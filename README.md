@@ -1,4 +1,4 @@
-### Hi, I’m Hayden Bleasel.
+# Hi, I’m Hayden Bleasel.
 ## I design, code and grow things on the internet.
 
 I’m a 26-year-old digital product designer, Javascript developer and studio director currently living in Sydney, Australia. Right now, I’m on a journey to help startups and tech companies that share my values — creating thoughtful products with a focus on privacy, security, transparency, inclusiveness and of course, beautiful design.
