@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Feature from '../components/Feature';
 
-const IndexPage = () => (
+export default () => (
   <Layout title="Home | Next.js + TypeScript Example">
     
     <Hero
@@ -60,6 +60,4 @@ const IndexPage = () => (
       <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, learning guitar, speaking at events, curating Spotify playlists, playing video games, making apps and learning new things.</p>
     </div>
   </Layout>
-)
-
-export default IndexPage;
+);
