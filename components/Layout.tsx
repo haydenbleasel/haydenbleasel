@@ -1,11 +1,21 @@
-import React, { ReactNode } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
+import React, { ReactNode } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Head from 'next/head';
 
 type Props = {
   children?: ReactNode
   title?: string
 }
+
+const socialIcons = [
+  'Spotify',
+  'Twitter',
+  'Dribbble',
+  'Instagram',
+  'GitHub',
+  'LinkedIn'
+];
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
   <div>
@@ -22,11 +32,32 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       </nav>
     </header>
     {children}
+    
     <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
+      <div className="newsletter">
+        <Image
+          layout="fixed"
+          width={20}
+          height={20}
+          src="public/newsletter.svg"
+        />
+        <p className="newsletter-heading">Join my private mailing list and get notified when I publish a new product or article.</p>
+        <input type="email" placeholder="janesmith@example.com" />
+      </div>
+      <div className="social">
+        {socialIcons.map((platform) => (
+          <Image
+            alt={platform}
+            layout="fixed"
+            width={16}
+            height={16}
+            src={`public/social/${platform.toLowerCase()}.svg`}
+          />
+        ))}
+      </div>
+      <span>&copy; Hayden Bleasel 2077</span>
     </footer>
   </div>
-)
+);
 
-export default Layout
+export default Layout;
