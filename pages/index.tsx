@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Feature from '../components/Feature';
 
-export default () => (
+const Home = () => (
   <Layout title="Home | Next.js + TypeScript Example">
     
     <Hero
@@ -61,3 +61,5 @@ export default () => (
     </div>
   </Layout>
 );
+
+export default Home;

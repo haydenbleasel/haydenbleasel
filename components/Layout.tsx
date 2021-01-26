@@ -42,20 +42,22 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           layout="fixed"
           width={20}
           height={20}
-          src="public/newsletter.svg"
+          src="/public/newsletter.svg"
         />
         <p className="newsletter-heading">Join my private mailing list and get notified when I publish a new product or article.</p>
         <input type="email" placeholder="janesmith@example.com" />
       </div>
       <div className="social">
         {socialIcons.map((platform) => (
-          <Image
-            alt={platform}
-            layout="fixed"
-            width={16}
-            height={16}
-            src={`public/social/${platform.toLowerCase()}.svg`}
-          />
+          <div key={platform}>
+            <Image
+              alt={platform}
+              layout="fixed"
+              width={16}
+              height={16}
+              src={`/public/social/${platform.toLowerCase()}.svg`}
+            />
+          </div>
         ))}
       </div>
       <span>&copy; Hayden Bleasel 2077</span>

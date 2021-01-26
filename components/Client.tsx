@@ -1,8 +1,22 @@
 import React from 'react';
 import Image from 'next/image';
 
-const Client = ({ image, title, summary, description, caption }) => (
-    <div className="Client">
+type ClientProps = {
+    image: string,
+    title: string,
+    summary: string,
+    description: any,
+    caption: string,
+}
+
+const Client = ({
+    image,
+    title,
+    summary,
+    description,
+    caption,
+}: ClientProps) => (
+    <div className="client">
         <Image
             layout="fixed"
             height={32}
@@ -11,7 +25,7 @@ const Client = ({ image, title, summary, description, caption }) => (
             src={image}
         />
         <p>{summary}</p>
-        <p>{description}</p>
+        {description}
         <p>{caption}</p>
     </div>
 );

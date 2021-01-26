@@ -10,14 +10,16 @@ type HeroProps = {
 const Hero = ({
     title,
     description,
-    actions,
+    actions = [],
 }: HeroProps) => (
     <div className="hero">
         <h1>{title}</h1>
         <p>{description}</p>
-        <div className="actions">
-            {actions.map(Link)}
-        </div>
+        {!!actions.length && (
+            <div className="actions">
+                {actions.map(Link)}
+            </div>
+        )}
     </div>
 );
 
