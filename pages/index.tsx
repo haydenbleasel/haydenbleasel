@@ -19,7 +19,7 @@ const Home = () => (
       layout="responsive"
       width={1312}
       height={740}
-      src="public/haydenbleasel.jpg"
+      src="/home/haydenbleasel.jpg"
       alt="Hayden Bleasel"
     />
 
@@ -27,7 +27,7 @@ const Home = () => (
     <p>Here’s what I’m currently doing...</p>
 
     <Feature
-      image="public/home/jellypepper.png"
+      image="/home/jellypepper.png"
       title="Jellypepper"
       description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
       actions={[
@@ -37,7 +37,7 @@ const Home = () => (
 
     <Feature
       reverse
-      image="public/home/neutral.png"
+      image="/home/neutral.png"
       title="Neutral"
       description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
       actions={[
@@ -46,7 +46,7 @@ const Home = () => (
     />
 
     <Feature
-      image="public/home/tomorrow.png"
+      image="/home/tomorrow.png"
       title="Tomorrow"
       description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
       actions={[
