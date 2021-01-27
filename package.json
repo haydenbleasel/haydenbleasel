@@ -9,11 +9,15 @@
   },
   "dependencies": {
     "@prismicio/client": "^4.0.0",
+    "colorthief": "^2.3.2",
+    "get-contrast": "^2.0.0",
+    "he": "^1.2.0",
     "next": "latest",
     "next-seo": "^4.17.0",
     "notyf": "^3.9.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",

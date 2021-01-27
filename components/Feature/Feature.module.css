@@ -11,6 +11,11 @@
     overflow: hidden;
 }
 
+.caption {
+    color: var(--grey);
+    font-weight: 650;
+}
+
 .featureInfoContainer {
     grid-column: 2;
     display: flex;
