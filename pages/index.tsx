@@ -17,14 +17,16 @@ const Home = () => (
       ]}
     />
 
-    <Image
-      layout="responsive"
-      width={1312}
-      height={740}
-      src="/images/home/haydenbleasel.jpg"
-      alt="Hayden Bleasel"
-      objectFit="cover"
-    />
+    <div className={styles.cover}>
+      <Image
+        layout="responsive"
+        width={1312}
+        height={740}
+        src="/images/home/haydenbleasel.jpg"
+        alt="Hayden Bleasel"
+        objectFit="cover"
+      />
+    </div>
 
     <div className={styles.intro}>
       <p className="heading-5">I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch.</p>

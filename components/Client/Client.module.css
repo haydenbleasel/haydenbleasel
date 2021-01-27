@@ -1,0 +1,20 @@
+.client h2 {
+    color: var(--black);
+    margin: 2rem 0 0.5rem;
+}
+
+.summary {
+    color: var(--grey);
+    margin: 0;
+}
+
+.description {
+    color: var(--black);
+    margin: 1.5rem 0;
+}
+
+.caption {
+    margin: 0;
+    display: block;
+    color: var(--grey);
+}

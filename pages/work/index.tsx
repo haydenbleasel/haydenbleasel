@@ -1,15 +1,43 @@
 import React from 'react';
 import Link from 'next/link';
 import Prismic from '@prismicio/client';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import Client from '../components/Client';
+import Layout from '../../components/Layout';
+import Hero from '../../components/Hero';
+import Client from '../../components/Client';
+
+import styles from './Work.module.css';
 
 type ClientDescriptionProps = {
   name: string,
   project_prefix: string,
   projects?: any,
 }
+
+function sortAlphabetically(a, b) {
+  return b.data.name > a.data.name ? -1 : 1;
+}
+
+const jellypepperRoles = {
+  'baraja': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'brighte': ['Creative Director', 'Web Developer'],
+  'clipchamp': ['Creative Director', 'Digital Product Designer'],
+  'corellium': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'faethm': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'flirtey': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'google': ['Creative Director', 'Visual Designer'],
+  'inventia': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'lightswap': ['Creative Director', 'Web Developer'],
+  'pursuited': ['Creative Director', 'Visual Designer'],
+  'ribit': ['Creative Director', 'Visual Designer'],
+  'shippit': ['Creative Director', 'Visual Designer'],
+  'simply-wall-st': ['Creative Director', 'Visual Designer'],
+  'snug': ['Creative Director', 'Visual Designer'],
+  'spaceship-voyager': ['Creative Director', 'Digital Product Designer'],
+  'tank-stream-ventures': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'upguard': ['Creative Director', 'Visual Designer', 'Web Developer'],
+  'westfield': ['Creative Director', 'Digital Product Designer'],
+  'zibbet': ['Creative Director', 'Digital Product Designer'],
+};
 
 const createClientDescription = ({
   name,
@@ -78,17 +106,15 @@ const Work = ({ jellypepperProjects }) => (
     <h2>Jellypepper</h2>
     <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
 
-    {console.log(jellypepperProjects)}
-
-    <div className="jellypepper-projects">
-      {jellypepperProjects.map(({ uid, data }) => (
+    <div className={styles.jellypepperProjects}>
+      {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }) => (
         <div key={uid} id={uid}>
           <Client
             image={data.logo.url}
             title={data.name}
             summary={data.description}
             description={createClientDescription(data)}
-            caption=""
+            caption={`Roles: ${jellypepperRoles[uid]?.join(', ') ?? 'Creative Director'}`}
           />
         </div>
       ))}

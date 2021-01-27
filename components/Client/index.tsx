@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 
+import styles from './Client.module.css';
+
 type ClientProps = {
     image: string,
     title: string,
@@ -16,7 +18,7 @@ const Client = ({
     description,
     caption,
 }: ClientProps) => (
-    <div className="client">
+    <div className={styles.client}>
         <Image
             layout="fixed"
             height={32}
@@ -24,9 +26,12 @@ const Client = ({
             alt={title}
             src={image}
         />
-        <p>{summary}</p>
-        {description}
-        <p>{caption}</p>
+        <h2 className="heading-5">{title}</h2>
+        <p className={styles.summary}>{summary}</p>
+        <p className={styles.description}>
+            {description}
+        </p>
+        <small className={styles.caption}>{caption}</small>
     </div>
 );
 

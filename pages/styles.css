@@ -28,6 +28,7 @@ html {
   font-weight: 450;
   font-size: 18px;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -56,4 +57,8 @@ body {
 
 small {
   font-size: 0.8rem;
+}
+
+p a {
+  color: inherit;
 }

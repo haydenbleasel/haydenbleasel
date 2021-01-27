@@ -1,3 +1,8 @@
+.cover {
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
 .intro {
     padding: var(--section-gap) 0;
     text-align: center;
