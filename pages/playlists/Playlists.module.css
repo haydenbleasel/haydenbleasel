@@ -1,0 +1,3 @@
+.playlists > * + * {
+    margin-top: var(--section-gap);
+}

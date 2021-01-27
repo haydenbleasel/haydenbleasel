@@ -8,11 +8,44 @@
 
 .newsletter {
     margin-bottom: var(--section-gap);
+    transition: opacity 0.2s;
+}
+
+.newsletter.loading {
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+}
+
+.newsletterFields {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    padding: 0;
+    margin: 0;
 }
 
 .newsletterHeading {
     max-width: 21rem;
     margin: 3rem 0;
+}
+
+.newsletterInput {
+    font-size: 1rem;
+    font-family: inherit;
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    padding: 1rem;
+}
+
+.newsletterButton {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 2rem;
+    outline: none;
 }
 
 .social {
@@ -33,13 +66,4 @@
 .copyright {
     color: var(--grey);
     margin-top: 2rem;
-}
-
-.newsletterInput {
-    font-size: 1rem;
-    font-family: inherit;
-    border: none;
-    outline: none;
-    background: transparent;
-    width: 100%;
 }

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import Feature from '../components/Feature';
+import Layout from '../../components/Layout';
+import Hero from '../../components/Hero';
+import Feature from '../../components/Feature';
 import SpotifyWebApi from 'spotify-web-api-node';
 import he from 'he';
 import ColorThief from 'colorthief';
 import Contrast from 'get-contrast';
 
-import ArrowLink from '../components/ArrowLink';
+import ArrowLink from '../../components/ArrowLink';
+import styles from './Playlists.module.css';
 
 function getColor(image: HTMLImageElement) {
     const colorThief = new ColorThief();
@@ -32,7 +33,10 @@ function Playlist({ description, external_urls, id, images, name, tracks }, i) {
         event.persist();
         
         const dominantColor = getColor(event.target);
-        setColor(`rgba(${dominantColor.join(',')})`);
+
+        if (dominantColor) {
+            setColor(`rgba(${dominantColor.join(',')})`);
+        }
     }
 
     return (
@@ -61,7 +65,9 @@ const Playlists = ({ playlists }) => (
             description="Some of Spotify playlists I’ve put together, for work or play."
         />
 
-        {playlists.map((Playlist))}
+        <div className={styles.playlists}>
+            {playlists.map((Playlist))}
+        </div>
     
     </Layout>
 );

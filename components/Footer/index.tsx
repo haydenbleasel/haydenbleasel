@@ -3,13 +3,16 @@ import Image from 'next/image';
 import { Notyf } from 'notyf';
 
 import styles from './Footer.module.css';
+import ArrowLink from '../ArrowLink';
 
 const Footer = ({ socialPlatforms }) => {
 
     const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
     
     async function joinMailingList(event: FormEvent) {
         event.preventDefault();
+        setLoading(true);
 
         const response = await fetch('/api/revue', {
             method: 'post',
@@ -32,11 +35,14 @@ const Footer = ({ socialPlatforms }) => {
                 icon: false,
             });
         }
+
+        setLoading(false);
+        setEmail('');
     }
 
     return (
         <footer className={styles.footer}>
-            <form className={styles.newsletter} onSubmit={joinMailingList}>
+            <form className={`${styles.newsletter} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
                 <Image
                     layout="fixed"
                     width={20}
@@ -45,14 +51,18 @@ const Footer = ({ socialPlatforms }) => {
                     alt="Newsletter"
                 />
                 <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
-                <input
-                    required
-                    className={styles.newsletterInput}
-                    type="email"
-                    placeholder="janesmith@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)} />
-                <button type="submit">&rarr;</button>
+                <fieldset className={styles.newsletterFields}>
+                    <input
+                        required
+                        className={styles.newsletterInput}
+                        type="email"
+                        placeholder="janesmith@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
+                    <button type="submit" className={styles.newsletterButton}>
+                        <ArrowLink />
+                    </button>
+                </fieldset>
             </form>
             <div className={styles.social}>
                 {socialPlatforms.map((platform) => (
