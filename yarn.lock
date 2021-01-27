@@ -2595,6 +2595,11 @@ normalize-path@^3.0.0, normalize-path@~3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-path/-/normalize-path-3.0.0.tgz#0dcd69ff23a1c9b11fd0978316644a0388216a65"
   integrity sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==
 
+notyf@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/notyf/-/notyf-3.9.0.tgz#012a83d989a5017c9a37c23372ee20f78d8b33ba"
+  integrity sha512-3zqV/AuP8w5OpPhUElsLte1BFfL42tswMZM5Ya24w7GozMsQTJRYsQQgqmA9oylDL3t5TE7F4rP3ZGM6JfaKOQ==
+
 npmlog@^4.0.1, npmlog@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.2.tgz#08a7f2a8bf734604779a9efa4ad5cc717abb954b"

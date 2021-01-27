@@ -1,9 +1,11 @@
-import React, { ReactNode, useState } from 'react';
+import React, { FormEvent, ReactNode, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import Head from 'next/head';
+import { Notyf } from 'notyf';
 
+import 'notyf/notyf.min.css';
 import styles from './Layout.module.css';
 
 type LayoutProps = {
@@ -26,7 +28,34 @@ const Layout = ({
 }: LayoutProps) => {
 
   const [menuActive, setMenuActive] = useState(false);
+  const [email, setEmail] = useState('');
   const router = useRouter();
+
+  async function joinMailingList(event: FormEvent) {
+    event.preventDefault();
+
+    const response = await fetch('/api/revue', {
+      method: 'post',
+      body: JSON.stringify({ email }),
+    });
+
+    const body = await response.json();
+    const notyf = new Notyf();
+
+    if (body.success) {
+      notyf.success({
+        message: 'Nice one! Check your email for a confirmation.',
+        duration: 5000,
+        icon: false,
+      });
+    } else {
+      notyf.error({
+        message: 'Sorry, something went wrong.',
+        duration: 5000,
+        icon: false,
+      });
+    }
+  }
 
   return (
     <>
@@ -66,7 +95,7 @@ const Layout = ({
           {children}
           
           <footer className={styles.footer}>
-            <div className={styles.newsletter}>
+            <form className={styles.newsletter} onSubmit={joinMailingList}>
               <Image
                 layout="fixed"
                 width={20}
@@ -74,8 +103,15 @@ const Layout = ({
                 src="/images/newsletter.svg"
               />
               <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
-              <input className={styles.newsletterInput} type="email" placeholder="janesmith@example.com" />
-            </div>
+              <input
+                required
+                className={styles.newsletterInput}
+                type="email"
+                placeholder="janesmith@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} />
+              <button type="submit">&rarr;</button>
+            </form>
             <div className={styles.social}>
               {socialIcons.map((platform) => (
                 <a
