@@ -14,10 +14,19 @@
   font-display: swap;
 }
 
+:root {
+  --section-gap: 10rem;
+  
+  --white: #FFFFFF;
+  --black: #0C0D15;
+  --grey: #565660;
+}
+
 html {
   font-family: 'haydenbleasel-universalsans', Arial, Helvetica, sans-serif;
   font-weight: 450;
   font-size: 18px;
+  line-height: 1.6;
 }
 
 body {
