@@ -13,6 +13,12 @@ const Blog = ({ posts }: BlogProps) => (
             title="Blog"
             description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants."
         />
+
+        <ul>
+            {posts.map((name) => (
+                <li>{name}</li>
+            ))}
+        </ul>
     
     </Layout>
 );

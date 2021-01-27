@@ -17,7 +17,13 @@ const Events = () => (
 
         <ul>
             {eventsList.map(({ name, organisation, year, url }) => (
-                <li>{name} - {organisation} {year}</li>
+                <li>
+                    {url ? (
+                        <a href={url} target="noopener noreferrer">{name} - {organisation} {year}</a>
+                    ) : (
+                        <span>{name} - {organisation} {year}</span>
+                    )}
+                </li>
             ))}
         </ul>
 

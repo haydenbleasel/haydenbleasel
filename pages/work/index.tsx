@@ -62,9 +62,9 @@ const createClientDescription = ({
       {projects.map(({ project_description, project_link }: Project, index: number) => {
 
         const projectDescription = project_link.url ? (
-          <Link href={project_link.url} target={project_link.target}>
+          <a href={project_link.url} target={project_link.target}>
             {project_description}
-          </Link>
+          </a>
         ) : (
           <span>{project_description}</span>
         );
