@@ -4,16 +4,7 @@ import { Notyf } from 'notyf';
 
 import styles from './Footer.module.css';
 
-const socialIcons = [
-    { name: 'Spotify', url: 'https://open.spotify.com/user/haydenbleasel' },
-    { name: 'Twitter', url: 'https://twitter.com/haydenbleasel' },
-    { name: 'Dribbble', url: 'https://dribbble.com/haydenbleasel' },
-    { name: 'Instagram', url: 'https://www.instagram.com/hayden.bleasel/' },
-    { name: 'GitHub', url: 'https://github.com/haydenbleasel/' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/haydenbleasel' },
-];
-
-const Footer = () => {
+const Footer = ({ socialPlatforms }) => {
 
     const [email, setEmail] = useState('');
     
@@ -64,7 +55,7 @@ const Footer = () => {
                 <button type="submit">&rarr;</button>
             </form>
             <div className={styles.social}>
-                {socialIcons.map((platform) => (
+                {socialPlatforms.map((platform) => (
                     <a
                         className={styles.socialIcon}
                         key={platform.name}

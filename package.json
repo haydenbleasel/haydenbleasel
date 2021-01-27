@@ -10,6 +10,7 @@
   "dependencies": {
     "@prismicio/client": "^4.0.0",
     "next": "latest",
+    "next-seo": "^4.17.0",
     "notyf": "^3.9.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
