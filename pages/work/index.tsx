@@ -6,6 +6,7 @@ import Hero from '../../components/Hero';
 import Client from '../../components/Client';
 
 import jellypepperRoles from './jellypepperRoles.json';
+import otherRoles from './otherRoles.json';
 
 import styles from './Work.module.css';
 
@@ -100,8 +101,27 @@ const Work = ({ jellypepperProjects }) => (
       ))}
     </div>
 
+    <div className={styles.presumi}>
+      <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
+      <Link href="/blog/presumi">Read the story</Link>
+    </div>
+
     <h2>Other roles</h2>
     <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
+
+    <div className={styles.jellypepperProjects}>
+      {otherRoles.map(({ image, role, company, type, start, end, location, description }) => (
+        <div key={company} id={company}>
+          <Client
+            image={image}
+            title={company}
+            summary={role}
+            description={description}
+            caption={`${type} from ${start} to ${end} in ${location}.`}
+          />
+        </div>
+      ))}
+    </div>
   </Layout>
 );
 
