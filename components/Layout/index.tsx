@@ -20,57 +20,61 @@ const socialIcons = [
 ];
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => (
-  <div>
+  <>
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     
-    <header>
-      <nav>
-        <Link href="/">
-          <a>Hayden Bleasel</a>
-        </Link>
-        <span>Menu</span>
-      </nav>
-    </header>
+    <div className={styles.grid}>
+      <div className={styles.container}>
+        <header>
+          <nav>
+            <Link href="/">
+              <a>Hayden Bleasel</a>
+            </Link>
+            <span>Menu</span>
+          </nav>
+        </header>
 
-    {children}
-    
-    <footer className={styles.footer}>
-      <div className={styles.newsletter}>
-        <Image
-          layout="fixed"
-          width={20}
-          height={20}
-          src="/images/newsletter.svg"
-        />
-        <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
-        <input className={styles.newsletterInput} type="email" placeholder="janesmith@example.com" />
-      </div>
-      <div className={styles.social}>
-        {socialIcons.map((platform) => (
-          <a
-            className={styles.socialIcon}
-            key={platform.name}
-            href={platform.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        {children}
+        
+        <footer className={styles.footer}>
+          <div className={styles.newsletter}>
             <Image
-              alt={platform.name}
               layout="fixed"
-              width={16}
-              height={16}
-              src={`/images/social/${platform.name.toLowerCase()}.svg`}
+              width={20}
+              height={20}
+              src="/images/newsletter.svg"
             />
-          </a>
-        ))}
+            <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
+            <input className={styles.newsletterInput} type="email" placeholder="janesmith@example.com" />
+          </div>
+          <div className={styles.social}>
+            {socialIcons.map((platform) => (
+              <a
+                className={styles.socialIcon}
+                key={platform.name}
+                href={platform.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  alt={platform.name}
+                  layout="fixed"
+                  width={16}
+                  height={16}
+                  src={`/images/social/${platform.name.toLowerCase()}.svg`}
+                />
+              </a>
+            ))}
+          </div>
+          <small className={styles.copyright}>&copy; Hayden Bleasel 2077</small>
+        </footer>
       </div>
-      <small className={styles.copyright}>&copy; Hayden Bleasel 2077</small>
-    </footer>
-  </div>
+    </div>
+  </>
 );
 
 export default Layout;
