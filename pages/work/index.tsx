@@ -103,10 +103,12 @@ const Work = ({ jellypepperProjects }: WorkProps) => (
       description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
     />
 
-    <h2>Jellypepper</h2>
-    <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
+    <div className={styles.projectsHeader}>
+      <h2 className="heading-5">Jellypepper</h2>
+      <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
+    </div>
 
-    <div className={styles.jellypepperProjects}>
+    <div className={styles.projects}>
       {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }) => (
         <div key={uid} id={uid}>
           <Client
@@ -125,10 +127,12 @@ const Work = ({ jellypepperProjects }: WorkProps) => (
       <Link href="/blog/presumi">Read the story</Link>
     </div>
 
-    <h2>Other roles</h2>
-    <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
+    <div className={styles.projectsHeader}>
+      <h2 className="heading-5">Other roles</h2>
+      <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
+    </div>
 
-    <div className={styles.jellypepperProjects}>
+    <div className={styles.projects}>
       {otherRoles.map(({ image, role, company, type, start, end, location, description }) => (
         <div key={company} id={company}>
           <Client

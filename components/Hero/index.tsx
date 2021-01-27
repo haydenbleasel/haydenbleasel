@@ -1,6 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
-
+import ArrowLink from '../ArrowLink';
 import styles from './Hero.module.css';
 
 type HeroProps = {
@@ -19,7 +18,11 @@ const Hero = ({
         <p>{description}</p>
         {!!actions.length && (
             <div className={styles.actions}>
-                {actions.map(Link)}
+                {actions.map((props, index) => (
+                    <div key={index}>
+                        <ArrowLink {...props} />
+                    </div>
+                ))}
             </div>
         )}
     </div>

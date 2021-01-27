@@ -1,7 +1,16 @@
-.jellypepperProjects {
+.projectsHeader {
+    max-width: 25rem;
+}
+
+.projectsHeader p {
+    color: var(--grey);
+}
+
+.projects {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 3rem;
+    margin-top: var(--section-gap);
 }
 
 .presumi {

@@ -1,0 +1,31 @@
+.arrow {
+  color: #2175FF;
+  cursor: pointer;
+  font-weight: 650;
+  text-decoration: none;
+  display: inline-block;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.arrow .arrowIcon {
+  position: relative;
+  top: -1px;
+  transition: transform 0.3s ease;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+.arrow .arrowIconCircle {
+  transition: stroke-dashoffset 0.3s ease;
+  stroke-dasharray: 95;
+  stroke-dashoffset: 95;
+}
+
+.arrow:hover .arrowIcon {
+  transform: translate3d(5px, 0, 0);
+}
+
+.arrow:hover .arrowIconCircle {
+  stroke-dashoffset: 0;
+}

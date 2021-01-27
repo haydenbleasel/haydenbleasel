@@ -40,7 +40,7 @@ const Home = () => (
         title="Jellypepper"
         description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
         actions={[
-          { href: 'https://jellypepper.com/', children: 'Visit the website'}
+          { href: 'https://jellypepper.com/', children: 'Visit the website', color: '#f12369' }
         ]}
       />
 
@@ -50,7 +50,7 @@ const Home = () => (
         title="Neutral"
         description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
         actions={[
-          { href: 'https://tryneutral.com/', children: 'Download Neutral' }
+          { href: 'https://tryneutral.com/', children: 'Download Neutral', color: '#068466' }
         ]}
       />
 
@@ -59,7 +59,7 @@ const Home = () => (
         title="Tomorrow"
         description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
         actions={[
-          { href: 'https://tomorrowstudio.co/', children: 'Visit the website' }
+          { href: 'https://tomorrowstudio.co/', children: 'Visit the website', color: '#5F49E3' }
         ]}
       />
     

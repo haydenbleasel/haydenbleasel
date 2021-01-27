@@ -1,7 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-
+import ArrowLink from '../ArrowLink';
 import styles from './Feature.module.css';
 
 type FeatureProps = {
@@ -19,7 +18,7 @@ const Feature = ({
     actions,
     reverse = false,
 }: FeatureProps) => (
-    <div className={`${styles.feature} ${reverse && styles.reverse}`}>
+    <div className={`${styles.feature} ${reverse ? styles.reverse : ''}`}>
         <div className={styles.featureImage}>
             <Image
                 layout="fixed"
@@ -34,7 +33,11 @@ const Feature = ({
                 <h2 className="heading-5">{title}</h2>
                 <p>{description}</p>
                 <div className={styles.actions}>
-                    {actions.map(Link)}
+                    {actions.map((props, index) => (
+                        <div key={index}>
+                            <ArrowLink {...props} />
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
