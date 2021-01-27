@@ -10,8 +10,6 @@ const Blog = ({ posts }) => (
             title="Blog"
             description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants."
         />
-
-        {posts.map(Post)}
     
     </Layout>
 );
