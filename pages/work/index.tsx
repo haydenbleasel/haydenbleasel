@@ -16,7 +16,26 @@ type ClientDescriptionProps = {
   projects?: any,
 }
 
-function sortAlphabetically(a, b) {
+type ProjectLink = {
+  url: string,
+  target: string,
+}
+
+type Project = {
+  project_description: string,
+  project_link: ProjectLink,
+}
+
+type PrismicDocument = {
+  uid: string,
+  data: any,
+}
+
+type WorkProps = {
+  jellypepperProjects: PrismicDocument[],
+}
+
+function sortAlphabetically(a: any, b: any) {
   return b.data.name > a.data.name ? -1 : 1;
 }
 
@@ -40,7 +59,7 @@ const createClientDescription = ({
   return (
     <>
       <span>{description}</span>
-      {projects.map(({ project_description, project_link }, index) => {
+      {projects.map(({ project_description, project_link }: Project, index: number) => {
 
         const projectDescription = project_link.url ? (
           <Link href={project_link.url} target={project_link.target}>
@@ -76,7 +95,7 @@ const createClientDescription = ({
   )
 };
 
-const Work = ({ jellypepperProjects }) => (
+const Work = ({ jellypepperProjects }: WorkProps) => (
   <Layout title="Home | Next.js + TypeScript Example">
 
     <Hero

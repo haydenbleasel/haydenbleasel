@@ -2,7 +2,16 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
-const Article = ({ post }) => (
+type Article = {
+    title: string,
+    description: string,
+}
+
+type ArticleProps = {
+    post: Article,
+}
+
+const Article = ({ post }: ArticleProps) => (
     <Layout title="Home | Next.js + TypeScript Example">
 
         <Hero

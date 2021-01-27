@@ -2,7 +2,11 @@ import React from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
-const Blog = ({ posts }) => (
+type BlogProps = {
+    posts: string[],
+}
+
+const Blog = ({ posts }: BlogProps) => (
     <Layout title="Home | Next.js + TypeScript Example">
 
         <Hero
