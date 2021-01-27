@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Image from 'next/image';
-import ArrowLink from '../ArrowLink';
 import styles from './Feature.module.css';
 
 type FeatureProps = {
     image: string,
     title: string,
     description: string,
-    actions: any,
+    children: ReactNode,
     reverse?: boolean,
 }
 
@@ -15,7 +14,7 @@ const Feature = ({
     image,
     title,
     description,
-    actions,
+    children,
     reverse = false,
 }: FeatureProps) => (
     <div className={`${styles.feature} ${reverse ? styles.reverse : ''}`}>
@@ -33,11 +32,7 @@ const Feature = ({
                 <h2 className="heading-5">{title}</h2>
                 <p>{description}</p>
                 <div className={styles.actions}>
-                    {actions.map((props, index) => (
-                        <div key={index}>
-                            <ArrowLink {...props} />
-                        </div>
-                    ))}
+                    {children}
                 </div>
             </div>
         </div>

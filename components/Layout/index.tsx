@@ -44,7 +44,7 @@ const Layout = ({
 
     if (body.success) {
       notyf.success({
-        message: 'Nice one! Check your email for a confirmation.',
+        message: 'Thanks, choom. Check your email for a confirmation.',
         duration: 5000,
         icon: false,
       });
