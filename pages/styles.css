@@ -14,8 +14,36 @@
   font-display: swap;
 }
 
-body {
-  margin: 0;
+html {
   font-family: 'haydenbleasel-universalsans', Arial, Helvetica, sans-serif;
   font-weight: 450;
+  font-size: 18px;
+}
+
+body {
+  margin: 0;
+}
+
+.heading-1 {
+  font-size: 3.052rem;
+}
+
+.heading-2 {
+  font-size: 2.441rem;
+}
+
+.heading-3 {
+  font-size: 1.953rem;
+}
+
+.heading-4 {
+  font-size: 1.563rem;
+}
+
+.heading-5 {
+  font-size: 1.25rem;
+}
+
+small {
+  font-size: 0.8rem;
 }
