@@ -1,9 +1,8 @@
 import React from 'react';
-import { ArticleJsonLd } from 'next-seo';l=
+import { ArticleJsonLd } from 'next-seo';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import { useRouter } from 'next/router';
-import { timeStamp } from 'console';
 
 type Article = {
     title: string,
