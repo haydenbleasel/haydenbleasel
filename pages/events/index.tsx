@@ -1,9 +1,10 @@
 import React from 'react';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import Post from '../components/Post';
+import Layout from '../../components/Layout';
+import Hero from '../../components/Hero';
 
-const Events = ({ events }) => (
+import eventsList from './events.json';
+
+const Events = () => (
     <Layout title="Home | Next.js + TypeScript Example">
 
         <Hero
@@ -15,20 +16,12 @@ const Events = ({ events }) => (
         />
 
         <ul>
-            {events.map(() => (
-                <li>Event</li>
+            {eventsList.map(({ name, organisation, year, url }) => (
+                <li>{name} - {organisation} {year}</li>
             ))}
         </ul>
 
     </Layout>
 );
-
-export async function getStaticProps() {
-    return {
-        props: {
-            events: [],
-        },
-    }
-}
 
 export default Events;
