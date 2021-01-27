@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "haydenbleasel-universalsans";
+  src: url("/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-450.woff") format("woff");
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "haydenbleasel-universalsans";
+  src: url("/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-650.woff") format("woff");
+  font-weight: 650;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  margin: 0;
+  font-family: 'haydenbleasel-universalsans', Arial, Helvetica, sans-serif;
+  font-weight: 450;
+}

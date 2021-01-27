@@ -42,7 +42,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
           layout="fixed"
           width={20}
           height={20}
-          src="/newsletter.svg"
+          src="/images/newsletter.svg"
         />
         <p className="newsletter-heading">Join my private mailing list and get notified when I publish a new product or article.</p>
         <input type="email" placeholder="janesmith@example.com" />
@@ -55,7 +55,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
               layout="fixed"
               width={16}
               height={16}
-              src={`/social/${platform.toLowerCase()}.svg`}
+              src={`/images/social/${platform.toLowerCase()}.svg`}
             />
           </div>
         ))}
