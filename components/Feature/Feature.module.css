@@ -31,10 +31,6 @@
     max-width: 23rem;
 }
 
-.featureInfo h2 {
-    color: var(--black);
-}
-
 .featureInfo p {
     color: var(--grey);
 }

@@ -1,5 +1,4 @@
 .client h2 {
-    color: var(--black);
     margin: 2rem 0 0.5rem;
 }
 
@@ -9,7 +8,6 @@
 }
 
 .description {
-    color: var(--black);
     margin: 1.5rem 0;
 }
 

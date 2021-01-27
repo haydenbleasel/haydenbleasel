@@ -3,3 +3,16 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 3rem;
 }
+
+.presumi {
+    background: #C94568;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    padding: 5rem;
+    color: var(--white);
+    margin: var(--section-gap) 0;
+}
+
+.presumi a {
+    color: var(--white);
+}
