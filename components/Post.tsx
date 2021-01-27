@@ -2,7 +2,21 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const Post = ({ image, title, description, caption, href }) => (
+type PostProps = {
+    image: string,
+    title: string,
+    description: string,
+    caption: string,
+    href: string,
+}
+
+const Post = ({
+    image,
+    title,
+    description,
+    caption,
+    href,
+}: PostProps) => (
     <div className="post">
         <Link href={href}>
             <Image

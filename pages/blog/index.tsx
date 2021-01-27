@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
-import Post from '../../components/Post';
 
 const Blog = ({ posts }) => (
     <Layout title="Home | Next.js + TypeScript Example">
