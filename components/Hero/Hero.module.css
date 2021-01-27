@@ -1,0 +1,25 @@
+.hero {
+    padding: var(--section-gap) 0;
+    max-width: 23rem;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    color: var(--black);
+    margin: 0;
+    font-weight: 450;
+}
+
+.hero p {
+    color: var(--grey);
+    margin: 1.5rem 0 0;
+}
+
+.actions {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

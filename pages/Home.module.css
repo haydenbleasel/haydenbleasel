@@ -1,0 +1,21 @@
+.intro {
+    padding: var(--section-gap) 0;
+    text-align: center;
+    max-width: 32rem;
+    margin: 0 auto;
+}
+
+.features > div {
+    margin-bottom: var(--section-gap);
+}
+
+.focus {
+    background: var(--ghost);
+    padding: var(--section-gap);
+}
+
+.focus p {
+    max-width: 26rem;
+    margin-left: auto;
+    margin-right: auto;
+}

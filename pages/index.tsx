@@ -4,6 +4,8 @@ import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Feature from '../components/Feature';
 
+import styles from './Home.module.css';
+
 const Home = () => (
   <Layout title="Home | Next.js + TypeScript Example">
     
@@ -21,40 +23,47 @@ const Home = () => (
       height={740}
       src="/images/home/haydenbleasel.jpg"
       alt="Hayden Bleasel"
+      objectFit="cover"
     />
 
-    <p>I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch.</p>
-    <p>Here’s what I’m currently doing...</p>
+    <div className={styles.intro}>
+      <p className="heading-5">I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch.</p>
+      <p className="heading-5">Here’s what I’m currently doing...</p>
+    </div>
 
-    <Feature
-      image="/images/home/jellypepper.png"
-      title="Jellypepper"
-      description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
-      actions={[
-        { href: 'https://jellypepper.com/', children: 'Visit the website'}
-      ]}
-    />
+    <div className={styles.features}>
+    
+      <Feature
+        image="/images/home/jellypepper.png"
+        title="Jellypepper"
+        description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
+        actions={[
+          { href: 'https://jellypepper.com/', children: 'Visit the website'}
+        ]}
+      />
 
-    <Feature
-      reverse
-      image="/images/home/neutral.png"
-      title="Neutral"
-      description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
-      actions={[
-        { href: 'https://tryneutral.com/', children: 'Download Neutral' }
-      ]}
-    />
+      <Feature
+        reverse
+        image="/images/home/neutral.png"
+        title="Neutral"
+        description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
+        actions={[
+          { href: 'https://tryneutral.com/', children: 'Download Neutral' }
+        ]}
+      />
 
-    <Feature
-      image="/images/home/tomorrow.png"
-      title="Tomorrow"
-      description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
-      actions={[
-        { href: 'https://tomorrowstudio.co/', children: 'Visit the website' }
-      ]}
-    />
+      <Feature
+        image="/images/home/tomorrow.png"
+        title="Tomorrow"
+        description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
+        actions={[
+          { href: 'https://tomorrowstudio.co/', children: 'Visit the website' }
+        ]}
+      />
+    
+    </div>
 
-    <div className="focus">
+    <div className={styles.focus}>
       <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles you can read about here.</p>
       <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees. During this time, I created a product for job seekers called Presumi that I ended up licensing to SEEK in Hong Kong.</p>
       <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, learning guitar, speaking at events, curating Spotify playlists, playing video games, making apps and learning new things.</p>
