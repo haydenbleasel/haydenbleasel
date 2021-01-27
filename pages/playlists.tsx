@@ -11,7 +11,7 @@ import ArrowLink from '../components/ArrowLink';
 
 function getColor(image: HTMLImageElement) {
     const colorThief = new ColorThief();
-    const palette = colorThief.getPalette(image, 8);
+    const palette = colorThief.getPalette(image, 8) || [];
 
     const colors = palette.filter((color) => (
         Contrast.isAccessible('#FFFFFF', `rgb(${color.join(',')})`)

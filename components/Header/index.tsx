@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 
 import styles from './Header.module.css';
 
+const routes = ['Work', 'Events', 'Blog', 'Playlists'];
+
 const Header = () => {
 
     const [menuActive, setMenuActive] = useState(false);
@@ -16,15 +18,11 @@ const Header = () => {
             </Link>
             <div className={styles.menu}>
                 <div className={styles.sitemap}>
-                    <Link href="/work">
-                        <a className={router.pathname == "/work" ? styles.active : ""}>Work</a>
-                    </Link>
-                    <Link href="/events">
-                        <a className={router.pathname == "/events" ? styles.active : ""}>Events</a>
-                    </Link>
-                    <Link href="/blog">
-                        <a className={router.pathname == "/blog" ? styles.active : ""}>Blog</a>
-                    </Link>
+                    {routes.map((route) => (
+                        <Link href={`/${route.toLowerCase()}`} key={route.toLowerCase()}>
+                            <a className={router.pathname == `/${route.toLowerCase()}` ? styles.active : ""}>{route}</a>
+                        </Link>
+                    ))}
                 </div>
                 <div className={styles.hamburgerContainer} onClick={() => setMenuActive(!menuActive)}>
                     <div className={styles.hamburger}>
