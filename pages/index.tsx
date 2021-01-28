@@ -34,7 +34,10 @@ const Home = () => {
   }, []);
 
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout
+      title="Digital product designer, JavaScript developer and entrepreneur"
+      description="I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch."
+    >
     
       <Hero
         title="Hayden Bleasel"

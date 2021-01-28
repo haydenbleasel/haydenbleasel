@@ -96,7 +96,10 @@ const createClientDescription = ({
 };
 
 const Work = ({ jellypepperProjects }: WorkProps) => (
-  <Layout title="Home | Next.js + TypeScript Example">
+  <Layout
+    title="Current and previous work"
+    description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
+  >
 
     <Hero
       title="Work"

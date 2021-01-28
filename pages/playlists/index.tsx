@@ -58,11 +58,13 @@ function Playlist({ description, external_urls, id, images, name, tracks }, i) {
 }
 
 const Playlists = ({ playlists }) => (
-    <Layout title="Playlists | Next.js + TypeScript Example">
+    <Layout
+        title="Curated Spotify playlists"
+        description="Some playlists I’ve put together, for work or play. Check them out on Spotify.">
 
         <Hero
             title="Playlists"
-            description="Some of Spotify playlists I’ve put together, for work or play."
+            description="Some playlists I’ve put together, for work or play. Check them out on Spotify."
         />
 
         <div className={styles.playlists}>

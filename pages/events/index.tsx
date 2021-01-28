@@ -16,7 +16,10 @@ const Event = ({ name, organisation, year }) => (
 );
 
 const Events = () => (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout
+        title="Events and press"
+        description="I’ve been fortunate enough to speak at a few events and be interviewed by a few writers and blogs."
+    >
 
         <Hero
             title="Events"
