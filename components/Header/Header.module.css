@@ -29,23 +29,40 @@
     display: flex;
     list-style: none;
     padding: 0;
-    @media (--mobile) {
-        display: none;
+
+    & a {
+        margin-left: 2rem;
+        color: var(--black);
+        text-decoration: none;
+        opacity: 0.4;
+        transition: opacity 0.2s;
+        display: block;
+
+        @media (--tablet) {
+            font-size: var(--type-scale-4);
+            margin: 0.5rem 0;
+        }
     }
-}
 
-.sitemap a {
-    margin-left: 2rem;
-    color: var(--black);
-    text-decoration: none;
-    opacity: 0.4;
-    transition: opacity 0.2s;
-    display: block;
-}
+    & li a:hover,
+    & li.active a {
+        opacity: 1;
+    }
 
-.sitemap li a:hover,
-.sitemap li.active a {
-    opacity: 1;
+    @media (--tablet) {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(4px);
+        height: 100vh;
+        margin: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
 .hamburgerContainer {
@@ -62,6 +79,28 @@
     position: relative;
     top: 8px;
     border-radius: 1rem;
+
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+        width: 1rem;
+        height: 2px;
+        background: var(--black);
+        position: relative;
+        user-select: none;
+        pointer-events: none;
+        border-radius: 1rem;
+        transition: transform 0.2s;
+    }
+
+    &::before {
+        top: -6px;
+    }
+
+    &::after {
+        bottom: -4px;
+    }
 }
 
 .hamburger span {
@@ -71,38 +110,18 @@
     user-select: none;
 }
 
-.hamburger::before,
-.hamburger::after {
-    content: "";
-    display: block;
-    width: 1rem;
-    height: 2px;
-    background: var(--black);
-    position: relative;
-    user-select: none;
-    pointer-events: none;
-    border-radius: 1rem;
-    transition: transform 0.2s;
-}
+.nav.active {
+    & .hamburger::before {
+        transform: translate3d(-4px,2px,0) rotate(-45deg) scaleX(.7);
+    }
 
-.hamburger::before {
-    top: -6px;
-}
+    & .hamburger::after {
+        transform: translate3d(-4px,-2px,0) rotate(45deg) scaleX(.7);
+    }
 
-.hamburger::after {
-    bottom: -4px;
-}
-
-.nav.active .hamburger::before {
-    transform: translate3d(-4px,2px,0) rotate(-45deg) scaleX(.7);
-}
-
-.nav.active .hamburger::after {
-    transform: translate3d(-4px,-2px,0) rotate(45deg) scaleX(.7);
-}
-
-.nav.active .sitemap {
-    opacity: 1;
-    user-select: initial;
-    pointer-events: initial;
+    & .sitemap {
+        opacity: 1;
+        user-select: initial;
+        pointer-events: initial;
+    }
 }

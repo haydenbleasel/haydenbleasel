@@ -29,6 +29,7 @@
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
     "react-headroom": "^3.1.0",
+    "react-responsive": "^8.2.0",
     "rss-parser": "^3.10.0",
     "spotify-web-api-node": "^5.0.2"
   },

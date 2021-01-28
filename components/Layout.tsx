@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
 import { siteUrl } from '../next-sitemap';
@@ -35,6 +35,11 @@ const Layout = ({
   images = [],
 }: LayoutProps) => {
   const { asPath } = useRouter();
+  const [bodyFixed, setBodyFixed] = useState(false);
+  
+  useEffect(() => {
+    document.body.style.overflow = bodyFixed ? 'hidden' : 'unset';
+  }, [bodyFixed]);
 
   return (
     <>
@@ -79,7 +84,7 @@ const Layout = ({
         sameAs={socialPlatforms.map(({ url }) => url)}
       />
 
-      <Header />
+      <Header onNavToggle={() => setBodyFixed(!bodyFixed)} />
       
       <div className="grid">
         <div className="container">

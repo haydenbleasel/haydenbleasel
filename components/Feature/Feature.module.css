@@ -4,7 +4,7 @@
     grid-auto-flow: dense;
     grid-gap: 3rem;
 
-    @media (--mobile) {
+    @media (--laptop) {
         display: block;
     }
 }
@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
 
-    @media (--mobile) {
+    @media (--laptop) {
         margin-top: 2rem;
     }
 }
