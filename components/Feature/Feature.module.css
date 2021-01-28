@@ -3,6 +3,10 @@
     grid-template-columns: 1fr 1fr;
     grid-auto-flow: dense;
     grid-gap: 3rem;
+
+    @media (--mobile) {
+        display: block;
+    }
 }
 
 .featureImage {
@@ -22,6 +26,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media (--mobile) {
+        margin-top: 2rem;
+    }
 }
 
 .featureInfo h2 {

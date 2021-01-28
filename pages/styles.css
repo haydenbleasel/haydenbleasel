@@ -14,13 +14,33 @@
   font-display: swap;
 }
 
+@custom-media --mobile (max-width: 575.98px);
+@custom-media --tablet (max-width: 767.98px);
+@custom-media --laptop (max-width: 991.98px);
+@custom-media --desktop (max-width: 1199.98px);
+
 :root {
   --section-gap: 10rem;
+  --page-gutter: 4rem;
+  --page-width: 73rem;
   
   --white: #FFFFFF;
   --black: #0C0D15;
   --grey: #565660;
   --ghost: #FAFAFA;
+
+  --type-scale-7: 3.052rem;
+  --type-scale-6: 2.441rem;
+  --type-scale-5: 1.953rem;
+  --type-scale-4: 1.563rem;
+  --type-scale-3: 1.25rem;
+  --type-scale-2: 1rem;
+  --type-scale-1: 0.8rem;
+
+  @media (--mobile) {
+    --section-gap: 5rem;
+    --page-gutter: 1rem;
+  }
 }
 
 html {
@@ -37,27 +57,42 @@ body {
 }
 
 .heading-1 {
-  font-size: 3.052rem;
+  font-size: var(--type-scale-7);
+  @media (--mobile) {
+    font-size: var(--type-scale-6);
+  }
 }
 
 .heading-2 {
-  font-size: 2.441rem;
+  font-size: var(--type-scale-6);
+  @media (--mobile) {
+    font-size: var(--type-scale-5);
+  }
 }
 
 .heading-3 {
-  font-size: 1.953rem;
+  font-size: var(--type-scale-5);
+  @media (--mobile) {
+    font-size: var(--type-scale-4);
+  }
 }
 
 .heading-4 {
-  font-size: 1.563rem;
+  font-size: var(--type-scale-4);
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+  }
 }
 
 .heading-5 {
-  font-size: 1.25rem;
+  font-size: var(--type-scale-3);
+  @media (--mobile) {
+    font-size: var(--type-scale-2);
+  }
 }
 
 small {
-  font-size: 0.8rem;
+  font-size: var(--type-scale-1);
 }
 
 p a {
@@ -66,7 +101,7 @@ p a {
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(4rem, auto) minmax(0, 73rem) minmax(4rem, auto);
+  grid-template-columns: minmax(var(--page-gutter), auto) minmax(0, var(--page-width)) minmax(var(--page-gutter), auto);
 }
 
 .container {

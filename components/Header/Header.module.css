@@ -27,6 +27,10 @@
     pointer-events: none;
     transition: opacity 0.2s;
     display: flex;
+
+    @media (--mobile) {
+        display: none;
+    }
 }
 
 .sitemap a {

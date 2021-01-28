@@ -17,6 +17,11 @@
 .focus {
     background: var(--ghost);
     padding: var(--section-gap);
+    
+    @media (--mobile) {
+        background: transparent;
+        padding: 0;
+    }
 }
 
 .focus p {
