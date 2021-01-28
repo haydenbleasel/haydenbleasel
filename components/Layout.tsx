@@ -3,9 +3,8 @@ import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
 
 import 'notyf/notyf.min.css';
-import styles from './Layout.module.css';
-import Header from '../Header';
-import Footer from '../Footer';
+import Header from './Header';
+import Footer from './Footer';
 
 type LayoutProps = {
   children?: ReactNode
