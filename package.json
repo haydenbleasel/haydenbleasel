@@ -23,6 +23,7 @@
     "next-pwa": "^5.0.4",
     "next-seo": "^4.17.0",
     "next-sitemap": "^1.4.15",
+    "nodemailer": "^6.4.17",
     "notyf": "^3.9.0",
     "preact": "^10.5.12",
     "preact-render-to-string": "^5.1.12",

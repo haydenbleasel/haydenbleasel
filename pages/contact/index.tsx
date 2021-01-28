@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
@@ -9,9 +9,29 @@ const Events = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [loading, setLoading] = useState(false);
 
-    async function sendEmail() {
-        console.log({ name, email, message });
+    async function sendEmail(event: FormEvent) {
+        event.preventDefault();
+
+        setLoading(true);
+
+        try {
+
+            const response = await fetch('/api/nodemailer', {
+                method: 'post',
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            const body = await response.json();
+
+            console.log(body, 'body');
+
+        } catch (error: Error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -25,7 +45,7 @@ const Events = () => {
                 description="I’m always keen to have a chat and open to new opportunities. Just fill in the form below."
             />
 
-            <form className={styles.form} onSubmit={sendEmail}>
+            <form className={`${styles.form} ${loading ? styles.loading : ''}`} onSubmit={sendEmail}>
                 <fieldset className={styles.fieldset}>
                     <div className={styles.fieldHeader}>
                         <label className={styles.label} htmlFor="name">Full name</label>
