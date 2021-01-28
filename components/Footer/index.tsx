@@ -78,7 +78,7 @@ const Footer = ({ socialPlatforms }) => {
                             layout="fixed"
                             width={16}
                             height={16}
-                            src={`/images/social/${platform.name.toLowerCase()}.svg`}
+                            src={platform.image}
                         />
                     </a>
                 ))}
