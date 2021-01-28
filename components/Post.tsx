@@ -25,6 +25,7 @@ const Post = ({
                 width={306}
                 alt={title}
                 src={image}
+                quality={100}
             />
             <h1>{title}</h1>
             <p>{description}</p>

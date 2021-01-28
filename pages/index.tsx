@@ -21,11 +21,11 @@ const Home = () => (
     <div className={styles.cover}>
       <Image
         layout="responsive"
-        width={1314}
-        height={740}
+        width={6000}
+        height={4000}
         src="/images/home/haydenbleasel.jpg"
         alt="Hayden Bleasel"
-        objectFit="cover"
+        quality={100}
       />
     </div>
 

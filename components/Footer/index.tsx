@@ -49,6 +49,7 @@ const Footer = ({ socialPlatforms }) => {
                     height={20}
                     src="/images/newsletter.svg"
                     alt="Newsletter"
+                    quality={100}
                 />
                 <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
                 <fieldset className={styles.newsletterFields}>
@@ -81,6 +82,7 @@ const Footer = ({ socialPlatforms }) => {
                             width={18}
                             height={18}
                             src={platform.image}
+                            quality={100}
                         />
                     </a>
                 ))}

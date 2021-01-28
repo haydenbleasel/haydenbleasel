@@ -25,6 +25,7 @@ const Client = ({
             width={32}
             alt={title}
             src={image}
+            quality={100}
         />
         <h2 className="heading-5">{title}</h2>
         <p className={styles.summary}>{summary}</p>

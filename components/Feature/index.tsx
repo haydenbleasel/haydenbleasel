@@ -31,6 +31,7 @@ const Feature = ({
                 src={image}
                 objectFit="cover"
                 onLoad={onImageLoad}
+                quality={100}
             />
         </div>
         <div className={styles.featureInfoContainer}>

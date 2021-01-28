@@ -56,7 +56,7 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "start_url": "https://haydenbleasel.com/",
+    "start_url": "/",
     "display": "standalone",
     "orientation": "portrait"
 }
