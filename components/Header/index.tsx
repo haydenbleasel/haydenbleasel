@@ -5,7 +5,7 @@ import Headroom from 'react-headroom';
 
 import styles from './Header.module.css';
 
-const routes = ['Work', 'Events', 'Thoughts', 'Playlists'];
+const routes = ['Work', 'Events', 'Thoughts', 'Playlists', 'Contact'];
 
 const Header = () => {
 

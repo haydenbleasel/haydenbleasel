@@ -50,6 +50,11 @@ html {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   color: var(--black);
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
 body {
