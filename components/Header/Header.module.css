@@ -102,6 +102,6 @@
 
 .nav.active .sitemap {
     opacity: 1;
-    user-select: all;
-    pointer-events: all;
+    user-select: initial;
+    pointer-events: initial;
 }

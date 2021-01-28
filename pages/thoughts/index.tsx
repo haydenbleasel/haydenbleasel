@@ -7,11 +7,11 @@ type BlogProps = {
     posts: string[],
 }
 
-const Blog = ({ posts }: BlogProps) => (
+const Thoughts = ({ posts }: BlogProps) => (
     <Layout title="Home | Next.js + TypeScript Example">
 
         <Hero
-            title="Blog"
+            title="Thoughts"
             description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants."
         />
 
@@ -39,4 +39,4 @@ export async function getStaticProps() {
     }
 }
 
-export default Blog;
+export default Thoughts;

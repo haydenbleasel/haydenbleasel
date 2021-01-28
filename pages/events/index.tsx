@@ -3,6 +3,17 @@ import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
 import eventsList from './events.json';
+import styles from './Events.module.css';
+
+const Event = ({ name, organisation, year }) => (
+    <span className={styles.event}>
+        <span className={styles.eventName}>{name}</span>
+        <span className={styles.eventMeta}>
+            <span>{organisation}</span>
+            <span className={styles.eventYear}>{year}</span>
+        </span>
+    </span>
+);
 
 const Events = () => (
     <Layout title="Home | Next.js + TypeScript Example">
@@ -15,13 +26,15 @@ const Events = () => (
             ]}
         />
 
-        <ul>
-            {eventsList.map(({ name, organisation, year, url }) => (
-                <li>
+        <ul className={styles.events}>
+            {eventsList.map(({ url, ...event }) => (
+                <li id={event.name}>
                     {url ? (
-                        <a href={url} target="noopener noreferrer">{name} - {organisation} {year}</a>
+                        <a className={styles.eventLink} href={url} target="noopener noreferrer">
+                            <Event {...event} />
+                        </a>
                     ) : (
-                        <span>{name} - {organisation} {year}</span>
+                        <Event {...event} />
                     )}
                 </li>
             ))}

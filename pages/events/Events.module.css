@@ -1,0 +1,36 @@
+.events {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--ghost);
+}
+
+.eventLink {
+    text-decoration: none;
+    color: inherit;
+}
+
+.eventLink .eventName {
+    text-decoration: underline;
+}
+
+.eventMeta {
+    display: flex;
+    color: var(--grey);
+}
+
+.eventMeta span {
+    margin-left: 2rem;
+    display: block;
+}
+
+.eventYear {
+    font-variant: tabular-nums;
+}
