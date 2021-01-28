@@ -63,3 +63,12 @@ small {
 p a {
   color: inherit;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(4rem, auto) minmax(0, 73rem) minmax(4rem, auto);
+}
+
+.container {
+  grid-column: 2;
+}

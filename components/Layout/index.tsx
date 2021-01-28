@@ -79,10 +79,11 @@ const Layout = ({
         url={basePath}
         sameAs={socialPlatforms.map(({ url }) => url)}
       />
+
+      <Header />
       
-      <div className={styles.grid}>
-        <div className={styles.container}>
-          <Header />
+      <div className="grid">
+        <div className="container">
           {children}
           <Footer socialPlatforms={socialPlatforms} />
         </div>

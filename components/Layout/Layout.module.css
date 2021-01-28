@@ -1,8 +1,0 @@
-.grid {
-    display: grid;
-    grid-template-columns: auto 4rem fit-content(73rem) 4rem auto;
-}
-
-.container {
-    grid-column: 3;
-}
