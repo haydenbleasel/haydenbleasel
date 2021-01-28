@@ -9,6 +9,7 @@ const Events = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [files, setFiles] = useState<File[]>([]);
     const [loading, setLoading] = useState(false);
 
     async function sendEmail(event: FormEvent) {
@@ -18,16 +19,26 @@ const Events = () => {
 
         try {
 
+            const formData = new FormData();
+
+            formData.append('name', name);
+            formData.append('email', email);
+            formData.append('message', message);
+
+            files.map((file, index) => (
+                formData.append(`file${index}`, file)
+            ));
+
             const response = await fetch('/api/nodemailer', {
                 method: 'post',
-                body: JSON.stringify({ name, email, message }),
+                body: formData,
             });
 
             const body = await response.json();
 
             console.log(body, 'body');
 
-        } catch (error: Error) {
+        } catch (error: any) {
             console.log(error);
         } finally {
             setLoading(false);
@@ -115,6 +126,21 @@ const Events = () => {
                         name="files"
                         type="file"
                         multiple
+                        onChange={({ target }: ChangeEvent) => {
+                            const targetFiles = (target as HTMLInputElement).files;
+                            const newFiles: File[] = [];
+
+                            if (targetFiles) {
+                                for (var i = 0; i < targetFiles.length; i++) {
+                                    let file = targetFiles.item(i);
+                                    if (file) {
+                                        newFiles.push(file);
+                                    }
+                                }
+                            }
+
+                            setFiles(newFiles);
+                        }}
                     />
                 </fieldset>
 

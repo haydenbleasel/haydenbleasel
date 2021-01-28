@@ -69,6 +69,7 @@
 .files {
     font-size: 0.8rem;
     margin-top: 0.5rem;
+    cursor: pointer;
 }
 
 .files::-webkit-file-upload-button {
@@ -78,6 +79,7 @@
     border: none;
     margin: 0 1rem 0 0;
     outline: none;
+    cursor: pointer;
 }
 
 .fieldHeader {
