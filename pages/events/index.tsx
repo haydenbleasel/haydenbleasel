@@ -4,6 +4,7 @@ import Hero from '../../components/Hero';
 
 import eventsList from './events.json';
 import styles from './Events.module.css';
+import ArrowLink from '../../components/ArrowLink';
 
 const Event = ({ name, organisation, year }) => (
     <span className={styles.event}>
@@ -24,10 +25,9 @@ const Events = () => (
         <Hero
             title="Events"
             description="I’ve been fortunate enough to speak at a few events and be interviewed by a few writers and blogs."
-            actions={[
-                { href: '/contact', children: 'Let\'s chat' }
-            ]}
-        />
+        >
+            <ArrowLink href="/contact">Let's chat</ArrowLink>
+        </Hero>
 
         <ul className={styles.events}>
             {eventsList.map(({ url, ...event }) => (

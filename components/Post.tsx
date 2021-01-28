@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from './Link';
 
 type PostProps = {
     image: string,

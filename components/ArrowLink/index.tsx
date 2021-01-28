@@ -1,16 +1,15 @@
 import React, { ReactNode } from 'react';
+import Link from '../Link';
 
 import styles from './ArrowLink.module.css';
 
 type ArrowLinkProps = {
+    href?: string,
     children?: ReactNode,
     color?: string,
 }
 
-const ArrowLink = ({
-    children,
-    color = 'var(--black)'
-}: ArrowLinkProps) => (
+const Arrow = ({ children, color }) => (
     <span className={styles.arrow} style={{ color }}>
         {!!children && (
             <span>{children}</span>
@@ -22,6 +21,18 @@ const ArrowLink = ({
             </g>
         </svg>
     </span>
+)
+
+const ArrowLink = ({
+    href,
+    children,
+    color = 'var(--black)'
+}: ArrowLinkProps) => href ? (
+    <Link href={href}>
+        <Arrow children={children} color={color} />
+    </Link>
+) : (
+    <Arrow children={children} color={color} />
 );
 
 export default ArrowLink;

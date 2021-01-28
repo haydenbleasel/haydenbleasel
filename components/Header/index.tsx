@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Headroom from 'react-headroom';
 
 import styles from './Header.module.css';
+import Link from '../Link';
 
 const routes = ['Work', 'Events', 'Thoughts', 'Playlists', 'Contact'];
 
@@ -16,17 +16,17 @@ const Header = () => {
         <Headroom>
             <nav className={`grid ${styles.navContainer}`}>
                 <header className={`container ${styles.nav} ${menuActive ? styles.active : ''}`}>
-                    <Link href="/">
-                        <a className={styles.name}>Hayden Bleasel</a>
-                    </Link>
+                    <div className={styles.name}>
+                        <Link href="/">Hayden Bleasel</Link>
+                    </div>
                     <div className={styles.menu}>
-                        <div className={styles.sitemap}>
+                        <ul className={styles.sitemap}>
                             {routes.map((route) => (
-                                <Link href={`/${route.toLowerCase()}`} key={route.toLowerCase()}>
-                                    <a className={router.pathname == `/${route.toLowerCase()}` ? styles.active : ""}>{route}</a>
-                                </Link>
+                                <li className={router.pathname == `/${route.toLowerCase()}` ? styles.active : ""}>
+                                    <Link href={`/${route.toLowerCase()}`} key={route.toLowerCase()}>{route}</Link>
+                                </li>
                             ))}
-                        </div>
+                        </ul>
                         <div className={styles.hamburgerContainer} onClick={() => setMenuActive(!menuActive)}>
                             <div className={styles.hamburger}>
                                 <span>Menu</span>

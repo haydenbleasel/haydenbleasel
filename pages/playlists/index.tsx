@@ -49,9 +49,7 @@ function Playlist({ description, external_urls, id, images, name, tracks }, i) {
                 reverse={!(i % 2)}
                 onImageLoad={getDominantColor}
             >
-                <a href={external_urls.spotify} rel="noopener noreferrer">
-                    <ArrowLink color={color}>Listen on Spotify</ArrowLink>
-                </a>
+                <ArrowLink href={external_urls.spotify} color={color}>Listen on Spotify</ArrowLink>
             </Feature>
         </div>
     );

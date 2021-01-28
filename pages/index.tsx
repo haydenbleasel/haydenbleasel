@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Feature from '../components/Feature';
 import styles from './Home.module.css';
 import ArrowLink from '../components/ArrowLink';
+import Link from '../components/Link';
 
 function calculateAge(currentTime) {
   const birthDateTime = new Date(1993, 10, 26).getTime();
@@ -49,10 +49,9 @@ const Home = () => {
             -year-old digital product designer, JavaScript developer and entrepreneur of sorts based in Sydney, Australia.
           </p>
         )}
-        actions={[
-          { href: '/contact', children: 'Get in touch' }
-        ]}
-      />
+      >
+        <ArrowLink href="/contact">Get in touch</ArrowLink>
+      </Hero>
 
       <div className={styles.cover}>
         <Image
@@ -77,9 +76,7 @@ const Home = () => {
           title="Jellypepper"
           description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
         >
-          <a href="https://jellypepper.com/" rel="noopener noreferrer">
-            <ArrowLink color="#f12369">Visit the website</ArrowLink>
-          </a>
+          <ArrowLink href="https://jellypepper.com/" color="#f12369">Visit the website</ArrowLink>
         </Feature>
 
         <Feature
@@ -88,9 +85,7 @@ const Home = () => {
           title="Neutral"
           description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
         >
-          <a href="https://tryneutral.com/" rel="noopener noreferrer">
-            <ArrowLink color="#068466">Download Neutral</ArrowLink>
-          </a>
+          <ArrowLink href="https://tryneutral.com/" color="#068466">Download Neutral</ArrowLink>
         </Feature>
 
         <Feature
@@ -98,9 +93,7 @@ const Home = () => {
           title="Tomorrow"
           description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
         >
-          <a href="https://tomorrowstudio.co/" rel="noopener noreferrer">
-            <ArrowLink color="#5F49E3">Join the mailing list</ArrowLink>
-          </a>
+          <ArrowLink href="https://tomorrowstudio.co/" color="#5F49E3">Join the mailing list</ArrowLink>
         </Feature>
       
       </div>

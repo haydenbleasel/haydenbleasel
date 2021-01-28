@@ -9,7 +9,7 @@
     justify-content: space-between;
 }
 
-.name {
+.name a {
     font-weight: 650;
     color: inherit;
     text-decoration: none;
@@ -21,13 +21,14 @@
 }
 
 .sitemap {
-    margin-right: 2rem;
+    margin: 0 2rem 0 0;
     opacity: 0;
     user-select: none;
     pointer-events: none;
     transition: opacity 0.2s;
     display: flex;
-
+    list-style: none;
+    padding: 0;
     @media (--mobile) {
         display: none;
     }
@@ -42,8 +43,8 @@
     display: block;
 }
 
-.sitemap a:hover,
-.sitemap a.active {
+.sitemap li a:hover,
+.sitemap li.active a {
     opacity: 1;
 }
 

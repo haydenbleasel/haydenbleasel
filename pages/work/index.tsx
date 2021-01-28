@@ -1,13 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
 import Prismic from '@prismicio/client';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
-
+import Link from '../../components/Link';
 import jellypepperRoles from './jellypepperRoles.json';
 import otherRoles from './otherRoles.json';
-
 import styles from './Work.module.css';
 
 type ClientDescriptionProps = {

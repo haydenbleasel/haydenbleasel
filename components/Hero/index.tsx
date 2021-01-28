@@ -1,28 +1,23 @@
 import React, { ReactNode } from 'react';
-import ArrowLink from '../ArrowLink';
 import styles from './Hero.module.css';
 
 type HeroProps = {
     title: string,
     description: string | ReactNode,
-    actions?: any,
+    children?: ReactNode,
 }
 
 const Hero = ({
     title,
     description,
-    actions = [],
+    children,
 }: HeroProps) => (
     <div className={styles.hero}>
         <h1 className="heading-2">{title}</h1>
         <p>{description}</p>
-        {!!actions.length && (
+        {!!children && (
             <div className={styles.actions}>
-                {actions.map((props, index) => (
-                    <div key={index}>
-                        <ArrowLink {...props} />
-                    </div>
-                ))}
+                {children}
             </div>
         )}
     </div>
