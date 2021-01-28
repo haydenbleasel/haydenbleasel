@@ -15,13 +15,7 @@ const Hero = ({
 }: HeroProps) => (
     <div className={styles.hero}>
         <h1 className="heading-2">{title}</h1>
-        {typeof description === 'string' ? (
-            <p>{description}</p>
-        ) : (
-            <p>
-                {description()}
-            </p>
-        )}
+        <p>{description}</p>
         {!!actions.length && (
             <div className={styles.actions}>
                 {actions.map((props, index) => (

@@ -41,7 +41,7 @@ const Home = () => {
     
       <Hero
         title="Hayden Bleasel"
-        description={() => (
+        description={(
           <p>
             <span className={styles.age} onClick={() => setFix(fix === 9 ? 0 : 9)}>
               {age.toFixed(fix)}
