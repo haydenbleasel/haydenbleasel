@@ -76,8 +76,8 @@ const Footer = ({ socialPlatforms }) => {
                         <Image
                             alt={platform.name}
                             layout="fixed"
-                            width={16}
-                            height={16}
+                            width={18}
+                            height={18}
                             src={platform.image}
                         />
                     </a>

@@ -18,12 +18,13 @@ const name = 'Hayden Bleasel';
 const username = 'haydenbleasel';
 
 const socialPlatforms = [
-  { name: 'Spotify', url: 'https://open.spotify.com/user/haydenbleasel', image: '/images/social/spotify.svg' },
   { name: 'Twitter', url: 'https://twitter.com/haydenbleasel', image: '/images/social/twitter.svg' },
   { name: 'Dribbble', url: 'https://dribbble.com/haydenbleasel', image: '/images/social/dribbble.svg' },
   { name: 'Instagram', url: 'https://www.instagram.com/hayden.bleasel/', image: '/images/social/instagram.svg' },
   { name: 'GitHub', url: 'https://github.com/haydenbleasel/', image: '/images/social/github.svg' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/haydenbleasel', image: '/images/social/linkedin.svg' },
+  { name: 'ProductHunt', url: 'https://www.producthunt.com/@haydenbleasel', image: '/images/social/producthunt.svg' },
+  { name: 'Spotify', url: 'https://open.spotify.com/user/haydenbleasel', image: '/images/social/spotify.svg' },
   // { name: 'YourStack', url: 'https://yourstack.com/@haydenbleasel', image: '/images/social/yourstack.png' },
 ];
 
