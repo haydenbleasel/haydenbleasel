@@ -21,7 +21,7 @@ const Home = () => (
     <div className={styles.cover}>
       <Image
         layout="responsive"
-        width={1312}
+        width={1314}
         height={740}
         src="/images/home/haydenbleasel.jpg"
         alt="Hayden Bleasel"
