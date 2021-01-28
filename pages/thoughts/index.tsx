@@ -1,10 +1,23 @@
 import React from 'react';
 import Parser from 'rss-parser';
+import { JSDOM } from 'jsdom';
+import dayjs from 'dayjs';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
+import Post from '../../components/Post';
+
+type Post = {
+    title: string,
+    url: string,
+    id: string,
+    date: string,
+    content: string,
+    summary: string,
+    image: string,
+}
 
 type BlogProps = {
-    posts: string[],
+    posts: Post[],
 }
 
 const Thoughts = ({ posts }: BlogProps) => (
@@ -18,8 +31,16 @@ const Thoughts = ({ posts }: BlogProps) => (
         />
 
         <ul>
-            {posts.map((name) => (
-                <li>{name}</li>
+            {posts.map(({ title, url, id, date, summary, image }) => (
+                <li key={id}>
+                    <Post
+                        image={image}
+                        title={title}
+                        description={summary}
+                        href={url}
+                        caption={dayjs(date).format('MMMM, YYYY')}
+                    />
+                </li>
             ))}
         </ul>
     
@@ -27,16 +48,28 @@ const Thoughts = ({ posts }: BlogProps) => (
 );
 
 export async function getStaticProps() {
-
     const parser = new Parser();
 
-    const feed = await parser.parseURL('https://medium.com/feed/@haydenbleasel');
+    const { items } = await parser.parseURL('https://medium.com/feed/@haydenbleasel');
 
-    console.log(feed, 'feed');
+    const posts = items.map((item) => {
+        const content = item['content:encoded'];
+        const dom = new JSDOM(content);
+
+        return {
+            title: item.title,
+            url: item.link,
+            id: item.guid,
+            date: item.isoDate,
+            summary: dom.window.document.querySelector('p').textContent,
+            content,
+            image: dom.window.document.querySelector('img').src,
+        };
+    });
 
     return {
         props: {
-            posts: [],
+            posts,
         },
     }
 }

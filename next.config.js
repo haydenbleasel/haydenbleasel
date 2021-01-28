@@ -28,6 +28,7 @@ module.exports = withPlugins(
             domains: [
                 'prismic-io.s3.amazonaws.com',
                 'i.scdn.co',
+                'cdn-images-1.medium.com',
             ],
         },
         redirects() {

@@ -1,6 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
-import Link from './Link';
+import Link from '../Link';
+
+import styles from './Post.module.css';
 
 type PostProps = {
     image: string,
@@ -28,7 +30,7 @@ const Post = ({
                 quality={100}
             />
             <h1>{title}</h1>
-            <p>{description}</p>
+            <p className={styles.description}>{description}</p>
             <p>{caption}</p>
         </Link>
     </div>
