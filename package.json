@@ -24,6 +24,7 @@
     "preact-render-to-string": "^5.1.12",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",
+    "rss-parser": "^3.10.0",
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {

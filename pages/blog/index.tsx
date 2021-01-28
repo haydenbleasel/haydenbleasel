@@ -1,4 +1,5 @@
 import React from 'react';
+import Parser from 'rss-parser';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
@@ -24,6 +25,13 @@ const Blog = ({ posts }: BlogProps) => (
 );
 
 export async function getStaticProps() {
+
+    const parser = new Parser();
+
+    const feed = await parser.parseURL('https://medium.com/feed/@haydenbleasel');
+
+    console.log(feed, 'feed');
+
     return {
         props: {
             posts: [],

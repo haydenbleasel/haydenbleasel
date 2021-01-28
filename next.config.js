@@ -11,7 +11,10 @@ module.exports = withPlugins(
         [
             withPWA,
             {
-                pwa: { dest: 'public', disable: process.env.NODE_ENV === 'development' }
+                pwa: {
+                    dest: 'public',
+                    disable: process.env.NODE_ENV === 'development'
+                }
             }
         ],
         [withBundleAnalyzer],
@@ -26,6 +29,9 @@ module.exports = withPlugins(
                 'prismic-io.s3.amazonaws.com',
                 'i.scdn.co',
             ],
+        },
+        redirects() {
+            return []
         },
     }
 );
