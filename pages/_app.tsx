@@ -21,14 +21,19 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <meta name="msapplication-config" content="/browserconfig.xml" />
                 <meta name="msapplication-TileColor" content="#2B5797" />
                 <meta name="msapplication-tap-highlight" content="no" />
-                <meta name="theme-color" content="#000000" />
-
-                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+                <meta name="theme-color" content="#0C0D15" />
                 <link rel="manifest" href="/manifest.json" />
-                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-                <link rel="shortcut icon" href="/favicon.ico" />
+
+                {[57, 60, 72, 76, 114, 120, 144, 152, 180].map((size) => (
+                    <link rel="apple-touch-icon" sizes={`${size}x${size}`} href={`/apple-touch-icon-${size}x${size}.png`} />
+                ))}
+
+                {[16, 32, 194].map((size) => (
+                    <link rel="icon" type="image/png" sizes={`${size}x${size}`} href={`/favicon-${size}x${size}.png`} />
+                ))}
+
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0c0d15" />
 
                 <link rel="preload" href="/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-450.woff" as="font" type="font/woff" />
                 <link rel="preload" href="/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-650.woff" as="font" type="font/woff" />
