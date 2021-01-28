@@ -6,6 +6,13 @@
     text-align: center;
 }
 
+.label {
+    opacity: 0;
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+}
+
 .newsletter {
     margin-bottom: var(--section-gap);
     transition: opacity 0.2s;

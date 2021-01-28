@@ -52,14 +52,16 @@ const Footer = ({ socialPlatforms }) => {
                 />
                 <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
                 <fieldset className={styles.newsletterFields}>
+                    <label className={styles.label} htmlFor="email">Email address</label>
                     <input
                         required
+                        id="email"
                         className={styles.newsletterInput}
                         type="email"
                         placeholder="janesmith@example.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)} />
-                    <button type="submit" className={styles.newsletterButton}>
+                    <button aria-label="Sign up" type="submit" className={styles.newsletterButton}>
                         <ArrowLink />
                     </button>
                 </fieldset>
