@@ -19,7 +19,6 @@
 
 .newsletterFields {
     display: flex;
-    flex-direction: row;
     border: none;
     padding: 0;
     margin: 0;
