@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Feature from '../components/Feature';
-
 import styles from './Home.module.css';
 import ArrowLink from '../components/ArrowLink';
 
@@ -103,9 +103,9 @@ const Home = () => {
       </div>
 
       <div className={styles.focus}>
-        <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles you can read about here.</p>
-        <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees. During this time, I created a product for job seekers called Presumi that I ended up licensing to SEEK in Hong Kong.</p>
-        <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, learning guitar, speaking at events, curating Spotify playlists, playing video games, making apps and learning new things.</p>
+        <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles you can read about <Link href="/work">here</Link>.</p>
+        <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees. During this time, I created a product for job seekers called <Link href="/blog/presumi">Presumi</Link> that I ended up licensing to SEEK in Hong Kong.</p>
+        <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, speaking at events, curating <Link href="/playlists">Spotify playlists</Link>, playing video games, making apps and learning new things.</p>
       </div>
     </Layout>
   );
