@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
+import { siteUrl } from '../next-sitemap';
 
 import 'notyf/notyf.min.css';
 import Header from './Header';
@@ -33,8 +34,7 @@ const Layout = ({
   description = 'This is the default description',
   images = [],
 }: LayoutProps) => {
-
-  const { asPath, basePath } = useRouter();
+  const { asPath } = useRouter();
 
   return (
     <>
@@ -42,7 +42,7 @@ const Layout = ({
         titleTemplate={`%s | ${name}`}
         title={title}
         description={description}
-        canonical={asPath}
+        canonical={`${siteUrl}${asPath}`}
         openGraph={{
           url: asPath,
           title,
@@ -50,7 +50,7 @@ const Layout = ({
           images: [
             ...images,
             {
-              url: `${basePath}/images/cover.jpg`,
+              url: `${siteUrl}/images/cover.jpg`,
               width: 1200,
               height: 630,
               alt: name,
@@ -75,7 +75,7 @@ const Layout = ({
       <SocialProfileJsonLd
         type="Person"
         name={name}
-        url={basePath}
+        url={siteUrl}
         sameAs={socialPlatforms.map(({ url }) => url)}
       />
 
