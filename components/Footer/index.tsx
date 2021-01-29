@@ -51,8 +51,8 @@ const Footer = ({ socialPlatforms }) => {
             <form className={`${styles.newsletter} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
                 <Image
                     layout="fixed"
-                    width={20}
-                    height={20}
+                    width={27}
+                    height={27}
                     src="/images/newsletter.svg"
                     alt="Newsletter"
                     quality={100}
