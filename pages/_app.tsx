@@ -37,8 +37,9 @@ export default function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
                 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0c0d15" />
 
-                <link rel="preload" href="/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-450.woff" as="font" type="font/woff" />
-                <link rel="preload" href="/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-650.woff" as="font" type="font/woff" />
+                {[450, 650].map((weight) => (
+                    <link rel="preload" href={`/fonts/UniversalSans-v1-2-0-50-0-721212122121-01-${weight}.woff`} as="font" type="font/woff" />
+                ))}
 
             </Head>
             <Component {...pageProps} />
