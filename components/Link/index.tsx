@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 
 type LinkProps = {
     href: string,
+    label?: string,
     children?: ReactNode,
 }
 
