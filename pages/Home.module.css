@@ -1,6 +1,24 @@
 .cover {
     border-radius: 0.5rem;
     overflow: hidden;
+    display: block;
+
+    @media (--mobile) {
+        display: none;
+    }
+}
+
+.avatar {
+    border-radius: 8rem;
+    overflow: hidden;
+    width: 4rem;
+    height: 4rem;
+    display: none;
+    margin: var(--section-gap) 0 -2rem;
+
+    @media (--mobile) {
+        display: block;
+    }
 }
 
 .intro {
@@ -8,6 +26,11 @@
     text-align: center;
     max-width: 32rem;
     margin: 0 auto;
+
+    @media (--mobile) {
+        text-align: left;
+        padding-top: 0;
+    }
 }
 
 .features > div {
@@ -28,6 +51,10 @@
     max-width: 26rem;
     margin-left: auto;
     margin-right: auto;
+
+    @media (--mobile) {
+        max-width: none;
+    }
 }
 
 .age {

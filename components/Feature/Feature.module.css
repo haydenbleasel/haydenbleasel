@@ -13,6 +13,10 @@
     grid-column: 1;
     border-radius: 0.5rem;
     overflow: hidden;
+
+    @media (--mobile) {
+        border-radius: 0.25rem;
+    }
 }
 
 .caption {
@@ -38,6 +42,10 @@
 
 .featureInfo p {
     margin: 2rem 0;
+
+    @media (--mobile) {
+        margin: 1rem 0;
+    }
 }
 
 .feature.reverse .featureImage {
@@ -50,6 +58,10 @@
 
 .featureInfo {
     max-width: 23rem;
+
+    @media (--mobile) {
+        max-width: none;
+    }
 }
 
 .featureInfo p {

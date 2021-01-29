@@ -38,6 +38,19 @@ const Home = () => {
       title="Digital product designer, JavaScript developer and entrepreneur"
       description="I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch."
     >
+
+      <div className={styles.avatar}>
+        <Image
+          layout="fixed"
+          width={72}
+          height={72}
+          src="/images/home/haydenbleasel.jpg"
+          alt="Hayden Bleasel"
+          quality={100}
+          objectFit="cover"
+          objectPosition="43% center"
+        />
+      </div>
     
       <Hero
         title="Hayden Bleasel"

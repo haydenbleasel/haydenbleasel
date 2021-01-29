@@ -11,6 +11,14 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 3rem;
     margin-top: var(--section-gap);
+
+    @media (--laptop) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @media (--tablet) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .presumi {
@@ -20,6 +28,13 @@
     padding: 5rem;
     color: var(--white);
     margin: var(--section-gap) 0;
+
+    @media (--mobile) {
+        margin-left: -1rem;
+        margin-right: -1rem;
+        border-radius: 0;
+        padding: 3rem 1rem;
+    }
 }
 
 .presumi a {

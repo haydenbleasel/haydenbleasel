@@ -10,6 +10,11 @@
     justify-content: space-between;
     padding: 1rem 0;
     border-bottom: 1px solid var(--ghost);
+
+    @media (--tablet) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
 
 .eventLink {
@@ -21,14 +26,34 @@
     text-decoration: underline;
 }
 
+.eventName, .eventMeta span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .eventMeta {
     display: flex;
     color: var(--grey);
+
+    @media (--tablet) {
+        margin-top: 0.5rem;
+    }
 }
 
 .eventMeta span {
     margin-left: 2rem;
     display: block;
+
+    @media (--tablet) {
+        margin-left: 0;
+
+        &:first-of-type::after {
+            content: ",";
+            display: inline-block;
+            margin-right: 0.25rem;
+        }
+    }
 }
 
 .eventYear {

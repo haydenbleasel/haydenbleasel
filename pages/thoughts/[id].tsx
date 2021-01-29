@@ -2,6 +2,7 @@ import React from 'react';
 import { ArticleJsonLd } from 'next-seo';
 import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
+import { useMediaQuery } from 'react-responsive';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import slugify from 'slugify';
@@ -28,6 +29,7 @@ type ArticleProps = {
 const Article = ({ post }: ArticleProps) => {
 
     const { asPath, basePath } = useRouter();
+    const mobile = useMediaQuery({ query: '(max-width: 575.98px)' });
 
     return (
         <Layout
@@ -64,14 +66,23 @@ const Article = ({ post }: ArticleProps) => {
                 </small>
             </Hero>
             
-            <Image
-                layout="responsive"
-                src={post.image}
-                width={1314}
-                height={876}
-                objectFit="cover"
-                className={styles.image}
-            />
+            <div className={styles.image}>
+                {mobile ? (
+                    <Image
+                        layout="fill"
+                        src={post.image}
+                        objectFit="cover"
+                    />
+                ) : (
+                    <Image
+                        layout="responsive"
+                        src={post.image}
+                        width={1314}
+                        height={876}
+                        objectFit="cover"
+                    />
+                )}
+            </div>
 
             <div
                 className={styles.content}

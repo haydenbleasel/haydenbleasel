@@ -3,16 +3,25 @@
     max-width: 23rem;
     text-align: center;
     margin: 0 auto;
-}
 
-.hero h1 {
-    margin: 0;
-    font-weight: 450;
-}
+    & h1 {
+        margin: 0;
+        font-weight: 450;
+    }
 
-.hero p {
-    color: var(--grey);
-    margin: 1.5rem 0 0;
+    & p {
+        color: var(--grey);
+        margin: 1.5rem 0 0;
+
+        @media (--mobile) {
+            margin-top: 0.75rem;
+        }
+    }
+
+    @media (--mobile) {
+        max-width: none;
+        text-align: left;
+    }
 }
 
 .actions {
@@ -20,4 +29,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (--mobile) {
+        justify-content: left;
+        margin-top: 1.5rem;
+    }
 }

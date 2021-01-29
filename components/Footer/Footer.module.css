@@ -4,6 +4,11 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
+
+    @media (--mobile) {
+        text-align: left;
+        align-items: flex-start;
+    }
 }
 
 .label {
@@ -34,16 +39,24 @@
 .newsletterHeading {
     max-width: 21rem;
     margin: 3rem 0;
+
+    @media (--mobile) {
+        margin: 1.5rem 0;
+    }
 }
 
 .newsletterInput {
-    font-size: 1rem;
+    font-size: inherit;
     font-family: inherit;
     border: none;
     outline: none;
     background: transparent;
     width: 100%;
     padding: 1rem;
+
+    @media (--mobile) {
+        margin-left: -1rem;
+    }
 }
 
 .newsletterButton {
@@ -60,6 +73,11 @@
     max-width: 90%;
     flex-wrap: wrap;
     justify-content: center;
+
+    @media (--mobile) {
+        justify-content: left;
+        margin-left: -1rem;
+    }
 }
 
 .socialIcon {
