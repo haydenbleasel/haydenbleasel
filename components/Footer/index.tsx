@@ -14,30 +14,36 @@ const Footer = ({ socialPlatforms }) => {
         event.preventDefault();
         setLoading(true);
 
-        const response = await fetch('/api/revue', {
-            method: 'post',
-            body: JSON.stringify({ email }),
-        });
-
-        const body = await response.json();
         const notyf = new Notyf();
 
-        if (body.success) {
+        try {
+            const response = await fetch('/api/revue', {
+                method: 'post',
+                body: JSON.stringify({ email }),
+            });
+
+            const body = await response.json();
+
+            if (!body.success) {
+                throw new Error();
+            }
+            
             notyf.success({
                 message: 'Thanks, choom. Check your email for a confirmation.',
                 duration: 5000,
                 icon: false,
             });
-        } else {
+            
+            setEmail('');
+        } catch (error: any) {
             notyf.error({
                 message: 'Sorry, something went wrong.',
                 duration: 5000,
                 icon: false,
             });
+        } finally {
+            setLoading(false);
         }
-
-        setLoading(false);
-        setEmail('');
     }
 
     return (

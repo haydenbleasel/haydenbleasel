@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { Notyf } from 'notyf';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
@@ -16,6 +17,7 @@ const Events = () => {
         event.preventDefault();
 
         setLoading(true);
+        const notyf = new Notyf();
 
         try {
 
@@ -34,12 +36,19 @@ const Events = () => {
                 body: formData,
             });
 
-            const body = await response.json();
+            await response.json();
 
-            console.log(body, 'body');
-
+            notyf.success({
+                message: 'Thanks, choom. I\'ll be in touch soon!',
+                duration: 5000,
+                icon: false,
+            });
         } catch (error: any) {
-            console.log(error);
+            notyf.error({
+                message: 'Sorry, something went wrong.',
+                duration: 5000,
+                icon: false,
+            });
         } finally {
             setLoading(false);
         }
@@ -131,8 +140,8 @@ const Events = () => {
                             const newFiles: File[] = [];
 
                             if (targetFiles) {
-                                for (var i = 0; i < targetFiles.length; i++) {
-                                    let file = targetFiles.item(i);
+                                for (let i = 0; i < targetFiles.length; i++) {
+                                    const file = targetFiles.item(i);
                                     if (file) {
                                         newFiles.push(file);
                                     }
