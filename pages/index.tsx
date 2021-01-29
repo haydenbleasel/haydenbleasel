@@ -99,7 +99,7 @@ const Home = () => {
       </div>
 
       <div className={styles.focus}>
-        <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles you can read about <Link href="/work">here</Link>.</p>
+        <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles you can read about <Link href="/work" label="Browse my work">here</Link>.</p>
         <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees. During this time, I created a product for job seekers called <Link href="/thoughts/presumi">Presumi</Link> that I ended up licensing to SEEK in Hong Kong.</p>
         <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, speaking at events, curating <Link href="/playlists">Spotify playlists</Link>, playing video games, making apps and learning new things.</p>
       </div>

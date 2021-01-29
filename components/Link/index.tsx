@@ -6,13 +6,13 @@ type LinkProps = {
     children?: ReactNode,
 }
 
-const Link = ({ children, href, ...props }: LinkProps) => (
+const Link = ({ children, href, label, ...props }: LinkProps) => (
     href.startsWith('/') ? (
         <NextLink href={href} {...props}>
-            <a>{children}</a>
+            <a aria-label={label}>{children}</a>
         </NextLink>
     ) : (
-        <a href={href} rel="noopener noreferrer" {...props}>{children}</a>
+        <a href={href} rel="noopener noreferrer" aria-label={label} {...props}>{children}</a>
     )  
 );
 
