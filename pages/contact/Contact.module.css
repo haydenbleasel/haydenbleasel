@@ -92,4 +92,5 @@
 .remaining {
     font-size: 0.8rem;
     color: var(--grey);
+    opacity: 0.5;
 }

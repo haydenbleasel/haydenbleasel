@@ -28,7 +28,7 @@ const Thoughts = ({ posts }: BlogProps) => (
 
         <Hero
             title="Thoughts"
-            description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants."
+            description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants that didn't fit on Twitter."
         />
 
         <ul className={styles.posts}>

@@ -69,7 +69,7 @@ const Events = () => {
                 <fieldset className={styles.fieldset}>
                     <div className={styles.fieldHeader}>
                         <label className={styles.label} htmlFor="name">Full name</label>
-                        <span className={styles.remaining}>{320 - name.length}</span>
+                        <span className={styles.remaining}>{320 - name.length} / 320</span>
                     </div>
                     <input
                         className={styles.input}
@@ -89,7 +89,7 @@ const Events = () => {
                 <fieldset className={styles.fieldset}>
                     <div className={styles.fieldHeader}>
                         <label className={styles.label} htmlFor="email">Email address</label>
-                        <span className={styles.remaining}>{320 - email.length}</span>
+                        <span className={styles.remaining}>{320 - email.length} / 320</span>
                     </div>
                     <input
                         className={styles.input}
@@ -109,7 +109,7 @@ const Events = () => {
                 <fieldset className={styles.fieldset}>
                     <div className={styles.fieldHeader}>
                         <label className={styles.label} htmlFor="message">Message</label>
-                        <span className={styles.remaining}>{1000 - message.length}</span>
+                        <span className={styles.remaining}>{1000 - message.length} / 1000</span>
                     </div>
                     <textarea
                         className={styles.textarea}
