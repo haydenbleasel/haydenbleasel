@@ -65,11 +65,12 @@
 .socialIcon {
     padding: 1rem;
     opacity: 0.4;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, transform 0.2s;
 }
 
 .socialIcon:hover {
     opacity: 1;
+    transform: translateY(-4px);
 }
 
 .copyright {
