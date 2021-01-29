@@ -2,7 +2,6 @@ import React from 'react';
 import { ArticleJsonLd } from 'next-seo';
 import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
-import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import slugify from 'slugify';
