@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArticleJsonLd, NextSeo } from 'next-seo';
+import { ArticleJsonLd } from 'next-seo';
 import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
 import { useRouter } from 'next/router';
