@@ -33,6 +33,7 @@
     "react-headroom": "^3.1.0",
     "react-responsive": "^8.2.0",
     "rss-parser": "^3.10.0",
+    "slugify": "^1.4.6",
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
