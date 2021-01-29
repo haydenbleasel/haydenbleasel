@@ -3,10 +3,10 @@ import Prismic from '@prismicio/client';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
-import Link from '../../components/Link';
 import jellypepperRoles from './jellypepperRoles.json';
 import otherRoles from './otherRoles.json';
 import styles from './Work.module.css';
+import ArrowLink from '../../components/ArrowLink';
 
 type ClientDescriptionProps = {
   name: string,
@@ -125,7 +125,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => (
 
     <div className={styles.presumi}>
       <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
-      <Link href="/blog/presumi">Read the story</Link>
+      <ArrowLink color="var(--white)" href="/thoughts/presumi">Read the story</ArrowLink>
     </div>
 
     <div className={styles.projectsHeader}>
