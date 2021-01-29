@@ -11,6 +11,7 @@ type LayoutProps = {
   children?: ReactNode
   title?: string,
   description?: string,
+  openGraph?: any,
   images?: any,
 }
 
@@ -32,6 +33,7 @@ const Layout = ({
   children,
   title = 'This is the default title',
   description = 'This is the default description',
+  openGraph = {},
   images = [],
 }: LayoutProps) => {
   const { asPath } = useRouter();
@@ -69,6 +71,7 @@ const Layout = ({
             username: username,
             gender: 'male',
           },
+          ...openGraph,
         }}
         twitter={{
           handle: `@${username}`,

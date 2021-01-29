@@ -39,7 +39,7 @@ const Thoughts = ({ posts }: BlogProps) => (
                         image={image}
                         title={title}
                         description={summary}
-                        caption={dayjs(date).format('MMMM, YYYY')}
+                        caption={dayjs(date).format('MMMM D, YYYY')}
                         featured={i === 0}
                     />
                 </li>
@@ -66,7 +66,7 @@ export async function getStaticProps() {
             }),
             date: item.isoDate,
             summary: dom.window.document.querySelector('h4').textContent,
-            image: dom.window.document.querySelector('img').src,
+            image: dom.window.document.querySelector('img').src.replace('max/1024', 'max/3840'),
             tags: item.categories,
         };
     });

@@ -4,6 +4,11 @@
     line-height: 1.7;
 }
 
+.date {
+    color: var(--grey);
+    font-weight: 650;
+}
+
 .image {
     border-radius: 0.5rem;
     overflow: hidden;
