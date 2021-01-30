@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import Prismic from '@prismicio/client';
 import Image from 'next/image';
-import Lottie from 'lottie-web';
+import dynamic from 'next/dynamic';
+import { useInView } from 'react-intersection-observer';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
@@ -11,7 +12,8 @@ import styles from './Work.module.css';
 import ArrowLink from '../../components/ArrowLink';
 import { siteUrl } from '../../next-sitemap';
 import Link from '../../components/Link';
-import * as animationData from './presumi.json';
+
+const PresumiAnimation = dynamic(() => import('../../components/Presumi'));
 
 type ClientDescriptionProps = {
   name: string,
@@ -100,24 +102,10 @@ const createClientDescription = ({
 
 const Work = ({ jellypepperProjects }: WorkProps) => {
 
-  const presumiRef = useRef(null);
-  const [animationLoaded, setAnimationLoaded] = useState(false);
-  
-  useEffect(() => {
-    if (presumiRef.current && !animationLoaded) {
-      const container: Element = presumiRef.current!;
-      
-      Lottie.loadAnimation({
-        container,
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: '/files/presumi.json',
-      });
-      
-      setAnimationLoaded(true);
-    }
-  }, [presumiRef]);
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+  });
   
   return (
     <Layout
@@ -165,12 +153,14 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
         ))}
       </div>
 
-      <div className={styles.presumi}>
+      <div className={styles.presumi} ref={ref}>
         <div>
           <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
           <ArrowLink color="var(--white)" href="/thoughts/presumi">Read the story</ArrowLink>
         </div>
-        <div ref={presumiRef} />
+        {inView && (
+          <PresumiAnimation />
+        )}
       </div>
 
       <div className={styles.projectsHeader}>
