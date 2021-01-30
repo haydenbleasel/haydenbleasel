@@ -6,7 +6,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import he from 'he';
 import ColorThief from 'colorthief';
 import Contrast from 'get-contrast';
-
+import { siteUrl } from '../../next-sitemap';
 import ArrowLink from '../../components/ArrowLink';
 import styles from './Playlists.module.css';
 
@@ -72,7 +72,13 @@ function Playlist({ description, external_urls, id, images, name, tracks }: Spot
 const Playlists = ({ playlists }: PlaylistsProps) => (
     <Layout
         title="Curated Spotify playlists"
-        description="Some playlists I’ve put together, for work or play. Check them out on Spotify.">
+        description="Some playlists I’ve put together, for work or play. Check them out on Spotify."
+        image={{
+            url: `${siteUrl}/images/playlists/playlists.png`,
+            width: 1440,
+            height: 900,
+        }}
+    >
 
         <Hero
             title="Playlists"
