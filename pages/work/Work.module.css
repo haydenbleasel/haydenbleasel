@@ -36,14 +36,36 @@
     background: #C94568;
     border-radius: 0.5rem;
     overflow: hidden;
-    padding: 5rem;
+    padding: 3rem 5rem;
     color: var(--white);
+    display: flex;
+    align-items: center;
+
+    @media (--laptop) {
+        flex-direction: column-reverse;
+    }
 
     @media (--mobile) {
         margin-left: -1rem;
         margin-right: -1rem;
         border-radius: 0;
-        padding: 3rem 1rem;
+        padding: var(--section-gap) 1rem;
+    }
+}
+
+.presumiInfo {
+    max-width: 20.5rem;
+    margin-right: 5rem;
+
+    @media (--laptop) {
+        margin-right: 0;
+        margin-top: 2rem;
+        text-align: center;
+        max-width: 27rem;
+    }
+
+    @media (--mobile) {
+        text-align: left;
     }
 }
 

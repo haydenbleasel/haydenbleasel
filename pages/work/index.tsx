@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Prismic from '@prismicio/client';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
@@ -102,10 +102,12 @@ const createClientDescription = ({
 
 const Work = ({ jellypepperProjects }: WorkProps) => {
 
-  const { ref, inView, entry } = useInView({
-    /* Optional options */
-    threshold: 0,
-  });
+  const [animationLoaded, setAnimationLoaded] = useState(false);
+  const { ref, inView } = useInView({ threshold: 0, rootMargin: '100px' });
+
+  useEffect(() => {
+    (inView && !animationLoaded) && setAnimationLoaded(true);
+  }, [inView]);
   
   return (
     <Layout
@@ -154,11 +156,11 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       </div>
 
       <div className={styles.presumi} ref={ref}>
-        <div>
+        <div className={styles.presumiInfo}>
           <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
           <ArrowLink color="var(--white)" href="/thoughts/presumi">Read the story</ArrowLink>
         </div>
-        {inView && (
+        {animationLoaded && (
           <PresumiAnimation />
         )}
       </div>
