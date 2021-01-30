@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Prismic from '@prismicio/client';
 import Image from 'next/image';
+import Lottie from 'lottie-web';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
@@ -10,6 +11,7 @@ import styles from './Work.module.css';
 import ArrowLink from '../../components/ArrowLink';
 import { siteUrl } from '../../next-sitemap';
 import Link from '../../components/Link';
+import * as animationData from './presumi.json';
 
 type ClientDescriptionProps = {
   name: string,
@@ -96,77 +98,102 @@ const createClientDescription = ({
   )
 };
 
-const Work = ({ jellypepperProjects }: WorkProps) => (
-  <Layout
-    title="Current and previous work"
-    description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
-    image={{
-      url: `${siteUrl}/images/work/cover.png`,
-      width: 2628,
-      height: 1752,
-    }}
-  >
+const Work = ({ jellypepperProjects }: WorkProps) => {
 
-    <Hero
-      title="Work"
+  const presumiRef = useRef(null);
+  const [animationLoaded, setAnimationLoaded] = useState(false);
+  
+  useEffect(() => {
+    if (presumiRef.current && !animationLoaded) {
+      const container: Element = presumiRef.current!;
+      
+      Lottie.loadAnimation({
+        container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/files/presumi.json',
+      });
+      
+      setAnimationLoaded(true);
+    }
+  }, [presumiRef]);
+  
+  return (
+    <Layout
+      title="Current and previous work"
       description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
-    />
+      image={{
+        url: `${siteUrl}/images/work/cover.png`,
+        width: 2628,
+        height: 1752,
+      }}
+    >
 
-    <div className={styles.cover}>
-      <Image
-        layout="responsive"
-        width={2628}
-        height={1752}
-        src="/images/work/cover.png"
-        alt="Image of my concept UI work"
-        quality={100}
+      <Hero
+        title="Work"
+        description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
       />
-    </div>
 
-    <div className={styles.projectsHeader}>
-      <h2 className="heading-5">Jellypepper</h2>
-      <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
-    </div>
+      <div className={styles.cover}>
+        <Image
+          layout="responsive"
+          width={2628}
+          height={1752}
+          src="/images/work/cover.png"
+          alt="Image of my concept UI work"
+          quality={100}
+        />
+      </div>
 
-    <div className={styles.projects}>
-      {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }) => (
-        <div key={uid} id={uid}>
-          <Client
-            image={data.logo.url}
-            title={data.name}
-            summary={data.description}
-            description={createClientDescription(data)}
-            caption={`Roles: ${['Creative Director', ...(jellypepperRoles[uid] || [])].join(', ')}`}
-          />
+      <div className={styles.projectsHeader}>
+        <h2 className="heading-5">Jellypepper</h2>
+        <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
+      </div>
+
+      <div className={styles.projects}>
+        {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }) => (
+          <div key={uid} id={uid}>
+            <Client
+              image={data.logo.url}
+              title={data.name}
+              summary={data.description}
+              description={createClientDescription(data)}
+              caption={`Roles: ${['Creative Director', ...(jellypepperRoles[uid] || [])].join(', ')}`}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.presumi}>
+        <div>
+          <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
+          <ArrowLink color="var(--white)" href="/thoughts/presumi">Read the story</ArrowLink>
         </div>
-      ))}
-    </div>
+        <div ref={presumiRef} />
+      </div>
 
-    <div className={styles.presumi}>
-      <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
-      <ArrowLink color="var(--white)" href="/thoughts/presumi">Read the story</ArrowLink>
-    </div>
+      <div className={styles.projectsHeader}>
+        <h2 className="heading-5">Other roles</h2>
+        <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
+      </div>
 
-    <div className={styles.projectsHeader}>
-      <h2 className="heading-5">Other roles</h2>
-      <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
-    </div>
-
-    <div className={styles.projects}>
-      {otherRoles.map(({ image, role, company, type, start, end, location, description }) => (
-        <div key={company} id={company}>
-          <Client
-            image={image}
-            title={company}
-            summary={role}
-            description={description}
-            caption={`${type} from ${start} to ${end} in ${location}.`}
-          />
-        </div>
-      ))}
-    </div>
-  </Layout>
-);
+      <div className={styles.projects}>
+        {otherRoles.map(({ image, role, company, type, start, end, location, description }) => (
+          <div key={company} id={company}>
+            <Client
+              image={image}
+              title={company}
+              summary={role}
+              description={description}
+              caption={`${type} from ${start} to ${end} in ${location}.`}
+            />
+          </div>
+        ))}
+      </div>
+    </Layout>
+  );
+}
 
 export async function getStaticProps() {
   const {
