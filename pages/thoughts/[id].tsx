@@ -114,9 +114,11 @@ export async function getStaticProps({ params }) {
     const content = post['content:encoded'];
     const dom = new JSDOM(content);
 
-    const contentDom = new JSDOM(content);
-    contentDom.window.document.querySelector('h4').remove();
-    contentDom.window.document.querySelector('figure').remove();
+    const summary = dom.window.document.querySelector('h4').textContent;
+    const image = dom.window.document.querySelector('img').src.replace('max/1024', 'max/3840');
+
+    dom.window.document.querySelector('h4').remove();
+    dom.window.document.querySelector('figure').remove();
 
     return {
         props: {
@@ -127,9 +129,9 @@ export async function getStaticProps({ params }) {
                     strict: true,
                 }),
                 date: post.isoDate,
-                content: contentDom.window.document.querySelector('body').innerHTML,
-                summary: dom.window.document.querySelector('h4').textContent,
-                image: dom.window.document.querySelector('img').src.replace('max/1024', 'max/3840'),
+                content: dom.window.document.querySelector('body').innerHTML,
+                summary,
+                image,
                 tags: post.categories,
             },
         },
