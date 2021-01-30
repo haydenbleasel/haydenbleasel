@@ -10,6 +10,19 @@ import Contrast from 'get-contrast';
 import ArrowLink from '../../components/ArrowLink';
 import styles from './Playlists.module.css';
 
+type SpotifyPlaylist = {
+    description: string,
+    external_urls: any,
+    id: string,
+    images: any,
+    name: string,
+    tracks: any,
+}
+
+type PlaylistsProps = {
+    playlists: SpotifyPlaylist[],
+}
+
 function getColor(image: HTMLImageElement) {
     const colorThief = new ColorThief();
     const palette = colorThief.getPalette(image, 8) || [];
@@ -26,7 +39,7 @@ function getColor(image: HTMLImageElement) {
     return colors[0];
 }
 
-function Playlist({ description, external_urls, id, images, name, tracks }, i) {
+function Playlist({ description, external_urls, id, images, name, tracks }: SpotifyPlaylist, i) {
     const [color, setColor] = useState('var(--black)');
 
     function getDominantColor(event: any) {
@@ -55,7 +68,7 @@ function Playlist({ description, external_urls, id, images, name, tracks }, i) {
     );
 }
 
-const Playlists = ({ playlists }) => (
+const Playlists = ({ playlists }: PlaylistsProps) => (
     <Layout
         title="Curated Spotify playlists"
         description="Some playlists I’ve put together, for work or play. Check them out on Spotify.">
@@ -66,7 +79,7 @@ const Playlists = ({ playlists }) => (
         />
 
         <div className={styles.playlists}>
-            {playlists.map((Playlist))}
+            {playlists.map(Playlist)}
         </div>
     
     </Layout>

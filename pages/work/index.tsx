@@ -35,7 +35,7 @@ type WorkProps = {
   jellypepperProjects: PrismicDocument[],
 }
 
-function sortAlphabetically(a: any, b: any) {
+function sortAlphabetically(a: PrismicDocument, b: PrismicDocument) {
   return b.data.name > a.data.name ? -1 : 1;
 }
 
@@ -88,9 +88,9 @@ const createClientDescription = ({
             {projectDescription}
             {projectDivider}
           </span>
-        )
+        );
 
-        })}
+      })}
     </>
   )
 };

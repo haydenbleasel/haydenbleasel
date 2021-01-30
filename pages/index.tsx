@@ -7,7 +7,7 @@ import styles from './Home.module.css';
 import ArrowLink from '../components/ArrowLink';
 import Link from '../components/Link';
 
-function calculateAge(currentTime) {
+function calculateAge(currentTime: number) {
   const birthDateTime = new Date(1993, 10, 26).getTime();
   const difference = (currentTime - birthDateTime);
   
@@ -28,9 +28,7 @@ const Home = () => {
       setAge(newAge);
     }, 50);
 
-    return () => {
-      clearInterval(ageInterval);
-    };
+    return () => clearInterval(ageInterval);
   }, []);
 
   return (

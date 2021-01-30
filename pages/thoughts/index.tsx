@@ -17,6 +17,15 @@ type Post = {
     image: string,
 }
 
+type MediumPost = {
+    title: string,
+    link: string,
+    guid: string,
+    isoDate: string,
+    categories: string[],
+    'content:encoded': string,
+}
+
 type BlogProps = {
     posts: Post[],
 }
@@ -54,7 +63,7 @@ export async function getStaticProps() {
 
     const { items } = await parser.parseURL('https://medium.com/feed/@haydenbleasel');
 
-    const posts = items.map((item) => {
+    const posts = (items as MediumPost[]).map((item) => {
         const content = item['content:encoded'];
         const dom = new JSDOM(content);
 

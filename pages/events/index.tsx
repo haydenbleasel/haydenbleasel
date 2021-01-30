@@ -1,12 +1,18 @@
 import React from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
-
+import ArrowLink from '../../components/ArrowLink';
 import eventsList from './events.json';
 import styles from './Events.module.css';
-import ArrowLink from '../../components/ArrowLink';
 
-const Event = ({ name, organisation, year }) => (
+type EventItem = {
+    name: string,
+    organisation: string,
+    year: number,
+    url?: string,
+}
+
+const Event = ({ name, organisation, year }: EventItem) => (
     <span className={styles.event}>
         <span className={styles.eventName}>{name}</span>
         <span className={styles.eventMeta}>
@@ -30,7 +36,7 @@ const Events = () => (
         </Hero>
 
         <ul className={styles.events}>
-            {eventsList.map(({ url, ...event }) => (
+            {(eventsList as EventItem[]).map(({ url, ...event }) => (
                 <li id={event.name}>
                     {url ? (
                         <a className={styles.eventLink} href={url} target="noopener noreferrer">

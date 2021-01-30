@@ -1,9 +1,15 @@
 import nodemailer from 'nodemailer';
 import formidable from 'formidable';
 
+type Fields = {
+    name: string,
+    message: string,
+    email: string,
+}
+
 type FormidablePromise = {
-    fields: any,
-    files: any,
+    fields: Fields,
+    files?: any,
 }
 
 interface NodemailerFile extends File {
@@ -25,13 +31,14 @@ export const config = {
 }
 
 function formidablePromise(req, opts): Promise<FormidablePromise> {
-    return new Promise(function (resolve, reject) {
-        var form = new formidable.IncomingForm(opts)
-        form.parse(req, function (
+    return new Promise((resolve, reject) => {
+        const form = new formidable.IncomingForm(opts);
+        
+        form.parse(req, (
             error: Error,
             fields: any,
             files: any,
-        ) {
+        ) => {
             if (error) {
                 return reject(error);
             }
