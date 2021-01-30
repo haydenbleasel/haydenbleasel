@@ -1,7 +1,17 @@
+.cover {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: block;
+
+    @media (--mobile) {
+        border-radius: 0.25rem;
+    }
+}
+
 .events {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: var(--section-gap) 0 0;
 }
 
 .event {
