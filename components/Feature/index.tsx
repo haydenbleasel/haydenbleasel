@@ -11,6 +11,7 @@ type FeatureProps = {
     children: ReactNode,
     reverse?: boolean,
     onImageLoad?: any,
+    square?: boolean,
 }
 
 const Feature = ({
@@ -21,6 +22,7 @@ const Feature = ({
     children,
     onImageLoad,
     reverse = false,
+    square = false,
 }: FeatureProps) => {
     const laptop = useMediaQuery({ query: '(max-width: 991.98px)' });
     
@@ -29,7 +31,7 @@ const Feature = ({
             <div className={styles.featureImage}>
                 <Image
                     layout="responsive"
-                    height={laptop ? 472 : 630}
+                    height={(laptop && !square) ? 472 : 630}
                     width={630}
                     alt={title}
                     src={image}

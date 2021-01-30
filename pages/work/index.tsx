@@ -9,6 +9,7 @@ import otherRoles from './otherRoles.json';
 import styles from './Work.module.css';
 import ArrowLink from '../../components/ArrowLink';
 import { siteUrl } from '../../next-sitemap';
+import Link from '../../components/Link';
 
 type ClientDescriptionProps = {
   name: string,
@@ -62,9 +63,9 @@ const createClientDescription = ({
       {projects.map(({ project_description, project_link }: Project, index: number) => {
 
         const projectDescription = project_link.url ? (
-          <a href={project_link.url} target={project_link.target}>
+          <Link href={project_link.url}>
             {project_description}
-          </a>
+          </Link>
         ) : (
           <span>{project_description}</span>
         );

@@ -61,6 +61,7 @@ function Playlist({ description, external_urls, id, images, name, tracks }: Spot
                 caption={`${tracks.total} tracks`}
                 reverse={!(i % 2)}
                 onImageLoad={getDominantColor}
+                square
             >
                 <ArrowLink href={external_urls.spotify} color={color}>Listen on Spotify</ArrowLink>
             </Feature>

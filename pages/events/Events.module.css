@@ -30,6 +30,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    @media (--tablet) {
+        white-space: normal;
+    }
 }
 
 .eventMeta {
