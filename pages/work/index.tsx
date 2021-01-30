@@ -1,5 +1,6 @@
 import React from 'react';
 import Prismic from '@prismicio/client';
+import Image from 'next/image';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
@@ -7,6 +8,7 @@ import jellypepperRoles from './jellypepperRoles.json';
 import otherRoles from './otherRoles.json';
 import styles from './Work.module.css';
 import ArrowLink from '../../components/ArrowLink';
+import { siteUrl } from '../../next-sitemap';
 
 type ClientDescriptionProps = {
   name: string,
@@ -97,12 +99,28 @@ const Work = ({ jellypepperProjects }: WorkProps) => (
   <Layout
     title="Current and previous work"
     description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
+    image={{
+      url: `${siteUrl}/images/work/cover.png`,
+      width: 2628,
+      height: 1752,
+    }}
   >
 
     <Hero
       title="Work"
       description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
     />
+
+    <div className={styles.cover}>
+      <Image
+        layout="responsive"
+        width={2628}
+        height={1752}
+        src="/images/work/cover.png"
+        alt="Image of my concept UI work"
+        quality={100}
+      />
+    </div>
 
     <div className={styles.projectsHeader}>
       <h2 className="heading-5">Jellypepper</h2>

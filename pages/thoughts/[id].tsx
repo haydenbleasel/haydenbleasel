@@ -35,7 +35,7 @@ const Article = ({ post }: ArticleProps) => {
         <Layout
             title={post.title}
             description={post.summary}
-            images={[{ url: post.image }]}
+            image={{ url: post.image }}
             openGraph={{
                 type: 'article',
                 article: {
@@ -151,8 +151,6 @@ export async function getStaticPaths() {
             })
         },
     }));
-
-    console.log(paths, 'paths');
 
     return {
         paths,

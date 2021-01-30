@@ -12,7 +12,7 @@ type LayoutProps = {
   title?: string,
   description?: string,
   openGraph?: any,
-  images?: any,
+  image?: any,
 }
 
 const name = 'Hayden Bleasel';
@@ -34,7 +34,12 @@ const Layout = ({
   title = 'This is the default title',
   description = 'This is the default description',
   openGraph = {},
-  images = [],
+  image = {
+    url: `${siteUrl}/images/cover.jpg`,
+    width: 1200,
+    height: 630,
+    alt: name,
+  },
 }: LayoutProps) => {
   const { asPath } = useRouter();
   const [bodyFixed, setBodyFixed] = useState(false);
@@ -54,15 +59,7 @@ const Layout = ({
           url: asPath,
           title,
           description,
-          images: [
-            ...images,
-            {
-              url: `${siteUrl}/images/cover.jpg`,
-              width: 1200,
-              height: 630,
-              alt: name,
-            },
-          ],
+          images: [image],
           site_name: name,
           type: 'profile',
           profile: {

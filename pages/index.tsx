@@ -49,6 +49,7 @@ const Home = () => {
           quality={100}
           objectFit="cover"
           objectPosition="43% center"
+          loading="eager"
         />
       </div>
     

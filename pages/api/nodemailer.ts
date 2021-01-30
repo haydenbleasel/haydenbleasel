@@ -65,8 +65,7 @@ export default async function handler(req, res) {
         res.statusCode = 200;
         res.end(JSON.stringify({ success: true }));
     } catch (error) {
-        console.log(error, 'error');
         res.statusCode = error.code;
-        res.end(JSON.stringify(error.message));
+        res.end(JSON.stringify(error));
     }
 }

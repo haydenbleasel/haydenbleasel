@@ -1,5 +1,16 @@
+.cover {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: block;
+
+    @media (--mobile) {
+        border-radius: 0.25rem;
+    }
+}
+
 .projectsHeader {
     max-width: 25rem;
+    margin: var(--section-gap) 0;
 }
 
 .projectsHeader p {
@@ -10,7 +21,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 3rem;
-    margin-top: var(--section-gap);
+    margin-bottom: var(--section-gap);
 
     @media (--laptop) {
         grid-template-columns: 1fr 1fr;
@@ -27,7 +38,6 @@
     overflow: hidden;
     padding: 5rem;
     color: var(--white);
-    margin: var(--section-gap) 0;
 
     @media (--mobile) {
         margin-left: -1rem;
