@@ -70,7 +70,6 @@
 .social {
     display: flex;
     align-items: center;
-    max-width: 90%;
     flex-wrap: wrap;
     justify-content: center;
 

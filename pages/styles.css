@@ -37,16 +37,19 @@
   --type-scale-2: 1rem;
   --type-scale-1: 0.8rem;
 
+  --base-font-size: 18px;
+
   @media (--mobile) {
     --section-gap: 5rem;
     --page-gutter: 1rem;
+    --base-font-size: 16px;
   }
 }
 
 html {
   font-family: 'haydenbleasel-universalsans', Arial, Helvetica, sans-serif;
   font-weight: 450;
-  font-size: 18px;
+  font-size: var(--base-font-size);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   color: var(--black);
