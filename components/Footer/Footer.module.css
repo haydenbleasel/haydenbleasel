@@ -93,4 +93,12 @@
 .copyright {
     color: var(--grey);
     margin-top: 2rem;
+
+    & a {
+        color: inherit;
+
+        &:hover {
+            color: var(--black);
+        }
+    }
 }

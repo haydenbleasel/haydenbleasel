@@ -4,6 +4,7 @@ import { Notyf } from 'notyf';
 import Fade from 'react-reveal/Fade';
 import styles from './Footer.module.css';
 import ArrowLink from '../ArrowLink';
+import Link from '../Link';
 
 const Footer = ({ socialPlatforms }) => {
 
@@ -102,7 +103,10 @@ const Footer = ({ socialPlatforms }) => {
                 ))}
             </div>
             <Fade>
-                <small className={styles.copyright}>&copy; Hayden Bleasel 2077</small>
+                <small className={styles.copyright}>
+                    <span>&copy; Hayden Bleasel 2077. </span>
+                    <span><Link href="https://github.com/haydenbleasel/website">Source code</Link>.</span>
+                </small>
             </Fade>
         </footer>
     );

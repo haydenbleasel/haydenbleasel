@@ -23,7 +23,7 @@
     grid-gap: 3rem;
     margin-bottom: var(--section-gap);
 
-    @media (--laptop) {
+    @media (--desktop) {
         grid-template-columns: 1fr 1fr;
     }
 
