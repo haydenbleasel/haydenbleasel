@@ -52,6 +52,10 @@
     margin-left: auto;
     margin-right: auto;
 
+    & :global(a):hover {
+        color: var(--grey);
+    }
+
     @media (--mobile) {
         max-width: none;
     }
@@ -59,4 +63,5 @@
 
 .age {
     cursor: pointer;
+    border-bottom: 1px solid var(--ghost);
 }

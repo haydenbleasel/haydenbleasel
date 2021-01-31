@@ -76,6 +76,7 @@
     @media (--mobile) {
         justify-content: left;
         margin-left: -1rem;
+        margin-right: -1rem;
     }
 }
 
