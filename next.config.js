@@ -29,7 +29,48 @@ module.exports = withPlugins(
             ],
         },
         redirects() {
-            return []
+            return [
+                {
+                    source: '/about',
+                    destination: '/',
+                    permanent: true,
+                },
+                {
+                    source: '/blog',
+                    destination: '/thoughts',
+                    permanent: true,
+                },
+                {
+                    source: '/work/presumi',
+                    destination: '/thoughts/presumi',
+                    permanent: true,
+                },
+                {
+                    source: '/presumi',
+                    destination: '/thoughts/presumi',
+                    permanent: true,
+                },
+                {
+                    source: '/work/gunmetal',
+                    destination: '/work#role-gunmetal',
+                    permanent: true,
+                },
+                {
+                    source: '/work/sumry',
+                    destination: '/work#role-sumry',
+                    permanent: true,
+                },
+                {
+                    source: '/work/palantir',
+                    destination: '/work#role-palantir',
+                    permanent: true,
+                },
+                {
+                    source: '/work/spaceship',
+                    destination: '/work#role-spaceship',
+                    permanent: true,
+                },
+            ]
         },
     }
 );

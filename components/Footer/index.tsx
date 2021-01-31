@@ -49,7 +49,7 @@ const Footer = ({ socialPlatforms }) => {
 
     return (
         <footer className={styles.footer}>
-            <form className={`${styles.newsletter} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
+            <form id="newsletter" className={`${styles.newsletter} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
                 <Fade>
                     <Image
                         layout="fixed"

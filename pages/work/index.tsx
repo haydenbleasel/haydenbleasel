@@ -149,7 +149,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
 
       <div className={styles.projects}>
         {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }, index) => (
-          <div key={uid} id={uid}>
+          <div key={uid} id={`jellypepper-${uid}`}>
             <Fade delay={(index % 3) * 100}>
               <Client
                 image={data.logo.url}
@@ -182,7 +182,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
 
       <div className={styles.projects}>
         {otherRoles.map(({ image, role, company, type, start, end, location, description }, index) => (
-          <div key={company} id={company}>
+          <div key={company} id={`role-${company}`}>
             <Fade delay={(index % 3) * 100}>
               <Client
                 image={image}
