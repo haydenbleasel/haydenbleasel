@@ -13,7 +13,7 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
 
     useEffect(() => {
         Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID as string, {
-            includedDomains: [siteUrl],
+            includedDomains: [siteUrl.replace('https://', '')],
         })
 
         function onRouteChangeComplete() {
