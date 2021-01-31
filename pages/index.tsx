@@ -50,7 +50,7 @@ const Home = () => {
             alt="Hayden Bleasel"
             quality={100}
             objectFit="cover"
-            objectPosition="43% center"
+            objectPosition="53% center"
             loading="eager"
           />
         </Fade>
