@@ -11,7 +11,7 @@ class Document extends NextDocument<any> {
                     <NextScript />
                 </body>
             </Html>
-        )
+        );
     }
 }
 

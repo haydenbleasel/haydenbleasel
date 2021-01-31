@@ -206,7 +206,7 @@ export async function getStaticProps() {
   } = process.env;
 
   const client = Prismic.client(`https://${NEXT_PUBLIC_PRISMIC_ENDPOINT}.prismic.io/api/v2`, {
-    accessToken: NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN
+    accessToken: NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN,
   });
 
   const { results } = await client.query(

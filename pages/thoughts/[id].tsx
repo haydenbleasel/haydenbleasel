@@ -120,7 +120,12 @@ export async function getStaticProps({ params }) {
     const dom = new JSDOM(content);
 
     const summary = dom.window.document.querySelector('h4').textContent;
-    const image = dom.window.document.querySelector('img').src.replace('max/1024', 'max/3840');
+
+    [...dom.window.document.querySelectorAll('img')].map((img) => (
+        img.src = img.src.replace('max/1024', 'max/3840')
+    ));
+
+    const image = dom.window.document.querySelector('img').src;
 
     dom.window.document.querySelector('h4').remove();
     dom.window.document.querySelector('figure').remove();
