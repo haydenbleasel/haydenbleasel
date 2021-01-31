@@ -4,6 +4,7 @@ import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
 import { useMediaQuery } from 'react-responsive';
 import { useRouter } from 'next/router';
+import Fade from 'react-reveal/Fade';
 import Image from 'next/image';
 import slugify from 'slugify';
 import dayjs from 'dayjs';
@@ -72,15 +73,19 @@ const Article = ({ post }: ArticleProps) => {
                         layout="fill"
                         src={post.image}
                         objectFit="cover"
+                        loading="eager"
                     />
                 ) : (
-                    <Image
-                        layout="responsive"
-                        src={post.image}
-                        width={1314}
-                        height={876}
-                        objectFit="cover"
-                    />
+                    <Fade delay={800}>
+                        <Image
+                            layout="responsive"
+                            src={post.image}
+                            width={1314}
+                            height={876}
+                            objectFit="cover"
+                            loading="eager"
+                        />
+                    </Fade>
                 )}
             </div>
 

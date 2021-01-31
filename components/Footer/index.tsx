@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import { Notyf } from 'notyf';
-
+import Fade from 'react-reveal/Fade';
 import styles from './Footer.module.css';
 import ArrowLink from '../ArrowLink';
 
@@ -49,32 +49,38 @@ const Footer = ({ socialPlatforms }) => {
     return (
         <footer className={styles.footer}>
             <form className={`${styles.newsletter} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
-                <Image
-                    layout="fixed"
-                    width={27}
-                    height={27}
-                    src="/images/newsletter.svg"
-                    alt="Newsletter"
-                    quality={100}
-                />
-                <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
-                <fieldset className={styles.newsletterFields}>
-                    <label className={styles.label} htmlFor="email">Email address</label>
-                    <input
-                        required
-                        id="email"
-                        className={styles.newsletterInput}
-                        type="email"
-                        placeholder="janesmith@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} />
-                    <button aria-label="Sign up" type="submit" className={styles.newsletterButton}>
-                        <ArrowLink />
-                    </button>
-                </fieldset>
+                <Fade>
+                    <Image
+                        layout="fixed"
+                        width={27}
+                        height={27}
+                        src="/images/newsletter.svg"
+                        alt="Newsletter"
+                        quality={100}
+                    />
+                </Fade>
+                <Fade delay={200}>
+                    <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
+                </Fade>
+                <Fade delay={400}>
+                    <fieldset className={styles.newsletterFields}>
+                        <label className={styles.label} htmlFor="email">Email address</label>
+                        <input
+                            required
+                            id="email"
+                            className={styles.newsletterInput}
+                            type="email"
+                            placeholder="janesmith@example.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)} />
+                        <button aria-label="Sign up" type="submit" className={styles.newsletterButton}>
+                            <ArrowLink />
+                        </button>
+                    </fieldset>
+                </Fade>
             </form>
             <div className={styles.social}>
-                {socialPlatforms.map((platform) => (
+                {socialPlatforms.map((platform, index) => (
                     <a
                         className={styles.socialIcon}
                         key={platform.name}
@@ -82,18 +88,22 @@ const Footer = ({ socialPlatforms }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <Image
-                            alt={platform.name}
-                            layout="fixed"
-                            width={18}
-                            height={18}
-                            src={platform.image}
-                            quality={100}
-                        />
+                        <Fade delay={index * 100}>
+                            <Image
+                                alt={platform.name}
+                                layout="fixed"
+                                width={18}
+                                height={18}
+                                src={platform.image}
+                                quality={100}
+                            />
+                        </Fade>
                     </a>
                 ))}
             </div>
-            <small className={styles.copyright}>&copy; Hayden Bleasel 2077</small>
+            <Fade>
+                <small className={styles.copyright}>&copy; Hayden Bleasel 2077</small>
+            </Fade>
         </footer>
     );
 }

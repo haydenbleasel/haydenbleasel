@@ -32,6 +32,7 @@ const Post = ({
                 quality={100}
                 objectFit="cover"
                 className={styles.image}
+                loading={featured ? 'eager' : 'lazy'}
             />
             <div className={styles.meta}>
                 <h2 className={styles.title}>{title}</h2>

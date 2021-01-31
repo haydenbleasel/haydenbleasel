@@ -3,6 +3,7 @@ import Prismic from '@prismicio/client';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useInView } from 'react-intersection-observer';
+import Fade from 'react-reveal/Fade';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
@@ -126,31 +127,38 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       />
 
       <div className={styles.cover}>
-        <Image
-          layout="responsive"
-          width={2628}
-          height={1752}
-          src="/images/work/cover.png"
-          alt="Image of my concept UI work"
-          quality={100}
-        />
+        <Fade delay={800}>
+          <Image
+            layout="responsive"
+            width={2628}
+            height={1752}
+            src="/images/work/cover.png"
+            alt="Image of my concept UI work"
+            quality={100}
+            loading="eager"
+          />
+        </Fade>
       </div>
 
-      <div className={styles.projectsHeader}>
-        <h2 className="heading-5">Jellypepper</h2>
-        <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
-      </div>
+      <Fade>
+        <div className={styles.projectsHeader}>
+          <h2 className="heading-5">Jellypepper</h2>
+          <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
+        </div>
+      </Fade>
 
       <div className={styles.projects}>
-        {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }) => (
+        {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }, index) => (
           <div key={uid} id={uid}>
-            <Client
-              image={data.logo.url}
-              title={data.name}
-              summary={data.description}
-              description={createClientDescription(data)}
-              caption={`Roles: ${['Creative Director', ...(jellypepperRoles[uid] || [])].join(', ')}`}
-            />
+            <Fade delay={(index % 3) * 100}>
+              <Client
+                image={data.logo.url}
+                title={data.name}
+                summary={data.description}
+                description={createClientDescription(data)}
+                caption={`Roles: ${['Creative Director', ...(jellypepperRoles[uid] || [])].join(', ')}`}
+              />
+            </Fade>
           </div>
         ))}
       </div>
@@ -165,21 +173,25 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
         )}
       </div>
 
-      <div className={styles.projectsHeader}>
-        <h2 className="heading-5">Other roles</h2>
-        <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
-      </div>
+      <Fade>
+        <div className={styles.projectsHeader}>
+          <h2 className="heading-5">Other roles</h2>
+          <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
+        </div>
+      </Fade>
 
       <div className={styles.projects}>
-        {otherRoles.map(({ image, role, company, type, start, end, location, description }) => (
+        {otherRoles.map(({ image, role, company, type, start, end, location, description }, index) => (
           <div key={company} id={company}>
-            <Client
-              image={image}
-              title={company}
-              summary={role}
-              description={description}
-              caption={`${type} from ${start} to ${end} in ${location}.`}
-            />
+            <Fade delay={(index % 3) * 100}>
+              <Client
+                image={image}
+                title={company}
+                summary={role}
+                description={description}
+                caption={`${type} from ${start} to ${end} in ${location}.`}
+              />
+            </Fade>
           </div>
         ))}
       </div>

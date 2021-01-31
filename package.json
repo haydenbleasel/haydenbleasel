@@ -35,6 +35,7 @@
     "react-headroom": "^3.1.0",
     "react-intersection-observer": "^8.31.0",
     "react-responsive": "^8.2.0",
+    "react-reveal": "^1.2.2",
     "rss-parser": "^3.10.0",
     "slugify": "^1.4.6",
     "spotify-web-api-node": "^5.0.2"

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Headroom from 'react-headroom';
 import { useMediaQuery } from 'react-responsive'
+import Fade from 'react-reveal/Fade';
 
 import styles from './Header.module.css';
 import Link from '../Link';
@@ -22,30 +23,32 @@ const Header = ({
 
     return (
         <Headroom>
-            <nav className={`grid ${styles.navContainer}`}>
-                <header className={`container ${styles.nav} ${menuActive ? styles.active : ''}`}>
-                    <div className={styles.name}>
-                        <Link href="/">Hayden Bleasel</Link>
-                    </div>
-                    <div className={styles.menu}>
-                        <ul className={styles.sitemap}>
-                            {routes.map((route) => (
-                                <li className={router.pathname == `/${route.toLowerCase()}` ? styles.active : ""}>
-                                    <Link href={`/${route.toLowerCase()}`} key={route.toLowerCase()}>{route}</Link>
-                                </li>
-                            ))}
-                        </ul>
-                        <div className={styles.hamburgerContainer} onClick={() => {
-                            setMenuActive(!menuActive);
-                            laptop && onNavToggle();
-                        }}>
-                            <div className={styles.hamburger}>
-                                <span>Menu</span>
+            <Fade top>
+                <nav className={`grid ${styles.navContainer}`}>
+                    <header className={`container ${styles.nav} ${menuActive ? styles.active : ''}`}>
+                        <div className={styles.name}>
+                            <Link href="/">Hayden Bleasel</Link>
+                        </div>
+                        <div className={styles.menu}>
+                            <ul className={styles.sitemap}>
+                                {routes.map((route) => (
+                                    <li className={router.pathname == `/${route.toLowerCase()}` ? styles.active : ""}>
+                                        <Link href={`/${route.toLowerCase()}`} key={route.toLowerCase()}>{route}</Link>
+                                    </li>
+                                ))}
+                            </ul>
+                            <div className={styles.hamburgerContainer} onClick={() => {
+                                setMenuActive(!menuActive);
+                                laptop && onNavToggle();
+                            }}>
+                                <div className={styles.hamburger}>
+                                    <span>Menu</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </header>
-            </nav>
+                    </header>
+                </nav>
+            </Fade>
         </Headroom>
     );
 }

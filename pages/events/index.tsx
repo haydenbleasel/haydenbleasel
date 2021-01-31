@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Fade from 'react-reveal/Fade';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import ArrowLink from '../../components/ArrowLink';
@@ -43,27 +44,32 @@ const Events = () => (
         </Hero>
 
         <div className={styles.cover}>
-            <Image
-                layout="responsive"
-                width={4032}
-                height={3024}
-                src="/images/events/sydney-designers.jpg"
-                alt="Sydney Designers event at Atlassian 2017"
-                quality={100}
-            />
+            <Fade delay={800}>
+                <Image
+                    layout="responsive"
+                    width={4032}
+                    height={3024}
+                    src="/images/events/sydney-designers.jpg"
+                    alt="Sydney Designers event at Atlassian 2017"
+                    quality={100}
+                    loading="eager"
+                />
+            </Fade>
         </div>
 
         <ul className={styles.events}>
-            {(eventsList as EventItem[]).map(({ url, ...event }) => (
-                <li id={event.name}>
-                    {url ? (
-                        <a className={styles.eventLink} href={url} target="noopener noreferrer">
+            {(eventsList as EventItem[]).map(({ url, ...event }, index) => (
+                <Fade delay={Math.min(index * 50, 500)}>
+                    <li id={event.name}>
+                        {url ? (
+                            <a className={styles.eventLink} href={url} target="noopener noreferrer">
+                                <Event {...event} />
+                            </a>
+                        ) : (
                             <Event {...event} />
-                        </a>
-                    ) : (
-                        <Event {...event} />
-                    )}
-                </li>
+                        )}
+                    </li>
+                </Fade>
             ))}
         </ul>
 

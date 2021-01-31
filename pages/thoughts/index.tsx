@@ -3,6 +3,7 @@ import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
 import dayjs from 'dayjs';
 import slugify from 'slugify';
+import Fade from 'react-reveal/Fade';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Post from '../../components/Post';
@@ -40,20 +41,22 @@ const Thoughts = ({ posts }: BlogProps) => (
             description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants that didn't fit on Twitter."
         />
 
-        <ul className={styles.posts}>
-            {posts.map(({ title, id, date, summary, image }, i) => (
-                <li className={i === 0 ? styles.featured : ''} key={id}>
-                    <Post
-                        id={id}
-                        image={image}
-                        title={title}
-                        description={summary}
-                        caption={dayjs(date).format('MMMM D, YYYY')}
-                        featured={i === 0}
-                    />
-                </li>
-            ))}
-        </ul>
+        <Fade delay={800}>
+            <ul className={styles.posts}>
+                {posts.map(({ title, id, date, summary, image }, index) => (
+                    <li className={index === 0 ? styles.featured : ''} key={id}>
+                        <Post
+                            id={id}
+                            image={image}
+                            title={title}
+                            description={summary}
+                            caption={dayjs(date).format('MMMM D, YYYY')}
+                            featured={index === 0}
+                        />
+                    </li>
+                ))}
+            </ul>
+        </Fade>
     
     </Layout>
 );

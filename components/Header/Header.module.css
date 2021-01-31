@@ -1,3 +1,7 @@
+.navContainer {
+    z-index: 999;
+}
+
 .nav {
     padding: 1.5rem 0;
     display: flex;

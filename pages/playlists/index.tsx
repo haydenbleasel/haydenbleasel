@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Feature from '../../components/Feature';
+import Fade from 'react-reveal/Fade';
 import SpotifyWebApi from 'spotify-web-api-node';
 import he from 'he';
 import ColorThief from 'colorthief';
@@ -39,7 +40,7 @@ function getColor(image: HTMLImageElement) {
     return colors[0];
 }
 
-function Playlist({ description, external_urls, id, images, name, tracks }: SpotifyPlaylist, i) {
+function Playlist({ description, external_urls, id, images, name, tracks }: SpotifyPlaylist, index) {
     const [color, setColor] = useState('var(--black)');
 
     function getDominantColor(event: any) {
@@ -54,17 +55,19 @@ function Playlist({ description, external_urls, id, images, name, tracks }: Spot
 
     return (
         <div key={id}>
-            <Feature
-                image={images[0].url}
-                title={name}
-                description={he.decode(description)}
-                caption={`${tracks.total} tracks`}
-                reverse={!(i % 2)}
-                onImageLoad={getDominantColor}
-                square
-            >
-                <ArrowLink href={external_urls.spotify} color={color}>Listen on Spotify</ArrowLink>
-            </Feature>
+            <Fade delay={index ? 0 : 800}>
+                <Feature
+                    image={images[0].url}
+                    title={name}
+                    description={he.decode(description)}
+                    caption={`${tracks.total} tracks`}
+                    reverse={!(index % 2)}
+                    onImageLoad={getDominantColor}
+                    square
+                >
+                    <ArrowLink href={external_urls.spotify} color={color}>Listen on Spotify</ArrowLink>
+                </Feature>
+            </Fade>
         </div>
     );
 }
