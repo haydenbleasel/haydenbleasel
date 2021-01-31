@@ -109,6 +109,7 @@ const Home = () => {
             image="/images/home/neutral.png"
             title="Neutral"
             description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
+            imageProps={{ objectPosition: 'top center'}}
           >
             <ArrowLink href="https://tryneutral.com/" color="#068466">Download Neutral</ArrowLink>
           </Feature>
@@ -119,6 +120,7 @@ const Home = () => {
             image="/images/home/tomorrow.png"
             title="Tomorrow"
             description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
+            imageProps={{ objectPosition: 'top right' }}
           >
             <ArrowLink href="https://tomorrowstudio.co/" color="#5F49E3">Join the mailing list</ArrowLink>
           </Feature>
