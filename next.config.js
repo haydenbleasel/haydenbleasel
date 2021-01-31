@@ -1,3 +1,4 @@
+import { createSecureHeaders } from 'next-secure-headers';
 const withPlugins = require('next-compose-plugins');
 const withPWA = require('next-pwa');
 const withPreact = require('next-plugin-preact');
@@ -28,6 +29,12 @@ module.exports = withPlugins(
                 'cdn-images-1.medium.com',
             ],
         },
+        headers() {
+            return [{
+                source: "/(.*)",
+                headers: createSecureHeaders(),
+            }]
+        },
         redirects() {
             return [
                 {
@@ -38,6 +45,11 @@ module.exports = withPlugins(
                 {
                     source: '/blog',
                     destination: '/thoughts',
+                    permanent: true,
+                },
+                {
+                    source: '/blog/:slug',
+                    destination: '/thoughts/:slug',
                     permanent: true,
                 },
                 {

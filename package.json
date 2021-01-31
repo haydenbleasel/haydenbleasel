@@ -25,6 +25,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-plugin-preact": "^3.0.3",
     "next-pwa": "^5.0.4",
+    "next-secure-headers": "^2.1.0",
     "next-seo": "^4.17.0",
     "next-sitemap": "^1.4.15",
     "nodemailer": "^6.4.17",
