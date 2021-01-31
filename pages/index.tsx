@@ -31,7 +31,9 @@ const Home = () => {
       setAge(newAge);
     }, 50);
 
-    return () => clearInterval(ageInterval);
+    return () => {
+      clearInterval(ageInterval);
+    };
   }, []);
 
   return (

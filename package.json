@@ -20,6 +20,7 @@
     "he": "^1.2.0",
     "jsdom": "^16.4.0",
     "lottie-web": "^5.7.6",
+    "medium-zoom": "^1.0.6",
     "next": "latest",
     "next-compose-plugins": "^2.2.1",
     "next-plugin-preact": "^3.0.3",

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArticleJsonLd } from 'next-seo';
 import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
@@ -8,6 +8,7 @@ import Fade from 'react-reveal/Fade';
 import Image from 'next/image';
 import slugify from 'slugify';
 import dayjs from 'dayjs';
+import mediumZoom from 'medium-zoom'
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
@@ -31,6 +32,14 @@ const Article = ({ post }: ArticleProps) => {
 
     const { asPath, basePath } = useRouter();
     const mobile = useMediaQuery({ query: '(max-width: 575.98px)' });
+
+    useEffect(() => {
+        const zoom = mediumZoom('figure img');
+
+        return () => {
+            zoom.detach();
+        };
+    }, []);
 
     return (
         <Layout
