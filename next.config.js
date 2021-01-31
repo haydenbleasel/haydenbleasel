@@ -1,4 +1,4 @@
-import { createSecureHeaders } from 'next-secure-headers';
+const { createSecureHeaders } = require('next-secure-headers');
 const withPlugins = require('next-compose-plugins');
 const withPWA = require('next-pwa');
 const withPreact = require('next-plugin-preact');
