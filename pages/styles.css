@@ -119,3 +119,12 @@ p a {
   box-shadow: 0 0.25rem 2rem 0 rgba(0,0,0,0.05);
   background: var(--white);
 }
+
+.grow img {
+  transition: transform 2s linear;
+}
+
+.grow:hover img {
+  transform: scale(1.05);
+  transition: transform 8s linear;
+}

@@ -27,7 +27,7 @@ const Feature = ({
     const laptop = useMediaQuery({ query: '(max-width: 991.98px)' });
     
     return (
-        <div className={`${styles.feature} ${reverse ? styles.reverse : ''}`}>
+        <div className={`grow ${styles.feature} ${reverse ? styles.reverse : ''}`}>
             <div className={styles.featureImage}>
                 <Image
                     layout="responsive"

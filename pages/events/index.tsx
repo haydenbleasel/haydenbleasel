@@ -43,7 +43,7 @@ const Events = () => (
             <ArrowLink href="/contact">Let's chat</ArrowLink>
         </Hero>
 
-        <div className={styles.cover}>
+        <div className={`${styles.cover} grow`}>
             <Fade delay={800}>
                 <Image
                     layout="responsive"

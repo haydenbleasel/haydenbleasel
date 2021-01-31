@@ -67,7 +67,7 @@ const Article = ({ post }: ArticleProps) => {
                 </small>
             </Hero>
             
-            <div className={styles.image}>
+            <div className={`${styles.cover} grow`}>
                 {mobile ? (
                     <Image
                         layout="fill"

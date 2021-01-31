@@ -68,7 +68,7 @@ const Home = () => {
         <ArrowLink href="/contact">Get in touch</ArrowLink>
       </Hero>
 
-      <div className={styles.cover}>
+      <div className={`${styles.cover} grow`}>
         <Fade delay={800}>
           <Image
             layout="responsive"

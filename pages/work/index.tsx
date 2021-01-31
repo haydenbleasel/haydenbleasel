@@ -126,7 +126,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
         description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
       />
 
-      <div className={styles.cover}>
+      <div className={`${styles.cover} grow`}>
         <Fade delay={800}>
           <Image
             layout="responsive"
