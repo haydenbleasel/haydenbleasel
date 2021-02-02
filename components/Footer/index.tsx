@@ -30,7 +30,7 @@ const Footer = ({ socialPlatforms }) => {
             }
             
             notyf.success({
-                message: 'Thanks, choom. Check your email for a confirmation.',
+                message: 'Thanks, choom. I\'ll let you know when I release something cool.',
                 duration: 5000,
                 icon: false,
             });

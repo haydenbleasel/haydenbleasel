@@ -11,6 +11,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 email: JSON.parse(req.body).email,
+                double_opt_in: false,
             }),
         });
 
