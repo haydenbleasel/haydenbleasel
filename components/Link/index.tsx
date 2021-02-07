@@ -13,7 +13,7 @@ const Link = ({ children, href, ...props }: LinkProps) => (
             <a>{children}</a>
         </NextLink>
     ) : (
-        <a href={href} rel="noopener noreferrer" {...props}>{children}</a>
+        <a href={href} target="_blank" rel="noopener noreferrer" {...props}>{children}</a>
     )  
 );
 
