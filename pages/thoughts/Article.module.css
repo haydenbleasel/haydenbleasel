@@ -98,4 +98,8 @@
     text-align: center;
     margin-top: 1rem;
     color: var(--grey);
+
+    & a {
+        color: inherit;
+    }
 }
