@@ -91,3 +91,11 @@
     max-width: 100%;
     width: 100%;
 }
+
+.content :global(figcaption) {
+    font-size: var(--type-scale-1);
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--grey);
+}
