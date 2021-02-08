@@ -2,6 +2,92 @@
     max-width: 39rem;
     margin: var(--section-gap) auto 0;
     line-height: 1.7;
+    width: 100%;
+
+    & :global(h1),
+    & :global(h2),
+    & :global(h3),
+    & :global(h4),
+    & :global(h5),
+    & :global(h6) {
+        line-height: 1.3;
+        margin: 3rem 0 1.5rem;
+        font-weight: 650;
+    }
+
+    & :global(h1) {
+        font-size: var(--type-scale-7);
+        @media (--mobile) {
+            font-size: var(--type-scale-6);
+        }
+    }
+
+    & :global(h2) {
+        font-size: var(--type-scale-6);
+        @media (--mobile) {
+            font-size: var(--type-scale-5);
+        }
+    }
+
+    & :global(h3) {
+        font-size: var(--type-scale-5);
+        @media (--mobile) {
+            font-size: var(--type-scale-4);
+        }
+    }
+
+    & :global(h4) {
+        font-size: var(--type-scale-4);
+        @media (--mobile) {
+            font-size: var(--type-scale-3);
+        }
+    }
+
+    & :global(h5) {
+        font-size: var(--type-scale-3);
+        @media (--mobile) {
+            font-size: var(--type-scale-2);
+        }
+    }
+
+    & :global(iframe) {
+        width: 100%;
+    }
+
+    & :global(figure),
+    & :global(iframe) {
+        margin: calc(var(--section-gap) / 2) 0;
+    }
+
+    & :global(figure) {
+        border-radius: 0.25rem;
+        overflow: hidden;
+    }
+
+    & :global(figure img) {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    & :global(figcaption) {
+        font-size: var(--type-scale-1);
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--grey);
+
+        & a {
+            color: inherit;
+        }
+    }
+
+    & :global(pre) {
+        background: var(--black);
+        color: #fff;
+        margin: 0;
+        padding: 2rem;
+        overflow: auto;
+    }
 
     @media (--mobile) {
         margin-top: 0;
@@ -24,82 +110,5 @@
         border-radius: 0;
         height: 40vh;
         position: relative;
-    }
-}
-
-.content :global(h1),
-.content :global(h2),
-.content :global(h3),
-.content :global(h4),
-.content :global(h5),
-.content :global(h6) {
-    line-height: 1.3;
-    margin: 3rem 0 1.5rem;
-    font-weight: 650;
-}
-
-.content :global(h1) {
-    font-size: var(--type-scale-7);
-    @media (--mobile) {
-        font-size: var(--type-scale-6);
-    }
-}
-
-.content :global(h2) {
-    font-size: var(--type-scale-6);
-    @media (--mobile) {
-        font-size: var(--type-scale-5);
-    }
-}
-
-.content :global(h3) {
-    font-size: var(--type-scale-5);
-    @media (--mobile) {
-        font-size: var(--type-scale-4);
-    }
-}
-
-.content :global(h4) {
-    font-size: var(--type-scale-4);
-    @media (--mobile) {
-        font-size: var(--type-scale-3);
-    }
-}
-
-.content :global(h5) {
-    font-size: var(--type-scale-3);
-    @media (--mobile) {
-        font-size: var(--type-scale-2);
-    }
-}
-
-.content :global(iframe) {
-    width: 100%;
-}
-
-.content :global(figure),
-.content :global(iframe) {
-    margin: calc(var(--section-gap) / 2) 0;
-}
-
-.content :global(figure) {
-    border-radius: 0.25rem;
-    overflow: hidden;
-}
-
-.content :global(figure img) {
-    max-width: 100%;
-    width: 100%;
-}
-
-.content :global(figcaption) {
-    font-size: var(--type-scale-1);
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-    color: var(--grey);
-
-    & a {
-        color: inherit;
     }
 }
