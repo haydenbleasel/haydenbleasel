@@ -166,7 +166,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       <div className={styles.presumi} ref={ref}>
         <div className={styles.presumiInfo}>
           <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
-          <ArrowLink color="var(--white)" href="/thoughts/presumi">Read the story</ArrowLink>
+          <ArrowLink color="white" href="/thoughts/presumi">Read the story</ArrowLink>
         </div>
         {animationLoaded && (
           <PresumiAnimation />

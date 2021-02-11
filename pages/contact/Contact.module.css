@@ -33,6 +33,9 @@
     transition: background 0.2s;
     &:hover, &:focus {
         background: #F6F6F6;
+        @media (prefers-color-scheme: dark) {
+            background: #252528;
+        }
     }
     &::placeholder {
         color: var(--black);
@@ -75,6 +78,7 @@
 
 .files::-webkit-file-upload-button {
     background: var(--ghost);
+    color: var(--black);
     padding: 1rem;
     border-radius: 0.25rem;
     border: none;
