@@ -62,6 +62,7 @@
 }
 
 .button {
+    appearance: none;
     background: var(--black);
     color: var(--white);
     font-weight: 650;
@@ -78,6 +79,7 @@
 
 .files::-webkit-file-upload-button {
     background: var(--ghost);
+    appearance: none;
     color: var(--black);
     padding: 1rem;
     border-radius: 0.25rem;
