@@ -9,6 +9,8 @@ import Image from 'next/image';
 import slugify from 'slugify';
 import dayjs from 'dayjs';
 import mediumZoom from 'medium-zoom'
+import hljs from 'highlight.js';
+import 'highlight.js/styles/atom-one-dark.css';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
@@ -35,6 +37,10 @@ const Article = ({ post }: ArticleProps) => {
 
     useEffect(() => {
         const zoom = mediumZoom('figure img');
+        
+        document.querySelectorAll('pre').forEach((block) => {
+            hljs.highlightBlock(block);
+        });
 
         return () => {
             zoom.detach();

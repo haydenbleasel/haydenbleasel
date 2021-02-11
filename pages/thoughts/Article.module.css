@@ -55,7 +55,8 @@
     }
 
     & :global(figure),
-    & :global(iframe) {
+    & :global(iframe),
+    & :global(pre) {
         margin: calc(var(--section-gap) / 2) 0;
     }
 
@@ -84,9 +85,13 @@
     & :global(pre) {
         background: var(--black);
         color: #fff;
-        margin: 0;
         padding: 2rem;
         overflow: auto;
+        font-family: 'Space Mono', monospace;
+        font-size: var(--type-scale-1);
+        border-radius: 0.25rem;
+        overflow: hidden;
+        font-variant-ligatures: none;
     }
 
     @media (--mobile) {

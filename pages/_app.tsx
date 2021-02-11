@@ -3,6 +3,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
+import GoogleFonts from 'next-google-fonts';
 import './styles.css';
 
 import { siteUrl } from '../next-sitemap';
@@ -45,6 +46,8 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
                 <meta name="msapplication-tap-highlight" content="no" />
                 <meta name="theme-color" content="#0C0D15" />
                 <link rel="manifest" href="/manifest.json" />
+
+                <GoogleFonts href="https://fonts.googleapis.com/css2?family=Space+Mono&amp;display=swap" />
 
                 {[57, 60, 72, 76, 114, 120, 144, 152, 180].map((size) => (
                     <link rel="apple-touch-icon" sizes={`${size}x${size}`} href={`/apple-touch-icon-${size}x${size}.png`} />
