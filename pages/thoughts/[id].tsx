@@ -139,6 +139,14 @@ export async function getStaticProps({ params }) {
     dom.window.document.querySelector('h4').remove();
     dom.window.document.querySelector('figure').remove();
 
+    [...dom.window.document.querySelectorAll('body > *')].map((node) => {
+        const prev = node.previousSibling;
+        if (prev && prev.nodeName === 'PRE' && node.nodeName === 'PRE') {
+            prev.innerHTML += `<br /><br />${node.innerHTML}`;
+            node.remove();
+        }
+    });
+
     return {
         props: {
             post: {
