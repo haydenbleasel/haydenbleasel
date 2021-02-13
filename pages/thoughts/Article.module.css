@@ -90,7 +90,7 @@
         font-family: 'Space Mono', monospace;
         font-size: var(--type-scale-1);
         border-radius: 0.25rem;
-        overflow: hidden;
+        overflow: auto;
         font-variant-ligatures: none;
     }
 
