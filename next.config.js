@@ -43,13 +43,13 @@ module.exports = withPlugins(
                     permanent: true,
                 },
                 {
-                    source: '/blog',
-                    destination: '/thoughts',
+                    source: '/blog/how-to-growth-hack-your-resume',
+                    destination: '/',
                     permanent: true,
                 },
                 {
-                    source: '/blog/how-to-growth-hack-your-resume',
-                    destination: '/',
+                    source: '/blog',
+                    destination: '/thoughts',
                     permanent: true,
                 },
                 {
