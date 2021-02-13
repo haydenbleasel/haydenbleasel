@@ -145,6 +145,13 @@ export async function getStaticProps({ params }) {
     dom.window.document.querySelector('h4').remove();
     dom.window.document.querySelector('figure').remove();
 
+    [...dom.window.document.querySelectorAll('a')].map((node) => {
+        if (!node.href.startsWith('https://haydenbleasel.com')) {
+            node.rel = 'noopener noreferrer';
+            node.target = '_blank';
+        }
+    });
+
     [...dom.window.document.querySelectorAll('body > *')].map((node) => {
         const prev = node.previousSibling;
         if (prev && prev.nodeName === 'PRE' && node.nodeName === 'PRE') {
