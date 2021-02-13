@@ -48,6 +48,11 @@ module.exports = withPlugins(
                     permanent: true,
                 },
                 {
+                    source: '/blog/how-to-growth-hack-your-resume',
+                    destination: '/',
+                    permanent: true,
+                },
+                {
                     source: '/blog/:slug',
                     destination: '/thoughts/:slug',
                     permanent: true,
@@ -80,6 +85,11 @@ module.exports = withPlugins(
                 {
                     source: '/work/spaceship',
                     destination: '/work#role-spaceship',
+                    permanent: true,
+                },
+                {
+                    source: '/work/jellypepper',
+                    destination: 'https://jellypepper.com/',
                     permanent: true,
                 },
             ]
