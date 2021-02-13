@@ -153,6 +153,17 @@ export async function getStaticProps({ params }) {
         }
     });
 
+    [...dom.window.document.querySelectorAll('iframe')].map((node) => {
+        const wrapper = dom.window.document.createElement('div');
+        const parent = node.parentNode;
+        
+        wrapper.className = 'iframe-wrapper';
+        wrapper.innerHTML = node.outerHTML;
+        parent.replaceChild(wrapper, node);
+
+        node.remove();
+    });
+
     return {
         props: {
             post: {
