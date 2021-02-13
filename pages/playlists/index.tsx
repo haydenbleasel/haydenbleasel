@@ -27,9 +27,10 @@ type PlaylistsProps = {
 function getColor(image: HTMLImageElement) {
     const colorThief = new ColorThief();
     const palette = colorThief.getPalette(image, 8) || [];
+    const backgroundColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? '#0C0D15' : '#FFFFFF';
 
     const colors = palette.filter((color) => (
-        Contrast.isAccessible('#FFFFFF', `rgb(${color.join(',')})`)
+        Contrast.isAccessible(backgroundColor, `rgb(${color.join(',')})`)
     )).sort((a, b) => {
         const ratioA = Contrast.ratio('#FFFFFF', `rgb(${a.join(',')})`);
         const ratioB = Contrast.ratio('#FFFFFF', `rgb(${b.join(',')})`);
