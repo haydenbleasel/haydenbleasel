@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <Layout
-      title="Digital product designer, JavaScript developer and entrepreneur"
+      title="Digital product designer and JavaScript developer"
       description="I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch."
     >
 
