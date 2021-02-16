@@ -11,7 +11,7 @@ const Events = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
-    const [files, setFiles] = useState<File[]>([]);
+    const [files, setFiles] = useState<FileList | null>(null);
     const [loading, setLoading] = useState(false);
 
     async function sendEmail(event: FormEvent) {
@@ -28,9 +28,11 @@ const Events = () => {
             formData.append('email', email);
             formData.append('message', message);
 
-            files.map((file, index) => (
-                formData.append(`file${index}`, file)
-            ));
+            if (files) {
+                Array.from(files).map((file, index) => (
+                    formData.append(`file${index}`, file)
+                ));
+            }
 
             const response = await fetch('/api/nodemailer', {
                 method: 'post',
@@ -46,7 +48,7 @@ const Events = () => {
             });
         } catch (error: any) {
             notyf.error({
-                message: 'Sorry, something went wrong.',
+                message: error.message,
                 duration: 5000,
                 icon: false,
             });
@@ -138,21 +140,9 @@ const Events = () => {
                             name="files"
                             type="file"
                             multiple
-                            onChange={({ target }: ChangeEvent) => {
-                                const targetFiles = (target as HTMLInputElement).files;
-                                const newFiles: File[] = [];
-
-                                if (targetFiles) {
-                                    for (let i = 0; i < targetFiles.length; i++) {
-                                        const file = targetFiles.item(i);
-                                        if (file) {
-                                            newFiles.push(file);
-                                        }
-                                    }
-                                }
-
-                                setFiles(newFiles);
-                            }}
+                            onChange={({ target }: ChangeEvent) => (
+                                setFiles((target as HTMLInputElement).files)
+                            )}
                         />
                     </fieldset>
 
