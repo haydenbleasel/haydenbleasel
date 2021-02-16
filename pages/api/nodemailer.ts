@@ -61,7 +61,7 @@ export default async function handler(req, res) {
             replyTo: fields.email,
             subject: `Hello from ${fields.name}`,
             text: fields.message,
-            html: `<p>${fields.message}</p>`,
+            html: `<p>${fields.message.replace(/(?:\r\n|\r|\n)/g, '<br>')}</p>`,
             attachments: fileArray.map(({ name, path, type }) => ({
                 filename: name,
                 path: path,
