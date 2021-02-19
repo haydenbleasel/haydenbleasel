@@ -42,8 +42,8 @@ const Home = () => {
       description="I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch."
     >
 
-      <div className={styles.avatar}>
-        <Fade triggerOnce>
+      <Fade triggerOnce>
+        <div className={styles.avatar}>
           <Image
             layout="fixed"
             width={72}
@@ -54,8 +54,8 @@ const Home = () => {
             objectFit="cover"
             objectPosition="53% center"
           />
-        </Fade>
-      </div>
+        </div>
+      </Fade>
     
       <Hero
         title="Hayden Bleasel"
@@ -71,8 +71,8 @@ const Home = () => {
         <ArrowLink href="/contact">Get in touch</ArrowLink>
       </Hero>
 
-      <div className={`${styles.cover} grow`}>
-        <Fade triggerOnce delay={800}>
+      <Fade triggerOnce delay={800}>
+        <div className={`${styles.cover} grow`}>
           <Image
             layout="responsive"
             width={6000}
@@ -81,8 +81,8 @@ const Home = () => {
             alt="Hayden Bleasel"
             quality={100}
           />
-        </Fade>
-      </div>
+        </div>
+      </Fade>
 
       <Fade triggerOnce delay={isMobile ? 800 : 0}>
         <div className={styles.intro}>
