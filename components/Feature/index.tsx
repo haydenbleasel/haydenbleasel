@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import Image from 'next/image';
-import { useMediaQuery } from 'react-responsive';
+import useResponsive from '../../utils/responsive';
 import styles from './Feature.module.css';
 
 type FeatureProps = {
@@ -24,14 +24,14 @@ const Feature = ({
     reverse = false,
     imageProps,
 }: FeatureProps) => {
-    const laptop = useMediaQuery({ query: '(max-width: 991.98px)' });
+    const { isLaptop } = useResponsive();
     
     return (
         <div className={`grow ${styles.feature} ${reverse ? styles.reverse : ''}`}>
             <div className={styles.featureImage}>
                 <Image
                     layout="responsive"
-                    height={laptop ? 472 : 630}
+                    height={isLaptop ? 472 : 630}
                     width={630}
                     alt={title}
                     src={image}

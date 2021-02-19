@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { ArticleJsonLd } from 'next-seo';
 import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
-import { useMediaQuery } from 'react-responsive';
+import useResponsive from '../../utils/responsive';
 import { useRouter } from 'next/router';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import Image from 'next/image';
 import slugify from 'slugify';
 import dayjs from 'dayjs';
@@ -33,7 +33,7 @@ type ArticleProps = {
 const Article = ({ post }: ArticleProps) => {
 
     const { asPath, basePath } = useRouter();
-    const mobile = useMediaQuery({ query: '(max-width: 575.98px)' });
+    const { isMobile } = useResponsive();
 
     useEffect(() => {
         const zoom = mediumZoom('figure img');
@@ -83,7 +83,7 @@ const Article = ({ post }: ArticleProps) => {
             </Hero>
             
             <div className={`${styles.cover} grow`}>
-                {mobile ? (
+                {isMobile ? (
                     <Image
                         layout="fill"
                         src={post.image}

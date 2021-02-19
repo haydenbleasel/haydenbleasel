@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Fade from 'react-reveal/Fade';
-import { useMediaQuery } from 'react-responsive';
+import { Fade } from 'react-awesome-reveal';
+import useResponsive from '../utils/responsive';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import Feature from '../components/Feature';
@@ -19,7 +19,7 @@ function calculateAge(currentTime: number) {
 const Home = () => {
   const timeOnStart = new Date().getTime();
   const ageOnStart = calculateAge(timeOnStart);
-  const mobile = useMediaQuery({ query: '(max-width: 575.98px)' });
+  const { isMobile } = useResponsive();
   
   const [age, setAge] = useState(ageOnStart);
   const [fix, setFix] = useState(0);
@@ -86,7 +86,7 @@ const Home = () => {
         </Fade>
       </div>
 
-      <Fade delay={mobile ? 800 : 0}>
+      <Fade delay={isMobile ? 800 : 0}>
         <div className={styles.intro}>
           <p className="heading-5">I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch.</p>
           <p className="heading-5">Here’s what I’m currently doing...</p>

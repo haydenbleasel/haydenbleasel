@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Headroom from 'react-headroom';
-import { useMediaQuery } from 'react-responsive'
-import Fade from 'react-reveal/Fade';
+import useResponsive from '../../utils/responsive';
+import { Fade } from 'react-awesome-reveal';
 
 import styles from './Header.module.css';
 import Link from '../Link';
@@ -16,10 +16,9 @@ type HeaderProps = {
 const Header = ({
     onNavToggle,
 }: HeaderProps) => {
-
-    const laptop = useMediaQuery({ query: '(max-width: 991.98px)' });
     const [menuActive, setMenuActive] = useState(false);
     const router = useRouter();
+    const { isLaptop } = useResponsive();
 
     return (
         <Headroom>
@@ -39,7 +38,7 @@ const Header = ({
                             </ul>
                             <div className={styles.hamburgerContainer} onClick={() => {
                                 setMenuActive(!menuActive);
-                                laptop && onNavToggle();
+                                isLaptop && onNavToggle();
                             }}>
                                 <div className={styles.hamburger}>
                                     <span>Menu</span>
