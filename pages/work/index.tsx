@@ -135,7 +135,6 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
             src="/images/work/cover.png"
             alt="Image of my concept UI work"
             quality={100}
-            loading="eager"
           />
         </Fade>
       </div>

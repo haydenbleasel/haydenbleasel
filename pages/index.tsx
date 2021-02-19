@@ -53,7 +53,6 @@ const Home = () => {
             quality={100}
             objectFit="cover"
             objectPosition="53% center"
-            loading="eager"
           />
         </Fade>
       </div>
@@ -81,7 +80,6 @@ const Home = () => {
             src="/images/home/haydenbleasel.jpg"
             alt="Hayden Bleasel"
             quality={100}
-            loading="eager"
           />
         </Fade>
       </div>

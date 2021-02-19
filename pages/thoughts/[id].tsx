@@ -88,7 +88,6 @@ const Article = ({ post }: ArticleProps) => {
                         layout="fill"
                         src={post.image}
                         objectFit="cover"
-                        loading="eager"
                     />
                 ) : (
                     <Fade triggerOnce delay={800}>
@@ -98,7 +97,6 @@ const Article = ({ post }: ArticleProps) => {
                             width={1314}
                             height={876}
                             objectFit="cover"
-                            loading="eager"
                         />
                     </Fade>
                 )}

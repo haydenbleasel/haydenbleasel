@@ -52,7 +52,6 @@ const Events = () => (
                     src="/images/events/sydney-designers.jpg"
                     alt="Sydney Designers event at Atlassian 2017"
                     quality={100}
-                    loading="eager"
                 />
             </Fade>
         </div>
