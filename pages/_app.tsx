@@ -30,6 +30,7 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
 
     return (
         <>
+            <GoogleFonts href="https://fonts.googleapis.com/css2?family=Space+Mono&amp;display=swap" />
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -46,8 +47,6 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
                 <meta name="msapplication-tap-highlight" content="no" />
                 <meta name="theme-color" content="#0C0D15" />
                 <link rel="manifest" href="/manifest.json" />
-
-                <GoogleFonts href="https://fonts.googleapis.com/css2?family=Space+Mono&amp;display=swap" />
 
                 {[57, 60, 72, 76, 114, 120, 144, 152, 180].map((size) => (
                     <link rel="apple-touch-icon" sizes={`${size}x${size}`} href={`/apple-touch-icon-${size}x${size}.png`} />
