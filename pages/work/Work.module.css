@@ -19,12 +19,12 @@
 
 .projects {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 3rem;
     margin-bottom: var(--section-gap);
 
     @media (--desktop) {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     @media (--tablet) {
