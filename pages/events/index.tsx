@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import ArrowLink from '../../components/ArrowLink';
@@ -44,7 +44,7 @@ const Events = () => (
         </Hero>
 
         <div className={`${styles.cover} grow`}>
-            <Fade delay={800}>
+            <Fade triggerOnce delay={800}>
                 <Image
                     layout="responsive"
                     width={4032}
@@ -59,7 +59,7 @@ const Events = () => (
 
         <ul className={styles.events}>
             {(eventsList as EventItem[]).map(({ url, ...event }, index) => (
-                <Fade delay={Math.min(index * 50, 500)}>
+                <Fade triggerOnce delay={Math.min(index * 50, 500)}>
                     <li id={event.name}>
                         {url ? (
                             <a className={styles.eventLink} href={url} target="noopener noreferrer">

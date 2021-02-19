@@ -43,7 +43,7 @@ const Home = () => {
     >
 
       <div className={styles.avatar}>
-        <Fade>
+        <Fade triggerOnce>
           <Image
             layout="fixed"
             width={72}
@@ -73,7 +73,7 @@ const Home = () => {
       </Hero>
 
       <div className={`${styles.cover} grow`}>
-        <Fade delay={800}>
+        <Fade triggerOnce delay={800}>
           <Image
             layout="responsive"
             width={6000}
@@ -86,7 +86,7 @@ const Home = () => {
         </Fade>
       </div>
 
-      <Fade delay={isMobile ? 800 : 0}>
+      <Fade triggerOnce delay={isMobile ? 800 : 0}>
         <div className={styles.intro}>
           <p className="heading-5">I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch.</p>
           <p className="heading-5">Here’s what I’m currently doing...</p>
@@ -95,7 +95,7 @@ const Home = () => {
 
       <div className={styles.features}>
       
-        <Fade>
+        <Fade triggerOnce>
           <Feature
             image="/images/home/jellypepper.png"
             title="Jellypepper"
@@ -105,7 +105,7 @@ const Home = () => {
           </Feature>
         </Fade>
 
-        <Fade>
+        <Fade triggerOnce>
           <Feature
             reverse
             image="/images/home/neutral.png"
@@ -117,7 +117,7 @@ const Home = () => {
           </Feature>
         </Fade>
 
-        <Fade>
+        <Fade triggerOnce>
           <Feature
             image="/images/home/tomorrow.png"
             title="Tomorrow"
@@ -131,13 +131,13 @@ const Home = () => {
       </div>
 
       <div className={styles.focus}>
-        <Fade>
+        <Fade triggerOnce>
           <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles <Link href="/work">you can read about</Link>.</p>
         </Fade>
-        <Fade delay={200}>
+        <Fade triggerOnce delay={200}>
           <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees. During this time, I created a product for job seekers called <Link href="/thoughts/presumi">Presumi</Link> that I ended up licensing to SEEK in Hong Kong.</p>
         </Fade>
-        <Fade delay={400}>
+        <Fade triggerOnce delay={400}>
           <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, speaking at events, curating <Link href="/playlists">Spotify playlists</Link>, playing video games, making apps and learning new things.</p>
         </Fade>
       </div>

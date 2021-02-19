@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { Notyf } from 'notyf';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 
@@ -68,7 +68,7 @@ const Events = () => {
                 description="I’m always keen to have a chat and open to new opportunities. Just fill in the form below."
             />
 
-            <Fade delay={800}>
+            <Fade triggerOnce delay={800}>
                 <form className={`${styles.form} ${loading ? styles.loading : ''}`} onSubmit={sendEmail}>
 
                     <fieldset className={styles.fieldset}>

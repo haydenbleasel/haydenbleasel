@@ -91,7 +91,7 @@ const Article = ({ post }: ArticleProps) => {
                         loading="eager"
                     />
                 ) : (
-                    <Fade delay={800}>
+                    <Fade triggerOnce delay={800}>
                         <Image
                             layout="responsive"
                             src={post.image}

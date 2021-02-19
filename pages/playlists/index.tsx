@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Feature from '../../components/Feature';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import SpotifyWebApi from 'spotify-web-api-node';
 import he from 'he';
 import ColorThief from 'colorthief';
@@ -56,7 +56,7 @@ function Playlist({ description, external_urls, id, images, name, tracks }: Spot
 
     return (
         <div key={id}>
-            <Fade delay={index ? 0 : 800}>
+            <Fade triggerOnce delay={index ? 0 : 800}>
                 <Feature
                     image={images[0].url}
                     title={name}

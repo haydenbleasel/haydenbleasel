@@ -3,7 +3,7 @@ import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
 import dayjs from 'dayjs';
 import slugify from 'slugify';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Post from '../../components/Post';
@@ -41,7 +41,7 @@ const Thoughts = ({ posts }: BlogProps) => (
             description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants that didn't fit on Twitter."
         />
 
-        <Fade delay={800}>
+        <Fade triggerOnce delay={800}>
             <ul className={styles.posts}>
                 {posts.map(({ title, id, date, summary, image }, index) => (
                     <li className={index === 0 ? styles.featured : ''} key={id}>

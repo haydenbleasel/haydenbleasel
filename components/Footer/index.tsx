@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import { Notyf } from 'notyf';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import styles from './Footer.module.css';
 import ArrowLink from '../ArrowLink';
 import Link from '../Link';
@@ -50,7 +50,7 @@ const Footer = ({ socialPlatforms }) => {
     return (
         <footer className={styles.footer}>
             <form id="newsletter" className={`${styles.newsletter} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
-                <Fade>
+                <Fade triggerOnce>
                     <Image
                         layout="fixed"
                         width={27}
@@ -60,10 +60,10 @@ const Footer = ({ socialPlatforms }) => {
                         quality={100}
                     />
                 </Fade>
-                <Fade delay={200}>
+                <Fade triggerOnce delay={200}>
                     <p className={styles.newsletterHeading}>Join my private mailing list and get notified when I publish a new product or article.</p>
                 </Fade>
-                <Fade delay={400}>
+                <Fade triggerOnce delay={400}>
                     <fieldset className={styles.newsletterFields}>
                         <label className={styles.label} htmlFor="email">Email address</label>
                         <input
@@ -89,7 +89,7 @@ const Footer = ({ socialPlatforms }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <Fade delay={index * 100}>
+                        <Fade triggerOnce delay={index * 100}>
                             <Image
                                 alt={platform.name}
                                 layout="fixed"
@@ -102,7 +102,7 @@ const Footer = ({ socialPlatforms }) => {
                     </a>
                 ))}
             </div>
-            <Fade>
+            <Fade triggerOnce>
                 <small className={styles.copyright}>
                     <span>&copy; Hayden Bleasel 2077. </span>
                     <span><Link href="https://github.com/haydenbleasel/website">Source code</Link>.</span>

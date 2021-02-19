@@ -3,7 +3,7 @@ import Prismic from '@prismicio/client';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useInView } from 'react-intersection-observer';
-import Fade from 'react-reveal/Fade';
+import { Fade } from 'react-awesome-reveal';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
@@ -127,7 +127,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       />
 
       <div className={`${styles.cover} grow`}>
-        <Fade delay={800}>
+        <Fade triggerOnce delay={800}>
           <Image
             layout="responsive"
             width={2628}
@@ -140,7 +140,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
         </Fade>
       </div>
 
-      <Fade>
+      <Fade triggerOnce>
         <div className={styles.projectsHeader}>
           <h2 className="heading-5">Jellypepper</h2>
           <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
@@ -150,7 +150,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       <div className={styles.projects}>
         {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }, index) => (
           <div key={uid} id={`jellypepper-${uid}`}>
-            <Fade delay={(index % 3) * 100}>
+            <Fade triggerOnce delay={(index % 3) * 100}>
               <Client
                 image={data.logo.url}
                 title={data.name}
@@ -173,7 +173,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
         )}
       </div>
 
-      <Fade>
+      <Fade triggerOnce>
         <div className={styles.projectsHeader}>
           <h2 className="heading-5">Other roles</h2>
           <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
@@ -183,7 +183,7 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       <div className={styles.projects}>
         {otherRoles.map(({ image, role, company, type, start, end, location, description }, index) => (
           <div key={company} id={`role-${company}`}>
-            <Fade delay={(index % 3) * 100}>
+            <Fade triggerOnce delay={(index % 3) * 100}>
               <Client
                 image={image}
                 title={company}

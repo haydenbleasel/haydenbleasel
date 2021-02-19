@@ -22,7 +22,7 @@ const Header = ({
 
     return (
         <Headroom>
-            <Fade top>
+            <Fade triggerOnce top>
                 <nav className={`grid ${styles.navContainer}`}>
                     <header className={`container ${styles.nav} ${menuActive ? styles.active : ''}`}>
                         <div className={styles.name}>
