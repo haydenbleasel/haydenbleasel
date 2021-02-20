@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Prismic from '@prismicio/client';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { useInView } from 'react-intersection-observer';
@@ -7,12 +6,14 @@ import { Fade } from 'react-awesome-reveal';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Client from '../../components/Client';
-import jellypepperRoles from './jellypepperRoles.json';
-import otherRoles from './otherRoles.json';
 import styles from './Work.module.css';
 import ArrowLink from '../../components/ArrowLink';
 import { siteUrl } from '../../next-sitemap';
 import Link from '../../components/Link';
+
+import jellypepperClients from './jellypepperClients.json';
+import jellypepperRoles from './jellypepperRoles.json';
+import otherRoles from './otherRoles.json';
 
 const PresumiAnimation = dynamic(() => import('../../components/Presumi'));
 
@@ -32,28 +33,19 @@ type Project = {
   project_link: ProjectLink,
 }
 
-type PrismicDocument = {
-  uid: string,
-  data: any,
-}
-
-type WorkProps = {
-  jellypepperProjects: PrismicDocument[],
-}
-
-function sortAlphabetically(a: PrismicDocument, b: PrismicDocument) {
-  return b.data.name > a.data.name ? -1 : 1;
+function sortAlphabetically(a: any, b: any) {
+  return b.name > a.name ? -1 : 1;
 }
 
 const createClientDescription = ({
   name,
-  project_prefix,
+  prefix,
   projects = [],
 }: ClientDescriptionProps) => {
   let description = `We helped ${name}`;
   
-  if (project_prefix) {
-    description += ` ${project_prefix}`;
+  if (prefix) {
+    description += ` ${prefix}`;
   }
 
   if (projects.length) {
@@ -65,14 +57,14 @@ const createClientDescription = ({
   return (
     <>
       <span>{description}</span>
-      {projects.map(({ project_description, project_link }: Project, index: number) => {
+      {projects.map(({ name, link }: any, index: number) => {
 
-        const projectDescription = project_link.url ? (
-          <Link href={project_link.url}>
-            {project_description}
+        const projectDescription = link ? (
+          <Link href={link}>
+            {name}
           </Link>
         ) : (
-          <span>{project_description}</span>
+          <span>{name}</span>
         );
         
         let projectDivider = (
@@ -101,7 +93,7 @@ const createClientDescription = ({
   )
 };
 
-const Work = ({ jellypepperProjects }: WorkProps) => {
+const Work = () => {
 
   const [animationLoaded, setAnimationLoaded] = useState(false);
   const { ref, inView } = useInView({ threshold: 0, rootMargin: '100px' });
@@ -147,15 +139,15 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       </Fade>
 
       <div className={styles.projects}>
-        {jellypepperProjects.sort(sortAlphabetically).map(({ uid, data }, index) => (
-          <div key={uid} id={`jellypepper-${uid}`}>
+        {[...jellypepperClients.startups, ...jellypepperClients.other].sort(sortAlphabetically).map((data, index) => (
+          <div key={data.id} id={`jellypepper-${data.id}`}>
             <Fade triggerOnce delay={(index % 3) * 100}>
               <Client
-                image={data.logo.url}
+                image={`/images/work/${data.id}.svg`}
                 title={data.name}
-                summary={data.description}
+                summary={data.tagline}
                 description={createClientDescription(data)}
-                caption={`Roles: ${['Creative Director', ...(jellypepperRoles[uid] || [])].join(', ')}`}
+                caption={`Roles: ${['Creative Director', ...(jellypepperRoles[data.id] || [])].join(', ')}`}
               />
             </Fade>
           </div>
@@ -196,27 +188,6 @@ const Work = ({ jellypepperProjects }: WorkProps) => {
       </div>
     </Layout>
   );
-}
-
-export async function getStaticProps() {
-  const {
-    NEXT_PUBLIC_PRISMIC_ENDPOINT,
-    NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN,
-  } = process.env;
-
-  const client = Prismic.client(`https://${NEXT_PUBLIC_PRISMIC_ENDPOINT}.prismic.io/api/v2`, {
-    accessToken: NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN,
-  });
-
-  const { results } = await client.query(
-    Prismic.Predicates.at('document.type', 'client')
-  );
-
-  return {
-    props: {
-      jellypepperProjects: results,
-    },
-  }
 }
 
 export default Work;
