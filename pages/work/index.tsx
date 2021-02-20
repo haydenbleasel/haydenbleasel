@@ -19,18 +19,13 @@ const PresumiAnimation = dynamic(() => import('../../components/Presumi'));
 
 type ClientDescriptionProps = {
   name: string,
-  project_prefix: string,
+  prefix: string,
   projects?: any,
 }
 
-type ProjectLink = {
-  url: string,
-  target: string,
-}
-
 type Project = {
-  project_description: string,
-  project_link: ProjectLink,
+  name: string,
+  link?: string,
 }
 
 function sortAlphabetically(a: any, b: any) {
@@ -57,7 +52,7 @@ const createClientDescription = ({
   return (
     <>
       <span>{description}</span>
-      {projects.map(({ name, link }: any, index: number) => {
+      {projects.map(({ name, link }: Project, index: number) => {
 
         const projectDescription = link ? (
           <Link href={link}>
