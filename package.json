@@ -18,6 +18,7 @@
     "fathom-client": "^3.0.0",
     "formidable": "^1.2.2",
     "get-contrast": "^2.0.0",
+    "hamburger-react": "^2.4.0",
     "he": "^1.2.0",
     "highlight.js": "^10.6.0",
     "jsdom": "^16.4.0",

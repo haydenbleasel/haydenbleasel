@@ -14,14 +14,14 @@ const Hero = ({
     children,
 }: HeroProps) => (
     <div className={styles.hero}>
-        <Fade triggerOnce bottom delay={200}>
+        <Fade triggerOnce delay={200}>
             <h1 className="heading-2">{title}</h1>
         </Fade>
-        <Fade triggerOnce bottom delay={400}>
+        <Fade triggerOnce delay={400}>
             <p>{description}</p>
         </Fade>
         {!!children && (
-            <Fade triggerOnce bottom delay={600}>
+            <Fade triggerOnce delay={600}>
                 <div className={styles.actions}>
                     {children}
                 </div>

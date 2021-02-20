@@ -3448,6 +3448,11 @@ gzip-size@^6.0.0:
   dependencies:
     duplexer "^0.1.2"
 
+hamburger-react@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/hamburger-react/-/hamburger-react-2.4.0.tgz#b2950fe28c4cf46b41e6887550140c3c17cb66a3"
+  integrity sha512-VYUhF7X9JszeHXSGHKJLaTIWPc/U64fVdcr4DTmOb04gOoJwricqi6gcRZXAylVtsJOs4CWtMVZNnWjXiWF0Xw==
+
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
