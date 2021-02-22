@@ -1,4 +1,3 @@
-import React from 'react';
 import Parser from 'rss-parser';
 import { JSDOM } from 'jsdom';
 import dayjs from 'dayjs';

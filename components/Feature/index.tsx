@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Image from 'next/image';
 import useResponsive from '../../utils/responsive';
 import styles from './Feature.module.css';

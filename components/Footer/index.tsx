@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import { Notyf } from 'notyf';
 import { Fade } from 'react-awesome-reveal';

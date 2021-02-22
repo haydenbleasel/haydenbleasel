@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
 import { siteUrl } from '../next-sitemap';

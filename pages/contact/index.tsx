@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Notyf } from 'notyf';
 import { Fade } from 'react-awesome-reveal';
 import Layout from '../../components/Layout';

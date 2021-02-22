@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Fade } from 'react-awesome-reveal';
 import styles from './Hero.module.css';
 

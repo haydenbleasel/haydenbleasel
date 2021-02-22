@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Headroom from 'react-headroom';
 import { Fade } from 'react-awesome-reveal';

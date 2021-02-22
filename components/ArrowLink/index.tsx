@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Link from '../Link';
 
 import styles from './ArrowLink.module.css';
