@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { Fade } from 'react-awesome-reveal';
+import SpotifyWebApi from 'spotify-web-api-node';
 import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Feature from '../../components/Feature';
-import { Fade } from 'react-awesome-reveal';
-import SpotifyWebApi from 'spotify-web-api-node';
 import he from 'he';
 import ColorThief from 'colorthief';
 import Contrast from 'get-contrast';
@@ -32,8 +32,8 @@ function getColor(image: HTMLImageElement) {
     const colors = palette.filter((color) => (
         Contrast.isAccessible(backgroundColor, `rgb(${color.join(',')})`)
     )).sort((a, b) => {
-        const ratioA = Contrast.ratio('#FFFFFF', `rgb(${a.join(',')})`);
-        const ratioB = Contrast.ratio('#FFFFFF', `rgb(${b.join(',')})`);
+        const ratioA = Contrast.ratio(backgroundColor, `rgb(${a.join(',')})`);
+        const ratioB = Contrast.ratio(backgroundColor, `rgb(${b.join(',')})`);
 
         return ratioA > ratioB ? 1 : -1;
     });

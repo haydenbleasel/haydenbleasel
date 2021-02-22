@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import Lottie from 'lottie-web';
 
 const PresumiAnimation = () => {
-    const presumiRef = useRef(null);
+    const presumiRef = useRef<HTMLDivElement>(null);
     const [animationLoaded, setAnimationLoaded] = useState(false);
 
     useEffect(() => {
-        if (presumiRef.current && !animationLoaded) {
-            const container: Element = presumiRef.current!;
+        let animation;
 
-            Lottie.loadAnimation({
-                container,
+        if (presumiRef.current && !animationLoaded) {
+            animation = Lottie.loadAnimation({
+                container: presumiRef.current,
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
@@ -18,6 +18,10 @@ const PresumiAnimation = () => {
             });
 
             setAnimationLoaded(true);
+        }
+
+        return () => {
+            animation?.destroy();
         }
     }, [presumiRef]);
 
