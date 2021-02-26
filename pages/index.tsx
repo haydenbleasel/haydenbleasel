@@ -99,7 +99,7 @@ const Home = () => {
             title="Jellypepper"
             description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
           >
-            <ArrowLink href="https://jellypepper.com/" color="#E60067">Visit the website</ArrowLink>
+            <ArrowLink href="https://jellypepper.com/" color="#cf307d">Visit the website</ArrowLink>
           </Feature>
         </Fade>
 
