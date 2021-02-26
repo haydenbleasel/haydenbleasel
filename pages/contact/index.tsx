@@ -39,7 +39,11 @@ const Events = () => {
                 body: formData,
             });
 
-            await response.json();
+            const data = await response.json();
+
+            if (response.status !== 200) {
+                throw new Error(data.message);
+            }
 
             notyf.success({
                 message: 'Thanks, choom. I\'ll be in touch soon!',

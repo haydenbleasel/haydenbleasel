@@ -72,7 +72,7 @@ export default async function handler(req, res) {
         res.statusCode = 200;
         res.end(JSON.stringify({ success: true }));
     } catch (error) {
-        res.statusCode = error.code;
-        res.end(JSON.stringify(error));
+        res.statusCode = 500;
+        res.end(JSON.stringify({ message: error.message }));
     }
 }
