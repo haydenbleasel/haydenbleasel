@@ -49,6 +49,10 @@ function formidablePromise(req, opts): Promise<FormidablePromise> {
 
 export default async function handler(req, res) {
 
+    if (req.method !== 'POST') {
+        return res.status(404).send('Begone.');
+    }
+
     res.setHeader('Content-Type', 'application/json');
     
     try {
