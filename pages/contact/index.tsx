@@ -24,6 +24,18 @@ const Events = () => {
 
             const formData = new FormData();
 
+            if (!name.trim()) {
+                throw new Error('Please provide a valid name.');
+            }
+
+            if (!email.trim()) {
+              throw new Error('Please provide a valid email address.');
+            }
+
+            if (!message.trim()) {
+              throw new Error('Please provide a valid message.');
+            }
+
             formData.append('name', name);
             formData.append('email', email);
             formData.append('message', message);
