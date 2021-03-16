@@ -126,6 +126,10 @@ p a {
   flex-direction: column;
 }
 
+.container > * {
+  content-visibility: auto;
+}
+
 .headroom--pinned {
   box-shadow: 0 0.25rem 2rem 0 rgba(0,0,0,0.05);
   background: var(--white);
