@@ -53,6 +53,7 @@
     background: transparent;
     width: 100%;
     padding: 1rem;
+    color: var(--black);
 
     @media (--mobile) {
         margin-left: -1rem;
