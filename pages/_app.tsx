@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
-import GoogleFonts from 'next-google-fonts';
+import { GoogleFonts } from 'next-google-fonts';
 import './styles.css';
 
 import { siteUrl } from '../next-sitemap';

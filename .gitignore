@@ -35,3 +35,7 @@ yarn-error.log*
 
 # uploaded files
 upload_*
+public/workbox-0e269636.js
+public/sw.js
+public/sitemap.xml
+public/robots.txt
