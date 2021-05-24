@@ -8,6 +8,7 @@ import useResponsive from "../../utils/responsive";
 
 import styles from "./Header.module.css";
 import Link from "../Link";
+import Section from "../Section";
 
 const routes = ["Home", "About", "Work", "Journal", "Projects", "Contact"];
 
@@ -28,55 +29,53 @@ const Header = ({ onNavToggle }: HeaderProps) => {
   return (
     <Headroom>
       <Fade triggerOnce>
-        <nav className={`grid ${styles.navContainer}`}>
-          <header
-            className={`container ${styles.nav} ${
-              menuActive ? styles.active : ""
-            }`}
-          >
-            <div className={styles.name}>
-              <Link href="/">
-                <Image
-                  src="/images/logo.svg"
-                  alt="Hayden Bleasel"
-                  layout="fixed"
-                  width={54}
-                  height={16}
-                />
-              </Link>
-            </div>
-            <div className={styles.menu}>
-              <ul className={styles.sitemap}>
-                {routes.map((route) => (
-                  <li
-                    className={
-                      router.pathname == `/${route.toLowerCase()}`
-                        ? styles.active
-                        : ""
-                    }
-                  >
-                    <Link
-                      href={`/${route.toLowerCase()}`}
-                      key={route.toLowerCase()}
-                    >
-                      {route}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {isLaptop && (
-                <div className={styles.hamburgerContainer}>
-                  <Hamburger
-                    size={20}
-                    toggled={menuActive}
-                    toggle={toggleMenuActive}
-                    color="var(--black)"
-                    label="Show menu"
+        <nav className={styles.navContainer}>
+          <Section>
+            <header
+              className={`container ${styles.nav} ${
+                menuActive ? styles.active : ""
+              }`}
+            >
+              <div className={styles.name}>
+                <Link href="/">
+                  <Image
+                    src="/images/logo.svg"
+                    alt="Hayden Bleasel"
+                    layout="fixed"
+                    width={54}
+                    height={16}
                   />
-                </div>
-              )}
-            </div>
-          </header>
+                </Link>
+              </div>
+              <div className={styles.menu}>
+                <ul className={styles.sitemap}>
+                  {routes.map((route) => (
+                    <li
+                      key={route}
+                      className={
+                        router.pathname == `/${route.toLowerCase()}`
+                          ? styles.active
+                          : ""
+                      }
+                    >
+                      <Link href={`/${route.toLowerCase()}`}>{route}</Link>
+                    </li>
+                  ))}
+                </ul>
+                {isLaptop && (
+                  <div className={styles.hamburgerContainer}>
+                    <Hamburger
+                      size={20}
+                      toggled={menuActive}
+                      toggle={toggleMenuActive}
+                      color="var(--black)"
+                      label="Show menu"
+                    />
+                  </div>
+                )}
+              </div>
+            </header>
+          </Section>
         </nav>
       </Fade>
     </Headroom>

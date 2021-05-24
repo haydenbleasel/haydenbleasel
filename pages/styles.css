@@ -33,13 +33,12 @@
   --divider: #DDDDDD;
   --ghost: #FAFAFA;
 
-  --base-font-size: 18px;
-  --type-scale-1: 1rem;
+  --type-scale-1: 1.25vw;
   
   --type-scale-2: calc(var(--type-scale-1) * 1.25);
   --type-scale-3: calc(var(--type-scale-2) * 1.25);
   --type-scale-4: calc(var(--type-scale-3) * 1.25);
-  --type-scale-5: 3vw;
+  --type-scale-5: calc(var(--type-scale-4) * 1.25);
   --type-scale-6: calc(var(--type-scale-5) * 1.25);
 
   --type-scale-0: calc(var(--type-scale-1) / 1.25);
@@ -59,7 +58,7 @@
 html {
   font-family: var(--type-family-sans);
   font-weight: 300;
-  font-size: var(--base-font-size);
+  font-size: var(--type-scale-1);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   color: var(--black);
@@ -170,4 +169,8 @@ body {
   font-weight: normal;
   font-size: var(--type-scale-00);
   line-height: 1.5;
+}
+
+.underline {
+  text-decoration: underline;
 }

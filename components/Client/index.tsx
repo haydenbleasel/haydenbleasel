@@ -3,21 +3,22 @@ import styles from "./Client.module.css";
 
 type ClientProps = {
   name: string;
+  size?: number;
 };
 
-const Client = ({ name }: ClientProps) => (
-  <div className={styles.client}>
+const Client = ({ name, size = 24 }: ClientProps) => (
+  <span className={styles.client}>
     <Image
       layout="fixed"
-      height={32}
-      width={32}
+      height={size}
+      width={size}
       alt={name}
       src={`/images/companies/${name.replace(' ', '').toLowerCase()}.svg`}
       quality={100}
       objectFit="contain"
     />
     <span>{name}</span>
-  </div>
+  </span>
 );
 
 export default Client;

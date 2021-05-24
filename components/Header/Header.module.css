@@ -1,20 +1,19 @@
 .navContainer {
     z-index: 999;
+    background: var(--white);
+    border-bottom: 1px solid var(--divider);
+
+    & > section {
+        padding-top: 2vw;
+        padding-bottom: 2vw;
+    }
 }
 
 .nav {
-    padding: 1.5rem 4rem;
+    grid-column: 1 / 13;
     display: flex;
-    z-index: 1;
-    background: var(--white);
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
-    border-bottom: 1px solid var(--divider);
-
-    @media (--mobile) {
-        padding: 0.75rem 0;
-    }
 }
 
 .name a {

@@ -11,6 +11,7 @@ const Home = () => {
       title="Hi, I’m Hayden Bleasel. I’m a digital product designer living in Sydney, Australia."
       description="I’ve had the privilege of working with many fantastic companies including Google, Palantir, Nike, Toyota, National Geographic, Westfield, Square, Canva and Spaceship."
     >
+      
       <Section>
         <div className={styles.heroLeft}>
           <Image
@@ -24,16 +25,16 @@ const Home = () => {
           <p className="h1Sans">
             Hi, I’m Hayden Bleasel. I’m a digital product designer living in
             Sydney, Australia. I currently spend my days running and designing
-            at <Client name="Jellypepper" /> &mdash; an award-winning digital
+            at <Client size={32} name="Jellypepper" /> &mdash; an award-winning digital
             agency for bright ideas.
           </p>
           <p className="h1Sans">
             I’ve had the privilege of working with many fantastic companies
-            including <Client name="Google" />, <Client name="Palantir" />,{" "}
-            <Client name="Nike" />, <Client name="Toyota" />,{" "}
-            <Client name="National Geographic" />, <Client name="Westfield" />,{" "}
-            <Client name="Square" />, <Client name="Canva" /> and{" "}
-            <Client name="Spaceship" />.
+            including <Client size={32} name="Google" />, <Client size={32} name="Palantir" />,{" "}
+            <Client size={32} name="Nike" />, <Client size={32} name="Toyota" />,{" "}
+            <Client size={32} name="National Geographic" />, <Client size={32} name="Westfield" />,{" "}
+            <Client size={32} name="Square" />, <Client size={32} name="Canva" /> and{" "}
+            <Client size={32} name="Spaceship" />.
           </p>
           <p className="h1Sans">
             <Link href="/about">Keep reading →</Link>
