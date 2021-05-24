@@ -38,8 +38,8 @@ module.exports = withPlugins(
     redirects() {
       return [
         {
-          source: "/about",
-          destination: "/",
+          source: "/events",
+          destination: "/about#events",
           permanent: true,
         },
         {
@@ -90,6 +90,11 @@ module.exports = withPlugins(
         {
           source: "/work/jellypepper",
           destination: "https://jellypepper.com/",
+          permanent: true,
+        },
+        {
+          source: "/playlists",
+          destination: "https://open.spotify.com/user/haydenbleasel",
           permanent: true,
         },
       ];
