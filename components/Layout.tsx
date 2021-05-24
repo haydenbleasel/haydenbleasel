@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NextSeo, SocialProfileJsonLd } from 'next-seo';
 import { useRouter } from 'next/router';
 import { siteUrl } from '../next-sitemap';
@@ -8,7 +8,7 @@ import Header from './Header';
 import Footer from './Footer';
 
 type LayoutProps = {
-  children?: ReactNode
+  children?: any;
   title?: string,
   description?: string,
   openGraph?: any,

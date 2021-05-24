@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Notyf } from "notyf";
 import { Fade } from "react-awesome-reveal";
 import Layout from "../../components/Layout";
-import Hero from "../../components/Hero";
 
 import styles from "./Contact.module.css";
 import Section from "../../components/Section";

@@ -12,7 +12,6 @@ import mediumZoom from 'medium-zoom'
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-dark.css';
 import Layout from '../../components/Layout';
-import Hero from '../../components/Hero';
 
 import styles from './Article.module.css';
 
@@ -72,15 +71,12 @@ const Article = ({ post }: ArticleProps) => {
                 description={post.summary}
             />
 
-            <Hero
-                title={post.title}
-                description={post.summary}
-            >
-                <small className={styles.date}>
-                    <span>Published </span>
-                    <time dateTime={post.date}>{dayjs(post.date).format('MMMM D, YYYY')}</time>
-                </small>
-            </Hero>
+            <p>{post.title}</p>
+            <p>{post.summary}</p>
+            <small className={styles.date}>
+                <span>Published </span>
+                <time dateTime={post.date}>{dayjs(post.date).format('MMMM D, YYYY')}</time>
+            </small>
             
             <div className={`${styles.cover} grow`}>
                 {isMobile ? (
