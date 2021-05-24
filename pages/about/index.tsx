@@ -1,27 +1,27 @@
-import Image from 'next/image';
-import { Fade } from 'react-awesome-reveal';
-import Layout from '../../components/Layout';
-import Hero from '../../components/Hero';
-import ArrowLink from '../../components/ArrowLink';
-import eventsList from './events.json';
-import styles from './Events.module.css';
-import { siteUrl } from '../../next-sitemap';
+import Image from "next/image";
+import { Fade } from "react-awesome-reveal";
+import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
+import ArrowLink from "../../components/ArrowLink";
+import eventsList from "./events.json";
+import styles from "./About.module.css";
+import { siteUrl } from "../../next-sitemap";
 
 type EventItem = {
-    name: string,
-    organisation: string,
-    year: number,
-    url?: string,
-}
+  name: string;
+  organisation: string;
+  year: number;
+  url?: string;
+};
 
 const Event = ({ name, organisation, year }: EventItem) => (
-    <span className={styles.event}>
-        <span className={styles.eventName}>{name}</span>
-        <span className={styles.eventMeta}>
-            <span>{organisation}</span>
-            <span className={styles.eventYear}>{year}</span>
-        </span>
+  <span className={styles.event}>
+    <span className={styles.eventName}>{name}</span>
+    <span className={styles.eventMeta}>
+      <span>{organisation}</span>
+      <span className={styles.eventYear}>{year}</span>
     </span>
+  </span>
 );
 
 const About = () => (

@@ -1,173 +1,137 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Fade } from 'react-awesome-reveal';
-import useResponsive from '../utils/responsive';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import Feature from '../components/Feature';
-import styles from './Home.module.css';
-import ArrowLink from '../components/ArrowLink';
-import Link from '../components/Link';
-
-function calculateAge(currentTime: number) {
-  const birthDateTime = new Date(1993, 10, 26).getTime();
-  const difference = (currentTime - birthDateTime);
-  
-  return difference / (1000 * 60 * 60 * 24 * 365);
-}
+import Image from "next/image";
+import Layout from "../components/Layout";
+import Link from "../components/Link";
+import Client from "../components/Client";
+import Section from "../components/Section";
+import styles from "./Home.module.css";
 
 const Home = () => {
-  const timeOnStart = new Date().getTime();
-  const ageOnStart = calculateAge(timeOnStart);
-  const { isMobile } = useResponsive();
-  
-  const [age, setAge] = useState(ageOnStart);
-  const [fix, setFix] = useState(0);
-
-  useEffect(() => {
-    const ageInterval = setInterval(() => {
-      const currentTime = new Date().getTime();
-      const newAge = calculateAge(currentTime);
-      setAge(newAge);
-    }, 50);
-
-    return () => {
-      clearInterval(ageInterval);
-    };
-  }, []);
-
   return (
     <Layout
-      title="Digital product designer and JavaScript developer"
-      description="I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch."
+      title="Hi, I’m Hayden Bleasel. I’m a digital product designer living in Sydney, Australia."
+      description="I’ve had the privilege of working with many fantastic companies including Google, Palantir, Nike, Toyota, National Geographic, Westfield, Square, Canva and Spaceship."
     >
-      <Fade triggerOnce>
-        <div className={styles.avatar}>
+      <Section>
+        <div className={styles.heroLeft}>
           <Image
+            src="/images/asterisk.svg"
             layout="fixed"
-            width={72}
-            height={72}
-            src="/images/home/haydenbleasel.jpg"
-            alt="Hayden Bleasel"
-            quality={100}
-            objectFit="cover"
-            objectPosition="53% center"
+            width={48}
+            height={48}
           />
         </div>
-      </Fade>
-
-      <Hero
-        title="Hayden Bleasel"
-        description={
-          <p>
-            <span
-              className={styles.age}
-              onClick={() => setFix(fix === 9 ? 0 : 9)}
-            >
-              {age.toFixed(fix)}
-            </span>
-            -year-old digital product designer, JavaScript developer and
-            entrepreneur of sorts based in Sydney, Australia.
+        <div className={styles.heroRight}>
+          <p className="h1Sans">
+            Hi, I’m Hayden Bleasel. I’m a digital product designer living in
+            Sydney, Australia. I currently spend my days running and designing
+            at <Client name="Jellypepper" /> &mdash; an award-winning digital
+            agency for bright ideas.
           </p>
-        }
-      >
-        <ArrowLink href="/contact">Get in touch</ArrowLink>
-      </Hero>
-
-      <Fade triggerOnce delay={800}>
-        <div className={`${styles.cover} grow`}>
-          <Image
-            layout="responsive"
-            width={6000}
-            height={4000}
-            src="/images/home/haydenbleasel.jpg"
-            alt="Hayden Bleasel"
-            quality={100}
-          />
+          <p className="h1Sans">
+            I’ve had the privilege of working with many fantastic companies
+            including <Client name="Google" />, <Client name="Palantir" />,{" "}
+            <Client name="Nike" />, <Client name="Toyota" />,{" "}
+            <Client name="National Geographic" />, <Client name="Westfield" />,{" "}
+            <Client name="Square" />, <Client name="Canva" /> and{" "}
+            <Client name="Spaceship" />.
+          </p>
+          <p className="h1Sans">
+            <Link href="/about">Keep reading →</Link>
+          </p>
         </div>
-      </Fade>
+      </Section>
 
-      <Fade triggerOnce delay={isMobile ? 800 : 0}>
-        <div className={styles.intro}>
-          <p className="heading-5">
-            I help companies elevate their experiences through their brand,
-            websites and products by taking their awesome ideas from concept to
-            launch.
-          </p>
-          <p className="heading-5">Here’s what I’m currently doing...</p>
+      <Section>
+        <h2 className={styles.sectionHeader}>
+          <span className="h2Sans">Selected</span>
+          <span className="h2Serif"> Work</span>
+        </h2>
+        <div className={styles.work}>
+          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <p className="verySmall">2016 &mdash; 2017</p>
+          <h3 className="h4Sans">Head of Product and Design at Spaceship</h3>
         </div>
-      </Fade>
+        <div className={styles.work}>
+          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <p className="verySmall">2015</p>
+          <h3 className="h4Sans">
+            Product Design Intern at Palantir Technologies
+          </h3>
+        </div>
+      </Section>
 
-      <div className={styles.features}>
-        <Fade triggerOnce>
-          <Feature
-            image="/images/home/jellypepper.png"
-            title="Jellypepper"
-            description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
-          >
-            <ArrowLink href="https://jellypepper.com/" color="#cf307d">
-              Visit the website
-            </ArrowLink>
-          </Feature>
-        </Fade>
+      <Section>
+        <h2 className={styles.sectionHeader}>
+          <span className="h2Sans">Thoughts</span>
+          <span className="h2Serif"> &amp; Ideas</span>
+        </h2>
+        <div className={styles.journal}>
+          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <h3 className="h4Sans">
+            How I started a data analytics startup and partnered with SEEK.
+          </h3>
+        </div>
+        <div className={styles.journal}>
+          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <h3 className="h4Sans">
+            Finding some inner peace through simplicity and focus
+          </h3>
+        </div>
+        <div className={styles.journal}>
+          <div>
+            <p className="verySmall">May, 2020</p>
+            <h3 className="paragraph">
+              Finding some inner peace through simplicity and focus
+            </h3>
+          </div>
+          <div>
+            <p className="verySmall">May, 2020</p>
+            <h3 className="paragraph">
+              Finding some inner peace through simplicity and focus
+            </h3>
+          </div>
+          <div>
+            <p className="verySmall">May, 2020</p>
+            <h3 className="paragraph">
+              Finding some inner peace through simplicity and focus
+            </h3>
+          </div>
+          <div>
+            <p className="verySmall">May, 2020</p>
+            <h3 className="paragraph">
+              Finding some inner peace through simplicity and focus
+            </h3>
+          </div>
+        </div>
+      </Section>
 
-        <Fade triggerOnce>
-          <Feature
-            reverse
-            image="/images/home/neutral.png"
-            title="Neutral"
-            description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
-            imageProps={{ objectPosition: "top center" }}
-          >
-            <ArrowLink href="https://tryneutral.com/" color="#068466">
-              Download Neutral
-            </ArrowLink>
-          </Feature>
-        </Fade>
-
-        <Fade triggerOnce>
-          <Feature
-            image="/images/home/tomorrow.png"
-            title="Tomorrow"
-            description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
-            imageProps={{ objectPosition: "top right" }}
-          >
-            <ArrowLink href="https://tomorrowstudio.co/" color="#5F49E3">
-              Join the mailing list
-            </ArrowLink>
-          </Feature>
-        </Fade>
-      </div>
-
-      <div className={styles.focus}>
-        <Fade triggerOnce>
-          <p>
-            Before all this, I was Head of Product at Spaceship, product design
-            intern at Palantir in Palo Alto and a bunch of other roles{" "}
-            <Link href="/work">you can read about</Link>.
+      <Section>
+        <h2 className={styles.sectionHeader}>
+          <span className="h2Sans">Projects</span>
+          <span className="h2Serif"> &amp; Apps</span>
+        </h2>
+        <div className={styles.project}>
+          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <h3 className="h4Sans">Neutral</h3>
+          <p className="paragraph">
+            Climate-focused app that combines a lifestyle questionnaire with
+            U.S. EPA and other data sources to calculate your CO₂e emissions,
+            then helps you offset it with a reforestation program.
           </p>
-        </Fade>
-        <Fade triggerOnce delay={200}>
-          <p>
-            In 2016, I graduated from the University of Technology, Sydney with
-            two Bachelors degrees. During this time, I created a product for job
-            seekers called <Link href="/k]journal/presumi">Presumi</Link> that I
-            ended up licensing to SEEK in Hong Kong.
+        </div>
+        <div className={styles.project}>
+          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <h3 className="h4Sans">Bokeh</h3>
+          <p className="paragraph">
+            Take control of your photography career with an intelligent
+            portfolio platform for professional photographers that grows with
+            your work. Bokeh is currently in private beta, but you can join the
+            waitlist.
           </p>
-        </Fade>
-        <Fade triggerOnce delay={400}>
-          <p>
-            In my spare time, I enjoy mentoring entrepreneurs, advising
-            startups, going to the gym, speaking at events, curating{" "}
-            <Link href="https://open.spotify.com/user/haydenbleasel">
-              Spotify playlists
-            </Link>
-            , playing video games, making apps and learning new things.
-          </p>
-        </Fade>
-      </div>
+        </div>
+      </Section>
     </Layout>
   );
-}
+};
 
 export default Home;

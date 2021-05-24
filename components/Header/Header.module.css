@@ -3,11 +3,14 @@
 }
 
 .nav {
-    padding: 1.5rem 0;
+    padding: 1.5rem 4rem;
     display: flex;
+    z-index: 1;
+    background: var(--white);
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    border-bottom: 1px solid var(--divider);
 
     @media (--mobile) {
         padding: 0.75rem 0;
@@ -28,9 +31,6 @@
 
 .sitemap {
     margin: 0 2rem 0 0;
-    opacity: 0;
-    user-select: none;
-    pointer-events: none;
     transition: opacity 0.2s;
     display: flex;
     list-style: none;
@@ -56,6 +56,9 @@
     }
 
     @media (--tablet) {
+        opacity: 0;
+        user-select: none;
+        pointer-events: none;
         position: fixed;
         top: 0;
         left: 0;

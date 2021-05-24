@@ -1,18 +1,9 @@
-.client h2 {
-    margin: 2rem 0 0.5rem;
+.client {
+    display: inline-flex;
+    align-items: baseline;
 }
 
-.summary {
-    color: var(--grey);
-    margin: 0;
-}
-
-.description {
-    margin: 1.5rem 0;
-}
-
-.caption {
-    margin: 0;
-    display: block;
-    color: var(--grey);
+.client span {
+    margin-left: 0.5rem;
+    text-decoration: underline;
 }

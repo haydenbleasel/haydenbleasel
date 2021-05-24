@@ -1,9 +1,8 @@
 .footer {
-    padding: var(--section-gap) 0;
+    background: var(--ghost);
+    padding: var(--section-gap) 4rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
 
     @media (--mobile) {
         text-align: left;
@@ -36,28 +35,11 @@
     margin: 0;
 }
 
-.newsletterHeading {
-    max-width: 21rem;
-    margin: 3rem 0;
-
-    @media (--mobile) {
-        margin: 1.5rem 0;
-    }
-}
-
-.newsletterInput {
-    font-size: inherit;
-    font-family: inherit;
-    border: none;
-    outline: none;
+.input {
     background: transparent;
+    border: none;
+    font-size: var(--type-scale-4);
     width: 100%;
-    padding: 1rem;
-    color: var(--black);
-
-    @media (--mobile) {
-        margin-left: -1rem;
-    }
 }
 
 .newsletterButton {
@@ -90,17 +72,4 @@
 .socialIcon:hover {
     opacity: 1;
     transform: translateY(-4px);
-}
-
-.copyright {
-    color: var(--grey);
-    margin-top: 2rem;
-
-    & a {
-        color: inherit;
-
-        &:hover {
-            color: var(--black);
-        }
-    }
 }

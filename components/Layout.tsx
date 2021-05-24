@@ -86,12 +86,9 @@ const Layout = ({
 
       <Header onNavToggle={() => setBodyFixed(!bodyFixed)} />
       
-      <div className="grid">
-        <div className="container">
-          {children}
-          <Footer socialPlatforms={socialPlatforms} />
-        </div>
-      </div>
+      {children}
+      
+      <Footer socialPlatforms={socialPlatforms} />
     </>
   );
 }
