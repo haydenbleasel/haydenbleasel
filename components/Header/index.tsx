@@ -8,7 +8,7 @@ import useResponsive from '../../utils/responsive';
 import styles from './Header.module.css';
 import Link from '../Link';
 
-const routes = ["Work", "About", "Thoughts", "Contact"];
+const routes = ["Work", "About", "Journal", "Contact"];
 
 type HeaderProps = {
     onNavToggle: any,

@@ -49,12 +49,22 @@ module.exports = withPlugins(
         },
         {
           source: "/blog",
-          destination: "/thoughts",
+          destination: "/journal",
           permanent: true,
         },
         {
           source: "/blog/:slug",
-          destination: "/thoughts/:slug",
+          destination: "/journal/:slug",
+          permanent: true,
+        },
+        {
+          source: "/thoughts",
+          destination: "/journal",
+          permanent: true,
+        },
+        {
+          source: "/thoughts/:slug",
+          destination: "/journal/:slug",
           permanent: true,
         },
         {

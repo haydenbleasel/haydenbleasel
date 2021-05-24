@@ -151,7 +151,7 @@ const Home = () => {
           <p>
             In 2016, I graduated from the University of Technology, Sydney with
             two Bachelors degrees. During this time, I created a product for job
-            seekers called <Link href="/thoughts/presumi">Presumi</Link> that I
+            seekers called <Link href="/k]journal/presumi">Presumi</Link> that I
             ended up licensing to SEEK in Hong Kong.
           </p>
         </Fade>

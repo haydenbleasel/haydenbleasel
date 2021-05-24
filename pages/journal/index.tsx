@@ -30,13 +30,13 @@ type BlogProps = {
     posts: Post[],
 }
 
-const Thoughts = ({ posts }: BlogProps) => (
+const Journal = ({ posts }: BlogProps) => (
     <Layout
         title="Thoughts, stories and ideas"
         description="I’ve had the privilege of working with a wide range of companies and early-stage startups.">
 
         <Hero
-            title="Thoughts"
+            title="Journal"
             description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants that didn't fit on Twitter."
         />
 
@@ -89,4 +89,4 @@ export async function getStaticProps() {
     }
 }
 
-export default Thoughts;
+export default Journal;
