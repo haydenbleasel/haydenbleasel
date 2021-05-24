@@ -1,12 +1,18 @@
 .footer {
     background: var(--ghost);
-    padding: var(--section-gap) 4rem;
-    display: flex;
-    flex-direction: column;
 
     @media (--mobile) {
         text-align: left;
         align-items: flex-start;
+    }
+
+    & > section {
+        height: 100vh;
+        justify-content: space-between;
+    }
+
+    & :global(a) {
+        color: inherit;
     }
 }
 
@@ -20,12 +26,18 @@
 .newsletter {
     margin-bottom: var(--section-gap);
     transition: opacity 0.2s;
+    grid-column: 1 / 8;
 }
 
 .newsletter.loading {
     opacity: 0.4;
     pointer-events: none;
     user-select: none;
+}
+
+.newsletterContainer {
+    grid-column: 1 / 9;
+    align-self: flex-end;
 }
 
 .newsletterFields {
@@ -38,8 +50,10 @@
 .input {
     background: transparent;
     border: none;
-    font-size: var(--type-scale-4);
+    font-size: var(--type-scale-5);
+    font-family: inherit;
     width: 100%;
+    outline: none;
 }
 
 .newsletterButton {
@@ -47,14 +61,16 @@
     border: none;
     padding: 0;
     width: 2rem;
+    font-size: var(--type-scale-5);
+    font-family: inherit;
     outline: none;
 }
 
 .social {
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    grid-column: 1 / 13;
+    align-self: flex-start;
 
     @media (--mobile) {
         justify-content: left;
@@ -72,4 +88,9 @@
 .socialIcon:hover {
     opacity: 1;
     transform: translateY(-4px);
+}
+
+.copyright {
+    grid-column: 1 / 13;
+    margin-top: var(--gap-medium)
 }

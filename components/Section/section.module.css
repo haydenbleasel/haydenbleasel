@@ -1,6 +1,6 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  padding: 6vw 4vw;
-  gap: 4vw;
+  padding: var(--gap-large) var(--gap-medium);
+  gap: var(--gap-medium);
 }

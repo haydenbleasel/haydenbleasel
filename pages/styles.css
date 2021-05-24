@@ -23,9 +23,10 @@
 @custom-media --desktopLarge (max-width: 1440px);
 
 :root {
-  --section-gap: 10rem;
-  --page-gutter: 4rem;
-  --page-width: 73rem;
+  --gap-small: 2vw;
+  --gap-medium: 4vw;
+  --gap-large: 6vw;
+  --gap-huge: 12vw;
   
   --white: #FFFFFF;
   --black: #1D1D1D;

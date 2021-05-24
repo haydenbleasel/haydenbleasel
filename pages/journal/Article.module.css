@@ -95,7 +95,7 @@
 
     & :global(pre) {
         background: var(--black);
-        color: #fff;
+        color: var(--white);
         padding: 2rem;
         overflow: auto;
         font-family: 'Space Mono', monospace;

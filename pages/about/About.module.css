@@ -5,7 +5,11 @@
         color: var(--grey);
         border-bottom: 1px solid var(--grey);
         padding-bottom: 0.5rem;
-        margin-bottom: 3vw;
+        margin-bottom: var(--gap-small);
+    }
+
+    & > div + div {
+        margin-top: var(--gap-large);
     }
 }
 
@@ -16,7 +20,7 @@
         color: var(--grey);
         border-bottom: 1px solid var(--grey);
         padding-bottom: 0.5rem;
-        margin-bottom: 3vw;
+        margin-bottom: var(--gap-small);
     }
 
     & ul {
@@ -25,12 +29,12 @@
         padding: 0;
 
         & li {
-            margin-top: 1vw;
+            margin-top: var(--gap-small);
         }
     }
 
     & > div {
-        margin-bottom: 6vw;
+        margin-bottom: var(--gap-large);
     }
 }
 
