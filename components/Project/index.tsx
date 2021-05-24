@@ -23,7 +23,7 @@ const Project = ({ date, name, role, link, children }: IProject) => (
       />
       <div className={styles.meta}>
         <div className={styles.summary}>
-          <p className="verySmall">{date}</p>
+          <p className="small">{date}</p>
           <h2 className="h2Sans">{name}</h2>
           <p className="h2Serif">{role}</p>
           <Link href={link}>Visit the website</Link>

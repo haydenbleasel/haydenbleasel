@@ -26,18 +26,18 @@ type IRole = {
 
 const Event = ({ url, name, organisation, year }: IEvent, index) => (
   <Fade triggerOnce delay={Math.min(index * 50, 500)}>
-    <div className={styles.eventLink}>
-      <p className="small grey">
+    <li>
+      <p className={`${styles.eventDetails} small grey`}>
         {organisation}, {year}
       </p>
       {url ? (
         <Link href={url}>
-          <span className="h4Sans">{name}</span>
+          <span className="paragraphSans">{name}</span>
         </Link>
       ) : (
-        <p className="h4Sans">{name}</p>
+        <p className="paragraphSans">{name}</p>
       )}
-    </div>
+    </li>
   </Fade>
 );
 
@@ -48,9 +48,9 @@ const Role = ({ role, company, start, end, url }: IRole, index) => (
         <small className="small grey">
           {start} &mdash; {end}
         </small>
-        <p>
-          <span className="h4Sans">{role},</span>
-          <span className="h4Serif"> {company}</span>
+        <p className={styles.roleDetails}>
+          <span className="paragraphSans">{role},</span>
+          <span className="paragraphSerif"> {company}</span>
         </p>
       </a>
     </li>
@@ -72,7 +72,7 @@ const About = () => (
     <Section>
       <div className={styles.bio}>
         <div>
-          <h2 className="paragraph">Introduction</h2>
+          <h2 className="paragraphSans">Introduction</h2>
           <p className="h3Sans">
             Hi, I’m Hayden Bleasel. I’m a digital product designer living in
             Sydney, Australia. I enjoy reducing complex problems into thoughtful
@@ -109,7 +109,7 @@ const About = () => (
         </div>
 
         <div>
-          <h2 className="paragraph">Work</h2>
+          <h2 className="paragraphSans">Work</h2>
           <p className="h3Sans">
             I currently run <Client name="Jellypepper" /> — an award-winning
             digital agency for bright ideas. I also work with R/GA every so
@@ -131,7 +131,7 @@ const About = () => (
         </div>
 
         <div>
-          <h2 className="paragraph">Tools</h2>
+          <h2 className="paragraphSans">Tools</h2>
           <p className="h3Sans">
             My design tool of choice for anything is typically Figma - it’s
             brilliant at handling the wireframing, ideating, designing and
@@ -146,7 +146,7 @@ const About = () => (
         </div>
 
         <div>
-          <h2 className="paragraph">Life</h2>
+          <h2 className="paragraphSans">Life</h2>
           <p className="h3Sans">
             In 2016, I graduated from UTS with two Bachelors degrees — Business
             (Management) and Information Technology (Enterprise Systems
@@ -164,11 +164,11 @@ const About = () => (
       </div>
       <div className={styles.sidebar}>
         <div>
-          <h2 className="paragraph">Work</h2>
+          <h2 className="paragraphSans">Work</h2>
           <ul className={styles.events}>{workList.map(Role)}</ul>
         </div>
         <div>
-          <h2 className="paragraph">Speaking Events</h2>
+          <h2 className="paragraphSans">Speaking Events</h2>
           <ul className={styles.events}>{eventsList.map(Event)}</ul>
         </div>
       </div>

@@ -1,42 +1,48 @@
-import { useState, useLayoutEffect } from 'react';
-import { useMediaQuery } from 'react-responsive';
+import { useState, useLayoutEffect } from "react";
+import { useMediaQuery } from "react-responsive";
 
 const breakpoints = {
-    mobile: '575.98px',
-    tablet: '767.98px',
-    laptop: '991.98px',
-    desktop: '1199.98px',
+  mobile: "576px",
+  tablet: "768px",
+  laptop: "992px",
+  desktop: "1200px",
+  desktopLarge: "1440px",
 };
 
 function useResponsive() {
-    const [isClient, setIsClient] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-    const isMobile = useMediaQuery({
-        maxWidth: breakpoints.mobile,
-    });
+  const isMobile = useMediaQuery({
+    maxWidth: breakpoints.mobile,
+  });
 
-    const isTablet = useMediaQuery({
-        maxWidth: breakpoints.tablet,
-    });
+  const isTablet = useMediaQuery({
+    maxWidth: breakpoints.tablet,
+  });
 
-    const isLaptop = useMediaQuery({
-        maxWidth: breakpoints.laptop,
-    });
+  const isLaptop = useMediaQuery({
+    maxWidth: breakpoints.laptop,
+  });
 
-    const isDesktop = useMediaQuery({
-        maxWidth: breakpoints.desktop,
-    });
+  const isDesktop = useMediaQuery({
+    maxWidth: breakpoints.desktop,
+  });
 
-    useLayoutEffect(() => {
-        if (typeof window !== 'undefined') setIsClient(true);
-    }, []);
+  const isDesktopLarge = useMediaQuery({
+    maxWidth: breakpoints.desktopLarge,
+  });
 
-    return {
-        isDesktop: isClient ? isDesktop : true,
-        isLaptop: isClient ? isLaptop : false,
-        isTablet: isClient ? isTablet : false,
-        isMobile: isClient ? isMobile : false,
-    };
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") setIsClient(true);
+  }, []);
+
+  return {
+    isDesktopLarge: isClient ? isDesktopLarge : true,
+    isDesktop: isClient ? isDesktop : false,
+    isLaptop: isClient ? isLaptop : false,
+    isTablet: isClient ? isTablet : false,
+    isMobile: isClient ? isMobile : false,
+  };
 }
 
 export default useResponsive;

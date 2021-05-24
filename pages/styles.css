@@ -16,10 +16,11 @@
   font-display: swap;
 }
 
-@custom-media --mobile (max-width: 575.98px);
-@custom-media --tablet (max-width: 767.98px);
-@custom-media --laptop (max-width: 991.98px);
-@custom-media --desktop (max-width: 1199.98px);
+@custom-media --small (max-width: 576px);
+@custom-media --tablet (max-width: 768px);
+@custom-media --laptop (max-width: 992px);
+@custom-media --desktop (max-width: 1200px);
+@custom-media --desktopLarge (max-width: 1440px);
 
 :root {
   --section-gap: 10rem;
@@ -49,6 +50,10 @@
     --black: #FFFFFF;
     --grey: #A1A1AA;
     --ghost: #17171C;
+  }
+
+  @media (--desktopLarge) {
+    --type-scale-1: 18px;
   }
 }
 
@@ -182,7 +187,7 @@ body {
 .small {
   font-family: var(--type-family-sans);
   font-style: normal;
-  font-weight: normal;
+  font-weight: 300;
   font-size: var(--type-scale-0);
   line-height: 1.5;
 }

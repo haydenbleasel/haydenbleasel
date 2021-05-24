@@ -19,11 +19,11 @@ type HeaderProps = {
 const Header = ({ onNavToggle }: HeaderProps) => {
   const [menuActive, setMenuActive] = useState(false);
   const router = useRouter();
-  const { isLaptop } = useResponsive();
+  const { isTablet } = useResponsive();
 
   function toggleMenuActive(active) {
     setMenuActive(active);
-    isLaptop && onNavToggle();
+    isTablet && onNavToggle();
   }
 
   function NavItem(route: string) {
@@ -68,7 +68,7 @@ const Header = ({ onNavToggle }: HeaderProps) => {
                 <ul className={styles.sitemap}>
                   {routes.map(NavItem)}
                 </ul>
-                {isLaptop && (
+                {isTablet && (
                   <div className={styles.hamburgerContainer}>
                     <Hamburger
                       size={20}

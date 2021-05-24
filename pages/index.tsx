@@ -49,12 +49,12 @@ const Home = () => {
         </h2>
         <div className={styles.work}>
           <div style={{ height: 390, background: "var(--ghost)" }} />
-          <p className="verySmall">2016 &mdash; 2017</p>
+          <p className="small">2016 &mdash; 2017</p>
           <h3 className="h4Sans">Head of Product and Design at Spaceship</h3>
         </div>
         <div className={styles.work}>
           <div style={{ height: 390, background: "var(--ghost)" }} />
-          <p className="verySmall">2015</p>
+          <p className="small">2015</p>
           <h3 className="h4Sans">
             Product Design Intern at Palantir Technologies
           </h3>
@@ -80,25 +80,25 @@ const Home = () => {
         </div>
         <div className={styles.journal}>
           <div>
-            <p className="verySmall">May, 2020</p>
+            <p className="small">May, 2020</p>
             <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
           <div>
-            <p className="verySmall">May, 2020</p>
+            <p className="small">May, 2020</p>
             <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
           <div>
-            <p className="verySmall">May, 2020</p>
+            <p className="small">May, 2020</p>
             <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
           <div>
-            <p className="verySmall">May, 2020</p>
+            <p className="small">May, 2020</p>
             <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>

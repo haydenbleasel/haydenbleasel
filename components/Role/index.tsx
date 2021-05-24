@@ -21,7 +21,7 @@ const Role = ({ date, title, company, children }: IRole) => (
       />
       <div className={styles.meta}>
         <div className={styles.summary}>
-          <p className="verySmall">{date}</p>
+          <p className="small">{date}</p>
           <h2 className="h2Sans">{title}</h2>
           <p className="h2Serif">{company}</p>
         </div>

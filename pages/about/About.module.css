@@ -23,5 +23,17 @@
         list-style: none;
         margin: 0;
         padding: 0;
+
+        & li {
+            margin-top: 1vw;
+        }
     }
+
+    & > div {
+        margin-bottom: 6vw;
+    }
+}
+
+.roleDetails, .eventDetails {
+    margin: 0;
 }
