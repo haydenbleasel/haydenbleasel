@@ -1,0 +1,10 @@
+.role {
+  grid-column: 1 / 13;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4vw;
+  margin-top: 4vw;
+}
