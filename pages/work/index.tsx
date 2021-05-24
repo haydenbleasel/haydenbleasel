@@ -1,102 +1,12 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
-import { useInView } from 'react-intersection-observer';
-import { Fade } from 'react-awesome-reveal';
-import Layout from '../../components/Layout';
-import Hero from '../../components/Hero';
-import Client from '../../components/Client';
-import styles from './Work.module.css';
-import ArrowLink from '../../components/ArrowLink';
-import { siteUrl } from '../../next-sitemap';
-import Link from '../../components/Link';
+import { Fade } from "react-awesome-reveal";
+import Layout from "../../components/Layout";
+import { siteUrl } from "../../next-sitemap";
+import Link from "../../components/Link";
 
-import jellypepperClients from './jellypepperClients.json';
-import jellypepperRoles from './jellypepperRoles.json';
-import otherRoles from './otherRoles.json';
-
-const PresumiAnimation = dynamic(() => import('../../components/Presumi'));
-
-type ClientDescriptionProps = {
-  name: string,
-  prefix: string,
-  projects?: any,
-}
-
-type Project = {
-  name: string,
-  link?: string,
-}
-
-function sortAlphabetically(a: any, b: any) {
-  return b.name > a.name ? -1 : 1;
-}
-
-const createClientDescription = ({
-  name,
-  prefix,
-  projects = [],
-}: ClientDescriptionProps) => {
-  let description = `We helped ${name}`;
-  
-  if (prefix) {
-    description += ` ${prefix}`;
-  }
-
-  if (projects.length) {
-    description += ' with ';
-  } else {
-    description += '.';
-  }
-
-  return (
-    <>
-      <span>{description}</span>
-      {projects.map(({ name, link }: Project, index: number) => {
-
-        const projectDescription = link ? (
-          <Link href={link}>
-            {name}
-          </Link>
-        ) : (
-          <span>{name}</span>
-        );
-        
-        let projectDivider = (
-          <span>, </span>
-        );
-        
-        if (index === projects.length - 1) {
-          projectDivider = (
-            <span>.</span>
-          );
-        } else if (index === projects.length - 2) {
-          projectDivider = (
-            <span>&nbsp;and&nbsp;</span>
-          );
-        }
-
-        return (
-          <span key={index}>
-            {projectDescription}
-            {projectDivider}
-          </span>
-        );
-
-      })}
-    </>
-  )
-};
+import Section from "../../components/Section";
+import Role from "../../components/Role";
 
 const Work = () => {
-
-  const [animationLoaded, setAnimationLoaded] = useState(false);
-  const { ref, inView } = useInView({ threshold: 0, rootMargin: '100px' });
-
-  useEffect(() => {
-    (inView && !animationLoaded) && setAnimationLoaded(true);
-  }, [inView]);
-  
   return (
     <Layout
       title="Current and previous work"
@@ -107,82 +17,175 @@ const Work = () => {
         height: 1752,
       }}
     >
+      <Section>
+        <h1>
+          <span className="titleSans">Selected</span>
+          <span className="titleSerif"> Work</span>
+        </h1>
+      </Section>
 
-      <Hero
-        title="Work"
-        description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
-      />
-
-      <div className={`${styles.cover} grow`}>
-        <Fade triggerOnce delay={800}>
-          <Image
-            layout="responsive"
-            width={2628}
-            height={1752}
-            src="/images/work/cover.png"
-            alt="Image of my concept UI work"
-            quality={100}
-          />
-        </Fade>
-      </div>
-
-      <Fade triggerOnce>
-        <div className={styles.projectsHeader}>
-          <h2 className="heading-5">Jellypepper</h2>
-          <p>Running an agency has given me the opportunity to see how companies from all different industries, all over the world, work and grow. My team and I have been fortunate enough to work with these folks...</p>
-        </div>
-      </Fade>
-
-      <div className={styles.projects}>
-        {[...jellypepperClients.startups, ...jellypepperClients.other].sort(sortAlphabetically).map((data, index) => (
-          <div key={data.id} id={`jellypepper-${data.id}`}>
-            <Fade triggerOnce delay={(index % 3) * 100}>
-              <Client
-                image={`/images/work/${data.id}.svg`}
-                title={data.name}
-                summary={data.tagline}
-                description={createClientDescription(data)}
-                caption={`Roles: ${['Creative Director', ...(jellypepperRoles[data.id] || [])].join(', ')}`}
-              />
-            </Fade>
+      <Section>
+        <Role
+          date="2018 — Present"
+          title="Director &amp; Lead Product Designer"
+          company="Jellypepper"
+        >
+          <div>
+            <p>
+              Jellypepper is an award-winning digital agency for bright ideas. I
+              started Jellypepper in 2016 in an effort to explore the world a
+              bit more, see how different industries and people worked.
+            </p>
+            <p>
+              I’m very hands-on, frequently spearheading or joining the product
+              design and development teams in ideating, creating and shipping
+              client experiences. It’s also helped me figure out what I care
+              about, what I value and what I want to work on in the future.
+            </p>
           </div>
-        ))}
-      </div>
-
-      <div className={styles.presumi} ref={ref}>
-        <div className={styles.presumiInfo}>
-          <p>While I was in university, I created a product for job seekers called Presumi — a unique resume-tracking algorithm coupled with a beautiful candidate dashboard that I ended up licensing to SEEK in Hong Kong.</p>
-          <ArrowLink color="white" href="/journal/presumi">Read the story</ArrowLink>
-        </div>
-        {animationLoaded && (
-          <PresumiAnimation />
-        )}
-      </div>
-
-      <Fade triggerOnce>
-        <div className={styles.projectsHeader}>
-          <h2 className="heading-5">Other roles</h2>
-          <p>Outside Jellypepper, I have been fortunate enough to work with the following companies.</p>
-        </div>
-      </Fade>
-
-      <div className={styles.projects}>
-        {otherRoles.map(({ image, role, company, type, start, end, location, description }, index) => (
-          <div key={company} id={`role-${company}`}>
-            <Fade triggerOnce delay={(index % 3) * 100}>
-              <Client
-                image={image}
-                title={company}
-                summary={role}
-                description={description}
-                caption={`${type} from ${start} to ${end} in ${location}.`}
-              />
-            </Fade>
+          <div>
+            <p>
+              It’s been a fantastic journey so far. I’ve grown a tight-knit team
+              of 5, met some brilliant people and worked on all sorts of
+              interesting projects in areas such as self-driving cars, future of
+              work AI, ARM virtualization, 3D biotechnology, cybersecurity and
+              even space logistics.
+            </p>
+            <p>
+              We’ve worked for a bunch of fantastic companies, browse{" "}
+              <Link href="https://jellypepper.com/work">our case studies</Link>{" "}
+              on our website.
+            </p>
           </div>
-        ))}
-      </div>
+        </Role>
+
+        <Role
+          date="2016 — 2017"
+          title="Head of Product and Design"
+          company="Spaceship"
+        >
+          <div>
+            <p>
+              Spaceship started in mid-2016 as a technology-focused
+              superannuation fund (if you’re not from Down Under, superannuation
+              is a bit like a 401k pension plan).
+            </p>
+            <p>
+              The idea was a new type of super fund focused on tech companies
+              where you can get exposure in companies such as Apple, Google and
+              Facebook - “invest where the world is going, not where it’s been”.
+            </p>
+            <p>
+              I joined Spaceship in September 2016. We raised $1.6M from
+              Atlassian’s Mike Cannon-Brookes and ShowPo’s Jane Lu, then in June
+              the next year raised $19.5M from NEA, Sequoia Capital and Valar
+              Ventures.
+            </p>
+          </div>
+          <div>
+            <p>
+              During my time at Spaceship, I worked with some insanely talented
+              people to grow a waitlist of 28,000 people, design and build the
+              marketing website and superannuation portal. I also created the
+              foundations of the Spaceship design system that ran our multiple
+              platforms and contributed towards the overall brand styleguide.
+            </p>
+            <p>
+              Spaceship was a challenge and a rare opportunity to change the way
+              milennials engaged with their finances. I loved the work we did at
+              Spaceship and I hope they find the persistence to break through
+              the regulatory restraints and truly disrupt the superannuation
+              industry.
+            </p>
+          </div>
+        </Role>
+
+        <Role date="2015" title="Product Design Intern" company="Palantir">
+          <div>
+            <p>
+              For a few months in late 2015, I worked as a Product Design intern
+              at Palantir’s Palo Alto HQ. I was part of a small team tasked with
+              designing an anti-fraud focused pilot project. It was my first
+              purely design-focused role and helped kickstart my career in
+              Product Design.
+            </p>
+            <p>
+              Palantir is one of the most inspiring companies I’ve worked with.
+              I learnt so much from their design team and was able to work on
+              something that really impacted people’s lives. Hopefully I can
+              work with them again one day.
+            </p>
+            <p>
+              The project I was working on consisted of three key parts. The
+              first was an object-node graphing system called Graph View which
+              built on the core visualisation techniques of their flagship
+              product, Gotham. Isolated subsets of data from Graph View were
+              brought into a relative, time-based visualisation system called
+              Stacks.
+            </p>
+          </div>
+          <div>
+            <p>
+              Stacks helped show object frequency and positioning over time
+              which could be used to find recurring patterns. The level of
+              granularity required for most cases meant we needed a library that
+              didn’t use a bezier curve to simplify things and allowed for
+              dynamic scaling of time range.
+            </p>
+            <p>
+              The last part was an Object Viewer — an inspector for individual
+              or small groups objects. It showed the object’s properties with
+              varying visualisation based on property type — string, pointer,
+              geolocation, etc. It also listed that object’s relationships to
+              other important items. By doing this, you were able to inspect a
+              particular object in detail then traverse its relationships.
+            </p>
+            <p>
+              I was also able to contribute a bit to their internal design
+              system (now open-source) called Blueprint.
+            </p>
+          </div>
+        </Role>
+
+        <Role date="2014 — 2015" title="Front-End Developer" company="Sumry">
+          <div>
+            <p>
+              Sumry is help you land your dream job by interweaving your unique
+              story with your professional achievements, sprinkled with your own
+              personality to create a timeline that help future employers
+              understand the real you.
+            </p>
+            <p>
+              I initially joined the Sumry team in mid-2014 as a front-end
+              developer. During this time, I learned to ideate, design, build
+              and launch a real product. I was also fortunate enough to dabble
+              in customer support, where I realised that startups have the
+              unfair advantage of being able to really get to know their
+              customers. Some of our users even used Sumry to get jobs at
+              companies such as Facebook and Google.
+            </p>
+          </div>
+          <div>
+            <p>
+              My focus was designing and implemented an entirely new user
+              interface and platform from ground up, built on Angular. I also
+              spent a lot of time refining the logo, colour palette, social
+              media and overall brand identity.
+            </p>
+            <p>
+              The overhaul was extensive and covered a lot of missing pieces in
+              the product strategy. We created an analytics dashboard so users
+              could see the impressions they were getting, gamified data
+              collection by highlighting missing fields and profile completion
+              and even added a great little feature called Storyteller — a
+              guided approach to creating a profile by answering a few easy
+              questions.
+            </p>
+          </div>
+        </Role>
+      </Section>
     </Layout>
   );
-}
+};
 
 export default Work;

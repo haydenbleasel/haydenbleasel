@@ -42,6 +42,7 @@
         opacity: 0.4;
         transition: opacity 0.2s;
         display: block;
+        font-size: var(--type-scale-1);
 
         @media (--tablet) {
             font-size: var(--type-scale-4);

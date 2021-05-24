@@ -1,10 +1,8 @@
-import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
-import Layout from "../../components/Layout";
-import Hero from "../../components/Hero";
-import ArrowLink from "../../components/ArrowLink";
-import eventsList from "./events.json";
 import styles from "./About.module.css";
+import Layout from "../../components/Layout";
+import eventsList from "./events.json";
+import workList from "./events.json";
 import { siteUrl } from "../../next-sitemap";
 import Section from "../../components/Section";
 import Link from "../../components/Link";
@@ -86,21 +84,22 @@ const About = () => (
         <div>
           <h2 className="small">Work</h2>
           <p className="h3Sans">
-            I currently run <Client name="Jellypepper" /> — an award-winning digital agency for
-            bright ideas. I also work with R/GA every so often, collaborating
-            with their strategy and design teams across different international
-            offices on amazing products and campaigns.
+            I currently run <Client name="Jellypepper" /> — an award-winning
+            digital agency for bright ideas. I also work with R/GA every so
+            often, collaborating with their strategy and design teams across
+            different international offices on amazing products and campaigns.
           </p>
           <p className="h3Sans">
-            After hours, I work on <Client name="Neutral" /> — a climate-focused app that combines
-            a lifestyle questionnaire with U.S. EPA and other data sources to
-            calculate your CO₂e emissions, then helps you offset it with a
-            reforestation program.
+            After hours, I work on <Client name="Neutral" /> — a climate-focused
+            app that combines a lifestyle questionnaire with U.S. EPA and other
+            data sources to calculate your CO₂e emissions, then helps you offset
+            it with a reforestation program.
           </p>
           <p className="h3Sans">
-            I’m also the design half of <Client name="Tomorrow" /> Studio — a tiny incubator for
-            delightful products. We’re currently working on <Client name="Bokeh" /> — a smart
-            portfolio platform for photographers.
+            I’m also the design half of <Client name="Tomorrow" /> Studio — a
+            tiny incubator for delightful products. We’re currently working on{" "}
+            <Client name="Bokeh" /> — a smart portfolio platform for
+            photographers.
           </p>
         </div>
 
@@ -137,25 +136,53 @@ const About = () => (
         </div>
       </div>
       <div className={styles.sidebar}>
-        <ul className={styles.events}>
-          {(eventsList as EventItem[]).map(({ url, ...event }, index) => (
-            <Fade triggerOnce delay={Math.min(index * 50, 500)}>
-              <li id={event.name}>
-                {url ? (
-                  <a
-                    className={styles.eventLink}
-                    href={url}
-                    target="noopener noreferrer"
-                  >
+        <div>
+          <h2 className="small">Work</h2>
+          <ul className={styles.events}>
+            {(workList as any[]).map(
+              ({ role, company, start, end, url }, index) => (
+                <Fade triggerOnce delay={Math.min(index * 50, 500)}>
+                  <li id={company}>
+                    <a
+                      className={styles.eventLink}
+                      href={url}
+                      target="noopener noreferrer"
+                    >
+                      <small>
+                        {start} &mdash; {end}
+                      </small>
+                      <p>
+                        {role}, {company}
+                      </p>
+                    </a>
+                  </li>
+                </Fade>
+              )
+            )}
+          </ul>
+        </div>
+        <div>
+          <h2 className="small">Speaking Events</h2>
+          <ul className={styles.events}>
+            {(eventsList as EventItem[]).map(({ url, ...event }, index) => (
+              <Fade triggerOnce delay={Math.min(index * 50, 500)}>
+                <li id={event.name}>
+                  {url ? (
+                    <a
+                      className={styles.eventLink}
+                      href={url}
+                      target="noopener noreferrer"
+                    >
+                      <Event {...event} />
+                    </a>
+                  ) : (
                     <Event {...event} />
-                  </a>
-                ) : (
-                  <Event {...event} />
-                )}
-              </li>
-            </Fade>
-          ))}
-        </ul>
+                  )}
+                </li>
+              </Fade>
+            ))}
+          </ul>
+        </div>
       </div>
     </Section>
   </Layout>

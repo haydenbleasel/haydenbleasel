@@ -7,7 +7,7 @@ import Layout from '../../components/Layout';
 import Hero from '../../components/Hero';
 import Post from '../../components/Post';
 
-import styles from './Blog.module.css';
+import styles from './Journal.module.css';
 
 type Post = {
     title: string,
