@@ -6,7 +6,7 @@ import Hero from '../../components/Hero';
 
 import styles from './Contact.module.css';
 
-const Events = () => {
+const Contact = () => {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -170,4 +170,4 @@ const Events = () => {
     );
 }
 
-export default Events;
+export default Contact;
