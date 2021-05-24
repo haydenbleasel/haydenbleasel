@@ -34,18 +34,23 @@
     display: flex;
     list-style: none;
     padding: 0;
+    align-items: center;
+
+    & li:last-of-type a {
+        border: 1px solid var(--black);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+    }
 
     & a {
-        margin-left: 2rem;
+        margin-left: 1.5rem;
         color: var(--black);
         text-decoration: none;
         opacity: 0.4;
         transition: opacity 0.2s;
         display: block;
-        font-size: var(--type-scale-1);
 
         @media (--tablet) {
-            font-size: var(--type-scale-4);
             margin: 0.5rem 0;
         }
     }

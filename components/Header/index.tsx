@@ -36,9 +36,9 @@ const Header = ({ onNavToggle }: HeaderProps) => {
     return (
       <li
         key={route}
-        className={
+        className={`small ${
           router.pathname == url ? styles.active : ""
-        }
+        }`}
       >
         <Link href={url}>{route}</Link>
       </li>

@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import Link from '../Link';
 import styles from './role.module.css';
 
-type IRole = {
+type IProject = {
   date: string;
   name: string;
   role: string;
@@ -11,7 +11,7 @@ type IRole = {
   children: ReactNode;
 }
 
-const Role = ({ date, name, role, link, children }: IRole) => (
+const Project = ({ date, name, role, link, children }: IProject) => (
   <div className={styles.role}>
     <Image
       src={`/images/projects/${name.toLowerCase()}.png`}
@@ -31,4 +31,4 @@ const Role = ({ date, name, role, link, children }: IRole) => (
   </div>
 );
 
-export default Role;
+export default Project;

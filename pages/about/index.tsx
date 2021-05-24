@@ -96,7 +96,7 @@ const About = () => (
             it with a reforestation program.
           </p>
           <p className="h3Sans">
-            I’m also the design half of <Client name="Tomorrow" /> Studio — a
+            I’m also the design half of <Client name="Tomorrow Studio" /> — a
             tiny incubator for delightful products. We’re currently working on{" "}
             <Client name="Bokeh" /> — a smart portfolio platform for
             photographers.
