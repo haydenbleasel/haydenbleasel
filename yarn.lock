@@ -1040,39 +1040,6 @@
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.11.tgz#aeb16f50649a91af79dbe36574b66d0f9e4d9f71"
   integrity sha512-3NsZsJIA/22P3QUyrEDNA2D133H4j224twJrdipXN38dpnIOzAbUDtOwkcJ5pXmn75w7LSQDjA4tO9dm1XlqlA==
 
-"@prefresh/babel-plugin@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@prefresh/babel-plugin/-/babel-plugin-0.4.1.tgz#c4e843f7c5e56c15f1185979a8559c893ffb4a35"
-  integrity sha512-gj3ekiYtHlZNz0zFI1z6a9mcYX80Qacw84+2++7V1skvO7kQoV2ux56r8bJkTBbKMVxwAgaYrxxIdUCYlclE7Q==
-
-"@prefresh/core@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@prefresh/core/-/core-1.3.1.tgz#3ec56367baef150144a28db4746c8630fc0c8bf7"
-  integrity sha512-AmtAM0vWbP25sFbUdp5a9TKP/sDSkOp2qjAarT82A1pebEa1RHcl75JiYEM73uKXirp2dNSgAedyERuykuBwJg==
-
-"@prefresh/next@^1.4.0":
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/@prefresh/next/-/next-1.4.6.tgz#1ec73696ba6fd39aaac8db506c506fcd29aa5f31"
-  integrity sha512-MyE+3pTrpv1yw/wkEkdCt/5GklCnRkbeKneSyt8tEn3L9YaRm9K88slgZ5b3fp9qnWaSaFk3gmfM8YoIGkkefQ==
-  dependencies:
-    "@prefresh/babel-plugin" "0.4.1"
-    "@prefresh/core" "^1.3.1"
-    "@prefresh/utils" "^1.0.0"
-    "@prefresh/webpack" "^3.2.0"
-
-"@prefresh/utils@^1.0.0", "@prefresh/utils@^1.1.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@prefresh/utils/-/utils-1.1.1.tgz#ffe7f2e6bd48a0633631a3d92c0ee4bdeb0ac330"
-  integrity sha512-MUhT5m2XNN5NsZl4GnpuvlzLo6VSTa/+wBfBd3fiWUvHGhv0GF9hnA1pd//v0uJaKwUnVRQ1hYElxCV7DtYsCQ==
-
-"@prefresh/webpack@^3.2.0":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@prefresh/webpack/-/webpack-3.2.2.tgz#efc59cf1be581531826e253f2fcf429cf3693b9e"
-  integrity sha512-DXjA+548YIdcFN1BTY44zTdGys7Egl1Y1wbN122ZGUnSBq2Opr9BNSi2msLjO3Bzndq+iuy3K3BP+DO+pdJzLQ==
-  dependencies:
-    "@prefresh/core" "^1.3.1"
-    "@prefresh/utils" "^1.1.0"
-
 "@rollup/plugin-babel@^5.2.0":
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-babel/-/plugin-babel-5.2.2.tgz#e5623a01dd8e37e004ba87f2de218c611727d9b2"
@@ -3144,7 +3111,7 @@ lodash@^4.7.0:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
-loose-envify@^1.4.0:
+loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -3275,11 +3242,6 @@ minimist@^1.2.0, minimist@^1.2.5:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
   integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
 
-module-alias@^2.0.0:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/module-alias/-/module-alias-2.2.2.tgz#151cdcecc24e25739ff0aa6e51e1c5716974c0e0"
-  integrity sha512-A/78XjoX2EmNvppVWEhM2oGk3x4lLxnkEA4jTbaK97QKSDjkIoOsKQlfylt/d3kKKi596Qy3NP5XrXJ6fZIC9Q==
-
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -3322,14 +3284,6 @@ next-compose-plugins@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
   integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
-
-next-plugin-preact@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/next-plugin-preact/-/next-plugin-preact-3.0.4.tgz#1688671f0f6c09951a92eeb7a17fcfba5bf6f08d"
-  integrity sha512-zdzEnZC6kmPiCe/iE4yNA033Ejjsw7dEznyLEwCY1XfPTyeLsNtqKD+Pz1Wno5vNsCg2JbbVHAFzMFLUCiSFMw==
-  dependencies:
-    "@prefresh/next" "^1.4.0"
-    module-alias "^2.0.0"
 
 next-pwa@^5.2.15:
   version "5.2.15"
@@ -4055,18 +4009,6 @@ postcss@^7.0.14, postcss@^7.0.17, postcss@^7.0.2, postcss@^7.0.32, postcss@^7.0.
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-preact-render-to-string@^5.1.19:
-  version "5.1.19"
-  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.1.19.tgz#ffae7c3bd1680be5ecf5991d41fe3023b3051e0e"
-  integrity sha512-bj8sn/oytIKO6RtOGSS/1+5CrQyRSC99eLUnEVbqUa6MzJX5dYh7wu9bmT0d6lm/Vea21k9KhCQwvr2sYN3rrQ==
-  dependencies:
-    pretty-format "^3.8.0"
-
-preact@^10.5.13:
-  version "10.5.13"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.13.tgz#85f6c9197ecd736ce8e3bec044d08fd1330fa019"
-  integrity sha512-q/vlKIGNwzTLu+jCcvywgGrt+H/1P/oIRSD6mV4ln3hmlC+Aa34C7yfPI4+5bzW8pONyVXYS7SvXosy2dKKtWQ==
-
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -4076,11 +4018,6 @@ pretty-bytes@^5.3.0, pretty-bytes@^5.4.1:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.5.0.tgz#0cecda50a74a941589498011cf23275aa82b339e"
   integrity sha512-p+T744ZyjjiaFlMUZZv6YPC5JrkNj8maRmPaQCWFJFplUAzpIUTRaTcS+7wmZtUoFXHtESJb23ISliaWyz3SHA==
-
-pretty-format@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
-  integrity sha1-v77VbV6ad2ZF9LH/eqGjrE+jw4U=
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -4198,10 +4135,14 @@ react-awesome-reveal@^3.7.1:
     react-intersection-observer "^8.31.0"
     react-is "^17.0.1"
 
-"react-dom@npm:@preact/compat", "react@npm:@preact/compat":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@preact/compat/-/compat-0.0.4.tgz#f329e41caa330199eaf779c9bc9cf9556e3984a0"
-  integrity sha512-NdazvKTisqbua54srMCVGuPwae53SM3u85yxrTymT+eJnScJOIAybDEzyOcAOpJsvo6vnGOiSyxmID7rlGw3nw==
+react-dom@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
+  integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    scheduler "^0.20.2"
 
 react-headroom@^3.1.1:
   version "3.1.1"
@@ -4246,6 +4187,14 @@ react-responsive@^8.2.0:
     matchmediaquery "^0.3.0"
     prop-types "^15.6.1"
     shallow-equal "^1.1.0"
+
+react@^17.0.2:
+  version "17.0.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
+  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 readable-stream@^2.0.2, readable-stream@^2.3.3, readable-stream@^2.3.6:
   version "2.3.7"
@@ -4462,6 +4411,14 @@ saxes@^5.0.1:
   integrity sha512-5LBh1Tls8c9xgGjw3QrMwETmTMVk0oFgvrFSvWx62llR2hcEInrKNZ2GZCCuuy2lvWrdl5jhbpeqc5hRYKFOcw==
   dependencies:
     xmlchars "^2.2.0"
+
+scheduler@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
+  integrity sha512-2eWfGgAqqWFGqtdMmcL5zCMK1U8KlXv8SQFGglL3CEtd0aDVDWgeF/YoCmvln55m5zSk3J/20hTaSBeSObsQDQ==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
 
 schema-utils@^2.6.5:
   version "2.7.1"
