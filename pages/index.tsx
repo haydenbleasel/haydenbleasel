@@ -49,12 +49,12 @@ const Home = () => {
         </h2>
         <div className={styles.work}>
           <Image src="/images/work/spaceship.png" layout="responsive" width={624} height={390} alt="Spaceship" objectFit="cover" objectPosition="center left" />
-          <p className="small">2016 &mdash; 2017</p>
+          <p className="small grey">2016 &mdash; 2017</p>
           <h3 className="h4Sans">Head of Product and Design at Spaceship</h3>
         </div>
         <div className={styles.work}>
           <Image src="/images/work/palantir.png" layout="responsive" width={624} height={390} alt="Palantir" objectFit="cover" />
-          <p className="small">2015</p>
+          <p className="small grey">2015</p>
           <h3 className="h4Sans">
             Product Design Intern at Palantir Technologies
           </h3>

@@ -13,7 +13,7 @@ const Client = ({ name, size = 24 }: ClientProps) => (
       height={size}
       width={size}
       alt={name}
-      src={`/images/companies/${name.replace(' ', '').toLowerCase()}.svg`}
+      src={`/images/companies/${name.replace(' ', '').replace('/', '').toLowerCase()}.svg`}
       quality={100}
       objectFit="contain"
     />
