@@ -1,7 +1,9 @@
+.hero {
+    grid-column: 1 / 5;
+}
+
 .form {
-    max-width: 30rem;
-    width: 100%;
-    margin: 0 auto;
+    grid-column: 6 / 11;
 }
 
 .form.loading {

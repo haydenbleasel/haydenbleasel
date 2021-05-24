@@ -1,173 +1,195 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { Notyf } from 'notyf';
-import { Fade } from 'react-awesome-reveal';
-import Layout from '../../components/Layout';
-import Hero from '../../components/Hero';
+import { ChangeEvent, FormEvent, useState } from "react";
+import { Notyf } from "notyf";
+import { Fade } from "react-awesome-reveal";
+import Layout from "../../components/Layout";
+import Hero from "../../components/Hero";
 
-import styles from './Contact.module.css';
+import styles from "./Contact.module.css";
+import Section from "../../components/Section";
 
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [files, setFiles] = useState<FileList | null>(null);
+  const [loading, setLoading] = useState(false);
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-    const [files, setFiles] = useState<FileList | null>(null);
-    const [loading, setLoading] = useState(false);
+  async function sendEmail(event: FormEvent) {
+    event.preventDefault();
 
-    async function sendEmail(event: FormEvent) {
-        event.preventDefault();
+    setLoading(true);
+    const notyf = new Notyf();
 
-        setLoading(true);
-        const notyf = new Notyf();
+    try {
+      const formData = new FormData();
 
-        try {
+      if (!name.trim()) {
+        throw new Error("Please provide a valid name.");
+      }
 
-            const formData = new FormData();
+      if (!email.trim()) {
+        throw new Error("Please provide a valid email address.");
+      }
 
-            if (!name.trim()) {
-                throw new Error('Please provide a valid name.');
-            }
+      if (!message.trim()) {
+        throw new Error("Please provide a valid message.");
+      }
 
-            if (!email.trim()) {
-              throw new Error('Please provide a valid email address.');
-            }
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("message", message);
 
-            if (!message.trim()) {
-              throw new Error('Please provide a valid message.');
-            }
+      if (files) {
+        Array.from(files).map((file, index) =>
+          formData.append(`file${index}`, file)
+        );
+      }
 
-            formData.append('name', name);
-            formData.append('email', email);
-            formData.append('message', message);
+      const response = await fetch("/api/nodemailer", {
+        method: "post",
+        body: formData,
+      });
 
-            if (files) {
-                Array.from(files).map((file, index) => (
-                    formData.append(`file${index}`, file)
-                ));
-            }
+      const data = await response.json();
 
-            const response = await fetch('/api/nodemailer', {
-                method: 'post',
-                body: formData,
-            });
+      if (response.status !== 200) {
+        throw new Error(data.message);
+      }
 
-            const data = await response.json();
-
-            if (response.status !== 200) {
-                throw new Error(data.message);
-            }
-
-            notyf.success({
-                message: 'Thanks, choom. I\'ll be in touch soon!',
-                duration: 5000,
-                icon: false,
-            });
-        } catch (error: any) {
-            notyf.error({
-                message: error.message,
-                duration: 5000,
-                icon: false,
-            });
-        } finally {
-            setLoading(false);
-        }
+      notyf.success({
+        message: "Thanks, choom. I'll be in touch soon!",
+        duration: 5000,
+        icon: false,
+      });
+    } catch (error: any) {
+      notyf.error({
+        message: error.message,
+        duration: 5000,
+        icon: false,
+      });
+    } finally {
+      setLoading(false);
     }
+  }
 
-    return (
-        <Layout
-            title="Get in touch"
-            description="I’m always keen to have a chat and open to new opportunities."
+  return (
+    <Layout
+      title="Get in touch"
+      description="I’m always keen to have a chat and open to new opportunities."
+    >
+      <Section>
+        <div className={styles.hero}>
+          <h1>
+            <span className="titleSans">Get in</span>
+            <span className="titleSerif"> touch</span>
+          </h1>
+          <p className="paragraph">
+            I’m always keen to have a chat and open to new opportunities. Just
+            fill in the form.
+          </p>
+        </div>
+
+        <form
+          className={`${styles.form} ${loading ? styles.loading : ""}`}
+          onSubmit={sendEmail}
         >
+          <Fade triggerOnce delay={800}>
+            <fieldset className={styles.fieldset}>
+              <div className={styles.fieldHeader}>
+                <label className={styles.label} htmlFor="name">
+                  Full name
+                </label>
+                <span className={styles.remaining}>
+                  {320 - name.length} / 320
+                </span>
+              </div>
+              <input
+                className={styles.input}
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Jane Smith"
+                required
+                autoComplete="on"
+                value={name}
+                maxLength={320}
+                onChange={({ target }: ChangeEvent) =>
+                  setName((target as HTMLInputElement).value)
+                }
+              />
+            </fieldset>
+            <fieldset className={styles.fieldset}>
+              <div className={styles.fieldHeader}>
+                <label className={styles.label} htmlFor="email">
+                  Email address
+                </label>
+                <span className={styles.remaining}>
+                  {320 - email.length} / 320
+                </span>
+              </div>
+              <input
+                className={styles.input}
+                id="email"
+                name="email"
+                type="email"
+                placeholder="janesmith@example.com"
+                required
+                autoComplete="on"
+                value={email}
+                maxLength={320}
+                onChange={({ target }: ChangeEvent) =>
+                  setEmail((target as HTMLInputElement).value)
+                }
+              />
+            </fieldset>
+            <fieldset className={styles.fieldset}>
+              <div className={styles.fieldHeader}>
+                <label className={styles.label} htmlFor="message">
+                  Message
+                </label>
+                <span className={styles.remaining}>
+                  {1000 - message.length} / 1000
+                </span>
+              </div>
+              <textarea
+                className={styles.textarea}
+                id="message"
+                name="message"
+                placeholder="Hey Hayden, I’m interested in chatting about a new role we have available..."
+                required
+                autoComplete="off"
+                value={message}
+                maxLength={1000}
+                onChange={({ target }: ChangeEvent) =>
+                  setMessage((target as HTMLInputElement).value)
+                }
+              />
+            </fieldset>
+            <fieldset className={styles.fieldset}>
+              <label className={styles.label} htmlFor="files">
+                Attach files
+                <span> (Optional)</span>
+              </label>
+              <input
+                className={styles.files}
+                id="files"
+                name="files"
+                type="file"
+                multiple
+                onChange={({ target }: ChangeEvent) =>
+                  setFiles((target as HTMLInputElement).files)
+                }
+              />
+            </fieldset>
 
-            <Hero
-                title="Get in touch"
-                description="I’m always keen to have a chat and open to new opportunities. Just fill in the form below."
-            />
-
-            <Fade triggerOnce delay={800}>
-                <form className={`${styles.form} ${loading ? styles.loading : ''}`} onSubmit={sendEmail}>
-
-                    <fieldset className={styles.fieldset}>
-                        <div className={styles.fieldHeader}>
-                            <label className={styles.label} htmlFor="name">Full name</label>
-                            <span className={styles.remaining}>{320 - name.length} / 320</span>
-                        </div>
-                        <input
-                            className={styles.input}
-                            id="name"
-                            name="name"
-                            type="text"
-                            placeholder="Jane Smith"
-                            required
-                            autoComplete="on"
-                            value={name}
-                            maxLength={320}
-                            onChange={({ target }: ChangeEvent) => (
-                                setName((target as HTMLInputElement).value)
-                            )}
-                        />
-                    </fieldset>
-                    <fieldset className={styles.fieldset}>
-                        <div className={styles.fieldHeader}>
-                            <label className={styles.label} htmlFor="email">Email address</label>
-                            <span className={styles.remaining}>{320 - email.length} / 320</span>
-                        </div>
-                        <input
-                            className={styles.input}
-                            id="email"
-                            name="email"
-                            type="email"
-                            placeholder="janesmith@example.com"
-                            required
-                            autoComplete="on"
-                            value={email}
-                            maxLength={320}
-                            onChange={({ target }: ChangeEvent) => (
-                                setEmail((target as HTMLInputElement).value)
-                            )}
-                        />
-                    </fieldset>
-                    <fieldset className={styles.fieldset}>
-                        <div className={styles.fieldHeader}>
-                            <label className={styles.label} htmlFor="message">Message</label>
-                            <span className={styles.remaining}>{1000 - message.length} / 1000</span>
-                        </div>
-                        <textarea
-                            className={styles.textarea}
-                            id="message"
-                            name="message"
-                            placeholder="Hey Hayden, I’m interested in chatting about a new role we have available..."
-                            required
-                            autoComplete="off"
-                            value={message}
-                            maxLength={1000}
-                            onChange={({ target }: ChangeEvent) => (
-                                setMessage((target as HTMLInputElement).value)
-                            )}
-                        />
-                    </fieldset>
-                    <fieldset className={styles.fieldset}>
-                        <label className={styles.label} htmlFor="files">Attach files
-                            <span> (Optional)</span>
-                        </label>
-                        <input
-                            className={styles.files}
-                            id="files"
-                            name="files"
-                            type="file"
-                            multiple
-                            onChange={({ target }: ChangeEvent) => (
-                                setFiles((target as HTMLInputElement).files)
-                            )}
-                        />
-                    </fieldset>
-
-                    <button className={styles.button} type="submit">Send message</button>
-                </form>
-            </Fade>
-
-        </Layout>
-    );
-}
+            <button className={styles.button} type="submit">
+              Send message
+            </button>
+          </Fade>
+        </form>
+      </Section>
+    </Layout>
+  );
+};
 
 export default Contact;

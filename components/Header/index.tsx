@@ -26,6 +26,25 @@ const Header = ({ onNavToggle }: HeaderProps) => {
     isLaptop && onNavToggle();
   }
 
+  function NavItem(route: string) {
+    let url = `/${route.toLowerCase()}`;
+
+    if (url === '/home') {
+      url = '/';
+    }
+
+    return (
+      <li
+        key={route}
+        className={
+          router.pathname == url ? styles.active : ""
+        }
+      >
+        <Link href={url}>{route}</Link>
+      </li>
+    );
+  }
+
   return (
     <Headroom>
       <Fade triggerOnce>
@@ -49,18 +68,7 @@ const Header = ({ onNavToggle }: HeaderProps) => {
               </div>
               <div className={styles.menu}>
                 <ul className={styles.sitemap}>
-                  {routes.map((route) => (
-                    <li
-                      key={route}
-                      className={
-                        router.pathname == `/${route.toLowerCase()}`
-                          ? styles.active
-                          : ""
-                      }
-                    >
-                      <Link href={`/${route.toLowerCase()}`}>{route}</Link>
-                    </li>
-                  ))}
+                  {routes.map(NavItem)}
                 </ul>
                 {isLaptop && (
                   <div className={styles.hamburgerContainer}>

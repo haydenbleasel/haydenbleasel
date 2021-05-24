@@ -80,18 +80,6 @@ const Projects = () => {
           </div>
         </Project>
 
-        <Project date="2015" name="Netlify Menubar" role="Maker" link="">
-          <div>
-            <p>
-              A handy menu bar app for Netlify deploys. Supports MacOS, Windows,
-              and Linux.
-            </p>
-          </div>
-          <div>
-            <p>asd</p>
-          </div>
-        </Project>
-
         <Project
           date="2014 — 2015"
           name="Presumi"
