@@ -55,17 +55,15 @@ const Header = ({ onNavToggle }: HeaderProps) => {
                 menuActive ? styles.active : ""
               }`}
             >
-              <div className={styles.name}>
-                <Link href="/">
-                  <Image
-                    src="/images/logo.svg"
-                    alt="Hayden Bleasel"
-                    layout="fixed"
-                    width={54}
-                    height={16}
-                  />
-                </Link>
-              </div>
+              <Link href="/">
+                <Image
+                  src="/images/logo.svg"
+                  alt="Hayden Bleasel"
+                  layout="fixed"
+                  width={54}
+                  height={16}
+                />
+              </Link>
               <div className={styles.menu}>
                 <ul className={styles.sitemap}>
                   {routes.map(NavItem)}

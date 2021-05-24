@@ -1,0 +1,4 @@
+.title {
+  display: flex;
+  grid-column: 1/ 13;
+}

@@ -1,6 +1,7 @@
 .sectionHeader {
     border-bottom: 1px solid var(--divider);
     margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
     grid-column: 1 / 13;
 }
 

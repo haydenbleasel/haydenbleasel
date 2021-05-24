@@ -8,6 +8,7 @@ import Post from "../../components/Post";
 
 import styles from "./Journal.module.css";
 import Section from "../../components/Section";
+import Title from "../../components/Title";
 
 type Post = {
   title: string;
@@ -35,12 +36,7 @@ const Journal = ({ posts }: BlogProps) => (
     title="Thoughts, stories and ideas"
     description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
   >
-    <Section>
-      <h1>
-        <span className="titleSans">Thoughts</span>
-        <span className="titleSerif"> &amp; Ideas</span>
-      </h1>
-    </Section>
+    <Title sans="Thoughts" serif="&amp; Ideas" />
 
     <Section>
       {posts.map(({ title, id, date, summary, image }, index) => (

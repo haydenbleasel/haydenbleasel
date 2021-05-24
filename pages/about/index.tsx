@@ -7,22 +7,54 @@ import { siteUrl } from "../../next-sitemap";
 import Section from "../../components/Section";
 import Link from "../../components/Link";
 import Client from "../../components/Client";
+import Title from "../../components/Title";
 
-type EventItem = {
+type IEvent = {
   name: string;
   organisation: string;
   year: number;
   url?: string;
 };
 
-const Event = ({ name, organisation, year }: EventItem) => (
-  <span className={styles.event}>
-    <span className={styles.eventName}>{name}</span>
-    <span className={styles.eventMeta}>
-      <span>{organisation}</span>
-      <span className={styles.eventYear}>{year}</span>
-    </span>
-  </span>
+type IRole = {
+  role: string;
+  company: string;
+  start: string;
+  end: string;
+  url: string;
+};
+
+const Event = ({ url, name, organisation, year }: IEvent, index) => (
+  <Fade triggerOnce delay={Math.min(index * 50, 500)}>
+    <div className={styles.eventLink}>
+      <p className="small grey">
+        {organisation}, {year}
+      </p>
+      {url ? (
+        <Link href={url}>
+          <span className="h4Sans">{name}</span>
+        </Link>
+      ) : (
+        <p className="h4Sans">{name}</p>
+      )}
+    </div>
+  </Fade>
+);
+
+const Role = ({ role, company, start, end, url }: IRole, index) => (
+  <Fade triggerOnce delay={Math.min(index * 50, 500)}>
+    <li id={company}>
+      <a className={styles.eventLink} href={url} target="noopener noreferrer">
+        <small className="small grey">
+          {start} &mdash; {end}
+        </small>
+        <p>
+          <span className="h4Sans">{role},</span>
+          <span className="h4Serif"> {company}</span>
+        </p>
+      </a>
+    </li>
+  </Fade>
 );
 
 const About = () => (
@@ -35,17 +67,12 @@ const About = () => (
       height: 3024,
     }}
   >
-    <Section>
-      <h1>
-        <span className="titleSans">About</span>
-        <span className="titleSerif"> Me</span>
-      </h1>
-    </Section>
+    <Title sans="About" serif="Me" />
 
     <Section>
       <div className={styles.bio}>
         <div>
-          <h2 className="small">Introduction</h2>
+          <h2 className="paragraph">Introduction</h2>
           <p className="h3Sans">
             Hi, I’m Hayden Bleasel. I’m a digital product designer living in
             Sydney, Australia. I enjoy reducing complex problems into thoughtful
@@ -82,7 +109,7 @@ const About = () => (
         </div>
 
         <div>
-          <h2 className="small">Work</h2>
+          <h2 className="paragraph">Work</h2>
           <p className="h3Sans">
             I currently run <Client name="Jellypepper" /> — an award-winning
             digital agency for bright ideas. I also work with R/GA every so
@@ -104,7 +131,7 @@ const About = () => (
         </div>
 
         <div>
-          <h2 className="small">Tools</h2>
+          <h2 className="paragraph">Tools</h2>
           <p className="h3Sans">
             My design tool of choice for anything is typically Figma - it’s
             brilliant at handling the wireframing, ideating, designing and
@@ -119,7 +146,7 @@ const About = () => (
         </div>
 
         <div>
-          <h2 className="small">Life</h2>
+          <h2 className="paragraph">Life</h2>
           <p className="h3Sans">
             In 2016, I graduated from UTS with two Bachelors degrees — Business
             (Management) and Information Technology (Enterprise Systems
@@ -137,52 +164,12 @@ const About = () => (
       </div>
       <div className={styles.sidebar}>
         <div>
-          <h2 className="small">Work</h2>
-          <ul className={styles.events}>
-            {(workList as any[]).map(
-              ({ role, company, start, end, url }, index) => (
-                <Fade triggerOnce delay={Math.min(index * 50, 500)}>
-                  <li id={company}>
-                    <a
-                      className={styles.eventLink}
-                      href={url}
-                      target="noopener noreferrer"
-                    >
-                      <small>
-                        {start} &mdash; {end}
-                      </small>
-                      <p>
-                        <span className="paragraph">{role},</span>
-                        <span className="paragraphSerif"> {company}</span>
-                      </p>
-                    </a>
-                  </li>
-                </Fade>
-              )
-            )}
-          </ul>
+          <h2 className="paragraph">Work</h2>
+          <ul className={styles.events}>{workList.map(Role)}</ul>
         </div>
         <div>
-          <h2 className="small">Speaking Events</h2>
-          <ul className={styles.events}>
-            {(eventsList as EventItem[]).map(({ url, ...event }, index) => (
-              <Fade triggerOnce delay={Math.min(index * 50, 500)}>
-                <li id={event.name}>
-                  {url ? (
-                    <a
-                      className={styles.eventLink}
-                      href={url}
-                      target="noopener noreferrer"
-                    >
-                      <Event {...event} />
-                    </a>
-                  ) : (
-                    <Event {...event} />
-                  )}
-                </li>
-              </Fade>
-            ))}
-          </ul>
+          <h2 className="paragraph">Speaking Events</h2>
+          <ul className={styles.events}>{eventsList.map(Event)}</ul>
         </div>
       </div>
     </Section>

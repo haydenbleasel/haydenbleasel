@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 
 import styles from "./Contact.module.css";
 import Section from "../../components/Section";
+import Title from "../../components/Title";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -78,10 +79,7 @@ const Contact = () => {
     >
       <Section>
         <div className={styles.hero}>
-          <h1>
-            <span className="titleSans">Get in</span>
-            <span className="titleSerif"> touch</span>
-          </h1>
+          <Title sans="Get in" serif="touch" />
           <p className="paragraphSans">
             I’m always keen to have a chat and open to new opportunities. Just
             fill in the form.

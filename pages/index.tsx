@@ -112,18 +112,18 @@ const Home = () => {
           <span className="h2Serif"> &amp; Apps</span>
         </h2>
         <div className={styles.project}>
-          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <Image src="/images/projects/neutral.png" layout="responsive" width={624} height={390} alt="Neutral" objectFit="cover" />
           <h3 className="h4Sans">Neutral</h3>
-          <p className="paragraphSans">
+          <p className="paragraphSans grey">
             Climate-focused app that combines a lifestyle questionnaire with
             U.S. EPA and other data sources to calculate your CO₂e emissions,
             then helps you offset it with a reforestation program.
           </p>
         </div>
         <div className={styles.project}>
-          <div style={{ height: 390, background: "var(--ghost)" }} />
+          <Image src="/images/projects/bokeh.png" layout="responsive" width={624} height={390} alt="Bokeh" objectFit="cover" />
           <h3 className="h4Sans">Bokeh</h3>
-          <p className="paragraphSans">
+          <p className="paragraphSans grey">
             Take control of your photography career with an intelligent
             portfolio platform for professional photographers that grows with
             your work. Bokeh is currently in private beta, but you can join the

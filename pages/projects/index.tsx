@@ -3,6 +3,7 @@ import { siteUrl } from "../../next-sitemap";
 
 import Section from "../../components/Section";
 import Project from "../../components/Project";
+import Title from "../../components/Title";
 
 const Projects = () => {
   return (
@@ -15,12 +16,7 @@ const Projects = () => {
         height: 1752,
       }}
     >
-      <Section>
-        <h1>
-          <span className="titleSans">Projects</span>
-          <span className="titleSerif"> &amp; Apps</span>
-        </h1>
-      </Section>
+      <Title sans="Projects" serif="&amp; Apps" />
 
       <Section>
         <Project

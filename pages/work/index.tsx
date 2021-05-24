@@ -4,6 +4,7 @@ import Link from "../../components/Link";
 
 import Section from "../../components/Section";
 import Role from "../../components/Role";
+import Title from "../../components/Title";
 
 const Work = () => {
   return (
@@ -16,12 +17,7 @@ const Work = () => {
         height: 1752,
       }}
     >
-      <Section>
-        <h1>
-          <span className="titleSans">Selected</span>
-          <span className="titleSerif"> Work</span>
-        </h1>
-      </Section>
+      <Title sans="Selected" serif="Work" />
 
       <Section>
         <Role
