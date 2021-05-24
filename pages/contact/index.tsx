@@ -83,7 +83,7 @@ const Contact = () => {
             <span className="titleSans">Get in</span>
             <span className="titleSerif"> touch</span>
           </h1>
-          <p className="paragraph">
+          <p className="paragraphSans">
             I’m always keen to have a chat and open to new opportunities. Just
             fill in the form.
           </p>

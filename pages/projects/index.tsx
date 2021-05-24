@@ -1,7 +1,6 @@
 import { Fade } from "react-awesome-reveal";
 import Layout from "../../components/Layout";
 import { siteUrl } from "../../next-sitemap";
-import Link from "../../components/Link";
 
 import Section from "../../components/Section";
 import Project from "../../components/Project";

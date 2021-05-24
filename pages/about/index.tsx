@@ -2,7 +2,7 @@ import { Fade } from "react-awesome-reveal";
 import styles from "./About.module.css";
 import Layout from "../../components/Layout";
 import eventsList from "./events.json";
-import workList from "./events.json";
+import workList from "./work.json";
 import { siteUrl } from "../../next-sitemap";
 import Section from "../../components/Section";
 import Link from "../../components/Link";
@@ -152,7 +152,8 @@ const About = () => (
                         {start} &mdash; {end}
                       </small>
                       <p>
-                        {role}, {company}
+                        <span className="paragraph">{role},</span>
+                        <span className="paragraphSerif"> {company}</span>
                       </p>
                     </a>
                   </li>

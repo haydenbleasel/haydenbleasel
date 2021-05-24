@@ -81,25 +81,25 @@ const Home = () => {
         <div className={styles.journal}>
           <div>
             <p className="verySmall">May, 2020</p>
-            <h3 className="paragraph">
+            <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
           <div>
             <p className="verySmall">May, 2020</p>
-            <h3 className="paragraph">
+            <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
           <div>
             <p className="verySmall">May, 2020</p>
-            <h3 className="paragraph">
+            <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
           <div>
             <p className="verySmall">May, 2020</p>
-            <h3 className="paragraph">
+            <h3 className="paragraphSans">
               Finding some inner peace through simplicity and focus
             </h3>
           </div>
@@ -114,7 +114,7 @@ const Home = () => {
         <div className={styles.project}>
           <div style={{ height: 390, background: "var(--ghost)" }} />
           <h3 className="h4Sans">Neutral</h3>
-          <p className="paragraph">
+          <p className="paragraphSans">
             Climate-focused app that combines a lifestyle questionnaire with
             U.S. EPA and other data sources to calculate your CO₂e emissions,
             then helps you offset it with a reforestation program.
@@ -123,7 +123,7 @@ const Home = () => {
         <div className={styles.project}>
           <div style={{ height: 390, background: "var(--ghost)" }} />
           <h3 className="h4Sans">Bokeh</h3>
-          <p className="paragraph">
+          <p className="paragraphSans">
             Take control of your photography career with an intelligent
             portfolio platform for professional photographers that grows with
             your work. Bokeh is currently in private beta, but you can join the

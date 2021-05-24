@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Notyf } from "notyf";
 import { Fade } from "react-awesome-reveal";
 import styles from "./Footer.module.css";
-import ArrowLink from "../ArrowLink";
 import Link from "../Link";
 
 const Footer = ({ socialPlatforms }) => {
@@ -86,7 +85,7 @@ const Footer = ({ socialPlatforms }) => {
               type="submit"
               className={styles.newsletterButton}
             >
-              <ArrowLink />
+              &rarr;
             </button>
           </fieldset>
         </Fade>
