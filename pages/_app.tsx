@@ -7,7 +7,7 @@ import './styles.css';
 
 import { siteUrl } from '../next-sitemap';
 
-export default ({ Component, pageProps }: AppProps): JSX.Element => {
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
     const router = useRouter();
 
@@ -66,3 +66,5 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
         </>
     );
 }
+
+export default App;
