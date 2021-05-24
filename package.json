@@ -25,7 +25,6 @@
     "medium-zoom": "^1.0.6",
     "next": "^10.2.0",
     "next-compose-plugins": "^2.2.1",
-    "next-google-fonts": "^2.2.0",
     "next-plugin-preact": "^3.0.4",
     "next-pwa": "^5.2.15",
     "next-secure-headers": "^2.2.0",

@@ -3,7 +3,6 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import * as Fathom from 'fathom-client';
 import { useRouter } from 'next/router';
-import { GoogleFonts } from 'next-google-fonts';
 import './styles.css';
 
 import { siteUrl } from '../next-sitemap';
@@ -30,7 +29,6 @@ export default ({ Component, pageProps }: AppProps): JSX.Element => {
 
     return (
         <>
-            <GoogleFonts href="https://fonts.googleapis.com/css2?family=Space+Mono&amp;display=swap" />
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
