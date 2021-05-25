@@ -47,10 +47,8 @@ const Projects = () => {
               emissions in your own backyard.
             </p>
             <p className="small">
-              So far, we’ve helped our users plant 1297 trees and offset 162.13
-              tonnes of CO₂e across 31 programs.
-            </p>
-            <p className="small">It’s just the beginning.</p>
+              So far, we’ve helped our users plant over a thousand trees and offset hundreds of
+              tonnes of CO₂e. It’s just the beginning.</p>
           </div>
         </Role>
 

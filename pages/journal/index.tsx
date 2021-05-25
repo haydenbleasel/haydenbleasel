@@ -1,7 +1,7 @@
 import Layout from "../../components/layout";
 import Post from "../../components/post";
 
-import styles from "./Journal.module.css";
+import styles from "./journal.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
 import { getDevPosts, getMediumPosts } from '../../utils/journal';
@@ -32,7 +32,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
       <div className={styles.design}>
         <Divider text="Design and everything else" />
 
-        <div className={styles.posts}>
+        <div className={styles.designPosts}>
           {mediumPosts.map((post, index) => (
             <div className={styles.post} key={post.title}>
               <Post {...post} featured={index === 0} />
@@ -43,11 +43,13 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
       <div className={styles.technical}>
         <Divider text="Technical" />
 
-        {devPosts.map((post) => (
-          <div className={styles.post} key={post.title}>
-            <Post {...post} compact />
-          </div>
-        ))}
+        <div className={styles.technicalPosts}>
+          {devPosts.map((post) => (
+            <div className={styles.post} key={post.title}>
+              <Post {...post} compact />
+            </div>
+          ))}
+        </div>
       </div>
     </Section>
   </Layout>

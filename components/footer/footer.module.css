@@ -10,10 +10,6 @@
         height: 100vh;
         justify-content: space-between;
     }
-
-    & :global(a) {
-        text-decoration: none;
-    }
 }
 
 .label {
@@ -38,6 +34,10 @@
 .newsletterContainer {
     grid-column: 1 / 9;
     align-self: flex-end;
+
+    & :global(a) {
+        text-decoration: none;
+    }
 }
 
 .newsletterFields {
@@ -92,5 +92,9 @@
 
 .copyright {
     grid-column: 1 / 13;
-    margin-top: var(--gap-medium)
+    margin-top: var(--gap-medium);
+
+    & :global(a) {
+        text-decoration: underline;
+    }
 }
