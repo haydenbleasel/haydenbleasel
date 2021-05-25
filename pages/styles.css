@@ -21,6 +21,7 @@
 @custom-media --laptop (max-width: 992px);
 @custom-media --desktop (max-width: 1200px);
 @custom-media --desktopLarge (max-width: 1440px);
+@custom-media --darkMode (prefers-color-scheme: dark);
 
 :root {
   --gap-small: 2vw;
@@ -49,9 +50,11 @@
   --type-family-serif: "haydenbleasel-gtsuper", serif;
 
   @media (prefers-color-scheme: dark) {
-    --white: #1d1d1d;
+    --white: #111213;
     --black: #ffffff;
     --grey: #a1a1aa;
+    --silver: #333333;
+    --divider: #222222;
     --ghost: #17171c;
   }
 
@@ -213,4 +216,10 @@ a {
 
 .grey {
   color: var(--grey);
+}
+
+svg * {
+  @media (--darkMode) {
+    fill: var(--black);
+  }
 }

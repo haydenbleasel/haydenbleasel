@@ -75,6 +75,7 @@
     padding: 0;
     width: 2rem;
     font-size: var(--type-scale-5);
+    color: var(--black);
     font-family: inherit;
     outline: none;
 

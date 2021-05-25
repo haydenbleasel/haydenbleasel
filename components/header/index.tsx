@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { SetStateAction } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import Headroom from "react-headroom";
 import { Squeeze as Hamburger } from "hamburger-react";
 import useResponsive from "../../utils/responsive";
@@ -9,6 +8,8 @@ import useResponsive from "../../utils/responsive";
 import styles from "./header.module.css";
 import Link from "../link";
 import Section from "../section";
+
+import Logo from '../../public/images/logo.svg';
 
 const routes = ["Home", "About", "Work", "Journal", "Projects", "Contact"];
 
@@ -50,13 +51,7 @@ const Header = ({ onNavToggle }: IHeader) => {
           <header className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
             <div className={styles.logo}>
               <Link href="/">
-                <Image
-                  src="/images/logo.svg"
-                  alt="Hayden Bleasel"
-                  layout="fixed"
-                  width={54}
-                  height={16}
-                />
+                <Logo />
               </Link>
             </div>
             <div className={styles.menu}>
