@@ -52,7 +52,6 @@
 .sitemap {
   margin: 0;
   padding: 0;
-  transition: opacity 0.2s;
   display: flex;
   list-style: none;
   align-items: center;
@@ -105,6 +104,7 @@
 
   @media (--tablet) {
     opacity: 0;
+    transition: opacity 0.2s;
     user-select: none;
     pointer-events: none;
     position: fixed;
