@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Layout from "../components/layout";
-import Link from "../components/link";
 import Client from "../components/client";
 import Section from "../components/section";
 import Post from "../components/post";
@@ -78,10 +77,8 @@ const Home = ({ mediumPosts, devPosts }) => {
             />
             .
           </p>
-          <p className="h1Sans">
-            <Link href="/about">
-              <span className="underline">Keep reading</span> →
-            </Link>
+          <p className={`h1Sans ${styles.outlink}`}>
+            <Outlink text="Keep reading" link="/about" />
           </p>
         </div>
       </Section>

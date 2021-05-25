@@ -11,6 +11,10 @@
     }
   }
 
+  &:hover .arrow {
+    transform: translateX(0.25rem);
+  }
+
   @media (--laptop) {
     grid-column: 1;
   }
@@ -18,4 +22,9 @@
   @media (--mobile) {
     margin-top: var(--gap-small);
   }
+}
+
+.arrow {
+  transition: transform 0.25s;
+  display: inline-block;
 }

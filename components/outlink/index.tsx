@@ -9,7 +9,8 @@ type IOutlink = {
 const Outlink = ({ link, text }: IOutlink) => (
   <div className={styles.outlink}>
     <Link href={link}>
-      <span className="underline">{text}</span> &rarr;
+      <span className="underline">{text}</span>{" "}
+      <span className={styles.arrow}>&rarr;</span>
     </Link>
   </div>
 );

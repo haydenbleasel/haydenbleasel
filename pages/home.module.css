@@ -24,8 +24,8 @@
     margin-top: 0;
   }
 
-  & :global(a) {
-    text-decoration: none;
+  & .outlink * {
+    font-size: inherit;
   }
 
   @media (--laptop) {
