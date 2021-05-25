@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "../link";
 import styles from "./client.module.css";
 
-type ClientProps = {
+type IClient = {
   link?: string;
   name: string;
   large?: boolean;
 };
 
-const ClientInner = ({ name, large = false }: ClientProps) => (
+const ClientInner = ({ name, large = false }: IClient) => (
   <span className={`${styles.client} ${large ? styles.large : ""}`}>
     <Image
       layout="fixed"
@@ -26,7 +26,7 @@ const ClientInner = ({ name, large = false }: ClientProps) => (
   </span>
 );
 
-const Client = ({ link, ...props }: ClientProps) =>
+const Client = ({ link, ...props }: IClient) =>
   link ? (
     <Link href={link}>
       <ClientInner {...props} />

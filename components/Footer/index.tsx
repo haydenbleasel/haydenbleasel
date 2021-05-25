@@ -5,7 +5,15 @@ import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
 
-const Footer = ({ socialPlatforms }) => {
+type IFooter = {
+  socialPlatforms: {
+    name: string;
+    url: string;
+    image: string;
+  }[];
+};
+
+const Footer = ({ socialPlatforms }: IFooter) => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -50,20 +58,20 @@ const Footer = ({ socialPlatforms }) => {
     <footer className={styles.footer}>
       <Section>
         <div className={styles.social}>
-          {socialPlatforms.map((platform) => (
+          {socialPlatforms.map(({ name, url, image }) => (
             <a
               className={styles.socialIcon}
-              key={platform.name}
-              href={platform.url}
+              key={name}
+              href={url}
               target="_blank"
               rel="noopener noreferrer"
             >
               <Image
-                alt={platform.name}
+                alt={name}
                 layout="fixed"
                 width={18}
                 height={18}
-                src={platform.image}
+                src={image}
                 quality={100}
               />
             </a>

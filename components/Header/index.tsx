@@ -11,11 +11,11 @@ import Section from "../section";
 
 const routes = ["Home", "About", "Work", "Journal", "Projects", "Contact"];
 
-type HeaderProps = {
+type IHeader = {
   onNavToggle: any;
 };
 
-const Header = ({ onNavToggle }: HeaderProps) => {
+const Header = ({ onNavToggle }: IHeader) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const router = useRouter();
   const { isTablet } = useResponsive();
