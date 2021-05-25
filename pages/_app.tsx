@@ -39,7 +39,6 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-config" content="/browserconfig.xml" />
         <meta name="msapplication-TileColor" content="#FFFFFF" />
         <meta name="msapplication-tap-highlight" content="no" />
         <meta name="theme-color" content="#FFFFFF" />
