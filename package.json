@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^10.2.2",
-    "@svgr/webpack": "^5.5.0",
     "date-fns": "^2.21.3",
     "fathom-client": "^3.0.0",
     "formidable": "^1.2.2",
