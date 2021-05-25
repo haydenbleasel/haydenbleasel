@@ -1,4 +1,4 @@
 .divider {
-  border-bottom: 1px solid var(--grey);
+  border-bottom: 1px solid var(--divider);
   margin-bottom: var(--gap-small);
 }

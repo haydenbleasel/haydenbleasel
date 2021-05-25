@@ -25,15 +25,15 @@
   transition: opacity 0.2s;
   grid-column: 1 / 8;
 
+  &.loading {
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+  }
+
   @media (--laptop) {
     grid-column: 1;
   }
-}
-
-.newsletter.loading {
-  opacity: 0.4;
-  pointer-events: none;
-  user-select: none;
 }
 
 .container {
