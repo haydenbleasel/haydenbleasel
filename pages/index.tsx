@@ -27,9 +27,9 @@ const Home = ({ mediumPosts, devPosts }) => {
         <div className={styles.heroRight}>
           <p className="h1Sans">
             Hi, I’m Hayden Bleasel. I’m a digital product designer living in
-            Sydney, Australia. I currently spend my days running and designing
-            at <Client large name="Jellypepper" /> &mdash; an award-winning
-            digital agency for bright ideas.
+            Sydney, Australia. I currently run and lead Product Design at{" "}
+            <Client large name="Jellypepper" /> &mdash; an award-winning digital
+            agency for bright ideas.
           </p>
           <p className="h1Sans">
             I’ve had the privilege of working with many fantastic companies
@@ -128,6 +128,5 @@ export async function getStaticProps() {
     },
   };
 }
-
 
 export default Home;
