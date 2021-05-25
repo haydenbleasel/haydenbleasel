@@ -1,7 +1,7 @@
 @font-face {
   font-family: "haydenbleasel-lausanne";
   src: url("/fonts/lausanne/TWKLausanne-300.woff2") format("woff2"),
-       url("/fonts/lausanne/TWKLausanne-300.woff") format("woff");
+    url("/fonts/lausanne/TWKLausanne-300.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 @font-face {
   font-family: "haydenbleasel-gtsuper";
   src: url("/fonts/gtsuper/GT-Super-Display-Light-Italic.woff2") format("woff2"),
-       url("/fonts/gtsuper/GT-Super-Display-Light-Italic.woff") format("woff");
+    url("/fonts/gtsuper/GT-Super-Display-Light-Italic.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -27,13 +27,13 @@
   --gap-medium: 4vw;
   --gap-large: 6vw;
   --gap-huge: 12vw;
-  
-  --white: #FFFFFF;
-  --black: #1D1D1D;
+
+  --white: #ffffff;
+  --black: #1d1d1d;
   --grey: #757575;
-  --silver: #BDBDBD;
-  --divider: #DDDDDD;
-  --ghost: #FAFAFA;
+  --silver: #bdbdbd;
+  --divider: #dddddd;
+  --ghost: #fafafa;
 
   --type-scale-1: 1.25vw;
   --type-scale-2: calc(var(--type-scale-1) * 1.25);
@@ -43,14 +43,14 @@
   --type-scale-6: calc(var(--type-scale-5) * 1.25);
 
   --type-scale-0: calc(var(--type-scale-1) / 1.25);
-  --type-family-sans: 'haydenbleasel-lausanne', Arial, Helvetica, sans-serif;
-  --type-family-serif: 'haydenbleasel-gtsuper', serif;
+  --type-family-sans: "haydenbleasel-lausanne", Arial, Helvetica, sans-serif;
+  --type-family-serif: "haydenbleasel-gtsuper", serif;
 
   @media (prefers-color-scheme: dark) {
-    --white: #1D1D1D;
-    --black: #FFFFFF;
-    --grey: #A1A1AA;
-    --ghost: #17171C;
+    --white: #1d1d1d;
+    --black: #ffffff;
+    --grey: #a1a1aa;
+    --ghost: #17171c;
   }
 
   @media (--desktopLarge) {
@@ -69,7 +69,9 @@ html {
   background: var(--white);
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 

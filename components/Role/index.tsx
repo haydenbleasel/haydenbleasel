@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import Skeleton from '../../components/skeleton';
 import styles from './role.module.css';
 
 type IRole = {
@@ -13,14 +14,19 @@ type IRole = {
   children: ReactNode;
 }
 
-const Role = ({ id, caption, image, title, subtitle, link, children }: IRole) => (
+const Role = ({
+  id,
+  caption,
+  image,
+  title,
+  subtitle,
+  link,
+  children,
+}: IRole) => (
   <div className={styles.role} id={id}>
-    <Image
-      src={image}
-      layout="responsive"
-      width={1312}
-      height={600}
-    />
+    <Skeleton>
+      <Image src={image} layout="responsive" width={1312} height={600} />
+    </Skeleton>
     <div className={styles.meta}>
       <div className={styles.summary}>
         <p className="grey small">{caption}</p>

@@ -6,7 +6,7 @@ import Section from "../components/section";
 import Post from "../components/post";
 import Outlink from "../components/outlink";
 import { getDevPosts, getMediumPosts } from "../utils/journal";
-import styles from "./Home.module.css";
+import styles from "./home.module.css";
 
 const Home = ({ mediumPosts, devPosts }) => {
   return (
@@ -29,8 +29,8 @@ const Home = ({ mediumPosts, devPosts }) => {
           <p className="h1Sans">
             Hi, I’m Hayden Bleasel. I’m a digital product designer living in
             Sydney, Australia. I currently run and lead Product Design at{" "}
-            <Client large name="Jellypepper" /> &mdash; an award-winning digital
-            agency for bright ideas.
+            <Client large name="Jellypepper" link="https://jellypepper.com/" />{" "}
+            &mdash; an award-winning digital agency for bright ideas.
           </p>
           <p className="h1Sans">
             I’ve had the privilege of working with many fantastic companies
@@ -83,13 +83,11 @@ const Home = ({ mediumPosts, devPosts }) => {
           <span className="h2Serif"> &amp; Ideas</span>
         </h2>
 
-        {mediumPosts.slice(0, 2).map((post) => (
-          <div className={styles.journal} key={post.title}>
-            <Post {...post} />
-          </div>
-        ))}
+        <div className={styles.designPosts}>
+          {mediumPosts.slice(0, 2).map(Post)}
+        </div>
 
-        <div className={styles.journal}>
+        <div className={styles.technicalPosts}>
           {devPosts.slice(0, 3).map((post) => (
             <Post key={post.title} {...post} compact />
           ))}

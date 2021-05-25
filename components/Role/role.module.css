@@ -13,6 +13,10 @@
   margin-top: var(--gap-medium);
 }
 
+.image {
+  background: var(--ghost);
+}
+
 .summary {
 
   & > p {

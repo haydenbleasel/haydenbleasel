@@ -114,9 +114,10 @@ const About = () => {
             <Divider text="Work" />
 
             <p className="h3Sans">
-              I currently run <Client name="Jellypepper" /> — an award-winning
-              digital agency for bright ideas, where I manage a team of 5 and
-              typically lead the product design projects.
+              I currently run{" "}
+              <Client name="Jellypepper" link="https://jellypepper.com/" /> — an
+              award-winning digital agency for bright ideas, where I manage a
+              team of 5 and typically lead the product design projects.
             </p>
             <p className="h3Sans">
               I also work with <Client name="R/GA" /> every so often,
@@ -124,16 +125,21 @@ const About = () => {
               different international offices on amazing products and campaigns.
             </p>
             <p className="h3Sans">
-              After hours, I work on <Client name="Neutral" /> — a
+              After hours, I work on{" "}
+              <Client name="Neutral" link="https://neutral.sh/" /> — a
               climate-focused app that combines a lifestyle questionnaire with
               U.S. EPA and other data sources to calculate your CO₂e emissions,
               then helps you offset it with a reforestation program.
             </p>
             <p className="h3Sans">
-              I’m also the design half of <Client name="Tomorrow Studio" /> — a
-              tiny incubator for delightful products. We’re currently working on{" "}
-              <Client name="Bokeh" /> — a smart portfolio platform for
-              photographers.
+              I’m also the design half of{" "}
+              <Client
+                name="Tomorrow Studio"
+                link="https://tomorrowstudio.co/"
+              />{" "}
+              — a tiny incubator for delightful products. We’re currently
+              working on <Client name="Bokeh" link="https://heybokeh.com/" /> —
+              a smart portfolio platform for photographers.
             </p>
           </div>
 

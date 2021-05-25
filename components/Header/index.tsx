@@ -5,7 +5,7 @@ import Headroom from "react-headroom";
 import { Squeeze as Hamburger } from "hamburger-react";
 import useResponsive from "../../utils/responsive";
 
-import styles from "./Header.module.css";
+import styles from "./header.module.css";
 import Link from "../link";
 import Section from "../section";
 
