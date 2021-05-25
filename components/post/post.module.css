@@ -1,24 +1,29 @@
 .post {
+  transition: transform 0.2s;
 
-    & a {
-        text-decoration: none;
-        display: block;
-    }
+  & a {
+    text-decoration: none;
+    display: block;
+  }
 
-    & h2 {
-        margin: 0;
-    }
-    
-    & small {
-        margin-bottom: calc(var(--gap-small) / 2);
-        display: block;
-    }
+  & h2 {
+    margin: 0;
+  }
 
-    & p {
-        margin: calc(var(--gap-small) / 2) 0 0 0;
-    }
+  & small {
+    margin-bottom: calc(var(--gap-small) / 2);
+    display: block;
+  }
+
+  & p {
+    margin: calc(var(--gap-small) / 2) 0 0 0;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
 }
 
 .image {
-    margin-bottom: var(--gap-small);
+  margin-bottom: var(--gap-small);
 }
