@@ -66,7 +66,7 @@ const Footer = ({ socialPlatforms }: IFooter) => {
           ))}
         </div>
 
-        <div className={styles.newsletterContainer}>
+        <div className={styles.container}>
           <p>
             <span className="h1Sans">Want to chat?</span>{" "}
             <Link href="/contact">
@@ -85,7 +85,7 @@ const Footer = ({ socialPlatforms }: IFooter) => {
             className={`${styles.newsletter} ${loading ? styles.loading : ""}`}
             onSubmit={joinMailingList}
           >
-            <fieldset className={styles.newsletterFields}>
+            <fieldset className={styles.fields}>
               <label className={styles.label} htmlFor="email">
                 Email address
               </label>
@@ -101,7 +101,7 @@ const Footer = ({ socialPlatforms }: IFooter) => {
               <button
                 aria-label="Sign up"
                 type="submit"
-                className={styles.newsletterButton}
+                className={styles.button}
               >
                 &rarr;
               </button>

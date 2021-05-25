@@ -36,7 +36,7 @@
   user-select: none;
 }
 
-.newsletterContainer {
+.container {
   grid-column: 1 / 9;
   align-self: flex-end;
 
@@ -55,7 +55,7 @@
   }
 }
 
-.newsletterFields {
+.fields {
   display: flex;
   border: none;
   padding: 0;
@@ -68,7 +68,6 @@
   font-size: var(--type-scale-5);
   font-family: inherit;
   width: 100%;
-  outline: none;
   padding: 0;
 
   @media (--mobile) {
@@ -76,7 +75,7 @@
   }
 }
 
-.newsletterButton {
+.button {
   background: transparent;
   border: none;
   padding: 0;
@@ -84,7 +83,6 @@
   font-size: var(--type-scale-5);
   color: var(--black);
   font-family: inherit;
-  outline: none;
   text-align: center;
   display: block;
   cursor: pointer;
