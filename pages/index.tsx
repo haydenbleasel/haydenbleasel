@@ -28,7 +28,7 @@ const Home = ({ mediumPosts, devPosts }) => {
         <div className={styles.heroRight}>
           <p className="h1Sans">
             Hi, I’m Hayden Bleasel. I’m a digital product designer living in
-            Sydney, Australia. I currently run and lead Product Design at{" "}
+            Sydney, Australia. I currently run and lead product design at{" "}
             <Client large name="Jellypepper" link="https://jellypepper.com/" />{" "}
             &mdash; an award-winning digital agency for bright ideas.
           </p>
@@ -70,7 +70,7 @@ const Home = ({ mediumPosts, devPosts }) => {
             caption="2015"
             title="Product Design Intern at Palantir Technologies"
             link="/work#palantir"
-            description="I worked as a Product Design intern at Palantir’s Palo Alto HQ. I was part of a small team tasked with designing an anti-fraud focused pilot project which helped kickstart my career in Product Design."
+            description="I worked as a Product Design intern at Palantir’s Palo Alto HQ. I was part of a small team tasked with designing an anti-fraud focused pilot project which helped kickstart my career in product design."
           />
         </div>
 

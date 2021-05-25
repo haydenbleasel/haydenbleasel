@@ -1,5 +1,17 @@
 .hero {
     grid-column: 1 / 5;
+
+    & > section {
+        grid-template-columns: 1fr;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    & h1 {
+        grid-column: 1;
+        padding: 0;
+        margin: 0;
+    }
 }
 
 .form {

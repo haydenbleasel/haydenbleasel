@@ -87,7 +87,7 @@ const About = () => {
               from concept to launch to growth.
             </p>
             <p className="h3Sans">
-              My primary focus is Product Design for iOS, Android and Web. I’m
+              My primary focus is product design for iOS, Android and Web. I’m
               best at screen designs in the form of UI and UX; and creating,
               maintaining and growing design systems. I’m relatively good at
               branding, copywriting and a few others.

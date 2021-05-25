@@ -43,7 +43,7 @@ const Header = ({ onNavToggle }: IHeader) => {
   }
 
   return (
-    <Headroom>
+    <Headroom style={{ zIndex: 999 }}>
       <nav className={styles.container}>
         <Section>
           <header
