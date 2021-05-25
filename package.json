@@ -13,7 +13,7 @@
   "dependencies": {
     "@next/bundle-analyzer": "^10.2.2",
     "colorthief": "^2.3.2",
-    "dayjs": "^1.10.4",
+    "date-fns": "^2.21.3",
     "fathom-client": "^3.0.0",
     "formidable": "^1.2.2",
     "get-contrast": "^3.0.0",

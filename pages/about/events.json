@@ -29,12 +29,6 @@
         "year": 2019
     },
     {
-        "name": "Rebranding Your Business: The 5-Step Strategy For Success",
-        "organisation": "Paperform Blog",
-        "year": 2019,
-        "url": "https://paperform.co/blog/rebranding-strategy"
-    },
-    {
         "name": "Design stories behind our iconic startups",
         "organisation": "AcademyXi",
         "year": 2018,
@@ -50,12 +44,6 @@
         "organisation": "Sydney Designers",
         "year": 2018,
         "url": "https://www.slideshare.net/HaydenBleasel/learning-to-unlearn-how-to-design-for-disruptive-startups"
-    },
-    {
-        "name": "What do you think of the Titles in Tech Industry?",
-        "organisation": "Product Disrupt",
-        "year": 2018,
-        "url": "https://blog.productdisrupt.com/what-do-you-think-of-the-titles-in-tech-industry-e5bdcb264f9f"
     },
     {
         "name": "Talks at Spaceship x Sydney Designers (Host)",
@@ -113,17 +101,5 @@
         "organisation": "Startup Daily",
         "year": 2016,
         "url": "https://www.startupdaily.net/2016/10/sydney-startup-presumi-helps-job-seekers-see-employers-interact-resume/"
-    },
-    {
-        "name": "Hard slog and serendipity on the path to overnight success",
-        "organisation": "UTS Newsroom",
-        "year": 2016,
-        "url": "/files/presumi-uts.pdf"
-    },
-    {
-        "name": "The Entrepreneur Zone: Presumi",
-        "organisation": "Sydney Views by ICC",
-        "year": 2015,
-        "url": "/files/presumi-icc.jpg"
     }
 ]

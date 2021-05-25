@@ -1,10 +1,10 @@
 import Layout from "../../components/Layout";
 import { siteUrl } from "../../next-sitemap";
 import Link from "../../components/Link";
-
 import Section from "../../components/Section";
 import Role from "../../components/Role";
 import Title from "../../components/Title";
+import styles from './Work.module.css';
 
 const Work = () => {
   return (
@@ -21,9 +21,10 @@ const Work = () => {
 
       <Section>
         <Role
-          date="2018 — Present"
+          caption="2018 — Present"
           title="Director &amp; Lead Product Designer"
-          company="Jellypepper"
+          subtitle="Jellypepper"
+          image="/images/work/jellypepper.png"
         >
           <div>
             <p className="small">
@@ -55,9 +56,10 @@ const Work = () => {
         </Role>
 
         <Role
-          date="2016 — 2017"
+          caption="2016 — 2017"
           title="Head of Product and Design"
-          company="Spaceship"
+          subtitle="Spaceship"
+          image="/images/work/spaceship.png"
         >
           <div>
             <p className="small">
@@ -95,7 +97,12 @@ const Work = () => {
           </div>
         </Role>
 
-        <Role date="2015" title="Product Design Intern" company="Palantir">
+        <Role
+          caption="2015"
+          title="Product Design Intern"
+          subtitle="Palantir"
+          image="/images/work/palantir.png"
+        >
           <div>
             <p className="small">
               For a few months in late 2015, I worked as a Product Design intern
@@ -142,7 +149,12 @@ const Work = () => {
           </div>
         </Role>
 
-        <Role date="2014 — 2015" title="Front-End Developer" company="Sumry">
+        <Role
+          caption="2014 — 2015"
+          title="Product Designer &amp; Front-End Developer"
+          subtitle="Sumry"
+          image="/images/work/sumry.png"
+        >
           <div>
             <p className="small">
               Sumry is help you land your dream job by interweaving your unique
@@ -178,6 +190,11 @@ const Work = () => {
             </p>
           </div>
         </Role>
+        <div className={styles.outlink}>
+          <Link href="https://www.linkedin.com/in/haydenbleasel">
+            View more work on LinkedIn &rarr;
+          </Link>
+        </div>
       </Section>
     </Layout>
   );

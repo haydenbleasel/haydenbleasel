@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Headroom from "react-headroom";
@@ -17,28 +17,26 @@ type HeaderProps = {
 };
 
 const Header = ({ onNavToggle }: HeaderProps) => {
-  const [menuActive, setMenuActive] = useState(false);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const router = useRouter();
   const { isTablet } = useResponsive();
 
-  function toggleMenuActive(active) {
-    setMenuActive(active);
+  function toggleMenuOpen(open: SetStateAction<boolean>) {
+    setMenuOpen(open);
     isTablet && onNavToggle();
   }
 
   function NavItem(route: string) {
     let url = `/${route.toLowerCase()}`;
 
-    if (url === '/home') {
-      url = '/';
+    if (url === "/home") {
+      url = "/";
     }
 
     return (
       <li
         key={route}
-        className={`small ${
-          router.pathname == url ? styles.active : ""
-        }`}
+        className={`small ${router.pathname == url ? styles.active : ""}`}
       >
         <Link href={url}>{route}</Link>
       </li>
@@ -48,32 +46,32 @@ const Header = ({ onNavToggle }: HeaderProps) => {
   return (
     <Headroom>
       <Fade triggerOnce>
-        <nav className={styles.navContainer}>
+        <nav className={styles.container}>
           <Section>
             <header
-              className={`container ${styles.nav} ${
-                menuActive ? styles.active : ""
+              className={`${styles.nav} ${
+                menuOpen ? styles.open : ""
               }`}
             >
-              <Link href="/">
-                <Image
-                  src="/images/logo.svg"
-                  alt="Hayden Bleasel"
-                  layout="fixed"
-                  width={54}
-                  height={16}
-                />
-              </Link>
+              <div className={styles.logo}>
+                <Link href="/">
+                  <Image
+                    src="/images/logo.svg"
+                    alt="Hayden Bleasel"
+                    layout="fixed"
+                    width={54}
+                    height={16}
+                  />
+                </Link>
+              </div>
               <div className={styles.menu}>
-                <ul className={styles.sitemap}>
-                  {routes.map(NavItem)}
-                </ul>
+                <ul className={styles.sitemap}>{routes.map(NavItem)}</ul>
                 {isTablet && (
-                  <div className={styles.hamburgerContainer}>
+                  <div className={styles.hamburger}>
                     <Hamburger
                       size={20}
-                      toggled={menuActive}
-                      toggle={toggleMenuActive}
+                      toggled={menuOpen}
+                      toggle={toggleMenuOpen}
                       color="var(--black)"
                       label="Show menu"
                     />

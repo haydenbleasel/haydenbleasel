@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import { siteUrl } from "../../next-sitemap";
 
 import Section from "../../components/Section";
-import Project from "../../components/Project";
+import Role from "../../components/Role";
 import Title from "../../components/Title";
 
 const Projects = () => {
@@ -19,11 +19,12 @@ const Projects = () => {
       <Title sans="Projects" serif="&amp; Apps" />
 
       <Section>
-        <Project
-          date="2018 — Present"
-          name="Neutral"
-          role="Maker"
+        <Role
+          caption="Currently growing"
+          title="Neutral"
+          subtitle="Maker"
           link="https://neutral.sh/"
+          image="/images/projects/neutral.png"
         >
           <div>
             <p className="small">
@@ -51,13 +52,14 @@ const Projects = () => {
             </p>
             <p className="small">It’s just the beginning.</p>
           </div>
-        </Project>
+        </Role>
 
-        <Project
-          date="2016 — 2017"
-          name="Bokeh"
-          role="Designer"
+        <Role
+          caption="Currently designing"
+          title="Bokeh"
+          subtitle="Designer"
           link="https://www.heybokeh.com/"
+          image="/images/projects/bokeh.png"
         >
           <div>
             <p className="small">
@@ -72,13 +74,14 @@ const Projects = () => {
               newest designs on Dribbble.
             </p>
           </div>
-        </Project>
+        </Role>
 
-        <Project
-          date="2014 — 2015"
-          name="Presumi"
-          role="Maker"
+        <Role
+          caption="Shut down"
+          title="Presumi"
+          subtitle="Maker"
           link="/journal/presumi"
+          image="/images/projects/presumi.png"
         >
           <div>
             <p className="small">
@@ -112,7 +115,7 @@ const Projects = () => {
               algorithm built in Node.js.
             </p>
           </div>
-        </Project>
+        </Role>
       </Section>
     </Layout>
   );

@@ -1,43 +1,49 @@
-import Image from 'next/image';
-import Link from '../Link';
-
-import styles from './Post.module.css';
+import Image from "next/image";
+import Link from "../Link";
+import styles from "./Post.module.css";
 
 type PostProps = {
-    image: string,
-    title: string,
-    description: string,
-    caption: string,
-    id: string,
-    featured: boolean,
-}
+  image?: string;
+  title: string;
+  description?: string;
+  caption?: string;
+  link: string;
+  featured?: boolean;
+  focus?: string;
+  compact?: boolean;
+};
 
 const Post = ({
   image,
   title,
   description,
   caption,
-  id,
+  link,
   featured = false,
+  compact = false,
+  focus,
 }: PostProps) => (
   <div className={styles.post}>
-    <Link href={`/journal/${id}`}>
-      <div className={`${styles.image} grow`}>
-        <Image
-          layout="responsive"
-          height={featured ? 540 : 306}
-          width={featured ? 858 : 403}
-          alt={title}
-          src={image}
-          quality={100}
-          objectFit="cover"
-          loading={featured ? "eager" : "lazy"}
-        />
-      </div>
+    <Link href={link}>
+      {!!image && !compact && (
+        <div className={styles.image}>
+          <Image
+            layout="responsive"
+            width={1128}
+            height={600}
+            alt={title}
+            src={image}
+            quality={100}
+            objectFit="cover"
+            loading={featured ? "eager" : "lazy"}
+            objectPosition={focus}
+          />
+        </div>
+      )}
       <div className={styles.meta}>
-        <h2 className={styles.title}>{title}</h2>
-        <p className={styles.description}>{description}</p>
-        <small className={styles.caption}>{caption}</small>
+        {!!caption && <small className="small grey">{caption}</small>}
+        <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
+        {!!description && !compact && <p className="paragraphSans grey">{description}</p>}
       </div>
     </Link>
   </div>

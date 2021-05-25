@@ -4,16 +4,16 @@ import Parser from "rss-parser";
 import { JSDOM } from "jsdom";
 import useResponsive from "../../utils/responsive";
 import { useRouter } from "next/router";
+import { parseISO, format } from 'date-fns';
 import { Fade } from "react-awesome-reveal";
 import Image from "next/image";
-import slugify from "slugify";
-import dayjs from "dayjs";
 import mediumZoom from "medium-zoom";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css";
 import Layout from "../../components/Layout";
 
 import styles from "./Article.module.css";
+import slug from "../../utils/slug";
 
 type Post = {
   title: string;
@@ -74,7 +74,7 @@ const Article = ({ post }: ArticleProps) => {
       <small className={styles.date}>
         <span>Published </span>
         <time dateTime={post.date}>
-          {dayjs(post.date).format("MMMM D, YYYY")}
+          {format(parseISO(post.date), "MMMM d, yyyy")}
         </time>
       </small>
 
@@ -114,10 +114,7 @@ export async function getStaticProps({ params }) {
   const posts = items.filter(
     ({ title }) =>
       id ===
-      slugify(title as string, {
-        lower: true,
-        strict: true,
-      })
+      slug(title!)
   );
 
   if (!posts.length) {
@@ -170,10 +167,7 @@ export async function getStaticProps({ params }) {
     props: {
       post: {
         title: post.title,
-        id: slugify(post.title as string, {
-          lower: true,
-          strict: true,
-        }),
+        id: slug(post.title!),
         date: post.isoDate,
         content: dom.window.document.querySelector("body").innerHTML,
         summary,
@@ -193,10 +187,7 @@ export async function getStaticPaths() {
 
   const paths = items.map((item) => ({
     params: {
-      id: slugify(item.title as string, {
-        lower: true,
-        strict: true,
-      }),
+      id: slug(item.title!),
     },
   }));
 

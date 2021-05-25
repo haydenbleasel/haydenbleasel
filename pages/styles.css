@@ -77,6 +77,10 @@ body {
   margin: 0;
 }
 
+a {
+  color: inherit;
+}
+
 .titleSans {
   font-family: var(--type-family-sans);
   font-style: normal;

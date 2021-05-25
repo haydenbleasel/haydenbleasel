@@ -3,15 +3,15 @@ import styles from "./Client.module.css";
 
 type ClientProps = {
   name: string;
-  size?: number;
+  large?: boolean;
 };
 
-const Client = ({ name, size = 24 }: ClientProps) => (
-  <span className={styles.client}>
+const Client = ({ name, large = false }: ClientProps) => (
+  <span className={`${styles.client} ${large ? styles.large :''}`}>
     <Image
       layout="fixed"
-      height={size}
-      width={size}
+      height={large ? 32 : 24}
+      width={large ? 32 : 24}
       alt={name}
       src={`/images/companies/${name.replace(' ', '').replace('/', '').toLowerCase()}.svg`}
       quality={100}

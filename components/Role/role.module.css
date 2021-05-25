@@ -1,5 +1,9 @@
 .role {
   grid-column: 1 / 13;
+
+  & + .role {
+    margin-top: var(--gap-large);
+  }
 }
 
 .meta {
@@ -7,4 +11,20 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap-medium);
   margin-top: var(--gap-medium);
+}
+
+.summary {
+
+  & > p {
+    margin: 0;
+  }
+
+  & > h2 {
+    margin: 1.5rem 0 0;
+  }
+
+  & > a {
+    margin-top: 1.5rem;
+    display: block;
+  }
 }

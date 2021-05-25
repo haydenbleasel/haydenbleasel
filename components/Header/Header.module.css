@@ -1,4 +1,4 @@
-.navContainer {
+.container {
     z-index: 999;
     background: var(--white);
     border-bottom: 1px solid var(--divider);
@@ -21,12 +21,16 @@
     align-items: center;
 }
 
+.logo, .logo :global(a) {
+    display: inline-flex;
+}
+
 .sitemap {
-    margin: 0 2rem 0 0;
+    margin: 0;
+    padding: 0;
     transition: opacity 0.2s;
     display: flex;
     list-style: none;
-    padding: 0;
     align-items: center;
 
     & li:last-of-type a {
@@ -82,4 +86,9 @@
         align-items: center;
         justify-content: center;
     }
+}
+
+.hamburger {
+    padding: 0.85rem;
+    margin-right: -0.85rem;
 }

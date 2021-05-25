@@ -1,0 +1,8 @@
+.outlink {
+  grid-column: 1 / 13;
+  margin-top: var(--gap-large);
+  
+  & :global(a) {
+    font-size: var(--type-scale-4);
+  }
+}

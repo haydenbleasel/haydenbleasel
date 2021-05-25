@@ -1,14 +1,16 @@
+import { useState } from "react";
 import { Fade } from "react-awesome-reveal";
 import styles from "./About.module.css";
 import Layout from "../../components/Layout";
-import eventsList from "./events.json";
-import workList from "./work.json";
 import { siteUrl } from "../../next-sitemap";
 import Section from "../../components/Section";
 import Link from "../../components/Link";
 import Client from "../../components/Client";
 import Title from "../../components/Title";
-import { useState } from "react";
+import Divider from "../../components/Divider";
+import events from "./events.json";
+import work from "./work.json";
+import interviews from "./interviews.json";
 
 type IEvent = {
   name: string;
@@ -61,7 +63,8 @@ const Role = ({ role, company, start, end, url }: IRole, index) => (
 const About = () => {
   const [rolesExpanded, setRolesExpanded] = useState(false);
   const [eventsExpanded, setEventsExpanded] = useState(false);
-  
+  const [interviewsExpanded, setInterviewsExpanded] = useState(false);
+
   return (
     <Layout
       title="About"
@@ -77,7 +80,8 @@ const About = () => {
       <Section>
         <div className={styles.bio}>
           <div>
-            <h2 className="paragraphSans">Introduction</h2>
+            <Divider text="Introduction" />
+
             <p className="h3Sans">
               Hi, I’m Hayden Bleasel. I’m a digital product designer living in
               Sydney, Australia. I enjoy reducing complex problems into
@@ -115,13 +119,17 @@ const About = () => {
           </div>
 
           <div>
-            <h2 className="paragraphSans">Work</h2>
+            <Divider text="Work" />
+
             <p className="h3Sans">
               I currently run <Client name="Jellypepper" /> — an award-winning
-              digital agency for bright ideas. I also work with{" "}
-              <Client name="R/GA" /> every so often, collaborating with their
-              strategy and design teams across different international offices
-              on amazing products and campaigns.
+              digital agency for bright ideas, where I manage a team of 5 and
+              typically lead the product design projects.
+            </p>
+            <p className="h3Sans">
+              I also work with <Client name="R/GA" /> every so often,
+              collaborating with their strategy and design teams across
+              different international offices on amazing products and campaigns.
             </p>
             <p className="h3Sans">
               After hours, I work on <Client name="Neutral" /> — a
@@ -138,7 +146,8 @@ const About = () => {
           </div>
 
           <div>
-            <h2 className="paragraphSans">Tools</h2>
+            <Divider text="Tools" />
+
             <p className="h3Sans">
               My design tool of choice for anything is typically Figma - it’s
               brilliant at handling the wireframing, ideating, designing and
@@ -153,7 +162,8 @@ const About = () => {
           </div>
 
           <div>
-            <h2 className="paragraphSans">Life</h2>
+            <Divider text="Life" />
+
             <p className="h3Sans">
               In 2016, I graduated from UTS with two Bachelors degrees —
               Business (Management) and Information Technology (Enterprise
@@ -167,23 +177,73 @@ const About = () => {
               </Link>
               , play video games, make apps and learn new things.
             </p>
+            <p className="h3Sans">
+              I also{" "}
+              <Link href="https://www.meetup.com/en-AU/sydney-designers/">
+                started a design meetup
+              </Link>{" "}
+              and used to work on{" "}
+              <Link href="https://www.npmjs.com/package/favicons">
+                open-source software
+              </Link>
+              .
+            </p>
           </div>
         </div>
         <div className={styles.sidebar}>
           <div>
-            <h2 className="paragraphSans">Work</h2>
-            <ul className={`${styles.list} ${rolesExpanded ? styles.expanded : ''}`}>{workList.map(Role)}</ul>
+            <Divider text="Work" />
+
+            <ul
+              className={`${styles.list} ${
+                rolesExpanded ? styles.expanded : ""
+              }`}
+            >
+              {work.map(Role)}
+            </ul>
             {!rolesExpanded && (
-              <p className={`small underline grey ${styles.expand}`} onClick={() => setRolesExpanded(true)}>
+              <p
+                className={`small underline grey ${styles.expand}`}
+                onClick={() => setRolesExpanded(true)}
+              >
                 Show more
               </p>
             )}
           </div>
           <div>
-            <h2 className="paragraphSans">Speaking Events</h2>
-            <ul className={`${styles.list} ${eventsExpanded ? styles.expanded : ''}`}>{eventsList.map(Event)}</ul>
+            <Divider text="Speaking Events" />
+
+            <ul
+              className={`${styles.list} ${
+                eventsExpanded ? styles.expanded : ""
+              }`}
+            >
+              {events.map(Event)}
+            </ul>
             {!eventsExpanded && (
-              <p className={`small underline grey ${styles.expand}`} onClick={() => setEventsExpanded(true)}>
+              <p
+                className={`small underline grey ${styles.expand}`}
+                onClick={() => setEventsExpanded(true)}
+              >
+                Show more
+              </p>
+            )}
+          </div>
+          <div>
+            <Divider text="Interviews &amp; Features" />
+
+            <ul
+              className={`${styles.list} ${
+                interviewsExpanded ? styles.expanded : ""
+              }`}
+            >
+              {interviews.map(Event)}
+            </ul>
+            {!interviewsExpanded && (
+              <p
+                className={`small underline grey ${styles.expand}`}
+                onClick={() => setInterviewsExpanded(true)}
+              >
                 Show more
               </p>
             )}
@@ -192,6 +252,6 @@ const About = () => {
       </Section>
     </Layout>
   );
-}
+};
 
 export default About;

@@ -15,10 +15,6 @@
     & :global(p):first-of-type {
         margin-top: 0;
     }
-
-    & :global(a) {
-        color: inherit;
-    }
 }
 
 .work, .project {
@@ -44,4 +40,9 @@
     &:nth-of-type(3) {
         grid-column: 10 / 13;
     }
+}
+
+.asterisk > div {
+    width: var(--type-scale-5) !important;
+    height: var(--type-scale-5) !important;
 }
