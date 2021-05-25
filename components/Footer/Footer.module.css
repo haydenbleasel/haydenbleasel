@@ -10,6 +10,10 @@
         height: 100vh;
         justify-content: space-between;
     }
+
+    & :global(a) {
+        text-decoration: none;
+    }
 }
 
 .label {

@@ -75,6 +75,7 @@ const Footer = ({ socialPlatforms }) => {
             <span className="h1Sans">Want to chat?</span>{" "}
             <Link href="/contact">
               <span className="h1Serif underline">Get in touch.</span>
+              <span className="h1Serif">&rarr;</span>
             </Link>
           </p>
 

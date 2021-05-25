@@ -4,5 +4,6 @@
   
   & :global(a) {
     font-size: var(--type-scale-4);
+    text-decoration: none;
   }
 }

@@ -3,6 +3,14 @@
     background: var(--white);
     border-bottom: 1px solid var(--divider);
 
+    &::before {
+        background: linear-gradient(90deg, #C9D2F0 0%, #FFE7BF 100%);
+        height: 0.5rem;
+        display: block;
+        content: "";
+        width: 100%;
+    }
+
     & > section {
         padding-top: 0;
         padding-bottom: 0;

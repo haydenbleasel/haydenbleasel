@@ -42,7 +42,9 @@ const Home = ({ mediumPosts, devPosts }) => {
             <Client large name="Canva" /> and <Client large name="Spaceship" />.
           </p>
           <p className="h1Sans">
-            <Link href="/about">Keep reading →</Link>
+            <Link href="/about">
+              <span className="underline">Keep reading</span> →
+            </Link>
           </p>
         </div>
       </Section>
