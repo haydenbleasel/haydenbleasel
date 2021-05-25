@@ -54,24 +54,28 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
           href="/fonts/lausanne/TWKLausanne-300.woff"
           as="font"
           type="font/woff"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/fonts/lausanne/TWKLausanne-300.woff2"
           as="font"
           type="font/woff2"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/fonts/gtsuper/GT-Super-Display-Light-Italic.woff"
           as="font"
           type="font/woff"
+          crossOrigin="anonymous"
         />
         <link
           rel="preload"
           href="/fonts/gtsuper/GT-Super-Display-Light-Italic.woff2"
           as="font"
           type="font/woff2"
+          crossOrigin="anonymous"
         />
       </Head>
       <Component {...pageProps} />
