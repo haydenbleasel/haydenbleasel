@@ -1,22 +1,22 @@
 .client {
-    display: inline-flex;
-    align-items: baseline;
+  display: inline-flex;
+  align-items: baseline;
 
-    & .image {
-        width: var(--type-scale-1);
-        height: var(--type-scale-1);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+  & .image {
+    width: var(--type-scale-1);
+    height: var(--type-scale-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    &.large > .image {
-        width: var(--type-scale-3);
-        height: var(--type-scale-3);
-    }
+  &.large > .image {
+    width: var(--type-scale-3);
+    height: var(--type-scale-3);
+  }
 
-    & > span {
-        margin-left: 0.5rem;
-        text-decoration: underline;
-    }
+  & > span {
+    margin-left: 0.5rem;
+    text-decoration: underline;
+  }
 }
