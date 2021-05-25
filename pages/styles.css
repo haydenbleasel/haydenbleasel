@@ -217,9 +217,3 @@ a {
 .grey {
   color: var(--grey);
 }
-
-svg * {
-  @media (--darkMode) {
-    fill: var(--black);
-  }
-}

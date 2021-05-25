@@ -1,6 +1,5 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from 'react';
-import { Notyf } from "notyf";
 import Layout from "../../components/layout";
 
 import styles from "./contact.module.css";
@@ -18,7 +17,6 @@ const Contact = () => {
     event.preventDefault();
 
     setLoading(true);
-    const notyf = new Notyf();
 
     try {
       const formData = new FormData();
@@ -56,17 +54,9 @@ const Contact = () => {
         throw new Error(data.message);
       }
 
-      notyf.success({
-        message: "Thanks, choom. I'll be in touch soon!",
-        duration: 5000,
-        icon: false,
-      });
+      window.alert("Thanks, choom! I'll be in touch soon!");
     } catch (error: any) {
-      notyf.error({
-        message: error.message,
-        duration: 5000,
-        icon: false,
-      });
+      window.alert(error.message);
     } finally {
       setLoading(false);
     }

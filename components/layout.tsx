@@ -5,8 +5,6 @@ import { siteUrl } from '../next-sitemap';
 import Header from './header';
 import Footer from './footer';
 
-import 'notyf/notyf.min.css';
-
 type LayoutProps = {
   children?: any;
   title?: string,

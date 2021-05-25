@@ -18,7 +18,7 @@ const Home = ({ mediumPosts, devPosts }) => {
         <div className={styles.heroLeft}>
           <div className={styles.asterisk}>
             <Image
-              src="/images/asterisk.svg"
+              src="/images/home/asterisk.svg"
               layout="fixed"
               width={48}
               height={48}

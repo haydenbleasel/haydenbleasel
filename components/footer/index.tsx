@@ -1,7 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import Image from "next/image";
-import { Notyf } from "notyf";
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
@@ -22,8 +21,6 @@ const Footer = ({ socialPlatforms }: IFooter) => {
     event.preventDefault();
     setLoading(true);
 
-    const notyf = new Notyf();
-
     try {
       const response = await fetch("/api/revue", {
         method: "post",
@@ -36,20 +33,10 @@ const Footer = ({ socialPlatforms }: IFooter) => {
         throw new Error();
       }
 
-      notyf.success({
-        message:
-          "Thanks, choom. I'll let you know when I release something cool.",
-        duration: 5000,
-        icon: false,
-      });
-
+      window.alert("Thanks, choom! I'll let you know when I release something cool.");
       setEmail("");
     } catch (error: any) {
-      notyf.error({
-        message: "Sorry, something went wrong.",
-        duration: 5000,
-        icon: false,
-      });
+      window.alert("Sorry, something went wrong! Try again later, hopefully I've fixed it");
     } finally {
       setLoading(false);
     }
