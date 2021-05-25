@@ -3,10 +3,18 @@
     margin-bottom: 1.5rem;
     padding-bottom: 1.5rem;
     grid-column: 1 / 13;
+
+    @media (--laptop) {
+        grid-column: 1;
+    }
 }
 
 .heroLeft {
     grid-column: 1 / 3;
+
+    @media (--laptop) {
+        grid-column: 1;
+    }
 }
 
 .heroRight {
@@ -19,15 +27,25 @@
     & :global(a) {
         text-decoration: none;
     }
+
+    @media (--laptop) {
+        grid-column: 1;
+    }
 }
 
 .work, .project {
     &:nth-of-type(1) {
         grid-column: 1 / 7;
+        @media (--laptop) {
+            grid-column: 1;
+        }
     }
 
     &:nth-of-type(2) {
         grid-column: 7 / 13;
+        @media (--laptop) {
+            grid-column: 1;
+        }
     }
 }
 
@@ -41,6 +59,11 @@
     & > div:first-of-type:last-of-type {
         grid-column: 1 / 3;
     }
+
+    @media (--laptop) {
+        grid-column: 1;
+        grid-template-columns: 1fr;
+    }
 }
 
 .technicalPosts {
@@ -48,6 +71,10 @@
     display: grid;
     gap: var(--gap-small);
     align-self: flex-start;
+
+    @media (--laptop) {
+        grid-column: 1;
+    }
 }
 
 .asterisk > div {

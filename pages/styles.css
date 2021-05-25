@@ -24,9 +24,9 @@
 
 :root {
   --gap-small: 2vw;
-  --gap-medium: 4vw;
-  --gap-large: 6vw;
-  --gap-huge: 12vw;
+  --gap-medium: calc(var(--gap-small) * 2);
+  --gap-large: calc(var(--gap-small) * 3);
+  --gap-huge: calc(var(--gap-small) * 6);
 
   --white: #ffffff;
   --black: #1d1d1d;
@@ -55,6 +55,7 @@
 
   @media (--desktopLarge) {
     --type-scale-1: 18px;
+    --gap-small: calc(var(--type-scale-1) * 2);
   }
 }
 

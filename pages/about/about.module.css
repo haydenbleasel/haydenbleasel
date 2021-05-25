@@ -4,6 +4,10 @@
     & > div + div {
         margin-top: var(--gap-large);
     }
+
+    @media (--laptop) {
+        grid-column: 1;
+    }
 }
 
 .sidebar {
@@ -11,6 +15,10 @@
 
     & > div {
         margin-bottom: var(--gap-large);
+    }
+
+    @media (--laptop) {
+        grid-column: 1;
     }
 }
 

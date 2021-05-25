@@ -3,6 +3,14 @@
 
   & + .role {
     margin-top: var(--gap-large);
+
+    @media (--laptop) {
+      margin-top: 0;
+    }
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
   }
 }
 
@@ -11,6 +19,12 @@
   grid-template-columns: repeat(3, 1fr);
   gap: var(--gap-medium);
   margin-top: var(--gap-medium);
+
+  @media (--laptop) {
+    grid-template-columns: 1fr;
+    gap: var(--gap-small);
+    margin-top: var(--gap-small);
+  }
 }
 
 .image {

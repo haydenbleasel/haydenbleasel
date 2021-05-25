@@ -24,6 +24,10 @@
     margin-bottom: var(--section-gap);
     transition: opacity 0.2s;
     grid-column: 1 / 8;
+
+    @media (--laptop) {
+        grid-column: 1;
+    }
 }
 
 .newsletter.loading {
@@ -38,6 +42,10 @@
 
     & :global(a) {
         text-decoration: none;
+    }
+    
+    @media (--laptop) {
+        grid-column: 1;
     }
 }
 
@@ -77,6 +85,10 @@
         justify-content: left;
         margin-left: -1rem;
         margin-right: -1rem;
+    }
+
+    @media (--laptop) {
+        grid-column: 1;
     }
 }
 

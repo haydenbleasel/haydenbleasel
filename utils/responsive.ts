@@ -9,6 +9,9 @@ const breakpoints = {
   desktopLarge: "1440px",
 };
 
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 function useResponsive() {
   const [isClient, setIsClient] = useState(false);
 
@@ -31,9 +34,6 @@ function useResponsive() {
   const isDesktopLarge = useMediaQuery({
     maxWidth: breakpoints.desktopLarge,
   });
-
-  const useIsomorphicLayoutEffect =
-    typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
   useIsomorphicLayoutEffect(() => {
     if (typeof window !== "undefined") setIsClient(true);

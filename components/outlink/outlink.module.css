@@ -6,4 +6,8 @@
     font-size: var(--type-scale-4);
     text-decoration: none;
   }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
 }
