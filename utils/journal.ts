@@ -47,8 +47,6 @@ export async function getMediumPosts() {
     "https://medium.com/feed/@haydenbleasel"
   );
 
-  console.log(items[0]);
-
   const posts = (items as IMediumPost[]).map((item) => {
     const content = item["content:encoded"];
     const dom = new JSDOM(content);

@@ -24,11 +24,10 @@ type IRole = {
   company: string;
   start: string;
   end: string;
-  url: string;
 };
 
 const Event = ({ url, name, organisation, year }: IEvent, index) => (
-  <Fade triggerOnce delay={Math.min(index * 50, 500)}>
+  <Fade key={name} triggerOnce delay={Math.min(index * 50, 500)}>
     <li>
       <p className={`${styles.eventDetails} small grey`}>
         {organisation}, {year}
@@ -44,18 +43,16 @@ const Event = ({ url, name, organisation, year }: IEvent, index) => (
   </Fade>
 );
 
-const Role = ({ role, company, start, end, url }: IRole, index) => (
-  <Fade triggerOnce delay={Math.min(index * 50, 500)}>
-    <li id={company}>
-      <a className={styles.eventLink} href={url} target="noopener noreferrer">
-        <small className="small grey">
-          {start} &mdash; {end}
-        </small>
-        <p className={styles.roleDetails}>
-          <span className="paragraphSans">{role},</span>
-          <span className="paragraphSerif"> {company}</span>
-        </p>
-      </a>
+const Role = ({ role, company, start, end }: IRole, index) => (
+  <Fade key={role} triggerOnce delay={Math.min(index * 50, 500)}>
+    <li id={company} className={styles.eventLink}>
+      <small className="small grey">
+        {start} &mdash; {end}
+      </small>
+      <p className={styles.roleDetails}>
+        <span className="paragraphSans">{role},</span>
+        <span className="paragraphSerif"> {company}</span>
+      </p>
     </li>
   </Fade>
 );

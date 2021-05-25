@@ -35,7 +35,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
 
         <div className={styles.posts}>
           {mediumPosts.map((post, index) => (
-            <div className={styles.post} key={post.link}>
+            <div className={styles.post} key={post.title}>
               <Fade triggerOnce delay={800}>
                 <Post {...post} featured={index === 0} />
               </Fade>
@@ -47,7 +47,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
         <Divider text="Technical" />
 
         {devPosts.map((post) => (
-          <div className={styles.post} key={post.link}>
+          <div className={styles.post} key={post.title}>
             <Fade triggerOnce delay={800}>
               <Post {...post} compact />
             </Fade>

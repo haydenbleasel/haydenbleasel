@@ -79,14 +79,14 @@ const Home = ({ mediumPosts, devPosts }) => {
         </h2>
 
         {mediumPosts.slice(0, 2).map((post) => (
-          <div className={styles.journal}>
+          <div className={styles.journal} key={post.title}>
             <Post {...post} />
           </div>
         ))}
 
         <div className={styles.journal}>
           {devPosts.slice(0, 3).map((post) => (
-            <Post {...post} compact />
+            <Post key={post.title} {...post} compact />
           ))}
         </div>
       </Section>
