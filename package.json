@@ -11,18 +11,18 @@
     "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
-    "@next/bundle-analyzer": "^10.2.2",
+    "@next/bundle-analyzer": "^10.2.3",
     "date-fns": "^2.21.3",
     "fathom-client": "^3.0.0",
     "formidable": "^1.2.2",
     "hamburger-react": "^2.4.1",
     "jsdom": "^16.6.0",
-    "next": "^10.2.2",
+    "next": "^10.2.3",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.2.21",
     "next-secure-headers": "^2.2.0",
     "next-seo": "^4.24.0",
-    "next-sitemap": "^1.6.57",
+    "next-sitemap": "^1.6.78",
     "nodemailer": "^6.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -31,7 +31,7 @@
     "rss-parser": "^3.12.0"
   },
   "devDependencies": {
-    "@types/node": "^15.6.0",
+    "@types/node": "^15.6.1",
     "@types/react": "^17.0.6",
     "@types/react-dom": "^17.0.5",
     "postcss-flexbugs-fixes": "^5.0.2",
