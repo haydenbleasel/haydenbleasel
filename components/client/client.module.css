@@ -5,6 +5,10 @@
   & > div {
     width: var(--type-scale-1) !important;
     height: var(--type-scale-1) !important;
+
+    @media (--darkMode) {
+      filter: brightness(100);
+    }
   }
 
   &.large > div {
