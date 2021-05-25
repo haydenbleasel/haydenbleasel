@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "../link";
+import Skeleton from "../skeleton";
 import styles from "./post.module.css";
 
 type PostProps = {
@@ -27,23 +28,27 @@ const Post = ({
     <Link href={link}>
       {!!image && !compact && (
         <div className={styles.image}>
-          <Image
-            layout="responsive"
-            width={1128}
-            height={600}
-            alt={title}
-            src={image}
-            quality={100}
-            objectFit="cover"
-            loading={featured ? "eager" : "lazy"}
-            objectPosition={focus}
-          />
+          <Skeleton>
+            <Image
+              layout="responsive"
+              width={1128}
+              height={600}
+              alt={title}
+              src={image}
+              quality={100}
+              objectFit="cover"
+              loading={featured ? "eager" : "lazy"}
+              objectPosition={focus}
+            />
+          </Skeleton>
         </div>
       )}
       <div className={styles.meta}>
         {!!caption && <small className="small grey">{caption}</small>}
         <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
-        {!!description && !compact && <p className="paragraphSans grey">{description}</p>}
+        {!!description && !compact && (
+          <p className="paragraphSans grey">{description}</p>
+        )}
       </div>
     </Link>
   </div>
