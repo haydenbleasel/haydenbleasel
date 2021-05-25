@@ -33,8 +33,16 @@
     align-items: center;
 }
 
-.logo, .logo :global(a) {
+.logo {
     display: inline-flex;
+}
+
+.logo :global(a) {
+    display: inline-flex;
+    height: 3rem;
+    width: 3rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .sitemap {
