@@ -67,6 +67,7 @@
 
         @media (--tablet) {
             margin: 0.5rem 0;
+            font-size: var(--type-scale-3);
         }
     }
 
@@ -83,6 +84,10 @@
         display: block;
         position: absolute;
         bottom: -1.1rem;
+
+        @media (--tablet) {
+            bottom: 0;
+        }
     }
 
     @media (--tablet) {
@@ -106,4 +111,10 @@
 .hamburger {
     padding: 0.85rem;
     margin-right: -0.85rem;
+}
+
+.open .sitemap {
+    opacity: 1;
+    user-select: initial;
+    pointer-events: initial;
 }

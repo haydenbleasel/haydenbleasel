@@ -63,6 +63,10 @@
     font-family: inherit;
     width: 100%;
     outline: none;
+
+    @media (--mobile) {
+        font-size: var(--type-scale-3);
+    }
 }
 
 .newsletterButton {
@@ -73,6 +77,10 @@
     font-size: var(--type-scale-5);
     font-family: inherit;
     outline: none;
+
+    @media (--mobile) {
+        font-size: var(--type-scale-3);
+    }
 }
 
 .social {

@@ -16,7 +16,7 @@
   font-display: swap;
 }
 
-@custom-media --small (max-width: 576px);
+@custom-media --mobile (max-width: 576px);
 @custom-media --tablet (max-width: 768px);
 @custom-media --laptop (max-width: 992px);
 @custom-media --desktop (max-width: 1200px);
@@ -35,14 +35,16 @@
   --divider: #dddddd;
   --ghost: #fafafa;
 
-  --type-scale-1: 1.25vw;
-  --type-scale-2: calc(var(--type-scale-1) * 1.25);
-  --type-scale-3: calc(var(--type-scale-2) * 1.25);
-  --type-scale-4: calc(var(--type-scale-3) * 1.25);
-  --type-scale-5: calc(var(--type-scale-4) * 1.25);
-  --type-scale-6: calc(var(--type-scale-5) * 1.25);
+  --type-scale-multiplier: 1.25;
 
-  --type-scale-0: calc(var(--type-scale-1) / 1.25);
+  --type-scale-1: calc(1vw * var(--type-scale-multiplier));
+  --type-scale-2: calc(var(--type-scale-1) * var(--type-scale-multiplier));
+  --type-scale-3: calc(var(--type-scale-2) * var(--type-scale-multiplier));
+  --type-scale-4: calc(var(--type-scale-3) * var(--type-scale-multiplier));
+  --type-scale-5: calc(var(--type-scale-4) * var(--type-scale-multiplier));
+  --type-scale-6: calc(var(--type-scale-5) * var(--type-scale-multiplier));
+
+  --type-scale-0: calc(var(--type-scale-1) / var(--type-scale-multiplier));
   --type-family-sans: "haydenbleasel-lausanne", Arial, Helvetica, sans-serif;
   --type-family-serif: "haydenbleasel-gtsuper", serif;
 
@@ -56,6 +58,11 @@
   @media (--desktopLarge) {
     --type-scale-1: 18px;
     --gap-small: calc(var(--type-scale-1) * 2);
+  }
+
+  @media (--mobile) {
+    --type-scale-1: 16px;
+    --type-scale-multiplier: 1.125;
   }
 }
 

@@ -46,6 +46,8 @@ const Layout = ({
   
   useEffect(() => {
     document.body.style.overflow = bodyFixed ? 'hidden' : 'unset';
+    document.body.style.position = bodyFixed ? "fixed" : "unset";
+    document.body.style.width = bodyFixed ? "100vw" : "unset";
   }, [bodyFixed]);
 
   return (
