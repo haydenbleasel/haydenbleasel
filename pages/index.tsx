@@ -34,13 +34,11 @@ const Home = ({ mediumPosts, devPosts }) => {
           <p className="h1Sans">
             I’ve had the privilege of working with many fantastic companies
             including <Client large name="Google" />,{" "}
-            <Client large name="Palantir" />,{" "}
-            <Client large name="Nike" />, <Client large name="Toyota" />
+            <Client large name="Palantir" />, <Client large name="Nike" />,{" "}
+            <Client large name="Toyota" />
             , <Client large name="National Geographic" />,{" "}
-            <Client large name="Westfield" />,{" "}
-            <Client large name="Square" />,{" "}
-            <Client large name="Canva" /> and{" "}
-            <Client large name="Spaceship" />.
+            <Client large name="Westfield" />, <Client large name="Square" />,{" "}
+            <Client large name="Canva" /> and <Client large name="Spaceship" />.
           </p>
           <p className="h1Sans">
             <Link href="/about">Keep reading →</Link>
@@ -60,6 +58,7 @@ const Home = ({ mediumPosts, devPosts }) => {
             caption="2016 &mdash; 2017"
             title="Head of Product and Design at Spaceship"
             link="/work#spaceship"
+            description="I joined Spaceship in September 2016 where I helped grow a waitlist of 28,000 people, design and build the marketing website and superannuation portal, as well as the design system that ran our apps."
           />
         </div>
         <div className={styles.work}>
@@ -68,6 +67,7 @@ const Home = ({ mediumPosts, devPosts }) => {
             caption="2015"
             title="Product Design Intern at Palantir Technologies"
             link="/work#palantir"
+            description="I worked as a Product Design intern at Palantir’s Palo Alto HQ. I was part of a small team tasked with designing an anti-fraud focused pilot project which helped kickstart my career in Product Design."
           />
         </div>
       </Section>

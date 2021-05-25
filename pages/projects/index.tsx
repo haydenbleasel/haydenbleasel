@@ -80,7 +80,7 @@ const Projects = () => {
           caption="Shut down"
           title="Presumi"
           subtitle="Maker"
-          link="/journal/presumi"
+          link="https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c?source=rss-7e02ca3f6f37------2"
           image="/images/projects/presumi.png"
         >
           <div>
