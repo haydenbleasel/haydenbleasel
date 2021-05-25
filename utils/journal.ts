@@ -1,15 +1,15 @@
 import Parser from "rss-parser";
 import { JSDOM } from "jsdom";
 import { parseISO, format } from "date-fns";
-import slug from "./slug";
 
 type IMediumPost = {
+  creator: string;
   title: string;
   link: string;
+  "content:encoded": string;
   guid: string;
   isoDate: string;
   categories: string[];
-  "content:encoded": string;
 };
 
 type IDevPost = {
@@ -47,13 +47,15 @@ export async function getMediumPosts() {
     "https://medium.com/feed/@haydenbleasel"
   );
 
+  console.log(items[0]);
+
   const posts = (items as IMediumPost[]).map((item) => {
     const content = item["content:encoded"];
     const dom = new JSDOM(content);
 
     return {
       title: item.title,
-      link: `/journal/${slug(item.title)}`,
+      link: item.link,
       caption: format(parseISO(item.isoDate), "MMMM d, yyyy"),
       description: dom.window.document.querySelector("h4").textContent,
       image: dom.window.document
@@ -72,13 +74,13 @@ export async function getDevPosts() {
   const items: IDevPost[] = await response.json();
 
   const posts = items.map(
-    ({ id, title, description, published_timestamp, social_image }) => ({
+    ({ id, title, description, published_timestamp, social_image, url }) => ({
       id,
       title,
       description,
       caption: format(parseISO(published_timestamp), "MMMM d, yyyy"),
       image: social_image,
-      link: `/journal/${slug(title)}`,
+      link: url,
     })
   );
 
