@@ -1,4 +1,5 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useState } from "react";
+import type { ChangeEvent, FormEvent } from 'react';
 import { Notyf } from "notyf";
 import Layout from "../../components/layout";
 

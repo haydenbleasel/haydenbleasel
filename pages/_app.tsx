@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
 import Head from "next/head";
-import * as Fathom from "fathom-client";
+import { load, trackPageview } from "fathom-client";
 import { useRouter } from "next/router";
 import "./styles.css";
 
@@ -11,12 +11,12 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
-    Fathom.load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID as string, {
+    load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID as string, {
       includedDomains: [siteUrl.replace("https://", "")],
     });
 
     function onRouteChangeComplete() {
-      Fathom.trackPageview();
+      trackPageview();
     }
 
     router.events.on("routeChangeComplete", onRouteChangeComplete);

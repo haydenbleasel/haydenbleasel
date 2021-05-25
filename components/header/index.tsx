@@ -1,4 +1,5 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
+import type { SetStateAction } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Headroom from "react-headroom";
@@ -46,11 +47,7 @@ const Header = ({ onNavToggle }: IHeader) => {
     <Headroom style={{ zIndex: 999 }}>
       <nav className={styles.container}>
         <Section>
-          <header
-            className={`${styles.nav} ${
-              menuOpen ? styles.open : ""
-            }`}
-          >
+          <header className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
             <div className={styles.logo}>
               <Link href="/">
                 <Image

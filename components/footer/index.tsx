@@ -1,4 +1,5 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import type { FormEvent } from "react";
 import Image from "next/image";
 import { Notyf } from "notyf";
 import styles from "./footer.module.css";
