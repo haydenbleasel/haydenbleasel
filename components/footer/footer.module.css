@@ -1,0 +1,134 @@
+.footer {
+  background: var(--ghost);
+
+  @media (--mobile) {
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  & > section {
+    height: 100vh;
+    min-height: 800px;
+    justify-content: space-between;
+  }
+}
+
+.label {
+  opacity: 0;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+}
+
+.newsletter {
+  margin-bottom: var(--section-gap);
+  transition: opacity 0.2s;
+  grid-column: 1 / 8;
+
+  &.loading {
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+}
+
+.container {
+  grid-column: 1 / 9;
+  align-self: flex-end;
+
+  & :global(a) {
+    text-decoration: none;
+  }
+
+  & :global(.h1Sans), & :global(.h1Serif) {
+    @media (--mobile) {
+      font-size: var(--type-scale-3);
+    }
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+}
+
+.fields {
+  display: flex;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  font-size: var(--type-scale-5);
+  font-family: inherit;
+  width: 100%;
+  padding: 0;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+  }
+}
+
+.button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 3rem;
+  font-size: var(--type-scale-5);
+  color: var(--black);
+  font-family: inherit;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+  }
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / 13;
+  align-self: flex-start;
+
+  @media (--mobile) {
+    justify-content: left;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+}
+
+.socialIcon {
+  padding: 1rem;
+  opacity: 0.4;
+  transition: opacity 0.2s, transform 0.2s;
+
+  @media (--darkMode) {
+    filter: brightness(100);
+  }
+}
+
+.socialIcon:hover {
+  opacity: 1;
+  transform: translateY(-4px);
+}
+
+.copyright {
+  grid-column: 1 / 13;
+  margin-top: var(--gap-medium);
+
+  & :global(a) {
+    text-decoration: underline;
+  }
+}

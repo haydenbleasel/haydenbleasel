@@ -1,0 +1,25 @@
+.container {
+  padding-top: var(--gap-huge);
+  grid-column: 1 / 13;
+
+  @media (--desktop) {
+    padding-top: var(--gap-large);
+  }
+
+  @media (--laptop) {
+    padding-top: var(--gap-medium);
+    grid-column: 1;
+  }
+
+  @media (--tablet) {
+    padding-top: var(--gap-small);
+  }
+
+  @media (--mobile) {
+    padding-top: 0;
+  }
+}
+
+.title {
+  display: flex;
+}

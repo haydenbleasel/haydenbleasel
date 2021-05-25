@@ -1,146 +1,154 @@
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Fade } from 'react-awesome-reveal';
-import useResponsive from '../utils/responsive';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import Feature from '../components/Feature';
-import styles from './Home.module.css';
-import ArrowLink from '../components/ArrowLink';
-import Link from '../components/Link';
+import Image from "next/image";
+import Layout from "../components/layout";
+import Link from "../components/link";
+import Client from "../components/client";
+import Section from "../components/section";
+import Post from "../components/post";
+import Outlink from "../components/outlink";
+import { getDevPosts, getMediumPosts } from "../utils/journal";
+import styles from "./home.module.css";
 
-function calculateAge(currentTime: number) {
-  const birthDateTime = new Date(1993, 10, 26).getTime();
-  const difference = (currentTime - birthDateTime);
-  
-  return difference / (1000 * 60 * 60 * 24 * 365);
-}
-
-const Home = () => {
-  const timeOnStart = new Date().getTime();
-  const ageOnStart = calculateAge(timeOnStart);
-  const { isMobile } = useResponsive();
-  
-  const [age, setAge] = useState(ageOnStart);
-  const [fix, setFix] = useState(0);
-
-  useEffect(() => {
-    const ageInterval = setInterval(() => {
-      const currentTime = new Date().getTime();
-      const newAge = calculateAge(currentTime);
-      setAge(newAge);
-    }, 50);
-
-    return () => {
-      clearInterval(ageInterval);
-    };
-  }, []);
-
-  return (
-    <Layout
-      title="Digital product designer and JavaScript developer"
-      description="I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch."
-    >
-
-      <Fade triggerOnce>
-        <div className={styles.avatar}>
+const Home = ({ mediumPosts, devPosts }) => (
+  <Layout
+    title="Digital Product Designer from Sydney, Australia"
+    description="I’ve had the privilege of working with many fantastic companies including Google, Palantir, Nike, Toyota, National Geographic, Westfield, Square, Canva and Spaceship."
+  >
+    <Section>
+      <div className={styles.heroLeft}>
+        <div className={styles.asterisk}>
           <Image
+            src="/images/home/asterisk.svg"
             layout="fixed"
-            width={72}
-            height={72}
-            src="/images/home/haydenbleasel.jpg"
-            alt="Hayden Bleasel"
-            quality={100}
-            objectFit="cover"
-            objectPosition="53% center"
+            width={48}
+            height={48}
+            alt="Hello there"
           />
         </div>
-      </Fade>
-    
-      <Hero
-        title="Hayden Bleasel"
-        description={(
-          <p>
-            <span className={styles.age} onClick={() => setFix(fix === 9 ? 0 : 9)}>
-              {age.toFixed(fix)}
-            </span>
-            -year-old digital product designer, JavaScript developer and entrepreneur of sorts based in Sydney, Australia.
-          </p>
-        )}
-      >
-        <ArrowLink href="/contact">Get in touch</ArrowLink>
-      </Hero>
-
-      <Fade triggerOnce delay={800}>
-        <div className={`${styles.cover} grow`}>
-          <Image
-            layout="responsive"
-            width={6000}
-            height={4000}
-            src="/images/home/haydenbleasel.jpg"
-            alt="Hayden Bleasel"
-            quality={100}
+      </div>
+      <div className={styles.heroRight}>
+        <p className="h1Sans">
+          Hi, I’m Hayden Bleasel. I’m a digital Product Designer living in
+          Sydney, Australia. I currently run and lead product design at{" "}
+          <Client large name="Jellypepper" link="https://jellypepper.com/" />{" "}
+          &mdash; an award-winning digital agency for bright ideas.
+        </p>
+        <p className="h1Sans">
+          I’ve had the privilege of working with many fantastic companies
+          including{" "}
+          <Client large name="Google" link="https://www.google.com/" />,{" "}
+          <Client large name="Palantir" link="https://www.palantir.com/" />,{" "}
+          <Client large name="Nike" link="https://www.nike.com/" />,{" "}
+          <Client large name="Toyota" link="https://www.toyota.com.au/" />,{" "}
+          <Client
+            large
+            name="National Geographic"
+            link="https://www.disney.com.au/national-geographic/"
           />
-        </div>
-      </Fade>
+          ,{" "}
+          <Client large name="Westfield" link="https://www.westfield.com.au/" />
+          , <Client
+            large
+            name="Square"
+            link="https://squareup.com/au/en"
+          />, <Client large name="Canva" link="https://www.canva.com/en_au/" />{" "}
+          and{" "}
+          <Client large name="Spaceship" link="https://www.spaceship.com.au/" />
+          .
+        </p>
+        <p className="h1Sans">
+          <Link href="/about">
+            <span className="underline">Keep reading</span> →
+          </Link>
+        </p>
+      </div>
+    </Section>
 
-      <Fade triggerOnce delay={isMobile ? 800 : 0}>
-        <div className={styles.intro}>
-          <p className="heading-5">I help companies elevate their experiences through their brand, websites and products by taking their awesome ideas from concept to launch.</p>
-          <p className="heading-5">Here’s what I’m currently doing...</p>
-        </div>
-      </Fade>
-
-      <div className={styles.features}>
-      
-        <Fade triggerOnce>
-          <Feature
-            image="/images/home/jellypepper.png"
-            title="Jellypepper"
-            description="I’m the creative director of an award-winning digital agency for bright ideas. We’ve helped a wide range of companies and startups that share our values create brands, websites and products that are thoughtful and beautiful."
-          >
-            <ArrowLink href="https://jellypepper.com/" color="#cf307d">Visit the website</ArrowLink>
-          </Feature>
-        </Fade>
-
-        <Fade triggerOnce>
-          <Feature
-            reverse
-            image="/images/home/neutral.png"
-            title="Neutral"
-            description="After hours, I work on an app for combating climate change through reforestation programs. We ask you a few key questions about your lifestyle, spending and utility bills, then combine this information with country averages and formulas from the U.S. EPA to calculate a score that measures how sustainable you live."
-            imageProps={{ objectPosition: 'top center'}}
-          >
-            <ArrowLink href="https://tryneutral.com/" color="#068466">Download Neutral</ArrowLink>
-          </Feature>
-        </Fade>
-
-        <Fade triggerOnce>
-          <Feature
-            image="/images/home/tomorrow.png"
-            title="Tomorrow"
-            description="I’m also half of a tiny product incubator for delightful products. Our first product is Bokeh — an intelligent portfolio platform for professional photographers. We just launched, but if you join the mailing list, we’ll keep you in the loop."
-            imageProps={{ objectPosition: 'top right' }}
-          >
-            <ArrowLink href="https://tomorrowstudio.co/" color="#5F49E3">Join the mailing list</ArrowLink>
-          </Feature>
-        </Fade>
-
+    <Section>
+      <h2 className={styles.sectionHeader}>
+        <span className="h2Sans">Selected</span>
+        <span className="h2Serif"> Work</span>
+      </h2>
+      <div className={styles.work}>
+        <Post
+          image="/images/work/spaceship.png"
+          focus="center left"
+          caption="2016 &mdash; 2017"
+          title="Head of Product and Design at Spaceship"
+          link="/work#spaceship"
+          description="I joined Spaceship in September 2016 where I helped grow a waitlist of 28,000 people, design and build the marketing website and superannuation portal, as well as the design system that ran our apps."
+        />
+      </div>
+      <div className={styles.work}>
+        <Post
+          image="/images/work/palantir.png"
+          caption="2015"
+          title="Product Design Intern at Palantir Technologies"
+          link="/work#palantir"
+          description="I worked as a Product Design intern at Palantir’s Palo Alto HQ. I was part of a small team tasked with designing an anti-fraud focused pilot project which helped kickstart my career in product design."
+        />
       </div>
 
-      <div className={styles.focus}>
-        <Fade triggerOnce>
-          <p>Before all this, I was Head of Product at Spaceship, product design intern at Palantir in Palo Alto and a bunch of other roles <Link href="/work">you can read about</Link>.</p>
-        </Fade>
-        <Fade triggerOnce delay={200}>
-          <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees. During this time, I created a product for job seekers called <Link href="/thoughts/presumi">Presumi</Link> that I ended up licensing to SEEK in Hong Kong.</p>
-        </Fade>
-        <Fade triggerOnce delay={400}>
-          <p>In my spare time, I enjoy mentoring entrepreneurs, advising startups, going to the gym, speaking at events, curating <Link href="/playlists">Spotify playlists</Link>, playing video games, making apps and learning new things.</p>
-        </Fade>
+      <Outlink link="/work" text="View more work" />
+    </Section>
+
+    <Section>
+      <h2 className={styles.sectionHeader}>
+        <span className="h2Sans">Thoughts</span>
+        <span className="h2Serif"> &amp; Ideas</span>
+      </h2>
+
+      <div className={styles.designPosts}>
+        {mediumPosts.slice(0, 2).map((post) => (
+          <Post key={post.title} {...post} />
+        ))}
       </div>
-    </Layout>
-  );
+
+      <div className={styles.technicalPosts}>
+        {devPosts.slice(0, mediumPosts.length < 2 ? 4 : 3).map((post) => (
+          <Post key={post.title} {...post} compact />
+        ))}
+      </div>
+
+      <Outlink link="/journal" text="View more posts" />
+    </Section>
+
+    <Section>
+      <h2 className={styles.sectionHeader}>
+        <span className="h2Sans">Projects</span>
+        <span className="h2Serif"> &amp; Apps</span>
+      </h2>
+      <div className={styles.project}>
+        <Post
+          image="/images/projects/neutral.png"
+          title="Neutral"
+          description="Climate-focused app that combines a lifestyle questionnaire with U.S. EPA and other data sources to calculate your CO₂e emissions, then helps you offset it with a reforestation program."
+          link="/projects#neutral"
+        />
+      </div>
+      <div className={styles.project}>
+        <Post
+          image="/images/projects/bokeh.png"
+          title="Bokeh"
+          description="Take control of your photography career with an intelligent portfolio platform for professional photographers that grows with your work. Bokeh is currently in private beta, but you can join the waitlist."
+          link="/projects#bokeh"
+        />
+      </div>
+
+      <Outlink link="/projects" text="View more projects" />
+    </Section>
+  </Layout>
+);
+
+export async function getStaticProps() {
+  const mediumPosts = await getMediumPosts();
+  const devPosts = await getDevPosts();
+
+  return {
+    props: {
+      mediumPosts,
+      devPosts,
+    },
+  };
 }
 
 export default Home;

@@ -1,0 +1,16 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: var(--gap-large) var(--gap-medium);
+  gap: var(--gap-medium);
+
+  @media (--laptop) {
+    grid-template-columns: 1fr;
+    padding: var(--gap-small);
+  }
+
+  @media (--mobile) {
+    gap: var(--gap-small);
+    padding: calc(var(--gap-small) / 2);
+  }
+}

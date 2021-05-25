@@ -1,0 +1,105 @@
+[
+    {
+        "name": "Xero Roadshow Breakfast Panel Session",
+        "organisation": "Xero",
+        "year": 2020,
+        "url": "https://twitter.com/haydenbleasel/status/1225231600058679296"
+    },
+    {
+        "name": "Branding for Disruptive Startups",
+        "organisation": "General Assembly",
+        "year": 2019,
+        "url": "https://www.meetup.com/en-AU/sydney-designers/events/266880417/"
+    },
+    {
+        "name": "Branding for Disruptive Startups",
+        "organisation": "Sydney UI / UX Meetup",
+        "year": 2019,
+        "url": "https://www.meetup.com/en-AU/Sydney-UX-UI-Meetup/events/266629688/"
+    },
+    {
+        "name": "Using Gatsby Inside of a Digital Agency",
+        "organisation": "Gatsby Arvos",
+        "year": 2019,
+        "url": "https://www.gatsbyarvos.com.au/"
+    },
+    {
+        "name": "Branding Startups",
+        "organisation": "UNSW 10x Accelerator",
+        "year": 2019
+    },
+    {
+        "name": "Design stories behind our iconic startups",
+        "organisation": "AcademyXi",
+        "year": 2018,
+        "url": "https://www.meetup.com/en-AU/sydney-designers/events/253805856/"
+    },
+    {
+        "name": "Designing Products for the World’s Biggest Tech Companies (Panel)",
+        "organisation": "AcademyXi",
+        "year": 2018
+    },
+    {
+        "name": "Learning to unlearn: how to design for disruptive startups",
+        "organisation": "Sydney Designers",
+        "year": 2018,
+        "url": "https://www.slideshare.net/HaydenBleasel/learning-to-unlearn-how-to-design-for-disruptive-startups"
+    },
+    {
+        "name": "Talks at Spaceship x Sydney Designers (Host)",
+        "organisation": "Spaceship Meetup",
+        "year": 2017,
+        "url": "https://www.meetup.com/en-AU/sydney-designers/events/240356226/"
+    },
+    {
+        "name": "Designing for Growth",
+        "organisation": "AcademyXi",
+        "year": 2017,
+        "url": "https://www.slideshare.net/HaydenBleasel/designing-for-growth-academy-xi"
+    },
+    {
+        "name": "UTS Start-up / Entrepreneur Insight Event",
+        "organisation": "UTS",
+        "year": 2017
+    },
+    {
+        "name": "Hatchery Masterclass: Product, Growth and Raising Funds",
+        "organisation": "UTS",
+        "year": 2017,
+        "url": "https://www.slideshare.net/HaydenBleasel/hatchery-masterclass-with-spaceship"
+    },
+    {
+        "name": "Spaceship Panel at Lean Startup Sydney",
+        "organisation": "Pivotal Labs",
+        "year": 2017
+    },
+    {
+        "name": "Tech Thursdays: Building Products",
+        "organisation": "UTS",
+        "year": 2016,
+        "url": "https://www.slideshare.net/HaydenBleasel/tech-thursdays-building-products"
+    },
+    {
+        "name": "How to write good quality code",
+        "organisation": "Coder Academy",
+        "year": 2016,
+        "url": "https://www.slideshare.net/HaydenBleasel/how-to-write-good-quality-code"
+    },
+    {
+        "name": "STEM Panel",
+        "organisation": "UNSW",
+        "year": 2016
+    },
+    {
+        "name": "Scalable front-end architecture with Atomic CSS",
+        "organisation": "Coder Academy",
+        "year": 2016,
+        "url": "https://www.slideshare.net/HaydenBleasel/scalable-frontend-architecture-with-bootstrap-3-atomic-css"
+    },
+    {
+        "name": "Sydney startup Presumi helps job seekers track how employers interact with their resume",
+        "organisation": "Startup Daily",
+        "year": 2016,
+        "url": "https://www.startupdaily.net/2016/10/sydney-startup-presumi-helps-job-seekers-see-employers-interact-resume/"
+    }
+]

@@ -1,0 +1,21 @@
+.outlink {
+  grid-column: 1 / 13;
+  margin-top: var(--gap-medium);
+  
+  & :global(a) {
+    font-size: var(--type-scale-4);
+    text-decoration: none;
+
+    @media (--mobile) {
+      font-size: var(--type-scale-3);
+    }
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+
+  @media (--mobile) {
+    margin-top: var(--gap-small);
+  }
+}
