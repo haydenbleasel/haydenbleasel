@@ -21,6 +21,7 @@ const Projects = () => {
         <Role
           caption="Currently growing"
           title="Neutral"
+          id="neutral"
           subtitle="Maker"
           link="https://neutral.sh/"
           image="/images/projects/neutral.png"
@@ -56,6 +57,7 @@ const Projects = () => {
         <Role
           caption="Currently designing"
           title="Bokeh"
+          id="bokeh"
           subtitle="Designer"
           link="https://www.heybokeh.com/"
           image="/images/projects/bokeh.png"
@@ -78,6 +80,7 @@ const Projects = () => {
         <Role
           caption="Shut down"
           title="Presumi"
+          id="presumi"
           subtitle="Maker"
           link="https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c?source=rss-7e02ca3f6f37------2"
           image="/images/projects/presumi.png"

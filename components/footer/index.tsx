@@ -1,7 +1,6 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
 import { Notyf } from "notyf";
-import { Fade } from "react-awesome-reveal";
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
@@ -51,7 +50,7 @@ const Footer = ({ socialPlatforms }) => {
     <footer className={styles.footer}>
       <Section>
         <div className={styles.social}>
-          {socialPlatforms.map((platform, index) => (
+          {socialPlatforms.map((platform) => (
             <a
               className={styles.socialIcon}
               key={platform.name}
@@ -59,80 +58,70 @@ const Footer = ({ socialPlatforms }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Fade triggerOnce delay={index * 100}>
-                <Image
-                  alt={platform.name}
-                  layout="fixed"
-                  width={18}
-                  height={18}
-                  src={platform.image}
-                  quality={100}
-                />
-              </Fade>
+              <Image
+                alt={platform.name}
+                layout="fixed"
+                width={18}
+                height={18}
+                src={platform.image}
+                quality={100}
+              />
             </a>
           ))}
         </div>
 
         <div className={styles.newsletterContainer}>
-          <Fade triggerOnce>
-            <p>
-              <span className="h1Sans">Want to chat?</span>{" "}
-              <Link href="/contact">
-                <span className="h1Serif underline">Get in touch.</span>
-              </Link>
-            </p>
-          </Fade>
+          <p>
+            <span className="h1Sans">Want to chat?</span>{" "}
+            <Link href="/contact">
+              <span className="h1Serif underline">Get in touch.</span>
+            </Link>
+          </p>
 
-          <Fade triggerOnce delay={200}>
-            <p className="h1Sans">
-              Join my private mailing list and get notified when I publish a new
-              product or article.
-            </p>
-          </Fade>
+          <p className="h1Sans">
+            Join my private mailing list and get notified when I publish a new
+            product or article.
+          </p>
 
           <form
             id="newsletter"
             className={`${styles.newsletter} ${loading ? styles.loading : ""}`}
             onSubmit={joinMailingList}
           >
-            <Fade triggerOnce delay={400}>
-              <fieldset className={styles.newsletterFields}>
-                <label className={styles.label} htmlFor="email">
-                  Email address
-                </label>
-                <input
-                  required
-                  id="email"
-                  className={styles.input}
-                  type="email"
-                  placeholder="janesmith@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <button
-                  aria-label="Sign up"
-                  type="submit"
-                  className={styles.newsletterButton}
-                >
-                  &rarr;
-                </button>
-              </fieldset>
-            </Fade>
+            <fieldset className={styles.newsletterFields}>
+              <label className={styles.label} htmlFor="email">
+                Email address
+              </label>
+              <input
+                required
+                id="email"
+                className={styles.input}
+                type="email"
+                placeholder="janesmith@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button
+                aria-label="Sign up"
+                type="submit"
+                className={styles.newsletterButton}
+              >
+                &rarr;
+              </button>
+            </fieldset>
           </form>
 
           <div className={styles.copyright}>
-            <Fade triggerOnce>
-              <p className="small">
-                <span>&copy; Hayden Bleasel 2077.</span>
-                <span>
-                  {" "}
-                  <Link href="https://github.com/haydenbleasel/website">
-                    Source code
-                  </Link>
-                  .
-                </span>
-              </p>
-            </Fade>
+            <p className="small">
+              <span>&copy; Hayden Bleasel 2077.</span>
+              <span>
+                {" "}
+                <Link href="https://github.com/haydenbleasel/website">
+                  Source code
+                </Link>
+                .
+              </span>
+            </p>
           </div>
         </div>
       </Section>

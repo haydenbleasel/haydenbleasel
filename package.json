@@ -12,16 +12,11 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^10.2.2",
-    "colorthief": "^2.3.2",
     "date-fns": "^2.21.3",
     "fathom-client": "^3.0.0",
     "formidable": "^1.2.2",
-    "get-contrast": "^3.0.0",
     "hamburger-react": "^2.4.1",
-    "he": "^1.2.0",
-    "highlight.js": "^10.7.2",
     "jsdom": "^16.6.0",
-    "lottie-web": "^5.7.8",
     "medium-zoom": "^1.0.6",
     "next": "^10.2.2",
     "next-compose-plugins": "^2.2.1",
@@ -32,14 +27,10 @@
     "nodemailer": "^6.6.1",
     "notyf": "^3.9.0",
     "react": "^17.0.2",
-    "react-awesome-reveal": "^3.7.1",
     "react-dom": "^17.0.2",
     "react-headroom": "^3.1.1",
-    "react-intersection-observer": "^8.32.0",
     "react-responsive": "^8.2.0",
-    "rss-parser": "^3.12.0",
-    "slugify": "^1.5.3",
-    "spotify-web-api-node": "^5.0.2"
+    "rss-parser": "^3.12.0"
   },
   "devDependencies": {
     "@types/node": "^15.6.0",

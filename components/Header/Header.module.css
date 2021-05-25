@@ -38,6 +38,9 @@
         border-radius: 4px;
         padding-left: 1rem;
         padding-right: 1rem;
+        &::after {
+            display: none !important;
+        }
     }
 
     & a {

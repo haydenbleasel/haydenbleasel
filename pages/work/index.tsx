@@ -24,6 +24,7 @@ const Work = () => {
           caption="2018 — Present"
           title="Director &amp; Lead Product Designer"
           subtitle="Jellypepper"
+          id="jellypepper"
           image="/images/work/jellypepper.png"
         >
           <div>
@@ -59,6 +60,7 @@ const Work = () => {
           caption="2016 — 2017"
           title="Head of Product and Design"
           subtitle="Spaceship"
+          id="spaceship"
           image="/images/work/spaceship.png"
         >
           <div>
@@ -101,6 +103,7 @@ const Work = () => {
           caption="2015"
           title="Product Design Intern"
           subtitle="Palantir"
+          id="palantir"
           image="/images/work/palantir.png"
         >
           <div>
@@ -153,6 +156,7 @@ const Work = () => {
           caption="2014 — 2015"
           title="Product Designer &amp; Front-End Developer"
           subtitle="Sumry"
+          id="sumry"
           image="/images/work/sumry.png"
         >
           <div>

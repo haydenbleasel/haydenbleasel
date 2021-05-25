@@ -1,4 +1,3 @@
-import { Fade } from "react-awesome-reveal";
 import Layout from "../../components/layout";
 import Post from "../../components/post";
 
@@ -36,9 +35,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
         <div className={styles.posts}>
           {mediumPosts.map((post, index) => (
             <div className={styles.post} key={post.title}>
-              <Fade triggerOnce delay={800}>
-                <Post {...post} featured={index === 0} />
-              </Fade>
+              <Post {...post} featured={index === 0} />
             </div>
           ))}
         </div>
@@ -48,9 +45,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
 
         {devPosts.map((post) => (
           <div className={styles.post} key={post.title}>
-            <Fade triggerOnce delay={800}>
-              <Post {...post} compact />
-            </Fade>
+            <Post {...post} compact />
           </div>
         ))}
       </div>

@@ -2,7 +2,6 @@ import { SetStateAction, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Headroom from "react-headroom";
-import { Fade } from "react-awesome-reveal";
 import { Squeeze as Hamburger } from "hamburger-react";
 import useResponsive from "../../utils/responsive";
 
@@ -45,43 +44,41 @@ const Header = ({ onNavToggle }: HeaderProps) => {
 
   return (
     <Headroom>
-      <Fade triggerOnce>
-        <nav className={styles.container}>
-          <Section>
-            <header
-              className={`${styles.nav} ${
-                menuOpen ? styles.open : ""
-              }`}
-            >
-              <div className={styles.logo}>
-                <Link href="/">
-                  <Image
-                    src="/images/logo.svg"
-                    alt="Hayden Bleasel"
-                    layout="fixed"
-                    width={54}
-                    height={16}
+      <nav className={styles.container}>
+        <Section>
+          <header
+            className={`${styles.nav} ${
+              menuOpen ? styles.open : ""
+            }`}
+          >
+            <div className={styles.logo}>
+              <Link href="/">
+                <Image
+                  src="/images/logo.svg"
+                  alt="Hayden Bleasel"
+                  layout="fixed"
+                  width={54}
+                  height={16}
+                />
+              </Link>
+            </div>
+            <div className={styles.menu}>
+              <ul className={styles.sitemap}>{routes.map(NavItem)}</ul>
+              {isTablet && (
+                <div className={styles.hamburger}>
+                  <Hamburger
+                    size={20}
+                    toggled={menuOpen}
+                    toggle={toggleMenuOpen}
+                    color="var(--black)"
+                    label="Show menu"
                   />
-                </Link>
-              </div>
-              <div className={styles.menu}>
-                <ul className={styles.sitemap}>{routes.map(NavItem)}</ul>
-                {isTablet && (
-                  <div className={styles.hamburger}>
-                    <Hamburger
-                      size={20}
-                      toggled={menuOpen}
-                      toggle={toggleMenuOpen}
-                      color="var(--black)"
-                      label="Show menu"
-                    />
-                  </div>
-                )}
-              </div>
-            </header>
-          </Section>
-        </nav>
-      </Fade>
+                </div>
+              )}
+            </div>
+          </header>
+        </Section>
+      </nav>
     </Headroom>
   );
 };

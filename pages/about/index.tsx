@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Fade } from "react-awesome-reveal";
 import styles from "./about.module.css";
 import Layout from "../../components/layout";
 import { siteUrl } from "../../next-sitemap";
@@ -26,35 +25,31 @@ type IRole = {
   end: string;
 };
 
-const Event = ({ url, name, organisation, year }: IEvent, index) => (
-  <Fade key={name} triggerOnce delay={Math.min(index * 50, 500)}>
-    <li>
-      <p className={`${styles.eventDetails} small grey`}>
-        {organisation}, {year}
-      </p>
-      {url ? (
-        <Link href={url}>
-          <span className="paragraphSans">{name}</span>
-        </Link>
-      ) : (
-        <p className="paragraphSans">{name}</p>
-      )}
-    </li>
-  </Fade>
+const Event = ({ url, name, organisation, year }: IEvent) => (
+  <li key={name}>
+    <p className={`${styles.eventDetails} small grey`}>
+      {organisation}, {year}
+    </p>
+    {url ? (
+      <Link href={url}>
+        <span className="paragraphSans">{name}</span>
+      </Link>
+    ) : (
+      <p className="paragraphSans">{name}</p>
+    )}
+  </li>
 );
 
-const Role = ({ role, company, start, end }: IRole, index) => (
-  <Fade key={role} triggerOnce delay={Math.min(index * 50, 500)}>
-    <li id={company} className={styles.eventLink}>
-      <small className="small grey">
-        {start} &mdash; {end}
-      </small>
-      <p className={styles.roleDetails}>
-        <span className="paragraphSans">{role},</span>
-        <span className="paragraphSerif"> {company}</span>
-      </p>
-    </li>
-  </Fade>
+const Role = ({ role, company, start, end }: IRole) => (
+  <li key={role} id={company} className={styles.eventLink}>
+    <small className="small grey">
+      {start} &mdash; {end}
+    </small>
+    <p className={styles.roleDetails}>
+      <span className="paragraphSans">{role},</span>
+      <span className="paragraphSerif"> {company}</span>
+    </p>
+  </li>
 );
 
 const About = () => {
