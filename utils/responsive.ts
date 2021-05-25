@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const breakpoints = {
@@ -32,7 +32,10 @@ function useResponsive() {
     maxWidth: breakpoints.desktopLarge,
   });
 
-  useLayoutEffect(() => {
+  const useIsomorphicLayoutEffect =
+    typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+  useIsomorphicLayoutEffect(() => {
     if (typeof window !== "undefined") setIsClient(true);
   }, []);
 
