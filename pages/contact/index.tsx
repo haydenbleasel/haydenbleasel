@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Notyf } from "notyf";
 import { Fade } from "react-awesome-reveal";
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 
-import styles from "./Contact.module.css";
-import Section from "../../components/Section";
-import Title from "../../components/Title";
+import styles from "./contact.module.css";
+import Section from "../../components/section";
+import Title from "../../components/title";
 
 const Contact = () => {
   const [name, setName] = useState("");

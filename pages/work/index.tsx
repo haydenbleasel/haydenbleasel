@@ -1,10 +1,10 @@
-import Layout from "../../components/Layout";
 import { siteUrl } from "../../next-sitemap";
-import Link from "../../components/Link";
-import Section from "../../components/Section";
-import Role from "../../components/Role";
-import Title from "../../components/Title";
-import styles from './Work.module.css';
+import Layout from "../../components/layout";
+import Link from "../../components/link";
+import Section from "../../components/section";
+import Role from "../../components/role";
+import Title from "../../components/title";
+import Outlink from "../../components/outlink";
 
 const Work = () => {
   return (
@@ -190,11 +190,8 @@ const Work = () => {
             </p>
           </div>
         </Role>
-        <div className={styles.outlink}>
-          <Link href="https://www.linkedin.com/in/haydenbleasel">
-            View more work on LinkedIn &rarr;
-          </Link>
-        </div>
+        
+        <Outlink link="https://www.linkedin.com/in/haydenbleasel" text="View more work on LinkedIn" />
       </Section>
     </Layout>
   );

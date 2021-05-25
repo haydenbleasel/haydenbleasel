@@ -1,11 +1,12 @@
 import Image from "next/image";
-import Layout from "../components/Layout";
-import Link from "../components/Link";
-import Client from "../components/Client";
-import Section from "../components/Section";
-import styles from "./Home.module.css";
-import Post from "../components/Post";
+import Layout from "../components/layout";
+import Link from "../components/link";
+import Client from "../components/client";
+import Section from "../components/section";
+import Post from "../components/post";
+import Outlink from "../components/outlink";
 import { getDevPosts, getMediumPosts } from "../utils/journal";
+import styles from "./Home.module.css";
 
 const Home = ({ mediumPosts, devPosts }) => {
   return (
@@ -70,6 +71,8 @@ const Home = ({ mediumPosts, devPosts }) => {
             description="I worked as a Product Design intern at Palantir’s Palo Alto HQ. I was part of a small team tasked with designing an anti-fraud focused pilot project which helped kickstart my career in Product Design."
           />
         </div>
+
+        <Outlink link="/work" text="View more work" />
       </Section>
 
       <Section>
@@ -89,6 +92,8 @@ const Home = ({ mediumPosts, devPosts }) => {
             <Post key={post.title} {...post} compact />
           ))}
         </div>
+
+        <Outlink link="/journal" text="View more posts" />
       </Section>
 
       <Section>
@@ -112,6 +117,8 @@ const Home = ({ mediumPosts, devPosts }) => {
             link="/projects#bokeh"
           />
         </div>
+
+        <Outlink link="/projects" text="View more projects" />
       </Section>
     </Layout>
   );

@@ -1,12 +1,12 @@
 import { Fade } from "react-awesome-reveal";
-import Layout from "../../components/Layout";
-import Post from "../../components/Post";
+import Layout from "../../components/layout";
+import Post from "../../components/post";
 
 import styles from "./Journal.module.css";
-import Section from "../../components/Section";
-import Title from "../../components/Title";
+import Section from "../../components/section";
+import Title from "../../components/title";
 import { getDevPosts, getMediumPosts } from '../../utils/journal';
-import Divider from "../../components/Divider";
+import Divider from "../../components/divider";
 
 type IPost = {
   title: string;

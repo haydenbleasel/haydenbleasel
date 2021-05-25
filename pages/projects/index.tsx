@@ -1,9 +1,8 @@
-import Layout from "../../components/Layout";
 import { siteUrl } from "../../next-sitemap";
-
-import Section from "../../components/Section";
-import Role from "../../components/Role";
-import Title from "../../components/Title";
+import Layout from "../../components/layout";
+import Section from "../../components/section";
+import Role from "../../components/role";
+import Title from "../../components/title";
 
 const Projects = () => {
   return (

@@ -1,0 +1,92 @@
+.footer {
+    background: var(--ghost);
+
+    @media (--mobile) {
+        text-align: left;
+        align-items: flex-start;
+    }
+
+    & > section {
+        height: 100vh;
+        justify-content: space-between;
+    }
+}
+
+.label {
+    opacity: 0;
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+}
+
+.newsletter {
+    margin-bottom: var(--section-gap);
+    transition: opacity 0.2s;
+    grid-column: 1 / 8;
+}
+
+.newsletter.loading {
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+}
+
+.newsletterContainer {
+    grid-column: 1 / 9;
+    align-self: flex-end;
+}
+
+.newsletterFields {
+    display: flex;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.input {
+    background: transparent;
+    border: none;
+    font-size: var(--type-scale-5);
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+}
+
+.newsletterButton {
+    background: transparent;
+    border: none;
+    padding: 0;
+    width: 2rem;
+    font-size: var(--type-scale-5);
+    font-family: inherit;
+    outline: none;
+}
+
+.social {
+    display: flex;
+    flex-wrap: wrap;
+    grid-column: 1 / 13;
+    align-self: flex-start;
+
+    @media (--mobile) {
+        justify-content: left;
+        margin-left: -1rem;
+        margin-right: -1rem;
+    }
+}
+
+.socialIcon {
+    padding: 1rem;
+    opacity: 0.4;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.socialIcon:hover {
+    opacity: 1;
+    transform: translateY(-4px);
+}
+
+.copyright {
+    grid-column: 1 / 13;
+    margin-top: var(--gap-medium)
+}
