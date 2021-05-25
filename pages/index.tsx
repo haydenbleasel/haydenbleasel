@@ -21,6 +21,7 @@ const Home = ({ mediumPosts, devPosts }) => (
             layout="fixed"
             width={48}
             height={48}
+            alt="Hello there"
           />
         </div>
       </div>
@@ -33,12 +34,26 @@ const Home = ({ mediumPosts, devPosts }) => (
         </p>
         <p className="h1Sans">
           I’ve had the privilege of working with many fantastic companies
-          including <Client large name="Google" />,{" "}
-          <Client large name="Palantir" />, <Client large name="Nike" />,{" "}
-          <Client large name="Toyota" />
-          , <Client large name="National Geographic" />,{" "}
-          <Client large name="Westfield" />, <Client large name="Square" />,{" "}
-          <Client large name="Canva" /> and <Client large name="Spaceship" />.
+          including{" "}
+          <Client large name="Google" link="https://www.google.com/" />,{" "}
+          <Client large name="Palantir" link="https://www.palantir.com/" />,{" "}
+          <Client large name="Nike" link="https://www.nike.com/" />,{" "}
+          <Client large name="Toyota" link="https://www.toyota.com.au/" />,{" "}
+          <Client
+            large
+            name="National Geographic"
+            link="https://www.disney.com.au/national-geographic/"
+          />
+          ,{" "}
+          <Client large name="Westfield" link="https://www.westfield.com.au/" />
+          , <Client
+            large
+            name="Square"
+            link="https://squareup.com/au/en"
+          />, <Client large name="Canva" link="https://www.canva.com/en_au/" />{" "}
+          and{" "}
+          <Client large name="Spaceship" link="https://www.spaceship.com.au/" />
+          .
         </p>
         <p className="h1Sans">
           <Link href="/about">
@@ -89,7 +104,7 @@ const Home = ({ mediumPosts, devPosts }) => (
       </div>
 
       <div className={styles.technicalPosts}>
-        {devPosts.slice(0, 3).map((post) => (
+        {devPosts.slice(0, mediumPosts.length < 2 ? 4 : 3).map((post) => (
           <Post key={post.title} {...post} compact />
         ))}
       </div>

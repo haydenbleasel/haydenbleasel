@@ -120,7 +120,8 @@ const About = () => {
               team of 5 and typically lead the product design projects.
             </p>
             <p className="h3Sans">
-              I also work with <Client name="R/GA" /> every so often,
+              I also work with{" "}
+              <Client name="R/GA" link="https://www.rga.com/" /> every so often,
               collaborating with their strategy and design teams across
               different international offices on amazing products and campaigns.
             </p>
@@ -183,6 +184,10 @@ const About = () => {
               and used to work on{" "}
               <Link href="https://www.npmjs.com/package/favicons">
                 open-source software
+              </Link>{" "}
+              and{" "}
+              <Link href="https://github.com/nitinthewiz/ghost-phantom">
+                Ghost themes
               </Link>
               .
             </p>

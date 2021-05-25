@@ -55,6 +55,11 @@ const Contact = () => {
       }
 
       window.alert("Thanks, choom! I'll be in touch soon!");
+
+      setName("");
+      setEmail("");
+      setMessage("");
+      setFiles(null);
     } catch (error: any) {
       window.alert(error.message);
     } finally {
@@ -86,7 +91,7 @@ const Contact = () => {
                 Full name
               </label>
               <span className={styles.remaining}>
-                {320 - name.length} / 320
+                {name.length} / 320
               </span>
             </div>
             <input
@@ -110,7 +115,7 @@ const Contact = () => {
                 Email address
               </label>
               <span className={styles.remaining}>
-                {320 - email.length} / 320
+                {email.length} / 320
               </span>
             </div>
             <input
@@ -134,7 +139,7 @@ const Contact = () => {
                 Message
               </label>
               <span className={styles.remaining}>
-                {1000 - message.length} / 1000
+                {message.length} / 1000
               </span>
             </div>
             <textarea

@@ -14,7 +14,6 @@
   & > section {
     padding-top: 0;
     padding-bottom: 0;
-    content-visibility: initial;
   }
 }
 
@@ -77,6 +76,7 @@
     padding: 0.55rem 0 0.45rem;
     margin: 1rem 0 1rem 1.5rem;
     position: relative;
+    background: var(--white);
 
     @media (--tablet) {
       margin: 0.5rem 0;

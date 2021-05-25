@@ -31,8 +31,8 @@ const Post = ({
           <Skeleton>
             <Image
               layout="responsive"
-              width={1128}
-              height={600}
+              width={featured ? 1128 : 742}
+              height={featured ? 600 : 395}
               alt={title}
               src={image}
               quality={100}
