@@ -13,7 +13,7 @@ import Google from '../public/images/companies/google.svg';
 import Palantir from '../public/images/companies/palantir.svg';
 import Nike from '../public/images/companies/nike.svg';
 import Toyota from '../public/images/companies/toyota.svg';
-import NationalGeographic from '../public/images/companies/nationalgeographic.svg';
+import NationalGeographic from '../public/images/companies/natgeo.svg';
 import Westfield from '../public/images/companies/westfield.svg';
 import Square from '../public/images/companies/square.svg';
 import Canva from '../public/images/companies/canva.svg';

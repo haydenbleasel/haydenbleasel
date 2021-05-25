@@ -13,7 +13,9 @@ const ClientInner = ({ image, name, large = false }: IClient) => {
 
   return (
     <span className={`${styles.client} ${large ? styles.large : ""}`}>
-      <Image />
+      <span className={styles.image}>
+        <Image />
+      </span>
       <span>{name}</span>
     </span>
   );

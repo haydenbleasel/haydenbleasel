@@ -14,7 +14,7 @@ import interviews from "./interviews.json";
 import Jellypepper from '../../public/images/companies/jellypepper.svg';
 import RGA from '../../public/images/companies/rga.svg';
 import Neutral from '../../public/images/companies/neutral.svg';
-import TomorrowStudio from '../../public/images/companies/tomorrowstudio.svg';
+import TomorrowStudio from '../../public/images/companies/tomorrow.svg';
 import Bokeh from '../../public/images/companies/bokeh.svg';
 
 type IEvent = {

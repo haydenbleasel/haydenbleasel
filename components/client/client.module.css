@@ -2,14 +2,17 @@
     display: inline-flex;
     align-items: baseline;
 
-    & > div {
-        width: var(--type-scale-1) !important;
-        height: var(--type-scale-1) !important;
+    & .image {
+        width: var(--type-scale-1);
+        height: var(--type-scale-1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    &.large > div {
-        width: var(--type-scale-3) !important;
-        height: var(--type-scale-3) !important;
+    &.large > .image {
+        width: var(--type-scale-3);
+        height: var(--type-scale-3);
     }
 
     & > span {
