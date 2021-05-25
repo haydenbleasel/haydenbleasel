@@ -44,6 +44,12 @@
     text-decoration: none;
   }
 
+  & :global(.h1Sans), & :global(.h1Serif) {
+    @media (--mobile) {
+      font-size: var(--type-scale-3);
+    }
+  }
+
   @media (--laptop) {
     grid-column: 1;
   }

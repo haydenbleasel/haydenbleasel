@@ -26,7 +26,7 @@ type IRole = {
 };
 
 const Event = ({ url, name, organisation, year }: IEvent) => (
-  <li key={name}>
+  <li key={`${name}-${organisation}`}>
     <p className={`${styles.eventDetails} small grey`}>
       {organisation}, {year}
     </p>

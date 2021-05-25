@@ -7,17 +7,13 @@ type ITitle = {
 };
 
 const Title = ({ sans, serif }: ITitle) => (
-  <Section
-    style={{
-      paddingBottom: 0,
-      paddingTop: "var(--gap-huge)",
-      marginBottom: "var(--gap-medium)",
-    }}
-  >
-    <h1 className={styles.title}>
-      <span className="titleSans">{sans}</span>
-      <span className="titleSerif">&nbsp;{serif}</span>
-    </h1>
+  <Section style={{ paddingBottom: 0 }}>
+    <div className={styles.container}>
+      <h1 className={styles.title}>
+        <span className="titleSans">{sans}</span>
+        <span className="titleSerif">&nbsp;{serif}</span>
+      </h1>
+    </div>
   </Section>
 );
 

@@ -2,3 +2,23 @@
   display: flex;
   grid-column: 1/ 13;
 }
+
+.container {
+  padding-top: var(--gap-huge);
+
+  @media (--desktop) {
+    padding-top: var(--gap-large);
+  }
+
+  @media (--laptop) {
+    padding-top: var(--gap-medium);
+  }
+
+  @media (--tablet) {
+    padding-top: var(--gap-small);
+  }
+
+  @media (--mobile) {
+    padding-top: 0;
+  }
+}

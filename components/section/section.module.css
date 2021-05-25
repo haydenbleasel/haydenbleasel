@@ -7,9 +7,10 @@
 
   @media (--laptop) {
     grid-template-columns: 1fr;
+    padding: var(--gap-small);
   }
 
   @media (--mobile) {
-    padding: var(--gap-small);
+    gap: var(--gap-small);
   }
 }
