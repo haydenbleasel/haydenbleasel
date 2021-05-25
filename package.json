@@ -17,7 +17,6 @@
     "formidable": "^1.2.2",
     "hamburger-react": "^2.4.1",
     "jsdom": "^16.6.0",
-    "medium-zoom": "^1.0.6",
     "next": "^10.2.2",
     "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.2.21",
