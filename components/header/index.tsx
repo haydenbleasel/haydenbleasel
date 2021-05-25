@@ -44,7 +44,7 @@ const Header = ({ onNavToggle }: IHeader) => {
   }
 
   return (
-    <Headroom style={{ zIndex: 999 }}>
+    <Headroom style={{ zIndex: 999, height: 102 }}>
       <nav className={styles.container}>
         <Section>
           <header className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>

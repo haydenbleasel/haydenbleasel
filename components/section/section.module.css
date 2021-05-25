@@ -3,6 +3,7 @@
   grid-template-columns: repeat(12, 1fr);
   padding: var(--gap-large) var(--gap-medium);
   gap: var(--gap-medium);
+  content-visibility: auto;
 
   @media (--laptop) {
     grid-template-columns: 1fr;
