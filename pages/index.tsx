@@ -104,7 +104,9 @@ const Home = ({ mediumPosts, devPosts }) => {
         </h2>
 
         <div className={styles.designPosts}>
-          {mediumPosts.slice(0, 2).map(Post)}
+          {mediumPosts.slice(0, 2).map((post) => (
+            <Post key={post.title} {...post} />
+          ))}
         </div>
 
         <div className={styles.technicalPosts}>
