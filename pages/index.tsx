@@ -10,7 +10,7 @@ import styles from "./home.module.css";
 
 const Home = ({ mediumPosts, devPosts }) => (
   <Layout
-    title="Hi, I’m Hayden Bleasel. I’m a digital product designer living in Sydney, Australia."
+    title="Digital Product Designer from Sydney, Australia"
     description="I’ve had the privilege of working with many fantastic companies including Google, Palantir, Nike, Toyota, National Geographic, Westfield, Square, Canva and Spaceship."
   >
     <Section>
@@ -27,7 +27,7 @@ const Home = ({ mediumPosts, devPosts }) => (
       </div>
       <div className={styles.heroRight}>
         <p className="h1Sans">
-          Hi, I’m Hayden Bleasel. I’m a digital product designer living in
+          Hi, I’m Hayden Bleasel. I’m a digital Product Designer living in
           Sydney, Australia. I currently run and lead product design at{" "}
           <Client large name="Jellypepper" link="https://jellypepper.com/" />{" "}
           &mdash; an award-winning digital agency for bright ideas.

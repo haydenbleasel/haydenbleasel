@@ -6,13 +6,8 @@ import Title from "../../components/title";
 
 const Projects = () => (
   <Layout
-    title="Current and previous work"
-    description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
-    image={{
-      url: `${siteUrl}/images/work/cover.png`,
-      width: 2628,
-      height: 1752,
-    }}
+    title="Projects and Apps"
+    description="I work on a bunch of side projects and apps after-hours."
   >
     <Title sans="Projects" serif="&amp; Apps" />
 

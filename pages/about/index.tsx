@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styles from "./about.module.css";
 import Layout from "../../components/layout";
-import { siteUrl } from "../../next-sitemap";
 import Section from "../../components/section";
 import Link from "../../components/link";
 import Client from "../../components/client";
@@ -59,15 +58,10 @@ const About = () => {
 
   return (
     <Layout
-      title="About"
-      description="I’ve been fortunate enough to speak at a few events and be interviewed by a few writers and blogs."
-      image={{
-        url: `${siteUrl}/images/events/sydney-designers.jpg`,
-        width: 4032,
-        height: 3024,
-      }}
+      title="About me"
+      description="I enjoy reducing complex problems into thoughtful solutions that balance simplicity, functionality and accessibility."
     >
-      <Title sans="About" serif="Me" />
+      <Title sans="About" serif="me" />
 
       <Section>
         <div className={styles.bio}>

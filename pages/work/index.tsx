@@ -8,13 +8,8 @@ import Outlink from "../../components/outlink";
 
 const Work = () => (
   <Layout
-    title="Current and previous work"
+    title="Selected Work"
     description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
-    image={{
-      url: `${siteUrl}/images/work/cover.png`,
-      width: 2628,
-      height: 1752,
-    }}
   >
     <Title sans="Selected" serif="Work" />
 

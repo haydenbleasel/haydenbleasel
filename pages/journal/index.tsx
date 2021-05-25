@@ -24,7 +24,7 @@ type IJournal = {
 const Journal = ({ mediumPosts, devPosts }: IJournal) => (
   <Layout
     title="Thoughts, stories and ideas"
-    description="I’ve had the privilege of working with a wide range of companies and early-stage startups."
+    description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants that didn't fit on Twitter."
   >
     <Title sans="Thoughts" serif="&amp; Ideas" />
 
