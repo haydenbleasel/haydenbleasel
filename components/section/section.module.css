@@ -12,5 +12,6 @@
 
   @media (--mobile) {
     gap: var(--gap-small);
+    padding: calc(var(--gap-small) / 2);
   }
 }
