@@ -1,4 +1,3 @@
-import { siteUrl } from "../../next-sitemap";
 import Layout from "../../components/layout";
 import Link from "../../components/link";
 import Section from "../../components/section";
