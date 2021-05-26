@@ -39,7 +39,7 @@
 
   --type-scale-0: calc(var(--type-scale-1) / var(--type-scale-multiplier));
   --type-family-sans: "haydenbleasel-lausanne", Arial, Helvetica, sans-serif;
-  --type-family-serif: "haydenbleasel-gtsuper", serif;
+  --type-family-serif: "haydenbleasel-gtsuper", Georgia, Times, Times New Roman, serif;
 
   @media (prefers-color-scheme: dark) {
     --white: #111213;
