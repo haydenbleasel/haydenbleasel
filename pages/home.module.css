@@ -78,11 +78,15 @@
   }
 }
 
-.asterisk > div {
-  width: var(--type-scale-5) !important;
-  height: var(--type-scale-5) !important;
+.asterisk {
+  display: inline-block;
+  
+  & > div > div {
+    width: var(--type-scale-5) !important;
+    height: var(--type-scale-5) !important;
 
-  @media (--darkMode) {
-    filter: brightness(100);
+    @media (--darkMode) {
+      filter: brightness(100);
+    }
   }
 }
