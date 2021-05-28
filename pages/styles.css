@@ -69,6 +69,7 @@ html {
   color: var(--black);
   box-sizing: border-box;
   background: var(--white);
+  overflow-x: hidden;
 }
 
 *,
