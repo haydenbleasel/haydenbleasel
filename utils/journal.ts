@@ -52,13 +52,14 @@ export async function getMediumPosts() {
     const dom = new JSDOM(content);
 
     return {
+      id: item.guid,
       title: item.title,
-      link: item.link,
-      caption: format(parseISO(item.isoDate), "MMMM d, yyyy"),
       description: dom.window.document.querySelector("h4").textContent,
+      caption: format(parseISO(item.isoDate), "MMMM d, yyyy"),
       image: dom.window.document
         .querySelector("img")
         .src.replace("max/1024", "max/3840"),
+      link: item.link,
     };
   });
 

@@ -1,20 +1,10 @@
 import Layout from "../../components/layout";
 import Post from "../../components/post";
-
 import styles from "./journal.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
 import { getDevPosts, getMediumPosts } from '../../utils/journal';
 import Divider from "../../components/divider";
-
-type IPost = {
-  title: string;
-  id: string;
-  date: string;
-  summary: string;
-  image: string;
-  link: string;
-}
 
 type IJournal = {
   mediumPosts: IPost[];
@@ -34,7 +24,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
 
         <div className={styles.designPosts}>
           {mediumPosts.map((post, index) => (
-            <div className={styles.post} key={post.title}>
+            <div className={styles.post} key={post.id}>
               <Post {...post} featured={index === 0} />
             </div>
           ))}
@@ -45,7 +35,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
 
         <div className={styles.technicalPosts}>
           {devPosts.map((post) => (
-            <div className={styles.post} key={post.title}>
+            <div className={styles.post} key={post.id}>
               <Post {...post} compact />
             </div>
           ))}

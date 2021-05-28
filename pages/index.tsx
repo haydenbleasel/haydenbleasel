@@ -8,7 +8,12 @@ import { getDevPosts, getMediumPosts } from "../utils/journal";
 import styles from "./home.module.css";
 import { useEffect, useState } from "react";
 
-const Home = ({ mediumPosts, devPosts }) => {
+type IHome = {
+  mediumPosts: IPost[],
+  devPosts: IPost[],
+}
+
+const Home = ({ mediumPosts, devPosts }: IHome) => {
   const [offset, setOffset] = useState<number>(0);
 
   function onScroll() {
@@ -119,13 +124,13 @@ const Home = ({ mediumPosts, devPosts }) => {
 
         <div className={styles.designPosts}>
           {mediumPosts.slice(0, 2).map((post) => (
-            <Post key={post.title} {...post} />
+            <Post key={post.id} {...post} />
           ))}
         </div>
 
         <div className={styles.technicalPosts}>
           {devPosts.slice(0, mediumPosts.length < 2 ? 4 : 3).map((post) => (
-            <Post key={post.title} {...post} compact />
+            <Post key={post.id} {...post} compact />
           ))}
         </div>
 
