@@ -54,6 +54,7 @@ const Header = ({ onNavToggle }: IHeader) => {
                   layout="fixed"
                   width={54}
                   height={16}
+                  priority
                 />
               </Link>
             </div>

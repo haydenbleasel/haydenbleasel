@@ -22,6 +22,7 @@ const Client = ({ link, large = false, name }: IClient) => (
           .toLowerCase()}.svg`}
         quality={100}
         objectFit="contain"
+        priority={large}
       />
       <span>{name}</span>
     </span>

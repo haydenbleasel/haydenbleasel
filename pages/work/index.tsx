@@ -19,6 +19,7 @@ const Work = () => (
         subtitle="Jellypepper"
         id="jellypepper"
         image="/images/work/jellypepper.png"
+        priority
       >
         <div>
           <p className="small">

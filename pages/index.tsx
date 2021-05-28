@@ -43,6 +43,7 @@ const Home = ({ mediumPosts, devPosts }: IHome) => {
                 width={48}
                 height={48}
                 alt="Hello there"
+                priority
               />
             </div>
           </div>

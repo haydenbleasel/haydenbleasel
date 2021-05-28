@@ -11,6 +11,7 @@ type IRole = {
   title: string;
   subtitle: string;
   link?: string;
+  priority?: boolean;
   children: ReactNode;
 }
 
@@ -21,11 +22,12 @@ const Role = ({
   title,
   subtitle,
   link,
+  priority = false,
   children,
 }: IRole) => (
   <div className={styles.role} id={id}>
     <Skeleton>
-      <Image src={image} layout="responsive" width={1312} height={600} />
+      <Image src={image} layout="responsive" width={1312} height={600} priority={priority} />
     </Skeleton>
     <div className={styles.meta}>
       <div className={styles.summary}>

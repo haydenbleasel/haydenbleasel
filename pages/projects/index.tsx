@@ -18,6 +18,7 @@ const Projects = () => (
         subtitle="Maker"
         link="https://neutral.sh/"
         image="/images/projects/neutral.png"
+        priority
       >
         <div>
           <p className="small">
