@@ -9,9 +9,9 @@ import styles from "./home.module.css";
 import { useEffect, useState } from "react";
 
 type IHome = {
-  mediumPosts: IPost[],
-  devPosts: IPost[],
-}
+  mediumPosts: IPost[];
+  devPosts: IPost[];
+};
 
 const Home = ({ mediumPosts, devPosts }: IHome) => {
   const [offset, setOffset] = useState<number>(0);
@@ -25,7 +25,7 @@ const Home = ({ mediumPosts, devPosts }: IHome) => {
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-    }
+    };
   }, []);
 
   return (
@@ -164,7 +164,7 @@ const Home = ({ mediumPosts, devPosts }: IHome) => {
       </Section>
     </Layout>
   );
-}
+};
 
 export async function getStaticProps() {
   const mediumPosts = await getMediumPosts();

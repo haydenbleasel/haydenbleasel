@@ -14,8 +14,8 @@ type IFooter = {
 };
 
 const Footer = ({ socialPlatforms }: IFooter) => {
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function joinMailingList(event: FormEvent) {
     event.preventDefault();
@@ -47,22 +47,18 @@ const Footer = ({ socialPlatforms }: IFooter) => {
       <Section>
         <div className={styles.social}>
           {socialPlatforms.map(({ name, url, image }) => (
-            <a
-              className={styles.socialIcon}
-              key={name}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image
-                alt={name}
-                layout="fixed"
-                width={18}
-                height={18}
-                src={image}
-                quality={100}
-              />
-            </a>
+            <div key={name} className={styles.socialIcon}>
+              <Link href={url}>
+                <Image
+                  alt={name}
+                  layout="fixed"
+                  width={18}
+                  height={18}
+                  src={image}
+                  quality={100}
+                />
+              </Link>
+            </div>
           ))}
         </div>
 

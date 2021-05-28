@@ -1,6 +1,7 @@
-import styles from './section.module.css';
+import type { HTMLAttributes } from "react";
+import styles from "./section.module.css";
 
-const Section = (props: any) => (
+const Section = (props: HTMLAttributes<HTMLDivElement>) => (
   <section className={styles.grid} {...props} />
 );
 

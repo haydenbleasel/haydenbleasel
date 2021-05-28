@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 import { useState } from "react";
 import type { SetStateAction } from "react";
 import { useRouter } from "next/router";
@@ -17,7 +17,7 @@ type IHeader = {
 
 const Header = ({ onNavToggle }: IHeader) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   function toggleMenuOpen(open: SetStateAction<boolean>) {
     setMenuOpen(open);
@@ -34,7 +34,7 @@ const Header = ({ onNavToggle }: IHeader) => {
     return (
       <li
         key={route}
-        className={`small ${router.pathname == url ? styles.active : ""}`}
+        className={`small ${pathname == url ? styles.active : ""}`}
       >
         <Link href={url}>{route}</Link>
       </li>
