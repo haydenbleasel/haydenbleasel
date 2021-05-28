@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import type { ReactNode } from 'react';
-import Skeleton from '../../components/skeleton';
-import styles from './role.module.css';
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import Skeleton from "../../components/skeleton";
+import styles from "./role.module.css";
 
 type IRole = {
   id: string;
@@ -11,8 +11,9 @@ type IRole = {
   title: string;
   subtitle: string;
   link?: string;
+  priority?: boolean;
   children: ReactNode;
-}
+};
 
 const Role = ({
   id,
@@ -21,11 +22,18 @@ const Role = ({
   title,
   subtitle,
   link,
+  priority = false,
   children,
 }: IRole) => (
   <div className={styles.role} id={id}>
     <Skeleton>
-      <Image src={image} layout="responsive" width={1312} height={600} />
+      <Image
+        src={image}
+        layout="responsive"
+        width={1312}
+        height={600}
+        priority={priority}
+      />
     </Skeleton>
     <div className={styles.meta}>
       <div className={styles.summary}>

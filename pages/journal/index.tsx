@@ -3,7 +3,7 @@ import Post from "../../components/post";
 import styles from "./journal.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
-import { getDevPosts, getMediumPosts } from '../../utils/journal';
+import { getDevPosts, getMediumPosts } from "../../utils/journal";
 import Divider from "../../components/divider";
 
 type IJournal = {

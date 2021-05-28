@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ChangeEvent, FormEvent } from 'react';
+import type { ChangeEvent, FormEvent } from "react";
 import Layout from "../../components/layout";
 
 import styles from "./contact.module.css";
@@ -7,11 +7,11 @@ import Section from "../../components/section";
 import Title from "../../components/title";
 
 const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
   const [files, setFiles] = useState<FileList | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   async function sendEmail(event: FormEvent) {
     event.preventDefault();
@@ -90,9 +90,7 @@ const Contact = () => {
               <label className={styles.label} htmlFor="name">
                 Full name
               </label>
-              <span className={styles.remaining}>
-                {name.length} / 320
-              </span>
+              <span className={styles.remaining}>{name.length} / 320</span>
             </div>
             <input
               className={styles.input}
@@ -114,9 +112,7 @@ const Contact = () => {
               <label className={styles.label} htmlFor="email">
                 Email address
               </label>
-              <span className={styles.remaining}>
-                {email.length} / 320
-              </span>
+              <span className={styles.remaining}>{email.length} / 320</span>
             </div>
             <input
               className={styles.input}
@@ -138,9 +134,7 @@ const Contact = () => {
               <label className={styles.label} htmlFor="message">
                 Message
               </label>
-              <span className={styles.remaining}>
-                {message.length} / 1000
-              </span>
+              <span className={styles.remaining}>{message.length} / 1000</span>
             </div>
             <textarea
               className={styles.textarea}

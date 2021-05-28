@@ -18,12 +18,13 @@ const Projects = () => (
         subtitle="Maker"
         link="https://neutral.sh/"
         image="/images/projects/neutral.png"
+        priority
       >
         <div>
           <p className="small">
             Neutral is a climate-focused app that combines a lifestyle
-            questionnaire with U.S. EPA and other data sources to calculate
-            your CO₂e emissions, then helps you offset it with a reforestation
+            questionnaire with U.S. EPA and other data sources to calculate your
+            CO₂e emissions, then helps you offset it with a reforestation
             program.
           </p>
           <p className="small">
@@ -36,12 +37,13 @@ const Projects = () => (
           <p className="small">
             By partnering with environmental non-profits and tree-planting
             organisations, we’ve given you access to global reforestation
-            initiatives, in your pocket, so you can offset your carbon
-            emissions in your own backyard.
+            initiatives, in your pocket, so you can offset your carbon emissions
+            in your own backyard.
           </p>
           <p className="small">
-            So far, we’ve helped our users plant over a thousand trees and offset hundreds of
-            tonnes of CO₂e. It’s just the beginning.</p>
+            So far, we’ve helped our users plant over a thousand trees and
+            offset hundreds of tonnes of CO₂e. It’s just the beginning.
+          </p>
         </div>
       </Role>
 
@@ -55,9 +57,9 @@ const Projects = () => (
       >
         <div>
           <p className="small">
-            As part of my work at Tomorrow Studio, I’m currently designing
-            Bokeh — an intelligent portfolio platform for professional
-            photographers that grows with your work.
+            As part of my work at Tomorrow Studio, I’m currently designing Bokeh
+            — an intelligent portfolio platform for professional photographers
+            that grows with your work.
           </p>
         </div>
         <div>
@@ -79,14 +81,14 @@ const Projects = () => (
         <div>
           <p className="small">
             While in university, I created a product called Presumi — a
-            resume-tracking and analytics platform that used a unique
-            algorithm that allowed for detailed data collection all the way
-            from the candidate to the employer.
+            resume-tracking and analytics platform that used a unique algorithm
+            that allowed for detailed data collection all the way from the
+            candidate to the employer.
           </p>
           <p className="small">
-            Built on top of this was a bespoke B2B analytics platform that
-            used aggregated behavioural analytics to help employment
-            marketplaces make strategic decisions.
+            Built on top of this was a bespoke B2B analytics platform that used
+            aggregated behavioural analytics to help employment marketplaces
+            make strategic decisions.
           </p>
           <p className="small">
             I started Presumi in 2016 as a B2C platform focused on helping
@@ -97,15 +99,15 @@ const Projects = () => (
         <div>
           <p className="small">
             After pivoting, I ended up licensing the platform to SEEK
-            (Australia’s no. 1 jobs, employment, career and recruitment site)
-            in Hong Kong for a while, where we managed 100K+ job applications
-            and analysed 1M+ data points.
+            (Australia’s no. 1 jobs, employment, career and recruitment site) in
+            Hong Kong for a while, where we managed 100K+ job applications and
+            analysed 1M+ data points.
           </p>
           <p className="small">
-            Presumi was my first solo project where I designed and developed
-            the entire platform from ground up. The front-end was built in
-            React and Parse, the back-end was a unique resume tracking
-            algorithm built in Node.js.
+            Presumi was my first solo project where I designed and developed the
+            entire platform from ground up. The front-end was built in React and
+            Parse, the back-end was a unique resume tracking algorithm built in
+            Node.js.
           </p>
         </div>
       </Role>

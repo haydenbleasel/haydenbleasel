@@ -37,8 +37,8 @@ const Post = ({
               src={image}
               quality={100}
               objectFit="cover"
-              loading={featured ? "eager" : "lazy"}
               objectPosition={focus}
+              priority={featured}
             />
           </Skeleton>
         </div>
