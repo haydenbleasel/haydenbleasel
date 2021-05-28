@@ -124,6 +124,11 @@
 .hamburger {
   padding: 0.85rem;
   margin-right: -0.85rem;
+  display: none;
+
+  @media (--tablet) {
+    display: block;
+  }
 }
 
 .open .sitemap {

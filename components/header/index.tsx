@@ -4,7 +4,6 @@ import type { SetStateAction } from "react";
 import { useRouter } from "next/router";
 import Headroom from "react-headroom";
 import { Squeeze as Hamburger } from "hamburger-react";
-import useResponsive from "../../utils/responsive";
 
 import styles from "./header.module.css";
 import Link from "../link";
@@ -19,11 +18,10 @@ type IHeader = {
 const Header = ({ onNavToggle }: IHeader) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { isTablet } = useResponsive();
 
   function toggleMenuOpen(open: SetStateAction<boolean>) {
     setMenuOpen(open);
-    isTablet && onNavToggle();
+    onNavToggle();
   }
 
   function NavItem(route: string) {
@@ -61,17 +59,15 @@ const Header = ({ onNavToggle }: IHeader) => {
             </div>
             <div className={styles.menu}>
               <ul className={styles.sitemap}>{routes.map(NavItem)}</ul>
-              {isTablet && (
-                <div className={styles.hamburger}>
-                  <Hamburger
-                    size={20}
-                    toggled={menuOpen}
-                    toggle={toggleMenuOpen}
-                    color="var(--black)"
-                    label="Show menu"
-                  />
-                </div>
-              )}
+              <div className={styles.hamburger}>
+                <Hamburger
+                  size={20}
+                  toggled={menuOpen}
+                  toggle={toggleMenuOpen}
+                  color="var(--black)"
+                  label="Show menu"
+                />
+              </div>
             </div>
           </header>
         </Section>
