@@ -103,10 +103,7 @@
   }
 
   @media (--tablet) {
-    opacity: 0;
-    transition: opacity 0.2s;
-    user-select: none;
-    pointer-events: none;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -132,7 +129,5 @@
 }
 
 .open .sitemap {
-  opacity: 1;
-  user-select: initial;
-  pointer-events: initial;
+  display: flex;
 }
