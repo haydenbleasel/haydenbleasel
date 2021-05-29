@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { NextSeo, SocialProfileJsonLd } from "next-seo";
 import { useRouter } from "next/router";
 import { siteUrl } from "../next-sitemap";
@@ -66,13 +65,6 @@ const Layout = ({
   description = "This is the default description",
 }: LayoutProps) => {
   const { asPath } = useRouter();
-  const [bodyFixed, setBodyFixed] = useState(false);
-
-  useEffect(() => {
-    document.body.style.overflow = bodyFixed ? "hidden" : "unset";
-    document.body.style.position = bodyFixed ? "fixed" : "unset";
-    document.body.style.width = bodyFixed ? "100vw" : "unset";
-  }, [bodyFixed]);
 
   return (
     <>
@@ -109,7 +101,7 @@ const Layout = ({
         sameAs={socialPlatforms.map(({ url }) => url)}
       />
 
-      <Header onNavToggle={() => setBodyFixed(!bodyFixed)} />
+      <Header />
 
       {children}
 

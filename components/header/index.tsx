@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
-import type { SetStateAction } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Headroom from "react-headroom";
 import { Squeeze as Hamburger } from "hamburger-react";
@@ -11,18 +10,15 @@ import Section from "../section";
 
 const routes = ["Home", "About", "Work", "Journal", "Projects", "Contact"];
 
-type IHeader = {
-  onNavToggle: any;
-};
-
-const Header = ({ onNavToggle }: IHeader) => {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const { pathname } = useRouter();
 
-  function toggleMenuOpen(open: SetStateAction<boolean>) {
-    setMenuOpen(open);
-    onNavToggle();
-  }
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "unset";
+    document.body.style.position = menuOpen ? "fixed" : "unset";
+    document.body.style.width = menuOpen ? "100vw" : "unset";
+  }, [menuOpen]);
 
   function NavItem(route: string) {
     let url = `/${route.toLowerCase()}`;
@@ -64,7 +60,7 @@ const Header = ({ onNavToggle }: IHeader) => {
                 <Hamburger
                   size={20}
                   toggled={menuOpen}
-                  toggle={toggleMenuOpen}
+                  toggle={(open) => setMenuOpen(open)}
                   color="var(--black)"
                   label="Show menu"
                 />
