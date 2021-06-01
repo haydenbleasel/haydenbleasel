@@ -1897,10 +1897,10 @@ data-urls@^2.0.0:
     whatwg-mimetype "^2.3.0"
     whatwg-url "^8.0.0"
 
-date-fns@^2.22.0:
-  version "2.22.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.0.tgz#e25d79dda0639ae9e840d02ab34446613037c392"
-  integrity sha512-1TMrlJRPYjeR6KS9TgnJz4DX1rHW5NkfgIHpe9NWL6TGTzd6qo8mLo6ibt3p1wvXAu/DOal1Yce5YloFGeexBA==
+date-fns@^2.22.1:
+  version "2.22.1"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.22.1.tgz#1e5af959831ebb1d82992bf67b765052d8f0efc4"
+  integrity sha512-yUFPQjrxEmIsMqlHhAhmxkuH769baF21Kk+nZwZGyrMoyLA+LugaQtC0+Tqf9CBUUULWwUJt6Q5ySI3LJDDCGg==
 
 debug@2:
   version "2.6.9"
@@ -2971,10 +2971,10 @@ next-seo@^4.24.0:
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-4.24.0.tgz#7c0447da00b8574dcda5c6979771a7f6efd24f55"
   integrity sha512-9VQXfXAelhE+hAWzJ4azigQaW3FPX0kU0eYKFQXKsQjgY7AWtukjRGXls0oSIk8khhDJwmCt46EwsO9n5DDW6Q==
 
-next-sitemap@^1.6.95:
-  version "1.6.95"
-  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-1.6.95.tgz#5f7ea8ebd1b41730250ca3a1f1abd2a4320902ff"
-  integrity sha512-vrmqS+iAoWxQunzBn0hx5Wq4kJWaHbJeaYRxG0Qy5fOuzJ5urqdcjrt6bL1UqmUziZmNpBfIUqV4Sh+6NDiC3g==
+next-sitemap@^1.6.99:
+  version "1.6.99"
+  resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-1.6.99.tgz#5009d4066fb6c7e908c15400732633241263c65b"
+  integrity sha512-2ZSIBOslKJO0bz0ShCVAU2UUzE/SBIBA1MT7e7uOlOMw9u+OD1Uc4XDzKLhNdjbCuic707xYMW5E0jsnOljhUA==
   dependencies:
     "@corex/deepmerge" "^2.6.20"
     matcher "^4.0.0"
