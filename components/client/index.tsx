@@ -7,25 +7,24 @@ type IClient = {
     data: PrismicLink;
   };
   content: string;
-  large: boolean;
 };
 
-const Client = ({ element, content, large = false }: IClient) => {
+const Client = ({ element, content }: IClient) => {
   return (
     <Link href={element.data}>
-      <span className={`${styles.client} ${large ? styles.large : ""}`}>
+      <span className={styles.client}>
         <Image
           layout="fixed"
-          height={large ? 32 : 24}
-          width={large ? 32 : 24}
+          height={32}
+          width={32}
           alt={content}
-          src={`/images/companies/${content
+          src={`/images/${content
             .replace(" ", "")
             .replace("/", "")
             .toLowerCase()}.svg`}
           quality={100}
           objectFit="contain"
-          priority={large}
+          priority
         />
         <span>{content}</span>
       </span>

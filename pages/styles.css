@@ -95,7 +95,7 @@ a {
   letter-spacing: -0.02em;
 }
 
-.titleSerif {
+.titleSans em, .titleSerif {
   font-family: var(--type-family-serif);
   font-style: italic;
   font-weight: 300;

@@ -15,8 +15,7 @@ const routes = (uid: string) => ({
 /** Richtext HTML parser */
 function htmlSerializer (elements, type, element, content, children) {
   if (Object.keys(elements).includes(type)) {
-    const [component, props] = elements[type];
-    const string = component({ element, content, children, ...props });
+    const string = elements[type]({ element, content, children });
 
     return renderToString(string);
   }

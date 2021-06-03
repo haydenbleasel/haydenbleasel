@@ -3,17 +3,12 @@
   align-items: baseline;
 
   & > div {
-    width: var(--type-scale-1) !important;
-    height: var(--type-scale-1) !important;
+    width: var(--type-scale-3) !important;
+    height: var(--type-scale-3) !important;
 
     @media (--darkMode) {
       filter: brightness(100);
     }
-  }
-
-  &.large > div {
-    width: var(--type-scale-3) !important;
-    height: var(--type-scale-3) !important;
   }
 
   & > span {
