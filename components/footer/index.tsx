@@ -4,16 +4,13 @@ import Image from "next/image";
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
+import { richtext } from "../../utils/prismic";
 
 type IFooter = {
-  socialPlatforms: {
-    name: string;
-    url: string;
-    image: string;
-  }[];
+  settings: PrismicSettings;
 };
 
-const Footer = ({ socialPlatforms }: IFooter) => {
+const Footer = ({ settings }: IFooter) => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -46,15 +43,15 @@ const Footer = ({ socialPlatforms }: IFooter) => {
     <footer className={styles.footer}>
       <Section>
         <div className={styles.social}>
-          {socialPlatforms.map(({ name, url, image }) => (
-            <div key={name} className={styles.socialIcon}>
-              <Link href={url}>
+          {settings.social.map(({ social_name, social_link, social_icon }) => (
+            <div key={social_name} className={styles.socialIcon}>
+              <Link href={social_link}>
                 <Image
-                  alt={name}
+                  alt={social_name}
                   layout="fixed"
                   width={18}
                   height={18}
-                  src={image}
+                  src={social_icon.url}
                   quality={100}
                 />
               </Link>
@@ -63,18 +60,7 @@ const Footer = ({ socialPlatforms }: IFooter) => {
         </div>
 
         <div className={styles.container}>
-          <p>
-            <span className="h1Sans">Want to chat?</span>{" "}
-            <Link href="/contact">
-              <span className="h1Serif underline">Get in touch.</span>
-              <span className="h1Serif">&rarr;</span>
-            </Link>
-          </p>
-
-          <p className="h1Sans">
-            Join my private mailing list and get notified when I publish a new
-            product or article.
-          </p>
+          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(settings.footer_content) }} />
 
           <form
             id="newsletter"
@@ -83,14 +69,14 @@ const Footer = ({ socialPlatforms }: IFooter) => {
           >
             <fieldset className={styles.fields}>
               <label className={styles.label} htmlFor="email">
-                Email address
+                {settings.footer_newsletter_label}
               </label>
               <input
                 required
                 id="email"
                 className={styles.input}
                 type="email"
-                placeholder="janesmith@example.com"
+                placeholder={settings.footer_newsletter_placeholder}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -105,16 +91,7 @@ const Footer = ({ socialPlatforms }: IFooter) => {
           </form>
 
           <div className={styles.copyright}>
-            <p className="small">
-              <span>&copy; Hayden Bleasel 2077.</span>
-              <span>
-                {" "}
-                <Link href="https://github.com/haydenbleasel/website">
-                  Source code
-                </Link>
-                .
-              </span>
-            </p>
+            <p className="small" dangerouslySetInnerHTML={{__html: richtext(settings.footer_disclaimer, true) }} />
           </div>
         </div>
       </Section>

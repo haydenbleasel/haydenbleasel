@@ -113,7 +113,7 @@ a {
   letter-spacing: -0.02em;
 }
 
-.h1Serif {
+.h1Sans em, .h1Serif {
   font-family: var(--type-family-serif);
   font-style: italic;
   font-weight: 300;
@@ -131,7 +131,7 @@ a {
   letter-spacing: -0.02em;
 }
 
-.h2Serif {
+.h2Sans em, .h2Serif {
   font-family: var(--type-family-serif);
   font-style: italic;
   font-weight: 300;
@@ -149,7 +149,7 @@ a {
   letter-spacing: -0.01em;
 }
 
-.h3Serif {
+.h3Sans em, .h3Serif {
   font-family: var(--type-family-serif);
   font-style: normal;
   font-weight: 300;
@@ -167,7 +167,7 @@ a {
   letter-spacing: -0.01em;
 }
 
-.h4Serif {
+.h4Sans em, .h4Serif {
   font-family: var(--type-family-serif);
   font-style: normal;
   font-weight: 300;
@@ -185,7 +185,7 @@ a {
   letter-spacing: -0.005em;
 }
 
-.paragraphSerif {
+.paragraphSans em, .paragraphSerif {
   font-family: var(--type-family-serif);
   font-style: normal;
   font-weight: 300;

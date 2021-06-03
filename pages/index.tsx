@@ -7,13 +7,35 @@ import Outlink from "../components/outlink";
 import { getDevPosts, getMediumPosts } from "../utils/journal";
 import styles from "./home.module.css";
 import { useEffect, useState } from "react";
+import { plaintext, queryAt, richtext } from "../utils/prismic";
 
 type IHome = {
+  data: {
+    title: string;
+    description: string;
+    asterisk: PrismicImage;
+    hero_title: PrismicRichText;
+    hero_subtitle: PrismicRichText;
+    hero_action_text: string;
+    hero_action_link: any;
+    selected_work_title: PrismicRichText;
+    selected_work: { work: PrismicLink & { data: PrismicRole }}[];
+    selected_work_link: PrismicLink;
+    selected_work_cta: string;
+    journal_title: PrismicRichText;
+    journal_cta: string;
+    journal_link: PrismicLink;
+    projects_title: PrismicRichText;
+    projects: { project: PrismicLink & { data: PrismicProject }}[];
+    projects_cta: string;
+    projects_link: PrismicLink;
+  },
   mediumPosts: IPost[];
   devPosts: IPost[];
+  settings: PrismicSettings;
 };
 
-const Home = ({ mediumPosts, devPosts }: IHome) => {
+const Home = ({ data, settings, mediumPosts, devPosts }: IHome) => {
   const [offset, setOffset] = useState<number>(0);
 
   function onScroll() {
@@ -30,15 +52,16 @@ const Home = ({ mediumPosts, devPosts }: IHome) => {
 
   return (
     <Layout
-      title="Digital Product Designer from Sydney, Australia"
-      description="I’ve had the privilege of working with many fantastic companies including Google, Palantir, Nike, Toyota, National Geographic, Westfield, Square, Canva and Spaceship."
+      title={data.title}
+      description={data.description}
+      settings={settings}
     >
       <Section>
         <div className={styles.heroLeft}>
           <div className={styles.asterisk}>
             <div style={{ transform: `rotate(${offset}deg)` }}>
               <Image
-                src="/images/home/asterisk.svg"
+                src={data.asterisk.url}
                 layout="fixed"
                 width={48}
                 height={48}
@@ -49,129 +72,93 @@ const Home = ({ mediumPosts, devPosts }: IHome) => {
           </div>
         </div>
         <div className={styles.heroRight}>
-          <p className="h1Sans">
-            Hi, I’m Hayden Bleasel. I’m a digital Product Designer living in
-            Sydney, Australia. I currently run and lead product design at{" "}
-            <Client large name="Jellypepper" link="https://jellypepper.com/" />{" "}
-            &mdash; an award-winning digital agency for bright ideas.
-          </p>
-          <p className="h1Sans">
-            I’ve had the privilege of working with many fantastic companies
-            including{" "}
-            <Client large name="Google" link="https://www.google.com/" />,{" "}
-            <Client large name="Palantir" link="https://www.palantir.com/" />,{" "}
-            <Client large name="Nike" link="https://www.nike.com/" />,{" "}
-            <Client large name="Toyota" link="https://www.toyota.com.au/" />,{" "}
-            <Client
-              large
-              name="National Geographic"
-              link="https://www.disney.com.au/national-geographic/"
-            />
-            ,{" "}
-            <Client
-              large
-              name="Westfield"
-              link="https://www.westfield.com.au/"
-            />
-            , <Client large name="Square" link="https://squareup.com/au/en" />,{" "}
-            <Client large name="Canva" link="https://www.canva.com/en_au/" />{" "}
-            and{" "}
-            <Client
-              large
-              name="Spaceship"
-              link="https://www.spaceship.com.au/"
-            />
-            .
-          </p>
-          <p className={`h1Sans ${styles.outlink}`}>
-            <Outlink text="Keep reading" link="/about" />
-          </p>
+          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_title, true, { hyperlink: [Client, { large: true }] }) }} />
+          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_subtitle, true, { hyperlink: [Client, { large: true }] }) }} />
+          <div className={`h1Sans ${styles.outlink}`}>
+            <Outlink text={data.hero_action_text} link={data.hero_action_link} />
+          </div>
         </div>
       </Section>
 
-      <Section>
-        <h2 className={styles.sectionHeader}>
-          <span className="h2Sans">Selected</span>
-          <span className="h2Serif"> Work</span>
-        </h2>
-        <div className={styles.work}>
-          <Post
-            image="/images/work/spaceship.png"
-            focus="center left"
-            caption="2016 &mdash; 2017"
-            title="Head of Product and Design at Spaceship"
-            link="/work#spaceship"
-            description="I joined Spaceship in September 2016 where I helped grow a waitlist of 28,000 people, design and build the marketing website and superannuation portal, as well as the design system that ran our apps."
-          />
-        </div>
-        <div className={styles.work}>
-          <Post
-            image="/images/work/palantir.png"
-            caption="2015"
-            title="Product Design Intern at Palantir Technologies"
-            link="/work#palantir"
-            description="I worked as a Product Design intern at Palantir’s Palo Alto HQ. I was part of a small team tasked with designing an anti-fraud focused pilot project which helped kickstart my career in product design."
-          />
-        </div>
-
-        <Outlink link="/work" text="View more work" />
+      <Section title={data.selected_work_title}>
+        {data.selected_work.map(({ work }) => (
+          <div key={work.uid} className={styles.work}>
+            <Post
+              image={work.data.image}
+              title={`${work.data.title} at ${work.data.description}`}
+              description={plaintext(work.data.content)}
+              caption={work.data.date}
+              link={work}
+            />
+          </div>
+        ))}
+        <Outlink link={data.selected_work_link} text={data.selected_work_cta} />
       </Section>
 
-      <Section>
-        <h2 className={styles.sectionHeader}>
-          <span className="h2Sans">Thoughts</span>
-          <span className="h2Serif"> &amp; Ideas</span>
-        </h2>
-
+      <Section title={data.journal_title}>
         <div className={styles.designPosts}>
           {mediumPosts.slice(0, 2).map((post) => (
-            <Post key={post.id} {...post} />
+            <Post
+              key={post.id}
+              {...post}
+            />
           ))}
         </div>
 
         <div className={styles.technicalPosts}>
           {devPosts.slice(0, mediumPosts.length < 2 ? 4 : 3).map((post) => (
-            <Post key={post.id} {...post} compact />
+            <Post
+              key={post.id}
+              {...post}
+              compact
+            />
           ))}
         </div>
 
-        <Outlink link="/journal" text="View more posts" />
+        <Outlink link={data.journal_link} text={data.journal_cta} />
       </Section>
 
-      <Section>
-        <h2 className={styles.sectionHeader}>
-          <span className="h2Sans">Projects</span>
-          <span className="h2Serif"> &amp; Apps</span>
-        </h2>
-        <div className={styles.project}>
-          <Post
-            image="/images/projects/neutral.png"
-            title="Neutral"
-            description="Climate-focused app that combines a lifestyle questionnaire with U.S. EPA and other data sources to calculate your CO₂e emissions, then helps you offset it with a reforestation program."
-            link="/projects#neutral"
-          />
-        </div>
-        <div className={styles.project}>
-          <Post
-            image="/images/projects/bokeh.png"
-            title="Bokeh"
-            description="Take control of your photography career with an intelligent portfolio platform for professional photographers that grows with your work. Bokeh is currently in private beta, but you can join the waitlist."
-            link="/projects#bokeh"
-          />
-        </div>
-
-        <Outlink link="/projects" text="View more projects" />
+      <Section title={data.projects_title}>
+        {data.projects.map(({ project }) => (
+          <div key={project.uid} className={styles.project}>
+            <Post
+              image={project.data.image}
+              title={project.data.title}
+              description={plaintext(project.data.content)}
+              caption={project.data.status}
+              link={project}
+            />
+          </div>
+        ))}
+        <Outlink link={data.projects_link} text={data.projects_cta} />
       </Section>
     </Layout>
   );
 };
 
 export async function getStaticProps() {
+  const { data } = await queryAt('document.type', 'home', {
+    fetchLinks: [
+      'role.image',
+      'role.title',
+      'role.description',
+      'role.date',
+      'role.content',
+      'project.image',
+      'project.title',
+      'project.description',
+      'project.status',
+      'project.content',
+    ]
+  });
+  const { data: settings } = await queryAt('document.type', 'settings');
   const mediumPosts = await getMediumPosts();
   const devPosts = await getDevPosts();
 
   return {
     props: {
+      data,
+      settings,
       mediumPosts,
       devPosts,
     },

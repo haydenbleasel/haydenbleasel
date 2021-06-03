@@ -9,6 +9,7 @@ import Divider from "../../components/divider";
 import events from "./events.json";
 import work from "./work.json";
 import interviews from "./interviews.json";
+import { queryAt } from "../../utils/prismic";
 
 type IEvent = {
   name: string;
@@ -23,6 +24,8 @@ type IRole = {
   start: string;
   end: string;
 };
+
+type IAbout = any;
 
 const Event = ({ url, name, organisation, year }: IEvent) => (
   <li key={`${name}-${organisation}`}>
@@ -51,7 +54,7 @@ const Role = ({ role, company, start, end }: IRole) => (
   </li>
 );
 
-const About = () => {
+const About = ({ data, settings }: IAbout) => {
   const [rolesExpanded, setRolesExpanded] = useState(false);
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const [interviewsExpanded, setInterviewsExpanded] = useState(false);
@@ -60,6 +63,7 @@ const About = () => {
     <Layout
       title="About me"
       description="I enjoy reducing complex problems into thoughtful solutions that balance simplicity, functionality and accessibility."
+      settings={settings}
     >
       <Title sans="About" serif="me" />
 
@@ -250,5 +254,17 @@ const About = () => {
     </Layout>
   );
 };
+
+export async function getStaticProps() {
+  const { data } = await queryAt('document.type', 'about');
+  const { data: settings } = await queryAt('document.type', 'settings');
+
+  return {
+    props: {
+      data,
+      settings,
+    },
+  };
+}
 
 export default About;

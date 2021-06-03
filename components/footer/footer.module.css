@@ -46,7 +46,7 @@
   align-self: flex-end;
 
   & :global(a) {
-    text-decoration: none;
+    text-decoration: underline;
   }
 
   & :global(.h1Sans), & :global(.h1Serif) {

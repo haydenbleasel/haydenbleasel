@@ -3,30 +3,34 @@ import Link from "../link";
 import styles from "./client.module.css";
 
 type IClient = {
-  link: string;
-  name: string;
-  large?: boolean;
+  element: {
+    data: PrismicLink;
+  };
+  content: string;
+  large: boolean;
 };
 
-const Client = ({ link, large = false, name }: IClient) => (
-  <Link href={link}>
-    <span className={`${styles.client} ${large ? styles.large : ""}`}>
-      <Image
-        layout="fixed"
-        height={large ? 32 : 24}
-        width={large ? 32 : 24}
-        alt={name}
-        src={`/images/companies/${name
-          .replace(" ", "")
-          .replace("/", "")
-          .toLowerCase()}.svg`}
-        quality={100}
-        objectFit="contain"
-        priority={large}
-      />
-      <span>{name}</span>
-    </span>
-  </Link>
-);
+const Client = ({ element, content, large = false }: IClient) => {
+  return (
+    <Link href={element.data}>
+      <span className={`${styles.client} ${large ? styles.large : ""}`}>
+        <Image
+          layout="fixed"
+          height={large ? 32 : 24}
+          width={large ? 32 : 24}
+          alt={content}
+          src={`/images/companies/${content
+            .replace(" ", "")
+            .replace("/", "")
+            .toLowerCase()}.svg`}
+          quality={100}
+          objectFit="contain"
+          priority={large}
+        />
+        <span>{content}</span>
+      </span>
+    </Link>
+  );
+}
 
 export default Client;

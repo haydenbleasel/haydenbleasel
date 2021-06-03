@@ -3,54 +3,17 @@ import { useRouter } from "next/router";
 import { siteUrl } from "../next-sitemap";
 import Header from "./header";
 import Footer from "./footer";
+import { resolveLink } from "../utils/prismic";
 
 type LayoutProps = {
   children: any;
   title: string;
   description: string;
+  settings: PrismicSettings,
 };
 
 const name = "Hayden Bleasel";
 const username = "haydenbleasel";
-
-const socialPlatforms = [
-  {
-    name: "Twitter",
-    url: "https://twitter.com/haydenbleasel",
-    image: "/images/social/twitter.svg",
-  },
-  {
-    name: "Dribbble",
-    url: "https://dribbble.com/haydenbleasel",
-    image: "/images/social/dribbble.svg",
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/hayden.bleasel/",
-    image: "/images/social/instagram.svg",
-  },
-  {
-    name: "GitHub",
-    url: "https://github.com/haydenbleasel/",
-    image: "/images/social/github.svg",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/haydenbleasel",
-    image: "/images/social/linkedin.svg",
-  },
-  {
-    name: "ProductHunt",
-    url: "https://www.producthunt.com/@haydenbleasel",
-    image: "/images/social/producthunt.svg",
-  },
-  {
-    name: "Spotify",
-    url: "https://open.spotify.com/user/haydenbleasel",
-    image: "/images/social/spotify.svg",
-  },
-  // { name: 'YourStack', url: 'https://yourstack.com/@haydenbleasel', image: '/images/social/yourstack.png' },
-];
 
 const image = {
   url: `${siteUrl}/images/cover.jpg`,
@@ -63,6 +26,7 @@ const Layout = ({
   children,
   title = "This is the default title",
   description = "This is the default description",
+  settings,
 }: LayoutProps) => {
   const { asPath } = useRouter();
 
@@ -98,14 +62,14 @@ const Layout = ({
         type="Person"
         name={name}
         url={siteUrl}
-        sameAs={socialPlatforms.map(({ url }) => url)}
+        sameAs={settings.social.map(({ social_link }) => resolveLink(social_link))}
       />
 
-      <Header />
+      <Header settings={settings} />
 
       {children}
 
-      <Footer socialPlatforms={socialPlatforms} />
+      <Footer settings={settings} />
     </>
   );
 };

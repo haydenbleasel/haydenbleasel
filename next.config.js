@@ -11,7 +11,15 @@ const config = {
   },
   images: {
     deviceSizes: [480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    domains: ["i.scdn.co", "cdn-images-1.medium.com", "dev.to"],
+    domains: [
+      "i.scdn.co",
+      "cdn-images-1.medium.com",
+      "dev.to",
+      "haydenbleasel.cdn.prismic.io",
+      "images.prismic.io",
+    ],
+    loader: "imgix",
+    path: "",
   },
   async headers() {
     return [

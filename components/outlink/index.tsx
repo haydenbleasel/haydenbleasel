@@ -3,7 +3,7 @@ import styles from "./outlink.module.css";
 
 type IOutlink = {
   text: string;
-  link: string;
+  link: PrismicLink;
 };
 
 const Outlink = ({ link, text }: IOutlink) => (
