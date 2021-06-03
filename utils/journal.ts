@@ -56,10 +56,12 @@ export async function getMediumPosts() {
       title: item.title,
       description: dom.window.document.querySelector("h4").textContent,
       caption: format(parseISO(item.isoDate), "MMMM d, yyyy"),
-      image: { url: dom.window.document
-        .querySelector("img")
-        .src.replace("max/1024", "max/3840") },
-      link: { src: item.link },
+      image: {
+        url: dom.window.document
+          .querySelector("img")
+          .src.replace("max/1024", "max/3840"),
+      },
+      link: { link_type: "Web", url: item.link },
     };
   });
 
@@ -79,7 +81,7 @@ export async function getDevPosts() {
       description,
       caption: format(parseISO(published_timestamp), "MMMM d, yyyy"),
       image: { url: social_image },
-      link: { src: url },
+      link: { link_type: "Web", url },
     })
   );
 
