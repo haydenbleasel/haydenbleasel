@@ -26,7 +26,6 @@ const Journal = ({ data, settings, mediumPosts, devPosts }: IJournal) => (
     description={data.description}
     settings={settings}
   >
-    {console.log(data)}
     <Title title={data.hero_title} />
 
     <Section>
