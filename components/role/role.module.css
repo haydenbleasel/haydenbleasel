@@ -32,7 +32,6 @@
 }
 
 .summary {
-
   & > p {
     margin: 0;
   }
@@ -48,5 +47,16 @@
 
   @media (--laptop) {
     margin-bottom: var(--gap-small);
+  }
+}
+
+.content {
+  columns: 2;
+  grid-column: 2 / 4;
+  column-gap: var(--gap-medium);
+  composes: small from global;
+
+  & p {
+    margin: 0 0 var(--gap-small);
   }
 }

@@ -79,6 +79,7 @@ const Role = ({ work_role, work_company, work_date }) => (
 function sortRoles(a, b) {
   const dateA = a.work_date.split(' — ')[0];
   const dateB = b.work_date.split(' — ')[0];
+  
   return new Date(dateA) < new Date(dateB) ? 1 : -1;
 }
 
