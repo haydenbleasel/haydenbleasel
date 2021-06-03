@@ -3,7 +3,6 @@ import styles from "./about.module.css";
 import Layout from "../../components/layout";
 import Section from "../../components/section";
 import Link from "../../components/link";
-import Client from "../../components/client";
 import Title from "../../components/title";
 import Divider from "../../components/divider";
 import { queryAt, richtext } from "../../utils/prismic";
@@ -77,10 +76,36 @@ const Role = ({ work_role, work_company, work_date }) => (
   </li>
 );
 
+function sortRoles(a, b) {
+  const dateA = a.work_date.split(' — ')[0];
+  const dateB = b.work_date.split(' — ')[0];
+  return new Date(dateA) < new Date(dateB) ? 1 : -1;
+}
+
+function sortEvents(a, b) {
+  return a.event_date < b.event_date ? 1 : -1;
+}
+
+function sortInterviews(a, b) {
+  return a.interview_date < b.interview_date ? 1 : -1;
+}
+
 const About = ({ data, settings }: IAbout) => {
   const [rolesExpanded, setRolesExpanded] = useState(false);
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const [interviewsExpanded, setInterviewsExpanded] = useState(false);
+
+  function filterRoles({ work_role }) {
+    if (rolesExpanded) {
+      return true;
+    } else {
+      return work_role.toLowerCase().includes('design');
+    }
+  }
+
+  function sliceList(expanded: boolean) {
+    return expanded ? [] : [0, 5];
+  }
 
   return (
     <Layout
@@ -93,7 +118,7 @@ const About = ({ data, settings }: IAbout) => {
       <Section>
         <div className={styles.bio}>
           {data.sections.map((section) => (
-            <div>
+            <div key={section.section_title}>
               <Divider text={section.section_title} />
 
               <div className="h3Sans" dangerouslySetInnerHTML={{ __html: richtext(section.section_content) }} />
@@ -105,12 +130,8 @@ const About = ({ data, settings }: IAbout) => {
           <div>
             <Divider text="Work History" />
 
-            <ul
-              className={`${styles.list} ${
-                rolesExpanded ? styles.expanded : ""
-              }`}
-            >
-              {data.work_history.map(Role)}
+            <ul className={styles.list}>
+              {data.work_history.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map(Role)}
             </ul>
             {!rolesExpanded && (
               <p
@@ -125,11 +146,9 @@ const About = ({ data, settings }: IAbout) => {
             <Divider text="Speaking Events" />
 
             <ul
-              className={`${styles.list} ${
-                eventsExpanded ? styles.expanded : ""
-              }`}
+              className={styles.list}
             >
-              {data.speaking_events.map(Event)}
+              {data.speaking_events.sort(sortEvents).slice(...sliceList(eventsExpanded)).map(Event)}
             </ul>
             {!eventsExpanded && (
               <p
@@ -143,12 +162,8 @@ const About = ({ data, settings }: IAbout) => {
           <div>
             <Divider text="Interviews &amp; Features" />
 
-            <ul
-              className={`${styles.list} ${
-                interviewsExpanded ? styles.expanded : ""
-              }`}
-            >
-              {data.interviews.map(Interview)}
+            <ul className={styles.list}>
+              {data.interviews.sort(sortInterviews).slice(...sliceList(interviewsExpanded)).map(Interview)}
             </ul>
             {!interviewsExpanded && (
               <p
