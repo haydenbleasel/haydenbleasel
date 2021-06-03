@@ -39,7 +39,7 @@ const Projects = ({ data, settings, projects }: IProjects) => (
           title={project.data.title}
           id={project.uid}
           subtitle={project.data.description}
-          action={project.data.action_label}
+          action={project.data.action_cta}
           link={project.data.action_link}
           image={project.data.image}
           priority={!index}

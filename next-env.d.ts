@@ -60,7 +60,7 @@ type PrismicProject = {
   description: string;
   status: string;
   content: PrismicRichText;
-  action_label: string;
+  action_cta: string;
   action_link: PrismicLink;
 };
 
