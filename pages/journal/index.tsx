@@ -3,24 +3,35 @@ import Post from "../../components/post";
 import styles from "./journal.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
-import { getDevPosts, getMediumPosts } from "../../utils/journal";
+import { getMediumPosts } from "../../utils/medium";
+import { getDevPosts } from "../../utils/dev";
 import Divider from "../../components/divider";
+import { queryAt } from "../../utils/prismic";
 
 type IJournal = {
+  data: {
+    title: string;
+    description: string;
+    hero_title: PrismicRichText;
+    medium_header: string;
+    dev_header: string;
+  };
+  settings: PrismicSettings;
   mediumPosts: IPost[];
   devPosts: IPost[];
 };
 
-const Journal = ({ mediumPosts, devPosts }: IJournal) => (
+const Journal = ({ data, settings, mediumPosts, devPosts }: IJournal) => (
   <Layout
-    title="Thoughts, stories and ideas"
-    description="I sometimes write about things I find interesting, tools I’m using and personal news. Here are some variants rants that didn't fit on Twitter."
+    title={data.title}
+    description={data.description}
+    settings={settings}
   >
-    <Title sans="Thoughts" serif="&amp; Ideas" />
+    <Title title={data.hero_title} />
 
     <Section>
       <div className={styles.design}>
-        <Divider text="Design and everything else" />
+        <Divider text={data.medium_header} />
 
         <div className={styles.designPosts}>
           {mediumPosts.map((post, index) => (
@@ -31,7 +42,7 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
         </div>
       </div>
       <div className={styles.technical}>
-        <Divider text="Technical" />
+        <Divider text={data.dev_header} />
 
         <div className={styles.technicalPosts}>
           {devPosts.map((post) => (
@@ -46,11 +57,15 @@ const Journal = ({ mediumPosts, devPosts }: IJournal) => (
 );
 
 export async function getStaticProps() {
+  const { data } = await queryAt('document.type', 'journal');
+  const { data: settings } = await queryAt('document.type', 'settings');
   const mediumPosts = await getMediumPosts();
   const devPosts = await getDevPosts();
 
   return {
     props: {
+      data,
+      settings,
       mediumPosts,
       devPosts,
     },

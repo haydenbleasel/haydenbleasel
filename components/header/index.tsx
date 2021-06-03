@@ -7,10 +7,13 @@ import { Squeeze as Hamburger } from "hamburger-react";
 import styles from "./header.module.css";
 import Link from "../link";
 import Section from "../section";
+import { resolveLink } from "../../utils/prismic";
 
-const routes = ["Home", "About", "Work", "Journal", "Projects", "Contact"];
+type IHeader = {
+  settings: PrismicSettings;
+}
 
-const Header = () => {
+const Header = ({ settings }: IHeader) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const { pathname } = useRouter();
 
@@ -20,19 +23,13 @@ const Header = () => {
     document.body.style.width = menuOpen ? "100vw" : "unset";
   }, [menuOpen]);
 
-  function NavItem(route: string) {
-    let url = `/${route.toLowerCase()}`;
-
-    if (url === "/home") {
-      url = "/";
-    }
-
+  function NavItem({ sitemap_label, sitemap_link }) {
     return (
       <li
-        key={route}
-        className={`small ${pathname == url ? styles.active : ""}`}
+        key={sitemap_label}
+        className={`small ${pathname == resolveLink(sitemap_link) ? styles.active : ""}`}
       >
-        <Link href={url}>{route}</Link>
+        <Link href={sitemap_link}>{sitemap_label}</Link>
       </li>
     );
   }
@@ -43,9 +40,9 @@ const Header = () => {
         <Section>
           <header className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
             <div className={styles.logo}>
-              <Link href="/">
+              <Link href={settings.logo_link}>
                 <Image
-                  src="/images/logo.svg"
+                  src={settings.logo.url}
                   alt="Hayden Bleasel"
                   layout="fixed"
                   width={54}
@@ -55,7 +52,9 @@ const Header = () => {
               </Link>
             </div>
             <div className={styles.menu}>
-              <ul className={styles.sitemap}>{routes.map(NavItem)}</ul>
+              <ul className={styles.sitemap}>
+                {settings.header_sitemap.map(NavItem)}
+              </ul>
               <div className={styles.hamburger}>
                 <Hamburger
                   size={20}

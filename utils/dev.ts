@@ -1,16 +1,4 @@
-import Parser from "rss-parser";
-import { JSDOM } from "jsdom";
 import { parseISO, format } from "date-fns";
-
-type IMediumPost = {
-  creator: string;
-  title: string;
-  link: string;
-  "content:encoded": string;
-  guid: string;
-  isoDate: string;
-  categories: string[];
-};
 
 type IDevPost = {
   type_of: string;
@@ -40,32 +28,6 @@ type IDevPost = {
   user: any;
 };
 
-export async function getMediumPosts() {
-  const parser = new Parser();
-
-  const { items } = await parser.parseURL(
-    "https://medium.com/feed/@haydenbleasel"
-  );
-
-  const posts = (items as IMediumPost[]).map((item) => {
-    const content = item["content:encoded"];
-    const dom = new JSDOM(content);
-
-    return {
-      id: item.guid,
-      title: item.title,
-      description: dom.window.document.querySelector("h4").textContent,
-      caption: format(parseISO(item.isoDate), "MMMM d, yyyy"),
-      image: dom.window.document
-        .querySelector("img")
-        .src.replace("max/1024", "max/3840"),
-      link: item.link,
-    };
-  });
-
-  return posts;
-}
-
 export async function getDevPosts() {
   const response = await fetch(
     "https://dev.to/api/articles?username=haydenbleasel"
@@ -78,8 +40,8 @@ export async function getDevPosts() {
       title,
       description,
       caption: format(parseISO(published_timestamp), "MMMM d, yyyy"),
-      image: social_image,
-      link: url,
+      image: { url: social_image },
+      link: { link_type: "Web", url },
     })
   );
 

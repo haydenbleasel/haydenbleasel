@@ -4,11 +4,11 @@ import Skeleton from "../skeleton";
 import styles from "./post.module.css";
 
 type PostProps = {
-  image?: string;
+  image?: PrismicImage;
   title: string;
   description?: string;
   caption?: string;
-  link: string;
+  link: PrismicLink;
   featured?: boolean;
   focus?: string;
   compact?: boolean;
@@ -34,7 +34,7 @@ const Post = ({
               width={featured ? 1128 : 742}
               height={featured ? 600 : 395}
               alt={title}
-              src={image}
+              src={image.url}
               quality={100}
               objectFit="cover"
               objectPosition={focus}

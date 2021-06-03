@@ -1,18 +1,19 @@
 import Image from "next/image";
-import Link from "next/link";
-import type { ReactNode } from "react";
-import Skeleton from "../../components/skeleton";
-import styles from "./role.module.css";
+import Link from '../link';
+import Skeleton from "../skeleton";
+import { richtext } from "../../utils/prismic";
+import styles from "./card.module.css";
 
 type IRole = {
   id: string;
   caption: string;
-  image: string;
+  image: PrismicImage;
   title: string;
   subtitle: string;
-  link?: string;
+  action?: string;
+  link?: PrismicLink;
   priority?: boolean;
-  children: ReactNode;
+  children: PrismicRichText;
 };
 
 const Role = ({
@@ -22,13 +23,14 @@ const Role = ({
   title,
   subtitle,
   link,
+  action,
   priority = false,
   children,
 }: IRole) => (
   <div className={styles.role} id={id}>
     <Skeleton>
       <Image
-        src={image}
+        src={image.url}
         layout="responsive"
         width={1312}
         height={600}
@@ -40,9 +42,9 @@ const Role = ({
         <p className="grey small">{caption}</p>
         <h2 className="h2Sans">{title}</h2>
         <p className="h2Serif">{subtitle}</p>
-        {!!link && <Link href={link}>Visit the website</Link>}
+        {(link && action) && <Link href={link}>{action}</Link>}
       </div>
-      {children}
+      <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(children) }} />
     </div>
   </div>
 );

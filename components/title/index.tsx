@@ -1,18 +1,15 @@
+import { richtext } from "../../utils/prismic";
 import Section from "../section";
 import styles from "./title.module.css";
 
 type ITitle = {
-  sans: string;
-  serif: string;
+  title: PrismicRichText;
 };
 
-const Title = ({ sans, serif }: ITitle) => (
+const Title = ({ title }: ITitle) => (
   <Section style={{ paddingBottom: 0 }}>
     <div className={styles.container}>
-      <h1 className={styles.title}>
-        <span className="titleSans">{sans}</span>
-        <span className="titleSerif">&nbsp;{serif}</span>
-      </h1>
+      <h1 className="titleSans" dangerouslySetInnerHTML={{ __html: richtext(title, true) }} />
     </div>
   </Section>
 );

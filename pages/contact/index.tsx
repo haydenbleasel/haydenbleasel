@@ -5,8 +5,29 @@ import Layout from "../../components/layout";
 import styles from "./contact.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
+import { queryAt, richtext } from "../../utils/prismic";
 
-const Contact = () => {
+type IContact = {
+  data: {
+    title: string;
+    description: string;
+    hero_title: PrismicRichText;
+    hero_description: PrismicRichText;
+    form_name_label: string;
+    form_name_placeholder: string;
+    form_email_label: string;
+    form_email_placeholder: string;
+    form_message_label: string;
+    form_message_placeholder: string;
+    form_files_label: string;
+    form_button_text: string;
+    success_alert: string;
+    error_alert: string;
+  };
+  settings: PrismicSettings;
+}
+
+const Contact = ({ data, settings }: IContact) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -54,14 +75,14 @@ const Contact = () => {
         throw new Error(data.message);
       }
 
-      window.alert("Thanks, choom! I'll be in touch soon!");
+      window.alert(data.success_alert);
 
       setName("");
       setEmail("");
       setMessage("");
       setFiles(null);
     } catch (error: any) {
-      window.alert(error.message);
+      window.alert(data.error_alert);
     } finally {
       setLoading(false);
     }
@@ -69,16 +90,14 @@ const Contact = () => {
 
   return (
     <Layout
-      title="Get in touch"
-      description="I’m always keen to have a chat and open to new opportunities."
+      title={data.title}
+      description={data.description}
+      settings={settings}
     >
       <Section>
         <div className={styles.hero}>
-          <Title sans="Get in" serif="touch" />
-          <p className="paragraphSans">
-            I’m always keen to have a chat and open to new opportunities. Just
-            fill in the form.
-          </p>
+          <Title title={data.hero_title} />
+          <p className="paragraphSans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_description, true) }} />
         </div>
 
         <form
@@ -88,7 +107,7 @@ const Contact = () => {
           <fieldset className={styles.fieldset}>
             <div className={styles.fieldHeader}>
               <label className={styles.label} htmlFor="name">
-                Full name
+                {data.form_name_label}
               </label>
               <span className={styles.remaining}>{name.length} / 320</span>
             </div>
@@ -97,7 +116,7 @@ const Contact = () => {
               id="name"
               name="name"
               type="text"
-              placeholder="Jane Smith"
+              placeholder={data.form_name_placeholder}
               required
               autoComplete="on"
               value={name}
@@ -110,7 +129,7 @@ const Contact = () => {
           <fieldset className={styles.fieldset}>
             <div className={styles.fieldHeader}>
               <label className={styles.label} htmlFor="email">
-                Email address
+                {data.form_email_label}
               </label>
               <span className={styles.remaining}>{email.length} / 320</span>
             </div>
@@ -119,7 +138,7 @@ const Contact = () => {
               id="email"
               name="email"
               type="email"
-              placeholder="janesmith@example.com"
+              placeholder={data.form_email_placeholder}
               required
               autoComplete="on"
               value={email}
@@ -132,7 +151,7 @@ const Contact = () => {
           <fieldset className={styles.fieldset}>
             <div className={styles.fieldHeader}>
               <label className={styles.label} htmlFor="message">
-                Message
+                {data.form_message_label}
               </label>
               <span className={styles.remaining}>{message.length} / 1000</span>
             </div>
@@ -140,7 +159,7 @@ const Contact = () => {
               className={styles.textarea}
               id="message"
               name="message"
-              placeholder="Hey Hayden, I’m interested in chatting about a new role we have available..."
+              placeholder={data.form_email_placeholder}
               required
               autoComplete="off"
               value={message}
@@ -152,7 +171,7 @@ const Contact = () => {
           </fieldset>
           <fieldset className={styles.fieldset}>
             <label className={styles.label} htmlFor="files">
-              Attach files
+              {data.form_files_label}
               <span> (Optional)</span>
             </label>
             <input
@@ -168,12 +187,24 @@ const Contact = () => {
           </fieldset>
 
           <button className={styles.button} type="submit">
-            Send message
+            {data.form_button_text}
           </button>
         </form>
       </Section>
     </Layout>
   );
 };
+
+export async function getStaticProps() {
+  const { data } = await queryAt('document.type', 'contact');
+  const { data: settings } = await queryAt('document.type', 'settings');
+
+  return {
+    props: {
+      data,
+      settings,
+    },
+  };
+}
 
 export default Contact;
