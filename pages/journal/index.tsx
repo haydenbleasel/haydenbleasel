@@ -3,7 +3,8 @@ import Post from "../../components/post";
 import styles from "./journal.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
-import { getDevPosts, getMediumPosts } from "../../utils/journal";
+import { getMediumPosts } from "../../utils/medium";
+import { getDevPosts } from "../../utils/dev";
 import Divider from "../../components/divider";
 import { queryAt } from "../../utils/prismic";
 
