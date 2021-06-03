@@ -9,3 +9,20 @@ type IPost = {
   description: string;
   image: string;
 };
+
+type PrismicDocument<T> = { data: T };
+
+type PrismicSlice = {
+  slice_type: string;
+  primary: any;
+  items: any[];
+};
+
+type PrismicImg = {
+  url: string;
+  dimensions: {
+    width: number;
+    height: number;
+  };
+  alt?: string;
+};
