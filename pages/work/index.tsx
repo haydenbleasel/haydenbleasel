@@ -63,8 +63,6 @@ export async function getStaticProps() {
   const roles = await queryAt('document.type', 'role');
   const { data: settings } = await queryAt('document.type', 'settings');
 
-  console.log(data, 'data')
-
   return {
     props: {
       data,
