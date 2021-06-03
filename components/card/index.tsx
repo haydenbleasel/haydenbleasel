@@ -10,6 +10,7 @@ type IRole = {
   image: PrismicImage;
   title: string;
   subtitle: string;
+  action?: string;
   link?: PrismicLink;
   priority?: boolean;
   children: PrismicRichText;
@@ -22,6 +23,7 @@ const Role = ({
   title,
   subtitle,
   link,
+  action,
   priority = false,
   children,
 }: IRole) => (
@@ -40,7 +42,7 @@ const Role = ({
         <p className="grey small">{caption}</p>
         <h2 className="h2Sans">{title}</h2>
         <p className="h2Serif">{subtitle}</p>
-        {!!link && <Link href={link}>Visit the website</Link>}
+        {(link && action) && <Link href={link}>{action}</Link>}
       </div>
       <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(children) }} />
     </div>
