@@ -59,4 +59,9 @@
   & p {
     margin: 0 0 var(--gap-small);
   }
+
+  @media (--laptop) {
+    columns: 1;
+    grid-column: 1;
+  }
 }
