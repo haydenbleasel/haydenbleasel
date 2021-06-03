@@ -1,3 +1,4 @@
+import type { GetStaticProps } from 'next';
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import Layout from "../../components/layout";
@@ -195,7 +196,7 @@ const Contact = ({ data, settings }: IContact) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'contact');
   const { data: settings } = await queryAt('document.type', 'settings');
 

@@ -1,3 +1,4 @@
+import type { GetStaticProps } from 'next';
 import { useState } from "react";
 import styles from "./about.module.css";
 import Layout from "../../components/layout";
@@ -181,7 +182,7 @@ const About = ({ data, settings }: IAbout) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'about');
   const { data: settings } = await queryAt('document.type', 'settings');
 

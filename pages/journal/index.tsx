@@ -1,3 +1,4 @@
+import type { GetStaticProps } from 'next';
 import Layout from "../../components/layout";
 import Post from "../../components/post";
 import styles from "./journal.module.css";
@@ -56,7 +57,7 @@ const Journal = ({ data, settings, mediumPosts, devPosts }: IJournal) => (
   </Layout>
 );
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'journal');
   const { data: settings } = await queryAt('document.type', 'settings');
   const mediumPosts = await getMediumPosts();
