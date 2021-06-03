@@ -1,6 +1,6 @@
 import Layout from "../../components/layout";
 import Section from "../../components/section";
-import Role from "../../components/role";
+import Card from "../../components/card";
 import Title from "../../components/title";
 import Outlink from "../../components/outlink";
 import { queryAt } from "../../utils/prismic";
@@ -37,7 +37,7 @@ const Work = ({ data, roles, settings }: IWork) => (
 
     <Section>
       {roles.sort(sortRoles).map((role, index) => (
-        <Role
+        <Card
           key={role.uid}
           caption={role.data.date}
           title={role.data.title}
@@ -47,7 +47,7 @@ const Work = ({ data, roles, settings }: IWork) => (
           priority={!index}
         >
           {role.data.content}
-        </Role>
+        </Card>
       ))}
 
       <Outlink

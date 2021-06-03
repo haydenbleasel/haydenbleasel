@@ -1,6 +1,6 @@
 import Layout from "../../components/layout";
 import Section from "../../components/section";
-import Role from "../../components/role";
+import Card from "../../components/card";
 import Title from "../../components/title";
 
 const Projects = () => (
@@ -11,7 +11,7 @@ const Projects = () => (
     <Title sans="Projects" serif="&amp; Apps" />
 
     <Section>
-      <Role
+      <Card
         caption="Currently growing"
         title="Neutral"
         id="neutral"
@@ -45,9 +45,9 @@ const Projects = () => (
             offset hundreds of tonnes of CO₂e. It’s just the beginning.
           </p>
         </div>
-      </Role>
+      </Card>
 
-      <Role
+      <Card
         caption="Currently designing"
         title="Bokeh"
         id="bokeh"
@@ -68,9 +68,9 @@ const Projects = () => (
             newest designs on Dribbble.
           </p>
         </div>
-      </Role>
+      </Card>
 
-      <Role
+      <Card
         caption="Shut down"
         title="Presumi"
         id="presumi"
@@ -110,7 +110,7 @@ const Projects = () => (
             Node.js.
           </p>
         </div>
-      </Role>
+      </Card>
     </Section>
   </Layout>
 );

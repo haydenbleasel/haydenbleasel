@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from '../link';
-import Skeleton from "../../components/skeleton";
+import Skeleton from "../skeleton";
 import { richtext } from "../../utils/prismic";
-import styles from "./role.module.css";
+import styles from "./card.module.css";
 
 type IRole = {
   id: string;
