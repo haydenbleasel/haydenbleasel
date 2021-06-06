@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { parse } from 'date-fns';
 import styles from "./about.module.css";
 import Layout from "../../components/layout";
 import Section from "../../components/section";
@@ -77,10 +78,10 @@ const Role = ({ work_role, work_company, work_date }) => (
 );
 
 function sortRoles(a, b) {
-  const dateA = a.work_date.split(' — ')[0];
-  const dateB = b.work_date.split(' — ')[0];
+  const dateA = parse(a.work_date.split(' — ')[0], 'MMM yyyy', new Date());
+  const dateB = parse(b.work_date.split(' — ')[0], 'MMM yyyy', new Date());
   
-  return new Date(dateA) < new Date(dateB) ? 1 : -1;
+  return dateA < dateB ? 1 : -1;
 }
 
 function sortEvents(a, b) {
