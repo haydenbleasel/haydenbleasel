@@ -1,0 +1,16 @@
+.form {
+
+  &.loading {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+
+.input {
+  font-size: var(--type-scale-6);
+  padding: 0;
+  border: none;
+  font-family: inherit;
+}

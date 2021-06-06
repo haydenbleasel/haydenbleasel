@@ -5,6 +5,7 @@ import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
 import { richtext } from "../../utils/prismic";
+import Form from "../form";
 
 type IFooter = {
   settings: PrismicSettings;
@@ -62,33 +63,16 @@ const Footer = ({ settings }: IFooter) => {
         <div className={styles.container}>
           <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(settings.footer_content) }} />
 
-          <form
-            id="newsletter"
-            className={`${styles.newsletter} ${loading ? styles.loading : ""}`}
+          <Form
+            name="email"
+            label={settings.footer_newsletter_label}
+            placeholder={settings.footer_newsletter_placeholder}
+            type="email"
+            value={email}
+            onChangeText={setEmail}
+            loading={loading}
             onSubmit={joinMailingList}
-          >
-            <fieldset className={styles.fields}>
-              <label className={styles.label} htmlFor="email">
-                {settings.footer_newsletter_label}
-              </label>
-              <input
-                required
-                id="email"
-                className={styles.input}
-                type="email"
-                placeholder={settings.footer_newsletter_placeholder}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <button
-                aria-label="Sign up"
-                type="submit"
-                className={styles.button}
-              >
-                &rarr;
-              </button>
-            </fieldset>
-          </form>
+          />
 
           <div className={styles.copyright}>
             <p className="small" dangerouslySetInnerHTML={{__html: richtext(settings.footer_disclaimer, true) }} />

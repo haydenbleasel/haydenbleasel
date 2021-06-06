@@ -1,0 +1,58 @@
+.label {
+  opacity: 0;
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+}
+
+.newsletter {
+  margin-bottom: var(--section-gap);
+  transition: opacity 0.2s;
+  grid-column: 1 / 8;
+
+  &.loading {
+    opacity: 0.4;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+}
+.fields {
+  display: flex;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  font-size: var(--type-scale-5);
+  font-family: inherit;
+  width: 100%;
+  padding: 0;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+  }
+}
+
+.button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 3rem;
+  font-size: var(--type-scale-5);
+  color: var(--black);
+  font-family: inherit;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+  }
+}
