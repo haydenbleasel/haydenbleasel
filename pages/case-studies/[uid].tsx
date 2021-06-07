@@ -20,12 +20,6 @@ type ICaseStudy = {
   settings: PrismicSettings;
 };
 
-async function fetchPrismicData({ uid }) {
-  const { data } = await queryAt('my.case_study.uid', uid);
-
-  return data;
-}
-
 function filterHeadings({ type }) {
   return type.startsWith('heading');
 }
@@ -66,9 +60,9 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
         throw new Error();
       }
 
-      const newData = await fetchPrismicData({ uid });
+      const newData = await queryAt('my.case_study.uid', uid);
 
-      setData(newData);
+      setData(newData.data);
       setAuthenticated(true);
     } catch (error: any) {
       window.alert("Sorry, wrong password.");
@@ -85,7 +79,7 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
     >
       <Title title={data.title} />
 
-      <Image src={data.cover.url} width={1312} height={600} alt={data.title} layout="responsive" />
+      <Image src={data.cover.url} width={1312} height={600} alt={data.title} layout="responsive" alt={`${data.title} Case Study`} />
       
       <Section style={{ gridAutoFlow: 'dense' }}>
         <div className={styles.table} dangerouslySetInnerHTML={{ __html: richtext(data.content.filter(filterHeadings), false, {
@@ -109,7 +103,7 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
     </Layout>
   ) : (
     <Layout title="Enter passphrase" description="Enter a passphrase" settings={settings}>
-      <Section style={{ minHeight: '50vh', alignItems: 'center' }}>
+      <Section style={{ minHeight: 400, height: '50vh', alignItems: 'center' }}>
         <Form
           name="passphrase"
           label="Passphrase"
