@@ -37,8 +37,6 @@ function slugElement({ text }) {
 function createTableElement({ element }) {
   const id = slugElement(element);
 
-  console.log(element, 'x');
-
   return (
     <div className={`paragraphSans ${styles[element.type]}`}>
       <a href={`#${id}`}>{element.text}</a>
@@ -89,7 +87,15 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
 
       <Image src={data.cover.url} width={1312} height={600} alt={data.title} layout="responsive" />
       
-      <Section>
+      <Section style={{ gridAutoFlow: 'dense' }}>
+        <div className={styles.table} dangerouslySetInnerHTML={{ __html: richtext(data.content.filter(filterHeadings), false, {
+          heading1: createTableElement,
+          heading2: createTableElement,
+          heading3: createTableElement,
+          heading4: createTableElement,
+          heading5: createTableElement,
+          heading6: createTableElement,
+        })}} />
         <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(data.content, false, {
           heading1: ({ children, element }) => <h1 id={slugElement(element)} className="h1Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
           heading2: ({ children, element }) => <h2 id={slugElement(element)} className="h2Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
@@ -99,14 +105,6 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
           heading6: ({ children, element }) => <h6 id={slugElement(element)} className="h6Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
           paragraph: ({ children }) => <p className="paragraphSans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
         }) }} />
-        <div className={styles.table} dangerouslySetInnerHTML={{ __html: richtext(data.content.filter(filterHeadings), false, {
-          heading1: createTableElement,
-          heading2: createTableElement,
-          heading3: createTableElement,
-          heading4: createTableElement,
-          heading5: createTableElement,
-          heading6: createTableElement,
-        })}} />
       </Section>
     </Layout>
   ) : (

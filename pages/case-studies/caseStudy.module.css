@@ -4,6 +4,14 @@
   & > *:first-child {
     margin-top: 0;
   }
+
+  @media (--desktop) {
+    grid-column: 1 / 8;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
 }
 
 .table {
@@ -34,5 +42,13 @@
 
   & .heading6 {
     margin-left: 5rem;
+  }
+
+  @media (--desktop) {
+    grid-column: 9 / 13;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
   }
 }
