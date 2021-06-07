@@ -34,6 +34,11 @@
   font-family: inherit;
   width: 100%;
   padding: 0;
+  color: var(--black);
+
+  &::placeholder {
+    color: var(--grey);
+  }
 
   @media (--mobile) {
     font-size: var(--type-scale-3);
