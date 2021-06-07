@@ -79,7 +79,11 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
     >
       <Title title={data.title} />
 
-      <Image src={data.cover.url} width={1312} height={600} layout="responsive" alt={`${data.title} Case Study`} />
+      <Section>
+        <div className={styles.cover}>
+          <Image src={data.cover.url} width={1312} height={600} layout="responsive" alt={`${data.title} Case Study`} />
+        </div>
+      </Section>
       
       <Section style={{ gridAutoFlow: 'dense' }}>
         <div className={styles.table} dangerouslySetInnerHTML={{ __html: richtext(data.content.filter(filterHeadings), false, {

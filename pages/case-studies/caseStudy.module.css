@@ -1,3 +1,7 @@
+.cover {
+  grid-column: 1 / 13;
+}
+
 .content {
   grid-column: 2 / 8;
 
