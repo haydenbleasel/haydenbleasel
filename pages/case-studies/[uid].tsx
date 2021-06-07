@@ -57,7 +57,7 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
       const body = await response.json();
 
       if (!body.success) {
-        throw new Error();
+        throw new Error(body.message);
       }
 
       const newData = await queryAt('my.case_study.uid', uid);
@@ -65,7 +65,7 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
       setData(newData.data);
       setAuthenticated(true);
     } catch (error: any) {
-      window.alert("Sorry, wrong password.");
+      window.alert(error.message);
     } finally {
       setLoading(false);
     }

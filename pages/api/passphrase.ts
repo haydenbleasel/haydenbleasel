@@ -19,9 +19,9 @@ export default async function handler(req, res) {
     }
 
     res.statusCode = 200;
-    res.end(JSON.stringify({ success: true }));
+    res.json({ success: true });
   } catch (error) {
-    res.statusCode = error.code;
-    res.end(JSON.stringify(error.message));
+    res.statusCode = 500;
+    res.json({ message: error.message });
   }
 }
