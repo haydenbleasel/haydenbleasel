@@ -53,7 +53,7 @@ const Projects = ({ data, settings, projects }: IProjects) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await queryAt('document.type', 'work');
+  const { data } = await queryAt('document.type', 'projects');
   const projects = await queryAt('document.type', 'project');
   const { data: settings } = await queryAt('document.type', 'settings');
 

@@ -23,7 +23,7 @@
     "next-pwa": "^5.2.21",
     "next-secure-headers": "^2.2.0",
     "next-seo": "^4.24.0",
-    "next-sitemap": "^1.6.99",
+    "next-sitemap": "^1.6.108",
     "nodemailer": "^6.6.1",
     "prismic-dom": "^2.2.5",
     "react": "^17.0.2",
@@ -33,9 +33,9 @@
     "slugify": "^1.5.3"
   },
   "devDependencies": {
-    "@types/node": "^15.6.1",
-    "@types/react": "^17.0.8",
-    "@types/react-dom": "^17.0.5",
+    "@types/node": "^15.12.2",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.7",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.0.2",
     "postcss-preset-env": "^6.7.0",
