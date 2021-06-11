@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { GetStaticProps } from 'next';
 import Layout from "../components/layout";
 import Client from "../components/client";
 import Section from "../components/section";
@@ -137,7 +138,7 @@ const Home = ({ data, settings, mediumPosts, devPosts }: IHome) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'home', {
     fetchLinks: [
       'role.image',

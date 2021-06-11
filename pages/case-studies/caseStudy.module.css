@@ -1,0 +1,58 @@
+.cover {
+  grid-column: 1 / 13;
+}
+
+.content {
+  grid-column: 2 / 8;
+
+  & > *:first-child {
+    margin-top: 0;
+  }
+
+  @media (--desktop) {
+    grid-column: 1 / 8;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+}
+
+.table {
+  grid-column: 9 / 12;
+  display: grid;
+  align-self: flex-start;
+  color: var(--grey);
+
+  & > * {
+    line-height: 1.7;
+  }
+
+  & .heading2 {
+    margin-left: 1rem;
+  }
+
+  & .heading3 {
+    margin-left: 2rem;
+  }
+
+  & .heading4 {
+    margin-left: 3rem;
+  }
+
+  & .heading5 {
+    margin-left: 4rem;
+  }
+
+  & .heading6 {
+    margin-left: 5rem;
+  }
+
+  @media (--desktop) {
+    grid-column: 9 / 13;
+  }
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+}

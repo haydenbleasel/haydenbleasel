@@ -1,3 +1,4 @@
+import type { GetStaticProps } from 'next';
 import Layout from "../../components/layout";
 import Section from "../../components/section";
 import Card from "../../components/card";
@@ -51,7 +52,7 @@ const Projects = ({ data, settings, projects }: IProjects) => (
   </Layout>
 );
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'work');
   const projects = await queryAt('document.type', 'project');
   const { data: settings } = await queryAt('document.type', 'settings');
