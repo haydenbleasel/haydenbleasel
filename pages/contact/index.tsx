@@ -148,6 +148,7 @@ const Contact = ({ data, settings }: IContact) => {
               required
               autoComplete="on"
               value={email}
+              pattern=".+@.+\..+"
               maxLength={320}
               onChange={({ target }: ChangeEvent) =>
                 setEmail((target as HTMLInputElement).value)

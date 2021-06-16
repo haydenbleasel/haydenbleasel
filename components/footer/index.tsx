@@ -74,6 +74,7 @@ const Footer = ({ settings }: IFooter) => {
             onChangeText={setEmail}
             loading={loading}
             onSubmit={joinMailingList}
+            pattern=".+@.+\..+"
           />
 
           <div className={styles.copyright}>

@@ -10,6 +10,7 @@ type IForm = {
   value: string;
   onChangeText: any;
   loading: boolean;
+  pattern?: string;
 } & FormHTMLAttributes<HTMLFormElement>
 
 const cx = classNames.bind(styles);
@@ -23,6 +24,7 @@ const Form = ({
   onChangeText,
   loading,
   onSubmit,
+  pattern,
 }: IForm) => (
   <form
     id="newsletter"
@@ -41,6 +43,7 @@ const Form = ({
         placeholder={placeholder}
         value={value}
         onChange={({ target }) => onChangeText(target.value)}
+        pattern={pattern}
       />
       <button aria-label="Sign up" type="submit" className={styles.button}>
         &rarr;
