@@ -16,12 +16,14 @@ export default async function handler(req, res) {
       }),
     });
 
-    await response.json();
+    const data = await response.json();
 
-    res.statusCode = 200;
-    res.end(JSON.stringify({ success: true }));
-  } catch (error) {
-    res.statusCode = error.code;
-    res.end(JSON.stringify(error.message));
+    if (data.error) {
+      throw new Error(data.error.email);
+    }
+
+    res.status(200).json({});
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 }
