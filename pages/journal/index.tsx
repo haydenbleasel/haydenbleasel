@@ -1,5 +1,6 @@
 import { BlogJsonLd } from 'next-seo';
 import type { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 import Layout from "../../components/layout";
 import Post from "../../components/post";
 import styles from "./journal.module.css";
@@ -10,8 +11,6 @@ import { getDevPosts } from "../../utils/dev";
 import Divider from "../../components/divider";
 import { queryAt } from "../../utils/prismic";
 import { siteUrl } from '../../next-sitemap';
-import { useRouter } from 'next/router';
-import { parseISO } from 'date-fns';
 
 type IJournal = {
   data: {
