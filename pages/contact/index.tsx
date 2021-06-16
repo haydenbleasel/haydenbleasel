@@ -1,8 +1,8 @@
 import type { GetStaticProps } from 'next';
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import classNames from 'classnames/bind';
 import Layout from "../../components/layout";
-
 import styles from "./contact.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
@@ -27,6 +27,8 @@ type IContact = {
   };
   settings: PrismicSettings;
 }
+
+const cx = classNames.bind(styles);
 
 const Contact = ({ data, settings }: IContact) => {
   const [name, setName] = useState<string>("");
@@ -102,7 +104,7 @@ const Contact = ({ data, settings }: IContact) => {
         </div>
 
         <form
-          className={`${styles.form} ${loading ? styles.loading : ""}`}
+          className={cx('form', { loading })}
           onSubmit={sendEmail}
         >
           <fieldset className={styles.fieldset}>

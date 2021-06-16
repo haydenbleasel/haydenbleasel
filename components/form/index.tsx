@@ -1,4 +1,5 @@
 import type { FormHTMLAttributes } from 'react';
+import classNames from 'classnames/bind';
 import styles from './form.module.css';
 
 type IForm = {
@@ -10,6 +11,8 @@ type IForm = {
   onChangeText: any;
   loading: boolean;
 } & FormHTMLAttributes<HTMLFormElement>
+
+const cx = classNames.bind(styles);
 
 const Form = ({
   name,
@@ -23,7 +26,7 @@ const Form = ({
 }: IForm) => (
   <form
     id="newsletter"
-    className={`${styles.newsletter} ${loading ? styles.loading : ""}`}
+    className={cx('newsletter', { loading })}
     onSubmit={onSubmit}
   >
     <fieldset className={styles.fields}>

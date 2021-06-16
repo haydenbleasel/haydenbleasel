@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Headroom from "react-headroom";
 import { Squeeze as Hamburger } from "hamburger-react";
+import classNames from 'classnames/bind';
 
 import styles from "./header.module.css";
 import Link from "../link";
@@ -12,6 +13,8 @@ import { resolveLink } from "../../utils/prismic";
 type IHeader = {
   settings: PrismicSettings;
 }
+
+const cx = classNames.bind(styles);
 
 const Header = ({ settings }: IHeader) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -38,7 +41,7 @@ const Header = ({ settings }: IHeader) => {
     <Headroom style={{ zIndex: 999, height: 102 }}>
       <nav className={styles.container}>
         <Section>
-          <header className={`${styles.nav} ${menuOpen ? styles.open : ""}`}>
+          <header className={cx('nav', { menuOpen })}>
             <div className={styles.logo}>
               <Link href={settings.logo_link}>
                 <Image
