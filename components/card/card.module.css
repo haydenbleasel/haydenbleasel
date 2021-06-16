@@ -1,7 +1,7 @@
-.role {
+.card {
   grid-column: 1 / 13;
 
-  & + .role {
+  & + .card {
     margin-top: var(--gap-large);
 
     @media (--laptop) {
