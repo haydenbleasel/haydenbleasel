@@ -2,12 +2,12 @@ import type { GetStaticProps, NextPage } from 'next';
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import classNames from 'classnames/bind';
+import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
 import styles from "./contact.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
 import { queryAt, richtext } from "../../utils/prismic";
-import { trackGoal } from 'fathom-client';
 
 type IContact = {
   data: {

@@ -3,6 +3,7 @@ import { createElement, FormEvent } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
 import slugify from 'slugify';
+import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
 import Form from "../../components/form";
 import Section from "../../components/section";
@@ -84,6 +85,8 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       setData(newData.data);
       setAuthenticated(true);
+
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0)
     } catch (error: any) {
       window.alert(error.message || 'Something went wrong.');
     } finally {
