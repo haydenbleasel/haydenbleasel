@@ -1,6 +1,6 @@
 import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
-import { createElement, FormEvent } from 'react';
-import { useState } from 'react';
+import { createElement, useState } from 'react';
+import type { FormEvent } from 'react';
 import Image from 'next/image';
 import slugify from 'slugify';
 import { trackGoal } from 'fathom-client';
