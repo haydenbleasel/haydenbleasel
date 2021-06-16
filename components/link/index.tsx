@@ -1,12 +1,11 @@
-import type { ReactNode } from "react";
 import NextLink from "next/link";
 import { resolveLink } from "../../utils/prismic";
+import { AnchorHTMLAttributes } from "react";
 
 type LinkProps = {
   href: PrismicLink;
   label?: string;
-  children?: ReactNode;
-};
+} & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
 const Link = ({ children, href, ...props }: LinkProps) => {
   const url = resolveLink(href);
