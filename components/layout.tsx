@@ -24,8 +24,8 @@ const image = {
 
 const Layout = ({
   children,
-  title = "This is the default title",
-  description = "This is the default description",
+  title,
+  description,
   settings,
 }: LayoutProps) => {
   const { pathname } = useRouter();
