@@ -23,7 +23,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
     return () => {
       router.events.off("routeChangeComplete", onRouteChangeComplete);
     };
-  }, []);
+  }, [router.events]);
 
   return (
     <>

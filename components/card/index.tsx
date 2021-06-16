@@ -35,6 +35,7 @@ const Card = ({
         width={1312}
         height={600}
         priority={priority}
+        alt={title}
       />
     </Skeleton>
     <div className={styles.meta}>

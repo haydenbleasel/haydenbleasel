@@ -51,7 +51,7 @@ const ItemInner = ({ title, subtitle }: Omit<IItem, 'date'>) => (
 )
 
 const Item = ({ date, title, subtitle, link }: IItem) => (
-  <li key={`${title}-${date}`} id={title} className={styles.eventLink}>
+  <li id={title} className={styles.eventLink}>
     <small className="small grey">
       {date}
     </small>
@@ -121,8 +121,9 @@ const About = ({ data, settings }: IAbout) => {
             <Divider text="Work History" />
 
             <ul className={styles.list}>
-              {data.work_history.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map((item) => (
+              {data.work_history.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map((item, index) => (
                 <Item
+                  key={`${item.work_company}-${index}`}
                   date={item.work_date}
                   title={item.work_role}
                   subtitle={item.work_company}
@@ -144,8 +145,9 @@ const About = ({ data, settings }: IAbout) => {
             <ul
               className={styles.list}
             >
-              {data.speaking_events.sort(sortEvents).slice(...sliceList(eventsExpanded)).map((item) => (
+              {data.speaking_events.sort(sortEvents).slice(...sliceList(eventsExpanded)).map((item, index) => (
                 <Item
+                  key={`${item.event_name}-${index}`}
                   date={item.event_date}
                   title={item.event_name}
                   subtitle={item.event_host}
@@ -166,8 +168,9 @@ const About = ({ data, settings }: IAbout) => {
             <Divider text="Interviews &amp; Features" />
 
             <ul className={styles.list}>
-              {data.interviews.sort(sortInterviews).slice(...sliceList(interviewsExpanded)).map((item) => (
+              {data.interviews.sort(sortInterviews).slice(...sliceList(interviewsExpanded)).map((item, index) => (
                 <Item
+                  key={`${item.interview_name}-${index}`}
                   date={item.interview_date}
                   title={item.interview_name}
                   subtitle={item.interview_host}

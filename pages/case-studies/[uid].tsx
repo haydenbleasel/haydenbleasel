@@ -1,5 +1,5 @@
 import type { GetStaticProps, GetStaticPaths } from 'next';
-import type { FormEvent } from 'react';
+import { createElement, FormEvent } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
 import slugify from 'slugify';
@@ -35,6 +35,26 @@ function createTableElement({ element }) {
     <div className={`paragraphSans ${styles[element.type]}`}>
       <a href={`#${id}`}>{element.text}</a>
     </div>
+  );
+}
+
+const elements = {
+  heading1: 'h1',
+  heading2: 'h2',
+  heading3: 'h3',
+  heading4: 'h4',
+  heading5: 'h5',
+  heading6: 'h6',
+  paragraph: 'p'
+};
+
+function createTextElement(children: any, element: any, props: any) {
+  return createElement(
+    elements[element.type],
+    {
+      dangerouslySetInnerHTML: { __html: children.join('') },
+      ...props,
+    },
   );
 }
 
@@ -95,13 +115,13 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
           heading6: createTableElement,
         })}} />
         <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(data.content, false, {
-          heading1: ({ children, element }) => <h1 id={slugElement(element)} className="h1Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
-          heading2: ({ children, element }) => <h2 id={slugElement(element)} className="h2Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
-          heading3: ({ children, element }) => <h3 id={slugElement(element)} className="h3Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
-          heading4: ({ children, element }) => <h4 id={slugElement(element)} className="h4Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
-          heading5: ({ children, element }) => <h5 id={slugElement(element)} className="h5Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
-          heading6: ({ children, element }) => <h6 id={slugElement(element)} className="h6Sans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
-          paragraph: ({ children }) => <p className="paragraphSans" dangerouslySetInnerHTML={{ __html: children.join('')}} />,
+          heading1: ({ children, element }) => createTextElement(children, element, { className: 'h1Sans', id: slugElement(element) }),
+          heading2: ({ children, element }) => createTextElement(children, element, { className: 'h2Sans', id: slugElement(element) }),
+          heading3: ({ children, element }) => createTextElement(children, element, { className: 'h3Sans', id: slugElement(element) }),
+          heading4: ({ children, element }) => createTextElement(children, element, { className: 'h4Sans', id: slugElement(element) }),
+          heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
+          heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
+          paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
         }) }} />
       </Section>
     </Layout>
