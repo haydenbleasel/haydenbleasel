@@ -8,10 +8,12 @@ type IOutlink = {
 } & HTMLAttributes<HTMLAnchorElement>;
 
 const Outlink = ({ link, text, ...props }: IOutlink) => (
-  <Link href={link} className={styles.outlink} {...props}>
-    <span className="underline">{text}</span>{" "}
-    <span className={styles.arrow}>&rarr;</span>
-  </Link>
+  <div className={styles.outlinkWrapper}>
+    <Link href={link} className={styles.outlink} {...props}>
+      <span className="underline">{text}</span>{" "}
+      <span className={styles.arrow}>&rarr;</span>
+    </Link>
+  </div>
 );
 
 export default Outlink;
