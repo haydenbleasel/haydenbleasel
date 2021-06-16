@@ -1,4 +1,4 @@
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import classNames from 'classnames/bind';
@@ -31,7 +31,7 @@ type IContact = {
 
 const cx = classNames.bind(styles);
 
-const Contact = ({ data, settings }: IContact) => {
+const Contact: NextPage<IContact> = ({ data, settings }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");

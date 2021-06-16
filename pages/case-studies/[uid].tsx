@@ -1,4 +1,4 @@
-import type { GetStaticProps, GetStaticPaths } from 'next';
+import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { createElement, FormEvent } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
@@ -58,7 +58,7 @@ function createTextElement(children: any, element: any, props: any) {
   );
 }
 
-const CaseStudy = ({ uid, settings }: ICaseStudy) => {
+const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [passphrase, setPassphrase] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);

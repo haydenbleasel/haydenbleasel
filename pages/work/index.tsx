@@ -1,4 +1,4 @@
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Layout from "../../components/layout";
 import Section from "../../components/section";
 import Card from "../../components/card";
@@ -28,7 +28,7 @@ function sortRoles(a, b) {
   return new Date(dateA) < new Date(dateB) ? 1 : -1;
 }
 
-const Work = ({ data, roles, settings }: IWork) => (
+const Work: NextPage<IWork> = ({ data, roles, settings }) => (
   <Layout
     title={data.title}
     description={data.description}

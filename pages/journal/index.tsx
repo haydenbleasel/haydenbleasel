@@ -1,5 +1,5 @@
 import { BlogJsonLd } from 'next-seo';
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Layout from "../../components/layout";
 import Post from "../../components/post";
@@ -25,7 +25,7 @@ type IJournal = {
   devPosts: IPost[];
 };
 
-const Journal = ({ data, settings, mediumPosts, devPosts }: IJournal) => {
+const Journal: NextPage<IJournal> = ({ data, settings, mediumPosts, devPosts }) => {
   const { pathname } = useRouter();
   const dates = [
     ...mediumPosts.map((post) => post.date),
