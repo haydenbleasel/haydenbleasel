@@ -1,5 +1,11 @@
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<APIResponse>) {
   res.setHeader("Content-Type", "application/json");
+
+  if (req.method !== "POST") {
+    return res.status(404).send({ error: "Begone." });
+  }
 
   try {
     const response = await fetch("https://www.getrevue.co/api/v2/subscribers", {
@@ -16,12 +22,14 @@ export default async function handler(req, res) {
       }),
     });
 
-    await response.json();
+    const data = await response.json();
 
-    res.statusCode = 200;
-    res.end(JSON.stringify({ success: true }));
-  } catch (error) {
-    res.statusCode = error.code;
-    res.end(JSON.stringify(error.message));
+    if (data.error) {
+      throw new Error(data.error.email);
+    }
+
+    res.status(200).json({});
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
   }
 }

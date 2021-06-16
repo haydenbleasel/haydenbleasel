@@ -42,6 +42,7 @@ export async function getDevPosts() {
       caption: format(parseISO(published_timestamp), "MMMM d, yyyy"),
       image: { url: social_image },
       link: { link_type: "Web", url },
+      date: published_timestamp,
     })
   );
 

@@ -9,27 +9,23 @@ type IClient = {
   content: string;
 };
 
-const Client = ({ element, content }: IClient) => {
-  return (
-    <Link href={element.data}>
-      <span className={styles.client}>
-        <Image
-          layout="fixed"
-          height={32}
-          width={32}
-          alt={content}
-          src={`/images/${content
-            .replace(" ", "")
-            .replace("/", "")
-            .toLowerCase()}.svg`}
-          quality={100}
-          objectFit="contain"
-          priority
-        />
-        <span>{content}</span>
-      </span>
-    </Link>
-  );
-}
+const Client = ({ element, content }: IClient) => (
+  <Link href={element.data} className={styles.client}>
+    <Image
+      layout="fixed"
+      height={32}
+      width={32}
+      alt={content}
+      src={`/images/${content
+        .replace(" ", "")
+        .replace("/", "")
+        .toLowerCase()}.svg`}
+      quality={100}
+      objectFit="contain"
+      priority
+    />&nbsp;
+    <span className={styles.clientName}>{content}</span>
+  </Link>
+);
 
 export default Client;

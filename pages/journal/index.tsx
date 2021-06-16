@@ -1,4 +1,6 @@
-import type { GetStaticProps } from 'next';
+import { BlogJsonLd } from 'next-seo';
+import type { GetStaticProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Layout from "../../components/layout";
 import Post from "../../components/post";
 import styles from "./journal.module.css";
@@ -8,6 +10,7 @@ import { getMediumPosts } from "../../utils/medium";
 import { getDevPosts } from "../../utils/dev";
 import Divider from "../../components/divider";
 import { queryAt } from "../../utils/prismic";
+import { siteUrl } from '../../next-sitemap';
 
 type IJournal = {
   data: {
@@ -22,40 +25,62 @@ type IJournal = {
   devPosts: IPost[];
 };
 
-const Journal = ({ data, settings, mediumPosts, devPosts }: IJournal) => (
-  <Layout
-    title={data.title}
-    description={data.description}
-    settings={settings}
-  >
-    <Title title={data.hero_title} />
+const Journal: NextPage<IJournal> = ({ data, settings, mediumPosts, devPosts }) => {
+  const { pathname } = useRouter();
+  const dates = [
+    ...mediumPosts.map((post) => post.date),
+    ...devPosts.map((post) => post.date),
+  ].sort();
 
-    <Section>
-      <div className={styles.design}>
-        <Divider text={data.medium_header} />
+  return (
+    <Layout
+      title={data.title}
+      description={data.description}
+      settings={settings}
+    >
 
-        <div className={styles.designPosts}>
-          {mediumPosts.map((post, index) => (
-            <div className={styles.post} key={post.id}>
-              <Post {...post} featured={index === 0} />
-            </div>
-          ))}
+      <BlogJsonLd
+        url={`${siteUrl}${pathname}`}
+        title={data.title}
+        images={[
+          ...mediumPosts.map((post) => post.image.url),
+          ...devPosts.map((post) => post.image.url),
+        ]}
+        datePublished={new Date(dates[0]).toISOString()}
+        dateModified={new Date(dates[dates.length - 1]).toISOString()}
+        authorName="Hayden Bleasel"
+        description={data.description}
+      />
+
+      <Title title={data.hero_title} />
+
+      <Section>
+        <div className={styles.design}>
+          <Divider text={data.medium_header} />
+
+          <div className={styles.designPosts}>
+            {mediumPosts.map((post, index) => (
+              <div className={styles.post} key={post.id}>
+                <Post {...post} featured={index === 0} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className={styles.technical}>
-        <Divider text={data.dev_header} />
+        <div className={styles.technical}>
+          <Divider text={data.dev_header} />
 
-        <div className={styles.technicalPosts}>
-          {devPosts.map((post) => (
-            <div className={styles.post} key={post.id}>
-              <Post {...post} compact />
-            </div>
-          ))}
+          <div className={styles.technicalPosts}>
+            {devPosts.map((post) => (
+              <div className={styles.post} key={post.id}>
+                <Post {...post} compact />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </Section>
-  </Layout>
-);
+      </Section>
+    </Layout>
+  );
+}
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'journal');

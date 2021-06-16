@@ -4,7 +4,7 @@ import Skeleton from "../skeleton";
 import { richtext } from "../../utils/prismic";
 import styles from "./card.module.css";
 
-type IRole = {
+type ICard = {
   id: string;
   caption: string;
   image: PrismicImage;
@@ -16,7 +16,7 @@ type IRole = {
   children: PrismicRichText;
 };
 
-const Role = ({
+const Card = ({
   id,
   caption,
   image,
@@ -26,8 +26,8 @@ const Role = ({
   action,
   priority = false,
   children,
-}: IRole) => (
-  <div className={styles.role} id={id}>
+}: ICard) => (
+  <div className={styles.card} id={id}>
     <Skeleton>
       <Image
         src={image.url}
@@ -35,6 +35,7 @@ const Role = ({
         width={1312}
         height={600}
         priority={priority}
+        alt={title}
       />
     </Skeleton>
     <div className={styles.meta}>
@@ -49,4 +50,4 @@ const Role = ({
   </div>
 );
 
-export default Role;
+export default Card;

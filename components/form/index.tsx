@@ -1,3 +1,5 @@
+import type { FormHTMLAttributes } from 'react';
+import classNames from 'classnames/bind';
 import styles from './form.module.css';
 
 type IForm = {
@@ -8,8 +10,10 @@ type IForm = {
   value: string;
   onChangeText: any;
   loading: boolean;
-  onSubmit: any;
-}
+  pattern?: string;
+} & FormHTMLAttributes<HTMLFormElement>
+
+const cx = classNames.bind(styles);
 
 const Form = ({
   name,
@@ -20,10 +24,11 @@ const Form = ({
   onChangeText,
   loading,
   onSubmit,
+  pattern,
 }: IForm) => (
   <form
     id="newsletter"
-    className={`${styles.newsletter} ${loading ? styles.loading : ""}`}
+    className={cx('newsletter', { loading })}
     onSubmit={onSubmit}
   >
     <fieldset className={styles.fields}>
@@ -38,6 +43,7 @@ const Form = ({
         placeholder={placeholder}
         value={value}
         onChange={({ target }) => onChangeText(target.value)}
+        pattern={pattern}
       />
       <button aria-label="Sign up" type="submit" className={styles.button}>
         &rarr;

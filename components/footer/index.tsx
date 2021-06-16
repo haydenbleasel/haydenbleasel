@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import Image from "next/image";
+import { trackGoal } from "fathom-client";
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
@@ -27,14 +28,15 @@ const Footer = ({ settings }: IFooter) => {
 
       const body = await response.json();
 
-      if (!body.success) {
-        throw new Error();
+      if (body.error) {
+        throw new Error(body.error);
       }
 
-      window.alert("Thanks, choom! I'll let you know when I release something cool.");
+      window.alert(settings.newsletter_success_alert);
       setEmail("");
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL!, 0);
     } catch (error: any) {
-      window.alert("Sorry, something went wrong! Try again later, hopefully I've fixed it");
+      window.alert(error.message || settings.newsletter_error_alert);
     } finally {
       setLoading(false);
     }
@@ -72,6 +74,7 @@ const Footer = ({ settings }: IFooter) => {
             onChangeText={setEmail}
             loading={loading}
             onSubmit={joinMailingList}
+            pattern=".+@.+\..+"
           />
 
           <div className={styles.copyright}>

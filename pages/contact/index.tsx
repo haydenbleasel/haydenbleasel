@@ -1,12 +1,13 @@
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import classNames from 'classnames/bind';
 import Layout from "../../components/layout";
-
 import styles from "./contact.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
 import { queryAt, richtext } from "../../utils/prismic";
+import { trackGoal } from 'fathom-client';
 
 type IContact = {
   data: {
@@ -28,7 +29,9 @@ type IContact = {
   settings: PrismicSettings;
 }
 
-const Contact = ({ data, settings }: IContact) => {
+const cx = classNames.bind(styles);
+
+const Contact: NextPage<IContact> = ({ data, settings }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
@@ -70,10 +73,10 @@ const Contact = ({ data, settings }: IContact) => {
         body: formData,
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
 
-      if (response.status !== 200) {
-        throw new Error(data.message);
+      if (responseData.error) {
+        throw new Error(responseData.error);
       }
 
       window.alert(data.success_alert);
@@ -82,8 +85,10 @@ const Contact = ({ data, settings }: IContact) => {
       setEmail("");
       setMessage("");
       setFiles(null);
+      
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_CONTACT_GOAL!, 0);
     } catch (error: any) {
-      window.alert(data.error_alert);
+      window.alert(error.message || data.error_alert);
     } finally {
       setLoading(false);
     }
@@ -102,7 +107,7 @@ const Contact = ({ data, settings }: IContact) => {
         </div>
 
         <form
-          className={`${styles.form} ${loading ? styles.loading : ""}`}
+          className={cx('form', { loading })}
           onSubmit={sendEmail}
         >
           <fieldset className={styles.fieldset}>
@@ -143,6 +148,7 @@ const Contact = ({ data, settings }: IContact) => {
               required
               autoComplete="on"
               value={email}
+              pattern=".+@.+\..+"
               maxLength={320}
               onChange={({ target }: ChangeEvent) =>
                 setEmail((target as HTMLInputElement).value)

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Layout from "../components/layout";
 import Client from "../components/client";
 import Section from "../components/section";
@@ -37,7 +37,7 @@ type IHome = {
   settings: PrismicSettings;
 };
 
-const Home = ({ data, settings, mediumPosts, devPosts }: IHome) => {
+const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
   const [offset, setOffset] = useState<number>(0);
 
   function onScroll() {

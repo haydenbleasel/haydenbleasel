@@ -46,7 +46,7 @@
   gap: var(--gap-medium);
   align-self: flex-start;
 
-  & > div:first-of-type:last-of-type {
+  & > :first-of-type:last-of-type {
     grid-column: 1 / 3;
   }
 

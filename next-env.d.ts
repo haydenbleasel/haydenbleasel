@@ -44,6 +44,8 @@ type PrismicSettings = {
     social_name: string;
     social_link: PrismicLink;
   }[];
+  newsletter_success_alert: string;
+  newsletter_error_alert: string;
 };
 
 type PrismicRole = {
@@ -71,4 +73,9 @@ type IPost = {
   caption: string;
   description: string;
   image: PrismicImage;
+  date: string;
 };
+
+type APIResponse = {
+  error?: string;
+}

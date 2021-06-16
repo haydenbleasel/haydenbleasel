@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { NextSeo, SocialProfileJsonLd } from "next-seo";
 import { useRouter } from "next/router";
 import { siteUrl } from "../next-sitemap";
@@ -6,7 +7,7 @@ import Footer from "./footer";
 import { resolveLink } from "../utils/prismic";
 
 type LayoutProps = {
-  children: any;
+  children: ReactNode;
   title: string;
   description: string;
   settings: PrismicSettings,
@@ -15,20 +16,14 @@ type LayoutProps = {
 const name = "Hayden Bleasel";
 const username = "haydenbleasel";
 
-const image = {
-  url: `${siteUrl}/images/cover.jpg`,
-  width: 1200,
-  height: 630,
-  alt: name,
-};
-
 const Layout = ({
   children,
-  title = "This is the default title",
-  description = "This is the default description",
+  title,
+  description,
   settings,
 }: LayoutProps) => {
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
+  const url = `${siteUrl}${pathname}`;
 
   return (
     <>
@@ -36,18 +31,23 @@ const Layout = ({
         titleTemplate={`%s | ${name}`}
         title={title}
         description={description}
-        canonical={`${siteUrl}${asPath}`}
+        canonical={url}
         openGraph={{
-          url: asPath,
+          url,
           title,
           description,
-          images: [image],
+          images: [{
+            url: `${siteUrl}/images/cover.jpg`,
+            width: 1200,
+            height: 630,
+            alt: name,
+          }],
           site_name: name,
           type: "profile",
           profile: {
             firstName: name.split(" ")[0],
             lastName: name.split(" ")[1],
-            username: username,
+            username,
             gender: "male",
           },
         }}

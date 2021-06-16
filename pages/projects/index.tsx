@@ -1,4 +1,4 @@
-import type { GetStaticProps } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Layout from "../../components/layout";
 import Section from "../../components/section";
 import Card from "../../components/card";
@@ -24,7 +24,7 @@ function sortProjects(a, b) {
   return order.indexOf(a.uid) > order.indexOf(b.uid) ? 1 : -1;
 }
 
-const Projects = ({ data, settings, projects }: IProjects) => (
+const Projects: NextPage<IProjects> = ({ data, settings, projects }) => (
   <Layout
     title={data.title}
     description={data.description}
