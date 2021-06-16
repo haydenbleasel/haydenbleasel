@@ -34,6 +34,7 @@ export async function getMediumPosts() {
           .src.replace("max/1024", "max/3840"),
       },
       link: { link_type: "Web", url: item.link },
+      date: item.isoDate,
     };
   });
 

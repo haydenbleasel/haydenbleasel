@@ -73,4 +73,5 @@ type IPost = {
   caption: string;
   description: string;
   image: PrismicImage;
+  date: string;
 };
