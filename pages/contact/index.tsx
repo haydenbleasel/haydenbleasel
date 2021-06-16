@@ -70,10 +70,10 @@ const Contact = ({ data, settings }: IContact) => {
         body: formData,
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
 
-      if (response.status !== 200) {
-        throw new Error(data.message);
+      if (responseData.error) {
+        throw new Error(responseData.error);
       }
 
       window.alert(data.success_alert);
@@ -83,7 +83,7 @@ const Contact = ({ data, settings }: IContact) => {
       setMessage("");
       setFiles(null);
     } catch (error: any) {
-      window.alert(data.error_alert);
+      window.alert(error.message || data.error_alert);
     } finally {
       setLoading(false);
     }

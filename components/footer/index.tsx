@@ -34,8 +34,7 @@ const Footer = ({ settings }: IFooter) => {
       window.alert("Thanks, choom! I'll let you know when I release something cool.");
       setEmail("");
     } catch (error: any) {
-      const message = error.message || "Sorry, something went wrong! Try again later, hopefully I've fixed it";
-      window.alert(message);
+      window.alert(error.message || "Sorry, something went wrong! Try again later, hopefully I've fixed it");
     } finally {
       setLoading(false);
     }

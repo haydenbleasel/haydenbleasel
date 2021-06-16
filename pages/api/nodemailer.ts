@@ -81,10 +81,8 @@ export default async function handler(req, res) {
       })),
     });
 
-    res.statusCode = 200;
-    res.end(JSON.stringify({ success: true }));
+    res.status(200).json({});
   } catch (error) {
-    res.statusCode = 500;
-    res.end(JSON.stringify({ message: error.message }));
+    res.status(500).json({ error: error.message });
   }
 }
