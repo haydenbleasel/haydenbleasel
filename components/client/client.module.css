@@ -9,10 +9,15 @@
     @media (--darkMode) {
       filter: brightness(100);
     }
-  }
 
-  & > span {
-    margin-left: 0.5rem;
-    text-decoration: underline;
+    @media (--mobile) {
+      width: var(--type-scale-2) !important;
+      height: var(--type-scale-2) !important;
+    }
   }
+}
+
+.clientName {
+  margin-left: 0.5rem;
+  text-decoration: underline;
 }
