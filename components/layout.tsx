@@ -28,7 +28,7 @@ const Layout = ({
   description = "This is the default description",
   settings,
 }: LayoutProps) => {
-  const { asPath } = useRouter();
+  const { pathname } = useRouter();
 
   return (
     <>
@@ -36,9 +36,9 @@ const Layout = ({
         titleTemplate={`%s | ${name}`}
         title={title}
         description={description}
-        canonical={`${siteUrl}${asPath}`}
+        canonical={`${siteUrl}${pathname}`}
         openGraph={{
-          url: asPath,
+          url: pathname,
           title,
           description,
           images: [image],
