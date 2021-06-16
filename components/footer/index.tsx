@@ -31,10 +31,10 @@ const Footer = ({ settings }: IFooter) => {
         throw new Error(body.error);
       }
 
-      window.alert("Thanks, choom! I'll let you know when I release something cool.");
+      window.alert(settings.newsletter_success_alert);
       setEmail("");
     } catch (error: any) {
-      window.alert(error.message || "Sorry, something went wrong! Try again later, hopefully I've fixed it");
+      window.alert(error.message || settings.newsletter_error_alert);
     } finally {
       setLoading(false);
     }
