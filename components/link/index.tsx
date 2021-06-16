@@ -11,8 +11,8 @@ const Link = ({ children, href, ...props }: LinkProps) => {
   const url = resolveLink(href);
 
   return url.startsWith("/") ? (
-    <NextLink href={url} {...props}>
-      <a>{children}</a>
+    <NextLink href={url}>
+      <a {...props}>{children}</a>
     </NextLink>
   ) : (
     <a href={url} target="_blank" rel="noopener noreferrer" {...props}>
