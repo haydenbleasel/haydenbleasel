@@ -1,6 +1,10 @@
 export default async function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
 
+  if (req.method !== "POST") {
+    return res.status(404).send("Begone.");
+  }
+
   try {
     const response = await fetch("https://www.getrevue.co/api/v2/subscribers", {
       method: "POST",

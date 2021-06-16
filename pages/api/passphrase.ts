@@ -1,6 +1,10 @@
 export default async function handler(req, res) {
   res.setHeader("Content-Type", "application/json");
 
+  if (req.method !== "POST") {
+    return res.status(404).send("Begone.");
+  }
+
   try {
     const { uid, passphrase } = JSON.parse(req.body);
 
