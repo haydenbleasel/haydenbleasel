@@ -5,15 +5,11 @@ import { load, trackPageview } from "fathom-client";
 import { useRouter } from "next/router";
 import "./styles.css";
 
-import { siteUrl } from "../next-sitemap";
-
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
-    load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID as string, {
-      includedDomains: [siteUrl.replace("https://", "")],
-    });
+    load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID!);
 
     function onRouteChangeComplete() {
       trackPageview();
