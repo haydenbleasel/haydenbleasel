@@ -22,10 +22,8 @@ export default async function handler(req, res) {
       throw new Error("Passphrase is not correct.");
     }
 
-    res.statusCode = 200;
-    res.json({ success: true });
+    res.status(200).json({});
   } catch (error) {
-    res.statusCode = 500;
-    res.json({ message: error.message });
+    res.status(500).json({ error: error.message });
   }
 }

@@ -56,8 +56,8 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
 
       const body = await response.json();
 
-      if (!body.success) {
-        throw new Error(body.message);
+      if (body.error) {
+        throw new Error(body.error);
       }
 
       const newData = await queryAt('my.case_study.uid', uid);
@@ -65,7 +65,7 @@ const CaseStudy = ({ uid, settings }: ICaseStudy) => {
       setData(newData.data);
       setAuthenticated(true);
     } catch (error: any) {
-      window.alert(error.message);
+      window.alert(error.message || 'Something went wrong.');
     } finally {
       setLoading(false);
     }
