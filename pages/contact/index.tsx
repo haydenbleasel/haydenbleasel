@@ -7,6 +7,7 @@ import styles from "./contact.module.css";
 import Section from "../../components/section";
 import Title from "../../components/title";
 import { queryAt, richtext } from "../../utils/prismic";
+import { trackGoal } from 'fathom-client';
 
 type IContact = {
   data: {
@@ -84,6 +85,8 @@ const Contact = ({ data, settings }: IContact) => {
       setEmail("");
       setMessage("");
       setFiles(null);
+      
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_CONTACT_GOAL!, 0);
     } catch (error: any) {
       window.alert(error.message || data.error_alert);
     } finally {

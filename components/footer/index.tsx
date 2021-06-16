@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import Image from "next/image";
+import { trackGoal } from "fathom-client";
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
@@ -33,6 +34,7 @@ const Footer = ({ settings }: IFooter) => {
 
       window.alert(settings.newsletter_success_alert);
       setEmail("");
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL!, 0);
     } catch (error: any) {
       window.alert(error.message || settings.newsletter_error_alert);
     } finally {
