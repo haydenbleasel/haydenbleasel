@@ -1,3 +1,4 @@
+import type { FormHTMLAttributes } from 'react';
 import styles from './form.module.css';
 
 type IForm = {
@@ -8,8 +9,7 @@ type IForm = {
   value: string;
   onChangeText: any;
   loading: boolean;
-  onSubmit: any;
-}
+} & FormHTMLAttributes<HTMLFormElement>
 
 const Form = ({
   name,

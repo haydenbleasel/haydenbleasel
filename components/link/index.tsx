@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import { resolveLink } from "../../utils/prismic";
-import { AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes } from "react";
 
 type LinkProps = {
   href: PrismicLink;
