@@ -36,10 +36,9 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
   >
     <Title title={data.hero_title} />
 
-    <Section>
-      {roles.sort(sortRoles).map((role, index) => (
+    {roles.sort(sortRoles).map((role, index) => (
+      <Section key={role.uid}>
         <Card
-          key={role.uid}
           caption={role.data.date}
           title={role.data.title}
           subtitle={role.data.description}
@@ -49,8 +48,10 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
         >
           {role.data.content}
         </Card>
-      ))}
+      </Section>
+    ))}
 
+    <Section>
       <Outlink
         link={data.action_link}
         text={data.action_cta}

@@ -32,10 +32,9 @@ const Projects: NextPage<IProjects> = ({ data, settings, projects }) => (
   >
     <Title title={data.hero_title} />
 
-    <Section>
-      {projects.sort(sortProjects).map((project, index) => (
+    {projects.sort(sortProjects).map((project, index) => (
+      <Section key={project.uid}>
         <Card
-          key={project.uid}
           caption={project.data.status}
           title={project.data.title}
           id={project.uid}
@@ -47,8 +46,8 @@ const Projects: NextPage<IProjects> = ({ data, settings, projects }) => (
         >
           {project.data.content}
         </Card>
-      ))}
-    </Section>
+      </Section>
+    ))}
   </Layout>
 );
 
