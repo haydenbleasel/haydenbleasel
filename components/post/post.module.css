@@ -1,10 +1,7 @@
 .post {
   transition: transform 0.2s;
-
-  & a {
-    text-decoration: none;
-    display: block;
-  }
+  text-decoration: none;
+  display: block;
 
   & h2 {
     margin: 0;
