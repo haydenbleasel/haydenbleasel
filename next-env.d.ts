@@ -75,3 +75,7 @@ type IPost = {
   image: PrismicImage;
   date: string;
 };
+
+type APIResponse = {
+  error?: string;
+}

@@ -1,8 +1,10 @@
-export default async function handler(req, res) {
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse<APIResponse>) {
   res.setHeader("Content-Type", "application/json");
 
   if (req.method !== "POST") {
-    return res.status(404).send("Begone.");
+    return res.status(404).send({ error: "Begone." });
   }
 
   try {
