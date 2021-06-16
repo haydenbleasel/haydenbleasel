@@ -36,45 +36,32 @@ type IAbout = {
   settings: PrismicSettings;
 }
 
-const Event = ({ event_link, event_name, event_host, event_date }) => (
-  <li key={`${event_name}-${event_host}`}>
-    <p className={`${styles.eventDetails} small grey`}>
-      {event_host}, {event_date}
-    </p>
-    {event_link ? (
-      <Link href={event_link}>
-        <span className="paragraphSans">{event_name}</span>
-      </Link>
-    ) : (
-      <p className="paragraphSans">{event_name}</p>
-    )}
-  </li>
-);
+type IItem = {
+  date: string;
+  title: string;
+  subtitle: string;
+  link?: PrismicLink;
+}
 
-const Interview = ({ interview_link, interview_name, interview_host, interview_date }) => (
-  <li key={`${interview_name}-${interview_host}`}>
-    <p className={`${styles.eventDetails} small grey`}>
-      {interview_host}, {interview_date}
-    </p>
-    {interview_link ? (
-      <Link href={interview_link}>
-        <span className="paragraphSans">{interview_name}</span>
-      </Link>
-    ) : (
-      <p className="paragraphSans">{interview_name}</p>
-    )}
-  </li>
-);
+const ItemInner = ({ title, subtitle }: Omit<IItem, 'date'>) => (
+  <div className={styles.itemDetails}>
+    <span className="paragraphSans">{title},</span>
+    <span className="paragraphSerif">&nbsp;{subtitle}</span>
+  </div>
+)
 
-const Role = ({ work_role, work_company, work_date }) => (
-  <li key={work_role} id={work_company} className={styles.eventLink}>
+const Item = ({ date, title, subtitle, link }: IItem) => (
+  <li key={`${title}-${date}`} id={title} className={styles.eventLink}>
     <small className="small grey">
-      {work_date}
+      {date}
     </small>
-    <p className={styles.roleDetails}>
-      <span className="paragraphSans">{work_role},</span>
-      <span className="paragraphSerif"> {work_company}</span>
-    </p>
+    {link ? (
+      <Link href={link}>
+        <ItemInner title={title} subtitle={subtitle} />
+      </Link>
+    ) : (
+      <ItemInner title={title} subtitle={subtitle} />
+    )}
   </li>
 );
 
@@ -134,7 +121,13 @@ const About = ({ data, settings }: IAbout) => {
             <Divider text="Work History" />
 
             <ul className={styles.list}>
-              {data.work_history.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map(Role)}
+              {data.work_history.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map((item) => (
+                <Item
+                  date={item.work_date}
+                  title={item.work_role}
+                  subtitle={item.work_company}
+                />
+              ))}
             </ul>
             {!rolesExpanded && (
               <p
@@ -151,7 +144,14 @@ const About = ({ data, settings }: IAbout) => {
             <ul
               className={styles.list}
             >
-              {data.speaking_events.sort(sortEvents).slice(...sliceList(eventsExpanded)).map(Event)}
+              {data.speaking_events.sort(sortEvents).slice(...sliceList(eventsExpanded)).map((item) => (
+                <Item
+                  date={item.event_date}
+                  title={item.event_name}
+                  subtitle={item.event_host}
+                  link={item.event_link}
+                />
+              ))}
             </ul>
             {!eventsExpanded && (
               <p
@@ -166,7 +166,14 @@ const About = ({ data, settings }: IAbout) => {
             <Divider text="Interviews &amp; Features" />
 
             <ul className={styles.list}>
-              {data.interviews.sort(sortInterviews).slice(...sliceList(interviewsExpanded)).map(Interview)}
+              {data.interviews.sort(sortInterviews).slice(...sliceList(interviewsExpanded)).map((item) => (
+                <Item
+                  date={item.interview_date}
+                  title={item.interview_name}
+                  subtitle={item.interview_host}
+                  link={item.interview_link}
+                />
+              ))}
             </ul>
             {!interviewsExpanded && (
               <p
