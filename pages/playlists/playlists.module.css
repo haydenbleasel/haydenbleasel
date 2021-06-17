@@ -16,17 +16,27 @@
 
 .playlist {
   text-decoration: none;
+  display: block;
 
   & > div {
     grid-column: auto;
     margin-top: 0 !important;
 
-    & > div {
+    & > div:last-child {
       display: block;
       margin-top: var(--gap-small);
 
+      & > div {
+        margin-bottom: 0 !important;
+
+        & > h2 {
+          margin-top: 0.5rem !important;
+        }
+      }
+
       & > p {
         columns: 1;
+        margin-bottom: 0 !important;
       }
     }
   }
