@@ -40,4 +40,12 @@
 .expand {
   cursor: pointer;
   margin-top: var(--gap-small);
+
+  &:hover {
+    color: var(--black);
+  }
+}
+
+.itemLink {
+  display: block;
 }

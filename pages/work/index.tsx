@@ -16,7 +16,7 @@ type IWork = {
     hero_title: PrismicRichText;
     action_cta: string;
     action_link: PrismicLink;
-    jellypepper_title: string;
+    jellypepper_intro: string;
   };
   settings: PrismicSettings;
   roles: {
@@ -63,10 +63,10 @@ function Client({ id, name, projects, roles }: IClient) {
           }
 
           return (
-            <>
+            <span key={index}>
               {projectDescription}
               {projectDivider}
-            </>
+            </span>
           );
         })}
       </p>
@@ -109,7 +109,7 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
     ))}
 
     <Section>
-      <p className={styles.jellypepperTitle}>{data.jellypepper_title}</p>
+      <p className={styles.jellypepperTitle}>{data.jellypepper_intro}</p>
       <div className={styles.clients}>
         <div className={styles.listHeader}>
           <p className="smallSans">Client</p>
