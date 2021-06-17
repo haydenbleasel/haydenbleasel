@@ -45,7 +45,7 @@ const Post = ({
       </div>
     )}
     <div className={styles.meta}>
-      {!!caption && <small className="small grey">{caption}</small>}
+      {!!caption && <small className="smallSans grey">{caption}</small>}
       <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
       {!!description && !compact && (
         <p className="paragraphSans grey">{description}</p>
