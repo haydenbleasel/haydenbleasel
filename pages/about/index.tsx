@@ -56,7 +56,7 @@ const Item = ({ date, title, subtitle, link }: IItem) => (
       {date}
     </small>
     {link ? (
-      <Link href={link}>
+      <Link className={styles.itemLink} href={link}>
         <ItemInner title={title} subtitle={subtitle} />
       </Link>
     ) : (
