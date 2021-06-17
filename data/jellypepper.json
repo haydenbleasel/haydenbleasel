@@ -1,0 +1,240 @@
+[
+  {
+    "id": "baraja",
+    "name": "Baraja",
+    "roles": ["Visual Design", "Web Development"],
+    "projects": [
+      {
+        "name": "a rebrand and new website",
+        "link": "https://jellypepper.com/work/baraja"
+      },
+      {
+        "name": "support for Amazon Innovation Day 2019 and CES 2020"
+      }
+    ]
+  },
+  {
+    "id": "brighte",
+    "name": "Brighte",
+    "roles": ["Website Design and Development"],
+    "projects": [
+      {
+        "name": "a rebrand, new website and product redesign",
+        "link": "https://jellypepper.com/work/brighte"
+      }
+    ]
+  },
+  {
+    "id": "flaunter",
+    "name": "Flaunter",
+    "roles": ["Product Design", "Design System"],
+    "projects": [
+      {
+        "name": "a rebrand, new website, product redesign and design system",
+        "link": "https://jellypepper.com/work/flaunter"
+      }
+    ]
+  },
+  {
+    "id": "flirtey",
+    "name": "Flirtey",
+    "roles": ["Website Design", "Web Development"],
+    "projects": [
+      {
+        "name": "a website design and build",
+        "link": "https://www.flirtey.com/"
+      },
+      {
+        "name": "Series A deck design"
+      },
+      {
+        "name": "Series B deck design"
+      },
+      {
+        "name": "product redesign concepts"
+      },
+      {
+        "name": "a timeline video"
+      }
+    ]
+  },
+  {
+    "id": "lightswap",
+    "name": "Lightswap",
+    "roles": ["Product Design", "Design System"],
+    "projects": [
+      {
+        "name": "a rebrand, new website, product redesign and design system",
+        "link": "https://jellypepper.com/work/lightswap"
+      }
+    ]
+  },
+  {
+    "id": "zibbet",
+    "name": "Zibbet",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "a brand update, new website, product redesign and design system",
+        "link": "https://jellypepper.com/work/zibbet"
+      }
+    ]
+  },
+  {
+    "id": "spaceship",
+    "name": "Spaceship",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "a logo animation"
+      },
+      {
+        "name": "design for their new Voyager web app",
+        "link": "https://www.spaceship.com.au/voyager/"
+      }
+    ]
+  },
+  {
+    "id": "upguard",
+    "name": "UpGuard",
+    "roles": ["Product Design", "Website Design"],
+    "projects": [
+      {
+        "name": "a website redesign concept"
+      },
+      {
+        "name": "new product updates"
+      },
+      {
+        "name": "pioneering new product wireframes"
+      }
+    ]
+  },
+  {
+    "id": "clipchamp",
+    "name": "Clipchamp",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "product-led growth and app redesign concepts",
+        "link": "https://jellypepper.com/work/clipchamp"
+      }
+    ]
+  },
+  {
+    "id": "futrli",
+    "name": "Futrli",
+    "roles": ["Website Development"],
+    "projects": [
+      {
+        "name": "a new website build"
+      }
+    ]
+  },
+  {
+    "id": "audience-republic",
+    "name": "Audience Republic",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "a graphing design system in Vue"
+      },
+      {
+        "name": "product design for an automation platform"
+      }
+    ]
+  },
+  {
+    "id": "simply-wall-st",
+    "name": "Simply Wall St",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "a product redesign concept"
+      }
+    ]
+  },
+  {
+    "id": "snug",
+    "name": "Snug",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "a product redesign",
+        "link": "https://snug.com/"
+      }
+    ]
+  },
+  {
+    "id": "shippit",
+    "name": "Shippit",
+    "roles": ["Product Design"],
+    "projects": [
+      {
+        "name": "tailored landing pages"
+      },
+      {
+        "name": "the design and build of Lyne Direct",
+        "link": "https://lynedirect.com/"
+      }
+    ]
+  },
+  {
+    "id": "corellium",
+    "name": "Corellium",
+    "roles": ["Website Development"],
+    "projects": [
+      {
+        "name": "a rebrand and a new website strategy, design and development",
+        "link": "https://jellypepper.com/work/corellium"
+      }
+    ]
+  },
+  {
+    "id": "inventia",
+    "name": "Inventia",
+    "roles": ["Website Development"],
+    "projects": [
+      {
+        "name": "a brand refresh and new website",
+        "link": "https://jellypepper.com/work/inventia"
+      },
+      {
+        "name": "a landing page for skin regeneration technology",
+        "link": "https://inventiaskin.com/"
+      }
+    ]
+  },
+  {
+    "id": "grow",
+    "name": "Grow",
+    "roles": ["Website Design", "Website Development"],
+    "projects": [
+      {
+        "name": "a new website design and build",
+        "link": "https://www.grow.inc/"
+      }
+    ]
+  },
+  {
+    "id": "airwallex",
+    "name": "Airwallex",
+    "roles": ["Design System"],
+    "projects": [
+      {
+        "name": "design system development"
+      }
+    ]
+  },
+  {
+    "id": "siesta-campers",
+    "name": "Siesta Campers",
+    "roles": ["Website Development"],
+    "projects": [
+      {
+        "name": "a website redesign and build",
+        "link": "https://jellypepper.com/work/siesta-campers"
+      }
+    ]
+  }
+]
