@@ -1,0 +1,33 @@
+.playlists {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column: 1 / 13;
+  gap: var(--gap-medium);
+
+  @media (--desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (--laptop) {
+    grid-template-columns: 1fr;
+    grid-column: 1;
+  }
+}
+
+.playlist {
+  text-decoration: none;
+
+  & > div {
+    grid-column: auto;
+    margin-top: 0 !important;
+
+    & > div {
+      display: block;
+      margin-top: var(--gap-small);
+
+      & > p {
+        columns: 1;
+      }
+    }
+  }
+}

@@ -85,11 +85,6 @@ const config = {
         permanent: true,
       },
       {
-        source: "/playlists",
-        destination: "https://open.spotify.com/user/haydenbleasel",
-        permanent: true,
-      },
-      {
         source: "/case-studies",
         destination: "/",
         permanent: false,
