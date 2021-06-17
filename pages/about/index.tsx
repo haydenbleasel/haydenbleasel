@@ -52,7 +52,7 @@ const ItemInner = ({ title, subtitle }: Omit<IItem, 'date'>) => (
 
 const Item = ({ date, title, subtitle, link }: IItem) => (
   <li id={title} className={styles.eventLink}>
-    <small className="small grey">
+    <small className="smallSans grey">
       {date}
     </small>
     {link ? (
@@ -132,7 +132,7 @@ const About: NextPage<IAbout> = ({ data, settings }) => {
             </ul>
             {!rolesExpanded && (
               <p
-                className={`small underline grey ${styles.expand}`}
+                className={`smallSans underline grey ${styles.expand}`}
                 onClick={() => setRolesExpanded(true)}
               >
                 Show more
@@ -157,7 +157,7 @@ const About: NextPage<IAbout> = ({ data, settings }) => {
             </ul>
             {!eventsExpanded && (
               <p
-                className={`small underline grey ${styles.expand}`}
+                className={`smallSans underline grey ${styles.expand}`}
                 onClick={() => setEventsExpanded(true)}
               >
                 Show more
@@ -180,7 +180,7 @@ const About: NextPage<IAbout> = ({ data, settings }) => {
             </ul>
             {!interviewsExpanded && (
               <p
-                className={`small underline grey ${styles.expand}`}
+                className={`smallSans underline grey ${styles.expand}`}
                 onClick={() => setInterviewsExpanded(true)}
               >
                 Show more

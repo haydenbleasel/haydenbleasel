@@ -40,7 +40,7 @@ const Card = ({
     </Skeleton>
     <div className={styles.meta}>
       <div className={styles.summary}>
-        <p className="grey small">{caption}</p>
+        <p className="grey smallSans">{caption}</p>
         <h2 className="h2Sans">{title}</h2>
         <p className="h2Serif">{subtitle}</p>
         {(link && action) && <Link href={link}>{action}</Link>}

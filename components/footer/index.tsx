@@ -78,7 +78,7 @@ const Footer = ({ settings }: IFooter) => {
           />
 
           <div className={styles.copyright}>
-            <p className="small" dangerouslySetInnerHTML={{__html: richtext(settings.footer_disclaimer, true) }} />
+            <p className="smallSans" dangerouslySetInnerHTML={{__html: richtext(settings.footer_disclaimer, true) }} />
           </div>
         </div>
       </Section>

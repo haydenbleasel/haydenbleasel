@@ -41,12 +41,12 @@ function Client({ id, name, projects, roles }: IClient) {
   return (
     <div id={id} key={id} className={styles.client}>
       <p>
-        <span className="small">
+        <span className="smallSans">
           {roles?.join(' and ')},&nbsp;
         </span>
         <span className="smallSerif">{name}</span>
       </p>
-      <p className="small">
+      <p className="smallSans">
         {projects.map((project, index) => {
           const projectDescription = project.link ? (
             <Link href={project.link}>{project.name}</Link>
@@ -112,8 +112,8 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
       <p className={styles.jellypepperTitle}>{data.jellypepper_title}</p>
       <div className={styles.clients}>
         <div className={styles.listHeader}>
-          <p className="small">Client</p>
-          <p className="small">Project</p>
+          <p className="smallSans">Client</p>
+          <p className="smallSans">Project</p>
         </div>
         {jellypepper.sort(sortById).map(Client)}
       </div>

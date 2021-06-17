@@ -196,7 +196,7 @@ a {
   letter-spacing: -0.005em;
 }
 
-.small {
+.smallSans {
   font-family: var(--type-family-sans);
   font-style: normal;
   font-weight: 300;

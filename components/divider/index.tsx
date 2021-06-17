@@ -6,7 +6,7 @@ type IDivider = {
 
 const Divider = ({ text }: IDivider) => (
   <div className={styles.divider}>
-    <h2 className="small grey">{text}</h2>
+    <h2 className="smallSans grey">{text}</h2>
   </div>
 );
 
