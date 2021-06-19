@@ -14,6 +14,8 @@ type SpotifyPlaylist = {
   url: string;
   image: string;
   tracks: number;
+  duration: number;
+  artists: string;
 };
 
 type IPlaylists = {
@@ -30,16 +32,17 @@ type IPlaylists = {
 function Playlist({
   id,
   name,
-  description,
   url,
   image,
   tracks,
+  duration,
+  artists,
 }: SpotifyPlaylist) {
   return (
     <Link className={styles.playlist} key={id} href={url}>
       <Card
         id={id}
-        caption={`${tracks} tracks`}
+        caption={`${tracks} tracks · ${(duration / 3600000).toFixed(1)} hours`}
         image={{
           url: image,
           alt: name,
@@ -52,7 +55,7 @@ function Playlist({
         height={640}
         title={name}
       >
-        {description}
+        {artists}
       </Card>
     </Link>
   )

@@ -17,6 +17,11 @@
 .playlist {
   text-decoration: none;
   display: block;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
 
   & > div {
     grid-column: auto;
