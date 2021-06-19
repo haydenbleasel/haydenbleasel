@@ -36,7 +36,7 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
   >
     <Title title={data.hero_title} />
 
-    {roles.sort(sortRoles).map((role, index) => (
+    {roles.filter(({ data }) => data.featured).sort(sortRoles).map((role, index) => (
       <Section key={role.uid}>
         <Card
           caption={role.data.date}

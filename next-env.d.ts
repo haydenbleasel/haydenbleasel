@@ -54,6 +54,7 @@ type PrismicRole = {
   description: string;
   date: string;
   content: PrismicRichText;
+  featured: boolean;
 };
 
 type PrismicProject = {
