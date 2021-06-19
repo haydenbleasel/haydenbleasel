@@ -1,6 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next';
 import { useState } from "react";
-import { parse } from 'date-fns';
 import styles from "./about.module.css";
 import Layout from "../../components/layout";
 import Section from "../../components/section";
