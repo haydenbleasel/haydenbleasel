@@ -40,10 +40,10 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 async function fetchPlaylist(id: string) {
-  const { body } = await spotifyApi.getPlaylist(id);
+  const { body } = await spotifyApi.getPlaylistTracks(id);
   let duration = 0;
 
-  const allArtists = body.tracks.items
+  const allArtists = body.items
     .map(({ track }) => {
       duration += track.duration_ms;
       const artistsArray = track.artists.map(({ name }) => name.split(","));
