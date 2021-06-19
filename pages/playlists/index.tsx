@@ -27,6 +27,37 @@ type IPlaylists = {
   settings: PrismicSettings;
 };
 
+function Playlist({
+  id,
+  name,
+  description,
+  url,
+  image,
+  tracks,
+}: SpotifyPlaylist) {
+  return (
+    <Link className={styles.playlist} key={id} href={url}>
+      <Card
+        id={id}
+        caption={`${tracks} tracks`}
+        image={{
+          url: image,
+          alt: name,
+          dimensions: {
+            width: 640,
+            height: 640,
+          }
+        }}
+        width={640}
+        height={640}
+        title={name}
+      >
+        {description}
+      </Card>
+    </Link>
+  )
+}
+
 const Playlists = ({ data, playlists, settings }: IPlaylists) => (
   <Layout
     title={data.title}
@@ -36,34 +67,7 @@ const Playlists = ({ data, playlists, settings }: IPlaylists) => (
     <Title title={data.hero_title} />
     <Section>
       <div className={styles.playlists}>
-        {playlists.map(({
-          id,
-          name,
-          description,
-          url,
-          image,
-          tracks,
-        }: SpotifyPlaylist) => (
-          <Link className={styles.playlist} key={id} href={url}>
-            <Card
-              id={id}
-              caption={`${tracks} tracks`}
-              image={{
-                url: image,
-                alt: name,
-                dimensions: {
-                  width: 640,
-                  height: 640,
-                }
-              }}
-              width={640}
-              height={640}
-              title={name}
-            >
-              {description}
-            </Card>
-          </Link>
-        ))}
+        {playlists.map(Playlist)}
       </div>
     </Section>
   </Layout>
