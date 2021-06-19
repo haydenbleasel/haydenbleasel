@@ -86,6 +86,11 @@ body {
 
 a {
   color: inherit;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .titleSans {
@@ -196,12 +201,24 @@ a {
   letter-spacing: -0.005em;
 }
 
-.small {
+.smallSans {
   font-family: var(--type-family-sans);
   font-style: normal;
   font-weight: 300;
   font-size: var(--type-scale-0);
   line-height: 1.5;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-1);
+  }
+}
+
+.smallSerif {
+  font-family: var(--type-family-serif);
+  font-style: normal;
+  font-weight: 300;
+  font-size: var(--type-scale-0);
+  line-height: 1.3;
 
   @media (--mobile) {
     font-size: var(--type-scale-1);

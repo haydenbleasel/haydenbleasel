@@ -61,9 +61,6 @@
     border-radius: 4px;
     padding-left: 1rem;
     padding-right: 1rem;
-    &::after {
-      display: none !important;
-    }
   }
 
   & a {
@@ -86,20 +83,6 @@
   & li a:hover,
   & li.active a {
     opacity: 1;
-  }
-
-  & li.active a::after {
-    content: "";
-    width: 100%;
-    background: var(--black);
-    height: 1px;
-    display: block;
-    position: absolute;
-    bottom: -1.1rem;
-
-    @media (--tablet) {
-      bottom: 0;
-    }
   }
 
   @media (--tablet) {

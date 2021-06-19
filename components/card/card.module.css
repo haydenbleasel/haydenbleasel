@@ -54,7 +54,7 @@
   columns: 2;
   grid-column: 2 / 4;
   column-gap: var(--gap-medium);
-  composes: small from global;
+  composes: smallSans from global;
 
   & p {
     margin: 0 0 var(--gap-small);

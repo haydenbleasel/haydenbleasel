@@ -1,14 +1,14 @@
+import type { AnchorHTMLAttributes } from "react";
 import NextLink from "next/link";
 import { resolveLink } from "../../utils/prismic";
-import type { AnchorHTMLAttributes } from "react";
 
 type LinkProps = {
-  href: PrismicLink;
+  href: PrismicLink | string;
   label?: string;
 } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
 const Link = ({ children, href, ...props }: LinkProps) => {
-  const url = resolveLink(href);
+  const url = typeof href === 'string' ? href : resolveLink(href);
 
   return url.startsWith("/") ? (
     <NextLink href={url}>

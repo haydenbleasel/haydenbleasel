@@ -75,7 +75,7 @@
     color: var(--black);
     opacity: 0.4;
   }
-  &:valid:not(:focus) {
+  &:valid:not(:placeholder-shown):not(:focus) {
     box-shadow: 0 0 0 0.125rem var(--green);
   }
   &:invalid:not(:placeholder-shown):not(:focus) {

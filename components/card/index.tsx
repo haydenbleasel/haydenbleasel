@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { ImageProps } from "next/image";
 import Link from '../link';
 import Skeleton from "../skeleton";
 import { richtext } from "../../utils/prismic";
@@ -9,12 +9,11 @@ type ICard = {
   caption: string;
   image: PrismicImage;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   action?: string;
-  link?: PrismicLink;
-  priority?: boolean;
-  children: PrismicRichText;
-};
+  link?: PrismicLink | string;
+  children: PrismicRichText | string;
+} & Omit<ImageProps, 'src'|'placeholder'|'blurDataURL'|'layout'>;
 
 const Card = ({
   id,
@@ -24,8 +23,8 @@ const Card = ({
   subtitle,
   link,
   action,
-  priority = false,
   children,
+  ...props
 }: ICard) => (
   <div className={styles.card} id={id}>
     <Skeleton>
@@ -34,18 +33,24 @@ const Card = ({
         layout="responsive"
         width={1312}
         height={600}
-        priority={priority}
         alt={title}
+        {...props}
       />
     </Skeleton>
     <div className={styles.meta}>
       <div className={styles.summary}>
-        <p className="grey small">{caption}</p>
+        <p className="grey smallSans">{caption}</p>
         <h2 className="h2Sans">{title}</h2>
-        <p className="h2Serif">{subtitle}</p>
+        {!!subtitle && (
+          <p className="h2Serif">{subtitle}</p>
+        )}
         {(link && action) && <Link href={link}>{action}</Link>}
       </div>
-      <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(children) }} />
+      {typeof children === 'string' ? (
+        <p className={styles.content}>{children}</p>
+      ) : (
+        <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(children) }} />
+      )}
     </div>
   </div>
 );

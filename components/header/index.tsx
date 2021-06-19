@@ -30,7 +30,7 @@ const Header = ({ settings }: IHeader) => {
     return (
       <li
         key={sitemap_label}
-        className={`small ${pathname == resolveLink(sitemap_link) ? styles.active : ""}`}
+        className={`smallSans ${pathname == resolveLink(sitemap_link) ? styles.active : ""}`}
       >
         <Link href={sitemap_link}>{sitemap_label}</Link>
       </li>
