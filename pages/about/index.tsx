@@ -70,8 +70,8 @@ const Item = ({ date, title, subtitle, link }: IItem) => (
 );
 
 function sortRoles(a, b) {
-  const dateA = parse(a.data.date.split(' — ')[0], 'MMM yyyy', new Date());
-  const dateB = parse(b.data.date.split(' — ')[0], 'MMM yyyy', new Date());
+  const dateA = a.data.date.split(' — ')[0];
+  const dateB = b.data.date.split(' — ')[0];
   
   return dateA < dateB ? 1 : -1;
 }
