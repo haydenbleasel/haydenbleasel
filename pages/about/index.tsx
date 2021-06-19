@@ -33,6 +33,10 @@ type IAbout = {
       interview_link: PrismicLink;
     }[];
   };
+  roles: {
+    uid: string;
+    data: PrismicRole;
+  }[];
   settings: PrismicSettings;
 }
 
@@ -66,8 +70,8 @@ const Item = ({ date, title, subtitle, link }: IItem) => (
 );
 
 function sortRoles(a, b) {
-  const dateA = parse(a.work_date.split(' — ')[0], 'MMM yyyy', new Date());
-  const dateB = parse(b.work_date.split(' — ')[0], 'MMM yyyy', new Date());
+  const dateA = parse(a.data.date.split(' — ')[0], 'MMM yyyy', new Date());
+  const dateB = parse(b.data.date.split(' — ')[0], 'MMM yyyy', new Date());
   
   return dateA < dateB ? 1 : -1;
 }
@@ -80,16 +84,16 @@ function sortInterviews(a, b) {
   return a.interview_date < b.interview_date ? 1 : -1;
 }
 
-const About: NextPage<IAbout> = ({ data, settings }) => {
+const About: NextPage<IAbout> = ({ data, roles, settings }) => {
   const [rolesExpanded, setRolesExpanded] = useState(false);
   const [eventsExpanded, setEventsExpanded] = useState(false);
   const [interviewsExpanded, setInterviewsExpanded] = useState(false);
 
-  function filterRoles({ work_role }) {
+  function filterRoles({ data }) {
     if (rolesExpanded) {
       return true;
     } else {
-      return work_role.toLowerCase().includes('design');
+      return data.title.toLowerCase().includes('design');
     }
   }
 
@@ -121,12 +125,12 @@ const About: NextPage<IAbout> = ({ data, settings }) => {
             <Divider text="Work History" />
 
             <ul className={styles.list}>
-              {data.work_history.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map((item, index) => (
+              {roles.sort(sortRoles).filter(filterRoles).slice(...sliceList(rolesExpanded)).map(({ data }, index) => (
                 <Item
-                  key={`${item.work_company}-${index}`}
-                  date={item.work_date}
-                  title={item.work_role}
-                  subtitle={item.work_company}
+                  key={`${data.description}-${index}`}
+                  date={data.date}
+                  title={data.title}
+                  subtitle={data.description}
                 />
               ))}
             </ul>
@@ -195,11 +199,13 @@ const About: NextPage<IAbout> = ({ data, settings }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const { data } = await queryAt('document.type', 'about');
+  const roles = await queryAt('document.type', 'role');
   const { data: settings } = await queryAt('document.type', 'settings');
 
   return {
     props: {
       data,
+      roles,
       settings,
     },
   };
