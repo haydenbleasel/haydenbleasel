@@ -13,7 +13,7 @@ type ICard = {
   action?: string;
   link?: PrismicLink | string;
   children: PrismicRichText | string;
-} & Omit<ImageProps, 'src'>;
+} & Omit<ImageProps, 'src'|'placeholder'|'blurDataURL'|'layout'>;
 
 const Card = ({
   id,
