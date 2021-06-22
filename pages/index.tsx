@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { GetStaticProps, NextPage } from 'next';
 import Layout from "../components/layout";
 import Client from "../components/client";
@@ -10,6 +9,7 @@ import { getDevPosts } from "../utils/dev";
 import styles from "./home.module.css";
 import { useEffect, useState } from "react";
 import { plaintext, queryAt, richtext } from "../utils/prismic";
+import PrismicImage from "../components/prismicImage";
 
 type IHome = {
   data: {
@@ -62,8 +62,8 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
         <div className={styles.heroLeft}>
           <div className={styles.asterisk}>
             <div style={{ transform: `rotate(${offset}deg)` }}>
-              <Image
-                src={data.asterisk.url}
+              <PrismicImage
+                src={data.asterisk}
                 layout="fixed"
                 width={48}
                 height={48}

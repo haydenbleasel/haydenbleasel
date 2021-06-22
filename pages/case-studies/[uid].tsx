@@ -1,7 +1,7 @@
 import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { createElement, useState } from 'react';
+import { ReactCompareSlider } from 'react-compare-slider';
 import type { FormEvent } from 'react';
-import Image from 'next/image';
 import slugify from 'slugify';
 import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
@@ -10,6 +10,7 @@ import Section from "../../components/section";
 import Title from '../../components/title';
 import { queryAt, richtext } from "../../utils/prismic";
 import styles from './caseStudy.module.css';
+import PrismicImage from '../../components/prismicImage';
 
 type ICaseStudy = {
   uid: string;
@@ -59,11 +60,56 @@ function createTextElement(children: any, element: any, props: any) {
   );
 }
 
+function Slice ({ slice_type, primary }, index) {
+  if (slice_type === 'rich_text') {
+    return (
+      <div key={index} dangerouslySetInnerHTML={{
+        __html: richtext(primary.text, false, {
+          heading1: ({ children, element }) => createTextElement(children, element, { className: 'h1Sans', id: slugElement(element) }),
+          heading2: ({ children, element }) => createTextElement(children, element, { className: 'h2Sans', id: slugElement(element) }),
+          heading3: ({ children, element }) => createTextElement(children, element, { className: 'h3Sans', id: slugElement(element) }),
+          heading4: ({ children, element }) => createTextElement(children, element, { className: 'h4Sans', id: slugElement(element) }),
+          heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
+          heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
+          paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
+        })
+      }} />
+    );
+  }
+
+  if (slice_type === 'image_comparison') {
+    return (
+      <div key={index}>
+        <ReactCompareSlider
+          itemOne={
+            <PrismicImage src={primary.before_image} />
+          }
+          itemTwo={
+            <PrismicImage src={primary.after_image} />
+          }
+        />
+        <div className={styles.comparisonSides}>
+          <p className="smallSans grey">Before</p>
+          <p className="smallSans">{primary.comparison_text}</p>
+          <p className="smallSans grey">After</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (slice_type === 'image') {
+    return (
+      <PrismicImage src={primary.image} />
+    )
+  }
+}
+
 const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [passphrase, setPassphrase] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
+  const [table, setTable] = useState<string>('');
 
   async function authenticate(event: FormEvent) {
     event.preventDefault();
@@ -86,7 +132,19 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
       setData(newData.data);
       setAuthenticated(true);
 
-      trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0)
+      const newTable = newData.data.body.filter(({ slice_type }) => slice_type === 'rich_text').map(({ primary }) => (
+        richtext(primary.text.filter(filterHeadings), false, {
+          heading1: createTableElement,
+          heading2: createTableElement,
+          heading3: createTableElement,
+          heading4: createTableElement,
+          heading5: createTableElement,
+          heading6: createTableElement,
+        })
+      ));
+
+      setTable(newTable.join(''));
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0);
     } catch (error: any) {
       window.alert(error.message || 'Something went wrong.');
     } finally {
@@ -104,28 +162,15 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       <Section>
         <div className={styles.cover}>
-          <Image src={data.cover.url} width={1312} height={600} layout="responsive" alt={`${data.title} Case Study`} />
+          <PrismicImage src={data.cover} width={1312} height={600} alt={`${data.title} Case Study`} />
         </div>
       </Section>
       
       <Section style={{ gridAutoFlow: 'dense' }}>
-        <div className={styles.table} dangerouslySetInnerHTML={{ __html: richtext(data.content.filter(filterHeadings), false, {
-          heading1: createTableElement,
-          heading2: createTableElement,
-          heading3: createTableElement,
-          heading4: createTableElement,
-          heading5: createTableElement,
-          heading6: createTableElement,
-        })}} />
-        <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(data.content, false, {
-          heading1: ({ children, element }) => createTextElement(children, element, { className: 'h1Sans', id: slugElement(element) }),
-          heading2: ({ children, element }) => createTextElement(children, element, { className: 'h2Sans', id: slugElement(element) }),
-          heading3: ({ children, element }) => createTextElement(children, element, { className: 'h3Sans', id: slugElement(element) }),
-          heading4: ({ children, element }) => createTextElement(children, element, { className: 'h4Sans', id: slugElement(element) }),
-          heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
-          heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
-          paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
-        }) }} />
+        <div className={styles.table} dangerouslySetInnerHTML={{ __html: table }} />
+        <div className={styles.content}>
+          {data.body.map(Slice)}
+        </div>
       </Section>
     </Layout>
   ) : (

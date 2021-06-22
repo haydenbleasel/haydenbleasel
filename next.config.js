@@ -15,9 +15,8 @@ const config = {
       "dev.to",
       "haydenbleasel.cdn.prismic.io",
       "images.prismic.io",
+      "prismic-io.s3.amazonaws.com",
     ],
-    loader: "imgix",
-    path: "",
   },
   async headers() {
     return [

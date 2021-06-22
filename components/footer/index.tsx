@@ -1,10 +1,10 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import Image from "next/image";
 import { trackGoal } from "fathom-client";
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
+import PrismicImage from "../prismicImage";
 import { richtext } from "../../utils/prismic";
 import Form from "../form";
 
@@ -49,13 +49,12 @@ const Footer = ({ settings }: IFooter) => {
           {settings.social.map(({ social_name, social_link, social_icon }) => (
             <div key={social_name} className={styles.socialIcon}>
               <Link href={social_link}>
-                <Image
+                <PrismicImage
+                  src={social_icon}
                   alt={social_name}
                   layout="fixed"
                   width={18}
                   height={18}
-                  src={social_icon.url}
-                  quality={100}
                 />
               </Link>
             </div>
