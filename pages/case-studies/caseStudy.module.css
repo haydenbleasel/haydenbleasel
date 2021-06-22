@@ -63,3 +63,7 @@
   justify-content: space-between;
   margin-top: 0.25rem;
 }
+
+.image, .comparison {
+  margin: var(--gap-medium) auto;
+}

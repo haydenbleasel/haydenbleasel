@@ -79,7 +79,7 @@ function Slice ({ slice_type, primary }, index) {
 
   if (slice_type === 'image_comparison') {
     return (
-      <div key={index}>
+      <div className={styles.comparison} key={index}>
         <ReactCompareSlider
           itemOne={
             <PrismicImage src={primary.before_image} />
@@ -99,7 +99,9 @@ function Slice ({ slice_type, primary }, index) {
 
   if (slice_type === 'image') {
     return (
-      <PrismicImage src={primary.image} />
+      <div className={styles.image}>
+        <PrismicImage src={primary.image} />
+      </div>
     )
   }
 }
