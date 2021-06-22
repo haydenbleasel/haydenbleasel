@@ -60,12 +60,6 @@ function createTextElement(children: any, element: any, props: any) {
   );
 }
 
-function createImageElement ({ element }: any) {
-  return (
-    <PrismicImage src={element} />
-  );
-}
-
 function Slice ({ slice_type, primary }, index) {
   if (slice_type === 'rich_text') {
     return (
@@ -78,7 +72,6 @@ function Slice ({ slice_type, primary }, index) {
           heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
           heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
           paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
-          image: createImageElement,
         })
       }} />
     );
@@ -97,11 +90,17 @@ function Slice ({ slice_type, primary }, index) {
         />
         <div className={styles.comparisonSides}>
           <p className="smallSans grey">Before</p>
-          <p className="paragraphSans">{primary.comparison_text}</p>
+          <p className="smallSans">{primary.comparison_text}</p>
           <p className="smallSans grey">After</p>
         </div>
       </div>
     );
+  }
+
+  if (slice_type === 'image') {
+    return (
+      <PrismicImage src={primary.image} />
+    )
   }
 }
 
