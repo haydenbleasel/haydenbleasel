@@ -59,6 +59,19 @@ function createTextElement(children: any, element: any, props: any) {
   );
 }
 
+function createImageElement ({ element }: any) {
+  console.log(element, 'element');
+  return (
+    <Image
+      src={element.url}
+      width={element.dimensions.width}
+      height={element.dimensions.height}
+      alt={element.alt}
+      layout="responsive"
+    />
+  );
+}
+
 const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [passphrase, setPassphrase] = useState<string>('');
@@ -125,6 +138,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
           heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
           heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
           paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
+          image: createImageElement,
         }) }} />
       </Section>
     </Layout>
