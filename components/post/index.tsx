@@ -1,6 +1,6 @@
-import Image from "next/image";
 import type { HTMLAttributes } from "react";
 import Link from "../link";
+import PrismicImage from "../prismicImage";
 import Skeleton from "../skeleton";
 import styles from "./post.module.css";
 
@@ -30,13 +30,11 @@ const Post = ({
     {!!image && !compact && (
       <div className={styles.image}>
         <Skeleton>
-          <Image
-            layout="responsive"
+          <PrismicImage
             width={featured ? 1128 : 742}
             height={featured ? 600 : 395}
             alt={title}
-            src={image.url}
-            quality={100}
+            src={image}
             objectFit="cover"
             objectPosition={focus}
             priority={featured}

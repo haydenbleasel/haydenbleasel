@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Headroom from "react-headroom";
@@ -9,6 +8,7 @@ import styles from "./header.module.css";
 import Link from "../link";
 import Section from "../section";
 import { resolveLink } from "../../utils/prismic";
+import PrismicImage from "../prismicImage";
 
 type IHeader = {
   settings: PrismicSettings;
@@ -44,8 +44,8 @@ const Header = ({ settings }: IHeader) => {
           <header className={cx('nav', { menuOpen })}>
             <div className={styles.logo}>
               <Link href={settings.logo_link}>
-                <Image
-                  src={settings.logo.url}
+                <PrismicImage
+                  src={settings.logo}
                   alt="Hayden Bleasel"
                   layout="fixed"
                   width={54}

@@ -1,8 +1,7 @@
 import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { createElement, useState } from 'react';
-import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
+import { ReactCompareSlider } from 'react-compare-slider';
 import type { FormEvent } from 'react';
-import Image from 'next/image';
 import slugify from 'slugify';
 import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
@@ -11,6 +10,7 @@ import Section from "../../components/section";
 import Title from '../../components/title';
 import { queryAt, richtext } from "../../utils/prismic";
 import styles from './caseStudy.module.css';
+import PrismicImage from '../../components/prismicImage';
 
 type ICaseStudy = {
   uid: string;
@@ -62,13 +62,7 @@ function createTextElement(children: any, element: any, props: any) {
 
 function createImageElement ({ element }: any) {
   return (
-    <Image
-      src={element.url}
-      width={element.dimensions.width}
-      height={element.dimensions.height}
-      alt={element.alt}
-      layout="responsive"
-    />
+    <PrismicImage src={element} />
   );
 }
 
@@ -95,22 +89,10 @@ function Slice ({ slice_type, primary }, index) {
       <div key={index}>
         <ReactCompareSlider
           itemOne={
-            <Image
-              src={primary.before_image.url}
-              width={primary.before_image.dimensions.width}
-              height={primary.before_image.dimensions.height}
-              alt={primary.before_image.alt}
-              layout="responsive"
-            />
+            <PrismicImage src={primary.before_image} />
           }
           itemTwo={
-            <Image
-              src={primary.after_image.url}
-              width={primary.after_image.dimensions.width}
-              height={primary.after_image.dimensions.height}
-              alt={primary.after_image.alt}
-              layout="responsive"
-            />
+            <PrismicImage src={primary.after_image} />
           }
         />
         <div className={styles.comparisonSides}>
@@ -181,7 +163,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       <Section>
         <div className={styles.cover}>
-          <Image src={data.cover.url} width={1312} height={600} layout="responsive" alt={`${data.title} Case Study`} />
+          <PrismicImage src={data.cover} width={1312} height={600} alt={`${data.title} Case Study`} />
         </div>
       </Section>
       
