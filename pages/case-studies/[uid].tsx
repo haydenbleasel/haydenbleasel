@@ -1,5 +1,6 @@
 import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { createElement, useState } from 'react';
+import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import type { FormEvent } from 'react';
 import Image from 'next/image';
 import slugify from 'slugify';
@@ -60,7 +61,6 @@ function createTextElement(children: any, element: any, props: any) {
 }
 
 function createImageElement ({ element }: any) {
-  console.log(element, 'element');
   return (
     <Image
       src={element.url}
@@ -72,11 +72,63 @@ function createImageElement ({ element }: any) {
   );
 }
 
+function Slice ({ slice_type, primary }, index) {
+  if (slice_type === 'rich_text') {
+    return (
+      <div key={index} dangerouslySetInnerHTML={{
+        __html: richtext(primary.text, false, {
+          heading1: ({ children, element }) => createTextElement(children, element, { className: 'h1Sans', id: slugElement(element) }),
+          heading2: ({ children, element }) => createTextElement(children, element, { className: 'h2Sans', id: slugElement(element) }),
+          heading3: ({ children, element }) => createTextElement(children, element, { className: 'h3Sans', id: slugElement(element) }),
+          heading4: ({ children, element }) => createTextElement(children, element, { className: 'h4Sans', id: slugElement(element) }),
+          heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
+          heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
+          paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
+          image: createImageElement,
+        })
+      }} />
+    );
+  }
+
+  if (slice_type === 'image_comparison') {
+    return (
+      <div key={index}>
+        <ReactCompareSlider
+          itemOne={
+            <Image
+              src={primary.before_image.url}
+              width={primary.before_image.dimensions.width}
+              height={primary.before_image.dimensions.height}
+              alt={primary.before_image.alt}
+              layout="responsive"
+            />
+          }
+          itemTwo={
+            <Image
+              src={primary.after_image.url}
+              width={primary.after_image.dimensions.width}
+              height={primary.after_image.dimensions.height}
+              alt={primary.after_image.alt}
+              layout="responsive"
+            />
+          }
+        />
+        <div className={styles.comparisonSides}>
+          <p className="smallSans grey">Before</p>
+          <p className="paragraphSans">{primary.comparison_text}</p>
+          <p className="smallSans grey">After</p>
+        </div>
+      </div>
+    );
+  }
+}
+
 const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [passphrase, setPassphrase] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
+  const [table, setTable] = useState<string>('');
 
   async function authenticate(event: FormEvent) {
     event.preventDefault();
@@ -99,7 +151,19 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
       setData(newData.data);
       setAuthenticated(true);
 
-      trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0)
+      const newTable = newData.data.body.filter(({ slice_type }) => slice_type === 'rich_text').map(({ primary }) => (
+        richtext(primary.text.filter(filterHeadings), false, {
+          heading1: createTableElement,
+          heading2: createTableElement,
+          heading3: createTableElement,
+          heading4: createTableElement,
+          heading5: createTableElement,
+          heading6: createTableElement,
+        })
+      ));
+
+      setTable(newTable.join(''));
+      trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0);
     } catch (error: any) {
       window.alert(error.message || 'Something went wrong.');
     } finally {
@@ -122,24 +186,10 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
       </Section>
       
       <Section style={{ gridAutoFlow: 'dense' }}>
-        <div className={styles.table} dangerouslySetInnerHTML={{ __html: richtext(data.content.filter(filterHeadings), false, {
-          heading1: createTableElement,
-          heading2: createTableElement,
-          heading3: createTableElement,
-          heading4: createTableElement,
-          heading5: createTableElement,
-          heading6: createTableElement,
-        })}} />
-        <div className={styles.content} dangerouslySetInnerHTML={{ __html: richtext(data.content, false, {
-          heading1: ({ children, element }) => createTextElement(children, element, { className: 'h1Sans', id: slugElement(element) }),
-          heading2: ({ children, element }) => createTextElement(children, element, { className: 'h2Sans', id: slugElement(element) }),
-          heading3: ({ children, element }) => createTextElement(children, element, { className: 'h3Sans', id: slugElement(element) }),
-          heading4: ({ children, element }) => createTextElement(children, element, { className: 'h4Sans', id: slugElement(element) }),
-          heading5: ({ children, element }) => createTextElement(children, element, { className: 'h5Sans', id: slugElement(element) }),
-          heading6: ({ children, element }) => createTextElement(children, element, { className: 'h6Sans', id: slugElement(element) }),
-          paragraph: ({ children, element }) => createTextElement(children, element, { className: 'paragraphSans' }),
-          image: createImageElement,
-        }) }} />
+        <div className={styles.table} dangerouslySetInnerHTML={{ __html: table }} />
+        <div className={styles.content}>
+          {data.body.map(Slice)}
+        </div>
       </Section>
     </Layout>
   ) : (

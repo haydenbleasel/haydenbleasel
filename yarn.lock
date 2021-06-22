@@ -4613,6 +4613,11 @@ raw-body@2.4.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-compare-slider@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-compare-slider/-/react-compare-slider-2.0.2.tgz#b170f302ebf551357ba585f3fe6dab4aa26615f1"
+  integrity sha512-hL4mZ6asoez23Upoce9T2hbPKRg607lt8A8rYOXDuvL6QtO7ujkmsGS0+6EZe1EIDlmGibXH9jVuXNca6JrUow==
+
 react-dom@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
