@@ -101,6 +101,7 @@ module.exports = withPlugins(
           dest: "public",
           disable: process.env.NODE_ENV === "development",
           dynamicStartUrl: false,
+          mode: process.env.NODE_ENV,
         },
       },
     ],
