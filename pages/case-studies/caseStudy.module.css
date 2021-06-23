@@ -1,9 +1,29 @@
 .cover, .hero {
   grid-column: 1 / 13;
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
 }
 
 .hero {
   padding-top: var(--gap-huge);
+
+  @media (--desktop) {
+    padding-top: var(--gap-large);
+  }
+
+  @media (--laptop) {
+    padding-top: var(--gap-medium);
+  }
+
+  @media (--tablet) {
+    padding-top: var(--gap-small);
+  }
+
+  @media (--mobile) {
+    padding-top: 0;
+  }
 
   & h1 {
     margin-bottom: 0.5rem;
