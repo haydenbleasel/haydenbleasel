@@ -7,7 +7,6 @@ import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
 import Form from "../../components/form";
 import Section from "../../components/section";
-import Title from '../../components/title';
 import { queryAt, richtext } from "../../utils/prismic";
 import styles from './caseStudy.module.css';
 import PrismicImage from '../../components/prismicImage';
@@ -17,7 +16,7 @@ type ICaseStudy = {
   data: {
     title: string;
     description: string;
-    content: PrismicRichText
+    content: PrismicRichText;
   } & any;
   settings: PrismicSettings;
 };
