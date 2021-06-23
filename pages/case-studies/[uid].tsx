@@ -160,7 +160,12 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
       description={data.description}
       settings={settings}
     >
-      <Title title={data.title} />
+      <Section>
+        <div className={styles.hero}>
+          <h1 className="titleSans">{data.title}</h1>
+          <p className="paragraphSans grey">{data.description}</p>
+        </div>
+      </Section>
 
       <Section>
         <div className={styles.cover}>

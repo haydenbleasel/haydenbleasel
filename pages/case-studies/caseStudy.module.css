@@ -1,12 +1,25 @@
-.cover {
+.cover, .hero {
   grid-column: 1 / 13;
+}
+
+.hero {
+  padding-top: var(--gap-huge);
+
+  & h1 {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .content {
   grid-column: 2 / 8;
 
-  & > *:first-child {
+  & > div > *:first-child {
     margin-top: 0;
+  }
+
+  & em {
+    font-family: var(--type-family-sans);
+    font-style: italic;
   }
 
   @media (--desktop) {
