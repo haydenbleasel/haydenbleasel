@@ -25,7 +25,7 @@
     "next-pwa": "^5.2.21",
     "next-secure-headers": "^2.2.0",
     "next-seo": "^4.26.0",
-    "next-sitemap": "^1.6.121",
+    "next-sitemap": "^1.6.124",
     "nodemailer": "^6.6.2",
     "prismic-dom": "^2.2.5",
     "react": "^17.0.2",
