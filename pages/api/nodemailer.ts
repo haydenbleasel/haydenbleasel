@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiHandler } from "next";
 import nodemailer from "nodemailer";
 import formidable from "formidable";
 
@@ -44,7 +44,7 @@ function formidablePromise(req, opts): Promise<FormidablePromise> {
   });
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<APIResponse>) {
+const handler: NextApiHandler<APIResponse> = async(req, res) => {
   if (req.method !== "POST") {
     return res.status(404).send({ error: "Begone." });
   }
@@ -86,4 +86,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
+
+export default handler;
