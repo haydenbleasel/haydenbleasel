@@ -22,8 +22,8 @@ const Layout = ({
   description,
   settings,
 }: LayoutProps) => {
-  const { pathname } = useRouter();
-  const url = `${siteUrl}${pathname}`;
+  const { asPath } = useRouter();
+  const url = `${siteUrl}${asPath}`;
 
   return (
     <>

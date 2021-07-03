@@ -26,7 +26,7 @@ type IJournal = {
 };
 
 const Journal: NextPage<IJournal> = ({ data, settings, mediumPosts, devPosts }) => {
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
   const dates = [
     ...mediumPosts.map((post) => post.date),
     ...devPosts.map((post) => post.date),
@@ -40,7 +40,7 @@ const Journal: NextPage<IJournal> = ({ data, settings, mediumPosts, devPosts }) 
     >
 
       <BlogJsonLd
-        url={`${siteUrl}${pathname}`}
+        url={`${siteUrl}${asPath}`}
         title={data.title}
         images={[
           ...mediumPosts.map((post) => post.image.url),
