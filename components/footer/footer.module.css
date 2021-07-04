@@ -5,17 +5,6 @@
     text-align: left;
     align-items: flex-start;
   }
-
-  & > section {
-    height: 100vh;
-    min-height: 800px;
-    justify-content: space-between;
-
-    @media (--mobile) {
-      height: auto;
-      min-height: 500px;
-    }
-  }
 }
 
 .container {
