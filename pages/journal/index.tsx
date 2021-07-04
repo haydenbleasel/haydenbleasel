@@ -10,7 +10,6 @@ import { getMediumPosts } from "../../utils/medium";
 import { getDevPosts } from "../../utils/dev";
 import Divider from "../../components/divider";
 import { queryAt } from "../../utils/prismic";
-import { siteUrl } from '../../next-sitemap';
 
 type IJournal = {
   data: {
@@ -40,7 +39,7 @@ const Journal: NextPage<IJournal> = ({ data, settings, mediumPosts, devPosts }) 
     >
 
       <BlogJsonLd
-        url={`${siteUrl}${asPath}`}
+        url={`${process.env.NEXT_PUBLIC_SITE_URL}${asPath}`}
         title={data.title}
         images={[
           ...mediumPosts.map((post) => post.image.url),

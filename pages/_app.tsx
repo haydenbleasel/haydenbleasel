@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { load, trackPageview } from "fathom-client";
 import { useRouter } from "next/router";
-import { siteUrl } from "../next-sitemap";
 import "./styles.css";
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
@@ -11,7 +10,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
   useEffect(() => {
     load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID!, {
-      includedDomains: [siteUrl.replace("https://", "")],
+      includedDomains: [process.env.NEXT_PUBLIC_SITE_URL!.replace("https://", "")],
     });
 
     function onRouteChangeComplete() {

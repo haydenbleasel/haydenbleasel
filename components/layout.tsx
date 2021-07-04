@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { NextSeo, SocialProfileJsonLd } from "next-seo";
 import { useRouter } from "next/router";
-import { siteUrl } from "../next-sitemap";
 import Header from "./header";
 import Footer from "./footer";
 import { resolveLink } from "../utils/prismic";
@@ -23,7 +22,7 @@ const Layout = ({
   settings,
 }: LayoutProps) => {
   const { asPath } = useRouter();
-  const url = `${siteUrl}${asPath}`;
+  const url = `${process.env.NEXT_PUBLIC_SITE_URL}${asPath}`;
 
   return (
     <>
@@ -37,7 +36,7 @@ const Layout = ({
           title,
           description,
           images: [{
-            url: `${siteUrl}/images/cover.jpg`,
+            url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/cover.jpg`,
             width: 1200,
             height: 630,
             alt: name,
@@ -61,7 +60,7 @@ const Layout = ({
       <SocialProfileJsonLd
         type="Person"
         name={name}
-        url={siteUrl}
+        url={process.env.NEXT_PUBLIC_SITE_URL!}
         sameAs={settings.social.map(({ social_link }) => resolveLink(social_link))}
       />
 
