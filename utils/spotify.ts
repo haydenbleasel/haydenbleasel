@@ -1,39 +1,5 @@
 import SpotifyWebApi from "spotify-web-api-node";
 
-interface Playlist {
-  collaborative: boolean;
-  description: string;
-  external_urls: {
-    spotify: string;
-  };
-  href: string;
-  id: string;
-  images: {
-    height: null;
-    url: string;
-    width: null;
-  }[];
-  name: string;
-  owner: {
-    display_name: string;
-    external_urls: {
-      spotify: string;
-    };
-    href: string;
-    id: string;
-    type: string;
-    uri: string;
-  };
-  primary_color: null;
-  public: boolean;
-  snapshot_id: string;
-  tracks: {
-    total: number;
-  };
-  type: string;
-  uri: string;
-}
-
 const spotifyApi = new SpotifyWebApi({
   clientId: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
   clientSecret: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET,
@@ -94,7 +60,7 @@ export async function getPlaylists() {
   );
 
   const playlists = body.items.map(
-    ({ external_urls, id, images, name, tracks }: Playlist) => {
+    ({ external_urls, id, images, name, tracks }: ISpotifyPlaylist) => {
       const data: any = playlistData.find((pl: any) => pl.id === id);
 
       return {

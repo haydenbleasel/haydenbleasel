@@ -2,16 +2,6 @@ import Parser from "rss-parser";
 import { JSDOM } from "jsdom";
 import { parseISO, format } from "date-fns";
 
-type IMediumPost = {
-  creator: string;
-  title: string;
-  link: string;
-  "content:encoded": string;
-  guid: string;
-  isoDate: string;
-  categories: string[];
-};
-
 export async function getMediumPosts() {
   const parser = new Parser();
 

@@ -1,0 +1,3 @@
+type APIResponse = {
+  error?: string;
+};
