@@ -29,6 +29,9 @@ type IPlaylists = {
   settings: PrismicSettings;
 };
 
+const size = 640;
+const dimensions = { width: size, height: size };
+
 function Playlist({
   id,
   name,
@@ -46,13 +49,10 @@ function Playlist({
         image={{
           url: image,
           alt: name,
-          dimensions: {
-            width: 640,
-            height: 640,
-          }
+          dimensions,
         }}
-        width={640}
-        height={640}
+        width={size}
+        height={size}
         title={name}
       >
         {artists}
@@ -65,6 +65,11 @@ const Playlists = ({ data, playlists, settings }: IPlaylists) => (
   <Layout
     title={data.title}
     description={data.description}
+    image={{
+      url: playlists[0].image,
+      alt: playlists[0].name,
+      dimensions,
+    }}
     settings={settings}
   >
     <Title title={data.hero_title} />

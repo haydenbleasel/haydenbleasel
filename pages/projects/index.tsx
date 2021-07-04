@@ -28,6 +28,7 @@ const Projects: NextPage<IProjects> = ({ data, settings, projects }) => (
   <Layout
     title={data.title}
     description={data.description}
+    image={projects.sort(sortProjects)[0].data.image}
     settings={settings}
   >
     <Title title={data.hero_title} />

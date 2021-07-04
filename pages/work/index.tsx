@@ -66,6 +66,7 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
   <Layout
     title={data.title}
     description={data.description}
+    image={roles.filter(({ data }) => data.featured).sort(sortRoles)[0].data.image}
     settings={settings}
   >
     <Title title={data.hero_title} />

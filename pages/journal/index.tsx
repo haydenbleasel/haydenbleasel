@@ -35,6 +35,7 @@ const Journal: NextPage<IJournal> = ({ data, settings, mediumPosts, devPosts }) 
     <Layout
       title={data.title}
       description={data.description}
+      image={mediumPosts[0].image}
       settings={settings}
     >
 

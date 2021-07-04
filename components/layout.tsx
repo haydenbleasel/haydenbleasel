@@ -9,7 +9,8 @@ type LayoutProps = {
   children: ReactNode;
   title: string;
   description: string;
-  settings: PrismicSettings,
+  image?: PrismicImage;
+  settings: PrismicSettings;
 };
 
 const name = "Hayden Bleasel";
@@ -19,10 +20,26 @@ const Layout = ({
   children,
   title,
   description,
+  image,
   settings,
 }: LayoutProps) => {
   const { asPath } = useRouter();
   const url = `${process.env.NEXT_PUBLIC_SITE_URL}${asPath}`;
+  const images = [{
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/cover.jpg`,
+    width: 1200,
+    height: 630,
+    alt: name,
+  }];
+
+  if (image) {
+    images.unshift({
+      url: image.url,
+      width: image.dimensions?.width,
+      height: image.dimensions?.height,
+      alt: name,
+    });
+  }
 
   return (
     <>
@@ -35,12 +52,7 @@ const Layout = ({
           url,
           title,
           description,
-          images: [{
-            url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/cover.jpg`,
-            width: 1200,
-            height: 630,
-            alt: name,
-          }],
+          images,
           site_name: name,
           type: "profile",
           profile: {
