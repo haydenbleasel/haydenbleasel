@@ -1,0 +1,4 @@
+.paragraph {
+  grid-column: 1 / 13;
+  max-width: 700px;
+}

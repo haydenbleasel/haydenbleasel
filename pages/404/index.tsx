@@ -1,8 +1,9 @@
 import type { GetStaticProps } from "next";
-import Layout from "../components/layout";
-import Title from "../components/title";
-import Section from "../components/section";
-import { queryAt, richtext } from "../utils/prismic";
+import Layout from "../../components/layout";
+import Title from "../../components/title";
+import Section from "../../components/section";
+import { queryAt, richtext } from "../../utils/prismic";
+import styles from './404.module.css';
 
 type ICustom404 = {
   data: {
@@ -18,7 +19,7 @@ const Custom404 = ({ data, settings }: ICustom404) => (
   <Layout title={data.title} description={data.description} settings={settings}>
     <Title title={data.hero_title} />
     <Section style={{ paddingTop: 0 }}>
-      <p style={{ gridColumnStart: 1, gridColumnEnd: 13, maxWidth: 700 }} dangerouslySetInnerHTML={{ __html: richtext(data.hero_description, true) }} />
+      <p className={styles.paragraph} dangerouslySetInnerHTML={{ __html: richtext(data.hero_description, true) }} />
     </Section>
   </Layout>
 );
