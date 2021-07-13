@@ -1,6 +1,7 @@
 import type { NextApiHandler } from "next";
 import nodemailer from "nodemailer";
 import formidable from "formidable";
+import { withSentry } from "@sentry/nextjs";
 
 type Fields = {
   name: string;
@@ -88,4 +89,4 @@ const handler: NextApiHandler<APIResponse> = async(req, res) => {
   }
 };
 
-export default handler;
+export default withSentry(handler);
