@@ -1,6 +1,7 @@
 const { createSecureHeaders } = require("next-secure-headers");
 const withPlugins = require("next-compose-plugins");
 const withPWA = require("next-pwa");
+const { withSentryConfig } = require("@sentry/nextjs");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
@@ -104,6 +105,12 @@ module.exports = withPlugins(
           mode: process.env.NODE_ENV,
         },
       },
+    ],
+    [
+      withSentryConfig,
+      {
+        silent: true,
+      }
     ],
     [withBundleAnalyzer],
   ],
