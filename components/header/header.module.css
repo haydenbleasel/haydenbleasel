@@ -35,10 +35,7 @@
 
 .logo {
   display: inline-flex;
-
-  @media (--darkMode) {
-    filter: brightness(100);
-  }
+  filter: var(--image-filter);
 }
 
 .logo :global(a) {

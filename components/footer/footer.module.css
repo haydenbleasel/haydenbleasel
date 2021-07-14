@@ -48,10 +48,7 @@
   opacity: 0.4;
   transition: opacity 0.2s, transform 0.2s;
   display: flex;
-
-  @media (--darkMode) {
-    filter: brightness(100);
-  }
+  filter: var(--image-filter);
 }
 
 .socialIcon :global(a):hover {
@@ -59,11 +56,30 @@
   transform: translateY(-4px);
 }
 
-.copyright {
-  grid-column: 1 / 13;
+.footerLower {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: var(--gap-medium);
+  grid-column: 1 / 13;
+  border-top: 1px solid var(--divider);
+  padding-top: 2rem;
+}
 
-  & :global(a) {
-    text-decoration: underline;
-  }
+.copyright :global(a) {
+  text-decoration: underline;
+}
+
+.select {
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--divider);
+  appearance: none;
+  width: 100%;
+  max-width: 10rem;
+  font-size: 1rem;
+  font-family: inherit;
+  line-height: 1.2;
+  background: transparent;
+  color: var(--black);
 }

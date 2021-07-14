@@ -30,6 +30,7 @@
   --red: #FF5630;
   --green: #31A575;
 
+  --image-filter: brightness(100%);
   --type-scale-multiplier: 1.25;
 
   --type-scale-1: calc(1vw * var(--type-scale-multiplier));
@@ -49,6 +50,7 @@
     --grey: #a1a1aa;
     --divider: #222222;
     --ghost: #17171c;
+    --image-filter: brightness(100);
   }
 
   @media (--desktopLarge) {
@@ -68,10 +70,29 @@ html {
   font-size: var(--type-scale-1);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  color: var(--black);
   box-sizing: border-box;
-  background: var(--white);
   overflow-x: hidden;
+}
+
+body {
+  color: var(--black);
+  background: var(--white);
+  &.light {
+    --white: #ffffff;
+    --black: #1d1d1d;
+    --grey: #757575;
+    --divider: #dddddd;
+    --ghost: #fafafa;
+    --image-filter: brightness(100%);
+  }
+  &.dark {
+    --white: #111213;
+    --black: #ffffff;
+    --grey: #a1a1aa;
+    --divider: #222222;
+    --ghost: #17171c;
+    --image-filter: brightness(100);
+  }
 }
 
 *,

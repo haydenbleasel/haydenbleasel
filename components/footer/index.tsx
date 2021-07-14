@@ -7,14 +7,44 @@ import Section from "../section";
 import PrismicImage from "../prismicImage";
 import { richtext } from "../../utils/prismic";
 import Form from "../form";
+import { useEffect } from "react";
 
 type IFooter = {
   settings: PrismicSettings;
 };
 
+enum ITheme {
+  AUTO = "auto",
+  LIGHT = "light",
+  DARK = "dark",
+}
+
 const Footer = ({ settings }: IFooter) => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [theme, setTheme] = useState<ITheme>(ITheme.AUTO);
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme as ITheme);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    document.body.className = document.body.className.replace(ITheme.AUTO, "");
+    document.body.className = document.body.className.replace(ITheme.LIGHT, "");
+    document.body.className = document.body.className.replace(ITheme.DARK, "");
+    
+    if (theme === ITheme.AUTO) {
+      localStorage.removeItem('theme');
+    } else {
+      document.body.className += theme;
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme]);
 
   async function joinMailingList(event: FormEvent) {
     event.preventDefault();
@@ -75,11 +105,17 @@ const Footer = ({ settings }: IFooter) => {
             onSubmit={joinMailingList}
             pattern=".+@.+\..+"
           />
-
-          <div className={styles.copyright}>
-            <p className="smallSans" dangerouslySetInnerHTML={{__html: richtext(settings.footer_disclaimer, true) }} />
-          </div>
         </div>
+        <div className={styles.footerLower}>
+            <div className={styles.copyright}>
+              <p className="smallSans" dangerouslySetInnerHTML={{__html: richtext(settings.footer_disclaimer, true) }} />
+            </div>
+            <select value={theme} className={styles.select} onChange={({ target }) => setTheme(target.value as ITheme)}>
+              <option value={ITheme.AUTO}>🌗 System Default</option>
+              <option value={ITheme.LIGHT}>☀️ Light</option>
+              <option value={ITheme.DARK}>🌑 Dark</option>
+            </select>
+          </div>
       </Section>
     </footer>
   );

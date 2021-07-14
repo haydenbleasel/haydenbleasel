@@ -14,10 +14,7 @@
   & > div {
     width: var(--type-scale-3) !important;
     height: var(--type-scale-3) !important;
-
-    @media (--darkMode) {
-      filter: brightness(100);
-    }
+    filter: var(--image-filter);
 
     @media (--mobile) {
       width: var(--type-scale-2) !important;
