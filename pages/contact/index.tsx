@@ -87,7 +87,7 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
       setFiles(null);
       
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_CONTACT_GOAL!, 0);
-    } catch (error: any) {
+    } catch (error) {
       window.alert(error.message || data.error_alert);
     } finally {
       setLoading(false);

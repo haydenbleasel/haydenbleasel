@@ -8,7 +8,7 @@ type IForm = {
   placeholder: string;
   type: string;
   value: string;
-  onChangeText: any;
+  onChangeText: (string) => void;
   loading: boolean;
   pattern?: string;
 } & FormHTMLAttributes<HTMLFormElement>

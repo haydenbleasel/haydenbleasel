@@ -146,7 +146,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       setTable(newTable.join(''));
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0);
-    } catch (error: any) {
+    } catch (error) {
       window.alert(error.message || 'Something went wrong.');
     } finally {
       setLoading(false);

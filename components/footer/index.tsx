@@ -65,7 +65,7 @@ const Footer = ({ settings }: IFooter) => {
       window.alert(settings.newsletter_success_alert);
       setEmail("");
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL!, 0);
-    } catch (error: any) {
+    } catch (error) {
       window.alert(error.message || settings.newsletter_error_alert);
     } finally {
       setLoading(false);

@@ -5,6 +5,11 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET,
 });
 
+type IArtist = {
+  name: string;
+  count: number;
+};
+
 async function fetchPlaylist(id: string) {
   const { body } = await spotifyApi.getPlaylistTracks(id);
   let duration = 0;
@@ -18,9 +23,9 @@ async function fetchPlaylist(id: string) {
     })
     .flat();
 
-  const sorted: any[] = [];
+  const sorted: IArtist[] = [];
 
-  allArtists.forEach((artist: any) => {
+  allArtists.forEach((artist) => {
     const currentArtist = sorted.findIndex(({ name }) => name === artist);
 
     if (currentArtist === -1) {
@@ -33,9 +38,9 @@ async function fetchPlaylist(id: string) {
     }
   });
 
-  sorted.sort((a: any, b: any) => (b.count > a.count ? 1 : -1));
+  sorted.sort((a: IArtist, b: IArtist) => (b.count > a.count ? 1 : -1));
 
-  const artistsMap = sorted
+  const artistsMap: string[] = sorted
     .map(({ name }) => name)
     .slice(0, 8);
   

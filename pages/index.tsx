@@ -19,7 +19,7 @@ type IHome = {
     hero_title: PrismicRichText;
     hero_subtitle: PrismicRichText;
     hero_action_text: string;
-    hero_action_link: any;
+    hero_action_link: PrismicLink;
     selected_work_title: PrismicRichText;
     selected_work: { work: PrismicLink & { data: PrismicRole }}[];
     selected_work_link: PrismicLink;
