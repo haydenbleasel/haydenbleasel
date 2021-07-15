@@ -44,6 +44,14 @@
   --type-family-sans: "haydenbleasel-lausanne", Arial, Helvetica, sans-serif;
   --type-family-serif: "haydenbleasel-gtsuper", Georgia, Times, Times New Roman, serif;
 
+  --skeleton: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+
   @media (prefers-color-scheme: dark) {
     --white: #111213;
     --black: #ffffff;
@@ -51,6 +59,13 @@
     --divider: #222222;
     --ghost: #17171c;
     --image-filter: brightness(100);
+    --skeleton: linear-gradient(
+      90deg,
+      rgba(50, 50, 50, 0) 0,
+      rgba(50, 50, 50, 0.2) 20%,
+      rgba(50, 50, 50, 0.5) 60%,
+      rgba(50, 50, 50, 0)
+    );
   }
 
   @media (--desktopLarge) {
@@ -84,6 +99,13 @@ body {
     --divider: #dddddd;
     --ghost: #fafafa;
     --image-filter: brightness(100%);
+    --skeleton: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.2) 20%,
+      rgba(255, 255, 255, 0.5) 60%,
+      rgba(255, 255, 255, 0)
+    );
   }
   &.dark {
     --white: #111213;
@@ -92,6 +114,13 @@ body {
     --divider: #222222;
     --ghost: #17171c;
     --image-filter: brightness(100);
+    --skeleton: linear-gradient(
+      90deg,
+      rgba(50, 50, 50, 0) 0,
+      rgba(50, 50, 50, 0.2) 20%,
+      rgba(50, 50, 50, 0.5) 60%,
+      rgba(50, 50, 50, 0)
+    );
   }
 }
 

@@ -3,4 +3,3 @@
 @custom-media --laptop (max-width: 992px);
 @custom-media --desktop (max-width: 1200px);
 @custom-media --desktopLarge (max-width: 1440px);
-@custom-media --darkMode (prefers-color-scheme: dark);
