@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from 'next';
+import { useWindowScroll } from 'react-use';
 import Layout from "../components/layout";
 import Client from "../components/client";
 import Section from "../components/section";
@@ -7,7 +8,6 @@ import Outlink from "../components/outlink";
 import { getMediumPosts } from "../utils/medium";
 import { getDevPosts } from "../utils/dev";
 import styles from "./home.module.css";
-import { useEffect, useState } from "react";
 import { plaintext, queryAt, richtext } from "../utils/prismic";
 import PrismicImage from "../components/prismicImage";
 
@@ -38,19 +38,7 @@ type IHome = {
 };
 
 const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
-  const [offset, setOffset] = useState<number>(0);
-
-  function onScroll() {
-    setOffset(window.pageYOffset / 3);
-  }
-
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+  const { y } = useWindowScroll();
 
   return (
     <Layout
@@ -61,7 +49,7 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
       <Section>
         <div className={styles.heroLeft}>
           <div className={styles.asterisk}>
-            <div style={{ transform: `rotate(${offset}deg)` }}>
+            <div style={{ transform: `rotate(${y / 3}deg)` }}>
               <PrismicImage
                 src={data.asterisk}
                 layout="fixed"
