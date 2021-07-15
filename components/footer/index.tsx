@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
+import { useLocalStorage } from 'react-use';
 import { trackGoal } from "fathom-client";
 import styles from "./footer.module.css";
 import Link from "../link";
@@ -7,7 +8,6 @@ import Section from "../section";
 import PrismicImage from "../prismicImage";
 import { richtext } from "../../utils/prismic";
 import Form from "../form";
-import { useEffect } from "react";
 
 type IFooter = {
   settings: PrismicSettings;
@@ -22,16 +22,8 @@ enum ITheme {
 const Footer = ({ settings }: IFooter) => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [theme, setTheme] = useState<ITheme>(ITheme.AUTO);
-
-  useEffect(() => {
-    if (typeof window !== undefined) {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        setTheme(savedTheme as ITheme);
-      }
-    }
-  }, []);
+  const [savedTheme, setSavedTheme, removeSavedTheme] = useLocalStorage<ITheme>('theme');
+  const [theme, setTheme] = useState<ITheme>(savedTheme || ITheme.AUTO);
 
   useEffect(() => {
     document.body.className = document.body.className.replace(ITheme.AUTO, "");
@@ -39,12 +31,12 @@ const Footer = ({ settings }: IFooter) => {
     document.body.className = document.body.className.replace(ITheme.DARK, "");
     
     if (theme === ITheme.AUTO) {
-      localStorage.removeItem('theme');
+      removeSavedTheme();
     } else {
       document.body.className += theme;
-      localStorage.setItem('theme', theme);
+      setSavedTheme(theme);
     }
-  }, [theme]);
+  }, [theme, setSavedTheme, removeSavedTheme]);
 
   async function joinMailingList(event: FormEvent) {
     event.preventDefault();
