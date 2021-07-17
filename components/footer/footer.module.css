@@ -64,6 +64,15 @@
   grid-column: 1 / 13;
   border-top: 1px solid var(--divider);
   padding-top: 2rem;
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+
+  @media (--mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .copyright :global(a) {
@@ -76,7 +85,7 @@
   border: 1px solid var(--divider);
   appearance: none;
   width: 100%;
-  max-width: 10rem;
+  max-width: 11rem;
   font-size: 1rem;
   font-family: inherit;
   line-height: 1.2;
