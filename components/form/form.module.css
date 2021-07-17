@@ -56,6 +56,11 @@
   text-align: center;
   display: block;
   cursor: pointer;
+  transition: transform 0.2s;
+  
+  &:hover {
+    transform: translateX(0.25rem);
+  }
 
   @media (--mobile) {
     font-size: var(--type-scale-3);
