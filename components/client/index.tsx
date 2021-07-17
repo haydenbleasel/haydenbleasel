@@ -17,7 +17,7 @@ const Client = ({ element, content }: IClient) => (
         height={32}
         width={32}
         alt={content}
-        src={`/images/${content
+        src={`/logos/${content
           .replace(" ", "")
           .replace("/", "")
           .toLowerCase()}.svg`}

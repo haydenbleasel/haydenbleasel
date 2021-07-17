@@ -26,7 +26,7 @@ const Layout = ({
   const { asPath } = useRouter();
   const url = `${process.env.NEXT_PUBLIC_SITE_URL}${asPath}`;
   const images = [{
-    url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/cover.jpg`,
+    url: `${process.env.NEXT_PUBLIC_SITE_URL}/cover.jpg`,
     width: 1200,
     height: 630,
     alt: name,
