@@ -116,7 +116,7 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
               image={project.data.image}
               title={project.data.title}
               description={plaintext(project.data.content)}
-              caption={project.data.status}
+              status={project.data.status}
               link={project}
             />
           </div>

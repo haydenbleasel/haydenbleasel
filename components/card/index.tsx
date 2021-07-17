@@ -6,7 +6,8 @@ import styles from "./card.module.css";
 
 type ICard = {
   id: string;
-  caption: string;
+  caption?: string;
+  status?: string;
   image: PrismicImage;
   title: string;
   subtitle?: string;
@@ -18,6 +19,7 @@ type ICard = {
 const Card = ({
   id,
   caption,
+  status,
   image,
   title,
   subtitle,
@@ -39,11 +41,16 @@ const Card = ({
     </Skeleton>
     <div className={styles.meta}>
       <div className={styles.summary}>
-        <p className="grey smallSans">{caption}</p>
+        {!!caption && (
+          <p className="grey smallSans">{caption}</p>
+        )}
         <h2 className="h2Sans">{title}</h2>
         {!!subtitle && (
           <p className="h2Serif">{subtitle}</p>
         )}
+        {!!status && (
+            <div className={styles.status}>{status}</div>
+          )}
         {(link && action) && <Link href={link}>{action}</Link>}
       </div>
       {typeof children === 'string' ? (

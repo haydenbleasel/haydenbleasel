@@ -9,6 +9,7 @@ type PostProps = {
   title: string;
   description?: string;
   caption?: string;
+  status?: string;
   link: PrismicLink;
   featured?: boolean;
   focus?: string;
@@ -20,6 +21,7 @@ const Post = ({
   title,
   description,
   caption,
+  status,
   link,
   featured = false,
   compact = false,
@@ -44,7 +46,10 @@ const Post = ({
     )}
     <div className={styles.meta}>
       {!!caption && <small className="smallSans grey">{caption}</small>}
-      <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
+      <div className={styles.title}>
+        <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
+        {!!status && <div className={styles.status}>{status}</div>}
+      </div>
       {!!description && !compact && (
         <p className="paragraphSans grey">{description}</p>
       )}
