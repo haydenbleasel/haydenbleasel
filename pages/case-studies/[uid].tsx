@@ -2,6 +2,7 @@ import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { createElement, useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 import type { FormEvent } from 'react';
+import { useEffectOnce, useSessionStorage } from 'react-use';
 import slugify from 'slugify';
 import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
@@ -108,18 +109,18 @@ function Slice ({ slice_type, primary }, index) {
 const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
   const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [passphrase, setPassphrase] = useState<string>('');
+  const [savedPassphrase, setSavedPassphrase] = useSessionStorage<string>(`passphrase-${uid}`, '');
   const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
   const [table, setTable] = useState<string>('');
 
-  async function authenticate(event: FormEvent) {
-    event.preventDefault();
+  async function authenticate(pass: string) {
     setLoading(true);
 
     try {
       const response = await fetch("/api/passphrase", {
         method: "post",
-        body: JSON.stringify({ uid, passphrase }),
+        body: JSON.stringify({ uid, passphrase: pass }),
       });
 
       const body = await response.json();
@@ -132,7 +133,8 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       setData(newData.data);
       setAuthenticated(true);
-
+      setSavedPassphrase(pass);
+      
       const newTable = newData.data.body.filter(({ slice_type }) => slice_type === 'rich_text').map(({ primary }) => (
         richtext(primary.text.filter(filterHeadings), false, {
           heading1: createTableElement,
@@ -153,33 +155,66 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
     }
   }
 
-  return authenticated ? (
-    <Layout
-      title={data.title}
-      description={data.description}
-      settings={settings}
-    >
-      <Section>
-        <div className={styles.hero}>
-          <h1 className="titleSans">{data.title}</h1>
-          <p className="paragraphSans grey">{data.description}</p>
-        </div>
-      </Section>
+  async function submit(event: FormEvent) {
+    event.preventDefault();
+    await authenticate(passphrase);
+  }
 
-      <Section>
-        <div className={styles.cover}>
-          <PrismicImage src={data.cover} width={1312} height={600} alt={`${data.title} Case Study`} />
-        </div>
-      </Section>
-      
-      <Section style={{ gridAutoFlow: 'dense' }}>
-        <div className={styles.table} dangerouslySetInnerHTML={{ __html: table }} />
-        <div className={styles.content}>
-          {data.body.map(Slice)}
-        </div>
-      </Section>
-    </Layout>
-  ) : (
+  useEffectOnce(() => {
+    async function authenticateAutomatically() {
+      try {
+        await authenticate(savedPassphrase);
+      } catch (error) {
+        window.alert(error.message || 'Couldn\'t load case study.');
+        setSavedPassphrase('');
+      }
+    }
+    if (savedPassphrase) {
+      authenticateAutomatically();
+    }
+  });
+
+  if (authenticated && data) {
+    return (
+      <Layout
+        title={data.title}
+        description={data.description}
+        settings={settings}
+      >
+        <Section>
+          <div className={styles.hero}>
+            <h1 className="titleSans">{data.title}</h1>
+            <p className="paragraphSans grey">{data.description}</p>
+          </div>
+        </Section>
+
+        <Section>
+          <div className={styles.cover}>
+            <PrismicImage src={data.cover} width={1312} height={600} alt={`${data.title} Case Study`} />
+          </div>
+        </Section>
+        
+        <Section style={{ gridAutoFlow: 'dense' }}>
+          <div className={styles.table} dangerouslySetInnerHTML={{ __html: table }} />
+          <div className={styles.content}>
+            {data.body.map(Slice)}
+          </div>
+        </Section>
+      </Layout>
+    );
+  }
+
+  if (savedPassphrase || (authenticated && !data)) {
+    return (
+      <Layout title="Enter passphrase" description="Enter a passphrase" settings={settings}>
+        <Section style={{ minHeight: 400, height: '50vh', alignItems: 'center' }}>
+          <p className={styles.loading}>Loading case study...</p>
+        </Section>
+      </Layout>
+    );
+  }
+
+  return (
     <Layout title="Enter passphrase" description="Enter a passphrase" settings={settings}>
       <Section style={{ minHeight: 400, height: '50vh', alignItems: 'center' }}>
         <Form
@@ -190,7 +225,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
           value={passphrase}
           onChangeText={setPassphrase}
           loading={loading}
-          onSubmit={authenticate}
+          onSubmit={submit}
         />
       </Section>
     </Layout>

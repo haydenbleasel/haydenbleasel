@@ -100,3 +100,7 @@
 .image, .comparison {
   margin: var(--gap-medium) auto;
 }
+
+.loading {
+  grid-column: 1 / 13;
+}
