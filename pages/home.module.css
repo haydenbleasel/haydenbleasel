@@ -9,14 +9,12 @@
 .heroRight {
   grid-column: 4 / 13;
 
-  & .outlink * {
-    font-size: inherit;
+  & > div + div {
+    margin-top: var(--gap-medium);
   }
 
-  & br {
-    height: var(--gap-medium);
-    display: block;
-    content: "";
+  & .outlink * {
+    font-size: inherit;
   }
 
   & p {

@@ -18,8 +18,8 @@ const Client = ({ element, content }: IClient) => (
         width={32}
         alt={content}
         src={`/logos/${content
-          .replace(" ", "")
-          .replace("/", "")
+          .replace(/ /g, "")
+          .replace(/\//g, "")
           .toLowerCase()}.svg`}
         quality={100}
         objectFit="contain"

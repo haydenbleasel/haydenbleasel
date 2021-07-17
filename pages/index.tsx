@@ -16,7 +16,7 @@ type IHome = {
     title: string;
     description: string;
     asterisk: PrismicImage;
-    hero_title: PrismicRichText;
+    hero_titles: { hero_title: PrismicRichText }[];
     hero_subtitle: PrismicRichText;
     hero_action_text: string;
     hero_action_link: PrismicLink;
@@ -62,7 +62,9 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
           </div>
         </div>
         <div className={styles.heroRight}>
-          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_title, false, { hyperlink: Client }) }} />
+          {data.hero_titles.map(({ hero_title }, index) => (
+            <div key={index} className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(hero_title, false, { hyperlink: Client }) }} />
+          ))}
           <div className={`h1Sans ${styles.outlink}`}>
             <Outlink text={data.hero_action_text} link={data.hero_action_link} />
           </div>
