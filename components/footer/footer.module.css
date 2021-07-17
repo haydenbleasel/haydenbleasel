@@ -85,10 +85,13 @@
   border: 1px solid var(--divider);
   appearance: none;
   width: 100%;
-  max-width: 11rem;
+  max-width: 12rem;
   font-size: 1rem;
   font-family: inherit;
   line-height: 1.2;
   background: transparent;
   color: var(--black);
+  background-image: url('/chevron.svg');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
 }
