@@ -104,6 +104,11 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
         <div className={styles.hero}>
           <Title title={data.hero_title} />
           <p className="paragraphSans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_description, true) }} />
+
+          <div className={styles.available}>
+            <div className={cx('dot', { active: settings.available_for_hire })} />
+            <p className="smallSans grey">Currently {settings.available_for_hire ? 'available' : 'unavailable'} for work</p>
+          </div>
         </div>
 
         <form

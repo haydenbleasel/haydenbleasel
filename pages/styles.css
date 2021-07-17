@@ -16,69 +16,6 @@
   font-display: swap;
 }
 
-:root {
-  --gap-small: 2vw;
-  --gap-medium: calc(var(--gap-small) * 2);
-  --gap-large: calc(var(--gap-small) * 3);
-  --gap-huge: calc(var(--gap-small) * 6);
-
-  --white: #ffffff;
-  --black: #1d1d1d;
-  --grey: #757575;
-  --divider: #dddddd;
-  --ghost: #fafafa;
-  --red: #FF5630;
-  --green: #31A575;
-
-  --image-filter: brightness(100%);
-  --type-scale-multiplier: 1.25;
-
-  --type-scale-1: calc(1vw * var(--type-scale-multiplier));
-  --type-scale-2: calc(var(--type-scale-1) * var(--type-scale-multiplier));
-  --type-scale-3: calc(var(--type-scale-2) * var(--type-scale-multiplier));
-  --type-scale-4: calc(var(--type-scale-3) * var(--type-scale-multiplier));
-  --type-scale-5: calc(var(--type-scale-4) * var(--type-scale-multiplier));
-  --type-scale-6: calc(var(--type-scale-5) * var(--type-scale-multiplier));
-
-  --type-scale-0: calc(var(--type-scale-1) / var(--type-scale-multiplier));
-  --type-family-sans: "haydenbleasel-lausanne", Arial, Helvetica, sans-serif;
-  --type-family-serif: "haydenbleasel-gtsuper", Georgia, Times, Times New Roman, serif;
-
-  --skeleton: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0,
-    rgba(255, 255, 255, 0.2) 20%,
-    rgba(255, 255, 255, 0.5) 60%,
-    rgba(255, 255, 255, 0)
-  );
-
-  @media (prefers-color-scheme: dark) {
-    --white: #111213;
-    --black: #ffffff;
-    --grey: #a1a1aa;
-    --divider: #222222;
-    --ghost: #17171c;
-    --image-filter: brightness(100);
-    --skeleton: linear-gradient(
-      90deg,
-      rgba(50, 50, 50, 0) 0,
-      rgba(50, 50, 50, 0.2) 20%,
-      rgba(50, 50, 50, 0.5) 60%,
-      rgba(50, 50, 50, 0)
-    );
-  }
-
-  @media (--desktopLarge) {
-    --type-scale-1: 18px;
-    --gap-small: calc(var(--type-scale-1) * 2);
-  }
-
-  @media (--mobile) {
-    --type-scale-1: 16px;
-    --type-scale-multiplier: 1.125;
-  }
-}
-
 html {
   font-family: var(--type-family-sans);
   font-weight: 300;
@@ -99,13 +36,6 @@ body {
     --divider: #dddddd;
     --ghost: #fafafa;
     --image-filter: brightness(100%);
-    --skeleton: linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0) 0,
-      rgba(255, 255, 255, 0.2) 20%,
-      rgba(255, 255, 255, 0.5) 60%,
-      rgba(255, 255, 255, 0)
-    );
   }
   &.dark {
     --white: #111213;
@@ -114,13 +44,6 @@ body {
     --divider: #222222;
     --ghost: #17171c;
     --image-filter: brightness(100);
-    --skeleton: linear-gradient(
-      90deg,
-      rgba(50, 50, 50, 0) 0,
-      rgba(50, 50, 50, 0.2) 20%,
-      rgba(50, 50, 50, 0.5) 60%,
-      rgba(50, 50, 50, 0)
-    );
   }
 }
 

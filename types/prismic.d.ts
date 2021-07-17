@@ -28,6 +28,7 @@ type PrismicRichText = {
 type PrismicSettings = {
   logo: PrismicImage;
   logo_link: PrismicLink;
+  available_for_hire: boolean;
   header_sitemap: {
     sitemap_label: string;
     sitemap_link: PrismicLink;

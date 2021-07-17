@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import { load, trackPageview } from "fathom-client";
 import { useRouter } from "next/router";
+import "./variables.css";
 import "./styles.css";
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
