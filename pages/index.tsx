@@ -62,8 +62,7 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
           </div>
         </div>
         <div className={styles.heroRight}>
-          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_title, true, { hyperlink: Client }) }} />
-          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_subtitle, true, { hyperlink: Client }) }} />
+          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_title, false, { hyperlink: Client }) }} />
           <div className={`h1Sans ${styles.outlink}`}>
             <Outlink text={data.hero_action_text} link={data.hero_action_link} />
           </div>

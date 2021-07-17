@@ -9,12 +9,18 @@
 .heroRight {
   grid-column: 4 / 13;
 
-  & > div:first-of-type {
-    margin-bottom: var(--gap-medium);
-  }
-
   & .outlink * {
     font-size: inherit;
+  }
+
+  & br {
+    height: var(--gap-medium);
+    display: block;
+    content: "";
+  }
+
+  & p {
+    display: inline;
   }
 
   @media (--laptop) {
