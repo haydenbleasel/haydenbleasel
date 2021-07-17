@@ -2,6 +2,7 @@ import type { GetStaticProps, GetStaticPaths, NextPage } from 'next';
 import { createElement, useState } from 'react';
 import { ReactCompareSlider } from 'react-compare-slider';
 import type { FormEvent } from 'react';
+import toast from 'react-hot-toast';
 import { useEffectOnce, useSessionStorage } from 'react-use';
 import slugify from 'slugify';
 import { trackGoal } from 'fathom-client';
@@ -149,7 +150,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
       setTable(newTable.join(''));
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0);
     } catch (error) {
-      window.alert(error.message || 'Something went wrong.');
+      toast.error(error.message || 'Something went wrong.');
     } finally {
       setLoading(false);
     }
@@ -165,7 +166,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
       try {
         await authenticate(savedPassphrase);
       } catch (error) {
-        window.alert(error.message || 'Couldn\'t load case study.');
+        toast.error(error.message || 'Couldn\'t load case study.');
         setSavedPassphrase('');
       }
     }

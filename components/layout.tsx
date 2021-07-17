@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { NextSeo, SocialProfileJsonLd } from "next-seo";
+import { Toaster } from 'react-hot-toast';
 import { useRouter } from "next/router";
 import Header from "./header";
 import Footer from "./footer";
@@ -81,6 +82,29 @@ const Layout = ({
       {children}
 
       <Footer settings={settings} />
+
+      <Toaster toastOptions={{
+        duration: 5000,
+        position: 'bottom-right',
+        style: {
+          color: 'var(--black)',
+          background: 'var(--white)',
+          border: '2px solid var(--divider)',
+          fontSize: 'var(--type-scale-0)',
+        },
+        success: {
+          icon: '💪',
+          style: {
+            borderColor: 'var(--green)',
+          },
+        },
+        error: {
+          icon: '😭',
+          style: {
+            borderColor: 'var(--red)',
+          },
+        },
+      }} />
     </>
   );
 };

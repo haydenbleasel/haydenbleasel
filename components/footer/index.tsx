@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { useLocalStorage } from 'react-use';
 import { trackGoal } from "fathom-client";
+import toast from 'react-hot-toast';
 import styles from "./footer.module.css";
 import Link from "../link";
 import Section from "../section";
@@ -54,11 +55,11 @@ const Footer = ({ settings }: IFooter) => {
         throw new Error(body.error);
       }
 
-      window.alert(settings.newsletter_success_alert);
+      toast.success(settings.newsletter_success_alert);
       setEmail("");
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL!, 0);
     } catch (error) {
-      window.alert(error.message || settings.newsletter_error_alert);
+      toast.error(error.message || settings.newsletter_error_alert);
     } finally {
       setLoading(false);
     }

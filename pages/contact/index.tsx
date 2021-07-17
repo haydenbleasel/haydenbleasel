@@ -2,6 +2,7 @@ import type { GetStaticProps, NextPage } from 'next';
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import classNames from 'classnames/bind';
+import toast from 'react-hot-toast';
 import { trackGoal } from 'fathom-client';
 import Layout from "../../components/layout";
 import styles from "./contact.module.css";
@@ -79,7 +80,7 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
         throw new Error(responseData.error);
       }
 
-      window.alert(data.success_alert);
+      toast.success(data.success_alert);
 
       setName("");
       setEmail("");
@@ -88,7 +89,7 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
       
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_CONTACT_GOAL!, 0);
     } catch (error) {
-      window.alert(error.message || data.error_alert);
+      toast.error(error.message || data.error_alert);
     } finally {
       setLoading(false);
     }
