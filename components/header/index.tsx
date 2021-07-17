@@ -27,12 +27,16 @@ const Header = ({ settings }: IHeader) => {
   }, [menuOpen]);
 
   function NavItem({ sitemap_label, sitemap_link }) {
+    const isExternal = !resolveLink(sitemap_link).startsWith("/");
     return (
       <li
         key={sitemap_label}
-        className={`smallSans ${pathname == resolveLink(sitemap_link) ? styles.active : ""}`}
+        className={cx('link', { active: pathname == resolveLink(sitemap_link), external: isExternal })}
       >
         <Link href={sitemap_link}>{sitemap_label}</Link>
+        {isExternal && (
+          <span className={styles.outlink}>&rarr;</span>
+        )}
       </li>
     );
   }
