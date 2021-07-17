@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from "react";
+import ReactPlayer from 'react-player/vimeo';
 import Link from "../link";
 import PrismicImage from "../prismicImage";
 import Skeleton from "../skeleton";
@@ -6,6 +7,7 @@ import styles from "./post.module.css";
 
 type PostProps = {
   image?: PrismicImage;
+  video?: PrismicVideo;
   title: string;
   description?: string;
   caption?: string;
@@ -19,6 +21,7 @@ type PostProps = {
 const Post = ({
   image,
   title,
+  video,
   description,
   caption,
   status,
@@ -32,15 +35,22 @@ const Post = ({
     {!!image && !compact && (
       <div className={styles.image}>
         <Skeleton>
-          <PrismicImage
-            width={featured ? 1128 : 742}
-            height={featured ? 600 : 395}
-            alt={title}
-            src={image}
-            objectFit="cover"
-            objectPosition={focus}
-            priority={featured}
-          />
+          {!!video?.embed_url && (
+            <div className={styles.video}>
+              <ReactPlayer url={video.embed_url} playing muted loop playsinline width="100%" height="100%" config={{ playerOptions: { background: true } }} />
+            </div>
+          )}
+          {(!!image?.url && !video?.embed_url) && (
+            <PrismicImage
+              width={featured ? 1128 : 742}
+              height={featured ? 600 : 395}
+              alt={title}
+              src={image}
+              objectFit="cover"
+              objectPosition={focus}
+              priority={featured}
+            />
+          )}
         </Skeleton>
       </div>
     )}

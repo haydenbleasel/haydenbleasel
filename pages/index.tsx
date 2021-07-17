@@ -76,6 +76,7 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
           <div key={work.uid} className={styles.work}>
             <Post
               image={work.data.image}
+              video={work.data.video}
               title={`${work.data.title} at ${work.data.description}`}
               description={plaintext(work.data.content)}
               caption={work.data.date}

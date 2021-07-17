@@ -79,6 +79,7 @@ const Work: NextPage<IWork> = ({ data, roles, settings }) => (
           subtitle={role.data.description}
           id={role.uid}
           image={role.data.image}
+          video={role.data.video}
           priority={!index}
         >
           {role.data.content}
