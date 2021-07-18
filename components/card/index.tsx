@@ -4,6 +4,7 @@ import Skeleton from "../skeleton";
 import { richtext } from "../../utils/prismic";
 import styles from "./card.module.css";
 import Video from "../video";
+import Badge from "../badge";
 
 type ICard = {
   id: string;
@@ -57,7 +58,9 @@ const Card = ({
           <p className="h2Serif">{subtitle}</p>
         )}
         {!!status && (
-            <div className={styles.status}>{status}</div>
+            <div className={styles.status}>
+              <Badge>{status}</Badge>
+            </div>
           )}
         {(link && action) && <Link href={link}>{action}</Link>}
       </div>

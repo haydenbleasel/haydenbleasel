@@ -1,4 +1,5 @@
 import type { HTMLAttributes } from "react";
+import Badge from "../badge";
 import Link from "../link";
 import PrismicImage from "../prismicImage";
 import Skeleton from "../skeleton";
@@ -56,7 +57,11 @@ const Post = ({
       {!!caption && <small className="smallSans grey">{caption}</small>}
       <div className={styles.title}>
         <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
-        {!!status && <div className={styles.status}>{status}</div>}
+        {!!status && (
+          <div className={styles.status}>
+            <Badge>{status}</Badge>
+          </div>
+        )}
       </div>
       {!!description && !compact && (
         <p className="paragraphSans grey">{description}</p>
