@@ -89,9 +89,11 @@
   right: 0rem;
   font-size: 0.75rem;
   top: 1rem;
-  color: var(--grey);
+  color: var(--black);
   user-select: none;
   pointer-events: none;
+  opacity: 0.5;
+  transition: opacity 0.2s;
 }
 
 .link {
@@ -121,6 +123,10 @@
 
   & a:hover, &.active a {
     opacity: 1;
+
+    & ~ .outlink {
+      opacity: 1;
+    }
   }
 
   &:last-of-type a {
