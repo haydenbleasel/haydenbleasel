@@ -61,7 +61,7 @@ a {
   color: inherit;
   transition: opacity 0.2s;
 
-  &:hover {
+  &:hover, &:focus {
     opacity: 0.8;
   }
 }

@@ -98,20 +98,23 @@
   margin-bottom: 2rem;
   line-height: 1.6;
   transition: background 0.2s, box-shadow 0.2s;
-  &:hover,
-  &:focus {
+  
+  &:hover, &:focus {
     background: #f6f6f6;
     @media (prefers-color-scheme: dark) {
       background: #252528;
     }
   }
+  
   &::placeholder {
     color: var(--black);
     opacity: 0.4;
   }
+  
   &:valid:not(:placeholder-shown):not(:focus) {
     box-shadow: 0 0 0 0.125rem var(--green);
   }
+  
   &:invalid:not(:placeholder-shown):not(:focus) {
     box-shadow: 0 0 0 0.125rem var(--red);
   }

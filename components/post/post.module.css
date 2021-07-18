@@ -16,7 +16,7 @@
     margin: calc(var(--gap-small) / 2) 0 0 0;
   }
 
-  &:hover {
+  &:hover, &:focus {
     transform: translateY(-4px);
   }
 }

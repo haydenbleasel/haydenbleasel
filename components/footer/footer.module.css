@@ -43,11 +43,11 @@
   transition: opacity 0.2s, transform 0.2s;
   display: flex;
   filter: var(--image-filter);
-}
-
-.socialIcon :global(a):hover {
-  opacity: 1;
-  transform: translateY(-4px);
+  
+  &:hover, &:focus {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
 }
 
 .newsletter {

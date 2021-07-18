@@ -16,8 +16,10 @@
   font-size: var(--type-scale-4);
   text-decoration: none;
 
-  &:hover .arrow {
-    transform: translateX(0.25rem);
+  &:hover, &:focus {
+    & .arrow {
+      transform: translateX(0.25rem);
+    }
   }
 }
 

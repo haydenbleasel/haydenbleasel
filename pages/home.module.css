@@ -19,6 +19,10 @@
 
   & + .heroTitle {
     margin-top: var(--gap-medium);
+
+    @media (--mobile) {
+      margin-top: var(--gap-small);
+    }
   }
 
   & p {

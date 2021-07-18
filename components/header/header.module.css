@@ -121,7 +121,7 @@
     padding-right: 1rem; 
   }
 
-  & a:hover, &.active a {
+  & a:hover, & a:focus, &.active a {
     opacity: 1;
 
     & ~ .outlink {

@@ -41,7 +41,7 @@
   cursor: pointer;
   margin-top: var(--gap-small);
 
-  &:hover {
+  &:hover, &:focus {
     color: var(--black);
   }
 }
