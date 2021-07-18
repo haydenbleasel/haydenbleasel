@@ -1,8 +1,8 @@
 import type { HTMLAttributes } from "react";
-import ReactPlayer from 'react-player/vimeo';
 import Link from "../link";
 import PrismicImage from "../prismicImage";
 import Skeleton from "../skeleton";
+import Video from "../video";
 import styles from "./post.module.css";
 
 type PostProps = {
@@ -36,9 +36,7 @@ const Post = ({
       <div className={styles.image}>
         <Skeleton>
           {!!video?.embed_url && (
-            <div className={styles.video}>
-              <ReactPlayer url={video.embed_url} playing muted loop playsinline width="100%" height="100%" config={{ playerOptions: { background: true } }} />
-            </div>
+            <Video {...video} />
           )}
           {(!!image?.url && !video?.embed_url) && (
             <PrismicImage

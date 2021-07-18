@@ -1,9 +1,9 @@
 import Image, { ImageProps } from "next/image";
-import ReactPlayer from 'react-player/vimeo';
 import Link from '../link';
 import Skeleton from "../skeleton";
 import { richtext } from "../../utils/prismic";
 import styles from "./card.module.css";
+import Video from "../video";
 
 type ICard = {
   id: string;
@@ -34,9 +34,7 @@ const Card = ({
   <div className={styles.card} id={id}>
     <Skeleton>
       {!!video?.embed_url && (
-        <div className={styles.video}>
-          <ReactPlayer url={video.embed_url} playing muted loop playsinline width="100%" height="100%" config={{ playerOptions: { background: true } }} />
-        </div>
+        <Video {...video} />
       )}
       {(!!image?.url && !video?.embed_url) && (
         <Image
