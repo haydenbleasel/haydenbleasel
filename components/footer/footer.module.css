@@ -15,12 +15,6 @@
     text-decoration: underline;
   }
 
-  & :global(.h1Sans), & :global(.h1Serif) {
-    @media (--mobile) {
-      font-size: var(--type-scale-3);
-    }
-  }
-
   @media (--laptop) {
     grid-column: 1;
   }
@@ -54,6 +48,17 @@
 .socialIcon :global(a):hover {
   opacity: 1;
   transform: translateY(-4px);
+}
+
+.newsletter {
+  composes: h1Sans from global;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+    & em {
+      font-size: var(--type-scale-3);
+    }
+  }
 }
 
 .footerLower {

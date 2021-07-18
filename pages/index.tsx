@@ -48,24 +48,22 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
     >
       <Section>
         <div className={styles.heroLeft}>
-          <div className={styles.asterisk}>
-            <div style={{ transform: `rotate(${y / 3}deg)` }}>
-              <PrismicImage
-                src={data.asterisk}
-                layout="fixed"
-                width={48}
-                height={48}
-                alt="Hello there"
-                priority
-              />
-            </div>
+          <div className={styles.asterisk} style={{ transform: `rotate(${y / 3}deg)` }}>
+            <PrismicImage
+              src={data.asterisk}
+              layout="fixed"
+              width={48}
+              height={48}
+              alt="Hello there"
+              priority
+            />
           </div>
         </div>
         <div className={styles.heroRight}>
           {data.hero_titles.map(({ hero_title }, index) => (
-            <div key={index} className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(hero_title, false, { hyperlink: Client }) }} />
+            <div key={index} className={styles.heroTitle} dangerouslySetInnerHTML={{ __html: richtext(hero_title, false, { hyperlink: Client }) }} />
           ))}
-          <div className={`h1Sans ${styles.outlink}`}>
+          <div className={styles.outlink}>
             <Outlink text={data.hero_action_text} link={data.hero_action_link} />
           </div>
         </div>

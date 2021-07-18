@@ -9,20 +9,27 @@
 .heroRight {
   grid-column: 4 / 13;
 
-  & > div + div {
-    margin-top: var(--gap-medium);
+  @media (--laptop) {
+    grid-column: 1;
   }
+}
 
-  & .outlink * {
-    font-size: inherit;
+.heroTitle {
+  composes: h1Sans from global;
+
+  & + .heroTitle {
+    margin-top: var(--gap-medium);
   }
 
   & p {
     display: inline;
   }
+}
 
-  @media (--laptop) {
-    grid-column: 1;
+.outlink {
+  composes: h1Sans from global;
+  & * {
+    font-size: inherit;
   }
 }
 
@@ -72,11 +79,11 @@
 }
 
 .asterisk {
-  display: inline-block;
+  display: inline-flex;
+  filter: var(--image-filter);
   
-  & > div > div {
+  & > div {
     width: var(--type-scale-5) !important;
     height: var(--type-scale-5) !important;
-    filter: var(--image-filter);
   }
 }

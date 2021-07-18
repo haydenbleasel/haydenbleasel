@@ -85,7 +85,7 @@ const Footer = ({ settings }: IFooter) => {
         </div>
 
         <div className={styles.container}>
-          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(settings.footer_content) }} />
+          <div className={styles.newsletter} dangerouslySetInnerHTML={{ __html: richtext(settings.footer_content) }} />
 
           <Form
             name="email"
