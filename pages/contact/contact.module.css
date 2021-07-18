@@ -183,15 +183,11 @@
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   display: inline-flex;
   align-items: center;
-
-  & p {
-    margin: 0;
-  }
 }
 
 .dot {
-  width: 1rem;
-  height: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
   background: var(--red);
   border-radius: 100%;
   margin-right: 0.5rem;
@@ -201,4 +197,9 @@
     background: var(--green);
     animation: pulse-green 2s infinite;
   }
+}
+
+.dotText {
+  composes: smallSans grey from global;
+  margin: 0 0 -0.2vw;
 }
