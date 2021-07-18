@@ -1,9 +1,10 @@
 import type { GetStaticProps, NextPage } from 'next';
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import classNames from 'classnames/bind';
 import toast from 'react-hot-toast';
 import { trackGoal } from 'fathom-client';
+import { useDrop } from 'react-use';
 import Layout from "../../components/layout";
 import styles from "./contact.module.css";
 import Section from "../../components/section";
@@ -36,8 +37,14 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [message, setMessage] = useState<string>("");
-  const [files, setFiles] = useState<FileList | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const dropState = useDrop({
+    onFiles: addFiles,
+    onUri: () => toast.error('Files only please!'),
+    onText: () => toast.error('Files only please!'),
+  });
 
   async function sendEmail(event: FormEvent) {
     event.preventDefault();
@@ -62,12 +69,9 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
       formData.append("name", name);
       formData.append("email", email);
       formData.append("message", message);
-
-      if (files) {
-        Array.from(files).map((file, index) =>
-          formData.append(`file${index}`, file)
-        );
-      }
+      files.map((file, index) =>
+        formData.append(`file${index}`, file)
+      );
 
       const response = await fetch("/api/nodemailer", {
         method: "post",
@@ -85,7 +89,7 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
       setName("");
       setEmail("");
       setMessage("");
-      setFiles(null);
+      setFiles([]);
       
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_CONTACT_GOAL!, 0);
     } catch (error) {
@@ -93,6 +97,42 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
     } finally {
       setLoading(false);
     }
+  }
+
+  function addFiles(newFiles: File[]) {
+    newFiles.forEach((file, index) => {
+      const fileExists = files.some(({ name, size }) => name === file.name && size === file.size);
+
+      if (fileExists) {
+        toast.error(`You already uploaded ${file.name}`);
+        newFiles.splice(index);
+      }
+
+      if (file.size > 5000000) {
+        toast.error(`${file.name} is too chonky (5MB max file size).`);
+        newFiles.splice(index);
+      }
+
+    });
+
+    setFiles([...files, ...newFiles]);
+  }
+
+  function onChangeFiles({ target }: ChangeEvent<HTMLInputElement>) {
+    if (target.files) {
+      const newFiles = Array.from(target.files);
+
+      addFiles(newFiles);
+    }
+  }
+
+  function clickFiles() {
+    fileInput.current?.click();
+  }
+
+  function removeFile(index: number) {
+    const newFiles = files.filter((_, i) => i !== index);
+    setFiles(newFiles);
   }
 
   return (
@@ -188,15 +228,26 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
               <span> (Optional)</span>
             </label>
             <input
-              className={styles.files}
+              value={[]}
+              ref={fileInput}
+              hidden
               id="files"
               name="files"
               type="file"
               multiple
-              onChange={({ target }: ChangeEvent) =>
-                setFiles((target as HTMLInputElement).files)
-              }
+              onChange={onChangeFiles}
             />
+            <div className={styles.files} onClick={clickFiles}>
+              Upload files
+            </div>
+            <div className={styles.fileList}>
+              {files.map((file, index) => (
+                <div className={styles.file} key={file.name}>
+                  <span>{file.name} ({(file.size / 1024).toFixed(2)}kb)</span>
+                  <span className={styles.remove} onClick={() => removeFile(index)}>&times;</span>
+                </div>
+              ))}
+            </div>
           </fieldset>
 
           <button className={styles.button} type="submit">
@@ -204,6 +255,8 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
           </button>
         </form>
       </Section>
+
+      <div className={cx('dropzone', { active: dropState.over })} />
     </Layout>
   );
 };

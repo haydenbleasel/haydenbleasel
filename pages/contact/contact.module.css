@@ -128,7 +128,7 @@
 }
 
 .label {
-  font-size: 0.8rem;
+  composes: smallSans from global;
   display: block;
   margin: 0 0 0.25rem;
 }
@@ -147,14 +147,10 @@
 }
 
 .files {
-  font-size: 0.8rem;
+  composes: smallSans from global;
   margin-top: 0.5rem;
   cursor: pointer;
-}
-
-.files::-webkit-file-upload-button {
   background: var(--ghost);
-  appearance: none;
   color: var(--black);
   padding: 1rem;
   border-radius: 0.25rem;
@@ -162,6 +158,7 @@
   margin: 0 1rem 0 0;
   outline: none;
   cursor: pointer;
+  display: inline-flex;
 }
 
 .fieldHeader {
@@ -172,7 +169,7 @@
 }
 
 .remaining {
-  font-size: 0.8rem;
+  composes: smallSans from global;
   color: var(--grey);
   opacity: 0.5;
 }
@@ -202,4 +199,44 @@
 .dotText {
   composes: smallSans grey from global;
   margin: 0 0 -0.2vw;
+}
+
+.dropzone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: color-mod(var(--blue) a(0.2));
+  pointer-events: none;
+  user-select: none;
+  border: 2px dashed var(--blue);
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.2s;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.fileList {
+  margin: 1.5rem -0.5rem -0.5rem;
+}
+
+.file {
+  composes: smallSans from global;
+  cursor: pointer;
+  background: var(--ghost);
+  color: var(--black);
+  padding: 0.25rem 0.5rem;
+  border-radius: 10rem;
+  border: none;
+  margin: 0.5rem;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.remove {
+  margin-left: 0.5rem;
 }
