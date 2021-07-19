@@ -38,6 +38,7 @@
 }
 
 .expand {
+  composes: smallSans underline grey from global;
   cursor: pointer;
   margin-top: var(--gap-small);
 

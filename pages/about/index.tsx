@@ -135,7 +135,7 @@ const About: NextPage<IAbout> = ({ data, roles, settings }) => {
             </ul>
             {!rolesExpanded && (
               <p
-                className={`smallSans underline grey ${styles.expand}`}
+                className={styles.expand}
                 onClick={() => setRolesExpanded(true)}
               >
                 Show more
@@ -160,7 +160,7 @@ const About: NextPage<IAbout> = ({ data, roles, settings }) => {
             </ul>
             {!eventsExpanded && (
               <p
-                className={`smallSans underline grey ${styles.expand}`}
+                className={styles.expand}
                 onClick={() => setEventsExpanded(true)}
               >
                 Show more
@@ -183,7 +183,7 @@ const About: NextPage<IAbout> = ({ data, roles, settings }) => {
             </ul>
             {!interviewsExpanded && (
               <p
-                className={`smallSans underline grey ${styles.expand}`}
+                className={styles.expand}
                 onClick={() => setInterviewsExpanded(true)}
               >
                 Show more
