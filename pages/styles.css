@@ -39,6 +39,7 @@ body {
     --green: var(--light-green);
     --blue: var(--light-blue);
     --image-filter: var(--light-image-filter);
+    --skeleton: var(--light-skeleton);
   }
   &.dark {
     --white: var(--dark-white);
@@ -50,6 +51,7 @@ body {
     --green: var(--dark-green);
     --blue: var(--dark-blue);
     --image-filter: var(--dark-image-filter);
+    --skeleton: var(--dark-skeleton);
   }
 }
 
