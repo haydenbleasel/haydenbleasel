@@ -237,9 +237,9 @@ const Contact: NextPage<IContact> = ({ data, settings }) => {
               multiple
               onChange={onChangeFiles}
             />
-            <div className={styles.files} onClick={clickFiles}>
+            <button className={styles.files} onClick={clickFiles}>
               Upload files
-            </div>
+            </button>
             <div className={styles.fileList}>
               {files.map((file, index) => (
                 <div className={styles.file} key={file.name}>
