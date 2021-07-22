@@ -14,15 +14,15 @@
   "dependencies": {
     "@next/bundle-analyzer": "^11.0.1",
     "@prismicio/client": "^5.1.0",
-    "@sentry/nextjs": "^6.9.0",
+    "@sentry/nextjs": "^6.10.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.22.1",
-    "fathom-client": "^3.0.0",
+    "fathom-client": "^3.1.0",
     "hamburger-react": "^2.4.1",
     "jsdom": "^16.6.0",
     "next": "^11.0.1",
     "next-compose-plugins": "^2.2.1",
-    "next-pwa": "^5.2.23",
+    "next-pwa": "^5.2.24",
     "next-secure-headers": "^2.2.0",
     "next-seo": "^4.26.0",
     "next-sitemap": "^1.6.140",
@@ -39,7 +39,7 @@
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
-    "@types/node": "^16.3.3",
+    "@types/node": "^16.4.1",
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "eslint": "^7.31.0",
