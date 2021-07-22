@@ -51,9 +51,6 @@ type PrismicRichText = {
 }[];
 
 type PrismicSettings = {
-  banner_text: PrismicRichText;
-  banner_cta: string;
-  banner_link: PrismicLink;
   logo: PrismicImage;
   logo_link: PrismicLink;
   available_for_hire: boolean;

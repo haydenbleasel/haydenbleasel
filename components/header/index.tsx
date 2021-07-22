@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import styles from "./header.module.css";
 import Link from "../link";
 import Section from "../section";
-import { resolveLink, richtext } from "../../utils/prismic";
+import { resolveLink } from "../../utils/prismic";
 import PrismicImage from "../prismicImage";
 
 type IHeader = {
@@ -43,54 +43,40 @@ const Header = ({ settings }: IHeader) => {
   }
 
   return (
-    <>
-      <div className={styles.banner} ref={banner}>
+    <Headroom style={{ zIndex: 999, height: 102 }} pinStart={banner.current?.clientHeight}>
+      <nav className={styles.container}>
         <Section>
-          <div className={styles.bannerContent}>
-            <div className={styles.bannerText} dangerouslySetInnerHTML={{ __html: richtext(settings.banner_text) }} />
-            <Link className={styles.button} href={settings.banner_link}>
-              <span className="underline">{settings.banner_cta}</span>
-              <span className={styles.bannerArrow}>&rarr;</span>
-            </Link>
-          </div>
+          <header className={cx('nav', { menuOpen })}>
+            <div className={styles.logo}>
+              <Link href={settings.logo_link}>
+                <PrismicImage
+                  src={settings.logo}
+                  alt="Hayden Bleasel"
+                  layout="fixed"
+                  width={54}
+                  height={16}
+                  priority
+                />
+              </Link>
+            </div>
+            <div className={styles.menu}>
+              <ul className={styles.sitemap}>
+                {settings.header_sitemap.map(NavItem)}
+              </ul>
+              <div className={styles.hamburger}>
+                <Hamburger
+                  size={20}
+                  toggled={menuOpen}
+                  toggle={(open) => setMenuOpen(open)}
+                  color="var(--black)"
+                  label="Show menu"
+                />
+              </div>
+            </div>
+          </header>
         </Section>
-      </div>
-
-      <Headroom style={{ zIndex: 999, height: 102 }} pinStart={banner.current?.clientHeight}>
-        <nav className={styles.container}>
-          <Section>
-            <header className={cx('nav', { menuOpen })}>
-              <div className={styles.logo}>
-                <Link href={settings.logo_link}>
-                  <PrismicImage
-                    src={settings.logo}
-                    alt="Hayden Bleasel"
-                    layout="fixed"
-                    width={54}
-                    height={16}
-                    priority
-                  />
-                </Link>
-              </div>
-              <div className={styles.menu}>
-                <ul className={styles.sitemap}>
-                  {settings.header_sitemap.map(NavItem)}
-                </ul>
-                <div className={styles.hamburger}>
-                  <Hamburger
-                    size={20}
-                    toggled={menuOpen}
-                    toggle={(open) => setMenuOpen(open)}
-                    color="var(--black)"
-                    label="Show menu"
-                  />
-                </div>
-              </div>
-            </header>
-          </Section>
-        </nav>
-      </Headroom>
-    </>
+      </nav>
+    </Headroom>
   );
 };
 
