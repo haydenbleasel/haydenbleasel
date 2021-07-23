@@ -65,3 +65,7 @@
     grid-column: 1;
   }
 }
+
+.status {
+  margin-top: 1rem;
+}

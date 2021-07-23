@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Headroom from "react-headroom";
 import { Squeeze as Hamburger } from "hamburger-react";
@@ -19,6 +19,7 @@ const cx = classNames.bind(styles);
 const Header = ({ settings }: IHeader) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const { pathname } = useRouter();
+  const banner = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "unset";
@@ -27,18 +28,22 @@ const Header = ({ settings }: IHeader) => {
   }, [menuOpen]);
 
   function NavItem({ sitemap_label, sitemap_link }) {
+    const isExternal = !resolveLink(sitemap_link).startsWith("/");
     return (
       <li
         key={sitemap_label}
-        className={`smallSans ${pathname == resolveLink(sitemap_link) ? styles.active : ""}`}
+        className={cx('link', { active: pathname == resolveLink(sitemap_link), external: isExternal })}
       >
         <Link href={sitemap_link}>{sitemap_label}</Link>
+        {isExternal && (
+          <span className={styles.outlink}>&rarr;</span>
+        )}
       </li>
     );
   }
 
   return (
-    <Headroom style={{ zIndex: 999, height: 102 }}>
+    <Headroom style={{ zIndex: 999, height: 102 }} pinStart={banner.current?.clientHeight}>
       <nav className={styles.container}>
         <Section>
           <header className={cx('nav', { menuOpen })}>

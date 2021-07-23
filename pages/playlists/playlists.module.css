@@ -19,7 +19,7 @@
   display: block;
   transition: transform 0.2s;
 
-  &:hover {
+  &:hover, &:focus {
     transform: translateY(-4px);
   }
 

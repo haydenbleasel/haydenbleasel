@@ -36,7 +36,7 @@ const Projects: NextPage<IProjects> = ({ data, settings, projects }) => (
     {projects.sort(sortProjects).map((project, index) => (
       <Section key={project.uid}>
         <Card
-          caption={project.data.status}
+          status={project.data.status}
           title={project.data.title}
           id={project.uid}
           subtitle={project.data.description}

@@ -15,12 +15,6 @@
     text-decoration: underline;
   }
 
-  & :global(.h1Sans), & :global(.h1Serif) {
-    @media (--mobile) {
-      font-size: var(--type-scale-3);
-    }
-  }
-
   @media (--laptop) {
     grid-column: 1;
   }
@@ -49,11 +43,22 @@
   transition: opacity 0.2s, transform 0.2s;
   display: flex;
   filter: var(--image-filter);
+  
+  &:hover, &:focus {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
 }
 
-.socialIcon :global(a):hover {
-  opacity: 1;
-  transform: translateY(-4px);
+.newsletter {
+  composes: h1Sans from global;
+
+  @media (--mobile) {
+    font-size: var(--type-scale-3);
+    & em {
+      font-size: var(--type-scale-3);
+    }
+  }
 }
 
 .footerLower {
@@ -64,6 +69,15 @@
   grid-column: 1 / 13;
   border-top: 1px solid var(--divider);
   padding-top: 2rem;
+
+  @media (--laptop) {
+    grid-column: 1;
+  }
+
+  @media (--mobile) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .copyright :global(a) {
@@ -76,10 +90,13 @@
   border: 1px solid var(--divider);
   appearance: none;
   width: 100%;
-  max-width: 10rem;
+  max-width: 12rem;
   font-size: 1rem;
   font-family: inherit;
   line-height: 1.2;
   background: transparent;
   color: var(--black);
+  background-image: url('/chevron.svg');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
 }

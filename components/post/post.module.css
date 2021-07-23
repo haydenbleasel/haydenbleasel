@@ -16,11 +16,20 @@
     margin: calc(var(--gap-small) / 2) 0 0 0;
   }
 
-  &:hover {
+  &:hover, &:focus {
     transform: translateY(-4px);
   }
 }
 
 .image {
   margin-bottom: var(--gap-small);
+}
+
+.status {
+  margin-left: 0.5rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
 }

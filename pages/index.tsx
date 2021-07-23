@@ -16,7 +16,7 @@ type IHome = {
     title: string;
     description: string;
     asterisk: PrismicImage;
-    hero_title: PrismicRichText;
+    hero_titles: { hero_title: PrismicRichText }[];
     hero_subtitle: PrismicRichText;
     hero_action_text: string;
     hero_action_link: PrismicLink;
@@ -48,22 +48,22 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
     >
       <Section>
         <div className={styles.heroLeft}>
-          <div className={styles.asterisk}>
-            <div style={{ transform: `rotate(${y / 3}deg)` }}>
-              <PrismicImage
-                src={data.asterisk}
-                layout="fixed"
-                width={48}
-                height={48}
-                alt="Hello there"
-                priority
-              />
-            </div>
+          <div className={styles.asterisk} style={{ transform: `rotate(${y / 3}deg)` }}>
+            <PrismicImage
+              src={data.asterisk}
+              layout="fixed"
+              width={48}
+              height={48}
+              alt="Hello there"
+              priority
+            />
           </div>
         </div>
         <div className={styles.heroRight}>
-          <div className="h1Sans" dangerouslySetInnerHTML={{ __html: richtext(data.hero_title, false, { hyperlink: Client }) }} />
-          <div className={`h1Sans ${styles.outlink}`}>
+          {data.hero_titles.map(({ hero_title }, index) => (
+            <div key={index} className={styles.heroTitle} dangerouslySetInnerHTML={{ __html: richtext(hero_title, false, { hyperlink: Client }) }} />
+          ))}
+          <div className={styles.outlink}>
             <Outlink text={data.hero_action_text} link={data.hero_action_link} />
           </div>
         </div>
@@ -74,6 +74,7 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
           <div key={work.uid} className={styles.work}>
             <Post
               image={work.data.image}
+              video={work.data.video}
               title={`${work.data.title} at ${work.data.description}`}
               description={plaintext(work.data.content)}
               caption={work.data.date}
@@ -114,7 +115,7 @@ const Home: NextPage<IHome> = ({ data, settings, mediumPosts, devPosts }) => {
               image={project.data.image}
               title={project.data.title}
               description={plaintext(project.data.content)}
-              caption={project.data.status}
+              status={project.data.status}
               link={project}
             />
           </div>

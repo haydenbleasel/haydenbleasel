@@ -7,7 +7,7 @@
 .skeleton {
   position: relative;
   overflow: hidden;
-  background-color: var(--divider);
+  background: var(--divider);
 
   &::after {
     position: absolute;

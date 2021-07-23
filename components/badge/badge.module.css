@@ -1,0 +1,7 @@
+.badge {
+  composes: smallSans grey from global;
+  border-radius: 10rem;
+  padding: 0.25rem 0.5rem 0.1rem;
+  border: 1px solid var(--divider);
+  display: inline-flex;
+}

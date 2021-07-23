@@ -30,6 +30,7 @@
 .input {
   background: transparent;
   border: none;
+  border-bottom: 1px solid transparent;
   font-size: var(--type-scale-5);
   font-family: inherit;
   width: 100%;
@@ -56,6 +57,11 @@
   text-align: center;
   display: block;
   cursor: pointer;
+  transition: transform 0.2s;
+  
+  &:hover, &:focus {
+    transform: translateX(0.25rem);
+  }
 
   @media (--mobile) {
     font-size: var(--type-scale-3);

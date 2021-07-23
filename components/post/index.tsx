@@ -1,14 +1,18 @@
 import type { HTMLAttributes } from "react";
+import Badge from "../badge";
 import Link from "../link";
 import PrismicImage from "../prismicImage";
 import Skeleton from "../skeleton";
+import Video from "../video";
 import styles from "./post.module.css";
 
 type PostProps = {
   image?: PrismicImage;
+  video?: PrismicVideo;
   title: string;
   description?: string;
   caption?: string;
+  status?: string;
   link: PrismicLink;
   featured?: boolean;
   focus?: string;
@@ -18,8 +22,10 @@ type PostProps = {
 const Post = ({
   image,
   title,
+  video,
   description,
   caption,
+  status,
   link,
   featured = false,
   compact = false,
@@ -30,21 +36,33 @@ const Post = ({
     {!!image && !compact && (
       <div className={styles.image}>
         <Skeleton>
-          <PrismicImage
-            width={featured ? 1128 : 742}
-            height={featured ? 600 : 395}
-            alt={title}
-            src={image}
-            objectFit="cover"
-            objectPosition={focus}
-            priority={featured}
-          />
+          {!!video?.embed_url && (
+            <Video {...video} />
+          )}
+          {(!!image?.url && !video?.embed_url) && (
+            <PrismicImage
+              width={featured ? 1128 : 742}
+              height={featured ? 600 : 395}
+              alt={title}
+              src={image}
+              objectFit="cover"
+              objectPosition={focus}
+              priority={featured}
+            />
+          )}
         </Skeleton>
       </div>
     )}
     <div className={styles.meta}>
       {!!caption && <small className="smallSans grey">{caption}</small>}
-      <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
+      <div className={styles.title}>
+        <h2 className={compact ? "paragraphSans" : "h4Sans"}>{title}</h2>
+        {!!status && (
+          <div className={styles.status}>
+            <Badge>{status}</Badge>
+          </div>
+        )}
+      </div>
       {!!description && !compact && (
         <p className="paragraphSans grey">{description}</p>
       )}
