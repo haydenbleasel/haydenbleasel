@@ -58,8 +58,8 @@ const Footer = ({ settings }: IFooter) => {
       toast.success(settings.newsletter_success_alert);
       setEmail("");
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL!, 0);
-    } catch (error) {
-      toast.error(error.message || settings.newsletter_error_alert);
+    } catch (error: any) {
+      toast.error(error?.message || settings.newsletter_error_alert);
     } finally {
       setLoading(false);
     }

@@ -126,7 +126,7 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       const body = await response.json();
 
-      if (body.error) {
+      if (body?.error) {
         throw new Error(body.error);
       }
 
@@ -149,8 +149,8 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
 
       setTable(newTable.join(''));
       trackGoal(process.env.NEXT_PUBLIC_FATHOM_PROJECT_GOAL!, 0);
-    } catch (error) {
-      toast.error(error.message || 'Something went wrong.');
+    } catch (error: any) {
+      toast.error(error?.message || 'Something went wrong.');
     } finally {
       setLoading(false);
     }
@@ -165,8 +165,8 @@ const CaseStudy: NextPage<ICaseStudy> = ({ uid, settings }) => {
     async function authenticateAutomatically() {
       try {
         await authenticate(savedPassphrase);
-      } catch (error) {
-        toast.error(error.message || 'Couldn\'t load case study.');
+      } catch (error: any) {
+        toast.error(error?.message || 'Couldn\'t load case study.');
         setSavedPassphrase('');
       }
     }
