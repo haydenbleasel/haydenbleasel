@@ -323,7 +323,7 @@ const Home: NextPage<any> = () => {
           <p>✌️</p>
         </section>
         <section className={styles.aside}>
-          <Image src={Spline} layout="fill" alt="A spline" objectFit="contain" objectPosition="top right" quality={100} placeholder="blur" />
+          <Image src={Spline} layout="fill" alt="A spline" objectFit="contain" objectPosition="top right" quality={100} placeholder="empty" />
         </section>
         <div className={styles.social}>
           {Object.values(social).map(Social)}
