@@ -38,14 +38,14 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#F0F0F0" />
+        <meta name="msapplication-TileColor" content="#F5F5F9" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#F0F0F0" />
+        <meta name="theme-color" content="#F5F5F9" />
         <link rel="manifest" href="/manifest.json" />
 
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#F0F0F0" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#F5F5F9" />
       </Head>
       <Component {...pageProps} />
     </>
