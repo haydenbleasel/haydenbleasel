@@ -122,7 +122,7 @@ const clients = {
   },
   spacemachines: {
     name: 'Space Machines Company',
-    url: 'https://jellypepper.com/work/spacemachines',
+    url: 'https://jellypepper.com/work/space-machines',
     logo: SpacemachinesLogo,
   },
   inventia: {
@@ -137,7 +137,7 @@ const clients = {
   },
   spaceship: {
     name: 'Spaceship',
-    url: 'https://jellypepper.com/work/spaceship',
+    url: 'https://spaceship.com.au/',
     logo: SpaceshipLogo,
   },
   airwallex: {
