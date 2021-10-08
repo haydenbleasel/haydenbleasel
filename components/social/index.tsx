@@ -7,7 +7,7 @@ const Client: FC<{
   url: string;
   logo: any;
 }> = (({ name, url, logo }) => (
-  <Link href={url} key={name}>
+  <Link href={url} key={name} label={name}>
     <Image
       layout="fixed"
       height={21}

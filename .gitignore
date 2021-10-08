@@ -39,3 +39,4 @@ public/*.js
 public/*.map
 public/sitemap.xml
 public/robots.txt
+tsconfig.tsbuildinfo

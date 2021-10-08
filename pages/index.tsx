@@ -296,9 +296,9 @@ const Home: NextPage<any> = () => {
           <div className={styles.photo}>
             <Image src={Photo} width={48} height={48} alt="A photo of me" priority quality={100} />
           </div>
-          
+
           <h1>Hi, I’m Hayden Bleasel. I’m currently Chief Design Officer at <Client {...clients.corellium} /> where I help shape the direction of our brand and product, blurring the line between real and virtual.</h1>
-          
+
           <div className={styles.bio}>
             <p>I’m an Australian he/him living in Sydney. I enjoy turning complex problems into meaningful solutions through design and code. I focus on simplicity, thoughtfulness, accessibility and a learning-based approach to my work.</p>
             <p>I’ve had the privilege of working with many fantastic companies including <Client {...clients.google} />, <Client {...clients.palantir} />, <Client {...clients.nike} />, <Client {...clients.toyota} />, <Client {...clients.natgeo} />, <Client {...clients.timberland} />, <Client {...clients.canva} />, <Client {...clients.westfield} /> and <Client {...clients.ausethical} />.</p>
@@ -308,7 +308,7 @@ const Home: NextPage<any> = () => {
             <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees — Business and Information Technology. I also ocassionally take on random courses such as HarvardX’s CS50 for fun.</p>
             <p>If you want to read more about my work, check out my <Link href={social.linkedin.url}>LinkedIn</Link>. If you want to chat, DM me on <Link href={social.twitter.url}>Twitter</Link>! Or if you want to stay up to date, join my mailing list below:</p>
           </div>
-          
+
           <form className={`${styles.form} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
             <input className={styles.input}
               name="email"

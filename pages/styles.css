@@ -1,31 +1,31 @@
 :root {
   --black: #101828;
-  --white: #FFFFFF;
-  --divider: #D0D5DD;
-  --background: #F5F5F9;
-  --green: #12B76A;
-  --red: #F04438;
+  --white: #ffffff;
+  --divider: #d0d5dd;
+  --background: #f5f5f9;
+  --green: #12b76a;
+  --red: #f04438;
 }
 
-::selection {
-  background: #FFCBCB; /* WebKit/Blink Browsers */
-}
-
+::selection,
 ::-moz-selection {
-  background: #FFCBCB; /* Gecko Browsers */
+  background: #ffcbcb;
 }
 
 html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   color: var(--black);
   background: var(--background);
   text-rendering: geometricPrecision;

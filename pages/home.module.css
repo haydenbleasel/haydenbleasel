@@ -64,8 +64,9 @@
   text-rendering: inherit;
 }
 
-.input:focus, .input:active {
-  border-color: #98A2B3;
+.input:focus,
+.input:active {
+  border-color: #98a2b3;
 }
 
 .button {
