@@ -30,6 +30,7 @@ import InventiaLogo from '../public/images/logos/inventia.svg';
 import LightswapLogo from '../public/images/logos/lightswap.svg';
 import SpaceshipLogo from '../public/images/logos/spaceship.svg';
 import ESLintLogo from '../public/images/logos/eslint.svg';
+import AirwallexLogo from '../public/images/logos/airwallex.svg';
 import BokehLogo from '../public/images/logos/bokeh.svg';
 import NeutralLogo from '../public/images/logos/neutral.svg';
 import PresumiLogo from '../public/images/logos/presumi.svg';
@@ -138,6 +139,11 @@ const clients = {
     name: 'Spaceship',
     url: 'https://jellypepper.com/work/spaceship',
     logo: SpaceshipLogo,
+  },
+  airwallex: {
+    name: 'Airwallex',
+    url: 'https://www.airwallex.com/au',
+    logo: AirwallexLogo,
   },
   eslint: {
     name: 'ESLint',
@@ -296,7 +302,7 @@ const Home: NextPage<any> = () => {
           <div className={styles.bio}>
             <p>I’m an Australian he/him living in Sydney. I enjoy turning complex problems into meaningful solutions through design and code. I focus on simplicity, thoughtfulness, accessibility and a learning-based approach to my work.</p>
             <p>I’ve had the privilege of working with many fantastic companies including <Client {...clients.google} />, <Client {...clients.palantir} />, <Client {...clients.nike} />, <Client {...clients.toyota} />, <Client {...clients.natgeo} />, <Client {...clients.timberland} />, <Client {...clients.canva} />, <Client {...clients.westfield} /> and <Client {...clients.ausethical} />.</p>
-            <p>Previously I ran an agency called <Client {...clients.jellypepper} /> where I worked with incredible startups and projects, including <Client {...clients.clipchamp} />, <Client {...clients.baraja} />, <Client {...clients.brighte} />, <Client {...clients.spaceship} />, <Client {...clients.spacemachines} />, <Client {...clients.inventia} />, <Client {...clients.lightswap} /> and <Client {...clients.eslint} />.</p>
+            <p>Previously I ran an agency called <Client {...clients.jellypepper} /> where I worked with incredible startups and projects, including <Client {...clients.clipchamp} />, <Client {...clients.baraja} />, <Client {...clients.brighte} />, <Client {...clients.spaceship} />, <Client {...clients.spacemachines} />, <Client {...clients.inventia} />, <Client {...clients.lightswap} />, <Client {...clients.airwallex} /> and <Client {...clients.eslint} />.</p>
             <p>After hours, I’m the design half of <Client {...clients.bokeh} /> — a new type of portfolio for photographers designed to showcase a meaningful body of work by going beyond likes, hashtags and scrolling.</p>
             <p>After hours, I’m working on <Client {...clients.neutral} /> — an app which so far has helped plant 1981 trees and offset 247.63 tonnes of CO₂e through 33 global reforestation programs. I also made <Client {...clients.presumi} /> — a resume analytics platform that SEEK used in Hong Kong to process 100K+ job applications and analyse 1M+ data points.</p>
             <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees — Business and Information Technology. I also ocassionally take on random courses such as HarvardX’s CS50 for fun.</p>

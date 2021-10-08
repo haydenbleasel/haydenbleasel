@@ -11,6 +11,7 @@
 .client > div {
   filter: var(--image-filter);
   user-select: none;
+  transform: translateY(2px);
 }
 
 .name {
