@@ -1,0 +1,77 @@
+[
+  {
+    "source": "/about",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/work",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/work/:slug",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/projects",
+    "destination": "/",
+    "permanent": true
+  },
+  {
+    "source": "/contact",
+    "destination": "https://twitter.com/haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/events",
+    "destination": "https://www.linkedin.com/in/haydenbleasel/",
+    "permanent": true
+  },
+  {
+    "source": "/blog",
+    "destination": "https://medium.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/blog/:slug",
+    "destination": "https://medium.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/thoughts",
+    "destination": "https://medium.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/thoughts/:slug",
+    "destination": "https://medium.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/journal",
+    "destination": "https://medium.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/journal/:slug",
+    "destination": "https://medium.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/case-studies",
+    "destination": "https://haydenbleasel.notion.site",
+    "permanent": false
+  },
+  {
+    "source": "/case-studies/:slug",
+    "destination": "https://haydenbleasel.notion.site",
+    "permanent": false
+  },
+  {
+    "source": "/playlists",
+    "destination": "https://open.spotify.com/user/haydenbleasel",
+    "permanent": false
+  }
+]

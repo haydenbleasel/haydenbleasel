@@ -1,12 +1,12 @@
+import type { FC } from "react";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { load, trackPageview } from "fathom-client";
 import { useRouter } from "next/router";
-import "./variables.css";
 import "./styles.css";
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
@@ -38,43 +38,14 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="msapplication-TileColor" content="#FFFFFF" />
+        <meta name="msapplication-TileColor" content="#F5F5F9" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <meta name="theme-color" content="#FFFFFF" />
+        <meta name="theme-color" content="#F5F5F9" />
         <link rel="manifest" href="/manifest.json" />
 
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1D1D1D" />
-
-        <link
-          rel="preload"
-          href="/fonts/lausanne/TWKLausanne-300.woff"
-          as="font"
-          type="font/woff"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/lausanne/TWKLausanne-300.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/gtsuper/GT-Super-Display-Light-Italic.woff"
-          as="font"
-          type="font/woff"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/gtsuper/GT-Super-Display-Light-Italic.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#F5F5F9" />
       </Head>
       <Component {...pageProps} />
     </>

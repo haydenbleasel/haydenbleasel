@@ -1,32 +1,29 @@
-.clientWrapper {
+.wrapper {
   display: inline-block;
-  
-  @media (--mobile) {
-    margin: -0.6rem;
-  }
 }
 
 .client {
-  display: inline-flex;
   align-items: baseline;
   text-decoration: none;
-
-  & > div {
-    width: var(--type-scale-3) !important;
-    height: var(--type-scale-3) !important;
-    filter: var(--image-filter);
-
-    @media (--mobile) {
-      width: var(--type-scale-2) !important;
-      height: var(--type-scale-2) !important;
-    }
-  }
-
-  @media (--mobile) {
-    padding: 0.6rem;
-  }
+  color: inherit;
 }
 
-.clientName {
+.client > div {
+  filter: var(--image-filter);
+  user-select: none;
+  transform: translateY(2px);
+}
+
+.name {
   text-decoration: underline;
+  margin-left: 0.25rem;
+}
+
+@media (--mobile) {
+  .wrapper {
+    margin: -0.6rem;
+  }
+  .client {
+    padding: 0.6rem;
+  }
 }

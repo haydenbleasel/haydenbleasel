@@ -35,7 +35,8 @@ yarn-error.log*
 
 # uploaded files
 upload_*
-public/workbox-*.js
-public/sw.js
+public/*.js
+public/*.map
 public/sitemap.xml
 public/robots.txt
+tsconfig.tsbuildinfo

@@ -1,58 +1,19 @@
-@font-face {
-  font-family: "haydenbleasel-lausanne";
-  src: url("/fonts/lausanne/TWKLausanne-300.woff2") format("woff2"),
-    url("/fonts/lausanne/TWKLausanne-300.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
+:root {
+  --black: #101828;
+  --white: #ffffff;
+  --divider: #d0d5dd;
+  --background: #f5f5f9;
+  --green: #12b76a;
+  --red: #f04438;
 }
 
-@font-face {
-  font-family: "haydenbleasel-gtsuper";
-  src: url("/fonts/gtsuper/GT-Super-Display-Light-Italic.woff2") format("woff2"),
-    url("/fonts/gtsuper/GT-Super-Display-Light-Italic.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
+::selection,
+::-moz-selection {
+  background: #ffcbcb;
 }
 
 html {
-  font-family: var(--type-family-sans);
-  font-weight: 300;
-  font-size: var(--type-scale-1);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--black);
-  background: var(--white);
-  &.light {
-    --white: var(--light-white);
-    --black: var(--light-black);
-    --grey: var(--light-grey);
-    --divider: var(--light-divider);
-    --ghost: var(--light-ghost);
-    --red: var(--light-red);
-    --green: var(--light-green);
-    --blue: var(--light-blue);
-    --image-filter: var(--light-image-filter);
-    --skeleton: var(--light-skeleton);
-  }
-  &.dark {
-    --white: var(--dark-white);
-    --black: var(--dark-black);
-    --grey: var(--dark-grey);
-    --divider: var(--dark-divider);
-    --ghost: var(--dark-ghost);
-    --red: var(--dark-red);
-    --green: var(--dark-green);
-    --blue: var(--dark-blue);
-    --image-filter: var(--dark-image-filter);
-    --skeleton: var(--dark-skeleton);
-  }
 }
 
 *,
@@ -63,153 +24,34 @@ body {
 
 body {
   margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  color: var(--black);
+  background: var(--background);
+  text-rendering: geometricPrecision;
+}
+
+h1 {
+  font-size: 1.5rem;
+  line-height: 1.33;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+p {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
 }
 
 a {
   color: inherit;
-  transition: opacity 0.2s;
-
-  &:hover, &:focus {
-    opacity: 0.8;
-  }
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.titleSans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-6);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.titleSans em, .titleSerif {
-  font-family: var(--type-family-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: var(--type-scale-6);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-}
-
-.h1Sans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-5);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.h1Sans em, .h1Serif {
-  font-family: var(--type-family-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: var(--type-scale-5);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-}
-
-.h2Sans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-4);
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-.h2Sans em, .h2Serif {
-  font-family: var(--type-family-serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: var(--type-scale-4);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-}
-
-.h3Sans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-3);
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-}
-
-.h3Sans em, .h3Serif {
-  font-family: var(--type-family-serif);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-3);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.h4Sans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-2);
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-.h4Sans em, .h4Serif {
-  font-family: var(--type-family-serif);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-2);
-  line-height: 1;
-  letter-spacing: -0.01em;
-}
-
-.paragraphSans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-1);
-  line-height: 1.4;
-  letter-spacing: -0.005em;
-}
-
-.paragraphSans em, .paragraphSerif {
-  font-family: var(--type-family-serif);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-1);
-  line-height: 1.2;
-  letter-spacing: -0.005em;
-}
-
-.smallSans {
-  font-family: var(--type-family-sans);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-0);
-  line-height: 1.5;
-
-  @media (--mobile) {
-    font-size: var(--type-scale-1);
-  }
-}
-
-.smallSerif {
-  font-family: var(--type-family-serif);
-  font-style: normal;
-  font-weight: 300;
-  font-size: var(--type-scale-0);
-  line-height: 1.3;
-
-  @media (--mobile) {
-    font-size: var(--type-scale-1);
-  }
-}
-
-.underline {
-  text-decoration: underline;
-}
-
-.grey {
-  color: var(--grey);
+a:hover {
+  opacity: 0.8;
+  transform: translateY(-0.25rem);
 }

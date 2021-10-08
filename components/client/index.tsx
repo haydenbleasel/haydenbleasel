@@ -1,35 +1,28 @@
-import Image from "next/image";
-import Link from "../link";
-import styles from "./client.module.css";
+import type { FC } from 'react';
+import Image from 'next/image';
+import Link from '../link';
+import styles from './client.module.css';
 
-type IClient = {
-  element: {
-    data: PrismicLink;
-  };
-  content: string;
-};
-
-const Client = ({ element, content }: IClient) => {
-  const filename = content.replace(/ /g, "").replace(/\//g, "").toLowerCase();
-  const logo = require(`./logos/${filename}.svg`);
-
-  return (
-    <div className={styles.clientWrapper}>
-      <Link href={element.data} className={styles.client}>
-        <Image
-          layout="fixed"
-          height={32}
-          width={32}
-          alt={content}
-          src={logo}
-          quality={100}
-          objectFit="contain"
-          priority
-        />&nbsp;
-        <span className={styles.clientName}>{content}</span>
-      </Link>
-    </div>
-  );
-}
+const Client: FC<{
+  name: string;
+  url: string;
+  logo: any;
+}> = (({ name, url, logo }) => (
+  <div className={styles.wrapper}>
+    <Link href={url} className={styles.client}>
+      <Image
+        layout="fixed"
+        height={16}
+        width={16}
+        alt={name}
+        src={logo}
+        quality={100}
+        objectFit="contain"
+        priority
+      />
+      <span className={styles.name}>{name}</span>
+    </Link>
+  </div>
+));
 
 export default Client;
