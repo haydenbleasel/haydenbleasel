@@ -294,7 +294,7 @@ const Home: NextPage<any> = () => {
         <section className={styles.content}>
 
           <div className={styles.photo}>
-            <Image src={Photo} width={48} height={48} alt="A photo of me" priority quality={100} />
+            <Image src={Photo} width={48} height={48} alt="Photo of Hayden Bleasel" priority quality={100} />
           </div>
 
           <h1>Hi, I’m Hayden Bleasel. I’m currently Chief Design Officer at <Client {...clients.corellium} /> where I help shape the direction of our brand and product, blurring the line between real and virtual.</h1>
