@@ -13,6 +13,7 @@
   justify-content: space-between;
   z-index: -1;
   user-select: none;
+  min-height: 50vw;
 }
 
 .social {
