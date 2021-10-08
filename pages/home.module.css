@@ -112,7 +112,7 @@
   .social {
     position: static;
     max-width: 29.125rem;
-    margin: 0 auto;
+    margin: 0 auto 4rem;
     padding: 0 1.5rem;
     display: flex;
     flex-wrap: wrap;
