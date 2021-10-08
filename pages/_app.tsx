@@ -1,3 +1,4 @@
+import type { FC } from "react";
 import { useEffect } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -5,7 +6,7 @@ import { load, trackPageview } from "fathom-client";
 import { useRouter } from "next/router";
 import "./styles.css";
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+const App: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
