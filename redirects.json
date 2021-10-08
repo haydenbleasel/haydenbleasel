@@ -10,7 +10,7 @@
     "permanent": true
   },
   {
-    "source": "/work/*",
+    "source": "/work/:slug",
     "destination": "/",
     "permanent": true
   },
@@ -35,7 +35,7 @@
     "permanent": true
   },
   {
-    "source": "/blog/*",
+    "source": "/blog/:slug",
     "destination": "https://medium.com/@haydenbleasel",
     "permanent": true
   },
@@ -45,7 +45,7 @@
     "permanent": true
   },
   {
-    "source": "/thoughts/*",
+    "source": "/thoughts/:slug",
     "destination": "https://medium.com/@haydenbleasel",
     "permanent": true
   },
@@ -55,7 +55,7 @@
     "permanent": true
   },
   {
-    "source": "/journal/*",
+    "source": "/journal/:slug",
     "destination": "https://medium.com/@haydenbleasel",
     "permanent": true
   },
@@ -65,7 +65,7 @@
     "permanent": false
   },
   {
-    "source": "/case-studies/*",
+    "source": "/case-studies/:slug",
     "destination": "https://haydenbleasel.notion.site",
     "permanent": false
   },
