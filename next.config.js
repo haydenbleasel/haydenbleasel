@@ -5,6 +5,7 @@ const { withSentryConfig } = require("@sentry/nextjs");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const redirects = require("./redirects.json");
 
 const config = {
   reactStrictMode: true,
@@ -28,68 +29,7 @@ const config = {
     ];
   },
   async redirects() {
-    return [
-      {
-        source: "/events",
-        destination: "/about#events",
-        permanent: true,
-      },
-      {
-        source: "/blog/how-to-growth-hack-your-resume",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/blog",
-        destination: "/journal",
-        permanent: true,
-      },
-      {
-        source: "/thoughts",
-        destination: "/journal",
-        permanent: true,
-      },
-      {
-        source: "/work/presumi",
-        destination: "https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c",
-        permanent: true,
-      },
-      {
-        source: "/presumi",
-        destination: "https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c",
-        permanent: true,
-      },
-      {
-        source: "/work/gunmetal",
-        destination: "/work#gunmetal",
-        permanent: true,
-      },
-      {
-        source: "/work/sumry",
-        destination: "/work#sumry",
-        permanent: true,
-      },
-      {
-        source: "/work/palantir",
-        destination: "/work#palantir",
-        permanent: true,
-      },
-      {
-        source: "/work/spaceship",
-        destination: "/work#spaceship",
-        permanent: true,
-      },
-      {
-        source: "/work/jellypepper",
-        destination: "/work#jellypepper",
-        permanent: true,
-      },
-      {
-        source: "/case-studies",
-        destination: "/",
-        permanent: false,
-      },
-    ];
+    return redirects;
   },
 };
 
