@@ -10,6 +10,11 @@
     "permanent": true
   },
   {
+    "source": "/work/presumi",
+    "destination": "https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c",
+    "permanent": true
+  },
+  {
     "source": "/work/:slug",
     "destination": "/",
     "permanent": true
