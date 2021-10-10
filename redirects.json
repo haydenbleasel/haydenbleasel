@@ -62,21 +62,31 @@
   {
     "source": "/case-studies",
     "destination": "https://haydenbleasel.notion.site",
-    "permanent": false
+    "permanent": true
   },
   {
     "source": "/case-studies/:slug",
     "destination": "https://haydenbleasel.notion.site",
-    "permanent": false
+    "permanent": true
   },
   {
     "source": "/playlists",
     "destination": "https://open.spotify.com/user/haydenbleasel",
-    "permanent": false
+    "permanent": true
   },
   {
     "source": "/presumi",
     "destination": "https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c",
-    "permanent": false
+    "permanent": true
+  },
+  {
+    "source": "/ph",
+    "destination": "https://www.producthunt.com/@haydenbleasel",
+    "permanent": true
+  },
+  {
+    "source": "/awards",
+    "destination": "/",
+    "permanent": true
   }
 ]
