@@ -73,5 +73,10 @@
     "source": "/playlists",
     "destination": "https://open.spotify.com/user/haydenbleasel",
     "permanent": false
+  },
+  {
+    "source": "/presumi",
+    "destination": "https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c",
+    "permanent": false
   }
 ]
