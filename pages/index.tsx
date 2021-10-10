@@ -52,7 +52,7 @@ import Photo from '../public/images/photo.jpg';
 const clients = {
   corellium: {
     name: 'Corellium',
-    url: 'https://corellium.com/',
+    url: 'https://www.corellium.com/',
     logo: CorelliumLogo,
   },
   google: {
@@ -62,37 +62,37 @@ const clients = {
   },
   palantir: {
     name: 'Palantir',
-    url: 'https://palantir.com/',
+    url: 'https://www.palantir.com/',
     logo: PalantirLogo,
   },
   nike: {
     name: 'Nike',
-    url: 'https://nike.com/',
+    url: 'https://www.nike.com/au/',
     logo: NikeLogo,
   },
   toyota: {
     name: 'Toyota',
-    url: 'https://toyota.com/',
+    url: 'https://www.toyota.com.au/',
     logo: ToyotaLogo,
   },
   natgeo: {
     name: 'National Geographic',
-    url: 'https://nationalgeographic.com/',
+    url: 'https://www.nationalgeographic.com/',
     logo: NatgeoLogo,
   },
   timberland: {
     name: 'Timberland',
-    url: 'https://timberland.com/',
+    url: 'https://www.timberland.com.au/',
     logo: TimberlandLogo,
   },
   canva: {
     name: 'Canva',
-    url: 'https://canva.com/',
+    url: 'https://www.canva.com/en_gb/',
     logo: CanvaLogo,
   },
   westfield: {
     name: 'Westfield',
-    url: 'https://westfield.com/',
+    url: 'https://www.westfield.com/',
     logo: WestfieldLogo,
   },
   ausethical: {
@@ -137,7 +137,7 @@ const clients = {
   },
   spaceship: {
     name: 'Spaceship',
-    url: 'https://spaceship.com.au/',
+    url: 'https://www.spaceship.com.au/',
     logo: SpaceshipLogo,
   },
   airwallex: {
@@ -162,7 +162,7 @@ const clients = {
   },
   presumi: {
     name: 'Presumi',
-    url: 'https://presumi.com/',
+    url: 'https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c',
     logo: PresumiLogo,
   },
 };
@@ -215,7 +215,7 @@ const social = {
   },
   medium: {
     name: 'Medium',
-    url: "https://medium.com/@haydenbleasel",
+    url: "https://haydenbleasel.medium.com/",
     logo: MediumLogo,
   },
 };
