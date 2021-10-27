@@ -9,17 +9,10 @@ const redirects = require('./redirects.json');
 
 const config = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    domains: [
-      'i.scdn.co',
-      'cdn-images-1.medium.com',
-      'dev.to',
-      'haydenbleasel.cdn.prismic.io',
-      'images.prismic.io',
-      'prismic-io.s3.amazonaws.com',
-    ],
   },
   async headers() {
     return [

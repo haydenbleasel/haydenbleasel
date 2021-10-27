@@ -220,7 +220,7 @@ const social = {
   },
 };
 
-const Home: NextPage<any> = () => {
+const Home: NextPage<{}> = () => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
