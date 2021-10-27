@@ -9,10 +9,8 @@ const redirects = require('./redirects.json');
 
 const config = {
   reactStrictMode: true,
-  experimental: {
-    swcLoader: true,
-  },
   images: {
+    formats: ['image/avif', 'image/webp'],
     deviceSizes: [480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     domains: [
       'i.scdn.co',
