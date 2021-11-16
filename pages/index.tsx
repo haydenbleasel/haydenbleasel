@@ -294,7 +294,7 @@ const Home: NextPage<{}> = () => {
         <section className={styles.content}>
 
           <div className={styles.photo}>
-            <Image src={Photo} width={48} height={48} alt="Photo of Hayden Bleasel" priority quality={100} />
+            <Image src={Photo} width={48} height={48} alt="" priority quality={100} />
           </div>
 
           <h1>Hi, I’m Hayden Bleasel. I lead the Product and Design teams at <Client {...clients.corellium} />, shaping the direction of our digital experiences and blurring the line between real and virtual.</h1>
@@ -323,7 +323,7 @@ const Home: NextPage<{}> = () => {
           <p>✌️</p>
         </section>
         <section className={styles.aside}>
-          <Image src={Spline} layout="fill" alt="A spline" objectFit="contain" objectPosition="top right" quality={100} placeholder="empty" />
+          <Image src={Spline} layout="fill" alt="" objectFit="contain" objectPosition="top right" quality={100} placeholder="empty" />
         </section>
         <div className={styles.social}>
           {Object.values(social).map(Social)}

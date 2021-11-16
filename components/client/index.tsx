@@ -14,7 +14,7 @@ const Client: FC<{
         layout="fixed"
         height={16}
         width={16}
-        alt={name}
+        alt=""
         src={logo}
         quality={100}
         objectFit="contain"
