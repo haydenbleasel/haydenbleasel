@@ -8,7 +8,7 @@ const Client: FC<{
   url: string;
   logo: string;
 }> = (({ name, url, logo }) => (
-  <div className={styles.wrapper}>
+  <span className={styles.wrapper}>
     <Link href={url} className={styles.client}>
       <Image
         layout="fixed"
@@ -22,7 +22,7 @@ const Client: FC<{
       />
       <span className={styles.name}>{name}</span>
     </Link>
-  </div>
+  </span>
 ));
 
 export default Client;
