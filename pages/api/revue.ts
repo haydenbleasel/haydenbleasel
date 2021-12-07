@@ -1,5 +1,4 @@
 import type { NextApiHandler } from 'next';
-import { withSentry } from '@sentry/nextjs';
 
 const handler: NextApiHandler<APIResponse> = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -35,4 +34,4 @@ const handler: NextApiHandler<APIResponse> = async (req, res) => {
   }
 };
 
-export default withSentry(handler);
+export default handler;

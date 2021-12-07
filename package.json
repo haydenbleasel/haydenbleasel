@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@next/bundle-analyzer": "^12.0.3",
-    "@sentry/nextjs": "^6.14.1",
     "fathom-client": "^3.2.0",
     "next": "12.0.3",
     "next-compose-plugins": "^2.2.1",
