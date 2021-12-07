@@ -1,6 +1,6 @@
 :root {
   --black: #101828;
-  --white: #ffffff;
+  --white: #fff;
   --divider: #d0d5dd;
   --background: #f5f5f9;
   --green: #12b76a;
@@ -11,7 +11,7 @@
   background: #ffcbcb;
 }
 
-::-moz-selection {
+::selection {
   background: #ffcbcb;
 }
 
@@ -20,8 +20,8 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 

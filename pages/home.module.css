@@ -73,7 +73,7 @@
 .button {
   font-family: inherit;
   appearance: none;
-  -webkit-appearance: none;
+  appearance: none;
   background: transparent;
   border: none;
   font-size: 1.125rem;
@@ -106,9 +106,11 @@
     margin: 4rem auto;
     padding: 0 1.5rem;
   }
+
   .aside {
     opacity: 0.3;
   }
+
   .social {
     position: static;
     max-width: 29.125rem;
