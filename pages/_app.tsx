@@ -11,7 +11,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 
   useEffect(() => {
     load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID!, {
-      includedDomains: [process.env.NEXT_PUBLIC_SITE_URL!.replace("https://", "")],
+      includedDomains: ['haydenbleasel.com'],
     });
 
     function onRouteChangeComplete() {

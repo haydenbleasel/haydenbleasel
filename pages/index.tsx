@@ -49,6 +49,8 @@ import TwitterLogo from '../public/images/social/twitter.svg';
 import Spline from '../public/images/spline.png';
 import Photo from '../public/images/photo.jpg';
 
+const siteUrl = 'https://haydenbleasel.com/';
+
 const clients = {
   corellium: {
     name: 'Corellium',
@@ -255,13 +257,13 @@ const Home: NextPage<{}> = () => {
       <NextSeo
         title="Hayden Bleasel — Chief Product Officer at Corellium"
         description="Hi, I’m Hayden Bleasel. I lead the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual."
-        canonical={process.env.NEXT_PUBLIC_SITE_URL!}
+        canonical={siteUrl}
         openGraph={{
-          url: process.env.NEXT_PUBLIC_SITE_URL!,
+          url: siteUrl,
           title: 'Hayden Bleasel',
           description: 'Hi, I’m Hayden Bleasel. I lead the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual.',
           images: [{
-            url: `${process.env.NEXT_PUBLIC_SITE_URL!}/images/cover.jpg`,
+            url: `${siteUrl}/images/cover.jpg`,
             width: 1200,
             height: 630,
             alt: 'A spline',
@@ -286,7 +288,7 @@ const Home: NextPage<{}> = () => {
       <SocialProfileJsonLd
         type="Person"
         name="Hayden Bleasel"
-        url={process.env.NEXT_PUBLIC_SITE_URL!}
+        url={siteUrl}
         sameAs={Object.values(social).map(({ url }) => url)}
       />
 

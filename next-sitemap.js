@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+  siteUrl: 'https://haydenbleasel.com/',
   generateRobotsTxt: true,
 };
