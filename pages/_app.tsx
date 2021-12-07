@@ -10,13 +10,11 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
-    load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID!, {
+    load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID ?? '', {
       includedDomains: ['haydenbleasel.com'],
     });
 
-    function onRouteChangeComplete() {
-      trackPageview();
-    }
+    const onRouteChangeComplete = () => trackPageview();
 
     router.events.on("routeChangeComplete", onRouteChangeComplete);
 

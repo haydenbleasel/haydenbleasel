@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, FC } from "react";
 import NextLink from "next/link";
 
 type LinkProps = {
@@ -6,7 +6,7 @@ type LinkProps = {
   label?: string;
 } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>;
 
-const Link = ({ children, href, ...props }: LinkProps) => href.startsWith("/") ? (
+const Link: FC<LinkProps> = ({ children, href, ...props }) => href.startsWith("/") ? (
   <NextLink href={href}>
     <a {...props}>{children}</a>
   </NextLink>

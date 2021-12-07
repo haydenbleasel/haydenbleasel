@@ -6,7 +6,7 @@ import styles from './client.module.css';
 const Client: FC<{
   name: string;
   url: string;
-  logo: any;
+  logo: string;
 }> = (({ name, url, logo }) => (
   <div className={styles.wrapper}>
     <Link href={url} className={styles.client}>

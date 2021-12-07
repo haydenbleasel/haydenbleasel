@@ -1,10 +1,26 @@
 import type { NextApiHandler } from 'next';
 
-const handler: NextApiHandler<APIResponse> = async (req, res) => {
+// eslint-disable-next-line camelcase, @typescript-eslint/naming-convention
+const double_opt_in = false;
+
+const handler: NextApiHandler<{
+  error?: string;
+}> = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
   if (req.method !== 'POST') {
     return res.status(404).send({ error: 'Begone.' });
+  }
+
+  const { body } = req as { body: string };
+  const { email } = JSON.parse(body) as { email: string };
+
+  if (!email) {
+    return res.status(400).send({ error: 'No email provided.' });
+  }
+
+  if (!process.env.NEXT_PUBLIC_REVUE_API_KEY) {
+    return res.status(500).send({ error: 'No API key.' });
   }
 
   try {
@@ -12,25 +28,24 @@ const handler: NextApiHandler<APIResponse> = async (req, res) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Token ${
-          process.env.NEXT_PUBLIC_REVUE_API_KEY as string
-        }`,
+        Authorization: `Token ${process.env.NEXT_PUBLIC_REVUE_API_KEY}`,
       },
-      body: JSON.stringify({
-        email: JSON.parse(req.body).email,
-        double_opt_in: false,
-      }),
+      // eslint-disable-next-line camelcase, @typescript-eslint/naming-convention
+      body: JSON.stringify({ email, double_opt_in }),
     });
 
-    const data = await response.json();
+    const data = (await response.json()) as {
+      error?: { message: string; email?: string };
+    };
 
     if (data.error) {
       throw new Error(data.error.email);
     }
 
-    res.status(200).json({});
-  } catch (error: any) {
-    res.status(500).json({ error: error?.message });
+    return res.status(200).json({});
+  } catch (error: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    return res.status(500).json({ error: "Couldn't subscribe." });
   }
 };
 

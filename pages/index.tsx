@@ -4,10 +4,9 @@ import { NextSeo, SocialProfileJsonLd } from "next-seo";
 import { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { trackGoal } from "fathom-client";
-import Link from '../components/link';
 
-import styles from './home.module.css';
 import Image from 'next/image';
+import Link from '../components/link';
 import Client from '../components/client';
 import Social from '../components/social';
 
@@ -48,6 +47,7 @@ import TwitterLogo from '../public/images/social/twitter.svg';
 
 import Spline from '../public/images/spline.png';
 import Photo from '../public/images/photo.jpg';
+import styles from './home.module.css';
 
 const siteUrl = 'https://haydenbleasel.com/';
 
@@ -55,117 +55,117 @@ const clients = {
   corellium: {
     name: 'Corellium',
     url: 'https://www.corellium.com/',
-    logo: CorelliumLogo,
+    logo: CorelliumLogo as string,
   },
   google: {
     name: 'Google',
     url: 'https://google.com/',
-    logo: GoogleLogo,
+    logo: GoogleLogo as string,
   },
   palantir: {
     name: 'Palantir',
     url: 'https://www.palantir.com/',
-    logo: PalantirLogo,
+    logo: PalantirLogo as string,
   },
   nike: {
     name: 'Nike',
     url: 'https://www.nike.com/au/',
-    logo: NikeLogo,
+    logo: NikeLogo as string,
   },
   toyota: {
     name: 'Toyota',
     url: 'https://www.toyota.com.au/',
-    logo: ToyotaLogo,
+    logo: ToyotaLogo as string,
   },
   natgeo: {
     name: 'National Geographic',
     url: 'https://www.nationalgeographic.com/',
-    logo: NatgeoLogo,
+    logo: NatgeoLogo as string,
   },
   timberland: {
     name: 'Timberland',
     url: 'https://www.timberland.com.au/',
-    logo: TimberlandLogo,
+    logo: TimberlandLogo as string,
   },
   canva: {
     name: 'Canva',
     url: 'https://www.canva.com/en_gb/',
-    logo: CanvaLogo,
+    logo: CanvaLogo as string,
   },
   westfield: {
     name: 'Westfield',
     url: 'https://www.westfield.com/',
-    logo: WestfieldLogo,
+    logo: WestfieldLogo as string,
   },
   ausethical: {
     name: 'Australian Ethical',
     url: 'https://www.australianethical.com.au/',
-    logo: AusethicalLogo,
+    logo: AusethicalLogo as string,
   },
   jellypepper: {
     name: 'Jellypepper',
     url: 'https://jellypepper.com/',
-    logo: JellypepperLogo,
+    logo: JellypepperLogo as string,
   },
   clipchamp: {
     name: 'Clipchamp',
     url: 'https://jellypepper.com/work/clipchamp',
-    logo: ClipchampLogo,
+    logo: ClipchampLogo as string,
   },
   baraja: {
     name: 'Baraja',
     url: 'https://jellypepper.com/work/baraja',
-    logo: BarajaLogo,
+    logo: BarajaLogo as string,
   },
   brighte: {
     name: 'Brighte',
     url: 'https://jellypepper.com/work/brighte',
-    logo: BrighteLogo,
+    logo: BrighteLogo as string,
   },
   spacemachines: {
     name: 'Space Machines Company',
     url: 'https://jellypepper.com/work/space-machines',
-    logo: SpacemachinesLogo,
+    logo: SpacemachinesLogo as string,
   },
   inventia: {
     name: 'Inventia Life Science',
     url: 'https://jellypepper.com/work/inventia',
-    logo: InventiaLogo,
+    logo: InventiaLogo as string,
   },
   lightswap: {
     name: 'Lightswap',
     url: 'https://jellypepper.com/work/lightswap',
-    logo: LightswapLogo,
+    logo: LightswapLogo as string,
   },
   spaceship: {
     name: 'Spaceship',
     url: 'https://www.spaceship.com.au/',
-    logo: SpaceshipLogo,
+    logo: SpaceshipLogo as string,
   },
   airwallex: {
     name: 'Airwallex',
     url: 'https://www.airwallex.com/au',
-    logo: AirwallexLogo,
+    logo: AirwallexLogo as string,
   },
   eslint: {
     name: 'ESLint',
     url: 'https://eslint.org/',
-    logo: ESLintLogo,
+    logo: ESLintLogo as string,
   },
   bokeh: {
     name: 'Bokeh',
     url: 'https://heybokeh.com/',
-    logo: BokehLogo,
+    logo: BokehLogo as string,
   },
   neutral: {
     name: 'Neutral',
     url: 'https://neutral.sh/',
-    logo: NeutralLogo,
+    logo: NeutralLogo as string,
   },
   presumi: {
     name: 'Presumi',
     url: 'https://haydenbleasel.medium.com/presumi-4d4a2ba0fc6c',
-    logo: PresumiLogo,
+    logo: PresumiLogo as string,
   },
 };
 
@@ -173,60 +173,60 @@ const social = {
   twitter: {
     name: 'Twitter',
     url: "https://twitter.com/haydenbleasel",
-    logo: TwitterLogo,
+    logo: TwitterLogo as string,
   },
   dribbble: {
     name: 'Dribbble',
     url: "https://dribbble.com/haydenbleasel",
-    logo: DribbbleLogo,
+    logo: DribbbleLogo as string,
   },
   instagram: {
     name: 'Instagram',
     url: "https://www.instagram.com/hayden.bleasel/",
-    logo: InstagramLogo,
+    logo: InstagramLogo as string,
   },
   github: {
     name: 'GitHub',
     url: "https://github.com/haydenbleasel/",
-    logo: GithubLogo,
+    logo: GithubLogo as string,
   },
   linkedin: {
     name: 'LinkedIn',
     url: "https://www.linkedin.com/in/haydenbleasel",
-    logo: LinkedinLogo,
+    logo: LinkedinLogo as string,
   },
   producthunt: {
     name: 'ProductHunt',
     url: "https://www.producthunt.com/@haydenbleasel",
-    logo: ProductHuntLogo,
+    logo: ProductHuntLogo as string,
   },
   spotify: {
     name: 'Spotify',
     url: "https://open.spotify.com/user/haydenbleasel",
-    logo: SpotifyLogo,
+    logo: SpotifyLogo as string,
   },
   devto: {
     name: 'Dev.to',
     url: "https://dev.to/haydenbleasel",
-    logo: DevtoLogo,
+    logo: DevtoLogo as string,
   },
   figma: {
     name: 'Figma',
     url: "https://www.figma.com/@haydenbleasel",
-    logo: FigmaLogo,
+    logo: FigmaLogo as string,
   },
   medium: {
     name: 'Medium',
     url: "https://haydenbleasel.medium.com/",
-    logo: MediumLogo,
+    logo: MediumLogo as string,
   },
 };
 
-const Home: NextPage<{}> = () => {
+const Home: NextPage = () => {
   const [email, setEmail] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
-  async function joinMailingList(event: FormEvent) {
+  const joinMailingList = async (event: FormEvent) => {
     event.preventDefault();
     setLoading(true);
 
@@ -236,7 +236,7 @@ const Home: NextPage<{}> = () => {
         body: JSON.stringify({ email }),
       });
 
-      const body = await response.json();
+      const body = await response.json() as { error?: string }
 
       if (body.error) {
         throw new Error(body.error);
@@ -244,9 +244,11 @@ const Home: NextPage<{}> = () => {
 
       toast.success('Thanks, choom! I\'ll let you know when I release something cool.');
       setEmail("");
-      trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL!, 0);
-    } catch (error: any) {
-      toast.error(error?.message || 'Sorry, something went wrong! Try again later, hopefully I\'ve fixed it by then.');
+      if (process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL) {
+        trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL, 0);
+      }
+    } catch (error) {
+      toast.error('Sorry, something went wrong! Try again later, hopefully I\'ve fixed it by then.');
     } finally {
       setLoading(false);
     }
@@ -269,6 +271,7 @@ const Home: NextPage<{}> = () => {
             alt: 'A spline',
             type: 'image/jpeg',
           }],
+          // eslint-disable-next-line camelcase, @typescript-eslint/naming-convention
           site_name: 'Hayden Bleasel',
           type: "profile",
           profile: {
@@ -319,7 +322,7 @@ const Home: NextPage<{}> = () => {
               value={email}
               onChange={({ target }) => setEmail(target.value)}
             />
-            <button disabled={!email} className={styles.button}>&rarr;</button>
+            <button type="submit" disabled={!email} className={styles.button}>&rarr;</button>
           </form>
 
           <p>✌️</p>

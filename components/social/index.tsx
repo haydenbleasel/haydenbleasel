@@ -5,7 +5,7 @@ import Link from '../link';
 const Client: FC<{
   name: string;
   url: string;
-  logo: any;
+  logo: string;
 }> = (({ name, url, logo }) => (
   <Link href={url} key={name} label={name}>
     <Image
