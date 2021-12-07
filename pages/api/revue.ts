@@ -44,7 +44,10 @@ const handler: NextApiHandler<{
 
     return res.status(200).json({});
   } catch (error: unknown) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    }
+
     return res.status(500).json({ error: "Couldn't subscribe." });
   }
 };

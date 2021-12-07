@@ -6,7 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const redirects = require('./redirects.json');
 
-const config = {
+const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
@@ -26,20 +26,16 @@ const config = {
   },
 };
 
+const pwaConfig = {
+  pwa: {
+    dest: 'public',
+    disable: process.env.NODE_ENV === 'development',
+    dynamicStartUrl: false,
+    mode: process.env.NODE_ENV,
+  },
+};
+
 module.exports = withPlugins(
-  [
-    [
-      withPWA,
-      {
-        pwa: {
-          dest: 'public',
-          disable: process.env.NODE_ENV === 'development',
-          dynamicStartUrl: false,
-          mode: process.env.NODE_ENV,
-        },
-      },
-    ],
-    [withBundleAnalyzer],
-  ],
-  config
+  [[withPWA, pwaConfig], withBundleAnalyzer],
+  nextConfig
 );
