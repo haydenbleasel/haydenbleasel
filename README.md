@@ -1,6 +1,12 @@
 # Hayden Bleasel
 
-My personal website, powered by Next.js with TypeScript and hosted on Vercel.
+Hi, I’m Hayden Bleasel. I design, code and grow things on the internet.
+
+I run the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual.
+
+I’m an Australian he/him living in Sydney. I enjoy turning complex problems into meaningful solutions through design and code. I focus on simplicity, thoughtfulness, accessibility and a learning-based approach to my work.
+
+This repo is used for my personal website, powered by Next.js with TypeScript and hosted on Vercel.
 
 ## Prerequisites
 
