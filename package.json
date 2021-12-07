@@ -9,6 +9,7 @@
     "start": "next start",
     "type-check": "tsc",
     "lint": "next lint",
+    "stylelint": "stylelint '**/*.css'",
     "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
@@ -48,6 +49,7 @@
   "license": "UNLICENSED",
   "pre-commit": [
     "lint",
-    "type-check"
+    "type-check",
+    "stylelint"
   ]
 }

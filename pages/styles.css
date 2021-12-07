@@ -11,10 +11,6 @@
   background: #ffcbcb;
 }
 
-::selection {
-  background: #ffcbcb;
-}
-
 html {
   box-sizing: border-box;
 }
