@@ -18,6 +18,8 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
 
     router.events.on("routeChangeComplete", onRouteChangeComplete);
 
+    onRouteChangeComplete();
+
     return () => {
       router.events.off("routeChangeComplete", onRouteChangeComplete);
     };
