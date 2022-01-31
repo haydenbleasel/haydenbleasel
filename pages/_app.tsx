@@ -12,6 +12,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
   useEffect(() => {
     load(process.env.NEXT_PUBLIC_FATHOM_SITE_ID ?? '', {
       includedDomains: ['haydenbleasel.com'],
+      url: 'https://delta.haydenbleasel.com/script.js',
     });
 
     const onRouteChangeComplete = () => trackPageview();
