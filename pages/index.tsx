@@ -159,7 +159,7 @@ const clients = {
   },
   neutral: {
     name: 'Neutral',
-    url: 'https://neutral.sh/',
+    url: 'https://tryneutral.com/',
     logo: NeutralLogo as string,
   },
   presumi: {
