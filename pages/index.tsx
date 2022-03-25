@@ -1,9 +1,6 @@
 import type { NextPage } from 'next';
-import type { FormEvent } from 'react';
 import { NextSeo, SocialProfileJsonLd } from "next-seo";
-import { useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import { trackGoal } from "fathom-client";
+import { Toaster } from 'react-hot-toast';
 
 import Image from 'next/image';
 import Link from '../components/link';
@@ -222,130 +219,97 @@ const social = {
   },
 };
 
-const Home: NextPage = () => {
-  const [email, setEmail] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+const Home: NextPage = () => (
+  <>
+    <NextSeo
+      title="Hayden Bleasel — Chief Product Officer at Corellium"
+      description="Hi, I’m Hayden Bleasel. I lead the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual."
+      canonical={siteUrl}
+      openGraph={{
+        url: siteUrl,
+        title: 'Hayden Bleasel',
+        description: 'Hi, I’m Hayden Bleasel. I lead the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual.',
+        images: [{
+          url: `${siteUrl}/images/cover.jpg`,
+          width: 1200,
+          height: 630,
+          alt: 'A spline',
+          type: 'image/jpeg',
+        }],
+        // eslint-disable-next-line camelcase, @typescript-eslint/naming-convention
+        site_name: 'Hayden Bleasel',
+        type: "profile",
+        profile: {
+          firstName: "Hayden",
+          lastName: "Bleasel",
+          username: "haydenbleasel",
+          gender: "male",
+        },
+      }}
+      twitter={{
+        handle: '@haydenbleasel',
+        site: '@haydenbleasel',
+        cardType: "summary_large_image",
+      }}
+    />
 
-  const joinMailingList = async (event: FormEvent) => {
-    event.preventDefault();
-    setLoading(true);
+    <SocialProfileJsonLd
+      type="Person"
+      name="Hayden Bleasel"
+      url={siteUrl}
+      sameAs={Object.values(social).map(({ url }) => url)}
+    />
 
-    try {
-      const response = await fetch("/api/revue", {
-        method: "post",
-        body: JSON.stringify({ email }),
-      });
+    <main className={styles.main}>
+      <section className={styles.content}>
 
-      const body = await response.json() as { error?: string }
-
-      if (body.error) {
-        throw new Error(body.error);
-      }
-
-      toast.success('Thanks, choom! I\'ll let you know when I release something cool.');
-      setEmail("");
-      if (process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL) {
-        trackGoal(process.env.NEXT_PUBLIC_FATHOM_NEWSLETTER_GOAL, 0);
-      }
-    } catch (error) {
-      toast.error('Sorry, something went wrong! Try again later, hopefully I\'ve fixed it by then.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  return (
-    <>
-      <NextSeo
-        title="Hayden Bleasel — Chief Product Officer at Corellium"
-        description="Hi, I’m Hayden Bleasel. I lead the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual."
-        canonical={siteUrl}
-        openGraph={{
-          url: siteUrl,
-          title: 'Hayden Bleasel',
-          description: 'Hi, I’m Hayden Bleasel. I lead the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual.',
-          images: [{
-            url: `${siteUrl}/images/cover.jpg`,
-            width: 1200,
-            height: 630,
-            alt: 'A spline',
-            type: 'image/jpeg',
-          }],
-          // eslint-disable-next-line camelcase, @typescript-eslint/naming-convention
-          site_name: 'Hayden Bleasel',
-          type: "profile",
-          profile: {
-            firstName: "Hayden",
-            lastName: "Bleasel",
-            username: "haydenbleasel",
-            gender: "male",
-          },
-        }}
-        twitter={{
-          handle: '@haydenbleasel',
-          site: '@haydenbleasel',
-          cardType: "summary_large_image",
-        }}
-      />
-
-      <SocialProfileJsonLd
-        type="Person"
-        name="Hayden Bleasel"
-        url={siteUrl}
-        sameAs={Object.values(social).map(({ url }) => url)}
-      />
-
-      <main className={styles.main}>
-        <section className={styles.content}>
-
-          <div className={styles.photo}>
-            <Image src={Photo} width={48} height={48} alt="" priority quality={100} />
-          </div>
-
-          <h1>Hi, I’m Hayden Bleasel. I lead the Product and Design teams at <Client {...clients.corellium} />, shaping the direction of our digital experiences and blurring the line between real and virtual.</h1>
-
-          <div className={styles.bio}>
-            <p>I’m an Australian he/him living in Sydney. I enjoy turning complex problems into meaningful solutions through design and code. I focus on simplicity, thoughtfulness, accessibility and a learning-based approach to my work.</p>
-            <p>I’ve had the privilege of working with many fantastic companies including <Client {...clients.google} />, <Client {...clients.palantir} />, <Client {...clients.nike} />, <Client {...clients.toyota} />, <Client {...clients.natgeo} />, <Client {...clients.timberland} />, <Client {...clients.canva} />, <Client {...clients.westfield} /> and <Client {...clients.ausethical} />.</p>
-            <p>Previously I ran an agency called <Client {...clients.jellypepper} /> where I worked with incredible startups and projects, including <Client {...clients.clipchamp} />, <Client {...clients.baraja} />, <Client {...clients.brighte} />, <Client {...clients.spaceship} />, <Client {...clients.spacemachines} />, <Client {...clients.inventia} />, <Client {...clients.lightswap} />, <Client {...clients.airwallex} /> and <Client {...clients.eslint} />.</p>
-            <p>After hours, I’m the design half of <Client {...clients.bokeh} /> — a new type of portfolio for photographers designed to showcase a meaningful body of work by going beyond likes, hashtags and scrolling.</p>
-            <p>I’m also working on <Client {...clients.neutral} /> — an app which so far has helped plant thousands of trees and offset hundreds of tonnes of CO₂e through global reforestation programs. Back in the day, I made <Client {...clients.presumi} /> — a resume analytics platform that SEEK used in Hong Kong to process 100K+ job applications and analyse 1M+ data points.</p>
-            <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees — Business and Information Technology. I also ocassionally take on random courses such as HarvardX’s CS50 for fun.</p>
-            <p>If you want to read more about my work, check out my <Link href={social.linkedin.url}>LinkedIn</Link>. If you want to chat, DM me on <Link href={social.twitter.url}>Twitter</Link>!</p>
-          </div>
-          <p>✌️</p>
-        </section>
-        <section className={styles.aside}>
-          <Image src={Spline} layout="fill" alt="" objectFit="contain" objectPosition="top right" quality={100} placeholder="empty" />
-        </section>
-        <div className={styles.social}>
-          {Object.values(social).map(Social)}
+        <div className={styles.photo}>
+          <Image src={Photo} width={48} height={48} alt="" priority quality={100} />
         </div>
-      </main>
 
-      <Toaster toastOptions={{
-        duration: 5000,
-        position: 'bottom-right',
+        <h1>Hi, I’m Hayden Bleasel. I lead the Product and Design teams at <Client {...clients.corellium} />, shaping the direction of our digital experiences and blurring the line between real and virtual.</h1>
+
+        <div className={styles.bio}>
+          <p>I’m an Australian he/him living in Sydney. I enjoy turning complex problems into meaningful solutions through design and code. I focus on simplicity, thoughtfulness, accessibility and a learning-based approach to my work.</p>
+          <p>I’ve had the privilege of working with many fantastic companies including <Client {...clients.google} />, <Client {...clients.palantir} />, <Client {...clients.nike} />, <Client {...clients.toyota} />, <Client {...clients.natgeo} />, <Client {...clients.timberland} />, <Client {...clients.canva} />, <Client {...clients.westfield} /> and <Client {...clients.ausethical} />.</p>
+          <p>Previously I ran an agency called <Client {...clients.jellypepper} /> where I worked with incredible startups and projects, including <Client {...clients.clipchamp} />, <Client {...clients.baraja} />, <Client {...clients.brighte} />, <Client {...clients.spaceship} />, <Client {...clients.spacemachines} />, <Client {...clients.inventia} />, <Client {...clients.lightswap} />, <Client {...clients.airwallex} /> and <Client {...clients.eslint} />.</p>
+          <p>After hours, I’m the design half of <Client {...clients.bokeh} /> — a new type of portfolio for photographers designed to showcase a meaningful body of work by going beyond likes, hashtags and scrolling.</p>
+          <p>I’m also working on <Client {...clients.neutral} /> — an app which so far has helped plant thousands of trees and offset hundreds of tonnes of CO₂e through global reforestation programs. Back in the day, I made <Client {...clients.presumi} /> — a resume analytics platform that SEEK used in Hong Kong to process 100K+ job applications and analyse 1M+ data points.</p>
+          <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees — Business and Information Technology. I also ocassionally take on random courses such as HarvardX’s CS50 for fun.</p>
+          <p>If you want to read more about my work, check out my <Link href={social.linkedin.url}>LinkedIn</Link>. If you want to chat, DM me on <Link href={social.twitter.url}>Twitter</Link>!</p>
+        </div>
+        <p>✌️</p>
+      </section>
+      <section className={styles.aside}>
+        <Image src={Spline} layout="fill" alt="" objectFit="contain" objectPosition="top right" quality={100} placeholder="empty" />
+      </section>
+      <div className={styles.social}>
+        {Object.values(social).map(Social)}
+      </div>
+    </main>
+
+    <Toaster toastOptions={{
+      duration: 5000,
+      position: 'bottom-right',
+      style: {
+        color: 'var(--black)',
+        background: 'var(--white)',
+        border: '2px solid var(--divider)',
+      },
+      success: {
+        icon: '👍',
         style: {
-          color: 'var(--black)',
-          background: 'var(--white)',
-          border: '2px solid var(--divider)',
+          borderColor: 'var(--green)',
         },
-        success: {
-          icon: '👍',
-          style: {
-            borderColor: 'var(--green)',
-          },
+      },
+      error: {
+        icon: '😭',
+        style: {
+          borderColor: 'var(--red)',
         },
-        error: {
-          icon: '😭',
-          style: {
-            borderColor: 'var(--red)',
-          },
-        },
-      }} />
-    </>
-  );
-};
+      },
+    }} />
+  </>
+);
 
 export default Home;
