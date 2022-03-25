@@ -311,20 +311,8 @@ const Home: NextPage = () => {
             <p>After hours, I’m the design half of <Client {...clients.bokeh} /> — a new type of portfolio for photographers designed to showcase a meaningful body of work by going beyond likes, hashtags and scrolling.</p>
             <p>I’m also working on <Client {...clients.neutral} /> — an app which so far has helped plant thousands of trees and offset hundreds of tonnes of CO₂e through global reforestation programs. Back in the day, I made <Client {...clients.presumi} /> — a resume analytics platform that SEEK used in Hong Kong to process 100K+ job applications and analyse 1M+ data points.</p>
             <p>In 2016, I graduated from the University of Technology, Sydney with two Bachelors degrees — Business and Information Technology. I also ocassionally take on random courses such as HarvardX’s CS50 for fun.</p>
-            <p>If you want to read more about my work, check out my <Link href={social.linkedin.url}>LinkedIn</Link>. If you want to chat, DM me on <Link href={social.twitter.url}>Twitter</Link>! Or if you want to stay up to date, join my mailing list below:</p>
+            <p>If you want to read more about my work, check out my <Link href={social.linkedin.url}>LinkedIn</Link>. If you want to chat, DM me on <Link href={social.twitter.url}>Twitter</Link>!</p>
           </div>
-
-          <form className={`${styles.form} ${loading ? styles.loading : ''}`} onSubmit={joinMailingList}>
-            <input className={styles.input}
-              name="email"
-              placeholder="janesmith@acme.com"
-              type="email"
-              value={email}
-              onChange={({ target }) => setEmail(target.value)}
-            />
-            <button type="submit" disabled={!email} className={styles.button}>&rarr;</button>
-          </form>
-
           <p>✌️</p>
         </section>
         <section className={styles.aside}>
