@@ -1,7 +1,6 @@
-# Hayden Bleasel
+Hi there 👋
 
-Hi, I’m Hayden Bleasel. I design, code and grow things on the internet.
+I'm Hayden Bleasel — an Australian product designer and frontend engineer living in the U.S. Currently leading Product and Design at [Corellium](https://www.corellium.com/), scaling global reforestation with Neutral ([App](https://tryneutral.com/), [API](https://neutral.sh/)) and building stuff at [Beskar](https://www.beskar.co/). You can [download my CV](https://read.cv/haydenbleasel) or [browse my portfolio](https://dribbble.com/haydenbleasel).
 
-I run the Product and Design teams at Corellium where I help shape the direction of our brand and product, blurring the line between real and virtual.
+Occasional freelancer / consultant → [get in touch](https://haydenbleasel.com/).
 
-[Visit my website](https://haydenbleasel.com/)
