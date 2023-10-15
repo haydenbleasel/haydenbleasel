@@ -1,6 +1,10 @@
 Hi there 👋
 
-I'm Hayden Bleasel — an Australian product designer and frontend engineer living in the U.S. Currently leading Product and Design at [Corellium](https://www.corellium.com/), scaling global reforestation with Neutral ([App](https://tryneutral.com/), [API](https://neutral.sh/)) and building stuff at [Beskar](https://www.beskar.co/). You can [download my CV](https://read.cv/haydenbleasel) or [browse my portfolio](https://dribbble.com/haydenbleasel).
+I'm the CPO at Corellium — a virtual hardware platform for government agencies and large enterprises to perform security research, penetration testing and development on mobile and IoT devices. I run the product management, customer support and design teams.
 
-Occasional freelancer / consultant → [get in touch](https://haydenbleasel.com/).
+Previously I ran an agency called Jellypepper. We worked with startups in self-driving car tech, AI, biotech, crypto, drone delivery, cybersecurity and even orbital (outer space) logistics. Jellypepper was acquired in 2023 by Raw Studio, where I joined them as an Advisor.
+
+I have limited availability and occasionally take on freelance projects and consulting. I'm also open to joining boards and advisory roles. If you're interested, please get in touch.
+
+Also, I have a [private mailing list](https://www.haydenbleasel.com/mailing-list) where I keep 1000+ people up to date with what I'm working on. Feel free to join if you're interested.
 
