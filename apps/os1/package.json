@@ -14,7 +14,7 @@
     "@haydenbleasel/design-system": "workspace:*",
     "@haydenbleasel/typefully": "workspace:*",
     "@spotify/web-api-ts-sdk": "^1.2.0",
-    "lucide-react": "^1.8.0",
+    "lucide-react": "^1.12.0",
     "next": "16.2.4",
     "octokit": "^5.0.5",
     "react": "19.2.5",
@@ -24,7 +24,7 @@
   "devDependencies": {
     "@haydenbleasel/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4",
-    "@types/bun": "^1.3.12",
+    "@types/bun": "^1.3.13",
     "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
