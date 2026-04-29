@@ -7,7 +7,7 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "tsgo --noEmit",
     "generate": "openapi-typescript https://api.typefully.com/v2/openapi.json -o schema.ts"
   },
   "dependencies": {

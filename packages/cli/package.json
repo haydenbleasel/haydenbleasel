@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "tsup",
-    "types": "tsc --noEmit",
+    "types": "tsgo --noEmit",
     "test": "bun test",
     "test:coverage": "bun test --coverage"
   },

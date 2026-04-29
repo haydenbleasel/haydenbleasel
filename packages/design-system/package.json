@@ -4,7 +4,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "tsgo --noEmit",
     "test": "bun test __tests__"
   },
   "dependencies": {
