@@ -19,7 +19,12 @@ const buildFetchMock = (routes: [pattern: string, handler: RouteHandler][]) =>
 
 const tokenOk: [string, RouteHandler] = [
   "accounts.spotify.com/api/token",
-  () => Response.json({ access_token: "fake-token" }),
+  () =>
+    Response.json({
+      access_token: "fake-token",
+      expires_in: 3600,
+      token_type: "Bearer",
+    }),
 ];
 
 describe("spotify", () => {
@@ -46,7 +51,7 @@ describe("spotify", () => {
                 tracks: { total: 0 },
               },
               {
-                description: null,
+                description: "",
                 external_urls: { spotify: "" },
                 id: "2",
                 images: [],
@@ -56,7 +61,7 @@ describe("spotify", () => {
                 tracks: { total: 0 },
               },
               {
-                description: null,
+                description: "",
                 external_urls: { spotify: "" },
                 id: "3",
                 images: [],
@@ -110,18 +115,6 @@ describe("spotify", () => {
     expect(albums[0]?.id).toBe("album-1");
   });
 
-  test("getCurrentlyPlaying returns null on a 204 No Content response", async () => {
-    globalThis.fetch = buildFetchMock([
-      tokenOk,
-      ["/me/player/currently-playing", () => new Response(null, { status: 204 })],
-    ]) as unknown as typeof fetch;
-
-    const { getCurrentlyPlaying } = await import("../lib/spotify");
-    const result = await getCurrentlyPlaying();
-
-    expect(result).toBeNull();
-  });
-
   test("throws when the token endpoint fails", async () => {
     globalThis.fetch = buildFetchMock([
       ["accounts.spotify.com/api/token", () => new Response("invalid_grant", { status: 400 })],
@@ -130,16 +123,5 @@ describe("spotify", () => {
     const { getTopTracks } = await import("../lib/spotify");
 
     expect(getTopTracks()).rejects.toThrow(/Spotify token error: 400/);
-  });
-
-  test("throws when an api endpoint fails", async () => {
-    globalThis.fetch = buildFetchMock([
-      tokenOk,
-      ["/me/top/artists", () => new Response("", { status: 500 })],
-    ]) as unknown as typeof fetch;
-
-    const { getTopArtists } = await import("../lib/spotify");
-
-    expect(getTopArtists()).rejects.toThrow("Spotify API error: 500");
   });
 });

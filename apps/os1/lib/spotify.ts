@@ -1,8 +1,11 @@
+import { SpotifyApi } from "@spotify/web-api-ts-sdk";
+import type { AccessToken } from "@spotify/web-api-ts-sdk";
+
 const clientId = process.env.SPOTIFY_CLIENT_ID ?? "";
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET ?? "";
 const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN ?? "";
 
-const getAccessToken = async (): Promise<string> => {
+const refreshAccessToken = async (): Promise<AccessToken> => {
   const response = await fetch("https://accounts.spotify.com/api/token", {
     body: new URLSearchParams({
       grant_type: "refresh_token",
@@ -20,124 +23,64 @@ const getAccessToken = async (): Promise<string> => {
     throw new Error(`Spotify token error: ${response.status} ${error}`);
   }
 
-  const data = (await response.json()) as { access_token: string };
-  return data.access_token;
-};
-
-const spotifyFetch = async <T>(endpoint: string): Promise<T> => {
-  const accessToken = await getAccessToken();
-
-  const response = await fetch(`https://api.spotify.com/v1${endpoint}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  if (response.status === 204) {
-    return null as T;
-  }
-
-  if (!response.ok) {
-    throw new Error(`Spotify API error: ${response.status}`);
-  }
-
-  return response.json() as Promise<T>;
-};
-
-interface SpotifyImage {
-  url: string;
-  height: number;
-  width: number;
-}
-
-interface SpotifyArtist {
-  id: string;
-  name: string;
-  images: SpotifyImage[];
-  genres: string[];
-  external_urls: { spotify: string };
-}
-
-interface SpotifyTrack {
-  id: string;
-  name: string;
-  artists: { name: string; id: string }[];
-  album: {
-    name: string;
-    images: SpotifyImage[];
+  const data = (await response.json()) as {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
   };
-  duration_ms: number;
-  external_urls: { spotify: string };
-}
 
-interface SpotifyCurrentlyPlaying {
-  is_playing: boolean;
-  item: SpotifyTrack | null;
-  progress_ms: number;
-}
+  return {
+    access_token: data.access_token,
+    expires_in: data.expires_in,
+    refresh_token: refreshToken,
+    token_type: data.token_type,
+  };
+};
 
-interface SpotifyAlbum {
-  id: string;
-  name: string;
-  images: SpotifyImage[];
-  artists: { name: string; id: string }[];
-  external_urls: { spotify: string };
-  total_tracks: number;
-}
+const getClient = async () => SpotifyApi.withAccessToken(clientId, await refreshAccessToken());
 
-interface SpotifyPlaylist {
-  id: string;
-  name: string;
-  description: string | null;
-  images: SpotifyImage[];
-  external_urls: { spotify: string };
-  tracks: { total: number };
-  owner: { id: string };
-  public: boolean;
-}
-
-export type { SpotifyAlbum, SpotifyArtist, SpotifyTrack, SpotifyCurrentlyPlaying, SpotifyPlaylist };
+const decodeHtmlEntities = (text: string) =>
+  text
+    .replaceAll("&#x27;", "'")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&amp;", "&");
 
 export const getTopTracks = async () => {
-  const data = await spotifyFetch<{ items: SpotifyTrack[] }>(
-    "/me/top/tracks?limit=20&time_range=medium_term",
-  );
+  const sdk = await getClient();
+  const data = await sdk.currentUser.topItems("tracks", "medium_term", 20);
   return data.items;
 };
 
 export const getTopArtists = async () => {
-  const data = await spotifyFetch<{ items: SpotifyArtist[] }>(
-    "/me/top/artists?limit=20&time_range=medium_term",
-  );
+  const sdk = await getClient();
+  const data = await sdk.currentUser.topItems("artists", "medium_term", 20);
   return data.items;
 };
 
-export const getCurrentlyPlaying = () =>
-  spotifyFetch<SpotifyCurrentlyPlaying | null>("/me/player/currently-playing");
+export const getCurrentlyPlaying = async () => {
+  const sdk = await getClient();
+  return sdk.player.getCurrentlyPlayingTrack();
+};
 
 export const getMyPlaylists = async () => {
-  const data = await spotifyFetch<{ items: SpotifyPlaylist[] }>("/me/playlists?limit=50");
-
-  const userId = await spotifyFetch<{ id: string }>("/me");
+  const sdk = await getClient();
+  const [data, profile] = await Promise.all([
+    sdk.currentUser.playlists.playlists(50),
+    sdk.currentUser.profile(),
+  ]);
 
   return data.items
-    .filter((playlist) => playlist.owner.id === userId.id && playlist.public)
+    .filter((playlist) => playlist.owner.id === profile.id && playlist.public)
     .map((playlist) => ({
       ...playlist,
-      description: playlist.description
-        ? playlist.description
-            .replaceAll("&#x27;", "'")
-            .replaceAll("&quot;", '"')
-            .replaceAll("&lt;", "<")
-            .replaceAll("&gt;", ">")
-            .replaceAll("&amp;", "&")
-        : null,
+      description: decodeHtmlEntities(playlist.description),
     }));
 };
 
 export const getSavedAlbums = async () => {
-  const data = await spotifyFetch<{ items: { added_at: string; album: SpotifyAlbum }[] }>(
-    "/me/albums?limit=50",
-  );
+  const sdk = await getClient();
+  const data = await sdk.currentUser.albums.savedAlbums(50);
   return data.items.map((item) => item.album);
 };

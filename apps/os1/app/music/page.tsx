@@ -82,7 +82,7 @@ const MusicPage = async () => {
                 )}
               </div>
               <p className="shrink-0 text-sm text-muted-foreground">
-                {playlist.tracks.total} tracks
+                {playlist.tracks?.total ?? 0} tracks
               </p>
             </a>
           ))}
