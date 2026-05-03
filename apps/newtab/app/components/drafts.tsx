@@ -6,11 +6,12 @@ import {
   CardTitle,
 } from "@haydenbleasel/design-system/components/ui/card";
 import { Skeleton } from "@haydenbleasel/design-system/components/ui/skeleton";
-import { getTypefullyDrafts, getTypefullyPublishes } from "@/lib/typefully";
 import { cn } from "@haydenbleasel/design-system/lib/utils";
 import { addDays, endOfWeek, format, startOfWeek } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { Suspense } from "react";
+
+import { getTypefullyDrafts, getTypefullyPublishes } from "@/lib/typefully";
 
 const getBadgeClasses = (count: number, goal: number) => {
   const classNames = {
@@ -36,7 +37,10 @@ const DraftWeek = ({ title, posts }: { title: string; posts: number }) => {
     <div key={title} className="flex items-center justify-between p-3">
       <p className="text-sm">{title}</p>
       <p className="text-muted-foreground text-sm">
-        <Badge variant="outline" className={cn(text, background, "border-none")}>
+        <Badge
+          variant="outline"
+          className={cn(text, background, "border-none")}
+        >
           {posts}
         </Badge>
       </p>
@@ -45,7 +49,10 @@ const DraftWeek = ({ title, posts }: { title: string; posts: number }) => {
 };
 
 const DraftsContent = async () => {
-  const [scheduled, published] = await Promise.all([getTypefullyDrafts(), getTypefullyPublishes()]);
+  const [scheduled, published] = await Promise.all([
+    getTypefullyDrafts(),
+    getTypefullyPublishes(),
+  ]);
   const data = [...scheduled, ...published];
 
   const { timeZone } = Intl.DateTimeFormat().resolvedOptions();
@@ -58,7 +65,7 @@ const DraftsContent = async () => {
       data: data.filter((draft) => {
         const date = toZonedTime(
           new Date(draft.scheduled_date ?? draft.published_at ?? ""),
-          timeZone,
+          timeZone
         );
         return date >= startOfThisWeek && date <= endOfThisWeek;
       }),
@@ -68,9 +75,12 @@ const DraftsContent = async () => {
       data: data.filter((draft) => {
         const date = toZonedTime(
           new Date(draft.scheduled_date ?? draft.published_at ?? ""),
-          timeZone,
+          timeZone
         );
-        return date >= addDays(startOfThisWeek, 7) && date <= addDays(endOfThisWeek, 7);
+        return (
+          date >= addDays(startOfThisWeek, 7) &&
+          date <= addDays(endOfThisWeek, 7)
+        );
       }),
       name: `Week of ${format(addDays(startOfThisWeek, 7), "MMM d")}`,
     },
@@ -78,9 +88,12 @@ const DraftsContent = async () => {
       data: data.filter((draft) => {
         const date = toZonedTime(
           new Date(draft.scheduled_date ?? draft.published_at ?? ""),
-          timeZone,
+          timeZone
         );
-        return date >= addDays(startOfThisWeek, 14) && date <= addDays(endOfThisWeek, 14);
+        return (
+          date >= addDays(startOfThisWeek, 14) &&
+          date <= addDays(endOfThisWeek, 14)
+        );
       }),
       name: `Week of ${format(addDays(startOfThisWeek, 14), "MMM d")}`,
     },
@@ -98,7 +111,9 @@ const DraftsContent = async () => {
 export const Drafts = () => (
   <Card className="gap-0 bg-sidebar p-1 shadow-xs">
     <CardHeader className="gap-0 px-3 py-2">
-      <CardTitle className="font-normal text-muted-foreground text-sm">Drafts</CardTitle>
+      <CardTitle className="font-normal text-muted-foreground text-sm">
+        Drafts
+      </CardTitle>
     </CardHeader>
     <Suspense fallback={<Skeleton className="h-[46.5px] rounded-xl" />}>
       <DraftsContent />

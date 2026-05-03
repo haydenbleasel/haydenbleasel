@@ -37,7 +37,8 @@ const refreshAccessToken = async (): Promise<AccessToken> => {
   };
 };
 
-const getClient = async () => SpotifyApi.withAccessToken(clientId, await refreshAccessToken());
+const getClient = async () =>
+  SpotifyApi.withAccessToken(clientId, await refreshAccessToken());
 
 const decodeHtmlEntities = (text: string) =>
   text

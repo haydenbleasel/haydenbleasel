@@ -35,7 +35,9 @@ export const Tasks = () => {
     saveTasks([...(tasks ?? []), newTask]);
 
     setTimeout(() => {
-      const input = document.querySelector(`[data-task-id="${newTask.id}"] input`);
+      const input = document.querySelector(
+        `[data-task-id="${newTask.id}"] input`
+      );
 
       if (input instanceof HTMLInputElement) {
         input.focus();
@@ -54,7 +56,9 @@ export const Tasks = () => {
       const lastTask = newTasks?.at(-1);
 
       if (lastTask) {
-        const input = document.querySelector(`[data-task-id="${lastTask.id}"] input`);
+        const input = document.querySelector(
+          `[data-task-id="${lastTask.id}"] input`
+        );
 
         if (input instanceof HTMLInputElement) {
           input.focus();
@@ -64,7 +68,9 @@ export const Tasks = () => {
   };
 
   const handleUpdateTask = (id: string, title: string) => {
-    saveTasks(tasks?.map((task) => (task.id === id ? { ...task, title } : task)));
+    saveTasks(
+      tasks?.map((task) => (task.id === id ? { ...task, title } : task))
+    );
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>, id: string) => {
@@ -80,15 +86,26 @@ export const Tasks = () => {
   return (
     <Card className="gap-0 bg-sidebar p-1 shadow-xs xl:absolute xl:inset-0">
       <CardHeader className="flex items-center justify-between gap-0 px-3 py-2">
-        <CardTitle className="font-normal text-muted-foreground text-sm">Tasks</CardTitle>
-        <Button variant="ghost" size="icon" onClick={handleAddTask} className="-m-2 cursor-pointer">
+        <CardTitle className="font-normal text-muted-foreground text-sm">
+          Tasks
+        </CardTitle>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={handleAddTask}
+          className="-m-2 cursor-pointer"
+        >
           <PlusIcon size={16} className="size-4 text-muted-foreground" />
         </Button>
       </CardHeader>
       {tasks?.length ? (
         <CardContent className="divide-y overflow-y-auto rounded-xl border bg-card p-0 shadow-xs">
           {tasks.map((task) => (
-            <div key={task.id} className="flex items-center gap-2 p-3" data-task-id={task.id}>
+            <div
+              key={task.id}
+              className="flex items-center gap-2 p-3"
+              data-task-id={task.id}
+            >
               <Checkbox
                 checked={false}
                 onCheckedChange={() => handleDeleteTask(task.id)}

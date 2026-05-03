@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import type { ReactNode } from "react";
 import { fonts } from "@haydenbleasel/design-system/fonts";
+
+import "./globals.css";
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   description: "A personal dashboard.",

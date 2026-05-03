@@ -1,5 +1,6 @@
-import { PageHeader } from "@/components/page-header";
 import type { Metadata } from "next";
+
+import { PageHeader } from "@/components/page-header";
 
 export const metadata: Metadata = {
   description: "The tools and services I use daily.",
@@ -273,7 +274,10 @@ const categories = [
 
 const StackPage = () => (
   <div className="flex flex-col gap-8">
-    <PageHeader title="Stack" description="The tools and services I use daily." />
+    <PageHeader
+      title="Stack"
+      description="The tools and services I use daily."
+    />
 
     {categories.map((category) => {
       const items = stackItems.filter((item) => item.category === category);
@@ -282,9 +286,14 @@ const StackPage = () => (
       }
 
       return (
-        <section key={category} className="flex flex-col gap-2 bg-sidebar rounded-2xl p-2">
+        <section
+          key={category}
+          className="flex flex-col gap-2 bg-sidebar rounded-2xl p-2"
+        >
           <div className="pt-2 pb-1 px-4">
-            <h2 className="text-sm font-medium text-muted-foreground">{category}</h2>
+            <h2 className="text-sm font-medium text-muted-foreground">
+              {category}
+            </h2>
           </div>
           <div className="grid gap-2 bg-background shadow-sm/5 rounded-2xl p-2">
             {items.map((item) => (
@@ -296,7 +305,9 @@ const StackPage = () => (
                 target="_blank"
               >
                 <p className="font-medium text-foreground">{item.name}</p>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {item.description}
+                </p>
               </a>
             ))}
           </div>

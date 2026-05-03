@@ -41,7 +41,8 @@ describe("spotify", () => {
           Response.json({
             items: [
               {
-                description: "He said &quot;hi&quot; &amp; left &lt;3 &gt; &#x27;ok&#x27;",
+                description:
+                  "He said &quot;hi&quot; &amp; left &lt;3 &gt; &#x27;ok&#x27;",
                 external_urls: { spotify: "" },
                 id: "1",
                 images: [],
@@ -117,7 +118,10 @@ describe("spotify", () => {
 
   test("throws when the token endpoint fails", async () => {
     globalThis.fetch = buildFetchMock([
-      ["accounts.spotify.com/api/token", () => new Response("invalid_grant", { status: 400 })],
+      [
+        "accounts.spotify.com/api/token",
+        () => new Response("invalid_grant", { status: 400 }),
+      ],
     ]) as unknown as typeof fetch;
 
     const { getTopTracks } = await import("../lib/spotify");

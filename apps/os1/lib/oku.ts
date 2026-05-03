@@ -16,7 +16,9 @@ const parseItems = (xml: string): OkuBook[] => {
     const [, content] = match;
 
     const get = (tag: string) => {
-      const tagMatch = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`).exec(content);
+      const tagMatch = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`).exec(
+        content
+      );
       return tagMatch?.[1]?.trim() ?? "";
     };
 
@@ -39,9 +41,12 @@ const parseItems = (xml: string): OkuBook[] => {
 };
 
 const fetchCollection = async (collectionId: string): Promise<OkuBook[]> => {
-  const response = await fetch(`https://oku.club/rss/collection/${collectionId}`, {
-    next: { revalidate: 60 * 60 },
-  });
+  const response = await fetch(
+    `https://oku.club/rss/collection/${collectionId}`,
+    {
+      next: { revalidate: 60 * 60 },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`Oku RSS error: ${response.status}`);

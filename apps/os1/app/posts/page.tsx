@@ -1,7 +1,8 @@
+import type { Metadata } from "next";
+
 import { PageHeader } from "@/components/page-header";
 import { getPublishedPosts } from "@/lib/typefully";
 import type { TypefullyPostWithAnalytics } from "@/lib/typefully";
-import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   description: "My recent posts on X, managed via Typefully.",
@@ -26,7 +27,8 @@ const getWeekStart = (date: string) => {
   return d;
 };
 
-const formatDate = (d: Date) => d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
 
 const formatWeek = (date: string) => {
   const start = getWeekStart(date);
@@ -60,7 +62,7 @@ const formatPostText = (text: string) => {
       </span>
     ) : (
       part
-    ),
+    )
   );
 };
 
@@ -72,7 +74,9 @@ const Post = ({ post }: { post: TypefullyPostWithAnalytics }) => (
     className="flex flex-col gap-2 rounded-lg px-3 py-2 no-underline transition-colors hover:bg-accent"
   >
     {post.preview && (
-      <p className="whitespace-pre-wrap leading-relaxed text-sm">{formatPostText(post.preview)}</p>
+      <p className="whitespace-pre-wrap leading-relaxed text-sm">
+        {formatPostText(post.preview)}
+      </p>
     )}
     <div className="flex gap-4 text-xs text-muted-foreground">
       <span>{formatNumber(post.impressions)} impressions</span>
@@ -89,12 +93,20 @@ const PostsPage = async () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader title="Posts" description="My recent posts on X, managed via Typefully." />
+      <PageHeader
+        title="Posts"
+        description="My recent posts on X, managed via Typefully."
+      />
 
       {grouped.map((group) => (
-        <section key={group.week} className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
+        <section
+          key={group.week}
+          className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2"
+        >
           <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">{group.week}</h2>
+            <h2 className="text-sm font-medium text-muted-foreground">
+              {group.week}
+            </h2>
           </div>
           <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
             {group.posts.map((post) => (

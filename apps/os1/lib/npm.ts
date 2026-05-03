@@ -34,7 +34,7 @@ export type { NpmPackage };
 
 export const getPackages = async (): Promise<NpmPackage[]> => {
   const response = await fetch(
-    "https://registry.npmjs.org/-/v1/search?text=maintainer:haydenbleasel&size=250",
+    "https://registry.npmjs.org/-/v1/search?text=maintainer:haydenbleasel&size=250"
   );
 
   if (!response.ok) {
@@ -45,11 +45,13 @@ export const getPackages = async (): Promise<NpmPackage[]> => {
   return data.objects
     .map((obj) => obj.package)
     .filter((pkg) => pkg.version !== "0.0.0")
-    .filter((pkg) => pkg.maintainers.some((m) => m.username === "haydenbleasel"));
+    .filter((pkg) =>
+      pkg.maintainers.some((m) => m.username === "haydenbleasel")
+    );
 };
 
 export const getBulkDownloads = async (
-  packageNames: string[],
+  packageNames: string[]
 ): Promise<Record<string, NpmDownloads>> => {
   const scoped: string[] = [];
   const unscoped: string[] = [];
@@ -66,7 +68,7 @@ export const getBulkDownloads = async (
 
   if (unscoped.length > 0) {
     const response = await fetch(
-      `https://api.npmjs.org/downloads/point/last-year/${unscoped.join(",")}`,
+      `https://api.npmjs.org/downloads/point/last-year/${unscoped.join(",")}`
     );
 
     if (!response.ok) {
@@ -79,7 +81,7 @@ export const getBulkDownloads = async (
 
   for (const name of scoped) {
     const response = await fetch(
-      `https://api.npmjs.org/downloads/point/last-year/${encodeURIComponent(name)}`,
+      `https://api.npmjs.org/downloads/point/last-year/${encodeURIComponent(name)}`
     );
 
     if (!response.ok) {

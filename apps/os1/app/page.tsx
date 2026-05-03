@@ -1,5 +1,9 @@
-import { PageHeader } from "@/components/page-header";
-import Link from "next/link";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@haydenbleasel/design-system/components/ui/card";
 import {
   BookOpenIcon,
   CodeIcon,
@@ -8,12 +12,9 @@ import {
   MessageSquareIcon,
   MusicIcon,
 } from "lucide-react";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@haydenbleasel/design-system/components/ui/card";
+import Link from "next/link";
+
+import { PageHeader } from "@/components/page-header";
 
 const pages = [
   {
@@ -56,7 +57,10 @@ const pages = [
 
 const HomePage = () => (
   <div className="flex flex-col gap-8">
-    <PageHeader title="OS1" description="An operating system for my public-facing life." />
+    <PageHeader
+      title="OS1"
+      description="An operating system for my public-facing life."
+    />
 
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {pages.map((page) => (

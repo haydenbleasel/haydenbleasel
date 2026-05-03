@@ -68,5 +68,7 @@ export const LanguageIcon = ({ language }: { language: string | null }) => {
     return <span className="text-sm text-muted-foreground">{language}</span>;
   }
 
-  return <Icon className="size-4 text-muted-foreground" aria-label={language} />;
+  return (
+    <Icon className="size-4 text-muted-foreground" aria-label={language} />
+  );
 };

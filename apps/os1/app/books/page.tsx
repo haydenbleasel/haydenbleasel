@@ -1,8 +1,9 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+
 import { PageHeader } from "@/components/page-header";
 import { getRead, getReading, getToRead } from "@/lib/oku";
 import type { OkuBook } from "@/lib/oku";
-import type { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   description: "What I've been reading on Oku.",
@@ -33,7 +34,11 @@ const Book = ({ book }: { book: OkuBook }) => (
 );
 
 const BooksPage = async () => {
-  const [reading, read, toRead] = await Promise.all([getReading(), getRead(), getToRead()]);
+  const [reading, read, toRead] = await Promise.all([
+    getReading(),
+    getRead(),
+    getToRead(),
+  ]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -41,8 +46,8 @@ const BooksPage = async () => {
         title="Books"
         description={
           <>
-            What I&apos;ve been reading on Oku. {reading.length + read.length + toRead.length} books
-            tracked.
+            What I&apos;ve been reading on Oku.{" "}
+            {reading.length + read.length + toRead.length} books tracked.
           </>
         }
       />
@@ -50,7 +55,9 @@ const BooksPage = async () => {
       {reading.length > 0 && (
         <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
           <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">Currently Reading</h2>
+            <h2 className="text-sm font-medium text-muted-foreground">
+              Currently Reading
+            </h2>
           </div>
           <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
             {reading.map((book) => (
@@ -76,7 +83,9 @@ const BooksPage = async () => {
       {toRead.length > 0 && (
         <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
           <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">To Read</h2>
+            <h2 className="text-sm font-medium text-muted-foreground">
+              To Read
+            </h2>
           </div>
           <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
             {toRead.map((book) => (

@@ -4,7 +4,7 @@ import { resend, audienceId } from "@/lib/resend";
 
 export const subscribe = async (
   _prevState: unknown,
-  formData: FormData,
+  formData: FormData
 ): Promise<{
   message: string;
   error: string;

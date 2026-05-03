@@ -1,7 +1,8 @@
-import { PageHeader } from "@/components/page-header";
-import { getMyPlaylists, getSavedAlbums } from "@/lib/spotify";
 import type { Metadata } from "next";
 import Image from "next/image";
+
+import { PageHeader } from "@/components/page-header";
+import { getMyPlaylists, getSavedAlbums } from "@/lib/spotify";
 
 export const metadata: Metadata = {
   description: "What I've been listening to on Spotify.",
@@ -9,16 +10,24 @@ export const metadata: Metadata = {
 };
 
 const MusicPage = async () => {
-  const [playlists, savedAlbums] = await Promise.all([getMyPlaylists(), getSavedAlbums()]);
+  const [playlists, savedAlbums] = await Promise.all([
+    getMyPlaylists(),
+    getSavedAlbums(),
+  ]);
 
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader title="Music" description="What I've been listening to on Spotify." />
+      <PageHeader
+        title="Music"
+        description="What I've been listening to on Spotify."
+      />
 
       {savedAlbums.length > 0 && (
         <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
           <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">Saved Albums</h2>
+            <h2 className="text-sm font-medium text-muted-foreground">
+              Saved Albums
+            </h2>
           </div>
           <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
             {savedAlbums.map((album) => (
@@ -39,7 +48,9 @@ const MusicPage = async () => {
                   />
                 )}
                 <div className="min-w-0 flex-1">
-                  <p className="truncate font-medium text-foreground">{album.name}</p>
+                  <p className="truncate font-medium text-foreground">
+                    {album.name}
+                  </p>
                   <p className="truncate text-sm text-muted-foreground">
                     {album.artists.map((a) => a.name).join(", ")}
                   </p>
@@ -55,7 +66,9 @@ const MusicPage = async () => {
 
       <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
         <div className="px-4 pt-2 pb-1">
-          <h2 className="text-sm font-medium text-muted-foreground">Playlists</h2>
+          <h2 className="text-sm font-medium text-muted-foreground">
+            Playlists
+          </h2>
         </div>
         <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
           {playlists.map((playlist) => (
@@ -76,9 +89,13 @@ const MusicPage = async () => {
                 />
               )}
               <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-foreground">{playlist.name}</p>
+                <p className="truncate font-medium text-foreground">
+                  {playlist.name}
+                </p>
                 {playlist.description && (
-                  <p className="truncate text-sm text-muted-foreground">{playlist.description}</p>
+                  <p className="truncate text-sm text-muted-foreground">
+                    {playlist.description}
+                  </p>
                 )}
               </div>
               <p className="shrink-0 text-sm text-muted-foreground">

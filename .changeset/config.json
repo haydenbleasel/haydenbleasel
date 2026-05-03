@@ -7,5 +7,10 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["website", "os1", "@haydenbleasel/design-system", "@haydenbleasel/typescript-config"]
+  "ignore": [
+    "website",
+    "os1",
+    "@haydenbleasel/design-system",
+    "@haydenbleasel/typescript-config"
+  ]
 }

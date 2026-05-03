@@ -1,6 +1,7 @@
-import { cn } from "../lib/utils";
 import { Instrument_Serif as createSerif } from "next/font/google";
 import localFont from "next/font/local";
+
+import { cn } from "../lib/utils";
 
 const sans = localFont({
   display: "swap",
@@ -26,4 +27,8 @@ const serif = createSerif({
   weight: "400",
 });
 
-export const fonts = cn(sans.variable, serif.variable, "touch-manipulation font-sans antialiased");
+export const fonts = cn(
+  sans.variable,
+  serif.variable,
+  "touch-manipulation font-sans antialiased"
+);

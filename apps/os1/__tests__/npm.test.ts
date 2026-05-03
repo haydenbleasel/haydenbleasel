@@ -10,7 +10,9 @@ const buildPackage = (overrides: {
   date: "2026-01-01",
   description: "",
   links: { npm: `https://npmjs.com/package/${overrides.name}` },
-  maintainers: overrides.maintainers ?? [{ email: "x@y.com", username: "haydenbleasel" }],
+  maintainers: overrides.maintainers ?? [
+    { email: "x@y.com", username: "haydenbleasel" },
+  ],
   name: overrides.name,
   version: overrides.version ?? "1.0.0",
 });
@@ -38,7 +40,7 @@ describe("npm", () => {
               score: { final: 0 },
             },
           ],
-        }),
+        })
       ) as unknown as typeof fetch;
 
       const { getPackages } = await import("../lib/npm");
@@ -48,7 +50,9 @@ describe("npm", () => {
     });
 
     test("throws when the registry responds with an error", async () => {
-      globalThis.fetch = mock(() => new Response("", { status: 500 })) as unknown as typeof fetch;
+      globalThis.fetch = mock(
+        () => new Response("", { status: 500 })
+      ) as unknown as typeof fetch;
 
       const { getPackages } = await import("../lib/npm");
 
@@ -88,7 +92,7 @@ describe("npm", () => {
 
     test("skips the bulk endpoint when only scoped names are provided", async () => {
       const fetchMock = mock(() =>
-        Response.json({ downloads: 5, end: "b", package: "@a/b", start: "a" }),
+        Response.json({ downloads: 5, end: "b", package: "@a/b", start: "a" })
       );
       globalThis.fetch = fetchMock as unknown as typeof fetch;
 
@@ -101,7 +105,12 @@ describe("npm", () => {
 
     test("url-encodes scoped package names", async () => {
       const fetchMock = mock((_input: string | URL | Request) =>
-        Response.json({ downloads: 0, end: "b", package: "@scope/pkg", start: "a" }),
+        Response.json({
+          downloads: 0,
+          end: "b",
+          package: "@scope/pkg",
+          start: "a",
+        })
       );
       globalThis.fetch = fetchMock as unknown as typeof fetch;
 
@@ -114,7 +123,9 @@ describe("npm", () => {
     });
 
     test("throws when the bulk endpoint fails", async () => {
-      globalThis.fetch = mock(() => new Response("", { status: 503 })) as unknown as typeof fetch;
+      globalThis.fetch = mock(
+        () => new Response("", { status: 503 })
+      ) as unknown as typeof fetch;
 
       const { getBulkDownloads } = await import("../lib/npm");
 
@@ -122,7 +133,9 @@ describe("npm", () => {
     });
 
     test("throws when a scoped request fails", async () => {
-      globalThis.fetch = mock(() => new Response("", { status: 502 })) as unknown as typeof fetch;
+      globalThis.fetch = mock(
+        () => new Response("", { status: 502 })
+      ) as unknown as typeof fetch;
 
       const { getBulkDownloads } = await import("../lib/npm");
 

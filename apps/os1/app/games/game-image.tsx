@@ -12,16 +12,22 @@ export const GameImage = ({
   name: string;
   capsuleFilename?: string;
 }) => {
-  const [fallback, setFallback] = useState<"original" | "capsule" | "none">("original");
+  const [fallback, setFallback] = useState<"original" | "capsule" | "none">(
+    "original"
+  );
 
   const handleError = useCallback(() => {
-    setFallback((prev) => (prev === "original" && capsuleFilename ? "capsule" : "none"));
+    setFallback((prev) =>
+      prev === "original" && capsuleFilename ? "capsule" : "none"
+    );
   }, [capsuleFilename]);
 
   if (fallback === "none") {
     return (
       <div className="w-32 h-15 shrink-0 rounded-lg bg-muted flex items-center justify-center">
-        <span className="text-xs text-muted-foreground truncate px-2">{name}</span>
+        <span className="text-xs text-muted-foreground truncate px-2">
+          {name}
+        </span>
       </div>
     );
   }

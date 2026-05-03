@@ -36,7 +36,7 @@ export const getWorkRepositories = async () => {
       const [owner, repo] = fullName.split("/");
       const { data } = await octokit.rest.repos.get({ owner, repo });
       return data;
-    }),
+    })
   );
 
   return results;

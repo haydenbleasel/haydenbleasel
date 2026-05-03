@@ -14,8 +14,8 @@ export const Hero = () => (
       priority
     />
     <h1 className="font-normal font-serif text-[28px] sm:text-[38px] leading-[1.2] text-foreground">
-      Member of Technical Staff at OpenAI. Originally from Sydney and currently living in San
-      Francisco, California.
+      Member of Technical Staff at OpenAI. Originally from Sydney and currently
+      living in San Francisco, California.
     </h1>
   </div>
 );

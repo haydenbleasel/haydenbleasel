@@ -1096,7 +1096,9 @@ export interface components {
       /** @description All platform accounts configured in this social set (X, LinkedIn, Mastodon, Threads, Bluesky) */
       platforms: components["schemas"]["PlatformsDict"];
       /** @description Shared publishing quota snapshot for this social set. */
-      publishing_quota?: components["schemas"]["PublishingQuotaResponse"] | null;
+      publishing_quota?:
+        | components["schemas"]["PublishingQuotaResponse"]
+        | null;
     };
     /**
      * ThreadsAccount
@@ -2572,7 +2574,9 @@ export interface operations {
   typefully_apps_apiv2_handlers_drafts_list_drafts: {
     parameters: {
       query?: {
-        status?: ("draft" | "published" | "scheduled" | "error" | "publishing") | null;
+        status?:
+          | ("draft" | "published" | "scheduled" | "error" | "publishing")
+          | null;
         tag?: string[] | null;
         order_by?:
           | "created_at"

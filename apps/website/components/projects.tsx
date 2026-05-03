@@ -1,5 +1,5 @@
-import type { ComponentProps, ReactNode } from "react";
 import { Badge } from "@haydenbleasel/design-system/components/ui/badge";
+import type { ComponentProps, ReactNode } from "react";
 
 interface Project {
   name: string;
@@ -10,7 +10,12 @@ interface Project {
 }
 
 const UltraciteLogo = (props: ComponentProps<"svg">) => (
-  <svg fill="none" viewBox="0 0 507 508" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg
+    fill="none"
+    viewBox="0 0 507 508"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
     <title>Ultracite</title>
     <path
       d="M318.661 13.3835L268.715 0L226.623 157.087L188.623 15.2678L138.674 28.6513L179.732 181.876L77.4678 79.6125L40.9035 116.177L153.075 228.349L13.3834 190.918L0 240.865L152.63 281.763C150.882 274.225 149.958 266.372 149.958 258.303C149.958 201.186 196.26 154.883 253.378 154.883C310.495 154.883 356.797 201.186 356.797 258.303C356.797 266.32 355.884 274.125 354.158 281.618L492.869 318.785L506.251 268.838L353.016 227.778L492.718 190.346L479.332 140.399L326.102 181.456L428.366 79.1929L391.801 42.6286L281.186 153.244L318.661 13.3835Z"
@@ -40,7 +45,12 @@ const UltraciteLogo = (props: ComponentProps<"svg">) => (
 );
 
 const EververseLogo = (props: ComponentProps<"svg">) => (
-  <svg fill="none" viewBox="0 0 118 118" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg
+    fill="none"
+    viewBox="0 0 118 118"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
     <title>Eververse</title>
     <path
       d="M59.3377 117.036C63.1496 117.036 66.2732 114.231 66.8024 110.26C72.0434 74.8953 76.861 69.9718 110.85 66.1073C114.767 65.6308 117.785 62.3486 117.785 58.5368C117.785 54.6717 114.82 51.4954 110.902 50.913C77.1259 46.2012 72.9438 42.0718 66.8024 6.76032C66.1142 2.84261 63.0964 0.036499 59.3377 0.036499C55.4732 0.036499 52.4022 2.84261 51.7671 6.81298C46.632 42.125 41.8144 47.0485 7.87879 50.913C3.85524 51.4427 0.890625 54.619 0.890625 58.5368C0.890625 62.3486 3.7494 65.5249 7.77295 66.1073C41.6022 70.9249 45.7316 75.0012 51.7671 110.313C52.5612 114.284 55.6317 117.036 59.3377 117.036Z"
@@ -50,7 +60,12 @@ const EververseLogo = (props: ComponentProps<"svg">) => (
 );
 
 const KiboLogo = (props: ComponentProps<"svg">) => (
-  <svg fill="none" viewBox="0 0 116 116" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg
+    fill="none"
+    viewBox="0 0 116 116"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
     <title>Kibo UI</title>
     <path
       clipRule="evenodd"
@@ -115,7 +130,12 @@ const NextForgeLogo = (props: ComponentProps<"svg">) => (
 );
 
 const GhostLogo = (props: ComponentProps<"svg">) => (
-  <svg viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+  <svg
+    viewBox="0 0 14 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
     <title>Ghost</title>
     <path
       d="M12.5 7C12.5 3.96243 10.0376 1.5 7 1.5C3.96243 1.5 1.5 3.96243 1.5 7V14.2754L1.91992 13.8848C2.79553 13.0691 4.09852 12.9133 5.1416 13.5L6.87695 14.4766C6.95321 14.5194 7.04679 14.5194 7.12305 14.4766L8.8584 13.5C9.9015 12.9133 11.2045 13.0691 12.0801 13.8848L12.5 14.2754V7ZM14 14.667C14 15.8294 12.6139 16.4319 11.7637 15.6396L11.0576 14.9824C10.6598 14.6118 10.0677 14.541 9.59375 14.8076L7.8584 15.7842C7.32581 16.0835 6.67516 16.0835 6.14258 15.7842L4.40625 14.8076C3.93237 14.5411 3.34025 14.6118 2.94238 14.9824L2.23633 15.6396C1.38606 16.4319 0 15.8294 0 14.667V7C0 3.13401 3.13401 0 7 0C10.866 0 14 3.13401 14 7V14.667Z"
@@ -200,7 +220,10 @@ export const Projects = () => (
           <p className="text-sm">{project.description}</p>
         </div>
         {project.status ? (
-          <Badge variant="outline" className="bg-transparent font-normal text-muted-foreground">
+          <Badge
+            variant="outline"
+            className="bg-transparent font-normal text-muted-foreground"
+          >
             {project.status}
           </Badge>
         ) : null}

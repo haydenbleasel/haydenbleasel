@@ -6,18 +6,21 @@ import {
   CardTitle,
 } from "@haydenbleasel/design-system/components/ui/card";
 import { Skeleton } from "@haydenbleasel/design-system/components/ui/skeleton";
-import { getTypefullyDrafts, getTypefullyPublishes } from "@/lib/typefully";
-import type { Draft } from "@/lib/typefully";
 import { isSameDay } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { Suspense } from "react";
+
+import { getTypefullyDrafts, getTypefullyPublishes } from "@/lib/typefully";
+import type { Draft } from "@/lib/typefully";
 
 const Post = ({ draft }: { draft: Draft }) => (
   <div
     key={draft.id}
     className="flex items-center justify-between gap-4 p-3 transition-colors hover:bg-muted"
   >
-    <p className="line-clamp-1 w-full truncate text-wrap text-sm">{draft.preview ?? ""}</p>
+    <p className="line-clamp-1 w-full truncate text-wrap text-sm">
+      {draft.preview ?? ""}
+    </p>
     <Badge variant="outline" className="shrink-0">
       {draft.published_at ? "Published" : "Scheduled"}
     </Badge>
@@ -25,14 +28,20 @@ const Post = ({ draft }: { draft: Draft }) => (
 );
 
 const TodayContent = async () => {
-  const [scheduled, published] = await Promise.all([getTypefullyDrafts(), getTypefullyPublishes()]);
+  const [scheduled, published] = await Promise.all([
+    getTypefullyDrafts(),
+    getTypefullyPublishes(),
+  ]);
 
   const timeZone = "America/Los_Angeles";
   const today = toZonedTime(new Date(), timeZone);
 
   const data = [...published, ...scheduled].filter((draft) => {
     if (draft.scheduled_date) {
-      const scheduledDate = toZonedTime(new Date(draft.scheduled_date), timeZone);
+      const scheduledDate = toZonedTime(
+        new Date(draft.scheduled_date),
+        timeZone
+      );
       if (isSameDay(scheduledDate, today)) {
         return true;
       }
@@ -60,8 +69,14 @@ const TodayContent = async () => {
     <CardContent className="divide-y overflow-hidden rounded-xl border bg-card p-0 shadow-xs">
       {data
         .toSorted((a, b) => {
-          const dateA = toZonedTime(new Date(a.published_at ?? a.scheduled_date ?? ""), timeZone);
-          const dateB = toZonedTime(new Date(b.published_at ?? b.scheduled_date ?? ""), timeZone);
+          const dateA = toZonedTime(
+            new Date(a.published_at ?? a.scheduled_date ?? ""),
+            timeZone
+          );
+          const dateB = toZonedTime(
+            new Date(b.published_at ?? b.scheduled_date ?? ""),
+            timeZone
+          );
 
           return dateA.getTime() - dateB.getTime();
         })

@@ -22,7 +22,9 @@ const getSocialSetId = async (): Promise<number | null> => {
 
 const getAnalytics = async (socialSetId: number): Promise<AnalyticsPost[]> => {
   const [endDate] = new Date().toISOString().split("T");
-  const [startDate] = new Date(Date.now() - 90 * 86_400_000).toISOString().split("T");
+  const [startDate] = new Date(Date.now() - 90 * 86_400_000)
+    .toISOString()
+    .split("T");
 
   const allResults: AnalyticsPost[] = [];
   let offset = 0;
@@ -36,7 +38,7 @@ const getAnalytics = async (socialSetId: number): Promise<AnalyticsPost[]> => {
           path: { platform: "x", social_set_id: socialSetId },
           query: { end_date: endDate, limit, offset, start_date: startDate },
         },
-      },
+      }
     );
 
     if (!data?.results) {
@@ -55,7 +57,9 @@ const getAnalytics = async (socialSetId: number): Promise<AnalyticsPost[]> => {
   return allResults;
 };
 
-export const getPublishedPosts = async (): Promise<TypefullyPostWithAnalytics[]> => {
+export const getPublishedPosts = async (): Promise<
+  TypefullyPostWithAnalytics[]
+> => {
   const socialSetId = await getSocialSetId();
 
   if (!socialSetId) {
@@ -78,9 +82,9 @@ export const getPublishedPosts = async (): Promise<TypefullyPostWithAnalytics[]>
     analytics
       .filter(
         (a): a is AnalyticsPost & { draft_id: number } =>
-          a.draft_id !== null && a.draft_id !== undefined,
+          a.draft_id !== null && a.draft_id !== undefined
       )
-      .map((a) => [a.draft_id, a] as const),
+      .map((a) => [a.draft_id, a] as const)
   );
 
   return drafts.map((draft) => {

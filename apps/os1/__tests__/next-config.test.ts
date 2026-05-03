@@ -15,7 +15,9 @@ describe("next.config", () => {
   });
 
   test("includes image hosts for each integration", () => {
-    const hostnames = (nextConfig.images?.remotePatterns ?? []).map((p) => p.hostname);
+    const hostnames = (nextConfig.images?.remotePatterns ?? []).map(
+      (p) => p.hostname
+    );
 
     expect(hostnames).toContain("cdn.cloudflare.steamstatic.com");
     expect(hostnames).toContain("*.scdn.co");

@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
-const getProtocol = (nodeEnv: string) => (nodeEnv === "production" ? "https" : "http");
+const getProtocol = (nodeEnv: string) =>
+  nodeEnv === "production" ? "https" : "http";
 
 const getOrigin = (envUrl?: string) => envUrl ?? "localhost:3000";
 

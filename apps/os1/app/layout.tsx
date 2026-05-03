@@ -1,14 +1,16 @@
 import { DesignSystemProvider } from "@haydenbleasel/design-system/components/provider/client";
 import { DesignSystemServerProvider } from "@haydenbleasel/design-system/components/provider/server";
-import { fonts } from "@haydenbleasel/design-system/fonts";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@haydenbleasel/design-system/components/ui/sidebar";
 
 import "./globals.css";
+import { fonts } from "@haydenbleasel/design-system/fonts";
 import type { Metadata } from "next";
-
 import type { ReactNode } from "react";
-import { AppSidebar } from "@/components/app-sidebar";
-import { SidebarInset, SidebarProvider } from "@haydenbleasel/design-system/components/ui/sidebar";
 
+import { AppSidebar } from "@/components/app-sidebar";
 import { url } from "@/lib/url";
 
 const title = "Software engineer and product designer | Hayden Bleasel";
@@ -84,7 +86,9 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <main className="container mx-auto max-w-6xl px-4 py-16">{children}</main>
+            <main className="container mx-auto max-w-6xl px-4 py-16">
+              {children}
+            </main>
           </SidebarInset>
         </SidebarProvider>
       </DesignSystemProvider>

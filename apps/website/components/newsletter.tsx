@@ -1,9 +1,9 @@
 "use client";
 
+import { Button } from "@haydenbleasel/design-system/components/ui/button";
+import { Input } from "@haydenbleasel/design-system/components/ui/input";
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
-import { Input } from "@haydenbleasel/design-system/components/ui/input";
-import { Button } from "@haydenbleasel/design-system/components/ui/button";
 
 import { subscribe } from "@/actions/subscribe";
 
@@ -15,7 +15,10 @@ const initialState = {
 export const emailRegex = /.+@.+/u;
 
 export const Newsletter = () => {
-  const [state, formAction, isPending] = useActionState(subscribe, initialState);
+  const [state, formAction, isPending] = useActionState(
+    subscribe,
+    initialState
+  );
   const prevState = useRef(state);
 
   useEffect(() => {

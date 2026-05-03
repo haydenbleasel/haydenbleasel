@@ -32,7 +32,7 @@ describe("oku", () => {
 
   test("getRead parses items from the RSS feed", async () => {
     globalThis.fetch = mock(
-      () => new Response(sampleXml, { status: 200 }),
+      () => new Response(sampleXml, { status: 200 })
     ) as unknown as typeof fetch;
 
     const { getRead } = await import("../lib/oku");
@@ -50,7 +50,7 @@ describe("oku", () => {
 
   test("falls back to enclosure url when oku:cover is missing", async () => {
     globalThis.fetch = mock(
-      () => new Response(sampleXml, { status: 200 }),
+      () => new Response(sampleXml, { status: 200 })
     ) as unknown as typeof fetch;
 
     const { getReading } = await import("../lib/oku");
@@ -61,7 +61,7 @@ describe("oku", () => {
 
   test("returns an empty array when the feed has no items", async () => {
     globalThis.fetch = mock(
-      () => new Response("<rss><channel></channel></rss>", { status: 200 }),
+      () => new Response("<rss><channel></channel></rss>", { status: 200 })
     ) as unknown as typeof fetch;
 
     const { getToRead } = await import("../lib/oku");
@@ -71,7 +71,9 @@ describe("oku", () => {
   });
 
   test("throws when the RSS feed responds with an error", async () => {
-    globalThis.fetch = mock(() => new Response("", { status: 500 })) as unknown as typeof fetch;
+    globalThis.fetch = mock(
+      () => new Response("", { status: 500 })
+    ) as unknown as typeof fetch;
 
     const { getToRead } = await import("../lib/oku");
 

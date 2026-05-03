@@ -10,7 +10,11 @@ export const CallToAction = async () => {
   return (
     <p>
       Follow me on{" "}
-      <a href="https://x.com/haydenbleasel" rel="noopener noreferrer" target="_blank">
+      <a
+        href="https://x.com/haydenbleasel"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         X
       </a>
       , or join {count} people on my mailing list below for infrequent updates.

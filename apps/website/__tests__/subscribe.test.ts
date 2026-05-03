@@ -4,7 +4,7 @@ const createMock = mock(() =>
   Promise.resolve({
     data: { id: "123" } as { id: string } | null,
     error: null as { message: string } | null,
-  }),
+  })
 );
 
 mock.module("../lib/resend", () => ({

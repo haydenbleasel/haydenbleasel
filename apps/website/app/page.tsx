@@ -4,11 +4,11 @@ import { CallToAction } from "@/components/call-to-action";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { Newsletter } from "@/components/newsletter";
+import { OS1 } from "@/components/os1";
 import { Projects } from "@/components/projects";
 import { Section } from "@/components/section";
 import { Speaking } from "@/components/speaking";
 import { Work } from "@/components/work";
-import { OS1 } from "@/components/os1";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -37,7 +37,11 @@ const Home = () => (
         fallback={
           <p>
             Follow me on{" "}
-            <a href="https://x.com/haydenbleasel" rel="noopener noreferrer" target="_blank">
+            <a
+              href="https://x.com/haydenbleasel"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               X
             </a>
             , or join my mailing list below for infrequent updates.
