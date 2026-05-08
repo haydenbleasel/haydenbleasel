@@ -12,10 +12,10 @@
   },
   "dependencies": {
     "@haydenbleasel/design-system": "workspace:*",
-    "next": "16.2.4",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
-    "resend": "^6.12.2",
+    "next": "16.2.6",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "resend": "^6.12.3",
     "sonner": "^2.0.7"
   },
   "devDependencies": {

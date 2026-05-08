@@ -8,17 +8,18 @@
     "typegen": "next typegen",
     "types": "tsgo --noEmit",
     "test": "bun test",
-    "test:coverage": "bun test --coverage"
+    "test:coverage": "bun test --coverage",
+    "spotify:token": "bun run scripts/generate-spotify-token.ts"
   },
   "dependencies": {
     "@haydenbleasel/design-system": "workspace:*",
     "@haydenbleasel/typefully": "workspace:*",
     "@spotify/web-api-ts-sdk": "^1.2.0",
-    "lucide-react": "^1.12.0",
-    "next": "16.2.4",
+    "lucide-react": "^1.14.0",
+    "next": "16.2.6",
     "octokit": "^5.0.5",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "steamapi": "^3.1.5"
   },
   "devDependencies": {
