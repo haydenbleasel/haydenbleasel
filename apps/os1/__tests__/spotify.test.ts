@@ -126,6 +126,6 @@ describe("spotify", () => {
 
     const { getTopTracks } = await import("../lib/spotify");
 
-    expect(getTopTracks()).rejects.toThrow(/Spotify token error: 400/);
+    expect(getTopTracks()).rejects.toThrow(/Spotify token error: 400/u);
   });
 });

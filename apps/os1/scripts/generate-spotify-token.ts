@@ -66,9 +66,9 @@ const exchangeCode = async (code: string): Promise<TokenResponse> => {
 const updateEnvFile = async (refreshToken: string) => {
   const contents = await readFile(ENV_PATH, "utf-8");
   const line = `SPOTIFY_REFRESH_TOKEN="${refreshToken}"`;
-  const next = /^SPOTIFY_REFRESH_TOKEN=.*$/m.test(contents)
-    ? contents.replace(/^SPOTIFY_REFRESH_TOKEN=.*$/m, line)
-    : `${contents.replace(/\s*$/, "")}\n${line}\n`;
+  const next = /^SPOTIFY_REFRESH_TOKEN=.*$/mu.test(contents)
+    ? contents.replace(/^SPOTIFY_REFRESH_TOKEN=.*$/mu, line)
+    : `${contents.replace(/\s*$/u, "")}\n${line}\n`;
   await writeFile(ENV_PATH, next);
 };
 

@@ -9,7 +9,7 @@ describe("url", () => {
   test("constructs url from environment variables", async () => {
     const { url } = await import("../lib/url");
 
-    expect(url).toMatch(/^https?:\/\/.+/);
+    expect(url).toMatch(/^https?:\/\/.+/u);
   });
 
   test("protocol logic uses https for production", () => {

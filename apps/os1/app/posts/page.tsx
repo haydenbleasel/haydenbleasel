@@ -54,7 +54,7 @@ const groupByWeek = (posts: TypefullyPostWithAnalytics[]) => {
 };
 
 const formatPostText = (text: string) => {
-  const parts = text.replaceAll(/\n{2,}/g, " ").split(/(@\w+)/g);
+  const parts = text.replaceAll(/\n{2,}/gu, " ").split(/(@\w+)/gu);
   return parts.map((part) =>
     part.startsWith("@") ? (
       <span key={part} className="text-blue-500">

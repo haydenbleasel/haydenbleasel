@@ -9,21 +9,22 @@ interface OkuBook {
 
 const parseItems = (xml: string): OkuBook[] => {
   const items: OkuBook[] = [];
-  const itemRegex = /<item>([\s\S]*?)<\/item>/g;
+  const itemRegex = /<item>([\s\S]*?)<\/item>/gu;
 
   let match = itemRegex.exec(xml);
   while (match) {
     const [, content] = match;
 
     const get = (tag: string) => {
-      const tagMatch = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`).exec(
-        content
-      );
+      const tagMatch = new RegExp(
+        `<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`,
+        "u"
+      ).exec(content);
       return tagMatch?.[1]?.trim() ?? "";
     };
 
-    const coverMatch = /<oku:cover>([^<]*)<\/oku:cover>/.exec(content);
-    const enclosureMatch = /enclosure[^>]+url="([^"]*)"/.exec(content);
+    const coverMatch = /<oku:cover>([^<]*)<\/oku:cover>/u.exec(content);
+    const enclosureMatch = /enclosure[^>]+url="([^"]*)"/u.exec(content);
 
     items.push({
       author: get("dc:creator"),
