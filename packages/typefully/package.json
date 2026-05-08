@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@haydenbleasel/typescript-config": "workspace:*",
-    "@types/node": "^25.6.1",
+    "@types/node": "^25.6.2",
     "openapi-typescript": "^7.13.0",
     "typescript": "^6"
   }
