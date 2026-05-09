@@ -131,24 +131,88 @@ const NextForgeLogo = (props: ComponentProps<"svg">) => (
 
 const GhostLogo = (props: ComponentProps<"svg">) => (
   <svg
-    viewBox="0 0 14 16"
+    viewBox="0 0 25 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
     <title>Ghost</title>
+    <path d="M12 24H13V25H11V23H12V24Z" fill="var(--border)" />
     <path
-      d="M12.5 7C12.5 3.96243 10.0376 1.5 7 1.5C3.96243 1.5 1.5 3.96243 1.5 7V14.2754L1.91992 13.8848C2.79553 13.0691 4.09852 12.9133 5.1416 13.5L6.87695 14.4766C6.95321 14.5194 7.04679 14.5194 7.12305 14.4766L8.8584 13.5C9.9015 12.9133 11.2045 13.0691 12.0801 13.8848L12.5 14.2754V7ZM14 14.667C14 15.8294 12.6139 16.4319 11.7637 15.6396L11.0576 14.9824C10.6598 14.6118 10.0677 14.541 9.59375 14.8076L7.8584 15.7842C7.32581 16.0835 6.67516 16.0835 6.14258 15.7842L4.40625 14.8076C3.93237 14.5411 3.34025 14.6118 2.94238 14.9824L2.23633 15.6396C1.38606 16.4319 0 15.8294 0 14.667V7C0 3.13401 3.13401 0 7 0C10.866 0 14 3.13401 14 7V14.667Z"
-      fill="currentColor"
+      d="M6 19H7V20H8V14H9V17H10V21H11V23H10V22H9V21H8V22H7V23H6V20H5V13H4V15H3V14H2V13H3V12H5V10H6V19Z"
+      fill="var(--border)"
     />
     <path
-      d="M4 6C4 5.44772 4.44772 5 5 5C5.55222 5 6 5.44769 6 6C6 6.55224 5.55224 7 5 7C4.44769 7 4 6.55222 4 6Z"
-      fill="currentColor"
+      d="M22 13H21V14H20V13H19V17H20V18H21V20H22V22H23V23H24V24H21V22H20V21H19V20H18V19H17V14H18V12H21V11H22V13Z"
+      fill="var(--border)"
     />
+    <path d="M15 11H16V13H15V11Z" fill="var(--border)" />
     <path
-      d="M8 6C8 5.44769 8.44778 5 9 5C9.55222 5 10 5.44769 10 6C10 6.55224 9.55224 7 9 7C8.44776 7 8 6.55224 8 6Z"
+      d="M13 16H14V18H15V20H16V21H17V22H19V23H18V24H17V25H14V20H13V17H12V14H13V16Z"
+      fill="var(--border)"
+    />
+    <path d="M9 7H10V9H9V10H8V9H7V7H8V6H9V7Z" fill="currentColor" />
+    <path d="M10 10H12V11H10V10Z" fill="currentColor" />
+    <path d="M14 7H15V9H14V10H13V9H12V7H13V6H14V7Z" fill="currentColor" />
+    <path d="M13 26H11V25H13V26Z" fill="currentColor" />
+    <path d="M17 26H14V25H17V26Z" fill="currentColor" />
+    <path d="M11 25H10V23H11V25Z" fill="currentColor" />
+    <path d="M14 25H13V24H14V25Z" fill="currentColor" />
+    <path d="M18 25H17V24H18V25Z" fill="currentColor" />
+    <path d="M24 25H21V24H24V25Z" fill="currentColor" />
+    <path d="M7 24H6V23H7V24Z" fill="currentColor" />
+    <path d="M13 24H12V23H13V24Z" fill="currentColor" />
+    <path d="M21 24H18V23H21V24Z" fill="currentColor" />
+    <path d="M25 24H24V23H25V24Z" fill="currentColor" />
+    <path d="M6 23H5V20H6V23Z" fill="currentColor" />
+    <path d="M8 23H7V22H8V23Z" fill="currentColor" />
+    <path d="M10 23H9V22H10V23Z" fill="currentColor" />
+    <path d="M24 23H23V22H24V23Z" fill="currentColor" />
+    <path d="M9 22H8V21H9V22Z" fill="currentColor" />
+    <path d="M23 22H22V20H23V22Z" fill="currentColor" />
+    <path d="M5 20H4V16H3V15H4V13H5V20Z" fill="currentColor" />
+    <path d="M22 20H21V18H22V20Z" fill="currentColor" />
+    <path d="M21 18H20V17H21V18Z" fill="currentColor" />
+    <path d="M20 14H21V15H20V17H19V13H20V14Z" fill="currentColor" />
+    <path d="M3 15H2V14H3V15Z" fill="currentColor" />
+    <path d="M2 14H1V13H2V14Z" fill="currentColor" />
+    <path d="M22 14H21V13H22V14Z" fill="currentColor" />
+    <path d="M1 13H0V9H1V13Z" fill="currentColor" />
+    <path d="M23 13H22V10H23V13Z" fill="currentColor" />
+    <path d="M17 11H16V10H17V11Z" fill="currentColor" />
+    <path d="M6 10H5V9H4V8H5V5H6V10Z" fill="currentColor" />
+    <path d="M18 10H17V9H18V10Z" fill="currentColor" />
+    <path d="M22 10H21V9H22V10Z" fill="currentColor" />
+    <path d="M2 9H1V8H2V9Z" fill="currentColor" />
+    <path d="M19 8H21V9H18V5H19V8Z" fill="currentColor" />
+    <path d="M4 8H2V7H4V8Z" fill="currentColor" />
+    <path d="M7 5H6V3H7V5Z" fill="currentColor" />
+    <path d="M18 5H17V3H18V5Z" fill="currentColor" />
+    <path d="M8 3H7V2H8V3Z" fill="currentColor" />
+    <path d="M17 3H16V2H17V3Z" fill="currentColor" />
+    <path d="M10 2H8V1H10V2Z" fill="currentColor" />
+    <path d="M16 2H14V1H16V2Z" fill="currentColor" />
+    <path d="M14 1H10V0H14V1Z" fill="currentColor" />
+    <path
+      d="M20 30H21V31H18V32H9V31H5V30H6V29H8V28H18V29H20V30Z"
       fill="currentColor"
     />
+  </svg>
+);
+
+const FilesSDKLogo = (props: ComponentProps<"svg">) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="currentColor"
+    viewBox="0 0 256 256"
+    {...props}
+  >
+    <title>Files SDK</title>
+    <path
+      d="M208,72V184a8,8,0,0,1-8,8H176V104L136,64H80V40a8,8,0,0,1,8-8h80Z"
+      opacity="0.2"
+    />
+    <path d="M213.66,66.34l-40-40A8,8,0,0,0,168,24H88A16,16,0,0,0,72,40V56H56A16,16,0,0,0,40,72V216a16,16,0,0,0,16,16H168a16,16,0,0,0,16-16V200h16a16,16,0,0,0,16-16V72A8,8,0,0,0,213.66,66.34ZM168,216H56V72h76.69L168,107.31v84.53c0,.06,0,.11,0,.16s0,.1,0,.16V216Zm32-32H184V104a8,8,0,0,0-2.34-5.66l-40-40A8,8,0,0,0,136,56H88V40h76.69L200,75.31Zm-56-32a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h48A8,8,0,0,1,144,152Zm0,32a8,8,0,0,1-8,8H88a8,8,0,0,1,0-16h48A8,8,0,0,1,144,184Z" />
   </svg>
 );
 
@@ -158,6 +222,12 @@ const projects: Project[] = [
     logo: UltraciteLogo,
     name: "Ultracite",
     url: "https://www.ultracite.ai",
+  },
+  {
+    description: "A unified storage SDK for object and blob backends.",
+    logo: FilesSDKLogo,
+    name: "Files SDK",
+    url: "https://files-sdk.dev",
   },
   {
     description: "Simple, reliable dedicated game servers.",
