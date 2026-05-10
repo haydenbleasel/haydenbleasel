@@ -42,6 +42,26 @@ export const getWorkRepositories = async () => {
   return results;
 };
 
+const formerRepos = [
+  "shadcnblocks/kibo",
+  "KayleeWilliams/joyful",
+  "itgalaxy/favicons",
+  "gulp-community/gulp-favicons",
+  "nitinthewiz/ghost-phantom",
+];
+
+export const getFormerRepositories = async () => {
+  const results = await Promise.all(
+    formerRepos.map(async (fullName) => {
+      const [owner, repo] = fullName.split("/");
+      const { data } = await octokit.rest.repos.get({ owner, repo });
+      return data;
+    })
+  );
+
+  return results;
+};
+
 export const getContributions = async () => {
   const data = await octokit.graphql<{
     user: {

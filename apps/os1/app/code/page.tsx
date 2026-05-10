@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { unstable_cache } from "next/cache";
 
 import { PageHeader } from "@/components/page-header";
-import { getRepositories, getWorkRepositories } from "@/lib/github";
+import {
+  getFormerRepositories,
+  getRepositories,
+  getWorkRepositories,
+} from "@/lib/github";
 import { getBulkDownloads, getPackages } from "@/lib/npm";
 import type { NpmPackage } from "@/lib/npm";
 
@@ -54,12 +58,14 @@ const formatNumber = (num: number) => {
 };
 
 const CodePage = async () => {
-  const [repos, workRepos, contributionData, packages] = await Promise.all([
-    getRepositories(),
-    getWorkRepositories(),
-    getCachedContributions(),
-    getPackages(),
-  ]);
+  const [repos, workRepos, formerRepos, contributionData, packages] =
+    await Promise.all([
+      getRepositories(),
+      getWorkRepositories(),
+      getFormerRepositories(),
+      getCachedContributions(),
+      getPackages(),
+    ]);
 
   const downloads = await getBulkDownloads(
     packages.map((pkg: NpmPackage) => pkg.name)
@@ -171,6 +177,45 @@ const CodePage = async () => {
         </div>
         <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
           {workRepos
+            .toSorted(
+              (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
+            )
+            .map((repo) => (
+              <a
+                key={repo.id}
+                href={repo.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="col-span-4 grid grid-cols-subgrid items-center rounded-lg px-3 py-2 transition-colors hover:bg-accent"
+              >
+                <div className="min-w-0">
+                  <p className="truncate font-medium">{repo.full_name}</p>
+                  {repo.description && (
+                    <p className="truncate text-xs text-muted-foreground">
+                      {repo.description}
+                    </p>
+                  )}
+                </div>
+                <LanguageIcon language={repo.language ?? null} />
+                <span className="text-right text-sm text-muted-foreground">
+                  {formatNumber(repo.stargazers_count ?? 0)} stars
+                </span>
+                <span className="text-right text-sm text-muted-foreground">
+                  {formatNumber(repo.forks_count ?? 0)} forks
+                </span>
+              </a>
+            ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
+        <div className="px-4 pt-2 pb-1">
+          <h2 className="text-sm font-medium text-muted-foreground">
+            Former Repositories
+          </h2>
+        </div>
+        <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
+          {formerRepos
             .toSorted(
               (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
             )
