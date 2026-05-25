@@ -172,12 +172,9 @@ export const PatternList = ({
 
   return (
     <Sidebar>
-      <SidebarHeader>
-        <div className="flex items-center justify-between px-2 py-1.5">
-          <div>
-            <p className="font-semibold text-sm">Studio</p>
-            <p className="text-muted-foreground text-xs">Strudel Lab</p>
-          </div>
+      <SidebarHeader className="border-b h-12">
+        <div className="flex items-center justify-between px-2">
+          <p className="font-semibold text-sm">Pulse</p>
           <Button
             aria-label="New pattern"
             onClick={onNewPattern}

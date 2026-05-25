@@ -32,9 +32,10 @@ import {
 } from "@haydenbleasel/design-system/components/ai-elements/suggestion";
 import { Button } from "@haydenbleasel/design-system/components/ui/button";
 import { DefaultChatTransport } from "ai";
-import { Loader2, Sparkles, X } from "lucide-react";
+import { Check, Loader2, Sparkles, Trash2, X } from "lucide-react";
 import { useCallback, useMemo, useRef } from "react";
 
+import type { PulseUIMessage } from "@/lib/agent";
 import { AI_TOKEN_HEADER, getAiToken, hasAiToken } from "@/lib/ai-token";
 
 interface Props {
@@ -45,29 +46,30 @@ interface Props {
   onClose: () => void;
 }
 
-// The server returns plain code (no fences), but strip a wrapping code fence
-// defensively in case the model adds one despite being told not to.
-const FENCE_RE = /^```(?:js|javascript|strudel)?\s*\n([\s\S]*?)\n```\s*$/u;
-
-const cleanMergedCode = (text: string): string => {
-  const fenced = text.match(FENCE_RE);
-  return (fenced?.[1] ?? text).trim();
-};
-
-const textOf = (parts: { type: string; text?: string }[]): string =>
-  parts.map((part) => (part.type === "text" ? (part.text ?? "") : "")).join("");
-
-// Starter prompts shown before the conversation begins.
+// Starter prompts shown before the conversation begins — a mix of edits and
+// questions, since the assistant now answers as well as edits.
 const SUGGESTIONS = [
   "Add a drum beat",
+  "What should I add next?",
   "Add a bassline",
-  "Make it more melodic",
+  "Explain this pattern",
+  "Make it sound darker",
   "Add reverb and delay",
   "Speed up the tempo",
-  "Make it sound darker",
-  "Add a hi-hat pattern",
   "Simplify this pattern",
 ];
+
+// The editor already shows the merged code, so apply the latest editPattern
+// result to it (the last one wins if a turn made several edits).
+const mergedCodeFrom = (message: PulseUIMessage): string | null => {
+  let code: string | null = null;
+  for (const part of message.parts) {
+    if (part.type === "tool-editPattern" && part.state === "output-available") {
+      ({ code } = part.output);
+    }
+  }
+  return code;
+};
 
 export const ChatPanel = ({
   activePath,
@@ -83,25 +85,26 @@ export const ChatPanel = ({
 
   const transport = useMemo(
     () =>
-      new DefaultChatTransport({
+      new DefaultChatTransport<PulseUIMessage>({
         api: "/api/chat",
         headers: () => ({ [AI_TOKEN_HEADER]: getAiToken() }),
       }),
     []
   );
 
-  const { messages, sendMessage, status, stop, error } = useChat({
-    onFinish: ({ message, isAbort, isError }) => {
-      if (isAbort || isError) {
-        return;
-      }
-      const merged = cleanMergedCode(textOf(message.parts));
-      if (merged.length > 0) {
-        onCodeUpdate(merged);
-      }
-    },
-    transport,
-  });
+  const { messages, sendMessage, setMessages, status, stop, error } =
+    useChat<PulseUIMessage>({
+      onFinish: ({ message, isAbort, isError }) => {
+        if (isAbort || isError) {
+          return;
+        }
+        const merged = mergedCodeFrom(message);
+        if (merged) {
+          onCodeUpdate(merged);
+        }
+      },
+      transport,
+    });
 
   const isGenerating = status === "submitted" || status === "streaming";
 
@@ -123,6 +126,13 @@ export const ChatPanel = ({
     },
     [isGenerating, onRequestToken, sendMessage]
   );
+
+  const handleClear = useCallback(() => {
+    if (isGenerating) {
+      stop();
+    }
+    setMessages([]);
+  }, [isGenerating, stop, setMessages]);
 
   const handleSuggestion = useCallback(
     (suggestion: string) => {
@@ -148,51 +158,98 @@ export const ChatPanel = ({
           <Sparkles className="size-4 shrink-0 text-muted-foreground" />
           <p className="font-medium text-sm">Assistant</p>
         </div>
-        <Button
-          aria-label="Close assistant"
-          onClick={onClose}
-          size="icon-sm"
-          variant="ghost"
-        >
-          <X />
-        </Button>
+        <div className="flex items-center gap-1">
+          <Button
+            aria-label="Clear conversation"
+            disabled={messages.length === 0}
+            onClick={handleClear}
+            size="icon-sm"
+            variant="ghost"
+          >
+            <Trash2 />
+          </Button>
+          <Button
+            aria-label="Close assistant"
+            onClick={onClose}
+            size="icon-sm"
+            variant="ghost"
+          >
+            <X />
+          </Button>
+        </div>
       </div>
 
       <Conversation className="flex-1">
         <ConversationContent>
           {messages.length === 0 ? (
             <ConversationEmptyState
-              description="Describe a change and the assistant will edit the current pattern."
+              description="Ask about the track or describe a change — the assistant edits the pattern when you ask it to."
               icon={<Sparkles className="size-5" />}
-              title="Edit with AI"
+              title="Chat & edit with AI"
             />
           ) : (
             messages.map((message) => (
               <Message from={message.role} key={message.id}>
                 {message.parts.map((part, index) => {
+                  const key = `${message.id}-${index}`;
+
                   if (part.type === "reasoning") {
+                    // Some turns (often those ending in a tool call) stream a
+                    // reasoning part with no summary text; skip it rather than
+                    // show an empty "Thought for Ns" panel that expands to
+                    // nothing.
+                    if (!part.text.trim()) {
+                      return null;
+                    }
                     return (
                       <Reasoning
                         className="w-full"
                         isStreaming={part.state === "streaming"}
-                        key={`${message.id}-${index}`}
+                        key={key}
                       >
                         <ReasoningTrigger />
                         <ReasoningContent>{part.text}</ReasoningContent>
                       </Reasoning>
                     );
                   }
+
                   if (part.type === "text") {
                     return (
-                      <MessageContent key={`${message.id}-${index}`}>
-                        <MessageResponse>
-                          {message.role === "assistant"
-                            ? `\`\`\`js\n${part.text}\n\`\`\``
-                            : part.text}
-                        </MessageResponse>
+                      <MessageContent key={key}>
+                        <MessageResponse>{part.text}</MessageResponse>
                       </MessageContent>
                     );
                   }
+
+                  if (part.type === "tool-editPattern") {
+                    if (part.state === "output-error") {
+                      return (
+                        <div
+                          className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-destructive text-xs"
+                          key={key}
+                        >
+                          {part.errorText ?? "The edit failed."}
+                        </div>
+                      );
+                    }
+                    const done = part.state === "output-available";
+                    return (
+                      <div
+                        className="flex items-center gap-2 text-muted-foreground text-xs"
+                        key={key}
+                      >
+                        {done ? (
+                          <Check className="size-3.5 text-emerald-500" />
+                        ) : (
+                          <Loader2 className="size-3.5 animate-spin" />
+                        )}
+                        <span>
+                          {done ? "Updated pattern" : "Editing pattern…"}
+                        </span>
+                      </div>
+                    );
+                  }
+
                   return null;
                 })}
               </Message>
@@ -228,7 +285,7 @@ export const ChatPanel = ({
         ) : null}
         <PromptInput onSubmit={handleSubmit}>
           <PromptInputBody>
-            <PromptInputTextarea placeholder="Edit the pattern…" />
+            <PromptInputTextarea placeholder="Ask or edit…" />
           </PromptInputBody>
           <PromptInputFooter>
             <PromptInputTools />
