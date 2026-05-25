@@ -256,7 +256,7 @@ export const ChatPanel = ({
                     }
                     return (
                       <Reasoning
-                        className="w-full"
+                        className="w-full wrap-anywhere"
                         isStreaming={part.state === "streaming"}
                         key={key}
                       >

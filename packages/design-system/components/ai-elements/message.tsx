@@ -328,6 +328,10 @@ export const MessageResponse = memo(
     <Streamdown
       className={cn(
         "size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
+        // Long inline code (e.g. a method chain with no spaces) can't break on
+        // its own and overflows the message; let it wrap. Fenced code blocks use
+        // a different element, so they keep their horizontal scroll.
+        "[&_[data-streamdown=inline-code]]:wrap-anywhere",
         className
       )}
       plugins={streamdownPlugins}
