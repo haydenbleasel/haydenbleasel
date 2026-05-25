@@ -1,5 +1,3 @@
-import { STRUDEL_BASICS, STRUDEL_SOUNDS } from "@/lib/prompts/strudel";
-
 // The planning half of the pipeline. The planning model reads the current
 // pattern and the instruction and emits a *lazy* edit snippet; Morph then
 // merges it into the full file, so the model never rewrites untouched code.
@@ -15,8 +13,4 @@ Rules:
 - Keep one or two real lines of surrounding context around each change so the snippet can be located unambiguously.
 - Put a \`// ... existing code ...\` marker wherever you skip unchanged lines — including the start and end of the file if it continues there. Any region you neither show nor cover with a marker is treated as deleted.
 - To delete lines, show the kept line just before and just after the deletion next to each other, with no marker between them.
-- Output ONLY the snippet. No prose, no explanations, no Markdown code fences.
-
-${STRUDEL_BASICS}
-
-${STRUDEL_SOUNDS}`;
+- Output ONLY the snippet. No prose, no explanations, no Markdown code fences.`;

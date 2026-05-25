@@ -1,8 +1,16 @@
-import { createGateway, generateText, streamText } from "ai";
+import {
+  createGateway,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  isTextUIPart,
+  streamText,
+} from "ai";
+import type { UIMessage } from "ai";
 
 import { AI_TOKEN_HEADER } from "@/lib/ai-token";
 import { NEW_PATTERN_SYSTEM } from "@/lib/prompts/generate";
 import { PLAN_SYSTEM } from "@/lib/prompts/morph";
+import { STRUDEL_SKILL } from "@/lib/prompts/strudel";
 
 export const maxDuration = 60;
 
@@ -11,8 +19,8 @@ const APPLY_MODEL = "morph/morph-v3-fast";
 
 // Strudel is a niche DSL and the lazy-marker format is unforgiving (an unmarked
 // region gets deleted on merge), so the planning model needs real reasoning.
-// Sonnet runs with extended thinking enabled; the AI SDK keeps thinking out of
-// `.text` (and out of the text stream), so only the snippet flows on to Morph.
+// Sonnet runs with extended thinking enabled and we forward that thinking to the
+// client as reasoning parts so it shows up in the chat.
 const THINKING_BUDGET = 4096;
 
 const PLAN_PROVIDER_OPTIONS = {
@@ -30,6 +38,20 @@ const stripFences = (text: string): string => {
   return (fenced?.[1] ?? text).trim();
 };
 
+// useChat sends the whole transcript; this pipeline only acts on the latest
+// instruction, so pull the text out of the final user message.
+const latestInstruction = (messages: UIMessage[]): string => {
+  const last = messages.at(-1);
+  if (!last || last.role !== "user") {
+    return "";
+  }
+  return last.parts
+    .filter(isTextUIPart)
+    .map((part) => part.text)
+    .join("")
+    .trim();
+};
+
 export const POST = async (req: Request) => {
   const apiKey = req.headers.get(AI_TOKEN_HEADER)?.trim();
   if (!apiKey) {
@@ -39,75 +61,128 @@ export const POST = async (req: Request) => {
   }
 
   const {
-    prompt,
+    messages = [],
     currentCode,
     activePath,
   }: {
-    prompt: string;
+    messages?: UIMessage[];
     currentCode?: string;
     activePath?: string | null;
   } = await req.json();
 
+  const prompt = latestInstruction(messages);
   const gateway = createGateway({ apiKey });
   const source = currentCode ?? "";
 
-  // New / empty pattern: nothing to diff, so generate the whole pattern directly.
-  if (source.trim().length === 0) {
-    const result = streamText({
-      model: gateway(PLAN_MODEL),
-      prompt: [
-        activePath ? `New pattern: ${activePath}` : "New pattern.",
-        "",
-        "Instruction:",
-        prompt,
-      ].join("\n"),
-      providerOptions: PLAN_PROVIDER_OPTIONS,
-      system: NEW_PATTERN_SYSTEM,
-    });
-    return result.toTextStreamResponse();
-  }
+  const stream = createUIMessageStream({
+    execute: async ({ writer }) => {
+      writer.write({ type: "start" });
 
-  // Existing pattern: Claude plans a lazy snippet, Morph applies it.
-  let snippet: string;
-  try {
-    const planned = await generateText({
-      model: gateway(PLAN_MODEL),
-      prompt: [
-        activePath ? `Active pattern: ${activePath}` : "",
-        "Current pattern:",
-        "```js",
-        source,
-        "```",
-        "",
-        "Edit instruction:",
-        prompt,
-      ].join("\n"),
-      providerOptions: PLAN_PROVIDER_OPTIONS,
-      system: PLAN_SYSTEM,
-    });
-    snippet = stripFences(planned.text);
-  } catch (error) {
-    return new Response(`Planning step failed: ${String(error)}`, {
-      status: 502,
-    });
-  }
+      // New / empty pattern: nothing to diff, so the planning model writes the
+      // whole pattern. Forward both its thinking and the resulting code.
+      if (source.trim().length === 0) {
+        const result = streamText({
+          model: gateway(PLAN_MODEL),
+          prompt: [
+            activePath ? `New pattern: ${activePath}` : "New pattern.",
+            "",
+            "Instruction:",
+            prompt,
+          ].join("\n"),
+          providerOptions: PLAN_PROVIDER_OPTIONS,
+          system: NEW_PATTERN_SYSTEM,
+        });
 
-  if (snippet.length === 0) {
-    return new Response("Model returned no edit.", { status: 422 });
-  }
+        for await (const part of result.fullStream) {
+          if (part.type === "reasoning-start") {
+            writer.write({ id: part.id, type: "reasoning-start" });
+          } else if (part.type === "reasoning-delta") {
+            writer.write({
+              delta: part.text,
+              id: part.id,
+              type: "reasoning-delta",
+            });
+          } else if (part.type === "reasoning-end") {
+            writer.write({ id: part.id, type: "reasoning-end" });
+          } else if (part.type === "text-start") {
+            writer.write({ id: part.id, type: "text-start" });
+          } else if (part.type === "text-delta") {
+            writer.write({ delta: part.text, id: part.id, type: "text-delta" });
+          } else if (part.type === "text-end") {
+            writer.write({ id: part.id, type: "text-end" });
+          }
+        }
 
-  // Morph wants the instruction, the full original file, and the lazy snippet
-  // as a single user message, with deterministic sampling.
-  const merged = streamText({
-    messages: [
-      {
-        content: `<instruction>${prompt}</instruction>\n<code>${source}</code>\n<update>${snippet}</update>`,
-        role: "user",
-      },
-    ],
-    model: gateway(APPLY_MODEL),
-    topP: 1,
+        writer.write({ type: "finish" });
+        return;
+      }
+
+      // Existing pattern: Claude plans a lazy snippet. Stream its thinking, but
+      // hold back its text — the snippet is an intermediate artifact. Morph then
+      // merges the snippet into the full file, and that becomes the visible code.
+      const planning = streamText({
+        model: gateway(PLAN_MODEL),
+        prompt: [
+          activePath ? `Active pattern: ${activePath}` : "",
+          "Current pattern:",
+          "```js",
+          source,
+          "```",
+          "",
+          "Edit instruction:",
+          prompt,
+        ].join("\n"),
+        providerOptions: PLAN_PROVIDER_OPTIONS,
+        system: `${PLAN_SYSTEM}\n\n${STRUDEL_SKILL}`,
+      });
+
+      for await (const part of planning.fullStream) {
+        if (part.type === "reasoning-start") {
+          writer.write({ id: part.id, type: "reasoning-start" });
+        } else if (part.type === "reasoning-delta") {
+          writer.write({
+            delta: part.text,
+            id: part.id,
+            type: "reasoning-delta",
+          });
+        } else if (part.type === "reasoning-end") {
+          writer.write({ id: part.id, type: "reasoning-end" });
+        }
+      }
+
+      const snippet = stripFences(await planning.text);
+      if (snippet.length === 0) {
+        throw new Error("Model returned no edit.");
+      }
+
+      // Morph wants the instruction, the full original file, and the lazy
+      // snippet as a single user message, with deterministic sampling.
+      const merged = streamText({
+        messages: [
+          {
+            content: `<instruction>${prompt}</instruction>\n<code>${source}</code>\n<update>${snippet}</update>`,
+            role: "user",
+          },
+        ],
+        model: gateway(APPLY_MODEL),
+        topP: 1,
+      });
+
+      for await (const part of merged.fullStream) {
+        if (part.type === "text-start") {
+          writer.write({ id: part.id, type: "text-start" });
+        } else if (part.type === "text-delta") {
+          writer.write({ delta: part.text, id: part.id, type: "text-delta" });
+        } else if (part.type === "text-end") {
+          writer.write({ id: part.id, type: "text-end" });
+        }
+      }
+
+      writer.write({ type: "finish" });
+    },
+    onError: (error) =>
+      error instanceof Error ? error.message : String(error),
   });
 
-  return merged.toTextStreamResponse();
+  return createUIMessageStreamResponse({ stream });
 };

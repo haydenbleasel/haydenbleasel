@@ -1,5 +1,6 @@
 "use client";
 
+import { useChat } from "@ai-sdk/react";
 import {
   Conversation,
   ConversationContent,
@@ -20,10 +21,15 @@ import {
   PromptInputTools,
 } from "@haydenbleasel/design-system/components/ai-elements/prompt-input";
 import type { PromptInputMessage } from "@haydenbleasel/design-system/components/ai-elements/prompt-input";
+import {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+} from "@haydenbleasel/design-system/components/ai-elements/reasoning";
 import { Button } from "@haydenbleasel/design-system/components/ui/button";
-import type { ChatStatus } from "ai";
+import { DefaultChatTransport } from "ai";
 import { Loader2, Sparkles, X } from "lucide-react";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef } from "react";
 
 import { AI_TOKEN_HEADER, getAiToken, hasAiToken } from "@/lib/ai-token";
 
@@ -35,12 +41,6 @@ interface Props {
   onClose: () => void;
 }
 
-interface ChatMessage {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-}
-
 // The server returns plain code (no fences), but strip a wrapping code fence
 // defensively in case the model adds one despite being told not to.
 const FENCE_RE = /^```(?:js|javascript|strudel)?\s*\n([\s\S]*?)\n```\s*$/u;
@@ -50,6 +50,9 @@ const cleanMergedCode = (text: string): string => {
   return (fenced?.[1] ?? text).trim();
 };
 
+const textOf = (parts: { type: string; text?: string }[]): string =>
+  parts.map((part) => (part.type === "text" ? (part.text ?? "") : "")).join("");
+
 export const ChatPanel = ({
   activePath,
   currentCode,
@@ -57,18 +60,37 @@ export const ChatPanel = ({
   onRequestToken,
   onClose,
 }: Props) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [status, setStatus] = useState<ChatStatus>("ready");
   const codeRef = useRef(currentCode);
   const pathRef = useRef(activePath);
-  const abortRef = useRef<AbortController | null>(null);
   codeRef.current = currentCode;
   pathRef.current = activePath;
+
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport({
+        api: "/api/chat",
+        headers: () => ({ [AI_TOKEN_HEADER]: getAiToken() }),
+      }),
+    []
+  );
+
+  const { messages, sendMessage, status, stop, error } = useChat({
+    onFinish: ({ message, isAbort, isError }) => {
+      if (isAbort || isError) {
+        return;
+      }
+      const merged = cleanMergedCode(textOf(message.parts));
+      if (merged.length > 0) {
+        onCodeUpdate(merged);
+      }
+    },
+    transport,
+  });
 
   const isGenerating = status === "submitted" || status === "streaming";
 
   const handleSubmit = useCallback(
-    async (message: PromptInputMessage) => {
+    (message: PromptInputMessage) => {
       const prompt = message.text.trim();
       if (!prompt || isGenerating) {
         return;
@@ -78,84 +100,13 @@ export const ChatPanel = ({
         // Throw so PromptInput keeps the typed prompt instead of clearing it.
         throw new Error("Add your AI Gateway key in Settings to use the AI.");
       }
-
-      // Commit the user turn; PromptInput clears the textarea on success.
-      const assistantId = crypto.randomUUID();
-      setMessages((prev) => [
-        ...prev,
-        { content: prompt, id: crypto.randomUUID(), role: "user" },
-        { content: "", id: assistantId, role: "assistant" },
-      ]);
-      setStatus("submitted");
-
-      const controller = new AbortController();
-      abortRef.current = controller;
-
-      const updateAssistant = (content: string) =>
-        setMessages((prev) =>
-          prev.map((m) => (m.id === assistantId ? { ...m, content } : m))
-        );
-
-      try {
-        const res = await fetch("/api/chat", {
-          body: JSON.stringify({
-            activePath: pathRef.current,
-            currentCode: codeRef.current,
-            prompt,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-            [AI_TOKEN_HEADER]: getAiToken(),
-          },
-          method: "POST",
-          signal: controller.signal,
-        });
-
-        if (!res.ok) {
-          const body = await res.text();
-          throw new Error(body.trim() || `Request failed: ${res.status}`);
-        }
-        if (!res.body) {
-          throw new Error("No response from the model.");
-        }
-
-        setStatus("streaming");
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        let raw = "";
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            break;
-          }
-          raw += decoder.decode(value, { stream: true });
-          updateAssistant(`\`\`\`js\n${raw}\n\`\`\``);
-        }
-
-        const merged = cleanMergedCode(raw);
-        if (merged.length === 0) {
-          throw new Error("Model returned no usable edit.");
-        }
-        onCodeUpdate(merged);
-        setStatus("ready");
-      } catch (error) {
-        if (controller.signal.aborted) {
-          setStatus("ready");
-          return;
-        }
-        const text = error instanceof Error ? error.message : String(error);
-        updateAssistant(`⚠️ ${text}`);
-        setStatus("error");
-      } finally {
-        abortRef.current = null;
-      }
+      sendMessage(
+        { text: prompt },
+        { body: { activePath: pathRef.current, currentCode: codeRef.current } }
+      );
     },
-    [isGenerating, onCodeUpdate, onRequestToken]
+    [isGenerating, onRequestToken, sendMessage]
   );
-
-  const handleStop = useCallback(() => {
-    abortRef.current?.abort();
-  }, []);
 
   return (
     <aside className="flex h-svh w-96 shrink-0 flex-col border-border border-l bg-background">
@@ -183,18 +134,49 @@ export const ChatPanel = ({
               title="Edit with AI"
             />
           ) : (
-            messages.map((m) => (
-              <Message from={m.role} key={m.id}>
-                <MessageContent>
-                  {m.content ? (
-                    <MessageResponse>{m.content}</MessageResponse>
-                  ) : (
-                    <Loader2 className="size-4 animate-spin text-muted-foreground" />
-                  )}
-                </MessageContent>
+            messages.map((message) => (
+              <Message from={message.role} key={message.id}>
+                {message.parts.map((part, index) => {
+                  if (part.type === "reasoning") {
+                    return (
+                      <Reasoning
+                        className="w-full"
+                        isStreaming={part.state === "streaming"}
+                        key={`${message.id}-${index}`}
+                      >
+                        <ReasoningTrigger />
+                        <ReasoningContent>{part.text}</ReasoningContent>
+                      </Reasoning>
+                    );
+                  }
+                  if (part.type === "text") {
+                    return (
+                      <MessageContent key={`${message.id}-${index}`}>
+                        <MessageResponse>
+                          {message.role === "assistant"
+                            ? `\`\`\`js\n${part.text}\n\`\`\``
+                            : part.text}
+                        </MessageResponse>
+                      </MessageContent>
+                    );
+                  }
+                  return null;
+                })}
               </Message>
             ))
           )}
+          {status === "submitted" ? (
+            <Message from="assistant">
+              <MessageContent>
+                <Loader2 className="size-4 animate-spin text-muted-foreground" />
+              </MessageContent>
+            </Message>
+          ) : null}
+          {error ? (
+            <div className="rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-destructive text-xs">
+              {error.message}
+            </div>
+          ) : null}
         </ConversationContent>
         <ConversationScrollButton />
       </Conversation>
@@ -212,7 +194,7 @@ export const ChatPanel = ({
                 </span>
               ) : null}
             </PromptInputTools>
-            <PromptInputSubmit onStop={handleStop} status={status} />
+            <PromptInputSubmit onStop={stop} status={status} />
           </PromptInputFooter>
         </PromptInput>
       </div>
