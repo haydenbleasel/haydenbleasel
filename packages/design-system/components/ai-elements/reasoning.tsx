@@ -54,7 +54,8 @@ export const Reasoning = ({
 }: ReasoningProps) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const [duration, setDuration] = useState(durationProp ?? 0);
-  const [hasAutoOpened, setHasAutoOpened] = useState(false);
+  const hasAutoOpened = useRef(false);
+  const hasAutoClosed = useRef(false);
   const startedAt = useRef<number | null>(null);
 
   // Time the reasoning across the streaming window so we can report how long
@@ -71,17 +72,23 @@ export const Reasoning = ({
     }
   }, [isStreaming, durationProp]);
 
-  // Open while the model is thinking, then collapse shortly after it stops.
+  // Open once while the model is thinking, then collapse once shortly after it
+  // stops. Keyed only off isStreaming (not isOpen) so reopening the panel by hand
+  // after it finishes doesn't re-arm the auto-close.
   useEffect(() => {
-    if (isStreaming && !(isOpen || hasAutoOpened)) {
-      setIsOpen(true);
-      setHasAutoOpened(true);
+    if (isStreaming) {
+      if (!hasAutoOpened.current) {
+        hasAutoOpened.current = true;
+        setIsOpen(true);
+      }
+      return;
     }
-    if (!isStreaming && isOpen && hasAutoOpened) {
+    if (hasAutoOpened.current && !hasAutoClosed.current) {
+      hasAutoClosed.current = true;
       const timer = setTimeout(() => setIsOpen(false), AUTO_CLOSE_DELAY);
       return () => clearTimeout(timer);
     }
-  }, [isStreaming, isOpen, hasAutoOpened]);
+  }, [isStreaming]);
 
   const value = useMemo<ReasoningContextValue>(
     () => ({ duration, isOpen, isStreaming, setIsOpen }),
