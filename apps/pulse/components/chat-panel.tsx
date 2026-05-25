@@ -26,6 +26,10 @@ import {
   ReasoningContent,
   ReasoningTrigger,
 } from "@haydenbleasel/design-system/components/ai-elements/reasoning";
+import {
+  Suggestion,
+  Suggestions,
+} from "@haydenbleasel/design-system/components/ai-elements/suggestion";
 import { Button } from "@haydenbleasel/design-system/components/ui/button";
 import { DefaultChatTransport } from "ai";
 import { Loader2, Sparkles, X } from "lucide-react";
@@ -52,6 +56,18 @@ const cleanMergedCode = (text: string): string => {
 
 const textOf = (parts: { type: string; text?: string }[]): string =>
   parts.map((part) => (part.type === "text" ? (part.text ?? "") : "")).join("");
+
+// Starter prompts shown before the conversation begins.
+const SUGGESTIONS = [
+  "Add a drum beat",
+  "Add a bassline",
+  "Make it more melodic",
+  "Add reverb and delay",
+  "Speed up the tempo",
+  "Make it sound darker",
+  "Add a hi-hat pattern",
+  "Simplify this pattern",
+];
 
 export const ChatPanel = ({
   activePath,
@@ -108,8 +124,25 @@ export const ChatPanel = ({
     [isGenerating, onRequestToken, sendMessage]
   );
 
+  const handleSuggestion = useCallback(
+    (suggestion: string) => {
+      if (isGenerating) {
+        return;
+      }
+      if (!hasAiToken()) {
+        onRequestToken();
+        return;
+      }
+      sendMessage(
+        { text: suggestion },
+        { body: { activePath: pathRef.current, currentCode: codeRef.current } }
+      );
+    },
+    [isGenerating, onRequestToken, sendMessage]
+  );
+
   return (
-    <aside className="flex h-svh w-96 shrink-0 flex-col border-border border-l bg-background">
+    <aside className="flex h-full w-full flex-col bg-background">
       <div className="flex h-12 shrink-0 items-center justify-between gap-2 border-border border-b px-3">
         <div className="flex items-center gap-2">
           <Sparkles className="size-4 shrink-0 text-muted-foreground" />
@@ -181,7 +214,18 @@ export const ChatPanel = ({
         <ConversationScrollButton />
       </Conversation>
 
-      <div className="shrink-0 p-3">
+      <div className="flex shrink-0 flex-col gap-2 p-3">
+        {messages.length === 0 ? (
+          <Suggestions>
+            {SUGGESTIONS.map((suggestion) => (
+              <Suggestion
+                key={suggestion}
+                onClick={handleSuggestion}
+                suggestion={suggestion}
+              />
+            ))}
+          </Suggestions>
+        ) : null}
         <PromptInput onSubmit={handleSubmit}>
           <PromptInputBody>
             <PromptInputTextarea placeholder="Edit the pattern…" />

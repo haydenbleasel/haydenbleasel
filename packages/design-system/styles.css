@@ -3,6 +3,11 @@
 
 @source "**/*.{ts,tsx}";
 
+/* Streamdown ships its classes in compiled JS; scan them so Tailwind generates
+   the utilities used by <Streamdown /> and its plugins (cjk, code, math, mermaid). */
+@source "node_modules/streamdown/dist/*.js";
+@source "node_modules/@streamdown/*/dist/*.js";
+
 @custom-variant dark (&:is(.dark *));
 
 :root {

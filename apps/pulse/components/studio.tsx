@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@haydenbleasel/design-system/components/ui/resizable";
+import {
   SidebarInset,
   SidebarProvider,
 } from "@haydenbleasel/design-system/components/ui/sidebar";
@@ -192,49 +197,63 @@ export const Studio = () => {
   }, [active, router]);
 
   return (
-    <SidebarProvider>
+    <SidebarProvider className="h-svh">
       <PatternList
         active={active}
         onNewPattern={() => setNewOpen(true)}
         onOpenSettings={() => setSettingsOpen(true)}
         patterns={patterns}
       />
-      <SidebarInset className="flex h-svh min-w-0 flex-col">
-        <Toolbar
-          active={active}
-          chatOpen={chatOpen}
-          dirty={dirty}
-          onDelete={handleDelete}
-          onPlay={handlePlay}
-          onSave={handleSave}
-          onStop={handleStop}
-          onToggleChat={() => setChatOpen((open) => !open)}
-          playing={playing}
-        />
-        <div className="min-h-0 flex-1 overflow-hidden">
-          <Editor
-            onChange={handleChange}
-            onCreateEditor={setEditorView}
-            onPlay={handlePlay}
-            onSave={handleSave}
-            value={code}
-          />
-        </div>
-        {errorMessage ? (
-          <div className="border-border border-t bg-destructive/10 px-3 py-2 font-mono text-destructive text-xs">
-            {errorMessage}
-          </div>
+      <ResizablePanelGroup className="min-w-0 flex-1" orientation="horizontal">
+        <ResizablePanel defaultSize="70%" id="editor" minSize="30%">
+          <SidebarInset className="h-full">
+            <Toolbar
+              active={active}
+              chatOpen={chatOpen}
+              dirty={dirty}
+              onDelete={handleDelete}
+              onPlay={handlePlay}
+              onSave={handleSave}
+              onStop={handleStop}
+              onToggleChat={() => setChatOpen((open) => !open)}
+              playing={playing}
+            />
+            <div className="min-h-0 flex-1 overflow-hidden">
+              <Editor
+                onChange={handleChange}
+                onCreateEditor={setEditorView}
+                onPlay={handlePlay}
+                onSave={handleSave}
+                value={code}
+              />
+            </div>
+            {errorMessage ? (
+              <div className="border-border border-t bg-destructive/10 px-3 py-2 font-mono text-destructive text-xs">
+                {errorMessage}
+              </div>
+            ) : null}
+          </SidebarInset>
+        </ResizablePanel>
+        {chatOpen ? (
+          <>
+            <ResizableHandle withHandle />
+            <ResizablePanel
+              defaultSize="30%"
+              id="assistant"
+              maxSize="45%"
+              minSize="20%"
+            >
+              <ChatPanel
+                activePath={active}
+                currentCode={code}
+                onClose={() => setChatOpen(false)}
+                onCodeUpdate={handleAiCode}
+                onRequestToken={() => setSettingsOpen(true)}
+              />
+            </ResizablePanel>
+          </>
         ) : null}
-      </SidebarInset>
-      {chatOpen ? (
-        <ChatPanel
-          activePath={active}
-          currentCode={code}
-          onClose={() => setChatOpen(false)}
-          onCodeUpdate={handleAiCode}
-          onRequestToken={() => setSettingsOpen(true)}
-        />
-      ) : null}
+      </ResizablePanelGroup>
       <NewPatternDialog
         onCreate={handleCreate}
         onOpenChange={setNewOpen}
