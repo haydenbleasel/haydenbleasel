@@ -45,7 +45,7 @@ Soundfonts (pitched — use with note/n, e.g. \`note("c2 g2").s("gm_acoustic_bas
 // model writes the whole thing and we skip the apply model entirely.
 const NEW_PATTERN_SYSTEM = `You write Strudel patterns for a live-coding music studio. Strudel is a JavaScript pattern language built on Tidal Cycles.
 
-Given an instruction, output a complete, runnable Strudel pattern. Output ONLY the code — no prose, no explanations, no Markdown code fences.
+Given an instruction, output a complete, runnable Strudel pattern.
 
 ${STRUDEL_BASICS}
 

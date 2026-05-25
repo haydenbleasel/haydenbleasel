@@ -7,10 +7,10 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
+import { ChatPanel } from "@/components/chat-panel";
 import { Editor } from "@/components/editor";
 import { NewPatternDialog } from "@/components/new-pattern-dialog";
 import { PatternList } from "@/components/pattern-list";
-import { PromptBar } from "@/components/prompt-bar";
 import { SettingsDialog } from "@/components/settings-dialog";
 import { Toolbar } from "@/components/toolbar";
 import {
@@ -40,6 +40,7 @@ export const Studio = () => {
   const [errorMessage, setError] = useState<string | null>(null);
   const [newOpen, setNewOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(true);
   const lastEvaluatedRef = useRef<string | null>(null);
 
   const refresh = useCallback(async () => {
@@ -201,11 +202,13 @@ export const Studio = () => {
       <SidebarInset className="flex h-svh min-w-0 flex-col">
         <Toolbar
           active={active}
+          chatOpen={chatOpen}
           dirty={dirty}
           onDelete={handleDelete}
           onPlay={handlePlay}
           onSave={handleSave}
           onStop={handleStop}
+          onToggleChat={() => setChatOpen((open) => !open)}
           playing={playing}
         />
         <div className="min-h-0 flex-1 overflow-hidden">
@@ -223,12 +226,15 @@ export const Studio = () => {
           </div>
         ) : null}
       </SidebarInset>
-      <PromptBar
-        activePath={active}
-        currentCode={code}
-        onCodeUpdate={handleAiCode}
-        onRequestToken={() => setSettingsOpen(true)}
-      />
+      {chatOpen ? (
+        <ChatPanel
+          activePath={active}
+          currentCode={code}
+          onClose={() => setChatOpen(false)}
+          onCodeUpdate={handleAiCode}
+          onRequestToken={() => setSettingsOpen(true)}
+        />
+      ) : null}
       <NewPatternDialog
         onCreate={handleCreate}
         onOpenChange={setNewOpen}

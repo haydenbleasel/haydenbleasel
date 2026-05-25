@@ -8,7 +8,7 @@ import {
 import { Button } from "@haydenbleasel/design-system/components/ui/button";
 import { Separator } from "@haydenbleasel/design-system/components/ui/separator";
 import { SidebarTrigger } from "@haydenbleasel/design-system/components/ui/sidebar";
-import { Play, Save, Square, Trash2 } from "lucide-react";
+import { PanelRight, Play, Save, Square, Trash2 } from "lucide-react";
 import { Fragment } from "react";
 
 import type { PatternRef } from "@/lib/patterns";
@@ -17,20 +17,24 @@ interface Props {
   active: PatternRef | null;
   playing: boolean;
   dirty: boolean;
+  chatOpen: boolean;
   onPlay: () => void;
   onStop: () => void;
   onSave: () => void;
   onDelete: () => void;
+  onToggleChat: () => void;
 }
 
 export const Toolbar = ({
   active,
   playing,
   dirty,
+  chatOpen,
   onPlay,
   onStop,
   onSave,
   onDelete,
+  onToggleChat,
 }: Props) => {
   const segments = active ? active.split("/") : [];
 
@@ -103,6 +107,15 @@ export const Toolbar = ({
           variant="outline"
         >
           <Trash2 />
+        </Button>
+        <Separator className="mx-1" orientation="vertical" />
+        <Button
+          aria-label="Toggle assistant"
+          onClick={onToggleChat}
+          size="icon-sm"
+          variant={chatOpen ? "secondary" : "outline"}
+        >
+          <PanelRight />
         </Button>
       </div>
     </div>
