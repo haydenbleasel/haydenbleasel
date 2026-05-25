@@ -14,18 +14,17 @@ import { STRUDEL_SKILL } from "@/lib/prompts/strudel";
 
 export const maxDuration = 60;
 
-const PLAN_MODEL = "anthropic/claude-sonnet-4.6";
+const PLAN_MODEL = "openai/gpt-5.5";
 const APPLY_MODEL = "morph/morph-v3-fast";
 
 // Strudel is a niche DSL and the lazy-marker format is unforgiving (an unmarked
 // region gets deleted on merge), so the planning model needs real reasoning.
-// Sonnet runs with extended thinking enabled and we forward that thinking to the
-// client as reasoning parts so it shows up in the chat.
-const THINKING_BUDGET = 4096;
-
+// GPT-5.5 runs with reasoning enabled and emits summaries that we forward to the
+// client as reasoning parts so they show up in the chat.
 const PLAN_PROVIDER_OPTIONS = {
-  anthropic: {
-    thinking: { budgetTokens: THINKING_BUDGET, type: "enabled" },
+  openai: {
+    reasoningEffort: "medium",
+    reasoningSummary: "auto",
   },
 };
 
@@ -79,7 +78,7 @@ export const POST = async (req: Request) => {
       writer.write({ type: "start" });
 
       // New / empty pattern: nothing to diff, so the planning model writes the
-      // whole pattern. Forward both its thinking and the resulting code.
+      // whole pattern. Forward both its reasoning and the resulting code.
       if (source.trim().length === 0) {
         const result = streamText({
           model: gateway(PLAN_MODEL),
@@ -117,9 +116,10 @@ export const POST = async (req: Request) => {
         return;
       }
 
-      // Existing pattern: Claude plans a lazy snippet. Stream its thinking, but
-      // hold back its text — the snippet is an intermediate artifact. Morph then
-      // merges the snippet into the full file, and that becomes the visible code.
+      // Existing pattern: the planning model writes a lazy snippet. Stream its
+      // reasoning, but hold back its text — the snippet is an intermediate
+      // artifact. Morph then merges the snippet into the full file, and that
+      // becomes the visible code.
       const planning = streamText({
         model: gateway(PLAN_MODEL),
         prompt: [

@@ -231,13 +231,7 @@ export const ChatPanel = ({
             <PromptInputTextarea placeholder="Edit the pattern…" />
           </PromptInputBody>
           <PromptInputFooter>
-            <PromptInputTools>
-              {activePath ? (
-                <span className="truncate px-1 text-muted-foreground text-xs">
-                  {activePath}
-                </span>
-              ) : null}
-            </PromptInputTools>
+            <PromptInputTools />
             <PromptInputSubmit onStop={stop} status={status} />
           </PromptInputFooter>
         </PromptInput>
