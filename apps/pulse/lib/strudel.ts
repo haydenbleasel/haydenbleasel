@@ -31,6 +31,13 @@ const prebake = async () => {
   await Promise.all([
     registerZZFXSounds(),
     registerSoundfonts(),
+    // EmuSP12 is strudel.cc's default drum kit — it registers the bare names
+    // (bd, sd, hh, oh, cp, cr, rd, rim, lt, mt, ht, cb, perc) so `s("bd hh sd")`
+    // plays without a .bank(). Its samples live under the tidal-drum-machines tree.
+    samples(`${CDN}/EmuSP12.json`, `${CDN}/tidal-drum-machines/machines/`, {
+      prebake: true,
+      tag: "drum-machines",
+    }),
     samples(`${CDN}/piano.json`, `${CDN}/piano/`, { prebake: true }),
     samples(`${CDN}/vcsl.json`, `${CDN}/VCSL/`, { prebake: true }),
     samples(

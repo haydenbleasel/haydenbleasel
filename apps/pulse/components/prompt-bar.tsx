@@ -13,48 +13,13 @@ interface Props {
   onRequestToken: () => void;
 }
 
-const CODE_BLOCK_RE = /```(?:js|javascript|strudel)?\s*\n([\s\S]*?)```/gu;
-const SEARCH_REPLACE_RE =
-  /<{7} SEARCH\r?\n([\s\S]*?)\r?\n={7}\r?\n([\s\S]*?)\r?\n>{7} REPLACE/gu;
+// The server now returns the full merged pattern. Strip a wrapping code fence
+// defensively in case the model adds one despite being told not to.
+const FENCE_RE = /^```(?:js|javascript|strudel)?\s*\n([\s\S]*?)\n```\s*$/u;
 
-type PatchResult =
-  | { kind: "patches"; code: string }
-  | { kind: "full"; code: string }
-  | { kind: "noop" }
-  | { kind: "error"; message: string };
-
-const extractFullCode = (text: string): string | null => {
-  const matches = [...text.matchAll(CODE_BLOCK_RE)];
-  if (matches.length === 0) {
-    return null;
-  }
-  return matches.at(-1)?.[1]?.trimEnd() ?? null;
-};
-
-const applyPatches = (source: string, text: string): PatchResult => {
-  const blocks = [...text.matchAll(SEARCH_REPLACE_RE)];
-  if (blocks.length > 0) {
-    let result = source;
-    for (const [, search, replace] of blocks) {
-      if (search === undefined || replace === undefined) {
-        continue;
-      }
-      if (!result.includes(search)) {
-        const preview = search.split("\n")[0]?.slice(0, 60) ?? "";
-        return {
-          kind: "error",
-          message: `Patch did not match current code near: "${preview}"`,
-        };
-      }
-      result = result.replace(search, replace);
-    }
-    return { code: result, kind: "patches" };
-  }
-  const full = extractFullCode(text);
-  if (full !== null) {
-    return { code: full, kind: "full" };
-  }
-  return { kind: "noop" };
+const cleanMergedCode = (text: string): string => {
+  const fenced = text.match(FENCE_RE);
+  return (fenced?.[1] ?? text).trim();
 };
 
 export const PromptBar = ({
@@ -97,19 +62,17 @@ export const PromptBar = ({
         method: "POST",
       });
       if (!res.ok) {
-        setError(`Request failed: ${res.status}`);
+        const body = await res.text();
+        setError(body.trim() || `Request failed: ${res.status}`);
         return;
       }
-      const text = await res.text();
-      const result = applyPatches(codeRef.current, text);
-      if (result.kind === "patches" || result.kind === "full") {
-        onCodeUpdate(result.code);
-        setValue("");
-      } else if (result.kind === "error") {
-        setError(result.message);
-      } else {
+      const merged = cleanMergedCode(await res.text());
+      if (merged.length === 0) {
         setError("Model returned no usable edit.");
+        return;
       }
+      onCodeUpdate(merged);
+      setValue("");
     } catch (error_) {
       setError(String(error_));
     } finally {
