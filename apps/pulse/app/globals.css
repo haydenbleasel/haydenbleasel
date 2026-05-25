@@ -1,0 +1,5 @@
+@import "tailwindcss";
+@import "@haydenbleasel/design-system/styles";
+
+@source "../node_modules/streamdown/*.js";
+@source "../node_modules/@streamdown/*/dist/*.js";
