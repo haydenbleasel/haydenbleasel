@@ -26,6 +26,7 @@ import {
   ReasoningContent,
   ReasoningTrigger,
 } from "@haydenbleasel/design-system/components/ai-elements/reasoning";
+import { Shimmer } from "@haydenbleasel/design-system/components/ai-elements/shimmer";
 import {
   Suggestion,
   Suggestions,
@@ -36,6 +37,7 @@ import { Check, Loader2, Sparkles, Trash2, X } from "lucide-react";
 import type { ReactNode } from "react";
 import { useCallback, useMemo, useRef, useState } from "react";
 
+import { CodePreview } from "@/components/code-preview";
 import type { PulseUIMessage } from "@/lib/agent";
 import { AI_TOKEN_HEADER, getAiToken, hasAiToken } from "@/lib/ai-token";
 
@@ -82,26 +84,26 @@ const ProposedEdit = ({
   let footer: ReactNode;
   if (decision === "approved") {
     footer = (
-      <div className="flex items-center gap-1.5 text-emerald-500 text-xs">
-        <Check className="size-3.5" />
-        <span>Applied to editor</span>
-      </div>
+      <Button className="w-fit" size="sm" disabled>
+        <Check />
+        <span>Accepted</span>
+      </Button>
     );
   } else if (decision === "rejected") {
     footer = (
-      <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
-        <X className="size-3.5" />
-        <span>Discarded</span>
-      </div>
+      <Button className="w-fit" size="sm" variant="ghost" disabled>
+        <X />
+        Rejected
+      </Button>
     );
   } else {
     footer = (
       <div className="flex items-center gap-1.5">
-        <Button onClick={onApprove} size="xs">
+        <Button onClick={onApprove} size="sm">
           <Check />
-          Approve
+          Accept
         </Button>
-        <Button onClick={onReject} size="xs" variant="ghost">
+        <Button onClick={onReject} size="sm" variant="ghost">
           <X />
           Reject
         </Button>
@@ -110,11 +112,9 @@ const ProposedEdit = ({
   }
 
   return (
-    <div className="flex w-full flex-col gap-2 rounded-md border border-border bg-muted/40 p-2">
-      <p className="text-muted-foreground text-xs">{summary}</p>
-      <pre className="max-h-64 overflow-auto rounded bg-background p-2 font-mono text-xs leading-relaxed">
-        <code>{code}</code>
-      </pre>
+    <div className="flex flex-col gap-4">
+      <p>{summary}</p>
+      <CodePreview code={code} />
       {footer}
     </div>
   );
@@ -288,11 +288,11 @@ export const ChatPanel = ({
                     if (part.state !== "output-available") {
                       return (
                         <div
-                          className="flex items-center gap-2 text-muted-foreground text-xs"
+                          className="flex items-center gap-2 text-muted-foreground text-sm"
                           key={key}
                         >
-                          <Loader2 className="size-3.5 animate-spin" />
-                          <span>Editing pattern…</span>
+                          <Loader2 className="size-4 animate-spin" />
+                          <Shimmer>Editing pattern…</Shimmer>
                         </div>
                       );
                     }
@@ -318,7 +318,10 @@ export const ChatPanel = ({
           {status === "submitted" ? (
             <Message from="assistant">
               <MessageContent>
-                <Loader2 className="size-4 animate-spin text-muted-foreground" />
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                  <Loader2 className="size-4 animate-spin" />
+                  <Shimmer>Pulsing...</Shimmer>
+                </div>
               </MessageContent>
             </Message>
           ) : null}
