@@ -33,7 +33,8 @@ import {
 import { Button } from "@haydenbleasel/design-system/components/ui/button";
 import { DefaultChatTransport } from "ai";
 import { Check, Loader2, Sparkles, Trash2, X } from "lucide-react";
-import { useCallback, useMemo, useRef } from "react";
+import type { ReactNode } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import type { PulseUIMessage } from "@/lib/agent";
 import { AI_TOKEN_HEADER, getAiToken, hasAiToken } from "@/lib/ai-token";
@@ -59,16 +60,64 @@ const SUGGESTIONS = [
   "Simplify this pattern",
 ];
 
-// The editor already shows the merged code, so apply the latest editPattern
-// result to it (the last one wins if a turn made several edits).
-const mergedCodeFrom = (message: PulseUIMessage): string | null => {
-  let code: string | null = null;
-  for (const part of message.parts) {
-    if (part.type === "tool-editPattern" && part.state === "output-available") {
-      ({ code } = part.output);
-    }
+// Each proposed edit is approved or rejected on its own. We don't apply
+// anything until the user approves it.
+type Decision = "approved" | "rejected";
+
+// Renders a completed editPattern proposal: the merged pattern plus the
+// approve/reject controls, or the resolved status once decided.
+const ProposedEdit = ({
+  summary,
+  code,
+  decision,
+  onApprove,
+  onReject,
+}: {
+  summary: string;
+  code: string;
+  decision: Decision | undefined;
+  onApprove: () => void;
+  onReject: () => void;
+}) => {
+  let footer: ReactNode;
+  if (decision === "approved") {
+    footer = (
+      <div className="flex items-center gap-1.5 text-emerald-500 text-xs">
+        <Check className="size-3.5" />
+        <span>Applied to editor</span>
+      </div>
+    );
+  } else if (decision === "rejected") {
+    footer = (
+      <div className="flex items-center gap-1.5 text-muted-foreground text-xs">
+        <X className="size-3.5" />
+        <span>Discarded</span>
+      </div>
+    );
+  } else {
+    footer = (
+      <div className="flex items-center gap-1.5">
+        <Button onClick={onApprove} size="xs">
+          <Check />
+          Approve
+        </Button>
+        <Button onClick={onReject} size="xs" variant="ghost">
+          <X />
+          Reject
+        </Button>
+      </div>
+    );
   }
-  return code;
+
+  return (
+    <div className="flex w-full flex-col gap-2 rounded-md border border-border bg-muted/40 p-2">
+      <p className="text-muted-foreground text-xs">{summary}</p>
+      <pre className="max-h-64 overflow-auto rounded bg-background p-2 font-mono text-xs leading-relaxed">
+        <code>{code}</code>
+      </pre>
+      {footer}
+    </div>
+  );
 };
 
 export const ChatPanel = ({
@@ -93,18 +142,11 @@ export const ChatPanel = ({
   );
 
   const { messages, sendMessage, setMessages, status, stop, error } =
-    useChat<PulseUIMessage>({
-      onFinish: ({ message, isAbort, isError }) => {
-        if (isAbort || isError) {
-          return;
-        }
-        const merged = mergedCodeFrom(message);
-        if (merged) {
-          onCodeUpdate(merged);
-        }
-      },
-      transport,
-    });
+    useChat<PulseUIMessage>({ transport });
+
+  // Approve/reject decision per proposed edit, keyed by message id + part index.
+  // The editor only changes when an edit is approved.
+  const [decisions, setDecisions] = useState<Record<string, Decision>>({});
 
   const isGenerating = status === "submitted" || status === "streaming";
 
@@ -132,7 +174,18 @@ export const ChatPanel = ({
       stop();
     }
     setMessages([]);
+    setDecisions({});
   }, [isGenerating, stop, setMessages]);
+
+  const decide = useCallback(
+    (key: string, decision: Decision, code?: string) => {
+      if (decision === "approved" && code !== undefined) {
+        onCodeUpdate(code);
+      }
+      setDecisions((prev) => ({ ...prev, [key]: decision }));
+    },
+    [onCodeUpdate]
+  );
 
   const handleSuggestion = useCallback(
     (suggestion: string) => {
@@ -183,7 +236,7 @@ export const ChatPanel = ({
         <ConversationContent>
           {messages.length === 0 ? (
             <ConversationEmptyState
-              description="Ask about the track or describe a change — the assistant edits the pattern when you ask it to."
+              description="Ask about the track or describe a change — the assistant proposes edits you can approve before they hit the editor."
               icon={<Sparkles className="size-5" />}
               title="Chat & edit with AI"
             />
@@ -232,21 +285,28 @@ export const ChatPanel = ({
                         </div>
                       );
                     }
-                    const done = part.state === "output-available";
-                    return (
-                      <div
-                        className="flex items-center gap-2 text-muted-foreground text-xs"
-                        key={key}
-                      >
-                        {done ? (
-                          <Check className="size-3.5 text-emerald-500" />
-                        ) : (
+                    if (part.state !== "output-available") {
+                      return (
+                        <div
+                          className="flex items-center gap-2 text-muted-foreground text-xs"
+                          key={key}
+                        >
                           <Loader2 className="size-3.5 animate-spin" />
-                        )}
-                        <span>
-                          {done ? "Updated pattern" : "Editing pattern…"}
-                        </span>
-                      </div>
+                          <span>Editing pattern…</span>
+                        </div>
+                      );
+                    }
+
+                    const proposed = part.output.code;
+                    return (
+                      <ProposedEdit
+                        code={proposed}
+                        decision={decisions[key]}
+                        key={key}
+                        onApprove={() => decide(key, "approved", proposed)}
+                        onReject={() => decide(key, "rejected")}
+                        summary={part.input.summary}
+                      />
                     );
                   }
 
