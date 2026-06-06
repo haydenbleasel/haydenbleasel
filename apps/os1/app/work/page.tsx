@@ -17,6 +17,17 @@ interface Job {
   logo: (props: ComponentProps<"svg">) => ReactNode;
 }
 
+const Link = ({ href, children }: { href: string; children: ReactNode }) => (
+  <a
+    className="text-foreground underline"
+    href={href}
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    {children}
+  </a>
+);
+
 const OpenAILogo = (props: ComponentProps<"svg">) => (
   <svg
     fill="none"
@@ -120,123 +131,26 @@ const jobs: Job[] = [
     company: "Vercel",
     description: (
       <>
-        Created{" "}
-        <a
-          href="https://streamdown.ai/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Streamdown
-        </a>
-        ,{" "}
-        <a
-          href="https://elements.ai-sdk.dev/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          AI Elements
-        </a>
-        ,{" "}
-        <a
-          href="https://www.npmjs.com/package/remend"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Remend
-        </a>
-        ,{" "}
-        <a
-          href="https://github.com/vercel-labs/tersa"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Tersa
-        </a>
-        ,{" "}
-        <a
-          href="https://github.com/vercel-labs/openreview"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          OpenReview
-        </a>
-        ,{" "}
-        <a
-          href="https://github.com/vercel-labs/vectr"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Vectr
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://www.npm.bet/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          npm.bet
-        </a>
-        . Helped ship{" "}
-        <a
-          href="https://chat-sdk.dev/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Chat SDK
-        </a>
-        ,{" "}
-        <a
-          href="https://vercel.com/platforms"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Platforms
-        </a>
-        ,{" "}
-        <a
-          href="https://vercel.com/blog/workflow-builder-build-your-own-workflow-automation-platform"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        Created <Link href="https://streamdown.ai/">Streamdown</Link>,{" "}
+        <Link href="https://elements.ai-sdk.dev/">AI Elements</Link>,{" "}
+        <Link href="https://www.npmjs.com/package/remend">Remend</Link>,{" "}
+        <Link href="https://github.com/vercel-labs/tersa">Tersa</Link>,{" "}
+        <Link href="https://github.com/vercel-labs/openreview">OpenReview</Link>
+        , <Link href="https://github.com/vercel-labs/vectr">Vectr</Link> and{" "}
+        <Link href="https://www.npm.bet/">npm.bet</Link>. Helped ship{" "}
+        <Link href="https://chat-sdk.dev/">Chat SDK</Link>,{" "}
+        <Link href="https://vercel.com/platforms">Platforms</Link>,{" "}
+        <Link href="https://vercel.com/blog/workflow-builder-build-your-own-workflow-automation-platform">
           Workflow Builder
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://vercel.com/academy"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Academy
-        </a>
-        ; rebuilt all our docs sites (e.g.{" "}
-        <a href="https://v0.app/docs" rel="noopener noreferrer" target="_blank">
-          v0
-        </a>
-        ,{" "}
-        <a
-          href="https://useworkflow.dev/docs/getting-started"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        </Link>{" "}
+        and <Link href="https://vercel.com/academy">Academy</Link>; rebuilt all
+        our docs sites (e.g. <Link href="https://v0.app/docs">v0</Link>,{" "}
+        <Link href="https://useworkflow.dev/docs/getting-started">
           Workflow
-        </a>
-        ,{" "}
-        <a
-          href="https://turborepo.dev/docs"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Turborepo
-        </a>
-        ) and co-authored{" "}
-        <a
-          href="https://www.components.build/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          components.build
-        </a>
-        .
+        </Link>
+        , <Link href="https://turborepo.dev/docs">Turborepo</Link>) and
+        co-authored{" "}
+        <Link href="https://www.components.build/">components.build</Link>.
       </>
     ),
     endDate: "Mar 2026",
@@ -251,13 +165,9 @@ const jobs: Job[] = [
         Started the frontend engineering team, then led the Product, Design and
         Support teams. Rebranded the company and helped it grow from seed to
         Series A funding, then subsequent{" "}
-        <a
-          href="https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        <Link href="https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/">
           acquisition
-        </a>{" "}
+        </Link>{" "}
         from Cellebrite.
       </>
     ),
@@ -273,13 +183,9 @@ const jobs: Job[] = [
         Started and ran an award-winning digital agency. Worked with early stage
         startups working on self-driving car technology, AI, biotech, crypto,
         drone delivery, cybersecurity and orbital logistics.{" "}
-        <a
-          href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        <Link href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/">
           Acquired
-        </a>{" "}
+        </Link>{" "}
         by Raw Studio.
       </>
     ),
@@ -300,7 +206,7 @@ const jobs: Job[] = [
 ];
 
 const JobCard = ({ job }: { job: Job }) => (
-  <div className="grid gap-4 rounded-lg px-3 py-2 sm:grid-cols-[48px_1fr]">
+  <div className="grid gap-4 rounded-lg sm:grid-cols-[48px_1fr]">
     <div className="flex aspect-square w-12 translate-y-0.5 items-center justify-center rounded-lg border text-foreground sm:w-full">
       <job.logo className="size-6 fill-current" />
     </div>
@@ -321,69 +227,43 @@ const JobCard = ({ job }: { job: Job }) => (
 
 const WorkPage = () => (
   <>
-    <PageHeader
-      title="Work"
-      description="The companies I've worked with over the years."
-    />
+    <PageHeader title="Work" />
 
     <PageBody>
-      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-        <div className="grid gap-6 rounded-2xl bg-background p-4 shadow-sm/5">
-          {jobs.map((job) => (
-            <JobCard job={job} key={job.company} />
-          ))}
+      <div className="grid gap-6">
+        {jobs.map((job) => (
+          <JobCard job={job} key={job.company} />
+        ))}
 
-          <div className="w-full border-t border-dotted" />
+        <div className="w-full border-t border-dotted" />
 
-          <p className="px-3 text-sm text-muted-foreground">
-            Earlier in my career, I was Head of Product and Design at Spaceship
-            (later{" "}
-            <a
-              href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              acquired
-            </a>{" "}
-            by eToro); contracted for many clients through{" "}
-            <a
-              href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              R/GA
-            </a>{" "}
-            and a handful of other roles you can read about on my{" "}
-            <a
-              href="https://www.linkedin.com/in/haydenbleasel/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              LinkedIn
-            </a>
-            . I&apos;ve also been fortunate to work with many great companies
-            such as Australian Ethical, Canva, Clipchamp, Google, National
-            Geographic, Nike, R/GA, Timberland, Toyota, Westfield and many more.
-            I{" "}
-            <a
-              href="https://eslint.org/blog/2022/08/redesigning-eslint/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              rebranded ESLint
-            </a>{" "}
-            and redesigned the{" "}
-            <a
-              href="https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign/"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Node.js website
-            </a>
-            .
-          </p>
-        </div>
-      </section>
+        <p className="px-3 text-sm text-muted-foreground">
+          Earlier in my career, I was Head of Product and Design at Spaceship
+          (later{" "}
+          <Link href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9">
+            acquired
+          </Link>{" "}
+          by eToro); contracted for many clients through{" "}
+          <Link href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/">
+            R/GA
+          </Link>{" "}
+          and a handful of other roles you can read about on my{" "}
+          <Link href="https://www.linkedin.com/in/haydenbleasel/">
+            LinkedIn
+          </Link>
+          . I&apos;ve also been fortunate to work with many great companies such
+          as Australian Ethical, Canva, Clipchamp, Google, National Geographic,
+          Nike, R/GA, Timberland, Toyota, Westfield and many more. I{" "}
+          <Link href="https://eslint.org/blog/2022/08/redesigning-eslint/">
+            rebranded ESLint
+          </Link>{" "}
+          and redesigned the{" "}
+          <Link href="https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign/">
+            Node.js website
+          </Link>
+          .
+        </p>
+      </div>
     </PageBody>
   </>
 );

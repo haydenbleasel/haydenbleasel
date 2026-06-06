@@ -86,9 +86,7 @@ const RootLayout = ({ children }: RootLayoutProps) => (
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <main className="container mx-auto max-w-6xl px-4 py-16">
-              {children}
-            </main>
+            <main className="flex flex-1 flex-col">{children}</main>
           </SidebarInset>
         </SidebarProvider>
       </DesignSystemProvider>

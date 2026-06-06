@@ -10,13 +10,21 @@ import {
   GamepadIcon,
   LayersIcon,
   MessageSquareIcon,
+  MicIcon,
   MusicIcon,
+  RocketIcon,
 } from "lucide-react";
 import Link from "next/link";
 
-import { PageHeader } from "@/components/page-header";
+import { PageBody, PageHeader } from "@/components/page-header";
 
 const pages = [
+  {
+    description: "Things I've designed, built and shipped.",
+    href: "/projects",
+    icon: RocketIcon,
+    title: "Projects",
+  },
   {
     description: "What I've been playing on Steam.",
     href: "/games",
@@ -53,29 +61,37 @@ const pages = [
     icon: BookOpenIcon,
     title: "Books",
   },
+  {
+    description: "Talks, interviews and judging I've done.",
+    href: "/appearances",
+    icon: MicIcon,
+    title: "Appearances",
+  },
 ];
 
 const HomePage = () => (
-  <div className="flex flex-col gap-8">
-    <PageHeader
-      title="OS1"
-      description="An operating system for my public-facing life."
-    />
+  <>
+    <PageHeader title="OS1" />
 
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {pages.map((page) => (
-        <Link key={page.href} href={page.href}>
-          <Card size="sm" className="h-full transition-colors hover:bg-accent">
-            <CardHeader>
-              <page.icon className="size-5 text-muted-foreground" />
-              <CardTitle>{page.title}</CardTitle>
-              <CardDescription>{page.description}</CardDescription>
-            </CardHeader>
-          </Card>
-        </Link>
-      ))}
-    </div>
-  </div>
+    <PageBody>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {pages.map((page) => (
+          <Link key={page.href} href={page.href}>
+            <Card
+              size="sm"
+              className="h-full transition-colors hover:bg-accent"
+            >
+              <CardHeader>
+                <page.icon className="size-5 text-muted-foreground" />
+                <CardTitle>{page.title}</CardTitle>
+                <CardDescription>{page.description}</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+        ))}
+      </div>
+    </PageBody>
+  </>
 );
 
 export default HomePage;

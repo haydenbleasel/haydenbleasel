@@ -1,7 +1,13 @@
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@haydenbleasel/design-system/components/ui/tabs";
 import type { Metadata } from "next";
 import { unstable_cache } from "next/cache";
 
-import { PageHeader } from "@/components/page-header";
+import { PageBody, PageHeader } from "@/components/page-header";
 import {
   getFormerRepositories,
   getRepositories,
@@ -19,6 +25,83 @@ export const metadata: Metadata = {
 };
 
 const username = "haydenbleasel";
+
+const formatNumber = (num: number) => {
+  if (num >= 1_000_000) {
+    return `${(num / 1_000_000).toFixed(1)}M`;
+  }
+  if (num >= 1000) {
+    return `${(num / 1000).toFixed(1)}K`;
+  }
+  return num.toString();
+};
+
+interface GitHubRepoLike {
+  id: number;
+  html_url: string;
+  name: string;
+  full_name: string;
+  description: string | null;
+  language?: string | null;
+  stargazers_count?: number;
+  forks_count?: number;
+}
+
+interface RepoRow {
+  id: number;
+  url: string;
+  name: string;
+  description: string | null;
+  language: string | null;
+  stars: number;
+  forks: number;
+}
+
+const toRepoRows = (
+  repos: GitHubRepoLike[],
+  { useFullName = false }: { useFullName?: boolean } = {}
+): RepoRow[] =>
+  repos
+    .toSorted((a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0))
+    .map((repo) => ({
+      description: repo.description,
+      forks: repo.forks_count ?? 0,
+      id: repo.id,
+      language: repo.language ?? null,
+      name: useFullName ? repo.full_name : repo.name,
+      stars: repo.stargazers_count ?? 0,
+      url: repo.html_url,
+    }));
+
+const RepoList = ({ repos }: { repos: RepoRow[] }) => (
+  <div className="-ml-3 -mt-2 grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 text-sm">
+    {repos.map((repo) => (
+      <a
+        key={repo.id}
+        href={repo.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="col-span-4 grid grid-cols-subgrid items-center rounded-lg px-3 py-2 transition-colors hover:bg-accent"
+      >
+        <div className="min-w-0">
+          <p className="truncate font-medium">{repo.name}</p>
+          {repo.description && (
+            <p className="truncate text-xs text-muted-foreground">
+              {repo.description}
+            </p>
+          )}
+        </div>
+        <LanguageIcon language={repo.language} />
+        <span className="text-right text-sm text-muted-foreground">
+          {formatNumber(repo.stars)} stars
+        </span>
+        <span className="text-right text-sm text-muted-foreground">
+          {formatNumber(repo.forks)} forks
+        </span>
+      </a>
+    ))}
+  </div>
+);
 
 interface ContributionsResponse {
   total: Record<string, number>;
@@ -47,16 +130,6 @@ const getCachedContributions = unstable_cache(
   { revalidate: 60 * 60 * 24 }
 );
 
-const formatNumber = (num: number) => {
-  if (num >= 1_000_000) {
-    return `${(num / 1_000_000).toFixed(1)}M`;
-  }
-  if (num >= 1000) {
-    return `${(num / 1000).toFixed(1)}K`;
-  }
-  return num.toString();
-};
-
 const CodePage = async () => {
   const [repos, workRepos, formerRepos, contributionData, packages] =
     await Promise.all([
@@ -70,194 +143,78 @@ const CodePage = async () => {
   const downloads = await getBulkDownloads(
     packages.map((pkg: NpmPackage) => pkg.name)
   );
-  const packagesWithDownloads = packages.map((pkg: NpmPackage) => ({
-    ...pkg,
-    downloads: downloads[pkg.name]?.downloads ?? 0,
-  }));
+  const packagesWithDownloads = packages
+    .map((pkg: NpmPackage) => ({
+      ...pkg,
+      downloads: downloads[pkg.name]?.downloads ?? 0,
+    }))
+    .toSorted((a, b) => b.downloads - a.downloads);
+
+  const repoSections = [
+    {
+      label: "Active",
+      repos: toRepoRows(repos.filter((repo) => !repo.fork && !repo.archived)),
+      value: "active",
+    },
+    {
+      label: "Archived",
+      repos: toRepoRows(repos.filter((repo) => !repo.fork && repo.archived)),
+      value: "archived",
+    },
+    {
+      label: "Work",
+      repos: toRepoRows(workRepos, { useFullName: true }),
+      value: "work",
+    },
+    {
+      label: "Former",
+      repos: toRepoRows(formerRepos, { useFullName: true }),
+      value: "former",
+    },
+  ].filter((section) => section.repos.length > 0);
+
+  const tabs = [
+    ...repoSections.map((section) => ({
+      label: section.label,
+      value: section.value,
+    })),
+    ...(packagesWithDownloads.length > 0
+      ? [{ label: "Packages", value: "packages" }]
+      : []),
+  ];
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageHeader
-        title="Code"
-        description={`${formatNumber(contributionData.total ?? 0)} contributions this year.`}
-      />
+    <Tabs defaultValue={tabs[0]?.value}>
+      <PageHeader title="Code" withTabs>
+        <TabsList className="gap-4" variant="line">
+          {tabs.map((tab) => (
+            <TabsTrigger
+              className="flex-none px-0 font-normal"
+              key={tab.value}
+              value={tab.value}
+            >
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </PageHeader>
 
-      <ContributionGraphClient
-        contributions={contributionData.contributions}
-        totalCount={contributionData.total ?? 0}
-      />
+      <PageBody>
+        <ContributionGraphClient
+          contributions={contributionData.contributions}
+          totalCount={contributionData.total ?? 0}
+        />
 
-      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-        <div className="px-4 pt-2 pb-1">
-          <h2 className="text-sm font-medium text-muted-foreground">
-            Active Repositories
-          </h2>
-        </div>
-        <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
-          {repos
-            .filter((repo) => !repo.fork && !repo.archived)
-            .toSorted(
-              (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
-            )
-            .map((repo) => (
-              <a
-                key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-4 grid grid-cols-subgrid items-center rounded-lg px-3 py-2 transition-colors hover:bg-accent"
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-medium">{repo.name}</p>
-                  {repo.description && (
-                    <p className="truncate text-xs text-muted-foreground">
-                      {repo.description}
-                    </p>
-                  )}
-                </div>
-                <LanguageIcon language={repo.language ?? null} />
-                <span className="text-right text-sm text-muted-foreground">
-                  {formatNumber(repo.stargazers_count ?? 0)} stars
-                </span>
-                <span className="text-right text-sm text-muted-foreground">
-                  {formatNumber(repo.forks_count ?? 0)} forks
-                </span>
-              </a>
-            ))}
-        </div>
-      </section>
+        {repoSections.map((section) => (
+          <TabsContent key={section.value} value={section.value}>
+            <RepoList repos={section.repos} />
+          </TabsContent>
+        ))}
 
-      {repos.some((repo) => !repo.fork && repo.archived) && (
-        <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              Archived Repositories
-            </h2>
-          </div>
-          <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
-            {repos
-              .filter((repo) => !repo.fork && repo.archived)
-              .toSorted(
-                (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
-              )
-              .map((repo) => (
-                <a
-                  key={repo.id}
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="col-span-4 grid grid-cols-subgrid items-center rounded-lg px-3 py-2 transition-colors hover:bg-accent"
-                >
-                  <div className="min-w-0">
-                    <p className="truncate font-medium">{repo.name}</p>
-                    {repo.description && (
-                      <p className="truncate text-xs text-muted-foreground">
-                        {repo.description}
-                      </p>
-                    )}
-                  </div>
-                  <LanguageIcon language={repo.language ?? null} />
-                  <span className="text-right text-sm text-muted-foreground">
-                    {formatNumber(repo.stargazers_count ?? 0)} stars
-                  </span>
-                  <span className="text-right text-sm text-muted-foreground">
-                    {formatNumber(repo.forks_count ?? 0)} forks
-                  </span>
-                </a>
-              ))}
-          </div>
-        </section>
-      )}
-
-      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-        <div className="px-4 pt-2 pb-1">
-          <h2 className="text-sm font-medium text-muted-foreground">
-            Work Repositories
-          </h2>
-        </div>
-        <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
-          {workRepos
-            .toSorted(
-              (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
-            )
-            .map((repo) => (
-              <a
-                key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-4 grid grid-cols-subgrid items-center rounded-lg px-3 py-2 transition-colors hover:bg-accent"
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-medium">{repo.full_name}</p>
-                  {repo.description && (
-                    <p className="truncate text-xs text-muted-foreground">
-                      {repo.description}
-                    </p>
-                  )}
-                </div>
-                <LanguageIcon language={repo.language ?? null} />
-                <span className="text-right text-sm text-muted-foreground">
-                  {formatNumber(repo.stargazers_count ?? 0)} stars
-                </span>
-                <span className="text-right text-sm text-muted-foreground">
-                  {formatNumber(repo.forks_count ?? 0)} forks
-                </span>
-              </a>
-            ))}
-        </div>
-      </section>
-
-      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-        <div className="px-4 pt-2 pb-1">
-          <h2 className="text-sm font-medium text-muted-foreground">
-            Former Repositories
-          </h2>
-        </div>
-        <div className="grid grid-cols-[1fr_auto_auto_auto] items-center gap-x-6 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
-          {formerRepos
-            .toSorted(
-              (a, b) => (b.stargazers_count ?? 0) - (a.stargazers_count ?? 0)
-            )
-            .map((repo) => (
-              <a
-                key={repo.id}
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="col-span-4 grid grid-cols-subgrid items-center rounded-lg px-3 py-2 transition-colors hover:bg-accent"
-              >
-                <div className="min-w-0">
-                  <p className="truncate font-medium">{repo.full_name}</p>
-                  {repo.description && (
-                    <p className="truncate text-xs text-muted-foreground">
-                      {repo.description}
-                    </p>
-                  )}
-                </div>
-                <LanguageIcon language={repo.language ?? null} />
-                <span className="text-right text-sm text-muted-foreground">
-                  {formatNumber(repo.stargazers_count ?? 0)} stars
-                </span>
-                <span className="text-right text-sm text-muted-foreground">
-                  {formatNumber(repo.forks_count ?? 0)} forks
-                </span>
-              </a>
-            ))}
-        </div>
-      </section>
-
-      {packagesWithDownloads.length > 0 && (
-        <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              npm Packages
-            </h2>
-          </div>
-          <div className="grid gap-2 rounded-2xl bg-background p-2 text-sm shadow-sm/5">
-            {packagesWithDownloads
-              .toSorted((a, b) => b.downloads - a.downloads)
-              .map((pkg) => (
+        {packagesWithDownloads.length > 0 && (
+          <TabsContent value="packages">
+            <div className="-ml-3 -mt-2 grid gap-2 text-sm">
+              {packagesWithDownloads.map((pkg) => (
                 <a
                   key={pkg.name}
                   href={pkg.links.npm}
@@ -279,10 +236,11 @@ const CodePage = async () => {
                   </div>
                 </a>
               ))}
-          </div>
-        </section>
-      )}
-    </div>
+            </div>
+          </TabsContent>
+        )}
+      </PageBody>
+    </Tabs>
   );
 };
 

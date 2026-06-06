@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { PageHeader } from "@/components/page-header";
+import { PageBody, PageHeader } from "@/components/page-header";
 import { getPublishedPosts } from "@/lib/typefully";
 import type { TypefullyPostWithAnalytics } from "@/lib/typefully";
 
@@ -92,30 +92,24 @@ const PostsPage = async () => {
   const grouped = groupByWeek(posts);
 
   return (
-    <div className="flex flex-col gap-8">
-      <PageHeader
-        title="Posts"
-        description="My recent posts on X, managed via Typefully."
-      />
+    <>
+      <PageHeader title="Posts" />
 
-      {grouped.map((group) => (
-        <section
-          key={group.week}
-          className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2"
-        >
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              {group.week}
-            </h2>
-          </div>
-          <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-            {group.posts.map((post) => (
-              <Post key={post.id} post={post} />
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
+      <PageBody>
+        <div className="grid gap-6">
+          {grouped.map((group) => (
+            <div className="grid gap-4" key={group.week}>
+              <h2 className="text-xl font-medium">{group.week}</h2>
+              <div className="-ml-3 -mt-2 grid gap-2">
+                {group.posts.map((post) => (
+                  <Post key={post.id} post={post} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </PageBody>
+    </>
   );
 };
 

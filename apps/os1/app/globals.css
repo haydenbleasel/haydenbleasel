@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "@haydenbleasel/design-system/styles";
+
+/* Thin the active tab underline to 1px (horizontal tabs only) */
+[data-slot="tabs"][data-orientation="horizontal"]
+  [data-slot="tabs-trigger"]::after {
+  height: 1px;
+}

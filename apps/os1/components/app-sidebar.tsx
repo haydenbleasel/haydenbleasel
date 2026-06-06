@@ -12,11 +12,14 @@ import {
 } from "@haydenbleasel/design-system/components/ui/sidebar";
 import {
   BookOpenIcon,
+  BriefcaseIcon,
   CodeIcon,
   GamepadIcon,
   LayersIcon,
   MessageSquareIcon,
+  MicIcon,
   MusicIcon,
+  RocketIcon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -24,6 +27,16 @@ import type { ComponentProps } from "react";
 
 const data = {
   navMain: [
+    {
+      icon: RocketIcon,
+      title: "Projects",
+      url: "/projects",
+    },
+    {
+      icon: BriefcaseIcon,
+      title: "Work",
+      url: "/work",
+    },
     {
       icon: GamepadIcon,
       title: "Games",
@@ -54,6 +67,11 @@ const data = {
       title: "Books",
       url: "/books",
     },
+    {
+      icon: MicIcon,
+      title: "Appearances",
+      url: "/appearances",
+    },
   ],
 };
 
@@ -61,7 +79,7 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
   const pathname = usePathname();
 
   return (
-    <Sidebar {...props} className="*:bg-transparent border-none">
+    <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -79,7 +97,11 @@ export const AppSidebar = ({ ...props }: ComponentProps<typeof Sidebar>) => {
             <SidebarMenu>
               {data.navMain.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.url}>
+                  <SidebarMenuButton
+                    className="data-active:font-normal"
+                    asChild
+                    isActive={pathname === item.url}
+                  >
                     <Link href={item.url}>
                       <item.icon className="size-4" />
                       {item.title}

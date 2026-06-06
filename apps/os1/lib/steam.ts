@@ -11,3 +11,14 @@ export const getOwnedGames = () =>
     includeAppInfo: true,
     includeExtendedAppInfo: true,
   });
+
+// Returns the user's achievements for a game, or null when the game has no
+// achievements or the request fails (e.g. private stats).
+export const getGameAchievements = async (appId: number) => {
+  try {
+    const { achievements } = await steam.getUserAchievements(steamId, appId);
+    return achievements;
+  } catch {
+    return null;
+  }
+};

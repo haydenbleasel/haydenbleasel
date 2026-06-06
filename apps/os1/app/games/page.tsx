@@ -1,4 +1,11 @@
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@haydenbleasel/design-system/components/ui/tabs";
 import type { Metadata } from "next";
+import { unstable_cache } from "next/cache";
 import type {
   GameInfo,
   GameInfoBasic,
@@ -6,8 +13,12 @@ import type {
   UserPlaytime,
 } from "steamapi";
 
-import { PageHeader } from "@/components/page-header";
-import { getOwnedGames, getRecentGames } from "@/lib/steam";
+import { PageBody, PageHeader } from "@/components/page-header";
+import {
+  getGameAchievements,
+  getOwnedGames,
+  getRecentGames,
+} from "@/lib/steam";
 
 import { GameImage } from "./game-image";
 import rawMergeMap from "./merge-map.json";
@@ -86,6 +97,27 @@ const mergeGames = (
   return merged;
 };
 
+// A game is "perfect" when it has achievements and the user has unlocked them
+// all. Achievements are fetched one request per game, so cache for a day.
+const getCachedPerfectGameIds = unstable_cache(
+  async (appIds: number[]) => {
+    const results = await Promise.all(
+      appIds.map(async (id) => {
+        const achievements = await getGameAchievements(id);
+        const perfect =
+          achievements !== null &&
+          achievements.length > 0 &&
+          achievements.every((achievement) => achievement.unlocked);
+        return perfect ? id : null;
+      })
+    );
+
+    return results.filter((id): id is number => id !== null);
+  },
+  ["steam-perfect-games"],
+  { revalidate: 60 * 60 * 24 }
+);
+
 const Game = ({ game }: { game: MergedGame }) => (
   <a
     href={`https://store.steampowered.com/app/${game.game.game.id}`}
@@ -141,46 +173,48 @@ const GamesPage = async () => {
     capsuleFilenames
   ).filter((g) => g.totalRecentMinutes > 0);
 
+  const perfectGameIds = await getCachedPerfectGameIds(
+    sortedGames.map((g) => g.game.game.id).toSorted((a, b) => a - b)
+  );
+  const perfectIds = new Set(perfectGameIds);
+  const perfectGames = sortedGames.filter((g) =>
+    perfectIds.has(g.game.game.id)
+  );
+
+  const sections = [
+    { games: recentMerged, label: "Recent", value: "recent" },
+    { games: perfectGames, label: "Completed", value: "completed" },
+    { games: sortedGames, label: "All", value: "most" },
+  ].filter((section) => section.games.length > 0);
+
   return (
-    <div className="flex flex-col gap-8">
-      <PageHeader
-        title="Games"
-        description={
-          <>
-            What I&apos;ve been playing on Steam. {ownedGames.length} games
-            owned.
-          </>
-        }
-      />
-
-      {recentMerged.length > 0 && (
-        <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              Recently Played
-            </h2>
-          </div>
-          <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-            {recentMerged.map((game) => (
-              <Game game={game} key={game.game.game.id} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-        <div className="px-4 pt-2 pb-1">
-          <h2 className="text-sm font-medium text-muted-foreground">
-            Most Played
-          </h2>
-        </div>
-        <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-          {sortedGames.map((game) => (
-            <Game game={game} key={game.game.game.id} />
+    <Tabs defaultValue={sections[0]?.value}>
+      <PageHeader title="Games" withTabs>
+        <TabsList className="gap-4" variant="line">
+          {sections.map((section) => (
+            <TabsTrigger
+              className="flex-none px-0 font-normal"
+              key={section.value}
+              value={section.value}
+            >
+              {section.label}
+            </TabsTrigger>
           ))}
-        </div>
-      </section>
-    </div>
+        </TabsList>
+      </PageHeader>
+
+      <PageBody>
+        {sections.map((section) => (
+          <TabsContent key={section.value} value={section.value}>
+            <div className="-ml-3 -mt-2 grid gap-2">
+              {section.games.map((game) => (
+                <Game game={game} key={game.game.game.id} />
+              ))}
+            </div>
+          </TabsContent>
+        ))}
+      </PageBody>
+    </Tabs>
   );
 };
 

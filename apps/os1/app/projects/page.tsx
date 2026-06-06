@@ -282,41 +282,36 @@ const projects: Project[] = [
 
 const ProjectsPage = () => (
   <>
-    <PageHeader
-      title="Projects"
-      description="Things I've designed, built and shipped."
-    />
+    <PageHeader title="Projects" />
 
     <PageBody>
-      <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-        <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-          {projects.map((project) => (
-            <a
-              className="group flex flex-col gap-2 rounded-lg px-3 py-2 no-underline transition-colors hover:bg-accent sm:flex-row sm:items-center sm:justify-between sm:gap-4"
-              href={project.url}
-              key={project.name}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-                <project.logo className="size-4 shrink-0 text-foreground" />
-                <p className="font-medium text-foreground">{project.name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {project.description}
-                </p>
-              </div>
-              {project.status ? (
-                <Badge
-                  variant="outline"
-                  className="shrink-0 bg-transparent font-normal text-muted-foreground"
-                >
-                  {project.status}
-                </Badge>
-              ) : null}
-            </a>
-          ))}
-        </div>
-      </section>
+      <div className="-ml-3 -mt-2 grid gap-2">
+        {projects.map((project) => (
+          <a
+            className="group flex flex-col gap-2 rounded-lg px-3 py-2 no-underline transition-colors hover:bg-accent sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+            href={project.url}
+            key={project.name}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+              <project.logo className="size-4 shrink-0 text-foreground" />
+              <p className="font-medium text-foreground">{project.name}</p>
+              <p className="text-sm text-muted-foreground">
+                {project.description}
+              </p>
+            </div>
+            {project.status ? (
+              <Badge
+                variant="outline"
+                className="shrink-0 bg-transparent font-normal text-muted-foreground"
+              >
+                {project.status}
+              </Badge>
+            ) : null}
+          </a>
+        ))}
+      </div>
     </PageBody>
   </>
 );

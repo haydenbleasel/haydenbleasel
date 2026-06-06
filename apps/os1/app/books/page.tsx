@@ -1,7 +1,13 @@
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@haydenbleasel/design-system/components/ui/tabs";
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { PageHeader } from "@/components/page-header";
+import { PageBody, PageHeader } from "@/components/page-header";
 import { getRead, getReading, getToRead } from "@/lib/oku";
 import type { OkuBook } from "@/lib/oku";
 
@@ -40,61 +46,40 @@ const BooksPage = async () => {
     getToRead(),
   ]);
 
+  const sections = [
+    { books: reading, label: "Currently Reading", value: "reading" },
+    { books: read, label: "Read", value: "read" },
+    { books: toRead, label: "To Read", value: "to-read" },
+  ].filter((section) => section.books.length > 0);
+
   return (
-    <div className="flex flex-col gap-8">
-      <PageHeader
-        title="Books"
-        description={
-          <>
-            What I&apos;ve been reading on Oku.{" "}
-            {reading.length + read.length + toRead.length} books tracked.
-          </>
-        }
-      />
+    <Tabs defaultValue={sections[0]?.value}>
+      <PageHeader title="Books" withTabs>
+        <TabsList className="gap-4" variant="line">
+          {sections.map((section) => (
+            <TabsTrigger
+              className="flex-none px-0 font-normal"
+              key={section.value}
+              value={section.value}
+            >
+              {section.label}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </PageHeader>
 
-      {reading.length > 0 && (
-        <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              Currently Reading
-            </h2>
-          </div>
-          <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-            {reading.map((book) => (
-              <Book key={book.link} book={book} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {read.length > 0 && (
-        <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">Read</h2>
-          </div>
-          <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-            {read.map((book) => (
-              <Book key={book.link} book={book} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {toRead.length > 0 && (
-        <section className="flex flex-col gap-2 rounded-2xl bg-sidebar p-2">
-          <div className="px-4 pt-2 pb-1">
-            <h2 className="text-sm font-medium text-muted-foreground">
-              To Read
-            </h2>
-          </div>
-          <div className="grid gap-2 rounded-2xl bg-background p-2 shadow-sm/5">
-            {toRead.map((book) => (
-              <Book key={book.link} book={book} />
-            ))}
-          </div>
-        </section>
-      )}
-    </div>
+      <PageBody>
+        {sections.map((section) => (
+          <TabsContent key={section.value} value={section.value}>
+            <div className="-ml-3 -mt-2 grid gap-2">
+              {section.books.map((book) => (
+                <Book key={book.link} book={book} />
+              ))}
+            </div>
+          </TabsContent>
+        ))}
+      </PageBody>
+    </Tabs>
   );
 };
 
