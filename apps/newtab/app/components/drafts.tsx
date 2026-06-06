@@ -109,7 +109,7 @@ const DraftsContent = async () => {
 };
 
 export const Drafts = () => (
-  <Card className="gap-0 bg-sidebar p-1 shadow-xs">
+  <Card className="gap-0 bg-sidebar p-1 shadow-xs w-full md:w-lg shrink-0">
     <CardHeader className="gap-0 px-3 py-2">
       <CardTitle className="font-normal text-muted-foreground text-sm">
         Drafts

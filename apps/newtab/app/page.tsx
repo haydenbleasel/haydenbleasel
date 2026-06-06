@@ -1,18 +1,18 @@
 import { Drafts } from "./components/drafts";
+import { Header } from "./components/header";
 import { Tasks } from "./components/tasks";
 import { Today } from "./components/today";
 
+export const dynamic = "force-dynamic";
+
 const Home = () => (
-  <div className="flex h-screen w-screen items-center justify-center">
-    <div className="grid gap-4 p-4 xl:grid-cols-2">
-      <div className="relative grid gap-4 xl:w-xl">
-        <Tasks />
-      </div>
-      <div className="grid gap-4 xl:w-xl">
-        <Drafts />
-        <Today />
-      </div>
+  <div className="flex h-screen w-screen flex-col p-6 gap-6">
+    <Header />
+    <div className="flex flex-col gap-4 md:flex-row">
+      <Drafts />
+      <Today />
     </div>
+    <Tasks />
   </div>
 );
 

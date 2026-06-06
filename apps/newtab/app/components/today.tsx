@@ -16,7 +16,7 @@ import type { Draft } from "@/lib/typefully";
 const Post = ({ draft }: { draft: Draft }) => (
   <div
     key={draft.id}
-    className="flex items-center justify-between gap-4 p-3 transition-colors hover:bg-muted"
+    className="flex items-center justify-between gap-4 bg-card p-3 transition-colors last:odd:col-span-2 hover:bg-muted"
   >
     <p className="line-clamp-1 w-full truncate text-wrap text-sm">
       {draft.preview ?? ""}
@@ -66,7 +66,7 @@ const TodayContent = async () => {
   }
 
   return (
-    <CardContent className="divide-y overflow-hidden rounded-xl border bg-card p-0 shadow-xs">
+    <CardContent className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border bg-border p-0 shadow-xs">
       {data
         .toSorted((a, b) => {
           const dateA = toZonedTime(
@@ -88,13 +88,13 @@ const TodayContent = async () => {
 };
 
 export const Today = () => (
-  <Card className="min-h-[188px] gap-0 bg-sidebar p-1 shadow-xs">
+  <Card className="gap-0 bg-sidebar p-1 shadow-xs w-full">
     <CardHeader className="gap-0 px-3 py-2">
       <CardTitle className="font-normal text-muted-foreground text-sm">
         Today&apos;s Posts
       </CardTitle>
     </CardHeader>
-    <Suspense fallback={<Skeleton className="h-[140px] rounded-xl" />}>
+    <Suspense fallback={<Skeleton className="h-[46.5px] rounded-xl" />}>
       <TodayContent />
     </Suspense>
   </Card>

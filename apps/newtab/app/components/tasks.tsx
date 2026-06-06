@@ -84,7 +84,7 @@ export const Tasks = () => {
   };
 
   return (
-    <Card className="gap-0 bg-sidebar p-1 shadow-xs xl:absolute xl:inset-0">
+    <Card className="gap-0 bg-sidebar p-1 shadow-xs">
       <CardHeader className="flex items-center justify-between gap-0 px-3 py-2">
         <CardTitle className="font-normal text-muted-foreground text-sm">
           Tasks
