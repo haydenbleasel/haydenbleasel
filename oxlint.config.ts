@@ -11,5 +11,6 @@ export default defineConfig({
     "packages/design-system/components/ai-elements",
     "packages/design-system/lib/utils.ts",
     "packages/design-system/hooks/use-mobile.ts",
+    "packages/typefully/schema.ts",
   ],
 });

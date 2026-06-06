@@ -4,3263 +4,4529 @@
  */
 
 export interface paths {
-  "/v2/me": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get current user
+         * @description Retrieve the currently authenticated Typefully user associated with your API Key
+         */
+        get: operations["typefully_apps_apiv2_handlers_user_get_me"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get current user
-     * @description Retrieve the currently authenticated Typefully user associated with your API Key
-     */
-    get: operations["typefully_apps_apiv2_handlers_user_get_me"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/analytics/{platform}/posts": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/analytics/{platform}/posts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List analytics posts
+         * @description Retrieve posts with metrics for a platform in a social set between `start_date` and `end_date` (inclusive).
+         *
+         *     **Required permission:** READ access to this social set.
+         *
+         *     Notes:
+         *     - `platform` is a path parameter (for example: `x`, `linkedin`).
+         *     - This endpoint is social-set scoped and platform-scoped to support analytics expansion.
+         *     - Currently, only `x` is supported.
+         *     - Replies are excluded by default. Set `include_replies=true` to include them.
+         *     - Pagination defaults to `limit=25` with max `limit=100`.
+         *     - Date ranges larger than 366 days are rejected.
+         */
+        get: operations["typefully_apps_apiv2_handlers_analytics_list_social_set_analytics_posts"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List analytics posts
-     * @description Retrieve posts with metrics for a platform in a social set between `start_date` and `end_date` (inclusive).
-     *
-     *     **Required permission:** READ access to this social set.
-     *
-     *     Notes:
-     *     - `platform` is a path parameter (for example: `x`, `linkedin`).
-     *     - This endpoint is social-set scoped and platform-scoped to support analytics expansion.
-     *     - Currently, only `x` is supported.
-     *     - Replies are excluded by default. Set `include_replies=true` to include them.
-     *     - Pagination defaults to `limit=25` with max `limit=100`.
-     *     - Date ranges larger than 366 days are rejected.
-     */
-    get: operations["typefully_apps_apiv2_handlers_analytics_list_social_set_analytics_posts"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/analytics/{platform}/followers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get followers analytics
+         * @description Retrieve daily follower counts for a platform in a social set between `start_date` and `end_date` (inclusive).
+         *
+         *     **Required permission:** READ access to this social set.
+         *
+         *     Notes:
+         *     - `platform` is a path parameter (for example: `x`, `linkedin`).
+         *     - This endpoint is social-set scoped and platform-scoped to support analytics expansion.
+         *     - Currently, only `x` is supported.
+         *     - Returns a totals-only daily follower series with the latest in-range follower count.
+         *     - If `start_date` and `end_date` are omitted, defaults to the last 30 days.
+         *     - Date ranges larger than 366 days are rejected.
+         */
+        get: operations["typefully_apps_apiv2_handlers_analytics_get_social_set_analytics_followers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List social sets
-     * @description Retrieve all social sets (accounts) you can access. This includes accounts you own directly and accounts that belong to teams you are a member of.
-     */
-    get: operations["typefully_apps_apiv2_handlers_social_sets_list_social_sets"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List social sets
+         * @description Retrieve all social sets (accounts) you can access. This includes accounts you own directly and accounts that belong to teams you are a member of.
+         */
+        get: operations["typefully_apps_apiv2_handlers_social_sets_list_social_sets"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get social set details
-     * @description Retrieve detailed information about a social set, including every configured social media platform (X, LinkedIn, Mastodon, Threads, Bluesky) with account details and profile information.
-     *
-     *     **Required permission:** READ access to the social set.
-     */
-    get: operations["typefully_apps_apiv2_handlers_social_sets_get_social_set_details"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/drafts": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get social set details
+         * @description Retrieve detailed information about a social set, including every configured social media platform (X, LinkedIn, Mastodon, Threads, Bluesky) with account details and profile information.
+         *
+         *     **Required permission:** READ access to the social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_social_sets_get_social_set_details"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List drafts
-     * @description Retrieve all drafts for a specific social set with optional filtering and sorting. Drafts are ordered by last edited date (most recent first) by default.
-     *
-     *     **Required permission:** READ access to this social set.
-     */
-    get: operations["typefully_apps_apiv2_handlers_drafts_list_drafts"];
-    put?: never;
-    /**
-     * Create draft
-     * @description Create a new draft with content for one or more social media platforms. The draft can be saved as a draft, scheduled for later publishing, or published immediately.
-     *
-     *     **Account-level settings:** This endpoint automatically applies the following account-level settings if enabled: Auto-Retweet, Auto-Plug, and Natural Posting Time.
-     *
-     *     **Required permission:** WRITE access to create drafts. PUBLISH access is required to schedule or publish immediately.
-     */
-    post: operations["typefully_apps_apiv2_handlers_drafts_create_draft"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/drafts/{draft_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/drafts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List drafts
+         * @description Retrieve all drafts for a specific social set with optional filtering and sorting. Drafts are ordered by last edited date (most recent first) by default.
+         *
+         *     **Required permission:** READ access to this social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_drafts_list_drafts"];
+        put?: never;
+        /**
+         * Create draft
+         * @description Create a new draft with content for one or more social media platforms. The draft can be saved as a draft, scheduled for later publishing, or published immediately.
+         *
+         *     **Account-level settings:** This endpoint automatically applies the following account-level settings if enabled: Auto-Retweet, Auto-Plug, and Natural Posting Time.
+         *
+         *     **Required permission:** WRITE access to create drafts. PUBLISH access is required to schedule or publish immediately.
+         */
+        post: operations["typefully_apps_apiv2_handlers_drafts_create_draft"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get draft
-     * @description Retrieve a specific draft by ID, including its content for all configured platforms, status, and scheduling information.
-     *
-     *     **Required permission:** READ access to this social set.
-     */
-    get: operations["typefully_apps_apiv2_handlers_drafts_get_draft"];
-    put?: never;
-    post?: never;
-    /**
-     * Delete draft
-     * @description Delete a draft. Requires WRITE access. You can delete your own drafts in any status (DRAFT, ERROR, SCHEDULED, PUBLISHED, PUBLISHING) with WRITE access. Drafts created by other users also require WRITE access to delete.
-     *
-     *     **Required permission:** WRITE access to this social set.
-     */
-    delete: operations["typefully_apps_apiv2_handlers_drafts_delete_draft"];
-    options?: never;
-    head?: never;
-    /**
-     * Update draft
-     * @description Update an existing draft with partial update semantics. Only provided fields are updated; omitted fields remain unchanged. Scheduled drafts require publish access to edit.
-     *
-     *     **Required permission:** WRITE access to edit drafts. PUBLISH access is required to edit scheduled drafts, schedule, or publish.
-     */
-    patch: operations["typefully_apps_apiv2_handlers_drafts_edit_draft"];
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/media/upload": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/drafts/{draft_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get draft
+         * @description Retrieve a specific draft by ID, including its content for all configured platforms, status, and scheduling information.
+         *
+         *     If the draft has any comment threads, the response's `posts[*].text` includes inline `<typ:comment-thread id="UUID">…</typ:comment-thread>` markers around the anchored spans (and self-closing markers at paragraph start for paragraph-level threads). The markers exist so a `GET → modify → PATCH` round-trip preserves comment anchors. To render plain text without markers (read-only / display use cases), pass `?exclude_comment_markers=true`. **Text returned with that flag set cannot be PATCHed back without losing comment anchors.**
+         *
+         *     **Required permission:** READ access to this social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_drafts_get_draft"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete draft
+         * @description Delete a draft. Requires WRITE access. You can delete your own drafts in any status (DRAFT, ERROR, SCHEDULED, PUBLISHED, PUBLISHING) with WRITE access. Drafts created by other users also require WRITE access to delete.
+         *
+         *     **Required permission:** WRITE access to this social set.
+         */
+        delete: operations["typefully_apps_apiv2_handlers_drafts_delete_draft"];
+        options?: never;
+        head?: never;
+        /**
+         * Update draft
+         * @description Update an existing draft with partial update semantics. Only provided fields are updated; omitted fields remain unchanged. Scheduled drafts require publish access to edit.
+         *
+         *     ## Note about Comment-thread markers
+         *
+         *     If the draft has comment threads, every submitted `posts[*].text` must include the inline `<typ:comment-thread id="UUID">…</typ:comment-thread>` markers it received from the GET response. Validation is at the platform-level: every comment thread anchored on a platform must appear somewhere in that platform's submitted text.- `409 COMMENTS_MARKER_MISMATCH` will be thrown if an expected comment thread marker is missing unless `"force_overwrite_comments": true` is set, in which case the affected threads are resolved server-side.
+         *     - `400 COMMENTS_MARKER_UNKNOWN_ID` will be thrown if you submit an id that doesn't exist on this draft. - `400 COMMENTS_MARKER_MALFORMED` will be thrown if the marker tag is malformed (bad UUID, unbalanced, attribute violations, etc.).
+         *
+         *     Pass `?exclude_comment_markers=true` to render the response's `posts[*].text` as plain text without markers (read-only / display rendering — does NOT skip server-side marker validation on the request body).
+         *
+         *     **Required permission:** WRITE access to edit drafts. PUBLISH access is required to edit scheduled drafts, schedule, or publish.
+         */
+        patch: operations["typefully_apps_apiv2_handlers_drafts_edit_draft"];
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * Create media upload
-     * @description Generate a presigned S3 upload URL for images, videos, GIFs, or PDFs. After you receive the URL, upload the file contents with a PUT request and then reference the returned media_id when creating drafts.
-     *
-     *     **Uploading:** Send a plain PUT with only raw file bytes as the body — no extra headers (`Content-Type`, `Authorization`, etc.). The presigned URL signature was calculated without them, so adding headers causes a `403 SignatureDoesNotMatch`. Use `curl -T <file>` (not `--data-binary`), `requests.put(url, data=file_bytes)` in Python, or `fetch(url, {method:'PUT', body:buffer})` in JS. A successful upload returns `200` or `204`.
-     *
-     *     **Required permission:** WRITE access to the social set.
-     */
-    post: operations["typefully_apps_apiv2_handlers_media_create_media_upload"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/media/{media_id}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/media/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create media upload
+         * @description Generate a presigned S3 upload URL for images, videos, GIFs, or PDFs. After you receive the URL, upload the file contents with a PUT request and then reference the returned media_id when creating drafts.
+         *
+         *     **Uploading:** Send a plain PUT with only raw file bytes as the body — no extra headers (`Content-Type`, `Authorization`, etc.). The presigned URL signature was calculated without them, so adding headers causes a `403 SignatureDoesNotMatch`. Use `curl -T <file>` (not `--data-binary`), `requests.put(url, data=file_bytes)` in Python, or `fetch(url, {method:'PUT', body:buffer})` in JS. A successful upload returns `200` or `204`.
+         *
+         *     **Required permission:** WRITE access to the social set.
+         */
+        post: operations["typefully_apps_apiv2_handlers_media_create_media_upload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get media status
-     * @description Retrieves the processing status of an uploaded media file. Poll this endpoint after uploading to check when the file is ready to use in drafts.
-     *
-     *     **Required permission:** READ access to the social set.
-     */
-    get: operations["typefully_apps_apiv2_handlers_media_get_media_status"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/tags": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/media/{media_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get media status
+         * @description Retrieves the processing status of an uploaded media file. Poll this endpoint after uploading to check when the file is ready to use in drafts.
+         *
+         *     **Required permission:** READ access to the social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_media_get_media_status"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * List tags
-     * @description Retrieve all tags for a social set, ordered by their slugs.
-     *
-     *     **Required permission:** READ access to the social set.
-     */
-    get: operations["typefully_apps_apiv2_handlers_tags_list_tags"];
-    put?: never;
-    /**
-     * Create tag
-     * @description Create a new tag for a social set. The slug is automatically generated from the tag name, which must be unique per social set.
-     *
-     *     **Required permission:** WRITE access to the social set.
-     */
-    post: operations["typefully_apps_apiv2_handlers_tags_create_tag"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/queue/schedule": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/tags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List tags
+         * @description Retrieve all tags for a social set, ordered by their slugs.
+         *
+         *     **Required permission:** READ access to the social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_tags_list_tags"];
+        put?: never;
+        /**
+         * Create tag
+         * @description Create a new tag for a social set. The slug is automatically generated from the tag name, which must be unique per social set.
+         *
+         *     **Required permission:** WRITE access to the social set.
+         */
+        post: operations["typefully_apps_apiv2_handlers_tags_create_tag"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get queue schedule
-     * @description Retrieve the queue schedule rules for a social set.
-     *
-     *     **Required permission:** READ access to this social set.
-     *
-     *     Behavior:
-     *     - If the schedule row does not exist yet, it is created with defaults.
-     */
-    get: operations["typefully_apps_apiv2_handlers_queue_get_queue_schedule"];
-    /**
-     * Replace queue schedule
-     * @description Replace the queue schedule rules for a social set.
-     *
-     *     **Required permission:** ADMIN access to this social set.
-     *     Semantics: full replacement (atomic).
-     *
-     *     Rule validation:
-     *     - `h` in `0..23`, `m` in `0..59`
-     *     - `days` values are one of: `mon,tue,wed,thu,fri,sat,sun`
-     *     - Duplicate day+time combinations are rejected
-     *
-     *     Note: `rules=[]` is allowed and represents an empty schedule.
-     */
-    put: operations["typefully_apps_apiv2_handlers_queue_put_queue_schedule"];
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/queue": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/queue/schedule": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get queue schedule
+         * @description Retrieve the queue schedule rules for a social set.
+         *
+         *     **Required permission:** READ access to this social set.
+         *
+         *     Behavior:
+         *     - If the schedule row does not exist yet, it is created with defaults.
+         */
+        get: operations["typefully_apps_apiv2_handlers_queue_get_queue_schedule"];
+        /**
+         * Replace queue schedule
+         * @description Replace the queue schedule rules for a social set.
+         *
+         *     **Required permission:** ADMIN access to this social set.
+         *     Semantics: full replacement (atomic).
+         *
+         *     Rule validation:
+         *     - `h` in `0..23`, `m` in `0..59`
+         *     - `days` values are one of: `mon,tue,wed,thu,fri,sat,sun`
+         *     - Duplicate day+time combinations are rejected
+         *
+         *     Note: `rules=[]` is allowed and represents an empty schedule.
+         */
+        put: operations["typefully_apps_apiv2_handlers_queue_put_queue_schedule"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Get queue
-     * @description Retrieve queue slots and scheduled drafts between `start_date` and `end_date` (inclusive).
-     *
-     *     **Required permission:** READ access to this social set.
-     *
-     *     Notes:
-     *     - `start_date` and `end_date` are interpreted in the social set timezone.
-     *     - Ranges larger than 62 days are rejected.
-     */
-    get: operations["typefully_apps_apiv2_handlers_queue_get_queue"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v2/social-sets/{social_set_id}/linkedin/organizations/resolve": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "/v2/social-sets/{social_set_id}/queue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get queue
+         * @description Retrieve queue slots and scheduled drafts between `start_date` and `end_date` (inclusive).
+         *
+         *     **Required permission:** READ access to this social set.
+         *
+         *     Notes:
+         *     - `start_date` and `end_date` are interpreted in the social set timezone.
+         *     - Ranges larger than 62 days are rejected.
+         */
+        get: operations["typefully_apps_apiv2_handlers_queue_get_queue"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    /**
-     * Resolve LinkedIn organization from URL
-     * @description Resolve a LinkedIn company/school URL into organization metadata that can be used to build LinkedIn mention syntax in post text.
-     *
-     *     This endpoint is resolver-only and is not a general organization search endpoint.
-     *
-     *     Mention format: `@[Company Name](urn:li:organization:123456)`
-     *
-     *     **Required permission:** READ access to the social set.
-     */
-    get: operations["typefully_apps_apiv2_handlers_linkedin_resolve_linkedin_organization_from_url"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/v2/social-sets/{social_set_id}/linkedin/organizations/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Resolve LinkedIn organization from URL
+         * @description Resolve a LinkedIn company/school URL into organization metadata that can be used to build LinkedIn mention syntax in post text.
+         *
+         *     This endpoint is resolver-only and is not a general organization search endpoint.
+         *
+         *     Mention format: `@[Company Name](urn:li:organization:123456)`
+         *
+         *     **Required permission:** READ access to the social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_linkedin_resolve_linkedin_organization_from_url"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/social-sets/{social_set_id}/drafts/{draft_id}/comment-threads": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List comment threads on a draft
+         * @description Retrieve comment threads attached to a draft, ordered by creation time. Each thread includes the original `selected_text` snapshot and the full ordered list of comments.
+         *
+         *     **Required permission:** READ access to this social set.
+         */
+        get: operations["typefully_apps_apiv2_handlers_comments_list_comments"];
+        put?: never;
+        /**
+         * Create a comment thread
+         * @description Create a new comment thread on a draft. The thread is anchored to a substring of a post (`selected_text`); use `occurrence` to disambiguate when the same substring appears more than once in the post. Omit `occurrence` to anchor on the first match.
+         *
+         *     LinkedIn mentions appear in `posts[*].text` as `@[Name](urn:li:organization:ID)` or `@[Name](urn:li:person:ID)`. A mention is indivisible — `selected_text` must either contain the entire mention substring or stay outside it.
+         *
+         *     **Required permission:** WRITE access to this social set.
+         */
+        post: operations["typefully_apps_apiv2_handlers_comments_create_comment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/social-sets/{social_set_id}/drafts/{draft_id}/comment-threads/{comment_thread_id}/comments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add a comment to an existing comment thread
+         * @description Append a comment to an existing comment thread. Returns the full updated thread.
+         *
+         *     **Required permission:** WRITE access to this social set.
+         */
+        post: operations["typefully_apps_apiv2_handlers_comments_add_comment_to_thread"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/social-sets/{social_set_id}/drafts/{draft_id}/comment-threads/{comment_thread_id}/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Resolve a comment thread
+         * @description Resolves the comment thread and removes the corresponding comment markers from the text.
+         *
+         *     **Required permission:** Either authorship of the comment thread or WRITE access on the social set.
+         */
+        post: operations["typefully_apps_apiv2_handlers_comments_resolve_thread"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v2/social-sets/{social_set_id}/drafts/{draft_id}/comment-threads/{comment_thread_id}/comments/{comment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete a comment
+         * @description Deletes a comment from a comment thread. If `comment_id` identifies the *root* (oldest) comment, the entire thread is deleted and the corresponding comment markers are removed from the text.
+         *
+         *     **Required permission:** Authorship of the comment or WRITE access on the social set.
+         */
+        delete: operations["typefully_apps_apiv2_handlers_comments_delete_comment"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a comment's text
+         * @description Update the plain-text body of a single comment. Returns the full updated thread.
+         *
+         *     **Required permission:** Authorship of the comment.
+         */
+        patch: operations["typefully_apps_apiv2_handlers_comments_update_comment"];
+        trace?: never;
+    };
+    "/v2/social-sets/{social_set_id}/drafts/{draft_id}/comment-threads/{comment_thread_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete a comment thread
+         * @description Deletes the comment thread along with all its comments and removes the corresponding comment markers from the text.
+         *
+         *     **Required permission:** Authorship of the comment thread or WRITE access on the social set.
+         */
+        delete: operations["typefully_apps_apiv2_handlers_comments_delete_thread"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export interface webhooks {
-  "draft.created": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Draft Created
-     * @description Triggered when a new draft is created in a social set you have access to.
-     */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /**
-             * @description The event type that triggered this webhook
-             * @constant
-             */
-            event: "draft.created";
-            /** @description The draft data at the time of the event. */
-            data: components["schemas"]["DraftDetailResponse"];
-          };
+    "draft.created": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Return any 2xx status to acknowledge receipt */
-        200: {
-          headers: Record<string, unknown>;
-          content?: never;
+        get?: never;
+        put?: never;
+        /**
+         * Draft Created
+         * @description Triggered when a new draft is created in a social set you have access to.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description The event type that triggered this webhook
+                         * @constant
+                         */
+                        event: "draft.created";
+                        /** @description The draft data at the time of the event. */
+                        data: components["schemas"]["DraftDetailResponse"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Return any 2xx status to acknowledge receipt */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
         };
-      };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "draft.scheduled": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Draft Scheduled
-     * @description Triggered when a draft is scheduled for publishing.
-     */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /**
-             * @description The event type that triggered this webhook
-             * @constant
-             */
-            event: "draft.scheduled";
-            /** @description The draft data at the time of the event. */
-            data: components["schemas"]["DraftDetailResponse"];
-          };
+    "draft.scheduled": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Return any 2xx status to acknowledge receipt */
-        200: {
-          headers: Record<string, unknown>;
-          content?: never;
+        get?: never;
+        put?: never;
+        /**
+         * Draft Scheduled
+         * @description Triggered when a draft is scheduled for publishing.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description The event type that triggered this webhook
+                         * @constant
+                         */
+                        event: "draft.scheduled";
+                        /** @description The draft data at the time of the event. */
+                        data: components["schemas"]["DraftDetailResponse"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Return any 2xx status to acknowledge receipt */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
         };
-      };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "draft.published": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Draft Published
-     * @description Triggered when a draft is successfully published to one or more platforms.
-     */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /**
-             * @description The event type that triggered this webhook
-             * @constant
-             */
-            event: "draft.published";
-            /** @description The draft data at the time of the event. */
-            data: components["schemas"]["DraftDetailResponse"];
-          };
+    "draft.published": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Return any 2xx status to acknowledge receipt */
-        200: {
-          headers: Record<string, unknown>;
-          content?: never;
+        get?: never;
+        put?: never;
+        /**
+         * Draft Published
+         * @description Triggered when a draft is successfully published to one or more platforms.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description The event type that triggered this webhook
+                         * @constant
+                         */
+                        event: "draft.published";
+                        /** @description The draft data at the time of the event. */
+                        data: components["schemas"]["DraftDetailResponse"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Return any 2xx status to acknowledge receipt */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
         };
-      };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "draft.status_changed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Draft Status Changed
-     * @description Triggered on any status transition. This event fires alongside specific events like draft.scheduled or draft.published.
-     */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /**
-             * @description The event type that triggered this webhook
-             * @constant
-             */
-            event: "draft.status_changed";
-            /** @description The draft data at the time of the event. */
-            data: components["schemas"]["DraftDetailResponse"];
-          };
+    "draft.status_changed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Return any 2xx status to acknowledge receipt */
-        200: {
-          headers: Record<string, unknown>;
-          content?: never;
+        get?: never;
+        put?: never;
+        /**
+         * Draft Status Changed
+         * @description Triggered on any status transition. This event fires alongside specific events like draft.scheduled or draft.published.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description The event type that triggered this webhook
+                         * @constant
+                         */
+                        event: "draft.status_changed";
+                        /** @description The draft data at the time of the event. */
+                        data: components["schemas"]["DraftDetailResponse"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Return any 2xx status to acknowledge receipt */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
         };
-      };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "draft.tags_changed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Draft Tags Changed
-     * @description Triggered when tags are added to or removed from a draft.
-     */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /**
-             * @description The event type that triggered this webhook
-             * @constant
-             */
-            event: "draft.tags_changed";
-            /** @description The draft data at the time of the event. */
-            data: components["schemas"]["DraftDetailResponse"];
-          };
+    "draft.tags_changed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Return any 2xx status to acknowledge receipt */
-        200: {
-          headers: Record<string, unknown>;
-          content?: never;
+        get?: never;
+        put?: never;
+        /**
+         * Draft Tags Changed
+         * @description Triggered when tags are added to or removed from a draft.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description The event type that triggered this webhook
+                         * @constant
+                         */
+                        event: "draft.tags_changed";
+                        /** @description The draft data at the time of the event. */
+                        data: components["schemas"]["DraftDetailResponse"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Return any 2xx status to acknowledge receipt */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
         };
-      };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "draft.deleted": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Draft Deleted
-     * @description Triggered when a draft is deleted. The payload contains the draft data as it was before deletion.
-     */
-    post: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path?: never;
-        cookie?: never;
-      };
-      requestBody: {
-        content: {
-          "application/json": {
-            /**
-             * @description The event type that triggered this webhook
-             * @constant
-             */
-            event: "draft.deleted";
-            /** @description The draft data at the time of the event. */
-            data: components["schemas"]["DraftDetailResponse"];
-          };
+    "draft.deleted": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      responses: {
-        /** @description Return any 2xx status to acknowledge receipt */
-        200: {
-          headers: Record<string, unknown>;
-          content?: never;
+        get?: never;
+        put?: never;
+        /**
+         * Draft Deleted
+         * @description Triggered when a draft is deleted. The payload contains the draft data as it was before deletion.
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": {
+                        /**
+                         * @description The event type that triggered this webhook
+                         * @constant
+                         */
+                        event: "draft.deleted";
+                        /** @description The draft data at the time of the event. */
+                        data: components["schemas"]["DraftDetailResponse"];
+                    };
+                };
+            };
+            responses: {
+                /** @description Return any 2xx status to acknowledge receipt */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
         };
-      };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
 }
 export interface components {
-  schemas: {
-    /**
-     * UserResponse
-     * @description User details response schema
-     */
-    UserResponse: {
-      /**
-       * Id
-       * @description Unique identifier for the user
-       * @example 12345
-       * @example 67890
-       */
-      id: number;
-      /**
-       * Name
-       * @description Name of the user
-       * @example John Doe
-       * @example Jane Smith
-       */
-      name: string;
-      /**
-       * Email
-       * @description Email address of the user
-       * @example user@example.com
-       */
-      email: string;
-      /**
-       * Profile Image Url
-       * @description URL to the user's profile image. Null if not available.
-       * @example https://example.com/avatar.jpg
-       */
-      profile_image_url?: string | null;
-      /**
-       * Signup Date
-       * Format: date-time
-       * @description Timestamp when the user signed up (ISO 8601 format in UTC)
-       * @example 2024-01-15T10:30:00Z
-       */
-      signup_date: string;
-      /**
-       * Api Key Label
-       * @description Label of the API key used to authenticate this request. Null if no label was set.
-       * @example My Production Key
-       * @example Zapier Integration
-       */
-      api_key_label?: string | null;
+    schemas: {
+        /**
+         * UserResponse
+         * @description User details response schema
+         */
+        UserResponse: {
+            /**
+             * Id
+             * @description Unique identifier for the user
+             * @example 12345
+             * @example 67890
+             */
+            id: number;
+            /**
+             * Name
+             * @description Name of the user
+             * @example John Doe
+             * @example Jane Smith
+             */
+            name: string;
+            /**
+             * Email
+             * @description Email address of the user
+             * @example user@example.com
+             */
+            email: string;
+            /**
+             * Profile Image Url
+             * @description URL to the user's profile image. Null if not available.
+             * @example https://example.com/avatar.jpg
+             */
+            profile_image_url?: string | null;
+            /**
+             * Signup Date
+             * Format: date-time
+             * @description Timestamp when the user signed up (ISO 8601 format in UTC)
+             * @example 2024-01-15T10:30:00Z
+             */
+            signup_date: string;
+            /**
+             * Api Key Label
+             * @description Label of the API key used to authenticate this request. Null if no label was set.
+             * @example My Production Key
+             * @example Zapier Integration
+             */
+            api_key_label?: string | null;
+        };
+        /**
+         * APIErrorResponse
+         * @description Standard error response for all API errors.
+         */
+        APIErrorResponse: {
+            error: components["schemas"]["ErrorObject"];
+        };
+        /**
+         * ErrorDetail
+         * @description Field-level error detail.
+         */
+        ErrorDetail: {
+            /**
+             * Message
+             * @description Human-readable error message
+             */
+            message: string;
+            /**
+             * Field
+             * @description Field name that caused the error
+             */
+            field?: string | null;
+            /**
+             * Type
+             * @description Error type (e.g. 'string_too_long', 'list_max_items')
+             */
+            type?: string | null;
+            /**
+             * Loc
+             * @description Error location path (e.g. ['body', 'platforms', 'x', 'posts', 0, 'text'])
+             */
+            loc?: unknown[] | null;
+            /**
+             * Ctx
+             * @description Error context
+             */
+            ctx?: Record<string, never> | null;
+            /**
+             * Input
+             * @description Input value that caused the error (e.g. 'Hello, world!')
+             */
+            input?: unknown | null;
+        };
+        /**
+         * ErrorObject
+         * @description Standard error response object.
+         */
+        ErrorObject: {
+            /**
+             * Code
+             * @description Error code
+             */
+            code: string;
+            /**
+             * Message
+             * @description Human-readable error message
+             */
+            message: string;
+            /**
+             * Details
+             * @description List of field-level errors (optional - only present when applicable)
+             */
+            details?: components["schemas"]["ErrorDetail"][] | null;
+        };
+        /**
+         * Input
+         * @description Pagination input parameters.
+         */
+        Input: {
+            /**
+             * Limit
+             * @description Maximum number of items to return per page
+             * @default 10
+             */
+            limit: number | null;
+            /**
+             * Offset
+             * @description Number of items to skip from the beginning
+             * @default 0
+             */
+            offset: number;
+        };
+        /**
+         * AnalyticsEngagementMetrics
+         * @description Platform-agnostic engagement metrics for a post.
+         */
+        AnalyticsEngagementMetrics: {
+            /**
+             * Total
+             * @description Total engagement count across supported interaction metrics.
+             */
+            total: number;
+            /**
+             * Likes
+             * @description Reaction count for the post.
+             */
+            likes: number;
+            /**
+             * Comments
+             * @description Comment/reply count for the post.
+             */
+            comments: number;
+            /**
+             * Shares
+             * @description Reshare/repost count for the post.
+             */
+            shares: number;
+            /**
+             * Quotes
+             * @description Quote/repost-with-comment count.
+             */
+            quotes: number;
+            /**
+             * Saves
+             * @description Save/bookmark count when available.
+             */
+            saves?: number | null;
+            /**
+             * Profile Clicks
+             * @description Profile click count.
+             */
+            profile_clicks: number;
+            /**
+             * Link Clicks
+             * @description Outbound URL click count when available.
+             */
+            link_clicks?: number | null;
+        };
+        /**
+         * AnalyticsPostMetrics
+         * @description High-level metrics for a post.
+         */
+        AnalyticsPostMetrics: {
+            /**
+             * Impressions
+             * @description Number of impressions for the post.
+             */
+            impressions: number;
+            /** @description Normalized engagement metrics for this post. */
+            engagement: components["schemas"]["AnalyticsEngagementMetrics"];
+        };
+        /** PagedSocialSetAnalyticsPostResponse */
+        PagedSocialSetAnalyticsPostResponse: {
+            /** Results */
+            results: components["schemas"]["SocialSetAnalyticsPostResponse"][];
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Next */
+            next: string | null;
+            /** Previous */
+            previous: string | null;
+        };
+        /**
+         * SocialSetAnalyticsPostResponse
+         * @description Analytics payload for a social-set post.
+         */
+        SocialSetAnalyticsPostResponse: {
+            /**
+             * Platform
+             * @description Social platform for this post. Currently only `x` is supported.
+             * @example x
+             * @constant
+             * @enum {string}
+             */
+            platform: "x";
+            /**
+             * Post Id
+             * @description Platform post identifier serialized as a string.
+             * @example 1898022122726803672
+             */
+            post_id: string;
+            /**
+             * Draft Id
+             * @description Typefully draft ID that produced this post when available.
+             */
+            draft_id?: number | null;
+            /**
+             * Created At
+             * Format: date-time
+             * @description When the post was created (ISO8601 in UTC).
+             */
+            created_at: string;
+            /**
+             * Preview Text
+             * @description Post preview text content.
+             */
+            preview_text: string;
+            /**
+             * Url
+             * @description Public URL to the post.
+             */
+            url: string;
+            /** @description Normalized post metrics grouped for external API consumers. */
+            metrics: components["schemas"]["AnalyticsPostMetrics"];
+        };
+        /**
+         * AnalyticsFollowersDataPoint
+         * @description Daily follower count datapoint.
+         */
+        AnalyticsFollowersDataPoint: {
+            /**
+             * Date
+             * Format: date
+             * @description Date bucket in the social set's timezone (YYYY-MM-DD).
+             */
+            date: string;
+            /**
+             * Followers Count
+             * @description Follower count for the date bucket.
+             */
+            followers_count: number;
+        };
+        /**
+         * SocialSetAnalyticsFollowersResponse
+         * @description Followers analytics payload for a social set.
+         */
+        SocialSetAnalyticsFollowersResponse: {
+            /**
+             * Platform
+             * @description Social platform for this analytics series. Currently only `x` is supported.
+             * @example x
+             * @constant
+             * @enum {string}
+             */
+            platform: "x";
+            /**
+             * Current Followers Count
+             * @description Latest non-null follower count in the returned date range.
+             */
+            current_followers_count?: number | null;
+            /**
+             * Data
+             * @description Daily follower counts ordered ascending by date.
+             */
+            data: components["schemas"]["AnalyticsFollowersDataPoint"][];
+        };
+        /** PagedSocialSetListResponse */
+        PagedSocialSetListResponse: {
+            /** Results */
+            results: components["schemas"]["SocialSetListResponse"][];
+            /** Count */
+            count: number;
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Next */
+            next: string | null;
+            /** Previous */
+            previous: string | null;
+        };
+        /**
+         * SocialSetListResponse
+         * @description Details of the social set for list endpoints
+         */
+        SocialSetListResponse: {
+            /**
+             * Id
+             * @description Unique identifier for the social set
+             * @example 12345
+             * @example 67890
+             */
+            id: number;
+            /**
+             * Username
+             * @description Username/handle for the social media account
+             * @example elonmusk
+             * @example typefully
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name of the social media account
+             * @example Elon Musk
+             * @example Typefully
+             */
+            name: string;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image of the social media account. Null if not available.
+             * @example https://typefully-user-avatars.s3.amazonaws.com/_generic/account/537/twitter.jpeg
+             */
+            profile_image_url: string | null;
+            /** @description Team that owns this social set. Null if the social set is owned by an individual user. */
+            team?: components["schemas"]["Team"] | null;
+        };
+        /**
+         * Team
+         * @description Details of the team that owns this social set
+         */
+        Team: {
+            /**
+             * Id
+             * @description Unique identifier for the team
+             * @example abc123def4567890
+             */
+            id: string;
+            /**
+             * Name
+             * @description Name of the team
+             * @example Marketing Team
+             * @example Engineering
+             */
+            name: string;
+        };
+        /**
+         * BlueskyAccount
+         * @description Schema for Bluesky account data in API responses
+         */
+        BlueskyAccount: {
+            /**
+             * Platform
+             * @description Platform identifier
+             * @default bluesky
+             */
+            platform: string;
+            /**
+             * Username
+             * @description Bluesky username/handle
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name for the account. Null if not available.
+             */
+            name?: string | null;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image. Null if not available.
+             */
+            profile_image_url?: string | null;
+            /**
+             * Profile Url
+             * @description URL to the public Bluesky profile
+             */
+            profile_url: string;
+        };
+        /**
+         * LinkedInAccount
+         * @description Schema for LinkedIn account data in API responses
+         */
+        LinkedInAccount: {
+            /**
+             * Platform
+             * @description Platform identifier
+             * @default linkedin
+             */
+            platform: string;
+            /**
+             * Username
+             * @description LinkedIn username/vanity name
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name for the account
+             */
+            name: string;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image. Null if not available.
+             */
+            profile_image_url?: string | null;
+            /**
+             * Profile Url
+             * @description URL to the public LinkedIn profile
+             */
+            profile_url: string;
+        };
+        /**
+         * MastodonAccount
+         * @description Schema for Mastodon account data in API responses
+         */
+        MastodonAccount: {
+            /**
+             * Platform
+             * @description Platform identifier
+             * @default mastodon
+             */
+            platform: string;
+            /**
+             * Username
+             * @description Mastodon username/handle (without the server suffix)
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name for the account
+             */
+            name: string;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image. Null if not available.
+             */
+            profile_image_url?: string | null;
+            /**
+             * Profile Url
+             * @description URL to the public Mastodon profile
+             */
+            profile_url: string;
+            /**
+             * Followers Count
+             * @description Number of followers on Mastodon
+             */
+            followers_count: number;
+            /**
+             * Server
+             * @description Server/instance for the Mastodon account
+             */
+            server: string;
+        };
+        /**
+         * PlatformsDict
+         * @description Strictly typed dictionary for platform accounts
+         */
+        PlatformsDict: {
+            x: components["schemas"]["XAccount"] | null;
+            linkedin: components["schemas"]["LinkedInAccount"] | null;
+            mastodon: components["schemas"]["MastodonAccount"] | null;
+            threads: components["schemas"]["ThreadsAccount"] | null;
+            bluesky: components["schemas"]["BlueskyAccount"] | null;
+        };
+        /** PublishingQuotaResponse */
+        PublishingQuotaResponse: {
+            /**
+             * Used
+             * @description Number of published drafts already counted in the active window.
+             */
+            used: number;
+            /**
+             * Remaining
+             * @description Remaining publish slots in the active window, or "unlimited".
+             */
+            remaining: number | "unlimited";
+            /**
+             * Resets At
+             * @description Timestamp when the current publishing quota window resets.
+             */
+            resets_at?: string | null;
+        };
+        /**
+         * SocialSetDetailResponse
+         * @description Detailed social set response including all platform accounts
+         */
+        SocialSetDetailResponse: {
+            /**
+             * Id
+             * @description Unique identifier for the social set
+             * @example 12345
+             * @example 67890
+             */
+            id: number;
+            /**
+             * Username
+             * @description Username/handle for the social media account
+             * @example elonmusk
+             * @example typefully
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name of the social media account
+             * @example Elon Musk
+             * @example Typefully
+             */
+            name: string;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image of the social media account. Null if not available.
+             * @example https://typefully-user-avatars.s3.amazonaws.com/_generic/account/537/twitter.jpeg
+             */
+            profile_image_url: string | null;
+            /** @description Team that owns this social set. Null if the social set is owned by an individual user. */
+            team?: components["schemas"]["Team"] | null;
+            /** @description All platform accounts configured in this social set (X, LinkedIn, Mastodon, Threads, Bluesky) */
+            platforms: components["schemas"]["PlatformsDict"];
+            /** @description Shared publishing quota snapshot for this social set. */
+            publishing_quota?: components["schemas"]["PublishingQuotaResponse"] | null;
+        };
+        /**
+         * ThreadsAccount
+         * @description Schema for Threads account data in API responses
+         */
+        ThreadsAccount: {
+            /**
+             * Platform
+             * @description Platform identifier
+             * @default threads
+             */
+            platform: string;
+            /**
+             * Username
+             * @description Threads username/handle
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name for the account. Null if not available.
+             */
+            name?: string | null;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image. Null if not available.
+             */
+            profile_image_url?: string | null;
+            /**
+             * Profile Url
+             * @description URL to the public Threads profile
+             */
+            profile_url: string;
+        };
+        /**
+         * XAccount
+         * @description Schema for X/Twitter account data in API responses
+         */
+        XAccount: {
+            /**
+             * Platform
+             * @description Platform identifier
+             * @default x
+             */
+            platform: string;
+            /**
+             * Username
+             * @description X/Twitter username/handle
+             */
+            username: string;
+            /**
+             * Name
+             * @description Display name for the account
+             */
+            name: string;
+            /**
+             * Profile Image Url
+             * @description URL to the profile image. Null if not available.
+             */
+            profile_image_url?: string | null;
+            /**
+             * Profile Url
+             * @description URL to the public X/Twitter profile
+             */
+            profile_url: string;
+        };
+        /**
+         * DraftOrderBy
+         * @description Allowed order_by fields for draft listing - prevents SQL injection
+         * @enum {string}
+         */
+        DraftOrderBy: "created_at" | "-created_at" | "updated_at" | "-updated_at" | "scheduled_date" | "-scheduled_date" | "published_at" | "-published_at";
+        /**
+         * DraftListResponse
+         * @description Schema for draft/thread data in API responses with standardized timestamp field names
+         */
+        DraftListResponse: {
+            /**
+             * Id
+             * @description Unique identifier for the draft
+             * @example 12345
+             */
+            id: number;
+            /**
+             * Preview
+             * @description Preview of the draft content (may be null for empty drafts).
+             * @example Hello world
+             * @example null
+             */
+            preview?: string | null;
+            /**
+             * Scheduled Date
+             * @description Scheduled datetime in UTC (ISO 8601). Null if not scheduled.
+             * @example 2025-01-20T14:00:00Z
+             * @example null
+             */
+            scheduled_date?: string | null;
+            /**
+             * Draft Title
+             * @description Internal title for the draft. Null if not set.
+             * @example My launch thread
+             * @example null
+             */
+            draft_title?: string | null;
+            /**
+             * Mastodon Post Enabled
+             * @description Whether posting to Mastodon is enabled for this draft
+             * @example true
+             * @example false
+             */
+            mastodon_post_enabled: boolean;
+            /**
+             * Social Set Id
+             * @description ID of the social set (account) this draft belongs to
+             * @example 67890
+             */
+            social_set_id: number;
+            /**
+             * Share Url
+             * @description Public share URL for the draft. Null if the draft is not publicly shared.
+             * @example https://typefully.com/share/abc123
+             */
+            share_url?: string | null;
+            /**
+             * Private Url
+             * @description Private URL for accessing the draft in Typefully. Can be shared with team members without requiring public sharing.
+             * @example https://typefully.com/?d=12345&a=67890
+             */
+            private_url: string;
+            /**
+             * Status
+             * @description Current status of the draft. 'draft' = saved but not scheduled, 'scheduled' = queued for publishing, 'published' = successfully posted, 'publishing' = currently being posted, 'error' = publishing failed
+             */
+            status: string;
+            /**
+             * Tags
+             * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs.
+             * @example [
+             *       "marketing",
+             *       "product"
+             *     ]
+             * @example [
+             *       "newsletter"
+             *     ]
+             * @example []
+             */
+            tags?: string[];
+            /**
+             * Created At
+             * Format: date-time
+             * @description Timestamp when the draft was created (ISO 8601 format in UTC)
+             * @example 2025-01-15T10:30:00Z
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * @description Timestamp when the draft was last edited (ISO 8601 format in UTC). Null if never edited.
+             * @example 2025-01-16T09:15:00Z
+             */
+            updated_at: string | null;
+            /**
+             * Published At
+             * @description Timestamp when the draft was published on any enabled platform (ISO 8601 format in UTC). Null if not yet published anywhere.
+             * @example 2025-01-20T14:00:05Z
+             */
+            published_at: string | null;
+            /**
+             * Mastodon Post Published At
+             * @description Timestamp when the post was published to Mastodon (ISO 8601 format in UTC). Null if not published to Mastodon.
+             * @example 2025-01-20T14:00:05Z
+             */
+            mastodon_post_published_at: string | null;
+            /**
+             * Linkedin Post Published At
+             * @description Timestamp when the post was published to LinkedIn (ISO 8601 format in UTC). Null if not published to LinkedIn.
+             * @example 2025-01-20T14:00:05Z
+             */
+            linkedin_post_published_at: string | null;
+            /**
+             * Threads Post Published At
+             * @description Timestamp when the post was published to Threads (ISO 8601 format in UTC). Null if not published to Threads.
+             * @example 2025-01-20T14:00:05Z
+             */
+            threads_post_published_at: string | null;
+            /**
+             * Bluesky Post Published At
+             * @description Timestamp when the post was published to Bluesky (ISO 8601 format in UTC). Null if not published to Bluesky.
+             * @example 2025-01-20T14:00:05Z
+             */
+            bluesky_post_published_at: string | null;
+            /**
+             * X Post Published At
+             * @description Timestamp when the post was published to X (ISO 8601 format in UTC). Null if not published to X.
+             * @example 2025-01-20T14:00:05Z
+             */
+            x_post_published_at?: string | null;
+            /**
+             * X Post Enabled
+             * @description Whether posting to X is enabled
+             */
+            x_post_enabled: boolean;
+            /**
+             * Linkedin Post Enabled
+             * @description Whether posting to LinkedIn is enabled
+             */
+            linkedin_post_enabled: boolean;
+            /**
+             * Threads Post Enabled
+             * @description Whether posting to Threads is enabled
+             */
+            threads_post_enabled: boolean;
+            /**
+             * Bluesky Post Enabled
+             * @description Whether posting to Bluesky is enabled
+             */
+            bluesky_post_enabled: boolean;
+            /**
+             * X Published Url
+             * @description URL of the published post on X (Twitter). Null if not published to X or URL not available.
+             * @example https://x.com/username/status/1234567890
+             */
+            x_published_url?: string | null;
+            /**
+             * Linkedin Published Url
+             * @description URL of the published post on LinkedIn. Null if not published to LinkedIn or URL not available.
+             * @example https://www.linkedin.com/feed/update/urn:li:share:1234567890
+             */
+            linkedin_published_url?: string | null;
+            /**
+             * Mastodon Published Url
+             * @description URL of the published post on Mastodon. Null if not published to Mastodon or URL not available.
+             * @example https://mastodon.social/@username/1234567890
+             */
+            mastodon_published_url?: string | null;
+            /**
+             * Threads Published Url
+             * @description URL of the published post on Threads. Null if not published to Threads or URL not available.
+             * @example https://www.threads.net/@username/post/ABC123
+             */
+            threads_published_url?: string | null;
+            /**
+             * Bluesky Published Url
+             * @description URL of the published post on Bluesky. Null if not published to Bluesky or URL not available.
+             * @example https://bsky.app/profile/username.bsky.social/post/abc123
+             */
+            bluesky_published_url?: string | null;
+        };
+        /** PagedDraftListResponse */
+        PagedDraftListResponse: {
+            /** Results */
+            results: components["schemas"]["DraftListResponse"][];
+            /** Count */
+            count: number;
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Next */
+            next: string | null;
+            /** Previous */
+            previous: string | null;
+        };
+        /**
+         * BlueskySettings
+         * @description Settings specific to Bluesky
+         */
+        BlueskySettings: Record<string, never>;
+        /**
+         * DisabledPlatform
+         * @description Shared schema for all disabled platforms
+         */
+        DisabledPlatform: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: false;
+        };
+        /**
+         * DraftDetailResponse
+         * @description Response schema for draft creation and retrieval
+         */
+        DraftDetailResponse: {
+            /**
+             * Id
+             * @description Unique identifier for the draft
+             * @example 12345
+             */
+            id: number;
+            /**
+             * Social Set Id
+             * @description ID of the social set (account) this draft belongs to
+             * @example 67890
+             */
+            social_set_id: number;
+            /**
+             * Draft Id
+             * @deprecated
+             * @description Deprecated: Use 'id' instead. Unique identifier for the draft.
+             * @example 12345
+             */
+            draft_id: number;
+            /**
+             * Status
+             * @description Current status of the draft. 'draft' = saved but not scheduled, 'scheduled' = queued for publishing, 'published' = successfully posted, 'publishing' = currently being posted, 'error' = publishing failed
+             * @example draft
+             * @example scheduled
+             * @example published
+             * @enum {string}
+             */
+            status: "draft" | "scheduled" | "published" | "publishing" | "error";
+            /**
+             * Created At
+             * Format: date-time
+             * @description Timestamp when the draft was created (ISO 8601 format in UTC)
+             * @example 2025-01-15T10:30:00Z
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * @description Timestamp when the draft was last edited (ISO 8601 format in UTC). Null if never edited.
+             * @example 2025-01-16T09:15:00Z
+             */
+            updated_at?: string | null;
+            /**
+             * Scheduled Date
+             * @description Timestamp when the draft is scheduled to publish (ISO 8601 format in UTC). Null if not scheduled.
+             * @example 2025-01-20T14:00:00Z
+             */
+            scheduled_date?: string | null;
+            /**
+             * Published At
+             * @description Timestamp when the draft was published on any enabled platform (ISO 8601 format in UTC). Null if not yet published.
+             * @example 2025-01-20T14:00:05Z
+             */
+            published_at?: string | null;
+            /**
+             * Draft Title
+             * @description Human-readable title for the draft. This is for internal organization only and is not posted to social media.
+             * @example Weekly Newsletter
+             * @example Product Launch Announcement
+             */
+            draft_title?: string | null;
+            /**
+             * Tags
+             * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs.
+             * @example [
+             *       "marketing",
+             *       "product"
+             *     ]
+             * @example [
+             *       "newsletter"
+             *     ]
+             * @example []
+             */
+            tags?: string[];
+            /**
+             * Preview
+             * @description Text preview of the draft, smart-trimmed with a 100-character limit
+             * @example Excited to announce our new feature! 🚀
+             */
+            preview: string;
+            /**
+             * Share Url
+             * @description Public share URL for the draft. Null if the draft is not publicly shared.
+             * @example https://typefully.com/share/abc123
+             */
+            share_url?: string | null;
+            /**
+             * Private Url
+             * @description Private URL for accessing the draft in Typefully. Can be shared with team members without requiring public sharing.
+             * @example https://typefully.com/?d=12345&a=67890
+             */
+            private_url: string;
+            /** @description Platform configurations showing which platforms are enabled and their content */
+            platforms: components["schemas"]["PlatformsResponse"];
+            /**
+             * X Published Url
+             * @description URL of the published post on X (Twitter). Null if not published to X or URL not available.
+             * @example https://x.com/username/status/1234567890
+             */
+            x_published_url?: string | null;
+            /**
+             * Linkedin Published Url
+             * @description URL of the published post on LinkedIn. Null if not published to LinkedIn or URL not available.
+             * @example https://www.linkedin.com/feed/update/urn:li:share:1234567890
+             */
+            linkedin_published_url?: string | null;
+            /**
+             * Mastodon Published Url
+             * @description URL of the published post on Mastodon. Null if not published to Mastodon or URL not available.
+             * @example https://mastodon.social/@username/1234567890
+             */
+            mastodon_published_url?: string | null;
+            /**
+             * Threads Published Url
+             * @description URL of the published post on Threads. Null if not published to Threads or URL not available.
+             * @example https://www.threads.net/@username/post/ABC123
+             */
+            threads_published_url?: string | null;
+            /**
+             * Bluesky Published Url
+             * @description URL of the published post on Bluesky. Null if not published to Bluesky or URL not available.
+             * @example https://bsky.app/profile/username.bsky.social/post/abc123
+             */
+            bluesky_published_url?: string | null;
+            /**
+             * X Post Published At
+             * @description Timestamp when the post was published to X  (ISO 8601 format in UTC). Null if not published to X.
+             * @example 2025-01-20T14:00:05Z
+             */
+            x_post_published_at?: string | null;
+            /**
+             * Linkedin Post Published At
+             * @description Timestamp when the post was published to LinkedIn (ISO 8601 format in UTC). Null if not published to LinkedIn.
+             * @example 2025-01-20T14:00:08Z
+             */
+            linkedin_post_published_at?: string | null;
+            /**
+             * Mastodon Post Published At
+             * @description Timestamp when the post was published to Mastodon (ISO 8601 format in UTC). Null if not published to Mastodon.
+             * @example 2025-01-20T14:00:10Z
+             */
+            mastodon_post_published_at?: string | null;
+            /**
+             * Threads Post Published At
+             * @description Timestamp when the post was published to Threads (ISO 8601 format in UTC). Null if not published to Threads.
+             * @example 2025-01-20T14:00:12Z
+             */
+            threads_post_published_at?: string | null;
+            /**
+             * Bluesky Post Published At
+             * @description Timestamp when the post was published to Bluesky (ISO 8601 format in UTC). Null if not published to Bluesky.
+             * @example 2025-01-20T14:00:15Z
+             */
+            bluesky_post_published_at?: string | null;
+            /**
+             * Scratchpad Text
+             * @description Plain text scratchpad notes for the draft. Formatting is stripped.
+             * @example line 1
+             *     line 2
+             *
+             *     line 4
+             */
+            scratchpad_text?: string | null;
+        };
+        /**
+         * EnabledBlueskyPlatformResponse
+         * @description Enabled Bluesky platform for responses (no validation limits)
+         */
+        EnabledBlueskyPlatformResponse: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["PostResponse"][];
+            /** @description Bluesky-specific settings */
+            settings?: components["schemas"]["BlueskySettings"] | null;
+        };
+        /**
+         * EnabledLinkedInPlatformResponse
+         * @description Enabled LinkedIn platform for responses (no validation limits)
+         */
+        EnabledLinkedInPlatformResponse: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["LinkedInPostResponse"][];
+            /** @description LinkedIn-specific settings */
+            settings?: components["schemas"]["LinkedInSettings"] | null;
+        };
+        /**
+         * EnabledMastodonPlatformResponse
+         * @description Enabled Mastodon platform for responses (no validation limits)
+         */
+        EnabledMastodonPlatformResponse: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["PostResponse"][];
+            /** @description Mastodon-specific settings */
+            settings?: components["schemas"]["MastodonSettings"] | null;
+        };
+        /**
+         * EnabledThreadsPlatformResponse
+         * @description Enabled Threads platform for responses (no validation limits)
+         */
+        EnabledThreadsPlatformResponse: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["PostResponse"][];
+            /** @description Threads-specific settings */
+            settings?: components["schemas"]["ThreadsSettings"] | null;
+        };
+        /**
+         * EnabledXPlatformResponse
+         * @description Enabled X platform for responses (no validation limits)
+         */
+        EnabledXPlatformResponse: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["XPostResponse"][];
+            /** @description X-specific settings */
+            settings?: components["schemas"]["XSettings"] | null;
+        };
+        /**
+         * LinkedInPostResponse
+         * @description Schema for LinkedIn post content in API responses.
+         */
+        LinkedInPostResponse: {
+            /**
+             * Text
+             * @description The text content of the post
+             */
+            text: string;
+            /**
+             * Media Ids
+             * @description List of media IDs attached to the post.
+             */
+            media_ids?: string[];
+            /**
+             * Linkedin Reshare Urn
+             * @description LinkedIn-only: canonical URN of the LinkedIn post reshared (repost) by this post. Null when no reshare is configured.
+             */
+            linkedin_reshare_urn?: string | null;
+            /**
+             * Hide Link Preview
+             * @description LinkedIn-only: whether the link-preview card is suppressed for this post.
+             * @default false
+             */
+            hide_link_preview: boolean;
+        };
+        /**
+         * LinkedInSettings
+         * @description Settings specific to LinkedIn
+         */
+        LinkedInSettings: Record<string, never>;
+        /**
+         * MastodonSettings
+         * @description Settings specific to Mastodon
+         */
+        MastodonSettings: Record<string, never>;
+        /**
+         * PlatformsResponse
+         * @description Schema for platform configurations in responses (no validation limits)
+         */
+        PlatformsResponse: {
+            /**
+             * X
+             * @description X (Twitter) configuration
+             */
+            x?: components["schemas"]["EnabledXPlatformResponse"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Linkedin
+             * @description LinkedIn configuration
+             */
+            linkedin?: components["schemas"]["EnabledLinkedInPlatformResponse"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Mastodon
+             * @description Mastodon configuration
+             */
+            mastodon?: components["schemas"]["EnabledMastodonPlatformResponse"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Threads
+             * @description Threads configuration
+             */
+            threads?: components["schemas"]["EnabledThreadsPlatformResponse"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Bluesky
+             * @description Bluesky configuration
+             */
+            bluesky?: components["schemas"]["EnabledBlueskyPlatformResponse"] | components["schemas"]["DisabledPlatform"] | null;
+        };
+        /**
+         * PostResponse
+         * @description Schema for post content in API responses (no request-time limits).
+         */
+        PostResponse: {
+            /**
+             * Text
+             * @description The text content of the post
+             */
+            text: string;
+            /**
+             * Media Ids
+             * @description List of media IDs attached to the post.
+             */
+            media_ids?: string[];
+        };
+        /**
+         * ThreadsSettings
+         * @description Settings specific to Threads
+         */
+        ThreadsSettings: Record<string, never>;
+        /**
+         * XPostResponse
+         * @description Schema for X post content in API responses.
+         */
+        XPostResponse: {
+            /**
+             * Text
+             * @description The text content of the post
+             */
+            text: string;
+            /**
+             * Media Ids
+             * @description List of media IDs attached to the post.
+             */
+            media_ids?: string[];
+            /**
+             * Quote Post Url
+             * @description X-only: URL of the X post quoted by this post. Null when no quoted post is configured.
+             */
+            quote_post_url?: string | null;
+            /**
+             * Subscribers Only
+             * @description X-only: Whether this individual post is visible only to paying Subscribers.
+             * @default false
+             * @example true
+             * @example false
+             */
+            subscribers_only: boolean;
+            /**
+             * Paid Partnership
+             * @description X-only: Whether this post is labeled as a paid partnership.
+             * @default false
+             * @example true
+             * @example false
+             */
+            paid_partnership: boolean;
+            /**
+             * Made With Ai
+             * @description X-only: Whether this post is labeled as made with AI.
+             * @default false
+             * @example true
+             * @example false
+             */
+            made_with_ai: boolean;
+        };
+        /**
+         * XSettings
+         * @description Settings specific to X (Twitter)
+         */
+        XSettings: {
+            /**
+             * Reply To Url
+             * @description URL of the X post to reply to. When provided, the first post in your thread will be posted as a reply.
+             * @example https://x.com/therajatkapoor/status/1399394576951959554
+             */
+            reply_to_url?: string | null;
+            /**
+             * Community Id
+             * @description ID of the X community to post to. Find the ID in the community URL (e.g., x.com/i/communities/1493446837214187523). You must have permission to post to the community, otherwise publishing will fail.
+             */
+            community_id?: string | null;
+            /**
+             * Share With Followers
+             * @description When posting to a community, whether to also share the post to your timeline/followers. Defaults to true if not specified. Only has an effect when community_id is provided.
+             */
+            share_with_followers?: boolean | null;
+        };
+        /**
+         * DraftCreateRequest
+         * @description Request schema for creating a draft
+         */
+        DraftCreateRequest: {
+            /** @description Platform configurations for each social media platform */
+            platforms: components["schemas"]["Platforms"];
+            /**
+             * Draft Title
+             * @description Human-readable title for the draft. This is for internal organization only and is not posted to social media.
+             * @example Weekly Newsletter
+             * @example Product Launch Announcement
+             * @example Monday Motivation Post
+             */
+            draft_title?: string | null;
+            /**
+             * Scratchpad Text
+             * @description Plain text scratchpad notes for the draft. Formatting is stripped.
+             * @example line 1
+             *     line 2
+             *
+             *     line 4
+             */
+            scratchpad_text?: string | null;
+            /**
+             * Tags
+             * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs. Tags must already exist in the social set.
+             * @example [
+             *       "marketing",
+             *       "product"
+             *     ]
+             * @example [
+             *       "newsletter"
+             *     ]
+             * @example []
+             */
+            tags?: string[];
+            /**
+             * Share
+             * @description Whether to generate a public share URL for this draft. When true, anyone with the URL can view the draft content.
+             * @default false
+             */
+            share: boolean;
+            /**
+             * Publish At
+             * @description When to publish the draft. Options: "now" to publish immediately, "next-free-slot" to schedule to your next available posting slot, or an ISO 8601 datetime string with timezone for a specific future time (e.g., '2025-01-20T14:00:00Z' for UTC or '2025-01-20T09:00:00-05:00' for EST). Timezone is required. Omit to save as a draft.
+             * @example 2025-12-20T09:00:00-05:00
+             * @example now
+             * @example next-free-slot
+             */
+            publish_at?: string | ("now" | "next-free-slot") | null;
+        };
+        /**
+         * EnabledBlueskyPlatform
+         * @description Enabled Bluesky platform with required data
+         */
+        EnabledBlueskyPlatform: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["Post"][];
+            /** @description Bluesky-specific settings */
+            settings?: components["schemas"]["BlueskySettings"] | null;
+        };
+        /**
+         * EnabledLinkedInPlatform
+         * @description Enabled LinkedIn platform with required data
+         */
+        EnabledLinkedInPlatform: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["Post"][];
+            /** @description LinkedIn-specific settings */
+            settings?: components["schemas"]["LinkedInSettings"] | null;
+        };
+        /**
+         * EnabledMastodonPlatform
+         * @description Enabled Mastodon platform with required data
+         */
+        EnabledMastodonPlatform: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["Post"][];
+            /** @description Mastodon-specific settings */
+            settings?: components["schemas"]["MastodonSettings"] | null;
+        };
+        /**
+         * EnabledThreadsPlatform
+         * @description Enabled Threads platform with required data
+         */
+        EnabledThreadsPlatform: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["Post"][];
+            /** @description Threads-specific settings */
+            settings?: components["schemas"]["ThreadsSettings"] | null;
+        };
+        /**
+         * EnabledXPlatform
+         * @description Enabled X platform with required data
+         */
+        EnabledXPlatform: {
+            /**
+             * Enabled
+             * @constant
+             * @enum {boolean}
+             */
+            enabled: true;
+            /**
+             * Posts
+             * @description List of posts for this platform
+             */
+            posts: components["schemas"]["XPost"][];
+            /** @description X-specific settings */
+            settings?: components["schemas"]["XSettings"] | null;
+        };
+        /**
+         * Platforms
+         * @description Schema for all platform configurations
+         */
+        Platforms: {
+            /**
+             * X
+             * @description X (Twitter) configuration
+             */
+            x?: components["schemas"]["EnabledXPlatform"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Linkedin
+             * @description LinkedIn configuration
+             */
+            linkedin?: components["schemas"]["EnabledLinkedInPlatform"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Mastodon
+             * @description Mastodon configuration
+             */
+            mastodon?: components["schemas"]["EnabledMastodonPlatform"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Threads
+             * @description Threads configuration
+             */
+            threads?: components["schemas"]["EnabledThreadsPlatform"] | components["schemas"]["DisabledPlatform"] | null;
+            /**
+             * Bluesky
+             * @description Bluesky configuration
+             */
+            bluesky?: components["schemas"]["EnabledBlueskyPlatform"] | components["schemas"]["DisabledPlatform"] | null;
+        };
+        /**
+         * Post
+         * @description Schema for individual post content
+         */
+        Post: {
+            /**
+             * Text
+             * @description The text content of the post. For LinkedIn posts, you can tag companies with mention syntax: @[Company Name](urn:li:organization:123456).
+             * @example Hello world! This is my first post.
+             * @example Check out this amazing update! 🚀
+             * @example Thanks @[Typefully](urn:li:organization:86779668) for the support!
+             */
+            text: string;
+            /**
+             * Media Ids
+             * @description List of media IDs to attach to the post. Obtain media IDs by uploading files via the media upload endpoint.
+             * @example [
+             *       "550e8400-e29b-41d4-a716-446655440000"
+             *     ]
+             * @example [
+             *       "550e8400-e29b-41d4-a716-446655440000",
+             *       "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+             *     ]
+             */
+            media_ids?: string[];
+            /**
+             * Paid Partnership
+             * @description X-only: Whether this post should be labeled as a paid partnership.
+             * @default false
+             * @example true
+             * @example false
+             */
+            paid_partnership: boolean;
+            /**
+             * Made With Ai
+             * @description X-only: Whether this post should be labeled as made with AI.
+             * @default false
+             * @example true
+             * @example false
+             */
+            made_with_ai: boolean;
+            /**
+             * Linkedin Reshare Target
+             * @description LinkedIn-only: canonical URN or full LinkedIn post URL to reshare (repost). URLs are normalized to the canonical URN in storage and responses. Use values like urn:li:share:<id>, urn:li:ugcPost:<id>, or urn:li:groupPost:<id>.
+             * @example urn:li:share:7437089188157554688
+             * @example https://www.linkedin.com/posts/typefullycom_linkedin-mentions-just-got-a-lot-better-in-activity-7437089188157554688-wSxN
+             */
+            linkedin_reshare_target?: string | null;
+            /**
+             * Hide Link Preview
+             * @description LinkedIn-only: suppress the link-preview card for this post. When True, Typefully publishes the post with the URL as plain text only. When False, Typefully fetches Open Graph metadata for the last URL in the text and attaches a rich preview. Omit (or send null) to keep the current value on update, or to fall back to False on create. Ignored on non-LinkedIn platforms.
+             */
+            hide_link_preview?: boolean | null;
+        };
+        /**
+         * XPost
+         * @description Schema for individual X post content.
+         */
+        XPost: {
+            /**
+             * Text
+             * @description The text content of the post. For LinkedIn posts, you can tag companies with mention syntax: @[Company Name](urn:li:organization:123456).
+             * @example Hello world! This is my first post.
+             * @example Check out this amazing update! 🚀
+             * @example Thanks @[Typefully](urn:li:organization:86779668) for the support!
+             */
+            text: string;
+            /**
+             * Media Ids
+             * @description List of media IDs to attach to the post. Obtain media IDs by uploading files via the media upload endpoint.
+             * @example [
+             *       "550e8400-e29b-41d4-a716-446655440000"
+             *     ]
+             * @example [
+             *       "550e8400-e29b-41d4-a716-446655440000",
+             *       "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+             *     ]
+             */
+            media_ids?: string[];
+            /**
+             * Paid Partnership
+             * @description X-only: Whether this post should be labeled as a paid partnership.
+             * @default false
+             * @example true
+             * @example false
+             */
+            paid_partnership: boolean;
+            /**
+             * Made With Ai
+             * @description X-only: Whether this post should be labeled as made with AI.
+             * @default false
+             * @example true
+             * @example false
+             */
+            made_with_ai: boolean;
+            /**
+             * Linkedin Reshare Target
+             * @description LinkedIn-only: canonical URN or full LinkedIn post URL to reshare (repost). URLs are normalized to the canonical URN in storage and responses. Use values like urn:li:share:<id>, urn:li:ugcPost:<id>, or urn:li:groupPost:<id>.
+             * @example urn:li:share:7437089188157554688
+             * @example https://www.linkedin.com/posts/typefullycom_linkedin-mentions-just-got-a-lot-better-in-activity-7437089188157554688-wSxN
+             */
+            linkedin_reshare_target?: string | null;
+            /**
+             * Hide Link Preview
+             * @description LinkedIn-only: suppress the link-preview card for this post. When True, Typefully publishes the post with the URL as plain text only. When False, Typefully fetches Open Graph metadata for the last URL in the text and attaches a rich preview. Omit (or send null) to keep the current value on update, or to fall back to False on create. Ignored on non-LinkedIn platforms.
+             */
+            hide_link_preview?: boolean | null;
+            /**
+             * Quote Post Url
+             * @description X-only: URL of the X post to quote in this post (equivalent to Typefully's 'convert to quote' action).
+             * @example https://x.com/typefully/status/2025894220243063023
+             */
+            quote_post_url?: string | null;
+            /**
+             * Subscribers Only
+             * @description X-only: Whether this individual post should be visible only to paying Subscribers. This only works for X accounts approved for creator Subscriptions.
+             * @default false
+             * @example true
+             * @example false
+             */
+            subscribers_only: boolean;
+        };
+        /**
+         * DraftUpdateRequest
+         * @description Request schema for updating a draft (partial updates supported)
+         */
+        DraftUpdateRequest: {
+            /** @description Platform configurations. Only provided platforms will be updated; omitted platforms remain unchanged. */
+            platforms?: components["schemas"]["Platforms"] | null;
+            /**
+             * Draft Title
+             * @description Human-readable title for the draft. This is for internal organization only and is not posted to social media. Omit to keep unchanged.
+             * @example Weekly Newsletter
+             * @example Product Launch Announcement
+             */
+            draft_title?: string | null;
+            /**
+             * Scratchpad Text
+             * @description Plain text scratchpad notes for the draft. Formatting is stripped. Omit to keep unchanged.
+             * @example line 1
+             *     line 2
+             *
+             *     line 4
+             */
+            scratchpad_text?: string | null;
+            /**
+             * Tags
+             * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs. Tags must already exist in the social set. Omit to keep unchanged.
+             * @example [
+             *       "marketing",
+             *       "product"
+             *     ]
+             * @example [
+             *       "newsletter"
+             *     ]
+             * @example []
+             */
+            tags?: string[] | null;
+            /**
+             * Share
+             * @description Whether to generate a public share URL. Omit to keep unchanged.
+             */
+            share?: boolean | null;
+            /**
+             * Publish At
+             * @description When to publish the draft. Options: "now" to publish immediately, "next-free-slot" to schedule to your next available posting slot, or an ISO 8601 datetime string with timezone for a specific future time (e.g., '2025-01-20T14:00:00Z' for UTC or '2025-01-20T09:00:00-05:00' for EST). Timezone is required. Omit to keep unchanged.
+             * @example 2025-12-20T09:00:00-05:00
+             * @example now
+             * @example next-free-slot
+             */
+            publish_at?: string | ("now" | "next-free-slot") | null;
+            /**
+             * Force Overwrite Comments
+             * @description Comment-thread anchor preservation toggle. When false (the default), submitting `posts[*].text` whose `<typ:comment-thread>` markers don't match the draft's stored comment threads is rejected with `409 COMMENTS_MARKER_MISMATCH`. Recover by re-including the missing markers and retrying. When true, missing markers are accepted: the affected comment threads are resolved server-side and their anchors are stripped from the draft. Markers that ARE submitted continue to be validated and re-anchored normally. StrictBool: only the JSON literals `true`/`false` are accepted (not `"true"` strings).
+             * @default false
+             */
+            force_overwrite_comments: boolean;
+        };
+        /**
+         * MediaUploadResponse
+         * @description Schema for media upload response
+         */
+        MediaUploadResponse: {
+            /**
+             * Media Id
+             * Format: uuid
+             * @description Unique identifier for the uploaded media. Use this ID when attaching media to posts.
+             * @example 550e8400-e29b-41d4-a716-446655440000
+             */
+            media_id: string;
+            /**
+             * Upload Url
+             * @description Presigned S3 URL for uploading the file. PUT the file content to this URL within 1 hour.
+             * @example https://s3.amazonaws.com/bucket/path/file?signature=...
+             */
+            upload_url: string;
+        };
+        /**
+         * MediaUploadRequest
+         * @description Schema for media upload request
+         */
+        MediaUploadRequest: {
+            /**
+             * File Name
+             * @description Original filename with extension (e.g., 'image.jpg', 'video.mp4'). Used for MIME type detection and display. Allowed characters: letters, numbers, hyphens, underscores, periods, parentheses. Allowed extensions: .jpg, .jpeg, .png, .webp, .gif, .mp4, .mov, .pdf
+             * @example profile-photo.jpg
+             * @example demo-video.mp4
+             * @example screenshot.png
+             */
+            file_name: string;
+        };
+        /**
+         * MediaStatusResponse
+         * @description Schema for media status response
+         */
+        MediaStatusResponse: {
+            /**
+             * Media Id
+             * Format: uuid
+             * @description Unique identifier for the media file
+             */
+            media_id: string;
+            /**
+             * File Name
+             * @description Original filename
+             * @example photo.jpg
+             */
+            file_name: string;
+            /**
+             * Mime
+             * @description MIME type of the media file
+             * @example image/jpeg
+             * @example image/png
+             * @example video/mp4
+             * @example image/gif
+             * @example application/pdf
+             */
+            mime?: string | null;
+            /**
+             * Status
+             * @description Processing status: 'processing' = file is being processed, 'ready' = file is ready to use in posts, 'failed' = processing failed
+             * @example ready
+             * @example processing
+             * @example failed
+             * @enum {string}
+             */
+            status: "processing" | "ready" | "failed";
+            /**
+             * Error Reason
+             * @description Error message if status is 'failed'. Null otherwise.
+             * @example Unsupported file format
+             */
+            error_reason?: string | null;
+            /**
+             * Media Urls
+             * @description Dictionary of media URLs. For resizable images (PNG, JPG, WEBP): includes 'small' (600px), 'medium' (1200px), 'large' (3200px), and 'original'. For non-resizable media (GIF, video, PDF): includes only 'original'.
+             * @example {
+             *       "large": "https://cdn.../resized/...",
+             *       "medium": "https://cdn.../resized/...",
+             *       "original": "https://cdn.../original/...",
+             *       "small": "https://cdn.../resized/..."
+             *     }
+             */
+            media_urls?: {
+                [key: string]: string;
+            } | null;
+        };
+        /** PagedTagResponse */
+        PagedTagResponse: {
+            /** Results */
+            results: components["schemas"]["TagResponse"][];
+            /** Count */
+            count: number;
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Next */
+            next: string | null;
+            /** Previous */
+            previous: string | null;
+        };
+        /**
+         * TagResponse
+         * @description Response schema for tag data
+         */
+        TagResponse: {
+            /**
+             * Slug
+             * @description Auto-generated URL-safe identifier from the tag name
+             * @example marketing
+             * @example product-launch
+             * @example weekly-updates
+             */
+            slug: string;
+            /**
+             * Name
+             * @description Display name for the tag
+             * @example Marketing
+             * @example Product Launch
+             * @example Weekly Updates
+             */
+            name: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Timestamp when the tag was created (ISO 8601 format in UTC)
+             * @example 2025-01-15T10:30:00Z
+             */
+            created_at: string;
+        };
+        /**
+         * TagCreateRequest
+         * @description Request schema for creating a tag
+         * @example {
+         *       "name": "Marketing"
+         *     }
+         * @example {
+         *       "name": "Product Launch"
+         *     }
+         * @example {
+         *       "name": "Weekly Newsletter"
+         *     }
+         */
+        TagCreateRequest: {
+            /**
+             * Name
+             * @description Display name for the tag. The slug will be auto-generated from this name.
+             * @example Marketing
+             * @example Product Launch
+             * @example Weekly Updates
+             */
+            name: string;
+        };
+        /**
+         * QueueScheduleResponse
+         * @description Response schema for queue schedule rules.
+         */
+        QueueScheduleResponse: {
+            /**
+             * Social Set Id
+             * @description ID of the social set (account) this schedule belongs to.
+             * @example 123
+             */
+            social_set_id: number;
+            /**
+             * Timezone
+             * @description Timezone name for this social set.
+             * @example America/New_York
+             */
+            timezone: string;
+            /**
+             * Rules
+             * @description Schedule rules in local time.
+             */
+            rules: components["schemas"]["QueueScheduleRuleSchema"][];
+        };
+        /**
+         * QueueScheduleRuleSchema
+         * @description Single schedule rule (local time + days of week).
+         */
+        QueueScheduleRuleSchema: {
+            /**
+             * H
+             * @description Hour in 24h clock (0-23)
+             */
+            h: number;
+            /**
+             * M
+             * @description Minute (0-59)
+             */
+            m: number;
+            /**
+             * Days
+             * @description Days of week this rule applies to
+             * @example [
+             *       "mon",
+             *       "tue",
+             *       "wed",
+             *       "thu",
+             *       "fri"
+             *     ]
+             */
+            days: ("mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun")[];
+        };
+        /**
+         * QueueScheduleUpdateRequest
+         * @description Request schema for fully replacing queue schedule rules.
+         */
+        QueueScheduleUpdateRequest: {
+            /**
+             * Rules
+             * @description New schedule rules (full replacement).
+             */
+            rules: components["schemas"]["QueueScheduleRuleSchema"][];
+        };
+        /**
+         * QueueDaySchema
+         * @description Queue day with its queue items.
+         */
+        QueueDaySchema: {
+            /**
+             * Date
+             * @description YYYY-MM-DD in the social set timezone
+             */
+            date: string;
+            /**
+             * Items
+             * @description Queue items for this day (in chronological order).
+             */
+            items: components["schemas"]["QueueItemSchema"][];
+        };
+        /**
+         * QueueItemSchema
+         * @description Queue items are time points in the queue.
+         *
+         *     - `at` is an ISO8601 datetime in UTC.
+         *     - `kind` differentiates schedule-generated queue slots from scheduled drafts that do not occupy a slot.
+         *     - `draft` is either null (free slot) or a DraftListResponse object.
+         */
+        QueueItemSchema: {
+            /**
+             * At
+             * Format: date-time
+             * @description ISO8601 datetime in UTC.
+             * @example 2026-02-12T22:00:00Z
+             */
+            at: string;
+            /**
+             * Kind
+             * @description Queue item kind.
+             *
+             *     - `queue_slot`: schedule-generated queue slot time (free slot if `draft` is null)
+             *     - `custom_time`: scheduled draft that does not count as a slot occupant (custom-time scheduling, or collision overflow)
+             * @example queue_slot
+             * @enum {string}
+             */
+            kind: "queue_slot" | "custom_time";
+            /** @description Draft scheduled at this time. Null means the slot is free. */
+            draft?: components["schemas"]["DraftListResponse"] | null;
+        };
+        /**
+         * QueueResponse
+         * @description Response schema for the queue date-range view.
+         */
+        QueueResponse: {
+            /**
+             * Social Set Id
+             * @description ID of the social set (account) this queue belongs to.
+             * @example 123
+             */
+            social_set_id: number;
+            /**
+             * Start Date
+             * @description YYYY-MM-DD in the social set timezone
+             * @example 2026-02-01
+             */
+            start_date: string;
+            /**
+             * End Date
+             * @description YYYY-MM-DD in the social set timezone
+             * @example 2026-02-29
+             */
+            end_date: string;
+            /**
+             * Days
+             * @description Days in the requested date range (inclusive).
+             */
+            days: components["schemas"]["QueueDaySchema"][];
+        };
+        /**
+         * LinkedInOrganizationFromURLResponse
+         * @description Resolved LinkedIn organization metadata.
+         */
+        LinkedInOrganizationFromURLResponse: {
+            /**
+             * Id
+             * @description LinkedIn organization ID
+             * @example 86779668
+             */
+            id: string;
+            /**
+             * Urn
+             * @description LinkedIn organization URN, usable in mention syntax
+             * @example urn:li:organization:86779668
+             */
+            urn: string;
+            /**
+             * Mention Text
+             * @description Ready-to-use LinkedIn mention syntax to paste into post text.
+             * @example @[Typefully](urn:li:organization:86779668)
+             */
+            mention_text: string;
+            /**
+             * Name
+             * @description Organization display name
+             */
+            name?: string | null;
+            /**
+             * Vanity Name
+             * @description LinkedIn vanity name
+             */
+            vanity_name?: string | null;
+            /**
+             * Description
+             * @description Organization description
+             */
+            description?: string | null;
+            /**
+             * Website
+             * @description Organization website
+             */
+            website?: string | null;
+            /**
+             * Logo Url
+             * @description Organization logo URL
+             */
+            logo_url?: string | null;
+            /**
+             * Url
+             * @description Public LinkedIn company URL
+             */
+            url?: string | null;
+        };
+        /**
+         * CommentResponse
+         * @description A single comment within a comment thread.
+         */
+        CommentResponse: {
+            /**
+             * Id
+             * Format: uuid
+             * @description Unique identifier for the comment.
+             */
+            id: string;
+            /**
+             * Text
+             * @description Plain-text comment body. Mentioning users is not supported.
+             */
+            text: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Timestamp when the comment was created (ISO 8601 in UTC).
+             */
+            created_at: string;
+            /** @description Author of the comment. */
+            user: components["schemas"]["CommentUserResponse"];
+        };
+        /**
+         * CommentThreadListResponse
+         * @description Paginated list of comment threads for a draft.
+         */
+        CommentThreadListResponse: {
+            /**
+             * Results
+             * @description Comment threads in the current page.
+             */
+            results: components["schemas"]["CommentThreadResponse"][];
+            /**
+             * Count
+             * @description Total number of comment threads available.
+             */
+            count: number;
+            /**
+             * Limit
+             * @description Items per page used for this request.
+             */
+            limit: number;
+            /**
+             * Offset
+             * @description Current offset value.
+             */
+            offset: number;
+            /**
+             * Next
+             * @description URL for the next page (null on last page).
+             */
+            next?: string | null;
+            /**
+             * Previous
+             * @description URL for the previous page (null on first page).
+             */
+            previous?: string | null;
+        };
+        /**
+         * CommentThreadResponse
+         * @description A comment thread (one root comment plus follow-up comments) on a draft.
+         */
+        CommentThreadResponse: {
+            /**
+             * Id
+             * Format: uuid
+             * @description Unique identifier for the comment thread.
+             */
+            id: string;
+            /**
+             * Draft Id
+             * @description Identifier of the draft this comment thread belongs to.
+             */
+            draft_id: number;
+            /**
+             * Platform
+             * @description Platform the comment thread is anchored on.
+             * @enum {string}
+             */
+            platform: "x" | "linkedin" | "mastodon" | "threads" | "bluesky";
+            /**
+             * Status
+             * @description Resolution status of the comment thread.
+             * @enum {string}
+             */
+            status: "unresolved" | "resolved";
+            /**
+             * Selected Text
+             * @description The text the comment thread was originally anchored to. Captured when the thread was created and not re-derived afterwards, so it may not match the current post text if the post has been edited. Null for threads that were created against a whole post rather than a specific span.
+             */
+            selected_text?: string | null;
+            /**
+             * Comments
+             * @description Comments in the thread, ordered by `created_at`.
+             */
+            comments: components["schemas"]["CommentResponse"][];
+        };
+        /**
+         * CommentUserResponse
+         * @description Author shape attached to a comment.
+         */
+        CommentUserResponse: {
+            /**
+             * Id
+             * @description Unique identifier for the user.
+             */
+            id: number;
+            /**
+             * Name
+             * @description Display name of the user.
+             */
+            name: string;
+            /**
+             * Profile Image Url
+             * @description URL to the user's profile image. Null if not available.
+             */
+            profile_image_url?: string | null;
+        };
+        /**
+         * CommentThreadCreateRequest
+         * @description Create a new comment thread anchored on a span of a draft post.
+         */
+        CommentThreadCreateRequest: {
+            /**
+             * Post Index
+             * @description Zero-based index of the target post within the platform's posts array.
+             */
+            post_index: number;
+            /**
+             * Platform
+             * @description Required when the draft has multiple commentable platforms; otherwise resolves to the source platform.
+             */
+            platform?: ("x" | "linkedin" | "mastodon" | "threads" | "bluesky") | null;
+            /**
+             * Selected Text
+             * @description Exact substring (codepoint-equal) of the post's flat text the comment thread is anchored to. Copy verbatim from the GET response.
+             *
+             *     LinkedIn mentions appear inside `posts[*].text` as `@[Name](urn:li:organization:ID)` or `@[Name](urn:li:person:ID)`. Mentions are indivisible — `selected_text` may either include the entire mention substring or stay outside it. A selection that starts or ends in the middle of a mention is rejected with `400 VALIDATION_ERROR`.
+             */
+            selected_text: string;
+            /**
+             * Occurrence
+             * @description Zero-based occurrence of `selected_text` within the post when the same substring appears multiple times.
+             * @default 0
+             */
+            occurrence: number;
+            /**
+             * Text
+             * @description Plain-text comment body. The server derives the stored rich_text from this.
+             */
+            text: string;
+        };
+        /**
+         * CommentCreateRequest
+         * @description Add a comment to an existing comment thread.
+         */
+        CommentCreateRequest: {
+            /**
+             * Text
+             * @description Plain-text comment body. The server derives the stored rich_text from this.
+             */
+            text: string;
+        };
+        /**
+         * CommentUpdateRequest
+         * @description Update the text body of a single comment within a comment thread.
+         */
+        CommentUpdateRequest: {
+            /**
+             * Text
+             * @description Plain-text comment body. The server derives the stored rich_text from this.
+             */
+            text: string;
+        };
+        /**
+         * WebhookEventPayload
+         * @description Payload envelope sent to webhook endpoints.
+         *
+         *     All webhook events follow this structure, with the event type identifying
+         *     the specific event and data containing the full draft details.
+         */
+        WebhookEventPayload: {
+            /**
+             * Event
+             * @description The event type that triggered this webhook
+             * @enum {string}
+             */
+            event: "draft.created" | "draft.scheduled" | "draft.published" | "draft.status_changed" | "draft.tags_changed" | "draft.deleted";
+            /** @description The draft data at the time of the event. See DraftDetailResponse schema for full structure. */
+            data: components["schemas"]["DraftDetailResponse"];
+        };
     };
-    /**
-     * APIErrorResponse
-     * @description Standard error response for all API errors.
-     */
-    APIErrorResponse: {
-      error: components["schemas"]["ErrorObject"];
-    };
-    /**
-     * ErrorDetail
-     * @description Field-level error detail.
-     */
-    ErrorDetail: {
-      /**
-       * Message
-       * @description Human-readable error message
-       */
-      message: string;
-      /**
-       * Field
-       * @description Field name that caused the error
-       */
-      field?: string | null;
-      /**
-       * Type
-       * @description Error type (e.g. 'string_too_long', 'list_max_items')
-       */
-      type?: string | null;
-      /**
-       * Loc
-       * @description Error location path (e.g. ['body', 'platforms', 'x', 'posts', 0, 'text'])
-       */
-      loc?: unknown[] | null;
-      /**
-       * Ctx
-       * @description Error context
-       */
-      ctx?: Record<string, never> | null;
-      /**
-       * Input
-       * @description Input value that caused the error (e.g. 'Hello, world!')
-       */
-      input?: unknown | null;
-    };
-    /**
-     * ErrorObject
-     * @description Standard error response object.
-     */
-    ErrorObject: {
-      /**
-       * Code
-       * @description Error code
-       */
-      code: string;
-      /**
-       * Message
-       * @description Human-readable error message
-       */
-      message: string;
-      /**
-       * Details
-       * @description List of field-level errors (optional - only present when applicable)
-       */
-      details?: components["schemas"]["ErrorDetail"][] | null;
-    };
-    /**
-     * Input
-     * @description Pagination input parameters.
-     */
-    Input: {
-      /**
-       * Limit
-       * @description Maximum number of items to return per page
-       * @default 10
-       */
-      limit: number | null;
-      /**
-       * Offset
-       * @description Number of items to skip from the beginning
-       * @default 0
-       */
-      offset: number;
-    };
-    /**
-     * AnalyticsEngagementMetrics
-     * @description Platform-agnostic engagement metrics for a post.
-     */
-    AnalyticsEngagementMetrics: {
-      /**
-       * Total
-       * @description Total engagement count across supported interaction metrics.
-       */
-      total: number;
-      /**
-       * Likes
-       * @description Reaction count for the post.
-       */
-      likes: number;
-      /**
-       * Comments
-       * @description Comment/reply count for the post.
-       */
-      comments: number;
-      /**
-       * Shares
-       * @description Reshare/repost count for the post.
-       */
-      shares: number;
-      /**
-       * Quotes
-       * @description Quote/repost-with-comment count.
-       */
-      quotes: number;
-      /**
-       * Saves
-       * @description Save/bookmark count when available.
-       */
-      saves?: number | null;
-      /**
-       * Profile Clicks
-       * @description Profile click count.
-       */
-      profile_clicks: number;
-      /**
-       * Link Clicks
-       * @description Outbound URL click count when available.
-       */
-      link_clicks?: number | null;
-    };
-    /**
-     * AnalyticsPostMetrics
-     * @description High-level metrics for a post.
-     */
-    AnalyticsPostMetrics: {
-      /**
-       * Impressions
-       * @description Number of impressions for the post.
-       */
-      impressions: number;
-      /** @description Normalized engagement metrics for this post. */
-      engagement: components["schemas"]["AnalyticsEngagementMetrics"];
-    };
-    /** PagedSocialSetAnalyticsPostResponse */
-    PagedSocialSetAnalyticsPostResponse: {
-      /** Results */
-      results: components["schemas"]["SocialSetAnalyticsPostResponse"][];
-      /** Limit */
-      limit: number;
-      /** Offset */
-      offset: number;
-      /** Next */
-      next: string | null;
-      /** Previous */
-      previous: string | null;
-    };
-    /**
-     * SocialSetAnalyticsPostResponse
-     * @description Analytics payload for a social-set post.
-     */
-    SocialSetAnalyticsPostResponse: {
-      /**
-       * Platform
-       * @description Social platform for this post. Currently only `x` is supported.
-       * @example x
-       * @constant
-       * @enum {string}
-       */
-      platform: "x";
-      /**
-       * Post Id
-       * @description Platform post identifier serialized as a string.
-       * @example 1898022122726803672
-       */
-      post_id: string;
-      /**
-       * Draft Id
-       * @description Typefully draft ID that produced this post when available.
-       */
-      draft_id?: number | null;
-      /**
-       * Created At
-       * Format: date-time
-       * @description When the post was created (ISO8601 in UTC).
-       */
-      created_at: string;
-      /**
-       * Preview Text
-       * @description Post preview text content.
-       */
-      preview_text: string;
-      /**
-       * Url
-       * @description Public URL to the post.
-       */
-      url: string;
-      /** @description Normalized post metrics grouped for external API consumers. */
-      metrics: components["schemas"]["AnalyticsPostMetrics"];
-    };
-    /** PagedSocialSetListResponse */
-    PagedSocialSetListResponse: {
-      /** Results */
-      results: components["schemas"]["SocialSetListResponse"][];
-      /** Count */
-      count: number;
-      /** Limit */
-      limit: number;
-      /** Offset */
-      offset: number;
-      /** Next */
-      next: string | null;
-      /** Previous */
-      previous: string | null;
-    };
-    /**
-     * SocialSetListResponse
-     * @description Details of the social set for list endpoints
-     */
-    SocialSetListResponse: {
-      /**
-       * Id
-       * @description Unique identifier for the social set
-       * @example 12345
-       * @example 67890
-       */
-      id: number;
-      /**
-       * Username
-       * @description Username/handle for the social media account
-       * @example elonmusk
-       * @example typefully
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name of the social media account
-       * @example Elon Musk
-       * @example Typefully
-       */
-      name: string;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image of the social media account. Null if not available.
-       * @example https://typefully-user-avatars.s3.amazonaws.com/_generic/account/537/twitter.jpeg
-       */
-      profile_image_url: string | null;
-      /** @description Team that owns this social set. Null if the social set is owned by an individual user. */
-      team?: components["schemas"]["Team"] | null;
-    };
-    /**
-     * Team
-     * @description Details of the team that owns this social set
-     */
-    Team: {
-      /**
-       * Id
-       * @description Unique identifier for the team
-       * @example abc123def4567890
-       */
-      id: string;
-      /**
-       * Name
-       * @description Name of the team
-       * @example Marketing Team
-       * @example Engineering
-       */
-      name: string;
-    };
-    /**
-     * BlueskyAccount
-     * @description Schema for Bluesky account data in API responses
-     */
-    BlueskyAccount: {
-      /**
-       * Platform
-       * @description Platform identifier
-       * @default bluesky
-       */
-      platform: string;
-      /**
-       * Username
-       * @description Bluesky username/handle
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name for the account. Null if not available.
-       */
-      name?: string | null;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image. Null if not available.
-       */
-      profile_image_url?: string | null;
-      /**
-       * Profile Url
-       * @description URL to the public Bluesky profile
-       */
-      profile_url: string;
-    };
-    /**
-     * LinkedInAccount
-     * @description Schema for LinkedIn account data in API responses
-     */
-    LinkedInAccount: {
-      /**
-       * Platform
-       * @description Platform identifier
-       * @default linkedin
-       */
-      platform: string;
-      /**
-       * Username
-       * @description LinkedIn username/vanity name
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name for the account
-       */
-      name: string;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image. Null if not available.
-       */
-      profile_image_url?: string | null;
-      /**
-       * Profile Url
-       * @description URL to the public LinkedIn profile
-       */
-      profile_url: string;
-    };
-    /**
-     * MastodonAccount
-     * @description Schema for Mastodon account data in API responses
-     */
-    MastodonAccount: {
-      /**
-       * Platform
-       * @description Platform identifier
-       * @default mastodon
-       */
-      platform: string;
-      /**
-       * Username
-       * @description Mastodon username/handle (without the server suffix)
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name for the account
-       */
-      name: string;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image. Null if not available.
-       */
-      profile_image_url?: string | null;
-      /**
-       * Profile Url
-       * @description URL to the public Mastodon profile
-       */
-      profile_url: string;
-      /**
-       * Followers Count
-       * @description Number of followers on Mastodon
-       */
-      followers_count: number;
-      /**
-       * Server
-       * @description Server/instance for the Mastodon account
-       */
-      server: string;
-    };
-    /**
-     * PlatformsDict
-     * @description Strictly typed dictionary for platform accounts
-     */
-    PlatformsDict: {
-      x: components["schemas"]["XAccount"] | null;
-      linkedin: components["schemas"]["LinkedInAccount"] | null;
-      mastodon: components["schemas"]["MastodonAccount"] | null;
-      threads: components["schemas"]["ThreadsAccount"] | null;
-      bluesky: components["schemas"]["BlueskyAccount"] | null;
-    };
-    /** PublishingQuotaResponse */
-    PublishingQuotaResponse: {
-      /**
-       * Used
-       * @description Number of published drafts already counted in the active window.
-       */
-      used: number;
-      /**
-       * Remaining
-       * @description Remaining publish slots in the active window, or "unlimited".
-       */
-      remaining: number | "unlimited";
-      /**
-       * Resets At
-       * @description Timestamp when the current publishing quota window resets.
-       */
-      resets_at?: string | null;
-    };
-    /**
-     * SocialSetDetailResponse
-     * @description Detailed social set response including all platform accounts
-     */
-    SocialSetDetailResponse: {
-      /**
-       * Id
-       * @description Unique identifier for the social set
-       * @example 12345
-       * @example 67890
-       */
-      id: number;
-      /**
-       * Username
-       * @description Username/handle for the social media account
-       * @example elonmusk
-       * @example typefully
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name of the social media account
-       * @example Elon Musk
-       * @example Typefully
-       */
-      name: string;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image of the social media account. Null if not available.
-       * @example https://typefully-user-avatars.s3.amazonaws.com/_generic/account/537/twitter.jpeg
-       */
-      profile_image_url: string | null;
-      /** @description Team that owns this social set. Null if the social set is owned by an individual user. */
-      team?: components["schemas"]["Team"] | null;
-      /** @description All platform accounts configured in this social set (X, LinkedIn, Mastodon, Threads, Bluesky) */
-      platforms: components["schemas"]["PlatformsDict"];
-      /** @description Shared publishing quota snapshot for this social set. */
-      publishing_quota?:
-        | components["schemas"]["PublishingQuotaResponse"]
-        | null;
-    };
-    /**
-     * ThreadsAccount
-     * @description Schema for Threads account data in API responses
-     */
-    ThreadsAccount: {
-      /**
-       * Platform
-       * @description Platform identifier
-       * @default threads
-       */
-      platform: string;
-      /**
-       * Username
-       * @description Threads username/handle
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name for the account. Null if not available.
-       */
-      name?: string | null;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image. Null if not available.
-       */
-      profile_image_url?: string | null;
-      /**
-       * Profile Url
-       * @description URL to the public Threads profile
-       */
-      profile_url: string;
-    };
-    /**
-     * XAccount
-     * @description Schema for X/Twitter account data in API responses
-     */
-    XAccount: {
-      /**
-       * Platform
-       * @description Platform identifier
-       * @default x
-       */
-      platform: string;
-      /**
-       * Username
-       * @description X/Twitter username/handle
-       */
-      username: string;
-      /**
-       * Name
-       * @description Display name for the account
-       */
-      name: string;
-      /**
-       * Profile Image Url
-       * @description URL to the profile image. Null if not available.
-       */
-      profile_image_url?: string | null;
-      /**
-       * Profile Url
-       * @description URL to the public X/Twitter profile
-       */
-      profile_url: string;
-    };
-    /**
-     * DraftOrderBy
-     * @description Allowed order_by fields for draft listing - prevents SQL injection
-     * @enum {string}
-     */
-    DraftOrderBy:
-      | "created_at"
-      | "-created_at"
-      | "updated_at"
-      | "-updated_at"
-      | "scheduled_date"
-      | "-scheduled_date"
-      | "published_at"
-      | "-published_at";
-    /**
-     * DraftListResponse
-     * @description Schema for draft/thread data in API responses with standardized timestamp field names
-     */
-    DraftListResponse: {
-      /**
-       * Id
-       * @description Unique identifier for the draft
-       * @example 12345
-       */
-      id: number;
-      /**
-       * Preview
-       * @description Preview of the draft content (may be null for empty drafts).
-       * @example Hello world
-       * @example null
-       */
-      preview?: string | null;
-      /**
-       * Scheduled Date
-       * @description Scheduled datetime in UTC (ISO 8601). Null if not scheduled.
-       * @example 2025-01-20T14:00:00Z
-       * @example null
-       */
-      scheduled_date?: string | null;
-      /**
-       * Draft Title
-       * @description Internal title for the draft. Null if not set.
-       * @example My launch thread
-       * @example null
-       */
-      draft_title?: string | null;
-      /**
-       * Mastodon Post Enabled
-       * @description Whether posting to Mastodon is enabled for this draft
-       * @example true
-       * @example false
-       */
-      mastodon_post_enabled: boolean;
-      /**
-       * Social Set Id
-       * @description ID of the social set (account) this draft belongs to
-       * @example 67890
-       */
-      social_set_id: number;
-      /**
-       * Share Url
-       * @description Public share URL for the draft. Null if the draft is not publicly shared.
-       * @example https://typefully.com/share/abc123
-       */
-      share_url?: string | null;
-      /**
-       * Private Url
-       * @description Private URL for accessing the draft in Typefully. Can be shared with team members without requiring public sharing.
-       * @example https://typefully.com/?d=12345&a=67890
-       */
-      private_url: string;
-      /**
-       * Status
-       * @description Current status of the draft. 'draft' = saved but not scheduled, 'scheduled' = queued for publishing, 'published' = successfully posted, 'publishing' = currently being posted, 'error' = publishing failed
-       */
-      status: string;
-      /**
-       * Tags
-       * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs.
-       * @example [
-       *       "marketing",
-       *       "product"
-       *     ]
-       * @example [
-       *       "newsletter"
-       *     ]
-       * @example []
-       */
-      tags?: string[];
-      /**
-       * Created At
-       * Format: date-time
-       * @description Timestamp when the draft was created (ISO 8601 format in UTC)
-       * @example 2025-01-15T10:30:00Z
-       */
-      created_at: string;
-      /**
-       * Updated At
-       * @description Timestamp when the draft was last edited (ISO 8601 format in UTC). Null if never edited.
-       * @example 2025-01-16T09:15:00Z
-       */
-      updated_at: string | null;
-      /**
-       * Published At
-       * @description Timestamp when the draft was published on any enabled platform (ISO 8601 format in UTC). Null if not yet published anywhere.
-       * @example 2025-01-20T14:00:05Z
-       */
-      published_at: string | null;
-      /**
-       * Mastodon Post Published At
-       * @description Timestamp when the post was published to Mastodon (ISO 8601 format in UTC). Null if not published to Mastodon.
-       * @example 2025-01-20T14:00:05Z
-       */
-      mastodon_post_published_at: string | null;
-      /**
-       * Linkedin Post Published At
-       * @description Timestamp when the post was published to LinkedIn (ISO 8601 format in UTC). Null if not published to LinkedIn.
-       * @example 2025-01-20T14:00:05Z
-       */
-      linkedin_post_published_at: string | null;
-      /**
-       * Threads Post Published At
-       * @description Timestamp when the post was published to Threads (ISO 8601 format in UTC). Null if not published to Threads.
-       * @example 2025-01-20T14:00:05Z
-       */
-      threads_post_published_at: string | null;
-      /**
-       * Bluesky Post Published At
-       * @description Timestamp when the post was published to Bluesky (ISO 8601 format in UTC). Null if not published to Bluesky.
-       * @example 2025-01-20T14:00:05Z
-       */
-      bluesky_post_published_at: string | null;
-      /**
-       * X Post Published At
-       * @description Timestamp when the post was published to X (ISO 8601 format in UTC). Null if not published to X.
-       * @example 2025-01-20T14:00:05Z
-       */
-      x_post_published_at?: string | null;
-      /**
-       * X Post Enabled
-       * @description Whether posting to X is enabled
-       */
-      x_post_enabled: boolean;
-      /**
-       * Linkedin Post Enabled
-       * @description Whether posting to LinkedIn is enabled
-       */
-      linkedin_post_enabled: boolean;
-      /**
-       * Threads Post Enabled
-       * @description Whether posting to Threads is enabled
-       */
-      threads_post_enabled: boolean;
-      /**
-       * Bluesky Post Enabled
-       * @description Whether posting to Bluesky is enabled
-       */
-      bluesky_post_enabled: boolean;
-      /**
-       * X Published Url
-       * @description URL of the published post on X (Twitter). Null if not published to X or URL not available.
-       * @example https://x.com/username/status/1234567890
-       */
-      x_published_url?: string | null;
-      /**
-       * Linkedin Published Url
-       * @description URL of the published post on LinkedIn. Null if not published to LinkedIn or URL not available.
-       * @example https://www.linkedin.com/feed/update/urn:li:share:1234567890
-       */
-      linkedin_published_url?: string | null;
-      /**
-       * Mastodon Published Url
-       * @description URL of the published post on Mastodon. Null if not published to Mastodon or URL not available.
-       * @example https://mastodon.social/@username/1234567890
-       */
-      mastodon_published_url?: string | null;
-      /**
-       * Threads Published Url
-       * @description URL of the published post on Threads. Null if not published to Threads or URL not available.
-       * @example https://www.threads.net/@username/post/ABC123
-       */
-      threads_published_url?: string | null;
-      /**
-       * Bluesky Published Url
-       * @description URL of the published post on Bluesky. Null if not published to Bluesky or URL not available.
-       * @example https://bsky.app/profile/username.bsky.social/post/abc123
-       */
-      bluesky_published_url?: string | null;
-    };
-    /** PagedDraftListResponse */
-    PagedDraftListResponse: {
-      /** Results */
-      results: components["schemas"]["DraftListResponse"][];
-      /** Count */
-      count: number;
-      /** Limit */
-      limit: number;
-      /** Offset */
-      offset: number;
-      /** Next */
-      next: string | null;
-      /** Previous */
-      previous: string | null;
-    };
-    /**
-     * BlueskySettings
-     * @description Settings specific to Bluesky
-     */
-    BlueskySettings: Record<string, never>;
-    /**
-     * DisabledPlatform
-     * @description Shared schema for all disabled platforms
-     */
-    DisabledPlatform: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: false;
-    };
-    /**
-     * DraftDetailResponse
-     * @description Response schema for draft creation and retrieval
-     */
-    DraftDetailResponse: {
-      /**
-       * Id
-       * @description Unique identifier for the draft
-       * @example 12345
-       */
-      id: number;
-      /**
-       * Social Set Id
-       * @description ID of the social set (account) this draft belongs to
-       * @example 67890
-       */
-      social_set_id: number;
-      /**
-       * Draft Id
-       * @deprecated
-       * @description Deprecated: Use 'id' instead. Unique identifier for the draft.
-       * @example 12345
-       */
-      draft_id: number;
-      /**
-       * Status
-       * @description Current status of the draft. 'draft' = saved but not scheduled, 'scheduled' = queued for publishing, 'published' = successfully posted, 'publishing' = currently being posted, 'error' = publishing failed
-       * @example draft
-       * @example scheduled
-       * @example published
-       * @enum {string}
-       */
-      status: "draft" | "scheduled" | "published" | "publishing" | "error";
-      /**
-       * Created At
-       * Format: date-time
-       * @description Timestamp when the draft was created (ISO 8601 format in UTC)
-       * @example 2025-01-15T10:30:00Z
-       */
-      created_at: string;
-      /**
-       * Updated At
-       * @description Timestamp when the draft was last edited (ISO 8601 format in UTC). Null if never edited.
-       * @example 2025-01-16T09:15:00Z
-       */
-      updated_at?: string | null;
-      /**
-       * Scheduled Date
-       * @description Timestamp when the draft is scheduled to publish (ISO 8601 format in UTC). Null if not scheduled.
-       * @example 2025-01-20T14:00:00Z
-       */
-      scheduled_date?: string | null;
-      /**
-       * Published At
-       * @description Timestamp when the draft was published on any enabled platform (ISO 8601 format in UTC). Null if not yet published.
-       * @example 2025-01-20T14:00:05Z
-       */
-      published_at?: string | null;
-      /**
-       * Draft Title
-       * @description Human-readable title for the draft. This is for internal organization only and is not posted to social media.
-       * @example Weekly Newsletter
-       * @example Product Launch Announcement
-       */
-      draft_title?: string | null;
-      /**
-       * Tags
-       * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs.
-       * @example [
-       *       "marketing",
-       *       "product"
-       *     ]
-       * @example [
-       *       "newsletter"
-       *     ]
-       * @example []
-       */
-      tags?: string[];
-      /**
-       * Preview
-       * @description Text preview of the draft (first 180 characters)
-       * @example Excited to announce our new feature! 🚀
-       */
-      preview: string;
-      /**
-       * Share Url
-       * @description Public share URL for the draft. Null if the draft is not publicly shared.
-       * @example https://typefully.com/share/abc123
-       */
-      share_url?: string | null;
-      /**
-       * Private Url
-       * @description Private URL for accessing the draft in Typefully. Can be shared with team members without requiring public sharing.
-       * @example https://typefully.com/?d=12345&a=67890
-       */
-      private_url: string;
-      /** @description Platform configurations showing which platforms are enabled and their content */
-      platforms: components["schemas"]["PlatformsResponse"];
-      /**
-       * X Published Url
-       * @description URL of the published post on X (Twitter). Null if not published to X or URL not available.
-       * @example https://x.com/username/status/1234567890
-       */
-      x_published_url?: string | null;
-      /**
-       * Linkedin Published Url
-       * @description URL of the published post on LinkedIn. Null if not published to LinkedIn or URL not available.
-       * @example https://www.linkedin.com/feed/update/urn:li:share:1234567890
-       */
-      linkedin_published_url?: string | null;
-      /**
-       * Mastodon Published Url
-       * @description URL of the published post on Mastodon. Null if not published to Mastodon or URL not available.
-       * @example https://mastodon.social/@username/1234567890
-       */
-      mastodon_published_url?: string | null;
-      /**
-       * Threads Published Url
-       * @description URL of the published post on Threads. Null if not published to Threads or URL not available.
-       * @example https://www.threads.net/@username/post/ABC123
-       */
-      threads_published_url?: string | null;
-      /**
-       * Bluesky Published Url
-       * @description URL of the published post on Bluesky. Null if not published to Bluesky or URL not available.
-       * @example https://bsky.app/profile/username.bsky.social/post/abc123
-       */
-      bluesky_published_url?: string | null;
-      /**
-       * X Post Published At
-       * @description Timestamp when the post was published to X  (ISO 8601 format in UTC). Null if not published to X.
-       * @example 2025-01-20T14:00:05Z
-       */
-      x_post_published_at?: string | null;
-      /**
-       * Linkedin Post Published At
-       * @description Timestamp when the post was published to LinkedIn (ISO 8601 format in UTC). Null if not published to LinkedIn.
-       * @example 2025-01-20T14:00:08Z
-       */
-      linkedin_post_published_at?: string | null;
-      /**
-       * Mastodon Post Published At
-       * @description Timestamp when the post was published to Mastodon (ISO 8601 format in UTC). Null if not published to Mastodon.
-       * @example 2025-01-20T14:00:10Z
-       */
-      mastodon_post_published_at?: string | null;
-      /**
-       * Threads Post Published At
-       * @description Timestamp when the post was published to Threads (ISO 8601 format in UTC). Null if not published to Threads.
-       * @example 2025-01-20T14:00:12Z
-       */
-      threads_post_published_at?: string | null;
-      /**
-       * Bluesky Post Published At
-       * @description Timestamp when the post was published to Bluesky (ISO 8601 format in UTC). Null if not published to Bluesky.
-       * @example 2025-01-20T14:00:15Z
-       */
-      bluesky_post_published_at?: string | null;
-      /**
-       * Scratchpad Text
-       * @description Plain text scratchpad notes for the draft. Formatting is stripped.
-       * @example line 1
-       *     line 2
-       *
-       *     line 4
-       */
-      scratchpad_text?: string | null;
-    };
-    /**
-     * EnabledBlueskyPlatformResponse
-     * @description Enabled Bluesky platform for responses (no validation limits)
-     */
-    EnabledBlueskyPlatformResponse: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["PostResponse"][];
-      /** @description Bluesky-specific settings */
-      settings?: components["schemas"]["BlueskySettings"] | null;
-    };
-    /**
-     * EnabledLinkedInPlatformResponse
-     * @description Enabled LinkedIn platform for responses (no validation limits)
-     */
-    EnabledLinkedInPlatformResponse: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["PostResponse"][];
-      /** @description LinkedIn-specific settings */
-      settings?: components["schemas"]["LinkedInSettings"] | null;
-    };
-    /**
-     * EnabledMastodonPlatformResponse
-     * @description Enabled Mastodon platform for responses (no validation limits)
-     */
-    EnabledMastodonPlatformResponse: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["PostResponse"][];
-      /** @description Mastodon-specific settings */
-      settings?: components["schemas"]["MastodonSettings"] | null;
-    };
-    /**
-     * EnabledThreadsPlatformResponse
-     * @description Enabled Threads platform for responses (no validation limits)
-     */
-    EnabledThreadsPlatformResponse: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["PostResponse"][];
-      /** @description Threads-specific settings */
-      settings?: components["schemas"]["ThreadsSettings"] | null;
-    };
-    /**
-     * EnabledXPlatformResponse
-     * @description Enabled X platform for responses (no validation limits)
-     */
-    EnabledXPlatformResponse: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["PostResponse"][];
-      /** @description X-specific settings */
-      settings?: components["schemas"]["XSettings"] | null;
-    };
-    /**
-     * LinkedInSettings
-     * @description Settings specific to LinkedIn
-     */
-    LinkedInSettings: Record<string, never>;
-    /**
-     * MastodonSettings
-     * @description Settings specific to Mastodon
-     */
-    MastodonSettings: Record<string, never>;
-    /**
-     * PlatformsResponse
-     * @description Schema for platform configurations in responses (no validation limits)
-     */
-    PlatformsResponse: {
-      /**
-       * X
-       * @description X (Twitter) configuration
-       */
-      x?:
-        | components["schemas"]["EnabledXPlatformResponse"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Linkedin
-       * @description LinkedIn configuration
-       */
-      linkedin?:
-        | components["schemas"]["EnabledLinkedInPlatformResponse"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Mastodon
-       * @description Mastodon configuration
-       */
-      mastodon?:
-        | components["schemas"]["EnabledMastodonPlatformResponse"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Threads
-       * @description Threads configuration
-       */
-      threads?:
-        | components["schemas"]["EnabledThreadsPlatformResponse"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Bluesky
-       * @description Bluesky configuration
-       */
-      bluesky?:
-        | components["schemas"]["EnabledBlueskyPlatformResponse"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-    };
-    /**
-     * PostResponse
-     * @description Schema for post content in API responses (no request-time limits).
-     */
-    PostResponse: {
-      /**
-       * Text
-       * @description The text content of the post
-       */
-      text: string;
-      /**
-       * Media Ids
-       * @description List of media IDs attached to the post.
-       */
-      media_ids?: string[];
-      /**
-       * Quote Post Url
-       * @description X-only: URL of the X post quoted by this post. Null when no quoted post is configured.
-       */
-      quote_post_url?: string | null;
-    };
-    /**
-     * ThreadsSettings
-     * @description Settings specific to Threads
-     */
-    ThreadsSettings: Record<string, never>;
-    /**
-     * XSettings
-     * @description Settings specific to X (Twitter)
-     */
-    XSettings: {
-      /**
-       * Reply To Url
-       * @description URL of the X post to reply to. When provided, the first post in your thread will be posted as a reply.
-       * @example https://x.com/therajatkapoor/status/1399394576951959554
-       */
-      reply_to_url?: string | null;
-      /**
-       * Community Id
-       * @description ID of the X community to post to. Find the ID in the community URL (e.g., x.com/i/communities/1493446837214187523). You must have permission to post to the community, otherwise publishing will fail.
-       */
-      community_id?: string | null;
-      /**
-       * Share With Followers
-       * @description When posting to a community, whether to also share the post to your timeline/followers. Defaults to true if not specified. Only has an effect when community_id is provided.
-       */
-      share_with_followers?: boolean | null;
-    };
-    /**
-     * DraftCreateRequest
-     * @description Request schema for creating a draft
-     */
-    DraftCreateRequest: {
-      /** @description Platform configurations for each social media platform */
-      platforms: components["schemas"]["Platforms"];
-      /**
-       * Draft Title
-       * @description Human-readable title for the draft. This is for internal organization only and is not posted to social media.
-       * @example Weekly Newsletter
-       * @example Product Launch Announcement
-       * @example Monday Motivation Post
-       */
-      draft_title?: string | null;
-      /**
-       * Scratchpad Text
-       * @description Plain text scratchpad notes for the draft. Formatting is stripped.
-       * @example line 1
-       *     line 2
-       *
-       *     line 4
-       */
-      scratchpad_text?: string | null;
-      /**
-       * Tags
-       * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs. Tags must already exist in the social set.
-       * @example [
-       *       "marketing",
-       *       "product"
-       *     ]
-       * @example [
-       *       "newsletter"
-       *     ]
-       * @example []
-       */
-      tags?: string[];
-      /**
-       * Share
-       * @description Whether to generate a public share URL for this draft. When true, anyone with the URL can view the draft content.
-       * @default false
-       */
-      share: boolean;
-      /**
-       * Publish At
-       * @description When to publish the draft. Options: "now" to publish immediately, "next-free-slot" to schedule to your next available posting slot, or an ISO 8601 datetime string with timezone for a specific future time (e.g., '2025-01-20T14:00:00Z' for UTC or '2025-01-20T09:00:00-05:00' for EST). Timezone is required. Omit to save as a draft.
-       * @example 2025-12-20T09:00:00-05:00
-       * @example now
-       * @example next-free-slot
-       */
-      publish_at?: string | ("now" | "next-free-slot") | null;
-    };
-    /**
-     * EnabledBlueskyPlatform
-     * @description Enabled Bluesky platform with required data
-     */
-    EnabledBlueskyPlatform: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["Post"][];
-      /** @description Bluesky-specific settings */
-      settings?: components["schemas"]["BlueskySettings"] | null;
-    };
-    /**
-     * EnabledLinkedInPlatform
-     * @description Enabled LinkedIn platform with required data
-     */
-    EnabledLinkedInPlatform: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["Post"][];
-      /** @description LinkedIn-specific settings */
-      settings?: components["schemas"]["LinkedInSettings"] | null;
-    };
-    /**
-     * EnabledMastodonPlatform
-     * @description Enabled Mastodon platform with required data
-     */
-    EnabledMastodonPlatform: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["Post"][];
-      /** @description Mastodon-specific settings */
-      settings?: components["schemas"]["MastodonSettings"] | null;
-    };
-    /**
-     * EnabledThreadsPlatform
-     * @description Enabled Threads platform with required data
-     */
-    EnabledThreadsPlatform: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["Post"][];
-      /** @description Threads-specific settings */
-      settings?: components["schemas"]["ThreadsSettings"] | null;
-    };
-    /**
-     * EnabledXPlatform
-     * @description Enabled X platform with required data
-     */
-    EnabledXPlatform: {
-      /**
-       * Enabled
-       * @constant
-       * @enum {boolean}
-       */
-      enabled: true;
-      /**
-       * Posts
-       * @description List of posts for this platform
-       */
-      posts: components["schemas"]["Post"][];
-      /** @description X-specific settings */
-      settings?: components["schemas"]["XSettings"] | null;
-    };
-    /**
-     * Platforms
-     * @description Schema for all platform configurations
-     */
-    Platforms: {
-      /**
-       * X
-       * @description X (Twitter) configuration
-       */
-      x?:
-        | components["schemas"]["EnabledXPlatform"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Linkedin
-       * @description LinkedIn configuration
-       */
-      linkedin?:
-        | components["schemas"]["EnabledLinkedInPlatform"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Mastodon
-       * @description Mastodon configuration
-       */
-      mastodon?:
-        | components["schemas"]["EnabledMastodonPlatform"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Threads
-       * @description Threads configuration
-       */
-      threads?:
-        | components["schemas"]["EnabledThreadsPlatform"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-      /**
-       * Bluesky
-       * @description Bluesky configuration
-       */
-      bluesky?:
-        | components["schemas"]["EnabledBlueskyPlatform"]
-        | components["schemas"]["DisabledPlatform"]
-        | null;
-    };
-    /**
-     * Post
-     * @description Schema for individual post content
-     */
-    Post: {
-      /**
-       * Text
-       * @description The text content of the post. For LinkedIn posts, you can tag companies with mention syntax: @[Company Name](urn:li:organization:123456).
-       * @example Hello world! This is my first post.
-       * @example Check out this amazing update! 🚀
-       * @example Thanks @[Typefully](urn:li:organization:86779668) for the support!
-       */
-      text: string;
-      /**
-       * Media Ids
-       * @description List of media IDs to attach to the post. Obtain media IDs by uploading files via the media upload endpoint.
-       * @example [
-       *       "550e8400-e29b-41d4-a716-446655440000"
-       *     ]
-       * @example [
-       *       "550e8400-e29b-41d4-a716-446655440000",
-       *       "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
-       *     ]
-       */
-      media_ids?: string[];
-      /**
-       * Quote Post Url
-       * @description X-only: URL of the X post to quote in this post (equivalent to Typefully's 'convert to quote' action).
-       * @example https://x.com/typefully/status/2025894220243063023
-       */
-      quote_post_url?: string | null;
-    };
-    /**
-     * DraftUpdateRequest
-     * @description Request schema for updating a draft (partial updates supported)
-     */
-    DraftUpdateRequest: {
-      /** @description Platform configurations. Only provided platforms will be updated; omitted platforms remain unchanged. */
-      platforms?: components["schemas"]["Platforms"] | null;
-      /**
-       * Draft Title
-       * @description Human-readable title for the draft. This is for internal organization only and is not posted to social media. Omit to keep unchanged.
-       * @example Weekly Newsletter
-       * @example Product Launch Announcement
-       */
-      draft_title?: string | null;
-      /**
-       * Scratchpad Text
-       * @description Plain text scratchpad notes for the draft. Formatting is stripped. Omit to keep unchanged.
-       * @example line 1
-       *     line 2
-       *
-       *     line 4
-       */
-      scratchpad_text?: string | null;
-      /**
-       * Tags
-       * @description List of tag slugs (not names) associated with this draft. Use the /tags endpoint to get available tags with their slugs. Tags must already exist in the social set. Omit to keep unchanged.
-       * @example [
-       *       "marketing",
-       *       "product"
-       *     ]
-       * @example [
-       *       "newsletter"
-       *     ]
-       * @example []
-       */
-      tags?: string[] | null;
-      /**
-       * Share
-       * @description Whether to generate a public share URL. Omit to keep unchanged.
-       */
-      share?: boolean | null;
-      /**
-       * Publish At
-       * @description When to publish the draft. Options: "now" to publish immediately, "next-free-slot" to schedule to your next available posting slot, or an ISO 8601 datetime string with timezone for a specific future time (e.g., '2025-01-20T14:00:00Z' for UTC or '2025-01-20T09:00:00-05:00' for EST). Timezone is required. Omit to keep unchanged.
-       * @example 2025-12-20T09:00:00-05:00
-       * @example now
-       * @example next-free-slot
-       */
-      publish_at?: string | ("now" | "next-free-slot") | null;
-    };
-    /**
-     * MediaUploadResponse
-     * @description Schema for media upload response
-     */
-    MediaUploadResponse: {
-      /**
-       * Media Id
-       * Format: uuid
-       * @description Unique identifier for the uploaded media. Use this ID when attaching media to posts.
-       * @example 550e8400-e29b-41d4-a716-446655440000
-       */
-      media_id: string;
-      /**
-       * Upload Url
-       * @description Presigned S3 URL for uploading the file. PUT the file content to this URL within 1 hour.
-       * @example https://s3.amazonaws.com/bucket/path/file?signature=...
-       */
-      upload_url: string;
-    };
-    /**
-     * MediaUploadRequest
-     * @description Schema for media upload request
-     */
-    MediaUploadRequest: {
-      /**
-       * File Name
-       * @description Original filename with extension (e.g., 'image.jpg', 'video.mp4'). Used for MIME type detection and display. Allowed characters: letters, numbers, hyphens, underscores, periods, parentheses. Allowed extensions: .jpg, .jpeg, .png, .webp, .gif, .mp4, .mov, .pdf
-       * @example profile-photo.jpg
-       * @example demo-video.mp4
-       * @example screenshot.png
-       */
-      file_name: string;
-    };
-    /**
-     * MediaStatusResponse
-     * @description Schema for media status response
-     */
-    MediaStatusResponse: {
-      /**
-       * Media Id
-       * Format: uuid
-       * @description Unique identifier for the media file
-       */
-      media_id: string;
-      /**
-       * File Name
-       * @description Original filename
-       * @example photo.jpg
-       */
-      file_name: string;
-      /**
-       * Mime
-       * @description MIME type of the media file
-       * @example image/jpeg
-       * @example image/png
-       * @example video/mp4
-       * @example image/gif
-       * @example application/pdf
-       */
-      mime?: string | null;
-      /**
-       * Status
-       * @description Processing status: 'processing' = file is being processed, 'ready' = file is ready to use in posts, 'failed' = processing failed
-       * @example ready
-       * @example processing
-       * @example failed
-       * @enum {string}
-       */
-      status: "processing" | "ready" | "failed";
-      /**
-       * Error Reason
-       * @description Error message if status is 'failed'. Null otherwise.
-       * @example Unsupported file format
-       */
-      error_reason?: string | null;
-      /**
-       * Media Urls
-       * @description Dictionary of media URLs. For resizable images (PNG, JPG, WEBP): includes 'small' (600px), 'medium' (1200px), 'large' (3200px), and 'original'. For non-resizable media (GIF, video, PDF): includes only 'original'.
-       * @example {
-       *       "large": "https://cdn.../resized/...",
-       *       "medium": "https://cdn.../resized/...",
-       *       "original": "https://cdn.../original/...",
-       *       "small": "https://cdn.../resized/..."
-       *     }
-       */
-      media_urls?: Record<string, string> | null;
-    };
-    /** PagedTagResponse */
-    PagedTagResponse: {
-      /** Results */
-      results: components["schemas"]["TagResponse"][];
-      /** Count */
-      count: number;
-      /** Limit */
-      limit: number;
-      /** Offset */
-      offset: number;
-      /** Next */
-      next: string | null;
-      /** Previous */
-      previous: string | null;
-    };
-    /**
-     * TagResponse
-     * @description Response schema for tag data
-     */
-    TagResponse: {
-      /**
-       * Slug
-       * @description Auto-generated URL-safe identifier from the tag name
-       * @example marketing
-       * @example product-launch
-       * @example weekly-updates
-       */
-      slug: string;
-      /**
-       * Name
-       * @description Display name for the tag
-       * @example Marketing
-       * @example Product Launch
-       * @example Weekly Updates
-       */
-      name: string;
-      /**
-       * Created At
-       * Format: date-time
-       * @description Timestamp when the tag was created (ISO 8601 format in UTC)
-       * @example 2025-01-15T10:30:00Z
-       */
-      created_at: string;
-    };
-    /**
-     * TagCreateRequest
-     * @description Request schema for creating a tag
-     * @example {
-     *       "name": "Marketing"
-     *     }
-     * @example {
-     *       "name": "Product Launch"
-     *     }
-     * @example {
-     *       "name": "Weekly Newsletter"
-     *     }
-     */
-    TagCreateRequest: {
-      /**
-       * Name
-       * @description Display name for the tag. The slug will be auto-generated from this name.
-       * @example Marketing
-       * @example Product Launch
-       * @example Weekly Updates
-       */
-      name: string;
-    };
-    /**
-     * QueueScheduleResponse
-     * @description Response schema for queue schedule rules.
-     */
-    QueueScheduleResponse: {
-      /**
-       * Social Set Id
-       * @description ID of the social set (account) this schedule belongs to.
-       * @example 123
-       */
-      social_set_id: number;
-      /**
-       * Timezone
-       * @description Timezone name for this social set.
-       * @example America/New_York
-       */
-      timezone: string;
-      /**
-       * Rules
-       * @description Schedule rules in local time.
-       */
-      rules: components["schemas"]["QueueScheduleRuleSchema"][];
-    };
-    /**
-     * QueueScheduleRuleSchema
-     * @description Single schedule rule (local time + days of week).
-     */
-    QueueScheduleRuleSchema: {
-      /**
-       * H
-       * @description Hour in 24h clock (0-23)
-       */
-      h: number;
-      /**
-       * M
-       * @description Minute (0-59)
-       */
-      m: number;
-      /**
-       * Days
-       * @description Days of week this rule applies to
-       * @example [
-       *       "mon",
-       *       "tue",
-       *       "wed",
-       *       "thu",
-       *       "fri"
-       *     ]
-       */
-      days: ("mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun")[];
-    };
-    /**
-     * QueueScheduleUpdateRequest
-     * @description Request schema for fully replacing queue schedule rules.
-     */
-    QueueScheduleUpdateRequest: {
-      /**
-       * Rules
-       * @description New schedule rules (full replacement).
-       */
-      rules: components["schemas"]["QueueScheduleRuleSchema"][];
-    };
-    /**
-     * QueueDaySchema
-     * @description Queue day with its queue items.
-     */
-    QueueDaySchema: {
-      /**
-       * Date
-       * @description YYYY-MM-DD in the social set timezone
-       */
-      date: string;
-      /**
-       * Items
-       * @description Queue items for this day (in chronological order).
-       */
-      items: components["schemas"]["QueueItemSchema"][];
-    };
-    /**
-     * QueueItemSchema
-     * @description Queue items are time points in the queue.
-     *
-     *     - `at` is an ISO8601 datetime in UTC.
-     *     - `kind` differentiates schedule-generated queue slots from scheduled drafts that do not occupy a slot.
-     *     - `draft` is either null (free slot) or a DraftListResponse object.
-     */
-    QueueItemSchema: {
-      /**
-       * At
-       * Format: date-time
-       * @description ISO8601 datetime in UTC.
-       * @example 2026-02-12T22:00:00Z
-       */
-      at: string;
-      /**
-       * Kind
-       * @description Queue item kind.
-       *
-       *     - `queue_slot`: schedule-generated queue slot time (free slot if `draft` is null)
-       *     - `custom_time`: scheduled draft that does not count as a slot occupant (custom-time scheduling, or collision overflow)
-       * @example queue_slot
-       * @enum {string}
-       */
-      kind: "queue_slot" | "custom_time";
-      /** @description Draft scheduled at this time. Null means the slot is free. */
-      draft?: components["schemas"]["DraftListResponse"] | null;
-    };
-    /**
-     * QueueResponse
-     * @description Response schema for the queue date-range view.
-     */
-    QueueResponse: {
-      /**
-       * Social Set Id
-       * @description ID of the social set (account) this queue belongs to.
-       * @example 123
-       */
-      social_set_id: number;
-      /**
-       * Start Date
-       * @description YYYY-MM-DD in the social set timezone
-       * @example 2026-02-01
-       */
-      start_date: string;
-      /**
-       * End Date
-       * @description YYYY-MM-DD in the social set timezone
-       * @example 2026-02-29
-       */
-      end_date: string;
-      /**
-       * Days
-       * @description Days in the requested date range (inclusive).
-       */
-      days: components["schemas"]["QueueDaySchema"][];
-    };
-    /**
-     * LinkedInOrganizationFromURLResponse
-     * @description Resolved LinkedIn organization metadata.
-     */
-    LinkedInOrganizationFromURLResponse: {
-      /**
-       * Id
-       * @description LinkedIn organization ID
-       * @example 86779668
-       */
-      id: string;
-      /**
-       * Urn
-       * @description LinkedIn organization URN, usable in mention syntax
-       * @example urn:li:organization:86779668
-       */
-      urn: string;
-      /**
-       * Mention Text
-       * @description Ready-to-use LinkedIn mention syntax to paste into post text.
-       * @example @[Typefully](urn:li:organization:86779668)
-       */
-      mention_text: string;
-      /**
-       * Name
-       * @description Organization display name
-       */
-      name?: string | null;
-      /**
-       * Vanity Name
-       * @description LinkedIn vanity name
-       */
-      vanity_name?: string | null;
-      /**
-       * Description
-       * @description Organization description
-       */
-      description?: string | null;
-      /**
-       * Website
-       * @description Organization website
-       */
-      website?: string | null;
-      /**
-       * Logo Url
-       * @description Organization logo URL
-       */
-      logo_url?: string | null;
-      /**
-       * Url
-       * @description Public LinkedIn company URL
-       */
-      url?: string | null;
-    };
-    /**
-     * WebhookEventPayload
-     * @description Payload envelope sent to webhook endpoints.
-     *
-     *     All webhook events follow this structure, with the event type identifying
-     *     the specific event and data containing the full draft details.
-     */
-    WebhookEventPayload: {
-      /**
-       * Event
-       * @description The event type that triggered this webhook
-       * @enum {string}
-       */
-      event:
-        | "draft.created"
-        | "draft.scheduled"
-        | "draft.published"
-        | "draft.status_changed"
-        | "draft.tags_changed"
-        | "draft.deleted";
-      /** @description The draft data at the time of the event. See DraftDetailResponse schema for full structure. */
-      data: components["schemas"]["DraftDetailResponse"];
-    };
-  };
-  responses: never;
-  parameters: never;
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    responses: never;
+    parameters: never;
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  typefully_apps_apiv2_handlers_user_get_me: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    typefully_apps_apiv2_handlers_user_get_me: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["UserResponse"];
+    typefully_apps_apiv2_handlers_analytics_list_social_set_analytics_posts: {
+        parameters: {
+            query: {
+                start_date: string;
+                end_date: string;
+                /** @description Include X replies in the results. Defaults to `false`, which returns only non-reply posts. */
+                include_replies?: boolean;
+                /** @description Maximum number of items to return per page */
+                limit?: number | null;
+                /** @description Number of items to skip from the beginning */
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+                platform: string;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Missing or invalid authentication */
-      401: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description Paginated posts with normalized analytics metrics. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedSocialSetAnalyticsPostResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_analytics_list_social_set_analytics_posts: {
-    parameters: {
-      query: {
-        start_date: string;
-        end_date: string;
-        /** @description Include X replies in the results. Defaults to `false`, which returns only non-reply posts. */
-        include_replies?: boolean;
-        /** @description Maximum number of items to return per page */
-        limit?: number | null;
-        /** @description Number of items to skip from the beginning */
-        offset?: number;
-      };
-      header?: never;
-      path: {
-        social_set_id: number;
-        platform: string;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_analytics_get_social_set_analytics_followers: {
+        parameters: {
+            query?: {
+                /** @description Start date for the follower series (YYYY-MM-DD). Defaults to 29 days before `end_date`, or before today when `end_date` is omitted. */
+                start_date?: string | null;
+                /** @description End date for the follower series (YYYY-MM-DD). Defaults to today in the social set's timezone. */
+                end_date?: string | null;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+                platform: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Daily follower counts for a social set on X. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SocialSetAnalyticsFollowersResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Service unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description Paginated posts with normalized analytics metrics. */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["PagedSocialSetAnalyticsPostResponse"];
+    typefully_apps_apiv2_handlers_social_sets_list_social_sets: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return per page */
+                limit?: number | null;
+                /** @description Number of items to skip from the beginning */
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
         };
-      };
-      /** @description Request failed validation */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedSocialSetListResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_social_sets_list_social_sets: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return per page */
-        limit?: number | null;
-        /** @description Number of items to skip from the beginning */
-        offset?: number;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
+    typefully_apps_apiv2_handlers_social_sets_get_social_set_details: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SocialSetDetailResponse"];
+                };
+            };
+            /** @description You do not have permission to access this social set */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["PagedSocialSetListResponse"];
+    typefully_apps_apiv2_handlers_drafts_list_drafts: {
+        parameters: {
+            query?: {
+                status?: ("draft" | "published" | "scheduled" | "error" | "publishing") | null;
+                tag?: string[] | null;
+                order_by?: "created_at" | "-created_at" | "updated_at" | "-updated_at" | "scheduled_date" | "-scheduled_date" | "published_at" | "-published_at";
+                /** @description Maximum number of items to return per page */
+                limit?: number | null;
+                /** @description Number of items to skip from the beginning */
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Missing or invalid authentication */
-      401: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedDraftListResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_social_sets_get_social_set_details: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_drafts_create_draft: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DraftCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DraftDetailResponse"];
+                };
+            };
+            /** @description Invalid request data or validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Account is paused or requires a paid plan before creating drafts */
+            402: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions or feature not available */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["SocialSetDetailResponse"];
+    typefully_apps_apiv2_handlers_drafts_get_draft: {
+        parameters: {
+            query?: {
+                /** @description When true, render `posts[*].text` as plain user-visible text without `<typ:comment-thread>` markers. Use only for read-only flows (LLM context windows, exports). The default (false) emits markers so a round-trip back to PATCH preserves comment anchors. */
+                exclude_comment_markers?: boolean;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description You do not have permission to access this social set */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DraftDetailResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_drafts_list_drafts: {
-    parameters: {
-      query?: {
-        status?:
-          | ("draft" | "published" | "scheduled" | "error" | "publishing")
-          | null;
-        tag?: string[] | null;
-        order_by?:
-          | "created_at"
-          | "-created_at"
-          | "updated_at"
-          | "-updated_at"
-          | "scheduled_date"
-          | "-scheduled_date"
-          | "published_at"
-          | "-published_at";
-        /** @description Maximum number of items to return per page */
-        limit?: number | null;
-        /** @description Number of items to skip from the beginning */
-        offset?: number;
-      };
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_drafts_delete_draft: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["PagedDraftListResponse"];
+    typefully_apps_apiv2_handlers_drafts_edit_draft: {
+        parameters: {
+            query?: {
+                /** @description Render the response's `posts[*].text` as plain text without `<typ:comment-thread>` markers. Render-only — does not affect request-body validation. */
+                exclude_comment_markers?: boolean;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DraftUpdateRequest"];
+            };
         };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DraftDetailResponse"];
+                };
+            };
+            /** @description Invalid request data or draft cannot be edited (e.g., already published) */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Account is paused or requires a paid plan before editing drafts */
+            402: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions or feature not available */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_drafts_create_draft: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_media_create_media_upload: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MediaUploadRequest"];
+            };
+        };
+        responses: {
+            /** @description Upload URL created successfully */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "media_id": "550e8400-e29b-41d4-a716-446655440000",
+                     *       "upload_url": "https://s3.amazonaws.com/bucket/path/file.jpg?X-Amz-Algorithm=..."
+                     *     }
+                     */
+                    "application/json": components["schemas"]["MediaUploadResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["DraftCreateRequest"];
-      };
+    typefully_apps_apiv2_handlers_media_get_media_status: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                media_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaStatusResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    responses: {
-      /** @description Created */
-      201: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["DraftDetailResponse"];
+    typefully_apps_apiv2_handlers_tags_list_tags: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return per page */
+                limit?: number | null;
+                /** @description Number of items to skip from the beginning */
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Invalid request data or validation error */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PagedTagResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Account is paused or requires a paid plan before creating drafts */
-      402: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Insufficient permissions or feature not available */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Schema validation error */
-      422: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_drafts_get_draft: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-        draft_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_tags_create_tag: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TagCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TagResponse"];
+                };
+            };
+            /** @description Invalid request data or validation error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions or feature not available */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["DraftDetailResponse"];
+    typefully_apps_apiv2_handlers_queue_get_queue_schedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description Queue schedule rules for this social set. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QueueScheduleResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_drafts_delete_draft: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-        draft_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_queue_put_queue_schedule: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["QueueScheduleUpdateRequest"];
+            };
+        };
+        responses: {
+            /** @description Updated queue schedule rules. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QueueScheduleResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description No Content */
-      204: {
-        headers: Record<string, unknown>;
-        content?: never;
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+    typefully_apps_apiv2_handlers_queue_get_queue: {
+        parameters: {
+            query: {
+                start_date: string;
+                end_date: string;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description Queue view (slots + scheduled drafts) for a date range. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QueueResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_drafts_edit_draft: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-        draft_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_linkedin_resolve_linkedin_organization_from_url: {
+        parameters: {
+            query: {
+                /**
+                 * @description Public LinkedIn organization URL (company or school profile).
+                 * @example https://www.linkedin.com/company/typefullycom
+                 * @example https://www.linkedin.com/school/harvard-university/
+                 */
+                organization_url: string;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Resolved LinkedIn organization metadata */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LinkedInOrganizationFromURLResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Service unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["DraftUpdateRequest"];
-      };
+    typefully_apps_apiv2_handlers_comments_list_comments: {
+        parameters: {
+            query?: {
+                platform?: ("x" | "linkedin" | "mastodon" | "threads" | "bluesky") | null;
+                status?: "unresolved" | "resolved" | "all";
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentThreadListResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["DraftDetailResponse"];
+    typefully_apps_apiv2_handlers_comments_create_comment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Invalid request data or draft cannot be edited (e.g., already published) */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CommentThreadCreateRequest"];
+            };
         };
-      };
-      /** @description Account is paused or requires a paid plan before editing drafts */
-      402: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentThreadResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Insufficient permissions or feature not available */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Schema validation error */
-      422: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_media_create_media_upload: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_comments_add_comment_to_thread: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+                comment_thread_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CommentCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description Created */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentThreadResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["MediaUploadRequest"];
-      };
+    typefully_apps_apiv2_handlers_comments_resolve_thread: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+                comment_thread_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentThreadResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    responses: {
-      /** @description Upload URL created successfully */
-      201: {
-        headers: Record<string, unknown>;
-        content: {
-          /**
-           * @example {
-           *       "media_id": "550e8400-e29b-41d4-a716-446655440000",
-           *       "upload_url": "https://s3.amazonaws.com/bucket/path/file.jpg?X-Amz-Algorithm=..."
-           *     }
-           */
-          "application/json": components["schemas"]["MediaUploadResponse"];
+    typefully_apps_apiv2_handlers_comments_delete_comment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+                comment_thread_id: string;
+                comment_id: string;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Schema validation error */
-      422: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_media_get_media_status: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-        media_id: string;
-      };
-      cookie?: never;
+    typefully_apps_apiv2_handlers_comments_update_comment: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+                comment_thread_id: string;
+                comment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CommentUpdateRequest"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommentThreadResponse"];
+                };
+            };
+            /** @description Request failed validation */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Schema validation error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+        };
     };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["MediaStatusResponse"];
+    typefully_apps_apiv2_handlers_comments_delete_thread: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                social_set_id: number;
+                draft_id: number;
+                comment_thread_id: string;
+            };
+            cookie?: never;
         };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Missing or invalid authentication */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Insufficient permissions */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Resource not found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
+            /** @description Rate limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["APIErrorResponse"];
+                };
+            };
         };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
     };
-  };
-  typefully_apps_apiv2_handlers_tags_list_tags: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return per page */
-        limit?: number | null;
-        /** @description Number of items to skip from the beginning */
-        offset?: number;
-      };
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description OK */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["PagedTagResponse"];
-        };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-    };
-  };
-  typefully_apps_apiv2_handlers_tags_create_tag: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["TagCreateRequest"];
-      };
-    };
-    responses: {
-      /** @description Created */
-      201: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["TagResponse"];
-        };
-      };
-      /** @description Invalid request data or validation error */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Insufficient permissions or feature not available */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Schema validation error */
-      422: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-    };
-  };
-  typefully_apps_apiv2_handlers_queue_get_queue_schedule: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Queue schedule rules for this social set. */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["QueueScheduleResponse"];
-        };
-      };
-      /** @description Request failed validation */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-    };
-  };
-  typefully_apps_apiv2_handlers_queue_put_queue_schedule: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["QueueScheduleUpdateRequest"];
-      };
-    };
-    responses: {
-      /** @description Updated queue schedule rules. */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["QueueScheduleResponse"];
-        };
-      };
-      /** @description Request failed validation */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Schema validation error */
-      422: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-    };
-  };
-  typefully_apps_apiv2_handlers_queue_get_queue: {
-    parameters: {
-      query: {
-        start_date: string;
-        end_date: string;
-      };
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Queue view (slots + scheduled drafts) for a date range. */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["QueueResponse"];
-        };
-      };
-      /** @description Request failed validation */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-    };
-  };
-  typefully_apps_apiv2_handlers_linkedin_resolve_linkedin_organization_from_url: {
-    parameters: {
-      query: {
-        /**
-         * @description Public LinkedIn organization URL (company or school profile).
-         * @example https://www.linkedin.com/company/typefullycom
-         * @example https://www.linkedin.com/school/harvard-university/
-         */
-        organization_url: string;
-      };
-      header?: never;
-      path: {
-        social_set_id: number;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Resolved LinkedIn organization metadata */
-      200: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["LinkedInOrganizationFromURLResponse"];
-        };
-      };
-      /** @description Request failed validation */
-      400: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Insufficient permissions */
-      403: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Resource not found */
-      404: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Rate limited */
-      429: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-      /** @description Service unavailable */
-      503: {
-        headers: Record<string, unknown>;
-        content: {
-          "application/json": components["schemas"]["APIErrorResponse"];
-        };
-      };
-    };
-  };
 }
