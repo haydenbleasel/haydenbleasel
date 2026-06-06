@@ -34,6 +34,7 @@
         "next": "16.2.6",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
+        "recharts": "3.8.1",
         "usehooks-ts": "^3.1.1",
       },
       "devDependencies": {
