@@ -42,7 +42,7 @@ export const metadata: Metadata = {
       {
         alt: "Hayden Bleasel",
         height: 630,
-        url: new URL("/opengraph-image.png", url).toString(),
+        url: new URL("/opengraph-image.jpg", url).toString(),
         width: 1200,
       },
     ],
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
       {
         alt: "Hayden Bleasel",
         height: 630,
-        url: new URL("/opengraph-image.png", url).toString(),
+        url: new URL("/opengraph-image.jpg", url).toString(),
         width: 1200,
       },
     ],
@@ -78,7 +78,7 @@ interface RootLayoutProps {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  image: "https://haydenbleasel.com/opengraph-image.png",
+  image: "https://haydenbleasel.com/opengraph-image.jpg",
   jobTitle: "Member of Technical Staff",
   name: "Hayden Bleasel",
   sameAs: [
