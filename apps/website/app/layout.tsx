@@ -95,6 +95,12 @@ const jsonLd = {
 
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en" suppressHydrationWarning>
+    <head>
+      <link
+        href="https://m5ujrbvzrmbgd5kn.public.blob.vercel-storage.com"
+        rel="preconnect"
+      />
+    </head>
     <body
       className={cn(
         sans.variable,
