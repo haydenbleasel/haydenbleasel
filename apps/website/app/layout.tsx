@@ -1,10 +1,11 @@
-import { DesignSystemProvider } from "@haydenbleasel/design-system/components/provider/client";
 import { DesignSystemServerProvider } from "@haydenbleasel/design-system/components/provider/server";
-import { fonts } from "@haydenbleasel/design-system/fonts";
+import { sans } from "@haydenbleasel/design-system/fonts";
 
 import "./globals.css";
+import { cn } from "@haydenbleasel/design-system/lib/utils";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Toaster } from "sonner";
 
 import { url } from "@/lib/url";
 
@@ -74,15 +75,36 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  image: "https://haydenbleasel.com/opengraph-image.png",
+  jobTitle: "Member of Technical Staff",
+  name: "Hayden Bleasel",
+  sameAs: [
+    "https://x.com/haydenbleasel",
+    "https://www.linkedin.com/in/haydenbleasel/",
+    "https://github.com/haydenbleasel",
+  ],
+  url: "https://haydenbleasel.com",
+  worksFor: {
+    "@type": "Organization",
+    name: "OpenAI",
+  },
+};
+
 const RootLayout = ({ children }: RootLayoutProps) => (
   <html lang="en" suppressHydrationWarning>
-    <body className={fonts}>
-      <DesignSystemProvider>
-        <main className="relative z-10 mx-auto grid w-full max-w-2xl gap-16 sm:gap-24 px-4 py-16 sm:py-32">
-          {children}
-        </main>
-      </DesignSystemProvider>
+    <body
+      className={cn(
+        sans.variable,
+        "font-sans antialiased min-h-dvh bg-background text-foreground text-lg -tracking-[0.01em]"
+      )}
+    >
+      {children}
+      <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       <DesignSystemServerProvider />
+      <Toaster />
     </body>
   </html>
 );

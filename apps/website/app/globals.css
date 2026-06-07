@@ -1,12 +1,44 @@
 @import "tailwindcss";
-@import "@haydenbleasel/design-system/styles";
+
+@theme {
+  --color-background: #fff;
+  --color-foreground: #273133;
+  --color-placeholder: #999;
+  --color-border: #eaeaea;
+  --color-primary: #427f5b;
+}
 
 @layer base {
-  body {
-    @apply text-muted-foreground;
-    @apply leading-relaxed -tracking-[0.015em];
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    @apply border-border;
   }
+
+  * {
+    @apply min-w-0;
+  }
+
+  html {
+    text-rendering: optimizelegibility;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-placeholder;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+
   p a {
-    @apply underline transition-colors hover:text-foreground;
+    @apply underline transition-colors underline-offset-2 decoration-border hover:text-primary;
+  }
+
+  ::selection {
+    @apply bg-primary/18 text-foreground;
   }
 }

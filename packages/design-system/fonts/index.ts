@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 
 import { cn } from "../lib/utils";
 
-const sans = localFont({
+export const sans = localFont({
   display: "swap",
   src: [
     {
@@ -20,7 +20,7 @@ const sans = localFont({
   variable: "--font-sans",
 });
 
-const serif = createSerif({
+export const serif = createSerif({
   display: "swap",
   subsets: ["latin"],
   variable: "--font-serif",

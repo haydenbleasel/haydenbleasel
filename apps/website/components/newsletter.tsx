@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@haydenbleasel/design-system/components/ui/button";
-import { Input } from "@haydenbleasel/design-system/components/ui/input";
 import { useActionState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 
@@ -12,7 +10,23 @@ const initialState = {
   message: "",
 };
 
-export const emailRegex = /.+@.+/u;
+const ArrowRightIcon = () => (
+  <svg
+    aria-hidden="true"
+    className="size-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M5 12h14m-6-6 6 6-6 6"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
+  </svg>
+);
 
 export const Newsletter = () => {
   const [state, formAction, isPending] = useActionState(
@@ -36,25 +50,29 @@ export const Newsletter = () => {
   }, [state]);
 
   return (
-    <form action={formAction} className="relative overflow-hidden rounded-full">
-      <Input
+    <form
+      action={formAction}
+      className="relative flex h-12 w-full items-center overflow-hidden rounded-full bg-[#fafafa]"
+    >
+      <input
         aria-label="Email address"
         autoCapitalize="none"
         autoComplete="email"
-        className="pr-18 pl-4 md:text-base h-10 border-none"
+        className="h-12 border-none outline-none w-full bg-transparent pl-6 pr-16 text-base shadow-none placeholder:text-black/50 focus-visible:ring-0 focus-visible:ring-offset-0"
         id="email"
         name="email"
-        placeholder="jane@acme.com"
+        placeholder="annie@acme.com"
         required
         type="email"
       />
-      <Button
-        className="absolute top-0.5 px-4 right-0.5 cursor-pointer"
+      <button
+        aria-label={isPending ? "Joining mailing list" : "Join mailing list"}
+        className="absolute right-0.5 top-0.5 flex items-center justify-center size-11 cursor-pointer rounded-full bg-primary p-0 text-white hover:bg-primary/80"
         disabled={isPending}
         type="submit"
       >
-        Join
-      </Button>
+        <ArrowRightIcon />
+      </button>
     </form>
   );
 };
