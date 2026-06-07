@@ -42,7 +42,7 @@ const PalantirMark = () => (
 );
 
 const Home = () => (
-  <header className="grid w-full gap-8 px-6 py-6 sm:px-12 sm:py-12 min-[1200px]:min-h-screen min-[1200px]:grid-cols-[531px_minmax(0,1fr)] min-[1200px]:items-stretch min-[1200px]:gap-[clamp(3rem,10.76vw,155px)]">
+  <main className="grid w-full gap-8 px-6 py-6 sm:px-12 sm:py-12 min-[1200px]:min-h-screen min-[1200px]:grid-cols-[531px_minmax(0,1fr)] min-[1200px]:items-stretch min-[1200px]:gap-[clamp(3rem,10.76vw,155px)]">
     <div className="flex flex-col gap-10 min-[1200px]:min-h-[calc(100svh-6rem)] min-[1200px]:justify-between">
       <Image
         alt="Hayden Bleasel"
@@ -143,7 +143,7 @@ const Home = () => (
         src="https://m5ujrbvzrmbgd5kn.public.blob.vercel-storage.com/home.webm"
       />
     </div>
-  </header>
+  </main>
 );
 
 export default Home;
