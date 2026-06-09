@@ -16,7 +16,7 @@ import type { Draft } from "@/lib/typefully";
 const Post = ({ draft }: { draft: Draft }) => (
   <div
     key={draft.id}
-    className="flex items-center justify-between gap-4 bg-card p-3 transition-colors hover:bg-muted"
+    className="flex min-w-0 flex-1 items-center justify-between gap-4 bg-card p-3 transition-colors hover:bg-muted"
   >
     <p className="line-clamp-1 w-full truncate text-wrap text-sm">
       {draft.preview ?? ""}
@@ -66,7 +66,7 @@ const TodayContent = async () => {
   }
 
   return (
-    <CardContent className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border bg-border p-0 shadow-xs">
+    <CardContent className="flex gap-px overflow-hidden rounded-xl border bg-border p-0 shadow-xs">
       {data
         .toSorted((a, b) => {
           const dateA = toZonedTime(
