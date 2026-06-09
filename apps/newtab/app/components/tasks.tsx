@@ -99,7 +99,7 @@ export const Tasks = () => {
         </Button>
       </CardHeader>
       {tasks?.length ? (
-        <CardContent className="divide-y overflow-hidden rounded-xl border bg-card p-0 shadow-xs">
+        <CardContent className="divide-y overflow-y-auto rounded-xl border bg-card p-0 shadow-xs">
           {tasks.map((task) => (
             <div
               key={task.id}
@@ -114,7 +114,7 @@ export const Tasks = () => {
               <Input
                 value={task.title}
                 onChange={(e) => handleUpdateTask(task.id, e.target.value)}
-                className="h-auto rounded-none border-none bg-transparent p-0 shadow-none outline-none focus-visible:ring-0"
+                className="h-auto overflow-hidden rounded-none border-none bg-transparent p-0 shadow-none outline-none focus-visible:ring-0"
                 placeholder="Start typing..."
                 onKeyDown={(e) => handleKeyDown(e, task.id)}
               />

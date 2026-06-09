@@ -13,19 +13,41 @@ import { Suspense } from "react";
 import { getTypefullyDrafts, getTypefullyPublishes } from "@/lib/typefully";
 import type { Draft } from "@/lib/typefully";
 
-const Post = ({ draft }: { draft: Draft }) => (
-  <div
-    key={draft.id}
-    className="flex min-w-0 flex-1 items-center justify-between gap-4 bg-card p-3 transition-colors hover:bg-muted"
-  >
-    <p className="line-clamp-1 w-full truncate text-wrap text-sm">
-      {draft.preview ?? ""}
-    </p>
-    <Badge variant="outline" className="shrink-0">
-      {draft.published_at ? "Published" : "Scheduled"}
-    </Badge>
-  </div>
-);
+const getPublishedUrl = (draft: Draft) =>
+  draft.x_published_url ??
+  draft.linkedin_published_url ??
+  draft.threads_published_url ??
+  draft.bluesky_published_url ??
+  draft.mastodon_published_url ??
+  draft.share_url ??
+  draft.private_url;
+
+const Post = ({ draft }: { draft: Draft }) => {
+  const className =
+    "flex min-w-0 flex-1 items-center justify-between gap-4 bg-card p-3 transition-colors hover:bg-muted";
+  const content = (
+    <>
+      <p className="line-clamp-1 w-full truncate text-wrap text-sm">
+        {draft.preview ?? ""}
+      </p>
+      <Badge variant="outline" className="shrink-0">
+        {draft.published_at ? "Published" : "Scheduled"}
+      </Badge>
+    </>
+  );
+
+  const url = draft.published_at ? getPublishedUrl(draft) : null;
+
+  if (url) {
+    return (
+      <a className={className} href={url} rel="noreferrer" target="_blank">
+        {content}
+      </a>
+    );
+  }
+
+  return <div className={className}>{content}</div>;
+};
 
 const TodayContent = async () => {
   const [scheduled, published] = await Promise.all([

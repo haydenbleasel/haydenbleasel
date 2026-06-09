@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@haydenbleasel/design-system/components/ui/chart";
+import { ChartContainer } from "@haydenbleasel/design-system/components/ui/chart";
 import type { ChartConfig } from "@haydenbleasel/design-system/components/ui/chart";
 import { cn } from "@haydenbleasel/design-system/lib/utils";
-import { format, parseISO } from "date-fns";
 import { Line, LineChart, XAxis, YAxis } from "recharts";
 
 const config = {
@@ -34,17 +29,6 @@ export const FollowersChart = ({
     <LineChart data={data} margin={{ bottom: 2, left: 0, right: 0, top: 2 }}>
       <XAxis dataKey="date" hide />
       <YAxis domain={["dataMin", "dataMax"]} hide />
-      <ChartTooltip
-        content={
-          <ChartTooltipContent
-            hideIndicator
-            labelFormatter={(value) =>
-              format(parseISO(value as string), "MMM d")
-            }
-          />
-        }
-        cursor={false}
-      />
       <Line
         dataKey="followers"
         dot={false}
