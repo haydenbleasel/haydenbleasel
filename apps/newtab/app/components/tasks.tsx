@@ -99,7 +99,7 @@ export const Tasks = () => {
         </Button>
       </CardHeader>
       {tasks?.length ? (
-        <CardContent className="divide-y overflow-y-auto rounded-xl border bg-card p-0 shadow-xs">
+        <CardContent className="divide-y overflow-hidden rounded-xl border bg-card p-0 shadow-xs">
           {tasks.map((task) => (
             <div
               key={task.id}
