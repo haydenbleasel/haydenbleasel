@@ -1,9 +1,9 @@
 #!/usr/bin/env bun
 import { randomBytes } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import path from "node:path";
 
-const ENV_PATH = join(import.meta.dir, "..", ".env.local");
+const ENV_PATH = path.join(import.meta.dir, "..", ".env.local");
 const PORT = 3001;
 const REDIRECT_URI = `http://127.0.0.1:${PORT}/callback`;
 const SCOPES = [

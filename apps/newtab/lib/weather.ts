@@ -154,7 +154,8 @@ export const getUvForecast = async (): Promise<UvForecast | null> => {
 
   // Local wall-clock minutes-of-day for each sample (e.g. "...T13:00" -> 780).
   const minutes = times.map((time) => {
-    const [, hours, mins] = time.match(/T(\d{2}):(\d{2})/u) ?? [];
+    const { hours, mins } =
+      time.match(/T(?<hours>\d{2}):(?<mins>\d{2})/u)?.groups ?? {};
     return Number(hours) * 60 + Number(mins);
   });
 

@@ -79,16 +79,22 @@ export const getBulkDownloads = async (
     Object.assign(results, data);
   }
 
-  for (const name of scoped) {
-    const response = await fetch(
-      `https://api.npmjs.org/downloads/point/last-year/${encodeURIComponent(name)}`
-    );
+  const scopedResults = await Promise.all(
+    scoped.map(async (name) => {
+      const response = await fetch(
+        `https://api.npmjs.org/downloads/point/last-year/${encodeURIComponent(name)}`
+      );
 
-    if (!response.ok) {
-      throw new Error(`npm API error: ${response.status}`);
-    }
+      if (!response.ok) {
+        throw new Error(`npm API error: ${response.status}`);
+      }
 
-    results[name] = (await response.json()) as NpmDownloads;
+      return [name, (await response.json()) as NpmDownloads] as const;
+    })
+  );
+
+  for (const [name, downloads] of scopedResults) {
+    results[name] = downloads;
   }
 
   return results;

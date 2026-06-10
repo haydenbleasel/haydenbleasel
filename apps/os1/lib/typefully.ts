@@ -20,17 +20,15 @@ const getSocialSetId = async (): Promise<number | null> => {
   return data?.results[0]?.id ?? null;
 };
 
-const getAnalytics = async (socialSetId: number): Promise<AnalyticsPost[]> => {
+const getAnalytics = (socialSetId: number): Promise<AnalyticsPost[]> => {
   const [endDate] = new Date().toISOString().split("T");
   const [startDate] = new Date(Date.now() - 90 * 86_400_000)
     .toISOString()
     .split("T");
 
-  const allResults: AnalyticsPost[] = [];
-  let offset = 0;
   const limit = 100;
 
-  while (true) {
+  const fetchPage = async (offset: number): Promise<AnalyticsPost[]> => {
     const { data } = await typefully.GET(
       "/v2/social-sets/{social_set_id}/analytics/{platform}/posts",
       {
@@ -42,19 +40,17 @@ const getAnalytics = async (socialSetId: number): Promise<AnalyticsPost[]> => {
     );
 
     if (!data?.results) {
-      break;
+      return [];
     }
-
-    allResults.push(...data.results);
 
     if (!data.next) {
-      break;
+      return data.results;
     }
 
-    offset += limit;
-  }
+    return [...data.results, ...(await fetchPage(offset + limit))];
+  };
 
-  return allResults;
+  return fetchPage(0);
 };
 
 export const getPublishedPosts = async (): Promise<

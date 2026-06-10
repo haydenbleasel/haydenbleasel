@@ -57,9 +57,9 @@ interface EditPatternOutput {
 // defensively so a stray ```js never leaks into the snippet or the merged code.
 const stripFences = (text: string): string => {
   const fenced = text.match(
-    /^```(?:js|javascript|strudel)?\s*\n([\s\S]*?)\n```\s*$/u
+    /^```(?:js|javascript|strudel)?\s*\n(?<body>[\s\S]*?)\n```\s*$/u
   );
-  return (fenced?.[1] ?? text).trim();
+  return (fenced?.groups?.body ?? text).trim();
 };
 
 const buildInstructions = (
