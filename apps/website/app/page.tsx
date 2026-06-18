@@ -73,54 +73,17 @@ const Home = () => (
           </p>
 
           <p>
-            After hours I maintain OSS projects such as{" "}
-            <a href="https://www.ultracite.ai" {...externalLinkProps}>
-              Ultracite
+            After hours I work on{" "}
+            <a href="https://oss.haydenbleasel.com/" {...externalLinkProps}>
+              open source software
             </a>
-            ,{" "}
-            <a href="https://useghost.sh/" {...externalLinkProps}>
-              Ghost
-            </a>{" "}
-            and{" "}
-            <a href="https://files-sdk.dev" {...externalLinkProps}>
-              Files SDK
-            </a>
-            . I previously sold{" "}
-            <a
-              href="https://www.shadcnblocks.com/blog/announcing-kibo-ui-acquisition/"
-              {...externalLinkProps}
-            >
-              Kibo UI
-            </a>
-            ,{" "}
-            <a
-              href="https://x.com/haydenbleasel/status/1678770475647012864"
-              {...externalLinkProps}
-            >
-              Refraction
-            </a>{" "}
-            and{" "}
-            <a
-              href="https://x.com/haydenbleasel/status/1929625673586598148"
-              {...externalLinkProps}
-            >
-              next-forge
-            </a>
-            .
-          </p>
-
-          <p>
-            If you&apos;d like to stay up to date with my adventures, subscribe
-            to my mailing list below,{" "}
+            . If you&apos;d like to stay up to date with my adventures, you can
+            subscribe to my mailing list below,{" "}
             <a href="https://x.com/haydenbleasel" {...externalLinkProps}>
               follow me on 𝕏
             </a>{" "}
             or check out{" "}
-            <a
-              className="underline underline-offset-2 transition-colors hover:text-[#427f5b]"
-              href="https://os1.haydenbleasel.com"
-              {...externalLinkProps}
-            >
+            <a href="https://os1.haydenbleasel.com" {...externalLinkProps}>
               OS1
             </a>
             .
