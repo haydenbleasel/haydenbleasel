@@ -1,4 +1,4 @@
-import { Instrument_Serif as createSerif } from "next/font/google";
+import { Geist_Mono as createMono } from "next/font/google";
 import localFont from "next/font/local";
 
 import { cn } from "../lib/utils";
@@ -20,15 +20,15 @@ export const sans = localFont({
   variable: "--font-sans",
 });
 
-export const serif = createSerif({
+export const mono = createMono({
   display: "swap",
   subsets: ["latin"],
-  variable: "--font-serif",
+  variable: "--font-mono",
   weight: "400",
 });
 
 export const fonts = cn(
   sans.variable,
-  serif.variable,
+  mono.variable,
   "touch-manipulation font-sans antialiased"
 );

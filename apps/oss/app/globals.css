@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "@haydenbleasel/design-system/styles";
+
+@layer base {
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+}
