@@ -47,7 +47,7 @@ const OssPage = async () => {
   const [primaryRelease, ...secondaryReleases] = data.featured;
 
   return (
-    <main className="mx-auto grid w-full gap-20 px-6 py-16 sm:p-16 lg:p-24">
+    <main className="mx-auto grid w-full max-w-[1600px] gap-20 px-6 py-16 sm:p-16 lg:p-24">
       <header className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
         <div className="grid gap-1">
           <h1 className="font-medium text-[28px] leading-tight">
