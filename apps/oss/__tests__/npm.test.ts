@@ -44,9 +44,9 @@ describe("npm", () => {
 
   test("maps npm packages to repositories and aggregates downloads", async () => {
     globalThis.fetch = mock((input: string | URL | Request) => {
-      const url = input.toString();
+      const { hostname } = new URL(input.toString());
 
-      if (url.includes("registry.npmjs.org")) {
+      if (hostname === "registry.npmjs.org") {
         return Response.json({
           objects: [
             {
@@ -86,9 +86,9 @@ describe("npm", () => {
 
   test("excludes npx command packages from download trends", async () => {
     const fetchMock = mock((input: string | URL | Request) => {
-      const url = input.toString();
+      const { hostname } = new URL(input.toString());
 
-      if (url.includes("registry.npmjs.org")) {
+      if (hostname === "registry.npmjs.org") {
         return Response.json({
           objects: [
             {
@@ -129,9 +129,9 @@ describe("npm", () => {
 
   test("tracks overridden npm package names for repositories", async () => {
     const fetchMock = mock((input: string | URL | Request) => {
-      const url = input.toString();
+      const { hostname } = new URL(input.toString());
 
-      if (url.includes("registry.npmjs.org")) {
+      if (hostname === "registry.npmjs.org") {
         return Response.json({
           objects: [
             {
