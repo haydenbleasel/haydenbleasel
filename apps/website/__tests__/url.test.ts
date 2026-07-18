@@ -1,30 +1,38 @@
 import { describe, expect, test } from "bun:test";
 
-const getProtocol = (nodeEnv: string) =>
-  nodeEnv === "production" ? "https" : "http";
+import { buildUrl, url } from "../src/lib/url";
 
-const getOrigin = (envUrl?: string) => envUrl ?? "localhost:3000";
-
-describe("url", () => {
-  test("constructs url from environment variables", async () => {
-    const { url } = await import("../lib/url");
-
-    expect(url).toMatch(/^https?:\/\/.+/u);
+describe("buildUrl", () => {
+  test("uses https in production", () => {
+    expect(buildUrl("production", "haydenbleasel.com")).toBe(
+      "https://haydenbleasel.com"
+    );
   });
 
-  test("protocol logic uses https for production", () => {
-    expect(getProtocol("production")).toBe("https");
+  test("uses http outside production", () => {
+    expect(buildUrl("development", "haydenbleasel.com")).toBe(
+      "http://haydenbleasel.com"
+    );
   });
 
-  test("protocol logic uses http for non-production", () => {
-    expect(getProtocol("development")).toBe("http");
-  });
+  test("falls back to localhost:3010 when the production url is unset", () => {
+    const previous = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+    delete process.env.VERCEL_PROJECT_PRODUCTION_URL;
 
-  test("falls back to localhost:3000 when VERCEL_PROJECT_PRODUCTION_URL is unset", () => {
-    expect(getOrigin()).toBe("localhost:3000");
+    expect(buildUrl("development")).toBe("http://localhost:3010");
+
+    if (previous !== undefined) {
+      process.env.VERCEL_PROJECT_PRODUCTION_URL = previous;
+    }
   });
 
   test("uses VERCEL_PROJECT_PRODUCTION_URL when set", () => {
-    expect(getOrigin("haydenbleasel.com")).toBe("haydenbleasel.com");
+    expect(buildUrl("production", "example.com")).toBe("https://example.com");
+  });
+});
+
+describe("url", () => {
+  test("is a valid absolute url", () => {
+    expect(url).toMatch(/^https?:\/\/.+/u);
   });
 });

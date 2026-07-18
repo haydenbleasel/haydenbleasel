@@ -1,0 +1,78 @@
+---
+import "@/styles/globals.css";
+import { url } from "@/lib/url";
+
+const title = "Software engineer and product designer | Hayden Bleasel";
+const description =
+  "I design and build software on the internet. I’m originally from Sydney, Australia and currently living in San Francisco, California.";
+
+const canonical = new URL(Astro.url.pathname, url).toString();
+const ogImage = new URL("/opengraph-image.jpg", url).toString();
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  image: "https://haydenbleasel.com/opengraph-image.jpg",
+  jobTitle: "Member of Technical Staff",
+  name: "Hayden Bleasel",
+  sameAs: [
+    "https://x.com/haydenbleasel",
+    "https://www.linkedin.com/in/haydenbleasel/",
+    "https://github.com/haydenbleasel",
+  ],
+  url: "https://haydenbleasel.com",
+  worksFor: {
+    "@type": "Organization",
+    name: "OpenAI",
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Hayden Bleasel" />
+    <meta name="creator" content="Hayden Bleasel" />
+    <link href="https://haydenbleasel.com" rel="author" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/icon.png" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content={title} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hayden Bleasel" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Hayden Bleasel" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@haydenbleasel" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Hayden Bleasel" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline
+    ></script>
+  </head>
+  <body
+    class="font-sans antialiased min-h-dvh bg-background text-foreground text-lg -tracking-[0.01em]"
+  >
+    <slot />
+  </body>
+</html>

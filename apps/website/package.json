@@ -2,29 +2,26 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "bun --bun next dev",
-    "build": "bun --bun next build",
-    "typegen": "next typegen",
-    "types": "tsgo --noEmit",
+    "dev": "astro dev --port 3010",
+    "build": "astro build",
+    "preview": "astro preview",
+    "types": "astro check",
     "test": "bun test",
     "test:coverage": "bun test --coverage"
   },
   "dependencies": {
-    "@haydenbleasel/design-system": "workspace:*",
-    "next": "16.2.6",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "resend": "^6.12.3",
-    "sonner": "^2.0.7"
+    "@astrojs/vercel": "^11.0.3",
+    "astro": "^7.1.1",
+    "resend": "^6.12.3"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.5",
     "@haydenbleasel/typescript-config": "workspace:*",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/bun": "^1.3.13",
     "@types/node": "^25",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
     "tailwindcss": "^4",
     "typescript": "^6"
   },

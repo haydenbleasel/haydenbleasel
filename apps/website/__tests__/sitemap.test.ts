@@ -1,21 +1,24 @@
 import { describe, expect, test } from "bun:test";
 
-import sitemap from "../app/sitemap";
+import { GET } from "../src/pages/sitemap.xml";
+
+const call = () => GET({} as unknown as Parameters<typeof GET>[0]) as Response;
 
 describe("sitemap", () => {
-  test("returns an array with at least one entry", () => {
-    const entries = sitemap();
+  test("returns xml", async () => {
+    const response = call();
 
-    expect(Array.isArray(entries)).toBe(true);
-    expect(entries.length).toBeGreaterThanOrEqual(1);
+    expect(response.headers.get("content-type")).toContain("application/xml");
+    await response.text();
   });
 
-  test("first entry has required fields", () => {
-    const [entry] = sitemap();
+  test("contains a url entry with required fields", async () => {
+    const body = await call().text();
 
-    expect(entry.url).toBeDefined();
-    expect(entry.changeFrequency).toBe("monthly");
-    expect(entry.priority).toBe(1);
-    expect(entry.lastModified).toBeInstanceOf(Date);
+    expect(body).toContain("<urlset");
+    expect(body).toContain("<loc>");
+    expect(body).toContain("<changefreq>monthly</changefreq>");
+    expect(body).toContain("<priority>1.0</priority>");
+    expect(body).toContain("<lastmod>");
   });
 });

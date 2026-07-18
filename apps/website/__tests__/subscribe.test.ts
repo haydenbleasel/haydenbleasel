@@ -7,7 +7,7 @@ const createMock = mock(() =>
   })
 );
 
-mock.module("../lib/resend", () => ({
+mock.module("../src/lib/resend", () => ({
   audienceId: "test-audience-id",
   resend: {
     contacts: {
@@ -16,12 +16,26 @@ mock.module("../lib/resend", () => ({
   },
 }));
 
-const { subscribe } = await import("../actions/subscribe");
+const { POST } = await import("../src/pages/api/subscribe");
+
+const buildRequest = (email?: string) => {
+  const formData = new FormData();
+  if (email !== undefined) {
+    formData.set("email", email);
+  }
+  return new Request("http://localhost/api/subscribe", {
+    body: formData,
+    method: "POST",
+  });
+};
+
+const call = (request: Request) =>
+  POST({ request } as unknown as Parameters<typeof POST>[0]);
 
 describe("subscribe", () => {
   test("returns error when email is missing", async () => {
-    const formData = new FormData();
-    const result = await subscribe(undefined, formData);
+    const response = await call(buildRequest());
+    const result = await response.json();
 
     expect(result.error).toBe("Invalid email address");
     expect(result.message).toBe("");
@@ -30,10 +44,8 @@ describe("subscribe", () => {
   test("returns success on valid subscription", async () => {
     createMock.mockResolvedValueOnce({ data: { id: "456" }, error: null });
 
-    const formData = new FormData();
-    formData.set("email", "test@example.com");
-
-    const result = await subscribe(undefined, formData);
+    const response = await call(buildRequest("test@example.com"));
+    const result = await response.json();
 
     expect(result.error).toBe("");
     expect(result.message).toBe("Subscribed!");
@@ -45,10 +57,8 @@ describe("subscribe", () => {
       error: { message: "Rate limit exceeded" },
     });
 
-    const formData = new FormData();
-    formData.set("email", "test@example.com");
-
-    const result = await subscribe(undefined, formData);
+    const response = await call(buildRequest("test@example.com"));
+    const result = await response.json();
 
     expect(result.error).toBe("Rate limit exceeded");
     expect(result.message).toBe("");

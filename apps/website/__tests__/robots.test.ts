@@ -1,27 +1,28 @@
 import { describe, expect, test } from "bun:test";
 
-import robots from "../app/robots";
+import { GET } from "../src/pages/robots.txt";
+
+const call = () => GET({} as unknown as Parameters<typeof GET>[0]) as Response;
 
 describe("robots", () => {
-  test("returns valid robots config", () => {
-    const config = robots();
+  test("returns plain text", async () => {
+    const response = call();
 
-    expect(config.rules).toBeDefined();
-    expect(Array.isArray(config.rules)).toBe(true);
+    expect(response.headers.get("content-type")).toContain("text/plain");
+    await response.text();
   });
 
-  test("allows all user agents", () => {
-    const config = robots();
-    const rules = Array.isArray(config.rules) ? config.rules : [config.rules];
+  test("allows all user agents", async () => {
+    const body = await call().text();
 
-    expect(rules[0].userAgent).toBe("*");
-    expect(rules[0].allow).toBe("/");
+    expect(body).toContain("User-agent: *");
+    expect(body).toContain("Allow: /");
   });
 
-  test("includes sitemap URL", () => {
-    const config = robots();
+  test("includes sitemap URL", async () => {
+    const body = await call().text();
 
-    expect(config.sitemap).toBeDefined();
-    expect(config.sitemap).toContain("/sitemap.xml");
+    expect(body).toContain("Sitemap:");
+    expect(body).toContain("/sitemap.xml");
   });
 });

@@ -1,11 +1,36 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Soehne";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/soehne-buch.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Soehne";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/soehne-kraftig.woff2") format("woff2");
+}
+
 @theme {
+  --font-sans: "Soehne", ui-sans-serif, system-ui, sans-serif;
+
   --color-background: #fff;
   --color-foreground: #273133;
   --color-placeholder: #999;
   --color-border: #eaeaea;
-  --color-primary: #427f5b;
+  --color-primary: #3a83f7;
+}
+
+/* Upgrade the primary to a wider-gamut P3 blue where the display supports it. */
+@supports (color: color(display-p3 0 0 0)) {
+  :root {
+    --color-primary: color(display-p3 0.227451 0.513726 0.968627);
+  }
 }
 
 @layer base {
