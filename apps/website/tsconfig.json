@@ -1,17 +1,12 @@
 {
-  "extends": "@haydenbleasel/typescript-config/nextjs.json",
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "types": ["@types/bun"],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"],
-      "@haydenbleasel/*": ["../../packages/*"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
-  ],
-  "exclude": ["node_modules"]
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["node_modules", "dist"]
 }

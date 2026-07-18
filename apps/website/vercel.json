@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/blog/:path*", "destination": "/", "permanent": true },
+    { "source": "/clients", "destination": "/", "permanent": true },
+    { "source": "/work/:path*", "destination": "/", "permanent": true },
+    {
+      "source": "/games",
+      "destination": "https://os1.haydenbleasel.com/games",
+      "permanent": true
+    },
+    {
+      "source": "/stack",
+      "destination": "https://os1.haydenbleasel.com/stack",
+      "permanent": true
+    }
+  ]
+}

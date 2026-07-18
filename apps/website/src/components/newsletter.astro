@@ -1,0 +1,98 @@
+---
+// Progressively-enhanced newsletter form. Posts to /api/subscribe; the inline
+// script below intercepts the submit for a no-reload experience and reports
+// status via an aria-live region.
+---
+
+<form
+  data-newsletter
+  action="/api/subscribe"
+  method="POST"
+  class="relative flex h-12 w-full items-center overflow-hidden rounded-full bg-[#fafafa]"
+>
+  <input
+    aria-label="Email address"
+    autocapitalize="none"
+    autocomplete="email"
+    class="h-12 border-none outline-none w-full bg-transparent pl-6 pr-16 text-base shadow-none placeholder:text-black/50 focus-visible:ring-0 focus-visible:ring-offset-0"
+    id="email"
+    name="email"
+    placeholder="annie@acme.com"
+    required
+    type="email"
+  />
+  <button
+    aria-label="Join mailing list"
+    class="absolute right-0.5 top-0.5 flex items-center justify-center size-11 cursor-pointer rounded-full bg-primary p-0 text-white hover:bg-primary/80 disabled:opacity-70"
+    type="submit"
+  >
+    <svg
+      aria-hidden="true"
+      class="size-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5 12h14m-6-6 6 6-6 6"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"></path>
+    </svg>
+  </button>
+</form>
+
+<p data-newsletter-status aria-live="polite" class="sr-only"></p>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-newsletter]");
+  const status = document.querySelector<HTMLParagraphElement>(
+    "[data-newsletter-status]"
+  );
+  const button = form?.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+  const setStatus = (message: string, isError: boolean) => {
+    if (!status) {
+      return;
+    }
+    status.textContent = message;
+    status.className = isError
+      ? "mt-2 text-base text-red-600"
+      : "mt-2 text-base text-primary";
+  };
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (button) {
+      button.disabled = true;
+      button.setAttribute("aria-label", "Joining mailing list");
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        body: new FormData(form),
+        method: "POST",
+      });
+      const result = (await response.json()) as {
+        error: string;
+        message: string;
+      };
+
+      if (result.error) {
+        setStatus(result.error, true);
+      } else {
+        setStatus(result.message, false);
+        form.reset();
+      }
+    } catch {
+      setStatus("Something went wrong. Please try again.", true);
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.setAttribute("aria-label", "Join mailing list");
+      }
+    }
+  });
+</script>
