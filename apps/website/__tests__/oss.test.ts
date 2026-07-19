@@ -20,6 +20,14 @@ const installFetch = (stub: FetchStub) => {
 const jsonResponse = (data: unknown, ok = true): Response =>
   ({ json: () => Promise.resolve(data), ok }) as Response;
 
+const isNpmRequest = (url: string) => new URL(url).hostname === "api.npmjs.org";
+
+const isGithubRepoRequest = (url: string) => {
+  const { hostname, pathname } = new URL(url);
+
+  return hostname === "api.github.com" && pathname.startsWith("/repos/");
+};
+
 const dailyDownloads = (days: number, perDay: number) =>
   Array.from({ length: days }, (_, index) => ({
     day: `2026-01-${index + 1}`,
@@ -29,7 +37,7 @@ const dailyDownloads = (days: number, perDay: number) =>
 describe("getOssProjects", () => {
   test("returns the curated projects in order with their github urls", async () => {
     installFetch((url) => {
-      if (url.includes("api.github.com/repos/")) {
+      if (isGithubRepoRequest(url)) {
         return Promise.resolve(jsonResponse({ stargazers_count: 100 }));
       }
 
@@ -74,11 +82,11 @@ describe("getOssProjects", () => {
     const npmRequests: string[] = [];
 
     installFetch((url) => {
-      if (url.includes("api.npmjs.org")) {
+      if (isNpmRequest(url)) {
         npmRequests.push(url);
       }
 
-      if (url.includes("api.github.com/repos/")) {
+      if (isGithubRepoRequest(url)) {
         return Promise.resolve(jsonResponse({ stargazers_count: 100 }));
       }
 
@@ -103,7 +111,7 @@ describe("getOssProjects", () => {
 
   test("parses stars, total downloads and a sparkline", async () => {
     installFetch((url) => {
-      if (url.includes("api.github.com/repos/")) {
+      if (isGithubRepoRequest(url)) {
         return Promise.resolve(jsonResponse({ stargazers_count: 100 }));
       }
 
@@ -158,7 +166,7 @@ describe("getOssProjects", () => {
     let githubInit: RequestInit | undefined;
 
     installFetch((url, init) => {
-      if (url.includes("api.github.com/repos/")) {
+      if (isGithubRepoRequest(url)) {
         githubInit = init;
       }
 
