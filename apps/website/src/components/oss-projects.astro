@@ -20,7 +20,7 @@ const { projects } = Astro.props;
           target="_blank"
         >
           <span class="flex min-w-0 items-center gap-2">
-            <span class="font-medium text-base">{project.name}</span>
+            <span class="truncate font-medium text-base">{project.name}</span>
             {project.acquired && (
               <span class="shrink-0 rounded-full border border-border px-2 py-0.5 text-xs font-medium text-foreground/50">
                 Acquired
@@ -32,7 +32,7 @@ const { projects } = Astro.props;
             {project.points.length >= 2 && (
               <svg
                 aria-hidden="true"
-                class="h-5 w-[4.5rem] shrink-0 text-foreground/40 transition-colors group-hover:text-primary"
+                class="hidden h-5 w-[4.5rem] shrink-0 text-foreground/40 transition-colors group-hover:text-primary sm:block"
                 fill="none"
                 viewBox="0 0 84 24"
               >
