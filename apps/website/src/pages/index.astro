@@ -5,6 +5,11 @@ import Layout from "@/layouts/layout.astro";
 import Newsletter from "@/components/newsletter.astro";
 import OssProjects from "@/components/oss-projects.astro";
 import Photo from "@/assets/photo.jpg";
+import { getOssProjects } from "@/lib/oss";
+
+const projects = await getOssProjects();
+const personalProjects = projects.filter((project) => !project.vercel);
+const vercelProjects = projects.filter((project) => project.vercel);
 
 // Rendered on demand and cached at the Vercel edge. Visitors are served cached
 // HTML instantly; the open source stats are refreshed by a single background
@@ -96,7 +101,16 @@ Astro.response.headers.set(
         >.
       </p>
 
-      <OssProjects />
+      <OssProjects projects={personalProjects} />
+    </div>
+
+    <div class="grid gap-6">
+      <p>
+        You may also recognize some projects I created or helped launch for
+        Vercel.
+      </p>
+
+      <OssProjects projects={vercelProjects} />
     </div>
 
     <p>

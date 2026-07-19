@@ -46,6 +46,14 @@ describe("getOssProjects", () => {
       "blume",
       "next-forge",
       "kibo-ui",
+      "streamdown",
+      "ai-elements",
+      "chat",
+      "tersa",
+      "openreview",
+      "components.build",
+      "vectr",
+      "workflow-builder-template",
     ]);
     expect(projects[0].url).toBe("https://github.com/haydenbleasel/ultracite");
     expect(projects.find((p) => p.name === "next-forge")?.url).toBe(
@@ -54,6 +62,43 @@ describe("getOssProjects", () => {
     expect(projects.find((p) => p.name === "kibo-ui")?.url).toBe(
       "https://github.com/shadcnblocks/kibo"
     );
+    expect(projects.find((p) => p.name === "streamdown")?.url).toBe(
+      "https://github.com/vercel/streamdown"
+    );
+    expect(projects.find((p) => p.name === "tersa")?.url).toBe(
+      "https://github.com/vercel-labs/tersa"
+    );
+  });
+
+  test("skips npm downloads for projects without a package", async () => {
+    const npmRequests: string[] = [];
+
+    installFetch((url) => {
+      if (url.includes("api.npmjs.org")) {
+        npmRequests.push(url);
+      }
+
+      if (url.includes("api.github.com/repos/")) {
+        return Promise.resolve(jsonResponse({ stargazers_count: 100 }));
+      }
+
+      return Promise.resolve(
+        jsonResponse({ downloads: dailyDownloads(30, 10) })
+      );
+    });
+
+    const projects = await getOssProjects();
+    const tersa = projects.find((p) => p.name === "tersa");
+    const openreview = projects.find((p) => p.name === "openreview");
+
+    for (const project of [tersa, openreview]) {
+      expect(project?.downloads).toBeNull();
+      expect(project?.points).toEqual([]);
+      expect(project?.stars).toBe(100);
+    }
+
+    expect(npmRequests.some((url) => url.includes("tersa"))).toBe(false);
+    expect(npmRequests.some((url) => url.includes("openreview"))).toBe(false);
   });
 
   test("parses stars, total downloads and a sparkline", async () => {
@@ -87,6 +132,28 @@ describe("getOssProjects", () => {
     expect(acquired).toEqual(["next-forge", "kibo-ui"]);
   });
 
+  test("flags projects built for Vercel", async () => {
+    installFetch(() =>
+      Promise.resolve(jsonResponse({ downloads: [], stargazers_count: 0 }))
+    );
+
+    const projects = await getOssProjects();
+    const vercel = projects
+      .filter((project) => project.vercel)
+      .map((project) => project.name);
+
+    expect(vercel).toEqual([
+      "streamdown",
+      "ai-elements",
+      "chat",
+      "tersa",
+      "openreview",
+      "components.build",
+      "vectr",
+      "workflow-builder-template",
+    ]);
+  });
+
   test("sends the GitHub token when present", async () => {
     let githubInit: RequestInit | undefined;
 
@@ -112,10 +179,10 @@ describe("getOssProjects", () => {
 
     const projects = await getOssProjects();
 
-    expect(projects).toHaveLength(5);
+    expect(projects).toHaveLength(13);
     for (const project of projects) {
       expect(project.stars).toBe(0);
-      expect(project.downloads).toBe(0);
+      expect(project.downloads === 0 || project.downloads === null).toBe(true);
       expect(project.points).toEqual([]);
     }
   });

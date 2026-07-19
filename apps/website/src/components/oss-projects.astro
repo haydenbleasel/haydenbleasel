@@ -1,8 +1,12 @@
 ---
 import { formatCompactNumber, getSparklinePath } from "@/lib/format";
-import { getOssProjects } from "@/lib/oss";
+import type { OssProject } from "@/lib/oss";
 
-const projects = await getOssProjects();
+interface Props {
+  projects: OssProject[];
+}
+
+const { projects } = Astro.props;
 ---
 
 <section>
@@ -10,7 +14,7 @@ const projects = await getOssProjects();
     {
       projects.map((project) => (
         <a
-          class="group flex items-center justify-between gap-6 py-4 transition-colors hover:text-primary"
+          class="group flex items-center justify-between gap-6 py-3 transition-colors hover:text-primary"
           href={project.url}
           rel="noopener noreferrer"
           target="_blank"
@@ -41,24 +45,26 @@ const projects = await getOssProjects();
               </svg>
             )}
 
-            <span
-              class="inline-flex w-16 shrink-0 items-center gap-1.5 tabular-nums"
-              title={`${project.downloads.toLocaleString()} downloads (last year)`}
-            >
-              <svg
-                aria-hidden="true"
-                class="size-4 shrink-0"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
+            {project.downloads !== null && (
+              <span
+                class="inline-flex w-16 shrink-0 items-center gap-1.5 tabular-nums"
+                title={`${project.downloads.toLocaleString()} downloads (last year)`}
               >
-                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16" />
-              </svg>
-              {formatCompactNumber(project.downloads)}
-            </span>
+                <svg
+                  aria-hidden="true"
+                  class="size-4 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16" />
+                </svg>
+                {formatCompactNumber(project.downloads)}
+              </span>
+            )}
 
             <span
               class="inline-flex w-14 shrink-0 items-center gap-1.5 tabular-nums"

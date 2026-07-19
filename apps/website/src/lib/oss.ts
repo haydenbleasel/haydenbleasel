@@ -5,8 +5,11 @@ import { toSparklinePoints } from "@/lib/format";
 interface ProjectSpec {
   acquired?: boolean;
   name: string;
-  npm: string;
+  // Omitted for projects without a published npm package.
+  npm?: string;
   repo: string;
+  // Built for Vercel rather than a personal project.
+  vercel?: boolean;
 }
 
 // Curated open source projects, in display order.
@@ -26,15 +29,39 @@ const projectSpecs: ProjectSpec[] = [
     npm: "kibo-ui",
     repo: "shadcnblocks/kibo",
   },
+  {
+    name: "streamdown",
+    npm: "streamdown",
+    repo: "vercel/streamdown",
+    vercel: true,
+  },
+  {
+    name: "ai-elements",
+    npm: "ai-elements",
+    repo: "vercel/ai-elements",
+    vercel: true,
+  },
+  { name: "chat", npm: "chat", repo: "vercel/chat", vercel: true },
+  { name: "tersa", repo: "vercel-labs/tersa", vercel: true },
+  { name: "openreview", repo: "vercel-labs/openreview", vercel: true },
+  { name: "components.build", repo: "vercel/components.build", vercel: true },
+  { name: "vectr", repo: "vercel-labs/vectr", vercel: true },
+  {
+    name: "workflow-builder-template",
+    repo: "vercel-labs/workflow-builder-template",
+    vercel: true,
+  },
 ];
 
 export interface OssProject {
   acquired: boolean;
-  downloads: number;
+  // Null when the project has no npm package to report downloads for.
+  downloads: number | null;
   name: string;
   points: number[];
   stars: number;
   url: string;
+  vercel: boolean;
 }
 
 interface NpmDownloadRange {
@@ -89,7 +116,9 @@ export const getOssProjects = (): Promise<OssProject[]> =>
     projectSpecs.map(async (spec) => {
       const [stars, { downloads, points }] = await Promise.all([
         getStars(spec.repo),
-        getDownloads(spec.npm),
+        spec.npm
+          ? getDownloads(spec.npm)
+          : Promise.resolve({ downloads: null, points: [] }),
       ]);
 
       return {
@@ -99,6 +128,7 @@ export const getOssProjects = (): Promise<OssProject[]> =>
         points,
         stars,
         url: `https://github.com/${spec.repo}`,
+        vercel: spec.vercel ?? false,
       } satisfies OssProject;
     })
   );
