@@ -4,7 +4,9 @@ I'm an Australian Design Engineer based in San Francisco who loves working on op
 
 ## Open Source
 
-I originally built [Streamdown](https://github.com/vercel/streamdown), [AI Elements](https://github.com/vercel/ai-elements), [Remend](https://www.npmjs.com/package/remend), [Tersa](https://github.com/vercel-labs/tersa), [OpenReview](https://github.com/vercel-labs/openreview), and [Vectr](https://github.com/vercel-labs/vectr) at Vercel. Now I maintain projects like [Ultracite](https://github.com/haydenbleasel/ultracite) and [Files SDK](https://github.com/haydenbleasel/files-sdk) personally.
+I originally built [Streamdown](https://github.com/vercel/streamdown), [AI Elements](https://github.com/vercel/ai-elements), [Remend](https://www.npmjs.com/package/remend), [Tersa](https://github.com/vercel-labs/tersa), [OpenReview](https://github.com/vercel-labs/openreview), and [Vectr](https://github.com/vercel-labs/vectr) at Vercel. Now I maintain projects like [Ultracite](https://github.com/haydenbleasel/ultracite), [Files SDK](https://github.com/haydenbleasel/files-sdk), [Batchwork](https://github.com/haydenbleasel/batchwork) and [Blume](https://github.com/haydenbleasel/blume) personally.
+
+If you like my work and want to [sponsor me](https://github.com/sponsors/haydenbleasel) I'd appreciate it!
 
 ## Links
 
