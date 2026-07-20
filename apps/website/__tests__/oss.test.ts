@@ -2,7 +2,8 @@ import { afterEach, describe, expect, mock, test } from "bun:test";
 
 mock.module("astro:env/server", () => ({ GITHUB_TOKEN: "test-token" }));
 
-const { getOssProjects } = await import("../src/lib/oss");
+const { getOssProjectCatalog, getOssProjects } = await import("../src/lib/oss");
+const { GET } = await import("../src/pages/api/oss");
 
 const originalFetch = globalThis.fetch;
 
@@ -35,6 +36,22 @@ const dailyDownloads = (days: number, perDay: number) =>
   }));
 
 describe("getOssProjects", () => {
+  test("returns the project catalog without fetching metrics", () => {
+    let fetchCalled = false;
+
+    installFetch(() => {
+      fetchCalled = true;
+      return Promise.reject(new Error("unexpected request"));
+    });
+
+    const projects = getOssProjectCatalog();
+
+    expect(projects).toHaveLength(13);
+    expect(projects.every((project) => project.stars === null)).toBe(true);
+    expect(projects.every((project) => project.downloads === null)).toBe(true);
+    expect(fetchCalled).toBe(false);
+  });
+
   test("returns the curated projects in order with their github urls", async () => {
     installFetch((url) => {
       if (isGithubRepoRequest(url)) {
@@ -182,26 +199,72 @@ describe("getOssProjects", () => {
     expect(headers?.authorization).toBe("Bearer test-token");
   });
 
-  test("falls back to zeros when a request rejects", async () => {
+  test("omits unavailable metrics when a request rejects", async () => {
     installFetch(() => Promise.reject(new Error("network")));
 
     const projects = await getOssProjects();
 
     expect(projects).toHaveLength(13);
     for (const project of projects) {
-      expect(project.stars).toBe(0);
-      expect(project.downloads === 0 || project.downloads === null).toBe(true);
+      expect(project.stars).toBeNull();
+      expect(project.downloads).toBeNull();
       expect(project.points).toEqual([]);
     }
   });
 
-  test("falls back to zeros on non-ok responses", async () => {
+  test("omits unavailable metrics on non-ok responses", async () => {
     installFetch(() => Promise.resolve(jsonResponse({}, false)));
 
     const [ultracite] = await getOssProjects();
 
-    expect(ultracite.stars).toBe(0);
-    expect(ultracite.downloads).toBe(0);
+    expect(ultracite.stars).toBeNull();
+    expect(ultracite.downloads).toBeNull();
     expect(ultracite.points).toEqual([]);
+  });
+
+  test("sets deadlines on upstream requests", async () => {
+    const signals: AbortSignal[] = [];
+
+    installFetch((_url, init) => {
+      if (init?.signal) {
+        signals.push(init.signal);
+      }
+
+      return Promise.reject(new Error("network"));
+    });
+
+    const projects = await getOssProjects(1);
+    await Bun.sleep(10);
+
+    expect(projects).toHaveLength(13);
+    expect(signals).toHaveLength(21);
+    expect(signals.every((signal) => signal.aborted)).toBe(true);
+    expect(projects.every((project) => project.stars === null)).toBe(true);
+    expect(projects.every((project) => project.downloads === null)).toBe(true);
+  });
+});
+
+describe("oss api", () => {
+  test("returns cached metrics", async () => {
+    installFetch((url) => {
+      if (isGithubRepoRequest(url)) {
+        return Promise.resolve(jsonResponse({ stargazers_count: 100 }));
+      }
+
+      return Promise.resolve(
+        jsonResponse({ downloads: dailyDownloads(30, 10) })
+      );
+    });
+
+    const response = (await GET({} as Parameters<typeof GET>[0])) as Response;
+    const projects = (await response.json()) as {
+      downloads: number | null;
+      stars: number | null;
+    }[];
+
+    expect(response.headers.get("cache-control")).toBe(
+      "public, s-maxage=3600, stale-while-revalidate=86400"
+    );
+    expect(projects[0]).toMatchObject({ downloads: 300, stars: 100 });
   });
 });

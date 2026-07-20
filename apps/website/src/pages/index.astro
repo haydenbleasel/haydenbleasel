@@ -5,20 +5,13 @@ import Layout from "@/layouts/layout.astro";
 import Newsletter from "@/components/newsletter.astro";
 import OssProjects from "@/components/oss-projects.astro";
 import Photo from "@/assets/photo.jpg";
-import { getOssProjects } from "@/lib/oss";
+import { getOssProjectCatalog } from "@/lib/oss";
 
-const projects = await getOssProjects();
+export const prerender = true;
+
+const projects = getOssProjectCatalog();
 const personalProjects = projects.filter((project) => !project.vercel);
 const vercelProjects = projects.filter((project) => project.vercel);
-
-// Rendered on demand and cached at the Vercel edge. Visitors are served cached
-// HTML instantly; the open source stats are refreshed by a single background
-// revalidation per window, so GitHub/npm are only hit occasionally (never per
-// visitor) and the numbers stay fresh without redeploying.
-Astro.response.headers.set(
-  "Cache-Control",
-  "public, s-maxage=3600, stale-while-revalidate=86400"
-);
 ---
 
 <Layout>

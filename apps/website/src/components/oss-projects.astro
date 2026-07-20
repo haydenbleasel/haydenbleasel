@@ -15,6 +15,7 @@ const { projects } = Astro.props;
       projects.map((project) => (
         <a
           class="group flex items-center justify-between gap-6 py-3 transition-colors hover:text-primary"
+          data-oss-project={project.name}
           href={project.url}
           rel="noopener noreferrer"
           target="_blank"
@@ -29,46 +30,67 @@ const { projects } = Astro.props;
           </span>
 
           <div class="flex items-center gap-4 text-sm text-foreground/50">
-            {project.points.length >= 2 && (
-              <svg
-                aria-hidden="true"
-                class="hidden h-5 w-[4.5rem] shrink-0 text-foreground/40 transition-colors group-hover:text-primary sm:block"
-                fill="none"
-                viewBox="0 0 84 24"
-              >
-                <path
-                  d={getSparklinePath(project.points)}
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-width="2"
-                />
-              </svg>
-            )}
-
-            {project.downloads !== null && (
-              <span
-                class="inline-flex w-16 shrink-0 items-center gap-1.5 tabular-nums"
-                title={`${project.downloads.toLocaleString()} downloads (last year)`}
-              >
-                <svg
-                  aria-hidden="true"
-                  class="size-4 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16" />
-                </svg>
-                {formatCompactNumber(project.downloads)}
-              </span>
-            )}
+            <svg
+              aria-hidden="true"
+              class:list={[
+                "h-5 w-[4.5rem] shrink-0 text-foreground/40 transition-colors group-hover:text-primary",
+                project.points.length >= 2 ? "hidden sm:block" : "hidden",
+              ]}
+              data-oss-sparkline
+              fill="none"
+              viewBox="0 0 84 24"
+            >
+              <path
+                d={getSparklinePath(project.points)}
+                data-oss-sparkline-path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-width="2"
+              />
+            </svg>
 
             <span
-              class="inline-flex w-14 shrink-0 items-center gap-1.5 tabular-nums"
-              title={`${project.stars.toLocaleString()} stars`}
+              class:list={[
+                "w-16 shrink-0 items-center gap-1.5 tabular-nums",
+                project.downloads === null ? "hidden" : "inline-flex",
+              ]}
+              data-oss-downloads
+              title={
+                project.downloads === null
+                  ? undefined
+                  : `${project.downloads.toLocaleString()} downloads (last year)`
+              }
+            >
+              <svg
+                aria-hidden="true"
+                class="size-4 shrink-0"
+                fill="none"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16" />
+              </svg>
+              <span data-oss-downloads-value>
+                {project.downloads === null
+                  ? ""
+                  : formatCompactNumber(project.downloads)}
+              </span>
+            </span>
+
+            <span
+              class:list={[
+                "w-14 shrink-0 items-center gap-1.5 tabular-nums",
+                project.stars === null ? "hidden" : "inline-flex",
+              ]}
+              data-oss-stars
+              title={
+                project.stars === null
+                  ? undefined
+                  : `${project.stars.toLocaleString()} stars`
+              }
             >
               <svg
                 aria-hidden="true"
@@ -82,7 +104,9 @@ const { projects } = Astro.props;
               >
                 <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z" />
               </svg>
-              {formatCompactNumber(project.stars)}
+              <span data-oss-stars-value>
+                {project.stars === null ? "" : formatCompactNumber(project.stars)}
+              </span>
             </span>
           </div>
         </a>
@@ -90,3 +114,87 @@ const { projects } = Astro.props;
     }
   </div>
 </section>
+
+<script>
+  import { formatCompactNumber, getSparklinePath } from "@/lib/format";
+  import type { OssProject } from "@/lib/oss";
+
+  const updateMetric = (
+    row: HTMLElement,
+    selector: string,
+    valueSelector: string,
+    value: number,
+    title: string
+  ) => {
+    const metric = row.querySelector<HTMLElement>(selector);
+    const metricValue = row.querySelector<HTMLElement>(valueSelector);
+
+    if (!(metric && metricValue)) {
+      return;
+    }
+
+    metricValue.textContent = formatCompactNumber(value);
+    metric.title = title;
+    metric.classList.remove("hidden");
+    metric.classList.add("inline-flex");
+  };
+
+  const updateOssMetrics = async () => {
+    try {
+      const response = await fetch("/api/oss");
+
+      if (!response.ok) {
+        return;
+      }
+
+      const projects = (await response.json()) as OssProject[];
+
+      for (const project of projects) {
+        const row = document.querySelector<HTMLElement>(
+          `[data-oss-project="${CSS.escape(project.name)}"]`
+        );
+
+        if (!row) {
+          continue;
+        }
+
+        if (project.downloads !== null) {
+          updateMetric(
+            row,
+            "[data-oss-downloads]",
+            "[data-oss-downloads-value]",
+            project.downloads,
+            `${project.downloads.toLocaleString()} downloads (last year)`
+          );
+        }
+
+        if (project.stars !== null) {
+          updateMetric(
+            row,
+            "[data-oss-stars]",
+            "[data-oss-stars-value]",
+            project.stars,
+            `${project.stars.toLocaleString()} stars`
+          );
+        }
+
+        if (project.points.length >= 2) {
+          const sparkline =
+            row.querySelector<SVGElement>("[data-oss-sparkline]");
+          const path = row.querySelector<SVGPathElement>(
+            "[data-oss-sparkline-path]"
+          );
+
+          if (sparkline && path) {
+            path.setAttribute("d", getSparklinePath(project.points));
+            sparkline.classList.add("sm:block");
+          }
+        }
+      }
+    } catch {
+      // Metrics are a progressive enhancement; project links remain usable.
+    }
+  };
+
+  updateOssMetrics();
+</script>

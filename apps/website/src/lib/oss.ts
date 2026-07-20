@@ -55,11 +55,11 @@ const projectSpecs: ProjectSpec[] = [
 
 export interface OssProject {
   acquired: boolean;
-  // Null when the project has no npm package to report downloads for.
+  // Null when the metric is unavailable or the project has no npm package.
   downloads: number | null;
   name: string;
   points: number[];
-  stars: number;
+  stars: number | null;
   url: string;
   vercel: boolean;
 }
@@ -68,37 +68,56 @@ interface NpmDownloadRange {
   downloads: { day: string; downloads: number }[];
 }
 
-const getStars = async (repo: string): Promise<number> => {
+const metricsTimeoutMs = 2000;
+
+const fetchMetric = (url: string, timeoutMs: number, init?: RequestInit) =>
+  fetch(url, {
+    ...init,
+    signal: AbortSignal.timeout(timeoutMs),
+  });
+
+const getStars = async (
+  repo: string,
+  timeoutMs: number
+): Promise<number | null> => {
   try {
-    const response = await fetch(`https://api.github.com/repos/${repo}`, {
-      headers: {
-        accept: "application/vnd.github+json",
-        ...(GITHUB_TOKEN ? { authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
-      },
-    });
+    const response = await fetchMetric(
+      `https://api.github.com/repos/${repo}`,
+      timeoutMs,
+      {
+        headers: {
+          accept: "application/vnd.github+json",
+          ...(GITHUB_TOKEN ? { authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
+        },
+      }
+    );
 
     if (!response.ok) {
-      return 0;
+      return null;
     }
 
     const data = (await response.json()) as { stargazers_count?: number };
 
-    return data.stargazers_count ?? 0;
+    return typeof data.stargazers_count === "number"
+      ? data.stargazers_count
+      : null;
   } catch {
-    return 0;
+    return null;
   }
 };
 
 const getDownloads = async (
-  npm: string
-): Promise<{ downloads: number; points: number[] }> => {
+  npm: string,
+  timeoutMs: number
+): Promise<{ downloads: number | null; points: number[] }> => {
   try {
-    const response = await fetch(
-      `https://api.npmjs.org/downloads/range/last-year/${encodeURIComponent(npm)}`
+    const response = await fetchMetric(
+      `https://api.npmjs.org/downloads/range/last-year/${encodeURIComponent(npm)}`,
+      timeoutMs
     );
 
     if (!response.ok) {
-      return { downloads: 0, points: [] };
+      return { downloads: null, points: [] };
     }
 
     const data = (await response.json()) as NpmDownloadRange;
@@ -107,17 +126,33 @@ const getDownloads = async (
 
     return { downloads: total, points: toSparklinePoints(daily) };
   } catch {
-    return { downloads: 0, points: [] };
+    return { downloads: null, points: [] };
   }
 };
 
-export const getOssProjects = (): Promise<OssProject[]> =>
+export const getOssProjectCatalog = (): OssProject[] =>
+  projectSpecs.map(
+    (spec) =>
+      ({
+        acquired: spec.acquired ?? false,
+        downloads: null,
+        name: spec.name,
+        points: [],
+        stars: null,
+        url: `https://github.com/${spec.repo}`,
+        vercel: spec.vercel ?? false,
+      }) satisfies OssProject
+  );
+
+export const getOssProjects = (
+  timeoutMs = metricsTimeoutMs
+): Promise<OssProject[]> =>
   Promise.all(
     projectSpecs.map(async (spec) => {
       const [stars, { downloads, points }] = await Promise.all([
-        getStars(spec.repo),
+        getStars(spec.repo, timeoutMs),
         spec.npm
-          ? getDownloads(spec.npm)
+          ? getDownloads(spec.npm, timeoutMs)
           : Promise.resolve({ downloads: null, points: [] }),
       ]);
 
