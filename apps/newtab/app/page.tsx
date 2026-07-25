@@ -1,4 +1,5 @@
 import { Drafts } from "./components/drafts";
+import { GitHub } from "./components/github";
 import { Header } from "./components/header";
 import { Tasks } from "./components/tasks";
 import { Today } from "./components/today";
@@ -13,6 +14,7 @@ const Home = () => (
       <Today />
     </div>
     <Tasks />
+    <GitHub />
   </div>
 );
 
