@@ -44,13 +44,18 @@ export const getOpenIssuesAndPullRequests = async (): Promise<GitHubItem[]> => {
 
   const data = (await response.json()) as GitHubSearchResponse;
 
-  return data.items.map((item) => ({
-    createdAt: item.created_at,
-    id: item.id,
-    number: item.number,
-    repo: item.repository_url.split("/").at(-1) ?? "",
-    title: item.title,
-    type: item.pull_request ? "pull-request" : "issue",
-    url: item.html_url,
-  }));
+  return data.items
+    .filter(
+      (item) =>
+        item.title !== "Version Packages" && !item.title.startsWith("RFC")
+    )
+    .map((item) => ({
+      createdAt: item.created_at,
+      id: item.id,
+      number: item.number,
+      repo: item.repository_url.split("/").at(-1) ?? "",
+      title: item.title,
+      type: item.pull_request ? ("pull-request" as const) : ("issue" as const),
+      url: item.html_url,
+    }));
 };
