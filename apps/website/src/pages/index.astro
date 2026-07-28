@@ -14,8 +14,14 @@ const CONTAINER = "mx-auto flex w-full max-w-5xl items-center px-6";
   <div
     class="flex h-dvh flex-col overflow-hidden bg-white text-black antialiased transition-colors duration-300 dark:bg-black dark:text-white"
   >
+    {/*
+      rgba() rather than bg-white/80: Tailwind's opacity modifier
+      compiles to color-mix(), a non-legacy color that transitions
+      interpolate in oklab — visibly out of step with the page's legacy
+      sRGB white→black fade. Legacy rgba() keeps both on one curve.
+    */}
     <nav
-      class="fixed inset-x-0 top-0 z-50 bg-white/80 backdrop-blur-xl transition-colors duration-300 dark:bg-black/80"
+      class="fixed inset-x-0 top-0 z-50 bg-[rgba(255,255,255,0.8)] backdrop-blur-xl transition-colors duration-300 dark:bg-[rgba(0,0,0,0.8)]"
     >
       <div class:list={[CONTAINER, "h-12 justify-between"]} data-site-nav-inner>
         <a
@@ -68,7 +74,7 @@ const CONTAINER = "mx-auto flex w-full max-w-5xl items-center px-6";
     </main>
 
     <footer
-      class="shrink-0 bg-white/95 backdrop-blur-sm transition-colors duration-300 dark:bg-black/95"
+      class="shrink-0 bg-[rgba(255,255,255,0.95)] backdrop-blur-sm transition-colors duration-300 dark:bg-[rgba(0,0,0,0.95)]"
     >
       <div class:list={[CONTAINER, "h-12 justify-between gap-6"]}>
         <ThemeSwitcher />

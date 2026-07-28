@@ -100,6 +100,18 @@ const record = defineLifeline({
             value: " — new identity, website, docs and playground.",
           },
         ],
+        [
+          { type: "text", value: "Created " },
+          {
+            href: "https://www.ultracite.ai",
+            type: "link",
+            value: "Ultracite",
+          },
+          {
+            type: "text",
+            value: ", a zero-config linter and formatter preset.",
+          },
+        ],
       ],
       id: "eslint",
     },
@@ -162,18 +174,6 @@ const record = defineLifeline({
           {
             type: "text",
             value: ", a production-grade Turborepo template for Next.js.",
-          },
-        ],
-        [
-          { type: "text", value: "Created " },
-          {
-            href: "https://www.ultracite.ai",
-            type: "link",
-            value: "Ultracite",
-          },
-          {
-            type: "text",
-            value: ", a zero-config linter and formatter preset.",
           },
         ],
       ],
