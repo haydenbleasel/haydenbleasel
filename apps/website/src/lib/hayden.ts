@@ -282,7 +282,7 @@ const record = defineLifeline({
           },
           { type: "text", value: " by shadcnblocks." },
         ],
-        "Visited Sydney, Alaska and Texas.",
+        "Visited Sydney, Alaska, Texas and Monterey.",
       ],
       id: "vercel",
     },
