@@ -1,0 +1,97 @@
+---
+// Compact newsletter form for the timeline footer. Progressively
+// enhanced: posts to /api/subscribe natively; the script intercepts
+// the submit for a no-reload experience and swaps in the result.
+---
+
+<form
+  action="/api/subscribe"
+  class="flex items-center gap-3"
+  data-newsletter
+  method="POST"
+>
+  <label class="sr-only" for="newsletter-email">Email address</label>
+  <input
+    autocapitalize="none"
+    autocomplete="email"
+    class="w-36 border-zinc-300 border-b bg-transparent py-1 text-[13px] text-black outline-none transition-colors duration-300 placeholder:text-zinc-400 focus:border-zinc-500 sm:w-52 dark:border-zinc-700 dark:text-white dark:placeholder:text-zinc-600 dark:focus:border-zinc-400"
+    id="newsletter-email"
+    name="email"
+    placeholder="Join my mailing list"
+    required
+    type="email"
+  />
+  <button
+    class="text-[13px] text-zinc-500 transition-colors duration-300 hover:text-black disabled:opacity-70 dark:hover:text-white"
+    type="submit"
+  >
+    Subscribe
+  </button>
+</form>
+
+<p
+  aria-live="polite"
+  class="hidden text-[13px] text-zinc-500"
+  data-newsletter-status
+>
+</p>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-newsletter]");
+  const status = document.querySelector<HTMLParagraphElement>(
+    "[data-newsletter-status]"
+  );
+  const button = form?.querySelector<HTMLButtonElement>(
+    'button[type="submit"]'
+  );
+
+  const setStatus = (message: string, isError: boolean) => {
+    if (!(status && form)) {
+      return;
+    }
+
+    status.textContent = message;
+    status.classList.remove("hidden");
+
+    if (isError) {
+      status.classList.add("text-red-500");
+    } else {
+      // Success replaces the form entirely — the footer stays quiet.
+      status.classList.remove("text-red-500");
+      form.classList.add("hidden");
+    }
+  };
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (button) {
+      button.disabled = true;
+    }
+    status?.classList.add("hidden");
+
+    try {
+      const response = await fetch(form.action, {
+        body: new FormData(form),
+        method: "POST",
+      });
+      const result = (await response.json()) as {
+        error: string;
+        message: string;
+      };
+
+      if (result.error) {
+        setStatus(result.error, true);
+      } else {
+        setStatus(result.message, false);
+        form.reset();
+      }
+    } catch {
+      setStatus("Something went wrong. Please try again.", true);
+    } finally {
+      if (button) {
+        button.disabled = false;
+      }
+    }
+  });
+</script>

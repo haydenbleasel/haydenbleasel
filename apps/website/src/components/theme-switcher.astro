@@ -1,0 +1,62 @@
+---
+/**
+ * Class-based light/dark toggle. The pre-paint script in the layout
+ * head applies the stored (or system) theme before first paint; this
+ * button just flips the class and persists the choice.
+ */
+---
+
+<button
+  aria-label="Switch theme"
+  class="inline-flex items-center p-0 text-zinc-500 transition-colors duration-300 hover:text-black dark:hover:text-white"
+  data-theme-switcher
+  type="button"
+>
+  <svg
+    aria-hidden="true"
+    class="hidden h-4 w-4 dark:block"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1.75"
+    viewBox="0 0 24 24"
+  >
+    <circle cx="12" cy="12" r="4"></circle>
+    <path d="M12 2v2"></path>
+    <path d="M12 20v2"></path>
+    <path d="m4.93 4.93 1.41 1.41"></path>
+    <path d="m17.66 17.66 1.41 1.41"></path>
+    <path d="M2 12h2"></path>
+    <path d="M20 12h2"></path>
+    <path d="m6.34 17.66-1.41 1.41"></path>
+    <path d="m19.07 4.93-1.41 1.41"></path>
+  </svg>
+  <svg
+    aria-hidden="true"
+    class="h-4 w-4 dark:hidden"
+    fill="none"
+    stroke="currentColor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1.75"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector("[data-theme-switcher]");
+
+  button?.addEventListener("click", () => {
+    const root = document.documentElement;
+    const isDark = root.classList.toggle("dark");
+
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch {
+      // Storage can be unavailable (private mode); the toggle still works.
+    }
+  });
+</script>

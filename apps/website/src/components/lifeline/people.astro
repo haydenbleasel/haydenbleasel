@@ -1,0 +1,66 @@
+---
+import type { AggregatedLifelinePerson } from "@/lib/lifeline/types";
+
+interface Props {
+  people: AggregatedLifelinePerson[];
+  allowWrap?: boolean;
+}
+
+const { people, allowWrap = false } = Astro.props;
+
+const getInitials = (name: string) =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2);
+---
+
+{
+  people.length > 0 && (
+    <div class="w-full space-y-3">
+      {people.map((person) => (
+        <div class="flex w-full items-center gap-2.5">
+          <div class="flex w-3 shrink-0 items-center justify-center gap-0.5">
+            {person.mentor && (
+              <span
+                aria-hidden="true"
+                class="h-1.5 w-1.5 rounded-full bg-blue-500"
+              />
+            )}
+            {person.met && (
+              <span
+                aria-hidden="true"
+                class="h-1.5 w-1.5 rounded-full bg-pink-500"
+              />
+            )}
+          </div>
+          {person.photo ? (
+            <img
+              alt={person.name}
+              class="h-7 w-7 shrink-0 rounded-full object-cover"
+              height="28"
+              loading="lazy"
+              src={person.photo}
+              width="28"
+            />
+          ) : (
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-black text-[10px] font-medium text-white transition-colors duration-300 dark:bg-white dark:text-black">
+              {getInitials(person.name)}
+            </span>
+          )}
+          <p
+            class={
+              allowWrap
+                ? "text-left text-[13px] leading-snug text-zinc-500 transition-colors duration-300"
+                : "whitespace-nowrap text-left text-[13px] text-zinc-500 transition-colors duration-300 group-hover:text-zinc-700 dark:group-hover:text-zinc-400"
+            }
+          >
+            {person.name}
+          </p>
+        </div>
+      ))}
+    </div>
+  )
+}

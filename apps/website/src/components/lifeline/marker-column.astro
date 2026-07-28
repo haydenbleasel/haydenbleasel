@@ -1,0 +1,115 @@
+---
+import CompanyIcon from "./company-icon.astro";
+import EventText from "./event-text.astro";
+import People from "./people.astro";
+import { aggregateLifelinePeople } from '@/lib/lifeline/types';
+import type { LifelineMarker } from '@/lib/lifeline/types';
+
+interface Props {
+  marker: LifelineMarker;
+  birthYear: number;
+  width: number;
+  /** Intro choreography, pre-computed server-side. */
+  introDelay: number;
+  introFade: number;
+}
+
+const { marker, birthYear, width, introDelay, introFade } = Astro.props;
+
+const age = marker.age ?? marker.year - birthYear;
+const people = aggregateLifelinePeople(marker);
+---
+
+<div
+  aria-label={marker.label ?? `${marker.year}`}
+  class="group relative shrink-0 pr-8 transition-opacity duration-300 ease-out will-change-[opacity]"
+  data-lifeline-marker
+  style={`width: ${width}px`}
+>
+  <div
+    class="relative"
+    style={`animation-delay: ${introDelay}ms; --lifeline-marker-fade-ms: ${introFade}ms`}
+  >
+    <span
+      aria-hidden="true"
+      class="absolute left-0 top-[var(--lifeline-rail)] z-10 h-[10px] w-px -translate-y-1/2 bg-zinc-400 transition-colors duration-300 group-hover:bg-zinc-600 dark:bg-zinc-700 dark:group-hover:bg-zinc-400"
+    ></span>
+
+    <div class="flex w-full flex-col items-start text-left">
+      <p
+        class="mb-5 h-4 text-[11px] font-medium leading-4 tabular-nums text-zinc-500 transition-colors duration-300 group-hover:text-black dark:text-zinc-600 dark:group-hover:text-zinc-400"
+      >
+        {age}
+      </p>
+
+      <p
+        class="mb-6 h-5 whitespace-nowrap text-[15px] font-medium leading-5 tabular-nums text-zinc-500 transition-colors duration-300 group-hover:text-black dark:group-hover:text-white"
+      >
+        {marker.label ?? marker.year}
+      </p>
+
+      <div
+        class="relative w-full pb-10 text-zinc-500 transition-colors duration-300 group-hover:text-black dark:group-hover:text-zinc-300"
+      >
+        {/*
+          When this column carries people, the content block reserves the
+          band's height as a floor: short columns put their portraits on
+          the same line as every other column, and a column whose events
+          run past the floor pushes its own portraits below them.
+        */}
+        <div
+          class:list={[
+            "flex w-full flex-col items-start pt-6",
+            people.length > 0 && "min-h-[var(--lifeline-people-top)] pb-6",
+          ]}
+        >
+          {
+            marker.badges && marker.badges.length > 0 && (
+              <div class="mb-3 flex items-center justify-start gap-2">
+                {marker.badges.map((badge) => (
+                  <img
+                    alt={badge.alt}
+                    class="h-6 w-6 object-contain opacity-80 transition-opacity duration-300 group-hover:opacity-100"
+                    src={badge.src}
+                  />
+                ))}
+              </div>
+            )
+          }
+
+          {
+            marker.companies && marker.companies.length > 0 && (
+              <div class="mb-2 flex items-center justify-start gap-1.5">
+                {marker.companies.map((company) => (
+                  <CompanyIcon
+                    class="opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                    id={company.id}
+                    label={company.name}
+                  />
+                ))}
+              </div>
+            )
+          }
+
+          <div class="min-h-[3.25rem] space-y-4">
+            {
+              marker.events.map((event) => (
+                <p class="max-w-[18rem] text-left text-[14px] leading-[1.55] tracking-[-0.01em]">
+                  <EventText event={event} />
+                </p>
+              ))
+            }
+          </div>
+        </div>
+
+        {
+          people.length > 0 && (
+            <div class="w-full">
+              <People people={people} />
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>

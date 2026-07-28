@@ -1,0 +1,104 @@
+---
+import CompanyIcon from "./company-icon.astro";
+import EventText from "./event-text.astro";
+import People from "./people.astro";
+import { aggregateLifelinePeople } from '@/lib/lifeline/types';
+import type { LifelineMarker } from '@/lib/lifeline/types';
+import { hasMarkerContent } from "@/lib/lifeline/layout";
+
+interface Props {
+  marker: LifelineMarker;
+  birthYear: number;
+  introDelay: number;
+  introFade: number;
+}
+
+const { marker, birthYear, introDelay, introFade } = Astro.props;
+
+const GRID_CLASS = "grid grid-cols-[2.5rem_1rem_1fr] gap-x-3";
+
+const age = marker.age ?? marker.year - birthYear;
+const people = aggregateLifelinePeople(marker);
+const hasContent = hasMarkerContent(marker);
+---
+
+<li
+  aria-label={marker.label ?? `${marker.year}`}
+  class={hasContent ? "pb-10" : "pb-3"}
+  data-lifeline-entry
+>
+  <div
+    style={`animation-delay: ${introDelay}ms; --lifeline-marker-fade-ms: ${introFade}ms`}
+  >
+    <div class:list={[GRID_CLASS, "items-center"]}>
+      <p
+        class="text-right text-[11px] font-medium leading-4 tabular-nums text-zinc-500 transition-colors duration-300 dark:text-zinc-600"
+      >
+        {age}
+      </p>
+
+      <div class="flex items-center justify-center">
+        <span
+          aria-hidden="true"
+          class="block h-px w-[10px] bg-zinc-400 transition-colors duration-300 dark:bg-zinc-700"
+        ></span>
+      </div>
+
+      <p
+        class="whitespace-nowrap text-[15px] font-medium leading-5 tabular-nums text-zinc-500 transition-colors duration-300 dark:text-zinc-400"
+      >
+        {marker.label ?? marker.year}
+      </p>
+    </div>
+
+    {
+      hasContent && (
+        <div class:list={[GRID_CLASS, "mt-6"]}>
+          <div aria-hidden="true" />
+          <div aria-hidden="true" />
+          <div class="min-w-0 text-zinc-500 transition-colors duration-300 dark:text-zinc-400">
+            {marker.badges && marker.badges.length > 0 && (
+              <div class="mb-3 flex items-center justify-start gap-2">
+                {marker.badges.map((badge) => (
+                  <img
+                    alt={badge.alt}
+                    class="h-6 w-6 object-contain opacity-80"
+                    src={badge.src}
+                  />
+                ))}
+              </div>
+            )}
+
+            {marker.companies && marker.companies.length > 0 && (
+              <div class="mb-2 flex items-center justify-start gap-1.5">
+                {marker.companies.map((company) => (
+                  <CompanyIcon
+                    class="opacity-70"
+                    id={company.id}
+                    label={company.name}
+                  />
+                ))}
+              </div>
+            )}
+
+            {marker.events.length > 0 && (
+              <div class="space-y-4">
+                {marker.events.map((event) => (
+                  <p class="max-w-[18rem] text-left text-[14px] leading-[1.55] tracking-[-0.01em]">
+                    <EventText event={event} />
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {people.length > 0 && (
+              <div class="mt-6 border-t border-zinc-200/70 pt-5 transition-colors duration-300 dark:border-zinc-800/70">
+                <People allowWrap people={people} />
+              </div>
+            )}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</li>

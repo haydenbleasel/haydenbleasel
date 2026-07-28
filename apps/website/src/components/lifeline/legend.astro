@@ -1,0 +1,33 @@
+---
+import type { LifelineLegendItem } from "@/lib/lifeline/types";
+
+interface Props {
+  items?: LifelineLegendItem[];
+}
+
+const DEFAULT_ITEMS: LifelineLegendItem[] = [
+  { label: "Mentors", type: "mentor" },
+  { label: "Met in person", type: "met" },
+];
+
+const { items = DEFAULT_ITEMS } = Astro.props;
+
+const LEGEND_DOT_CLASS: Record<LifelineLegendItem["type"], string> = {
+  mentor: "bg-blue-500",
+  met: "bg-pink-500",
+};
+---
+
+<ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-[13px] text-zinc-500">
+  {
+    items.map((item) => (
+      <li class="flex items-center gap-2">
+        <span
+          aria-hidden="true"
+          class:list={["h-1.5 w-1.5 shrink-0 rounded-full", LEGEND_DOT_CLASS[item.type]]}
+        />
+        <span>{item.label}</span>
+      </li>
+    ))
+  }
+</ul>

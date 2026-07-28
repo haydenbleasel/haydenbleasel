@@ -32,6 +32,22 @@ const jsonLd = {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      // Apply the stored (or system) theme before first paint.
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const dark =
+            stored === "dark" ||
+            (!stored &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+          document.documentElement.classList.toggle("dark", dark);
+        } catch {
+          /* no storage — stay light */
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
 
@@ -71,7 +87,7 @@ const jsonLd = {
     ></script>
   </head>
   <body
-    class="font-sans antialiased min-h-dvh bg-background text-foreground text-lg -tracking-[0.01em]"
+    class="font-sans antialiased min-h-dvh bg-background text-foreground -tracking-[0.01em] transition-colors duration-300"
   >
     <slot />
   </body>
