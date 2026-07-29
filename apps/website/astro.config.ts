@@ -14,11 +14,6 @@ export default defineConfig({
 
   env: {
     schema: {
-      GITHUB_TOKEN: envField.string({
-        access: "secret",
-        context: "server",
-        optional: true,
-      }),
       RESEND_AUDIENCE_ID: envField.string({
         access: "secret",
         context: "server",

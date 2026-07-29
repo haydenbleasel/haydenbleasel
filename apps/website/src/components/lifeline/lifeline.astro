@@ -1,0 +1,216 @@
+---
+/**
+ * Lifeline — a timeline for the stories that unfold over time.
+ * Astro port of https://github.com/evilrabbit/lifeline (MIT © Evil
+ * Rabbit): the markup renders statically here; a small vanilla script
+ * drives the scrub, momentum, and intro sweep.
+ *
+ * Desktop is a horizontal rail scrubbed by wheel/drag/arrow keys; below
+ * `md:` the same data renders as a vertical list in the page's own
+ * scroller. Both are in the HTML and CSS picks one, so no framework
+ * runtime ships at all.
+ */
+import MarkerColumn from "./marker-column.astro";
+import VerticalEntry from "./vertical-entry.astro";
+import StickyLabels from "./sticky-labels.astro";
+import type { LifelineMarker } from "@/lib/lifeline/types";
+import {
+  getMarkerHeight,
+  getMarkerWidth,
+  LIFELINE_STICKY_SHIELD_WIDTH,
+} from "@/lib/lifeline/layout";
+import {
+  getFadeScale,
+  getMarkerDelay,
+  getMarkerFadeDuration,
+  getRailDuration,
+  LIFELINE_LABELS_MS,
+} from "@/lib/lifeline/intro-timing";
+
+interface Props {
+  markers: LifelineMarker[];
+  birthYear: number;
+  title?: string;
+}
+
+const { markers, birthYear, title = "Lifeline" } = Astro.props;
+
+const widths = markers.map((marker, index) =>
+  getMarkerWidth(marker, markers[index + 1]?.year)
+);
+const heights = markers.map((marker, index) =>
+  getMarkerHeight(marker, markers[index + 1]?.year)
+);
+
+const totalWidth = widths.reduce((sum, width) => sum + width, 0);
+const totalHeight = heights.reduce((sum, height) => sum + height, 0);
+const trackWidth = LIFELINE_STICKY_SHIELD_WIDTH + totalWidth;
+
+// The whole intro choreography is a function of the data, so it's
+// computed here at render time: each marker carries its own delay and
+// fade duration; the client script only advances the sweep.
+const desktopRailMs = getRailDuration(totalWidth);
+const desktopFadeScale = getFadeScale(desktopRailMs);
+const verticalRailMs = getRailDuration(totalHeight);
+const verticalFadeScale = getFadeScale(verticalRailMs);
+
+const desktopConfig = JSON.stringify({ railMs: desktopRailMs, sizes: widths });
+const verticalConfig = JSON.stringify({
+  railMs: verticalRailMs,
+  sizes: heights,
+});
+
+const introStyle = (railMs: number) =>
+  `--lifeline-labels-ms: ${LIFELINE_LABELS_MS}ms; --lifeline-rail-ms: ${railMs}ms`;
+---
+
+{/* Desktop: horizontal rail, one column per year. */}
+<section
+  aria-label={title}
+  class="invisible relative hidden h-full min-h-0 select-none overflow-hidden pt-5 md:block [&_a]:cursor-pointer"
+  data-lifeline-config={desktopConfig}
+  data-lifeline-desktop
+  style={introStyle(desktopRailMs)}
+>
+  <div class="flex h-full items-center overflow-hidden">
+    {/*
+      shrink-0 matters: the site's global `* { min-width: 0 }` would
+      otherwise let flex squash the track to the stage width, cutting
+      the rail line short while the shrink-0 markers overflow past it.
+    */}
+    <div
+      class="relative flex w-max shrink-0 items-start will-change-transform [--lifeline-people-top:calc(14.5rem+40px)] [--lifeline-rail:5rem]"
+      data-lifeline-track
+      style={`width: ${trackWidth}px`}
+    >
+      {/*
+        The label column paints a shield: once the track scrolls, marker
+        text passes underneath and would otherwise read straight through
+        "Age" and "Years".
+      */}
+      <div
+        class="lifeline-labels shrink-0 bg-white transition-colors duration-300 will-change-transform dark:bg-black"
+        data-lifeline-labels
+        style={`width: ${LIFELINE_STICKY_SHIELD_WIDTH}px`}
+      >
+        <div>
+          <StickyLabels />
+        </div>
+      </div>
+
+      {/*
+        Explicit width so the rail ends exactly at the last marker:
+        intrinsic sizing would either squash this wrapper (the global
+        min-width: 0) or overgrow it (max-content of overflowing
+        marker content).
+      */}
+      <div class="relative shrink-0" style={`width: ${totalWidth}px`}>
+        <div
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-x-0 top-[var(--lifeline-rail)] h-px overflow-hidden"
+        >
+          <div
+            class="h-px w-full border-t border-dashed border-zinc-300 transition-colors duration-300 dark:border-zinc-800"
+            data-lifeline-rail
+          >
+          </div>
+        </div>
+
+        <div class="relative flex items-start">
+          {
+            markers.map((marker, index) => (
+              <MarkerColumn
+                birthYear={birthYear}
+                introDelay={Math.round(
+                  getMarkerDelay(index, widths, desktopRailMs)
+                )}
+                introFade={Math.round(
+                  getMarkerFadeDuration(index) * desktopFadeScale
+                )}
+                marker={marker}
+                width={widths[index] ?? 80}
+              />
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Mobile: the same years as a vertical list. */}
+<article
+  aria-label={title}
+  class="invisible relative select-none px-6 pb-10 pt-4 md:hidden [&_a]:cursor-pointer"
+  data-lifeline-config={verticalConfig}
+  data-lifeline-vertical
+  style={introStyle(verticalRailMs)}
+>
+  <div
+    class="mb-6 grid grid-cols-[2.5rem_1rem_1fr] items-end gap-x-3"
+    data-lifeline-vertical-labels
+  >
+    <p
+      class="text-right text-[11px] font-medium uppercase leading-4 tracking-[0.08em] text-zinc-500 transition-colors duration-300 dark:text-zinc-600"
+    >
+      Age
+    </p>
+    <div aria-hidden="true"></div>
+    <p
+      class="text-[11px] font-medium uppercase leading-5 tracking-[0.08em] text-zinc-500 transition-colors duration-300 dark:text-zinc-600"
+    >
+      Years
+    </p>
+  </div>
+
+  <div class="relative">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute bottom-0 top-0 w-px -translate-x-1/2 overflow-hidden"
+      style="left: calc(2.5rem + 0.75rem + 0.5rem)"
+    >
+      <div
+        class="h-full w-px border-l border-dashed border-zinc-300 transition-colors duration-300 dark:border-zinc-800"
+        data-lifeline-rail
+      >
+      </div>
+    </div>
+
+    <ol class="relative">
+      {
+        markers.map((marker, index) => (
+          <VerticalEntry
+            birthYear={birthYear}
+            introDelay={Math.round(
+              getMarkerDelay(index, heights, verticalRailMs)
+            )}
+            introFade={Math.round(
+              getMarkerFadeDuration(index) * verticalFadeScale
+            )}
+            marker={marker}
+          />
+        ))
+      }
+    </ol>
+  </div>
+</article>
+
+{/* Without JS the rails stay useful: visible and natively scrollable. */}
+<noscript>
+  <style>
+    [data-lifeline-desktop] {
+      visibility: visible;
+      overflow-x: auto;
+    }
+    [data-lifeline-desktop] [data-lifeline-track] {
+      transform: translate3d(24px, 0, 0);
+    }
+    [data-lifeline-vertical] {
+      visibility: visible;
+    }
+  </style>
+</noscript>
+
+<script>
+  import "@/scripts/lifeline-client";
+</script>

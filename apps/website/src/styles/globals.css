@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Class-based dark mode — the pre-paint script in the layout head puts
+   `.dark` on <html> from localStorage/system preference. */
+@custom-variant dark (&:is(.dark *));
+
 @font-face {
   font-family: "Soehne";
   font-style: normal;
@@ -19,11 +23,21 @@
 @theme {
   --font-sans: "Soehne", ui-sans-serif, system-ui, sans-serif;
 
-  --color-background: #fff;
-  --color-foreground: #273133;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-placeholder: #999;
   --color-border: #eaeaea;
   --color-primary: #3a83f7;
+}
+
+:root {
+  --background: #fff;
+  --foreground: #273133;
+}
+
+.dark {
+  --background: #000;
+  --foreground: #ededed;
 }
 
 /* Upgrade the primary to a wider-gamut P3 blue where the display supports it. */
@@ -59,11 +73,65 @@
     @apply cursor-pointer;
   }
 
-  p a {
-    @apply underline transition-colors underline-offset-2 decoration-border hover:text-primary;
-  }
-
   ::selection {
     @apply bg-primary/18 text-foreground;
   }
+}
+
+/* Lifeline — intro animation plumbing. The client script writes
+   --lifeline-intro-progress each frame while the sweep runs; markers
+   carry their own animation-delay and fade duration inline. */
+@keyframes lifeline-rail-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes lifeline-marker-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes lifeline-labels-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lifeline-rail-intro {
+  transform: scaleX(var(--lifeline-intro-progress, 0));
+  transform-origin: left center;
+}
+
+.lifeline-rail-intro-vertical {
+  transform: scaleY(var(--lifeline-intro-progress, 0));
+  transform-origin: top center;
+}
+
+.lifeline-marker-intro {
+  opacity: 0;
+  animation: lifeline-marker-in var(--lifeline-marker-fade-ms, 420ms)
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.lifeline-labels-intro {
+  opacity: 0;
+  animation: lifeline-labels-in var(--lifeline-labels-ms, 600ms)
+    cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.lifeline-labels.is-pinned {
+  z-index: 20;
 }

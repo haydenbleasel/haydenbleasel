@@ -1,0 +1,81 @@
+---
+import { getLifelineEventContent, getLifelineEventImage } from '@/lib/lifeline/types';
+import type { LifelineEvent } from '@/lib/lifeline/types';
+
+interface Props {
+  event: LifelineEvent;
+}
+
+const { event } = Astro.props;
+
+const content = getLifelineEventContent(event);
+const image = getLifelineEventImage(event);
+const segments =
+  typeof content === "string"
+    ? [{ type: "text" as const, value: content }]
+    : content;
+
+const linkClass =
+  "underline decoration-zinc-400 underline-offset-2 transition-colors duration-300 group-hover:text-black group-hover:decoration-zinc-600 dark:decoration-zinc-700 dark:group-hover:text-white dark:group-hover:decoration-zinc-400";
+---
+
+<span
+  >{
+    segments.map((segment) =>
+      segment.type === "link" ? (
+        <a
+          class={linkClass}
+          href={segment.href}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {segment.value}
+        </a>
+      ) : (
+        <span>{segment.value}</span>
+      )
+    )
+  }</span
+>{
+  image && (
+    <span class="whitespace-nowrap">
+      {" "}
+      {image.video ? (
+        <svg
+          aria-hidden="true"
+          class="ml-0.5 inline-block h-3 w-3 -translate-y-px text-zinc-400 transition-colors duration-300 dark:text-zinc-600"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.75"
+          viewBox="0 0 24 24"
+        >
+          <rect height="18" rx="2" width="18" x="3" y="3" />
+          <path d="M7 3v18" />
+          <path d="M3 7.5h4" />
+          <path d="M3 12h18" />
+          <path d="M3 16.5h4" />
+          <path d="M17 3v18" />
+          <path d="M21 7.5h-4" />
+          <path d="M21 16.5h-4" />
+        </svg>
+      ) : (
+        <svg
+          aria-hidden="true"
+          class="ml-0.5 inline-block h-3 w-3 -translate-y-px text-zinc-400 transition-colors duration-300 dark:text-zinc-600"
+          fill="none"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.75"
+          viewBox="0 0 24 24"
+        >
+          <rect height="18" rx="2" ry="2" width="18" x="3" y="3" />
+          <circle cx="9" cy="9" r="2" />
+          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+        </svg>
+      )}
+    </span>
+  )
+}
