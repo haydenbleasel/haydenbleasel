@@ -7,12 +7,12 @@ const description =
   "I design and build software on the internet. I’m originally from Sydney, Australia and currently living in San Francisco, California.";
 
 const canonical = new URL(Astro.url.pathname, url).toString();
-const ogImage = new URL("/opengraph-image.jpg", url).toString();
+const ogImage = new URL("/opengraph-image.png", url).toString();
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  image: "https://haydenbleasel.com/opengraph-image.jpg",
+  image: ogImage,
   jobTitle: "Member of Technical Staff",
   name: "Hayden Bleasel",
   sameAs: [
