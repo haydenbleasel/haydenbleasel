@@ -1,15 +1,11 @@
 import { defineLifeline } from "./lifeline/define";
 
 /**
- * Sourced from the os1 work/projects pages and the public facts in the
- * dossier — work, projects, education, awards, and talks only.
- *
  * Extras the renderer already supports:
  * - `companies`: ids with a mark in company-icon.astro (openai, vercel,
- *   palantir, corellium, jellypepper) render the logo; anything else
- *   falls back to an initial in a ring.
- * - `mentors` / `met`: people rows with photos (or initials) and the
- *   blue/pink legend dots.
+ *   palantir, corellium, jellypepper, spaceship, rga) render the logo;
+ *   anything else falls back to an initial in a ring.
+ * - `mentors` / `met`: people rows with photos (or initials).
  * - Events can be plain strings or segment arrays with links, as below.
  */
 const record = defineLifeline({
@@ -41,7 +37,20 @@ const record = defineLifeline({
       id: "palantir",
     },
     2016: {
+      companies: [{ id: "spaceship", name: "Spaceship" }],
       events: [
+        [
+          {
+            type: "text",
+            value: "Joined Spaceship as Head of Product and Design (later ",
+          },
+          {
+            href: "https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9",
+            type: "link",
+            value: "acquired by eToro",
+          },
+          { type: "text", value: ")." },
+        ],
         "Graduated from UTS.",
         [
           { type: "text", value: "Launched " },
@@ -55,18 +64,6 @@ const record = defineLifeline({
             value:
               ", my first product — #4 Product of the Day on Product Hunt.",
           },
-        ],
-        [
-          {
-            type: "text",
-            value: "Joined Spaceship as Head of Product and Design (later ",
-          },
-          {
-            href: "https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9",
-            type: "link",
-            value: "acquired by eToro",
-          },
-          { type: "text", value: ")." },
         ],
       ],
       id: "spaceship",
@@ -86,6 +83,25 @@ const record = defineLifeline({
     2019: {
       events: ["Visited Melbourne."],
       id: "melbourne",
+    },
+    2020: {
+      companies: [{ id: "rga", name: "R/GA" }],
+      events: [
+        [
+          {
+            type: "text",
+            value:
+              "Contracted for R/GA — worked with Snap, Toyota, Google, Nike, Australian Ethical, ",
+          },
+          {
+            href: "https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/",
+            type: "link",
+            value: "Timberland",
+          },
+          { type: "text", value: " and more." },
+        ],
+      ],
+      id: "rga",
     },
     2021: {
       companies: [{ id: "corellium", name: "Corellium" }],
@@ -137,16 +153,13 @@ const record = defineLifeline({
           { type: "text", value: "." },
         ],
         [
-          { type: "text", value: "Sold " },
+          { type: "text", value: "Created the AI coding app Refraction, " },
           {
             href: "https://x.com/haydenbleasel/status/1678770475647012864",
             type: "link",
-            value: "Refraction",
+            value: "acquired",
           },
-          {
-            type: "text",
-            value: ", my AI code-generation tool, to Twistag.",
-          },
+          { type: "text", value: " by Twistag." },
         ],
         [
           { type: "text", value: "Designed the new " },
@@ -155,19 +168,16 @@ const record = defineLifeline({
             type: "link",
             value: "Node.js website",
           },
-          { type: "text", value: " for the OpenJS Foundation." },
+          { type: "text", value: "." },
         ],
         [
           { type: "text", value: "Spoke at " },
           {
             href: "https://www.wdx.design/wdx23-conference",
             type: "link",
-            value: "WDX'23",
+            value: "WDX '23",
           },
-          {
-            type: "text",
-            value: " in Sydney on shipping products at lightspeed.",
-          },
+          { type: "text", value: " in Sydney." },
         ],
         "Visited Sydney, New York, the Bahamas, Colorado, Boston, Cape Canaveral and Miami.",
       ],
@@ -293,7 +303,7 @@ const record = defineLifeline({
         [
           { type: "text", value: "Launched " },
           {
-            href: "https://github.com/haydenbleasel/blume",
+            href: "https://useblume.dev",
             type: "link",
             value: "Blume",
           },
