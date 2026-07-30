@@ -20,13 +20,7 @@ export const stack: StackItem[] = [
     category: "AI",
     description: "Your AI chatbot for everyday use.",
     name: "ChatGPT",
-    url: "https://chatgpt.com/",
-  },
-  {
-    category: "AI",
-    description: "Focused desktop app for agentic development.",
-    name: "Codex App",
-    url: "https://developers.openai.com/codex/app",
+    url: "https://chatgpt.com/download/",
   },
   {
     category: "AI",

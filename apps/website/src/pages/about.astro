@@ -96,36 +96,28 @@ const projects = [
       >
         <p>
           I'm an Australian software engineer, product designer and technology
-          entrepreneur based in San Francisco, California. I'm currently a
-          Member of Technical Staff at{" "}
+          entrepreneur, currently a Member of Technical Staff at{" "}
           <a
             class={LINK}
             href="https://openai.com"
             rel="noopener noreferrer"
             target="_blank">OpenAI</a
-          >.
+          >. Originally from Sydney, I moved to the United States in 2022 and
+          now call San Francisco home.
         </p>
         <p>
-          Before OpenAI, I worked on the Developer Experience team at Vercel,
-          where I created open source projects including Streamdown, AI
-          Elements, Tersa, OpenReview and Vectr, helped ship Chat SDK and
-          co-authored components.build. My Next.js template, next-forge, was
-          acquired by Vercel in 2025.
+          My work sits at the intersection of design and engineering. I've
+          spent most of my career building tools for other builders —
+          developer platforms, design systems and open source infrastructure —
+          and I care deeply about craft, speed and the details that make
+          software feel considered.
         </p>
         <p>
-          From 2021 to 2025 I was Chief Product Officer at Corellium, the
-          virtualization and mobile security research company, where I started
-          the frontend engineering team and went on to lead the Product,
-          Design and Support organizations. Corellium was acquired by
-          Cellebrite for $170 million in 2025.
-        </p>
-        <p>
-          Earlier in my career, I founded Jellypepper, an award-winning
-          digital agency acquired by Raw Studio; was Head of Product and
-          Design at Spaceship, later acquired by eToro; and interned in
-          product design at Palantir. My independent work includes the ESLint
-          rebrand, the Node.js website redesign, and products such as
-          Ultracite, Kibo UI, Refraction and Presumi.
+          Along the way I've founded and sold an award-winning digital agency,
+          led product at a security research company from seed through Series
+          A, and shipped a string of open source projects and products,
+          several of which have been acquired. The full story — my work
+          history, projects and the tools I use every day — is below.
         </p>
       </div>
     </section>
@@ -133,38 +125,49 @@ const projects = [
     <section class="grid gap-6">
       <h2 class="font-medium text-lg tracking-tight">Work</h2>
 
-      <div class="grid gap-8">
-        <div class="grid gap-1">
-          <div class="flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <CompanyIcon id="openai" label="OpenAI" />
-              <h3 class="font-medium">OpenAI</h3>
-            </div>
-            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
-              Mar 2026 – Present
-            </span>
+      <div class="grid gap-8 text-sm">
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="openai" label="OpenAI" />
           </div>
-          <p class="text-sm text-zinc-500">Member of Technical Staff</p>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">OpenAI</h3>
+                <p class="text-zinc-500">Member of Technical Staff</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Mar 2026 – Present
+              </span>
+            </div>
           <p
-            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
           >
             Working on the new frontier of intelligence. Stay tuned.
           </p>
+          </div>
         </div>
 
-        <div class="grid gap-1">
-          <div class="flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <CompanyIcon id="vercel" label="Vercel" />
-              <h3 class="font-medium">Vercel</h3>
-            </div>
-            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
-              Jun 2025 – Mar 2026
-            </span>
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="vercel" label="Vercel" />
           </div>
-          <p class="text-sm text-zinc-500">DX Engineer</p>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Vercel</h3>
+                <p class="text-zinc-500">DX Engineer</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Jun 2025 – Mar 2026
+              </span>
+            </div>
           <p
-            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
           >
             Created{" "}
             <a
@@ -261,21 +264,27 @@ const projects = [
               target="_blank">components.build</a
             >.
           </p>
+          </div>
         </div>
 
-        <div class="grid gap-1">
-          <div class="flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <CompanyIcon id="corellium" label="Corellium" />
-              <h3 class="font-medium">Corellium</h3>
-            </div>
-            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
-              Nov 2021 – Jan 2025
-            </span>
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="corellium" label="Corellium" />
           </div>
-          <p class="text-sm text-zinc-500">Chief Product Officer</p>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Corellium</h3>
+                <p class="text-zinc-500">Chief Product Officer</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Nov 2021 – Jan 2025
+              </span>
+            </div>
           <p
-            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
           >
             Started the frontend engineering team, then led the Product, Design
             and Support teams. Rebranded the company and helped it grow from
@@ -288,21 +297,27 @@ const projects = [
             >{" "}
             by Cellebrite.
           </p>
+          </div>
         </div>
 
-        <div class="grid gap-1">
-          <div class="flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <CompanyIcon id="jellypepper" label="Jellypepper" />
-              <h3 class="font-medium">Jellypepper</h3>
-            </div>
-            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
-              Nov 2017 – Jul 2023
-            </span>
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="jellypepper" label="Jellypepper" />
           </div>
-          <p class="text-sm text-zinc-500">Director</p>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Jellypepper</h3>
+                <p class="text-zinc-500">Director</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Nov 2017 – Jul 2023
+              </span>
+            </div>
           <p
-            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
           >
             Started and ran an award-winning digital agency. Worked with early
             stage startups working on self-driving car technology, AI, biotech,
@@ -315,27 +330,34 @@ const projects = [
             >{" "}
             by Raw Studio.
           </p>
+          </div>
         </div>
 
-        <div class="grid gap-1">
-          <div class="flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <CompanyIcon id="palantir" label="Palantir" />
-              <h3 class="font-medium">Palantir</h3>
-            </div>
-            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
-              Oct 2015 – Dec 2015
-            </span>
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="palantir" label="Palantir" />
           </div>
-          <p class="text-sm text-zinc-500">Product Design Intern</p>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Palantir</h3>
+                <p class="text-zinc-500">Product Design Intern</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Oct 2015 – Dec 2015
+              </span>
+            </div>
           <p
-            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
           >
             Part of a small team tasked with designing an anti-fraud focused
             pilot project. Designed a platform allowing for node-based
             graphing, time-based visualization for object frequency analysis,
             and a rich data exploration interface.
           </p>
+          </div>
         </div>
       </div>
 
@@ -377,13 +399,13 @@ const projects = [
 
     <section class="grid gap-4">
       <h2 class="font-medium text-lg tracking-tight">Projects</h2>
-      <ul class="grid gap-3">
+      <ul class="grid gap-3 text-sm">
         {
           projects.map((project) => (
             <li class="flex items-center justify-between gap-4">
               <div class="flex min-w-0 items-center gap-3">
                 <ProjectIcon class="size-4 shrink-0" name={project.name} />
-                <p class="leading-relaxed">
+                <p class="flex items-baseline gap-2 leading-relaxed">
                   <a
                     class="font-medium transition-colors duration-300 hover:text-zinc-500"
                     href={project.url}
@@ -391,14 +413,14 @@ const projects = [
                     target="_blank"
                   >
                     {project.name}
-                  </a>{" "}
-                  <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                  </a>
+                  <span class="text-zinc-600 dark:text-zinc-400">
                     {project.description}
                   </span>
                 </p>
               </div>
               {project.status ? (
-                <span class="shrink-0 text-sm text-zinc-500">
+                <span class="shrink-0 text-zinc-500">
                   {project.status}
                 </span>
               ) : null}
@@ -448,23 +470,23 @@ const projects = [
         stackSections.map((section, index) => (
           <ul
             aria-labelledby={`stack-tab-${section.heading}`}
-            class="grid gap-3"
+            class="grid gap-3 text-sm"
             data-stack-panel={section.heading}
             hidden={index !== 0}
             id={`stack-panel-${section.heading}`}
             role="tabpanel"
           >
             {section.items.map((item) => (
-              <li class="leading-relaxed">
+              <li class="flex items-baseline gap-2 leading-relaxed">
                 <a
-                  class="font-medium transition-colors duration-300 hover:text-zinc-500"
+                  class="shrink-0 font-medium transition-colors duration-300 hover:text-zinc-500"
                   href={item.url}
                   rel="noopener noreferrer"
                   target="_blank"
                 >
                   {item.name}
-                </a>{" "}
-                <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                </a>
+                <span class="text-zinc-600 dark:text-zinc-400">
                   {item.description}
                 </span>
               </li>
