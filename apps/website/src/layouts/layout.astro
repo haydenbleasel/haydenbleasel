@@ -9,22 +9,53 @@ const description =
 const canonical = new URL(Astro.url.pathname, url).toString();
 const ogImage = new URL("/opengraph-image.png", url).toString();
 
+// Identity URLs are permanent — keep them on the production origin so the
+// @ids never change between environments.
+const identity = "https://haydenbleasel.com";
+
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  image: ogImage,
-  jobTitle: "Member of Technical Staff",
-  name: "Hayden Bleasel",
-  sameAs: [
-    "https://x.com/haydenbleasel",
-    "https://www.linkedin.com/in/haydenbleasel/",
-    "https://github.com/haydenbleasel",
-  ],
-  url: "https://haydenbleasel.com",
-  worksFor: {
-    "@type": "Organization",
-    name: "OpenAI",
+  "@id": `${identity}/#profilepage`,
+  "@type": "ProfilePage",
+  description,
+  mainEntity: {
+    "@id": `${identity}/#person`,
+    "@type": "Person",
+    alternateName: "@haydenbleasel",
+    description:
+      "Software engineer and product designer at OpenAI, originally from Sydney, Australia and now based in San Francisco, California.",
+    familyName: "Bleasel",
+    givenName: "Hayden",
+    image: [
+      `${identity}/photo-1x1.jpg`,
+      `${identity}/photo-4x3.jpg`,
+      `${identity}/photo-16x9.jpg`,
+    ],
+    jobTitle: "Member of Technical Staff",
+    name: "Hayden Bleasel",
+    sameAs: [
+      "https://x.com/haydenbleasel",
+      "https://www.linkedin.com/in/haydenbleasel/",
+      "https://github.com/haydenbleasel",
+      "https://bsky.app/profile/haydenbleasel.com",
+      "https://mastodon.social/@haydenbleasel",
+      "https://dribbble.com/haydenbleasel",
+      "https://dev.to/haydenbleasel",
+      "https://www.youtube.com/@haydenbleasel1",
+      "https://www.npmjs.com/~haydenbleasel",
+      "https://www.figma.com/@haydenbleasel",
+      "https://www.producthunt.com/@haydenbleasel",
+    ],
+    url: identity,
+    worksFor: {
+      "@id": "https://openai.com/#organization",
+      "@type": "Organization",
+      name: "OpenAI",
+      url: "https://openai.com",
+    },
   },
+  name: title,
+  url: identity,
 };
 ---
 
