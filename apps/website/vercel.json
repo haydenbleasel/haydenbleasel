@@ -3,12 +3,23 @@
   "redirects": [
     { "source": "/blog/:path*", "destination": "/", "permanent": true },
     { "source": "/clients", "destination": "/", "permanent": true },
-    { "source": "/work/:path*", "destination": "/", "permanent": true },
+    { "source": "/work/:path*", "destination": "/about", "permanent": true },
+    { "source": "/appearances", "destination": "/speaking", "permanent": true },
+    { "source": "/projects", "destination": "/about", "permanent": true },
+    { "source": "/stack", "destination": "/about", "permanent": true },
     {
-      "source": "/games",
-      "destination": "https://os1.haydenbleasel.com/games",
+      "source": "/posts",
+      "destination": "https://x.com/haydenbleasel",
       "permanent": true
     },
-    { "source": "/stack", "destination": "/about", "permanent": true }
+    {
+      "source": "/code",
+      "destination": "https://github.com/haydenbleasel",
+      "permanent": true
+    },
+    { "source": "/games", "destination": "/", "permanent": false },
+    { "source": "/books", "destination": "/", "permanent": false },
+    { "source": "/music", "destination": "/", "permanent": false },
+    { "source": "/saved", "destination": "/", "permanent": false }
   ]
 }
