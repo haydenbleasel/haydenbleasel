@@ -1,0 +1,64 @@
+---
+import NewsletterInline from "@/components/newsletter-inline.astro";
+import SiteNav from "@/components/site-nav.astro";
+import SocialLinks from "@/components/social-links.astro";
+import ThemeSwitcher from "@/components/theme-switcher.astro";
+import Layout from "@/layouts/layout.astro";
+
+interface Props {
+  description: string;
+  jsonLd: Record<string, unknown>;
+  title: string;
+}
+
+const { description, jsonLd, title } = Astro.props;
+---
+
+<Layout
+  description={description}
+  jsonLd={jsonLd}
+  title={`${title} | Hayden Bleasel`}
+>
+  <div
+    class="flex min-h-dvh flex-col bg-white text-black antialiased transition-colors duration-300 dark:bg-black dark:text-white"
+  >
+    <SiteNav />
+
+    <main class="mx-auto w-full max-w-2xl flex-1 px-6 pt-28 pb-20">
+      <h1 class="font-medium text-2xl tracking-tight">{title}</h1>
+      <p
+        class="mt-2 text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+      >
+        {description}
+      </p>
+
+      <div class="mt-12">
+        <slot />
+      </div>
+    </main>
+
+    <footer
+      class="border-zinc-200 border-t transition-colors duration-300 dark:border-zinc-800"
+    >
+      <div
+        class="mx-auto flex h-12 w-full max-w-5xl items-center justify-between gap-6 px-6"
+      >
+        <div class="flex items-center gap-4">
+          <ThemeSwitcher />
+
+          <div
+            aria-hidden="true"
+            class="h-4 w-px bg-zinc-200 transition-colors duration-300 dark:bg-zinc-800"
+          >
+          </div>
+
+          <SocialLinks />
+        </div>
+
+        <div class="flex items-center gap-3">
+          <NewsletterInline />
+        </div>
+      </div>
+    </footer>
+  </div>
+</Layout>

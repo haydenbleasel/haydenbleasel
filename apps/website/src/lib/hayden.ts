@@ -307,13 +307,19 @@ const record = defineLifeline({
             type: "link",
             value: "Blume",
           },
-          { type: "text", value: " (a docs framework) and " },
+          { type: "text", value: " (a docs framework), " },
           {
             href: "https://files-sdk.dev",
             type: "link",
             value: "Files SDK",
           },
-          { type: "text", value: " (a unified storage SDK)." },
+          { type: "text", value: " (a unified storage SDK) and " },
+          {
+            href: "https://batchwork.dev",
+            type: "link",
+            value: "Batchwork",
+          },
+          { type: "text", value: " (batch processing for LLMs)." },
         ],
         [
           {

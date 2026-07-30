@@ -18,19 +18,36 @@ describe("vercel.json redirects", () => {
     expect(sources).toContain("/blog/:path*");
     expect(sources).toContain("/clients");
     expect(sources).toContain("/work/:path*");
-    expect(sources).toContain("/games");
-    expect(sources).toContain("/stack");
   });
 
   test("legacy content routes redirect home permanently", () => {
-    for (const source of ["/blog/:path*", "/clients", "/work/:path*"]) {
+    for (const source of ["/blog/:path*", "/clients"]) {
       expect(bySource(source)?.destination).toBe("/");
       expect(bySource(source)?.permanent).toBe(true);
     }
   });
 
-  test("games and stack redirect to os1", () => {
-    expect(bySource("/games")?.destination).toContain("os1.haydenbleasel.com");
-    expect(bySource("/stack")?.destination).toContain("os1.haydenbleasel.com");
+  test("os1 routes map to their new homes", () => {
+    expect(bySource("/appearances")?.destination).toBe("/speaking");
+    expect(bySource("/projects")?.destination).toBe("/about");
+    expect(bySource("/stack")?.destination).toBe("/about");
+    expect(bySource("/work/:path*")?.destination).toBe("/about");
+    expect(bySource("/posts")?.destination).toBe("https://x.com/haydenbleasel");
+    expect(bySource("/code")?.destination).toBe(
+      "https://github.com/haydenbleasel"
+    );
+  });
+
+  test("unported os1 routes fall back to home", () => {
+    for (const source of ["/games", "/books", "/music", "/saved"]) {
+      expect(bySource(source)?.destination).toBe("/");
+      expect(bySource(source)?.permanent).toBe(false);
+    }
+  });
+
+  test("no redirect points at the os1 domain", () => {
+    for (const redirect of redirects) {
+      expect(redirect.destination).not.toContain("os1.haydenbleasel.com");
+    }
   });
 });

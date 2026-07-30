@@ -1,30 +1,26 @@
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@haydenbleasel/design-system/components/ui/tabs";
-import type { Metadata } from "next";
+export interface StackItem {
+  category: string;
+  description: string;
+  name: string;
+  url: string;
+}
 
-import { PageBody, PageHeader } from "@/components/page-header";
+export const categories = [
+  "AI",
+  "Development",
+  "Design",
+  "Productivity",
+  "Marketing",
+  "Finance",
+  "Other",
+] as const;
 
-export const metadata: Metadata = {
-  description: "The tools and services I use daily.",
-  title: "Stack | OS1",
-};
-
-const stackItems = [
+export const stack: StackItem[] = [
   {
     category: "AI",
     description: "Your AI chatbot for everyday use.",
     name: "ChatGPT",
-    url: "https://chatgpt.com/",
-  },
-  {
-    category: "AI",
-    description: "Focused desktop app for agentic development.",
-    name: "Codex App",
-    url: "https://developers.openai.com/codex/app",
+    url: "https://chatgpt.com/download/",
   },
   {
     category: "AI",
@@ -267,65 +263,3 @@ const stackItems = [
     url: "https://ubereats.com/feed?promoCode=eats-haydenb85",
   },
 ];
-
-const categories = [
-  "AI",
-  "Development",
-  "Design",
-  "Productivity",
-  "Marketing",
-  "Finance",
-  "Other",
-] as const;
-
-const StackPage = () => {
-  const sections = categories
-    .map((category) => ({
-      items: stackItems.filter((item) => item.category === category),
-      value: category,
-    }))
-    .filter((section) => section.items.length > 0);
-
-  return (
-    <Tabs defaultValue={sections[0]?.value}>
-      <PageHeader title="Stack" withTabs>
-        <TabsList className="gap-4" variant="line">
-          {sections.map((section) => (
-            <TabsTrigger
-              className="flex-none px-0 font-normal"
-              key={section.value}
-              value={section.value}
-            >
-              {section.value}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </PageHeader>
-
-      <PageBody>
-        {sections.map((section) => (
-          <TabsContent key={section.value} value={section.value}>
-            <div className="-ml-3 -mt-2 grid gap-2">
-              {section.items.map((item) => (
-                <a
-                  className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 rounded-lg px-3 py-2 no-underline transition-colors hover:bg-accent"
-                  href={item.url}
-                  key={item.name}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <p className="font-medium text-foreground">{item.name}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
-                </a>
-              ))}
-            </div>
-          </TabsContent>
-        ))}
-      </PageBody>
-    </Tabs>
-  );
-};
-
-export default StackPage;

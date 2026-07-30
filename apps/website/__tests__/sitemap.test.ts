@@ -21,4 +21,14 @@ describe("sitemap", () => {
     expect(body).toContain("<priority>1.0</priority>");
     expect(body).toContain("<lastmod>");
   });
+
+  test("contains the durable subpages", async () => {
+    const body = await call().text();
+
+    for (const route of ["/about", "/writing", "/speaking", "/press"]) {
+      expect(body).toContain(`${route}</loc>`);
+    }
+
+    expect(body).toContain("<priority>0.7</priority>");
+  });
 });

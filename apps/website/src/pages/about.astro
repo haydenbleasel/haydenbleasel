@@ -1,0 +1,531 @@
+---
+import CompanyIcon from "@/components/lifeline/company-icon.astro";
+import ProjectIcon from "@/components/project-icon.astro";
+import Page from "@/layouts/page.astro";
+import { identity, person } from "@/lib/person";
+import { categories, stack } from "@/lib/stack";
+
+export const prerender = true;
+
+const title = "About";
+const description =
+  "A bit about me — my background, work, projects and the tools I use daily.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/about#webpage`,
+  "@type": "AboutPage",
+  description,
+  mainEntity: person,
+  name: "About Hayden Bleasel",
+  url: `${identity}/about`,
+};
+
+const LINK = "text-black underline dark:text-white";
+
+const stackSections = categories
+  .map((category) => ({
+    heading: category,
+    items: stack.filter((item) => item.category === category),
+  }))
+  .filter((section) => section.items.length > 0);
+
+const projects = [
+  {
+    description: "Robust, zero-config linter/formatter preset.",
+    name: "Ultracite",
+    url: "https://www.ultracite.ai",
+  },
+  {
+    description: "A unified storage SDK for object and blob backends.",
+    name: "Files SDK",
+    url: "https://files-sdk.dev",
+  },
+  {
+    description: "Fast, AI-ready, markdown-first docs framework.",
+    name: "Blume",
+    url: "https://useblume.dev/",
+  },
+  {
+    description: "Save up to 50% on LLM costs.",
+    name: "Batchwork",
+    url: "https://batchwork.dev/",
+  },
+  {
+    description: "Simple, reliable dedicated game servers.",
+    name: "Ghost",
+    url: "https://github.com/haydenbleasel/ghost",
+  },
+  {
+    description: "A UI library for building web applications.",
+    name: "Kibo UI",
+    status: "Acquired",
+    url: "https://www.shadcnblocks.com/blog/announcing-kibo-ui-acquisition/",
+  },
+  {
+    description: "Learn, improve and generate code with AI.",
+    name: "Refraction",
+    status: "Acquired",
+    url: "https://x.com/haydenbleasel/status/1678770475647012864",
+  },
+  {
+    description: "Production-grade Turborepo template.",
+    name: "next-forge",
+    status: "Acquired",
+    url: "https://x.com/haydenbleasel/status/1929625673586598148",
+  },
+  {
+    description: "AI toolkit for transcribing and synthesizing speech.",
+    name: "Orate",
+    status: "Merged",
+    url: "https://x.com/haydenbleasel/status/1931033287851675688",
+  },
+  {
+    description: "The open source product management platform.",
+    name: "Eververse",
+    status: "Archived",
+    url: "https://github.com/haydenbleasel/eververse",
+  },
+];
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="grid gap-12">
+    <section>
+      <img
+        alt="Hayden Bleasel"
+        class="float-right mb-4 ml-6 w-36 rounded-lg sm:w-44"
+        height="1024"
+        loading="eager"
+        src="/photo-3x4.jpg"
+        width="768"
+      />
+
+      <div
+        class="space-y-4 text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+      >
+        <p>
+          I'm an Australian software engineer, product designer and technology
+          entrepreneur, currently a Member of Technical Staff at{" "}
+          <a
+            class={LINK}
+            href="https://openai.com"
+            rel="noopener noreferrer"
+            target="_blank">OpenAI</a
+          >. Originally from Sydney, I moved to the United States in 2022 and
+          now call San Francisco home.
+        </p>
+        <p>
+          My work sits at the intersection of design and engineering. I've
+          spent most of my career building tools for other builders —
+          developer platforms, design systems and open source infrastructure —
+          and I care deeply about craft, speed and the details that make
+          software feel considered.
+        </p>
+        <p>
+          Along the way I've founded and sold an award-winning digital agency,
+          led product at a security research company from seed through Series
+          A, and shipped a string of open source projects and products,
+          several of which have been acquired. The full story — my work
+          history, projects and the tools I use every day — is below.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid gap-6">
+      <h2 class="font-medium text-lg tracking-tight">Work</h2>
+
+      <div class="grid gap-8 text-sm">
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="openai" label="OpenAI" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">OpenAI</h3>
+                <p class="text-zinc-500">Member of Technical Staff</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Mar 2026 – Present
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Working on the new frontier of intelligence. Stay tuned.
+          </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="vercel" label="Vercel" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Vercel</h3>
+                <p class="text-zinc-500">DX Engineer</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Jun 2025 – Mar 2026
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Created{" "}
+            <a
+              class={LINK}
+              href="https://streamdown.ai/"
+              rel="noopener noreferrer"
+              target="_blank">Streamdown</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://elements.ai-sdk.dev/"
+              rel="noopener noreferrer"
+              target="_blank">AI Elements</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://www.npmjs.com/package/remend"
+              rel="noopener noreferrer"
+              target="_blank">Remend</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/tersa"
+              rel="noopener noreferrer"
+              target="_blank">Tersa</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/openreview"
+              rel="noopener noreferrer"
+              target="_blank">OpenReview</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/vectr"
+              rel="noopener noreferrer"
+              target="_blank">Vectr</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://www.npm.bet/"
+              rel="noopener noreferrer"
+              target="_blank">npm.bet</a
+            >. Helped ship{" "}
+            <a
+              class={LINK}
+              href="https://chat-sdk.dev/"
+              rel="noopener noreferrer"
+              target="_blank">Chat SDK</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/platforms"
+              rel="noopener noreferrer"
+              target="_blank">Platforms</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/blog/workflow-builder-build-your-own-workflow-automation-platform"
+              rel="noopener noreferrer"
+              target="_blank">Workflow Builder</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/academy"
+              rel="noopener noreferrer"
+              target="_blank">Academy</a
+            >; rebuilt the docs sites for{" "}
+            <a
+              class={LINK}
+              href="https://v0.app/docs"
+              rel="noopener noreferrer"
+              target="_blank">v0</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://useworkflow.dev/docs/getting-started"
+              rel="noopener noreferrer"
+              target="_blank">Workflow</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://turborepo.dev/docs"
+              rel="noopener noreferrer"
+              target="_blank">Turborepo</a
+            >; and co-authored{" "}
+            <a
+              class={LINK}
+              href="https://www.components.build/"
+              rel="noopener noreferrer"
+              target="_blank">components.build</a
+            >.
+          </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="corellium" label="Corellium" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Corellium</h3>
+                <p class="text-zinc-500">Chief Product Officer</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Nov 2021 – Jan 2025
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Started the frontend engineering team, then led the Product, Design
+            and Support teams. Rebranded the company and helped it grow from
+            seed to Series A funding, then subsequent{" "}
+            <a
+              class={LINK}
+              href="https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/"
+              rel="noopener noreferrer"
+              target="_blank">acquisition</a
+            >{" "}
+            by Cellebrite.
+          </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="jellypepper" label="Jellypepper" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Jellypepper</h3>
+                <p class="text-zinc-500">Director</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Nov 2017 – Jul 2023
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Started and ran an award-winning digital agency. Worked with early
+            stage startups working on self-driving car technology, AI, biotech,
+            crypto, drone delivery, cybersecurity and orbital logistics.{" "}
+            <a
+              class={LINK}
+              href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/"
+              rel="noopener noreferrer"
+              target="_blank">Acquired</a
+            >{" "}
+            by Raw Studio.
+          </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="palantir" label="Palantir" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Palantir</h3>
+                <p class="text-zinc-500">Product Design Intern</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Oct 2015 – Dec 2015
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Part of a small team tasked with designing an anti-fraud focused
+            pilot project. Designed a platform allowing for node-based
+            graphing, time-based visualization for object frequency analysis,
+            and a rich data exploration interface.
+          </p>
+          </div>
+        </div>
+      </div>
+
+      <p
+        class="border-zinc-200 border-t border-dotted pt-6 text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:border-zinc-800 dark:text-zinc-400"
+      >
+        Earlier in my career, I was Head of Product and Design at Spaceship
+        (later{" "}
+        <a
+          class={LINK}
+          href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9"
+          rel="noopener noreferrer"
+          target="_blank">acquired</a
+        >{" "}
+        by eToro) and contracted for many clients through{" "}
+        <a
+          class={LINK}
+          href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/"
+          rel="noopener noreferrer"
+          target="_blank">R/GA</a
+        >, plus a handful of other roles you can read about on my{" "}
+        <a
+          class={LINK}
+          href="https://www.linkedin.com/in/haydenbleasel/"
+          rel="noopener noreferrer"
+          target="_blank">LinkedIn</a
+        >. I've been fortunate to work with many great companies including
+        Australian Ethical, Canva, Clipchamp, Google, National Geographic,
+        Nike, R/GA, Timberland, Toyota and Westfield. I{" "}
+        <a
+          class={LINK}
+          href="https://eslint.org/blog/2022/08/redesigning-eslint/"
+          rel="noopener noreferrer"
+          target="_blank">rebranded ESLint</a
+        >{" "}
+        and redesigned the{" "}
+        <a
+          class={LINK}
+          href="https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign"
+          rel="noopener noreferrer"
+          target="_blank">Node.js website</a
+        >.
+      </p>
+    </section>
+
+    <section class="grid gap-4">
+      <h2 class="font-medium text-lg tracking-tight">Projects</h2>
+      <ul class="grid gap-3 text-sm">
+        {
+          projects.map((project) => (
+            <li class="flex items-center justify-between gap-4">
+              <div class="flex min-w-0 items-center gap-3">
+                <ProjectIcon class="size-4 shrink-0" name={project.name} />
+                <p class="flex items-baseline gap-2 leading-relaxed">
+                  <a
+                    class="font-medium transition-colors duration-300 hover:text-zinc-500"
+                    href={project.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {project.name}
+                  </a>
+                  <span class="text-zinc-600 dark:text-zinc-400">
+                    {project.description}
+                  </span>
+                </p>
+              </div>
+              {project.status ? (
+                <span class="shrink-0 text-zinc-500">
+                  {project.status}
+                </span>
+              ) : null}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="grid gap-4">
+      <h2 class="font-medium text-lg tracking-tight">Education</h2>
+      <p
+        class="text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+      >
+        I hold a double degree from the University of Technology Sydney
+        (2012 – 2016): a Bachelor of Business, majoring in Management, and a
+        Bachelor of Science in Information Technology, majoring in Enterprise
+        Systems Development.
+      </p>
+    </section>
+
+    <section class="grid gap-4">
+      <h2 class="font-medium text-lg tracking-tight">Stack</h2>
+
+      <div
+        class="flex flex-wrap gap-x-4 border-zinc-200 border-b transition-colors duration-300 dark:border-zinc-800"
+        role="tablist"
+      >
+        {
+          stackSections.map((section, index) => (
+            <button
+              aria-controls={`stack-panel-${section.heading}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              class="-mb-px cursor-pointer border-transparent border-b pb-2 text-sm text-zinc-500 transition-colors duration-300 hover:text-black aria-selected:border-current aria-selected:text-black dark:aria-selected:text-white dark:hover:text-white"
+              data-stack-tab={section.heading}
+              id={`stack-tab-${section.heading}`}
+              role="tab"
+              type="button"
+            >
+              {section.heading}
+            </button>
+          ))
+        }
+      </div>
+
+      {
+        stackSections.map((section, index) => (
+          <ul
+            aria-labelledby={`stack-tab-${section.heading}`}
+            class="grid gap-3 text-sm"
+            data-stack-panel={section.heading}
+            hidden={index !== 0}
+            id={`stack-panel-${section.heading}`}
+            role="tabpanel"
+          >
+            {section.items.map((item) => (
+              <li class="flex items-baseline gap-2 leading-relaxed">
+                <a
+                  class="shrink-0 font-medium transition-colors duration-300 hover:text-zinc-500"
+                  href={item.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {item.name}
+                </a>
+                <span class="text-zinc-600 dark:text-zinc-400">
+                  {item.description}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </section>
+  </div>
+</Page>
+
+<script>
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-stack-tab]')];
+  const panels = [...document.querySelectorAll<HTMLElement>('[data-stack-panel]')];
+
+  for (const tab of tabs) {
+    tab.addEventListener("click", () => {
+      for (const other of tabs) {
+        other.setAttribute("aria-selected", String(other === tab));
+      }
+      for (const panel of panels) {
+        panel.hidden = panel.dataset.stackPanel !== tab.dataset.stackTab;
+      }
+    });
+  }
+</script>

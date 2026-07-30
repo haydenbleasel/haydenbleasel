@@ -1,30 +1,37 @@
 ---
 import "@/styles/globals.css";
+import { identity, person } from "@/lib/person";
 import { url } from "@/lib/url";
 
-const title = "Software engineer and product designer | Hayden Bleasel";
-const description =
+interface Props {
+  description?: string;
+  jsonLd?: Record<string, unknown>;
+  title?: string;
+}
+
+const defaultTitle = "Software engineer and product designer | Hayden Bleasel";
+const defaultDescription =
   "I design and build software on the internet. I’m originally from Sydney, Australia and currently living in San Francisco, California.";
+
+const {
+  description = defaultDescription,
+  jsonLd: jsonLdProp,
+  title = defaultTitle,
+} = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, url).toString();
 const ogImage = new URL("/opengraph-image.png", url).toString();
 
-const jsonLd = {
+// The homepage is the canonical identity URL: a ProfilePage wrapping the
+// Person. Subpages pass their own page-level node via the jsonLd prop.
+const jsonLd = jsonLdProp ?? {
   "@context": "https://schema.org",
-  "@type": "Person",
-  image: ogImage,
-  jobTitle: "Member of Technical Staff",
-  name: "Hayden Bleasel",
-  sameAs: [
-    "https://x.com/haydenbleasel",
-    "https://www.linkedin.com/in/haydenbleasel/",
-    "https://github.com/haydenbleasel",
-  ],
-  url: "https://haydenbleasel.com",
-  worksFor: {
-    "@type": "Organization",
-    name: "OpenAI",
-  },
+  "@id": `${identity}/#profilepage`,
+  "@type": "ProfilePage",
+  description,
+  mainEntity: person,
+  name: title,
+  url: identity,
 };
 ---
 

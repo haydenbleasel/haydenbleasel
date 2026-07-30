@@ -1,0 +1,62 @@
+---
+import Page from "@/layouts/page.astro";
+import { identity, person, personRef } from "@/lib/person";
+import { writing } from "@/lib/writing";
+
+export const prerender = true;
+
+const title = "Writing";
+const description =
+  "My articles and long-form writing on design, engineering and developer tools.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/writing#webpage`,
+  "@type": "CollectionPage",
+  about: person,
+  description,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: writing.map((item, index) => ({
+      "@type": "ListItem",
+      item: {
+        "@type": "Article",
+        author: personRef,
+        headline: item.title,
+        url: item.url,
+      },
+      position: index + 1,
+    })),
+  },
+  name: "Writing by Hayden Bleasel",
+  url: `${identity}/writing`,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="grid gap-8">
+    {
+      writing.map((item) => (
+        <a
+          class="group grid gap-1"
+          href={item.url}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <div class="flex items-baseline justify-between gap-4">
+            <h2 class="font-medium leading-relaxed transition-colors duration-300 group-hover:text-zinc-500">
+              {item.title}
+            </h2>
+            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+              {item.year}
+            </span>
+          </div>
+          <p class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400">
+            {item.description}
+          </p>
+          <p class="text-sm text-zinc-500">{item.publisher}</p>
+        </a>
+      ))
+    }
+  </div>
+</Page>
