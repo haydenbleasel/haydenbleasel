@@ -1,12 +1,15 @@
 ---
+import CompanyIcon from "@/components/lifeline/company-icon.astro";
+import ProjectIcon from "@/components/project-icon.astro";
 import Page from "@/layouts/page.astro";
 import { identity, person } from "@/lib/person";
+import { categories, stack } from "@/lib/stack";
 
 export const prerender = true;
 
 const title = "About";
 const description =
-  "A formal biography of Hayden Bleasel — software engineer, product designer and technology entrepreneur.";
+  "A bit about me — my background, work, projects and the tools I use daily.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -18,62 +21,60 @@ const jsonLd = {
   url: `${identity}/about`,
 };
 
-const highlights = [
+const LINK = "text-black underline dark:text-white";
+
+const stackSections = categories
+  .map((category) => ({
+    heading: category,
+    items: stack.filter((item) => item.category === category),
+  }))
+  .filter((section) => section.items.length > 0);
+
+const projects = [
   {
-    label:
-      "Joined OpenAI as a Member of Technical Staff in March 2026.",
-    url: "https://openai.com",
-    year: 2026,
+    description: "Robust, zero-config linter/formatter preset.",
+    name: "Ultracite",
+    url: "https://www.ultracite.ai",
   },
   {
-    label:
-      "Corellium was acquired by Cellebrite for $170M, following his tenure as Chief Product Officer.",
-    url: "https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/",
-    year: 2025,
+    description: "A unified storage SDK for object and blob backends.",
+    name: "Files SDK",
+    url: "https://files-sdk.dev",
   },
   {
-    label:
-      "next-forge, his production-grade Turborepo template for Next.js, was acquired by Vercel.",
-    url: "https://x.com/haydenbleasel/status/1929625673586598148",
-    year: 2025,
+    description: "Simple, reliable dedicated game servers.",
+    name: "Ghost",
+    url: "https://github.com/haydenbleasel/ghost",
   },
   {
-    label: "Kibo UI, his component library, was acquired by shadcnblocks.",
+    description: "A UI library for building web applications.",
+    name: "Kibo UI",
+    status: "Acquired",
     url: "https://www.shadcnblocks.com/blog/announcing-kibo-ui-acquisition/",
-    year: 2025,
   },
   {
-    label:
-      "Created open source projects at Vercel including Streamdown and AI Elements.",
-    url: "https://streamdown.ai/",
-    year: 2025,
-  },
-  {
-    label:
-      "Spaceship, where he was Head of Product and Design, was acquired by eToro in an $80M deal.",
-    url: "https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9",
-    year: 2024,
-  },
-  {
-    label: "Designed the new Node.js website.",
-    url: "https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign",
-    year: 2023,
-  },
-  {
-    label:
-      "Jellypepper, the digital agency he founded, was acquired by Raw Studio.",
-    url: "https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/",
-    year: 2023,
-  },
-  {
-    label: "Refraction, his AI coding tool, was acquired by Twistag.",
+    description: "Learn, improve and generate code with AI.",
+    name: "Refraction",
+    status: "Acquired",
     url: "https://x.com/haydenbleasel/status/1678770475647012864",
-    year: 2023,
   },
   {
-    label: "Rebranded ESLint — new identity, website, docs and playground.",
-    url: "https://eslint.org/blog/2022/08/redesigning-eslint/",
-    year: 2022,
+    description: "Production-grade Turborepo template.",
+    name: "next-forge",
+    status: "Acquired",
+    url: "https://x.com/haydenbleasel/status/1929625673586598148",
+  },
+  {
+    description: "AI toolkit for transcribing and synthesizing speech.",
+    name: "Orate",
+    status: "Merged",
+    url: "https://x.com/haydenbleasel/status/1931033287851675688",
+  },
+  {
+    description: "The open source product management platform.",
+    name: "Eververse",
+    status: "Archived",
+    url: "https://github.com/haydenbleasel/eververse",
   },
 ];
 ---
@@ -94,58 +95,313 @@ const highlights = [
         class="space-y-4 text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
       >
         <p>
-          Hayden Bleasel is an Australian software engineer, product designer
-          and technology entrepreneur based in San Francisco, California. He is
-          currently a Member of Technical Staff at{' '}
+          I'm an Australian software engineer, product designer and technology
+          entrepreneur based in San Francisco, California. I'm currently a
+          Member of Technical Staff at{" "}
           <a
-            class="text-black underline dark:text-white"
+            class={LINK}
             href="https://openai.com"
             rel="noopener noreferrer"
             target="_blank">OpenAI</a
           >.
         </p>
         <p>
-          Before OpenAI, Hayden worked on the Developer Experience team at
-          Vercel, where he created open source projects including Streamdown,
-          AI Elements, Tersa, OpenReview and Vectr, helped ship Chat SDK and
-          co-authored components.build. His Next.js template, next-forge, was
+          Before OpenAI, I worked on the Developer Experience team at Vercel,
+          where I created open source projects including Streamdown, AI
+          Elements, Tersa, OpenReview and Vectr, helped ship Chat SDK and
+          co-authored components.build. My Next.js template, next-forge, was
           acquired by Vercel in 2025.
         </p>
         <p>
-          From 2021 to 2025 he was Chief Product Officer at Corellium, the
-          virtualization and mobile security research company, where he started
-          the frontend engineering team and went on to lead the Product, Design
-          and Support organizations. Corellium was acquired by Cellebrite for
-          $170 million in 2025.
+          From 2021 to 2025 I was Chief Product Officer at Corellium, the
+          virtualization and mobile security research company, where I started
+          the frontend engineering team and went on to lead the Product,
+          Design and Support organizations. Corellium was acquired by
+          Cellebrite for $170 million in 2025.
         </p>
         <p>
-          Earlier in his career, Hayden founded Jellypepper, an award-winning
-          digital agency acquired by Raw Studio; was Head of Product and Design
-          at Spaceship, later acquired by eToro; and interned in product design
-          at Palantir. His independent work includes the ESLint rebrand, the
-          Node.js website redesign, and products such as Ultracite, Kibo UI,
-          Refraction and Presumi.
+          Earlier in my career, I founded Jellypepper, an award-winning
+          digital agency acquired by Raw Studio; was Head of Product and
+          Design at Spaceship, later acquired by eToro; and interned in
+          product design at Palantir. My independent work includes the ESLint
+          rebrand, the Node.js website redesign, and products such as
+          Ultracite, Kibo UI, Refraction and Presumi.
         </p>
       </div>
     </section>
 
+    <section class="grid gap-6">
+      <h2 class="font-medium text-lg tracking-tight">Work</h2>
+
+      <div class="grid gap-8">
+        <div class="grid gap-1">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <CompanyIcon id="openai" label="OpenAI" />
+              <h3 class="font-medium">OpenAI</h3>
+            </div>
+            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+              Mar 2026 – Present
+            </span>
+          </div>
+          <p class="text-sm text-zinc-500">Member of Technical Staff</p>
+          <p
+            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Working on the new frontier of intelligence. Stay tuned.
+          </p>
+        </div>
+
+        <div class="grid gap-1">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <CompanyIcon id="vercel" label="Vercel" />
+              <h3 class="font-medium">Vercel</h3>
+            </div>
+            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+              Jun 2025 – Mar 2026
+            </span>
+          </div>
+          <p class="text-sm text-zinc-500">DX Engineer</p>
+          <p
+            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Created{" "}
+            <a
+              class={LINK}
+              href="https://streamdown.ai/"
+              rel="noopener noreferrer"
+              target="_blank">Streamdown</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://elements.ai-sdk.dev/"
+              rel="noopener noreferrer"
+              target="_blank">AI Elements</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://www.npmjs.com/package/remend"
+              rel="noopener noreferrer"
+              target="_blank">Remend</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/tersa"
+              rel="noopener noreferrer"
+              target="_blank">Tersa</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/openreview"
+              rel="noopener noreferrer"
+              target="_blank">OpenReview</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/vectr"
+              rel="noopener noreferrer"
+              target="_blank">Vectr</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://www.npm.bet/"
+              rel="noopener noreferrer"
+              target="_blank">npm.bet</a
+            >. Helped ship{" "}
+            <a
+              class={LINK}
+              href="https://chat-sdk.dev/"
+              rel="noopener noreferrer"
+              target="_blank">Chat SDK</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/platforms"
+              rel="noopener noreferrer"
+              target="_blank">Platforms</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/blog/workflow-builder-build-your-own-workflow-automation-platform"
+              rel="noopener noreferrer"
+              target="_blank">Workflow Builder</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/academy"
+              rel="noopener noreferrer"
+              target="_blank">Academy</a
+            >; rebuilt the docs sites for{" "}
+            <a
+              class={LINK}
+              href="https://v0.app/docs"
+              rel="noopener noreferrer"
+              target="_blank">v0</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://useworkflow.dev/docs/getting-started"
+              rel="noopener noreferrer"
+              target="_blank">Workflow</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://turborepo.dev/docs"
+              rel="noopener noreferrer"
+              target="_blank">Turborepo</a
+            >; and co-authored{" "}
+            <a
+              class={LINK}
+              href="https://www.components.build/"
+              rel="noopener noreferrer"
+              target="_blank">components.build</a
+            >.
+          </p>
+        </div>
+
+        <div class="grid gap-1">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <CompanyIcon id="corellium" label="Corellium" />
+              <h3 class="font-medium">Corellium</h3>
+            </div>
+            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+              Nov 2021 – Jan 2025
+            </span>
+          </div>
+          <p class="text-sm text-zinc-500">Chief Product Officer</p>
+          <p
+            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Started the frontend engineering team, then led the Product, Design
+            and Support teams. Rebranded the company and helped it grow from
+            seed to Series A funding, then subsequent{" "}
+            <a
+              class={LINK}
+              href="https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/"
+              rel="noopener noreferrer"
+              target="_blank">acquisition</a
+            >{" "}
+            by Cellebrite.
+          </p>
+        </div>
+
+        <div class="grid gap-1">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <CompanyIcon id="jellypepper" label="Jellypepper" />
+              <h3 class="font-medium">Jellypepper</h3>
+            </div>
+            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+              Nov 2017 – Jul 2023
+            </span>
+          </div>
+          <p class="text-sm text-zinc-500">Director</p>
+          <p
+            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Started and ran an award-winning digital agency. Worked with early
+            stage startups working on self-driving car technology, AI, biotech,
+            crypto, drone delivery, cybersecurity and orbital logistics.{" "}
+            <a
+              class={LINK}
+              href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/"
+              rel="noopener noreferrer"
+              target="_blank">Acquired</a
+            >{" "}
+            by Raw Studio.
+          </p>
+        </div>
+
+        <div class="grid gap-1">
+          <div class="flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <CompanyIcon id="palantir" label="Palantir" />
+              <h3 class="font-medium">Palantir</h3>
+            </div>
+            <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+              Oct 2015 – Dec 2015
+            </span>
+          </div>
+          <p class="text-sm text-zinc-500">Product Design Intern</p>
+          <p
+            class="text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Part of a small team tasked with designing an anti-fraud focused
+            pilot project. Designed a platform allowing for node-based
+            graphing, time-based visualization for object frequency analysis,
+            and a rich data exploration interface.
+          </p>
+        </div>
+      </div>
+
+      <p
+        class="border-zinc-200 border-t border-dotted pt-6 text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:border-zinc-800 dark:text-zinc-400"
+      >
+        Earlier in my career, I was Head of Product and Design at Spaceship
+        (later{" "}
+        <a
+          class={LINK}
+          href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9"
+          rel="noopener noreferrer"
+          target="_blank">acquired</a
+        >{" "}
+        by eToro) and contracted for many clients through{" "}
+        <a
+          class={LINK}
+          href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/"
+          rel="noopener noreferrer"
+          target="_blank">R/GA</a
+        >. I've been fortunate to work with many great companies including
+        Australian Ethical, Canva, Clipchamp, Google, National Geographic,
+        Nike, R/GA, Timberland, Toyota and Westfield. I{" "}
+        <a
+          class={LINK}
+          href="https://eslint.org/blog/2022/08/redesigning-eslint/"
+          rel="noopener noreferrer"
+          target="_blank">rebranded ESLint</a
+        >{" "}
+        and redesigned the{" "}
+        <a
+          class={LINK}
+          href="https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign"
+          rel="noopener noreferrer"
+          target="_blank">Node.js website</a
+        >.
+      </p>
+    </section>
+
     <section class="grid gap-4">
-      <h2 class="font-medium text-lg tracking-tight">Career highlights</h2>
+      <h2 class="font-medium text-lg tracking-tight">Projects</h2>
       <ul class="grid gap-3">
         {
-          highlights.map((highlight) => (
-            <li class="flex items-baseline justify-between gap-4">
-              <a
-                class="text-zinc-600 leading-relaxed transition-colors duration-300 hover:text-black dark:text-zinc-400 dark:hover:text-white"
-                href={highlight.url}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {highlight.label}
-              </a>
-              <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
-                {highlight.year}
-              </span>
+          projects.map((project) => (
+            <li class="flex items-center justify-between gap-4">
+              <div class="flex min-w-0 items-center gap-3">
+                <ProjectIcon class="size-4 shrink-0" name={project.name} />
+                <p class="leading-relaxed">
+                  <a
+                    class="font-medium transition-colors duration-300 hover:text-zinc-500"
+                    href={project.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {project.name}
+                  </a>{" "}
+                  <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                    {project.description}
+                  </span>
+                </p>
+              </div>
+              {project.status ? (
+                <span class="shrink-0 text-sm text-zinc-500">
+                  {project.status}
+                </span>
+              ) : null}
             </li>
           ))
         }
@@ -157,11 +413,81 @@ const highlights = [
       <p
         class="text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
       >
-        Hayden holds a double degree from the University of Technology Sydney
+        I hold a double degree from the University of Technology Sydney
         (2012 – 2016): a Bachelor of Business, majoring in Management, and a
         Bachelor of Science in Information Technology, majoring in Enterprise
         Systems Development.
       </p>
     </section>
+
+    <section class="grid gap-4">
+      <h2 class="font-medium text-lg tracking-tight">Stack</h2>
+
+      <div
+        class="flex flex-wrap gap-x-4 border-zinc-200 border-b transition-colors duration-300 dark:border-zinc-800"
+        role="tablist"
+      >
+        {
+          stackSections.map((section, index) => (
+            <button
+              aria-controls={`stack-panel-${section.heading}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              class="-mb-px cursor-pointer border-transparent border-b pb-2 text-sm text-zinc-500 transition-colors duration-300 hover:text-black aria-selected:border-current aria-selected:text-black dark:aria-selected:text-white dark:hover:text-white"
+              data-stack-tab={section.heading}
+              id={`stack-tab-${section.heading}`}
+              role="tab"
+              type="button"
+            >
+              {section.heading}
+            </button>
+          ))
+        }
+      </div>
+
+      {
+        stackSections.map((section, index) => (
+          <ul
+            aria-labelledby={`stack-tab-${section.heading}`}
+            class="grid gap-3"
+            data-stack-panel={section.heading}
+            hidden={index !== 0}
+            id={`stack-panel-${section.heading}`}
+            role="tabpanel"
+          >
+            {section.items.map((item) => (
+              <li class="leading-relaxed">
+                <a
+                  class="font-medium transition-colors duration-300 hover:text-zinc-500"
+                  href={item.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {item.name}
+                </a>{" "}
+                <span class="text-sm text-zinc-600 dark:text-zinc-400">
+                  {item.description}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </section>
   </div>
 </Page>
+
+<script>
+  const tabs = [...document.querySelectorAll<HTMLButtonElement>('[data-stack-tab]')];
+  const panels = [...document.querySelectorAll<HTMLElement>('[data-stack-panel]')];
+
+  for (const tab of tabs) {
+    tab.addEventListener("click", () => {
+      for (const other of tabs) {
+        other.setAttribute("aria-selected", String(other === tab));
+      }
+      for (const panel of panels) {
+        panel.hidden = panel.dataset.stackPanel !== tab.dataset.stackTab;
+      }
+    });
+  }
+</script>

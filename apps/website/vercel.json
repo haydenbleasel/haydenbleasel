@@ -9,10 +9,6 @@
       "destination": "https://os1.haydenbleasel.com/games",
       "permanent": true
     },
-    {
-      "source": "/stack",
-      "destination": "https://os1.haydenbleasel.com/stack",
-      "permanent": true
-    }
+    { "source": "/stack", "destination": "/about", "permanent": true }
   ]
 }

@@ -19,7 +19,11 @@ describe("vercel.json redirects", () => {
     expect(sources).toContain("/clients");
     expect(sources).toContain("/work/:path*");
     expect(sources).toContain("/games");
-    expect(sources).toContain("/stack");
+  });
+
+  test("stack redirects to about", () => {
+    expect(bySource("/stack")?.destination).toBe("/about");
+    expect(bySource("/stack")?.permanent).toBe(true);
   });
 
   test("legacy content routes redirect home permanently", () => {
@@ -29,8 +33,7 @@ describe("vercel.json redirects", () => {
     }
   });
 
-  test("games and stack redirect to os1", () => {
+  test("games redirects to os1", () => {
     expect(bySource("/games")?.destination).toContain("os1.haydenbleasel.com");
-    expect(bySource("/stack")?.destination).toContain("os1.haydenbleasel.com");
   });
 });
