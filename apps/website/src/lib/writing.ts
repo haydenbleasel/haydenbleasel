@@ -9,6 +9,22 @@ export interface WritingItem {
 export const writing: WritingItem[] = [
   {
     description:
+      "A Vercel Academy course on building production-grade monorepos with Turborepo.",
+    publisher: "Vercel Academy",
+    title: "Production Monorepos with Turborepo",
+    url: "https://vercel.com/academy/production-monorepos",
+    year: 2025,
+  },
+  {
+    description:
+      "A Vercel Academy course on modern UI development with shadcn/ui, Radix primitives and Tailwind CSS.",
+    publisher: "Vercel Academy",
+    title: "React UI with shadcn/ui + Radix + Tailwind",
+    url: "https://vercel.com/academy/shadcn-ui",
+    year: 2025,
+  },
+  {
+    description:
       "A co-authored guide to designing and building composable component libraries.",
     publisher: "components.build",
     title: "components.build",
