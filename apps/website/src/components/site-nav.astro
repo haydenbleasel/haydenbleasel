@@ -1,0 +1,53 @@
+---
+const links = [
+  { href: "/about", label: "About" },
+  { href: "/writing", label: "Writing" },
+  { href: "/speaking", label: "Speaking" },
+  { href: "/press", label: "Press" },
+];
+
+const pathname = Astro.url.pathname.replace(/\/+$/u, "") || "/";
+---
+
+{/*
+  rgba() rather than bg-white/80: Tailwind's opacity modifier
+  compiles to color-mix(), a non-legacy color that transitions
+  interpolate in oklab — visibly out of step with the page's legacy
+  sRGB white→black fade. Legacy rgba() keeps both on one curve.
+*/}
+<nav
+  class="fixed inset-x-0 top-0 z-50 bg-[rgba(255,255,255,0.8)] backdrop-blur-xl transition-colors duration-300 dark:bg-[rgba(0,0,0,0.8)]"
+>
+  <div
+    class="mx-auto flex h-12 w-full max-w-5xl items-center justify-between px-6"
+    data-site-nav-inner
+  >
+    <a
+      aria-label="Hayden Bleasel — Home"
+      class="whitespace-nowrap font-medium text-black text-sm transition-[color,opacity] duration-300 hover:opacity-70 dark:text-white"
+      data-site-nav-logo
+      href="/"
+    >
+      Hayden Bleasel
+    </a>
+
+    <div class="flex items-center gap-4 max-sm:gap-3">
+      {
+        links.map((link) => (
+          <a
+            aria-current={pathname === link.href ? "page" : undefined}
+            class:list={[
+              "text-sm transition-colors duration-300 max-sm:text-xs",
+              pathname === link.href
+                ? "text-black dark:text-white"
+                : "text-zinc-500 hover:text-black dark:hover:text-white",
+            ]}
+            href={link.href}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>

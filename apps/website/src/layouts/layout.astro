@@ -1,59 +1,35 @@
 ---
 import "@/styles/globals.css";
+import { identity, person } from "@/lib/person";
 import { url } from "@/lib/url";
 
-const title = "Software engineer and product designer | Hayden Bleasel";
-const description =
+interface Props {
+  description?: string;
+  jsonLd?: Record<string, unknown>;
+  title?: string;
+}
+
+const defaultTitle = "Software engineer and product designer | Hayden Bleasel";
+const defaultDescription =
   "I design and build software on the internet. I’m originally from Sydney, Australia and currently living in San Francisco, California.";
+
+const {
+  description = defaultDescription,
+  jsonLd: jsonLdProp,
+  title = defaultTitle,
+} = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, url).toString();
 const ogImage = new URL("/opengraph-image.png", url).toString();
 
-// Identity URLs are permanent — keep them on the production origin so the
-// @ids never change between environments.
-const identity = "https://haydenbleasel.com";
-
-const jsonLd = {
+// The homepage is the canonical identity URL: a ProfilePage wrapping the
+// Person. Subpages pass their own page-level node via the jsonLd prop.
+const jsonLd = jsonLdProp ?? {
   "@context": "https://schema.org",
   "@id": `${identity}/#profilepage`,
   "@type": "ProfilePage",
   description,
-  mainEntity: {
-    "@id": `${identity}/#person`,
-    "@type": "Person",
-    alternateName: "@haydenbleasel",
-    description:
-      "Software engineer and product designer at OpenAI, originally from Sydney, Australia and now based in San Francisco, California.",
-    familyName: "Bleasel",
-    givenName: "Hayden",
-    image: [
-      `${identity}/photo-1x1.jpg`,
-      `${identity}/photo-4x3.jpg`,
-      `${identity}/photo-16x9.jpg`,
-    ],
-    jobTitle: "Member of Technical Staff",
-    name: "Hayden Bleasel",
-    sameAs: [
-      "https://x.com/haydenbleasel",
-      "https://www.linkedin.com/in/haydenbleasel/",
-      "https://github.com/haydenbleasel",
-      "https://bsky.app/profile/haydenbleasel.com",
-      "https://mastodon.social/@haydenbleasel",
-      "https://dribbble.com/haydenbleasel",
-      "https://dev.to/haydenbleasel",
-      "https://www.youtube.com/@haydenbleasel1",
-      "https://www.npmjs.com/~haydenbleasel",
-      "https://www.figma.com/@haydenbleasel",
-      "https://www.producthunt.com/@haydenbleasel",
-    ],
-    url: identity,
-    worksFor: {
-      "@id": "https://openai.com/#organization",
-      "@type": "Organization",
-      name: "OpenAI",
-      url: "https://openai.com",
-    },
-  },
+  mainEntity: person,
   name: title,
   url: identity,
 };

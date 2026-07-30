@@ -1,0 +1,85 @@
+---
+import { appearances } from '@/lib/appearances';
+import type { Appearance } from '@/lib/appearances';
+import Page from "@/layouts/page.astro";
+import { identity, person } from "@/lib/person";
+
+export const prerender = true;
+
+const title = "Speaking";
+const description =
+  "Conference talks, meetups, podcasts, interviews and judging by Hayden Bleasel.";
+
+const sections: { heading: string; items: Appearance[] }[] = [
+  {
+    heading: "Talks",
+    items: appearances.filter((appearance) => appearance.type === "Talk"),
+  },
+  {
+    heading: "Podcasts",
+    items: appearances.filter((appearance) => appearance.type === "Podcast"),
+  },
+  {
+    heading: "Interviews",
+    items: appearances.filter((appearance) => appearance.type === "Interview"),
+  },
+  {
+    heading: "Judging",
+    items: appearances.filter((appearance) => appearance.type === "Judging"),
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/speaking#webpage`,
+  "@type": "CollectionPage",
+  about: person,
+  description,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: appearances.map((appearance, index) => ({
+      "@type": "ListItem",
+      name: appearance.title,
+      position: index + 1,
+      ...(appearance.url ? { url: appearance.url } : {}),
+    })),
+  },
+  name: "Speaking by Hayden Bleasel",
+  url: `${identity}/speaking`,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="grid gap-12">
+    {
+      sections.map((section) => (
+        <section class="grid gap-4">
+          <h2 class="font-medium text-lg tracking-tight">{section.heading}</h2>
+          <ul class="grid gap-3">
+            {section.items.map((item) => (
+              <li class="flex items-baseline justify-between gap-4">
+                {item.url ? (
+                  <a
+                    class="text-zinc-600 leading-relaxed transition-colors duration-300 hover:text-black dark:text-zinc-400 dark:hover:text-white"
+                    href={item.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <span class="text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400">
+                    {item.title}
+                  </span>
+                )}
+                <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+                  {item.year}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Page>

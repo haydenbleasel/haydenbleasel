@@ -1,0 +1,167 @@
+---
+import Page from "@/layouts/page.astro";
+import { identity, person } from "@/lib/person";
+
+export const prerender = true;
+
+const title = "About";
+const description =
+  "A formal biography of Hayden Bleasel — software engineer, product designer and technology entrepreneur.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/about#webpage`,
+  "@type": "AboutPage",
+  description,
+  mainEntity: person,
+  name: "About Hayden Bleasel",
+  url: `${identity}/about`,
+};
+
+const highlights = [
+  {
+    label:
+      "Joined OpenAI as a Member of Technical Staff in March 2026.",
+    url: "https://openai.com",
+    year: 2026,
+  },
+  {
+    label:
+      "Corellium was acquired by Cellebrite for $170M, following his tenure as Chief Product Officer.",
+    url: "https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/",
+    year: 2025,
+  },
+  {
+    label:
+      "next-forge, his production-grade Turborepo template for Next.js, was acquired by Vercel.",
+    url: "https://x.com/haydenbleasel/status/1929625673586598148",
+    year: 2025,
+  },
+  {
+    label: "Kibo UI, his component library, was acquired by shadcnblocks.",
+    url: "https://www.shadcnblocks.com/blog/announcing-kibo-ui-acquisition/",
+    year: 2025,
+  },
+  {
+    label:
+      "Created open source projects at Vercel including Streamdown and AI Elements.",
+    url: "https://streamdown.ai/",
+    year: 2025,
+  },
+  {
+    label:
+      "Spaceship, where he was Head of Product and Design, was acquired by eToro in an $80M deal.",
+    url: "https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9",
+    year: 2024,
+  },
+  {
+    label: "Designed the new Node.js website.",
+    url: "https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign",
+    year: 2023,
+  },
+  {
+    label:
+      "Jellypepper, the digital agency he founded, was acquired by Raw Studio.",
+    url: "https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/",
+    year: 2023,
+  },
+  {
+    label: "Refraction, his AI coding tool, was acquired by Twistag.",
+    url: "https://x.com/haydenbleasel/status/1678770475647012864",
+    year: 2023,
+  },
+  {
+    label: "Rebranded ESLint — new identity, website, docs and playground.",
+    url: "https://eslint.org/blog/2022/08/redesigning-eslint/",
+    year: 2022,
+  },
+];
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="grid gap-12">
+    <section>
+      <img
+        alt="Hayden Bleasel"
+        class="float-right mb-4 ml-6 w-36 rounded-lg sm:w-44"
+        height="1024"
+        loading="eager"
+        src="/photo-3x4.jpg"
+        width="768"
+      />
+
+      <div
+        class="space-y-4 text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+      >
+        <p>
+          Hayden Bleasel is an Australian software engineer, product designer
+          and technology entrepreneur based in San Francisco, California. He is
+          currently a Member of Technical Staff at{' '}
+          <a
+            class="text-black underline dark:text-white"
+            href="https://openai.com"
+            rel="noopener noreferrer"
+            target="_blank">OpenAI</a
+          >.
+        </p>
+        <p>
+          Before OpenAI, Hayden worked on the Developer Experience team at
+          Vercel, where he created open source projects including Streamdown,
+          AI Elements, Tersa, OpenReview and Vectr, helped ship Chat SDK and
+          co-authored components.build. His Next.js template, next-forge, was
+          acquired by Vercel in 2025.
+        </p>
+        <p>
+          From 2021 to 2025 he was Chief Product Officer at Corellium, the
+          virtualization and mobile security research company, where he started
+          the frontend engineering team and went on to lead the Product, Design
+          and Support organizations. Corellium was acquired by Cellebrite for
+          $170 million in 2025.
+        </p>
+        <p>
+          Earlier in his career, Hayden founded Jellypepper, an award-winning
+          digital agency acquired by Raw Studio; was Head of Product and Design
+          at Spaceship, later acquired by eToro; and interned in product design
+          at Palantir. His independent work includes the ESLint rebrand, the
+          Node.js website redesign, and products such as Ultracite, Kibo UI,
+          Refraction and Presumi.
+        </p>
+      </div>
+    </section>
+
+    <section class="grid gap-4">
+      <h2 class="font-medium text-lg tracking-tight">Career highlights</h2>
+      <ul class="grid gap-3">
+        {
+          highlights.map((highlight) => (
+            <li class="flex items-baseline justify-between gap-4">
+              <a
+                class="text-zinc-600 leading-relaxed transition-colors duration-300 hover:text-black dark:text-zinc-400 dark:hover:text-white"
+                href={highlight.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {highlight.label}
+              </a>
+              <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+                {highlight.year}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="grid gap-4">
+      <h2 class="font-medium text-lg tracking-tight">Education</h2>
+      <p
+        class="text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+      >
+        Hayden holds a double degree from the University of Technology Sydney
+        (2012 – 2016): a Bachelor of Business, majoring in Management, and a
+        Bachelor of Science in Information Technology, majoring in Enterprise
+        Systems Development.
+      </p>
+    </section>
+  </div>
+</Page>
