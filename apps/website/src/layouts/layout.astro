@@ -19,7 +19,10 @@ const {
   title = defaultTitle,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, url).toString();
+// Strip the trailing slash (prerendered pages render as `/about/`) so the
+// canonical matches the sitemap, navigation and JSON-LD URLs.
+const pathname = Astro.url.pathname.replace(/\/+$/u, "") || "/";
+const canonical = new URL(pathname, url).toString();
 const ogImage = new URL("/opengraph-image.png", url).toString();
 
 // The homepage is the canonical identity URL: a ProfilePage wrapping the

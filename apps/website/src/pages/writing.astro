@@ -20,8 +20,17 @@ const jsonLd = {
     itemListElement: writing.map((item, index) => ({
       "@type": "ListItem",
       item: {
-        "@type": "Article",
-        author: personRef,
+        "@type": item.schemaType ?? "Article",
+        author: item.coAuthors
+          ? [
+              personRef,
+              ...item.coAuthors.map((coAuthor) => ({
+                "@type": "Person",
+                name: coAuthor.name,
+                url: coAuthor.url,
+              })),
+            ]
+          : personRef,
         headline: item.title,
         url: item.url,
       },

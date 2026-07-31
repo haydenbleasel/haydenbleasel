@@ -20,6 +20,16 @@ const CONTAINER = "mx-auto flex w-full max-w-5xl items-center px-6";
 
     {/* pt-16 clears the fixed nav; md hands scrolling to the scrub. */}
     <main class="min-h-0 flex-1 overflow-y-auto pt-12 md:overflow-hidden">
+      {/* Visually hidden identity statement — gives the page an h1 and a
+          canonical sentence without altering the timeline-first design. */}
+      <header class="sr-only">
+        <h1>Hayden Bleasel</h1>
+        <p>
+          Hayden Bleasel is an Australian software engineer and product designer
+          at OpenAI, based in San Francisco, California.
+        </p>
+      </header>
+
       <Lifeline
         birthYear={haydenLifeline.birthYear}
         markers={haydenLifeline.markers}

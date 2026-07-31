@@ -1,6 +1,10 @@
 export interface WritingItem {
+  // Additional credited authors beyond me, for co-authored works.
+  coAuthors?: { name: string; url: string }[];
   description: string;
   publisher: string;
+  // Schema.org type for the JSON-LD item; defaults to Article.
+  schemaType?: "CreativeWork";
   title: string;
   url: string;
   year: number;
@@ -211,9 +215,12 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    coAuthors: [{ name: "shadcn", url: "https://shadcn.com" }],
     description:
       "A co-authored guide to designing and building composable component libraries.",
     publisher: "components.build",
+    // An open specification, not a conventional article.
+    schemaType: "CreativeWork",
     title: "components.build",
     url: "https://www.components.build/",
     year: 2025,

@@ -1,4 +1,7 @@
 export interface PressItem {
+  // Whether the article itself names me. Articles that only cover a company
+  // milestone must not claim Article.about person in the JSON-LD.
+  mentionsMe: boolean;
   note: string;
   outlet: string;
   title: string;
@@ -8,6 +11,7 @@ export interface PressItem {
 
 export const press: PressItem[] = [
   {
+    mentionsMe: false,
     note: "Coverage of Cellebrite's $170M acquisition of Corellium, where I was Chief Product Officer.",
     outlet: "TechCrunch",
     title:
@@ -16,6 +20,7 @@ export const press: PressItem[] = [
     year: 2025,
   },
   {
+    mentionsMe: true,
     note: "Announcement of shadcnblocks acquiring Kibo UI, the component library I created.",
     outlet: "shadcnblocks",
     title: "Announcing the Kibo UI acquisition",
@@ -23,6 +28,7 @@ export const press: PressItem[] = [
     year: 2025,
   },
   {
+    mentionsMe: false,
     note: "Coverage of eToro acquiring Spaceship, where I was Head of Product and Design.",
     outlet: "Australian Financial Review",
     title: "Cannon-Brookes-backed Spaceship acquired in $80m deal",
@@ -30,6 +36,7 @@ export const press: PressItem[] = [
     year: 2024,
   },
   {
+    mentionsMe: true,
     note: "The Node.js team on the website redesign I worked on, including a conversation about the design process.",
     outlet: "Node.js",
     title: "Diving into the Node.js Website Redesign",
@@ -37,6 +44,7 @@ export const press: PressItem[] = [
     year: 2024,
   },
   {
+    mentionsMe: true,
     note: "Announcement of Raw Studio acquiring Jellypepper, the digital agency I founded.",
     outlet: "Raw Studio",
     title:
@@ -45,6 +53,7 @@ export const press: PressItem[] = [
     year: 2023,
   },
   {
+    mentionsMe: true,
     note: "Untitled UI lists me as a designer to follow in their guide to improving UI design skills.",
     outlet: "Untitled UI",
     title: "How to Improve Your UI Design Skills",
@@ -52,6 +61,7 @@ export const press: PressItem[] = [
     year: 2023,
   },
   {
+    mentionsMe: true,
     note: "Coverage of Timberland's TimbsTrails experience via R/GA Australia, crediting me as Senior Experience Designer.",
     outlet: "Campaign Brief",
     title:
@@ -60,7 +70,8 @@ export const press: PressItem[] = [
     year: 2022,
   },
   {
-    note: "Profile of Presumi, the resume analytics startup I founded.",
+    mentionsMe: true,
+    note: "Profile of Presumi, the resume analytics product I created.",
     outlet: "Startup Daily",
     title:
       "Sydney startup Presumi helps job seekers see how employers interact with their resume",
@@ -68,6 +79,7 @@ export const press: PressItem[] = [
     year: 2016,
   },
   {
+    mentionsMe: true,
     note: "University of Technology Sydney profile on my early startup work.",
     outlet: "UTS Newsroom",
     title: "Hard Slog and Serendipity on the Path to Overnight Success",
@@ -75,6 +87,7 @@ export const press: PressItem[] = [
     year: 2016,
   },
   {
+    mentionsMe: true,
     note: "Profile feature in Sydney Views, the magazine of the International Convention Centre Sydney.",
     outlet: "Sydney Views (ICC Sydney)",
     title: "Sydney Views — Edition 3",

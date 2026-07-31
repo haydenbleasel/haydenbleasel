@@ -17,17 +17,28 @@ const jsonLd = {
   description,
   mainEntity: {
     "@type": "ItemList",
-    itemListElement: press.map((item, index) => ({
-      "@type": "ListItem",
-      item: {
-        "@type": "Article",
-        about: personRef,
-        headline: item.title,
-        publisher: { "@type": "Organization", name: item.outlet },
-        url: item.url,
-      },
-      position: index + 1,
-    })),
+    // Only articles that actually name me assert Article.about — company
+    // milestone coverage stays a plain ListItem so the claim is accurate.
+    itemListElement: press.map((item, index) =>
+      item.mentionsMe
+        ? {
+            "@type": "ListItem",
+            item: {
+              "@type": "Article",
+              about: personRef,
+              headline: item.title,
+              publisher: { "@type": "Organization", name: item.outlet },
+              url: item.url,
+            },
+            position: index + 1,
+          }
+        : {
+            "@type": "ListItem",
+            name: item.title,
+            position: index + 1,
+            url: item.url,
+          }
+    ),
   },
   name: "Press coverage of Hayden Bleasel",
   url: `${identity}/press`,
