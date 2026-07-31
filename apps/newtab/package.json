@@ -13,7 +13,7 @@
     "date-fns-tz": "^3.2.0",
     "lucide-react": "^1.14.0",
     "nanoid": "^5.1.11",
-    "next": "16.2.6",
+    "next": "16.2.11",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "recharts": "3.8.1",
