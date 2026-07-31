@@ -9,8 +9,10 @@
   "updateInternalDependencies": "patch",
   "ignore": [
     "website",
-    "os1",
+    "newtab",
+    "pulse",
     "@haydenbleasel/design-system",
+    "@haydenbleasel/typefully",
     "@haydenbleasel/typescript-config"
   ]
 }
