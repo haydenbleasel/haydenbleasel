@@ -11,6 +11,14 @@ export interface PressItem {
 
 export const press: PressItem[] = [
   {
+    mentionsMe: true,
+    note: "Write-up on migrating the Logixlysia docs to Blume, the documentation framework I created.",
+    outlet: "PunGrumpy",
+    title: "Docs are content again: moving Logixlysia from Fumadocs to Blume",
+    url: "https://www.pungrumpy.com/blog/moving-logixlysia-from-fumadocs-to-blume",
+    year: 2026,
+  },
+  {
     mentionsMe: false,
     note: "Coverage of Cellebrite's $170M acquisition of Corellium, where I was Chief Product Officer.",
     outlet: "TechCrunch",
