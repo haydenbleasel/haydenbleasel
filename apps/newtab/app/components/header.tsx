@@ -38,7 +38,7 @@ const Uv = async () => {
         {vitaminDMinutes ? ` (${vitaminDMinutes}m)` : null}
       </Badge>
       {forecast.range ? (
-        <span className="text-muted-foreground text-sm">
+        <span className="whitespace-nowrap text-muted-foreground text-sm">
           {formatTime(forecast.range.start)} &rarr;{" "}
           {formatTime(forecast.range.end)}
         </span>
@@ -63,7 +63,7 @@ const Followers = async () => {
 
   return (
     <div className="flex items-center gap-2">
-      <span className="flex items-center gap-1 text-muted-foreground text-sm">
+      <span className="flex items-center gap-1 whitespace-nowrap text-muted-foreground text-sm">
         Followers
         <span
           className={cn(
@@ -85,12 +85,16 @@ export const Header = () => {
   const today = toZonedTime(new Date(), location.timeZone);
 
   return (
-    <header className="flex justify-between gap-4">
+    <header className="flex flex-col gap-4 sm:flex-row sm:justify-between">
       <div className="flex flex-col">
-        <p className="font-medium text-sm">{format(today, "EEEE, MMMM d")}</p>
-        <p className="text-muted-foreground text-sm">{location.name}</p>
+        <p className="whitespace-nowrap font-medium text-sm">
+          {format(today, "EEEE, MMMM d")}
+        </p>
+        <p className="whitespace-nowrap text-muted-foreground text-sm">
+          {location.name}
+        </p>
       </div>
-      <div className="flex flex-col items-end gap-2">
+      <div className="flex flex-col gap-2 sm:items-end">
         <Suspense fallback={<Skeleton className="h-6 w-32 rounded-md" />}>
           <Uv />
         </Suspense>

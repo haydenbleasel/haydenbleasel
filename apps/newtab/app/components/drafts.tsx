@@ -35,7 +35,7 @@ const DraftWeek = ({ title, posts }: { title: string; posts: number }) => {
 
   return (
     <div key={title} className="flex items-center justify-between p-3">
-      <p className="text-sm">{title}</p>
+      <p className="whitespace-nowrap text-sm">{title}</p>
       <p className="text-muted-foreground text-sm">
         <Badge
           variant="outline"
@@ -100,7 +100,7 @@ const DraftsContent = async () => {
   ];
 
   return (
-    <CardContent className="grid grid-cols-3 divide-x rounded-xl border bg-card p-0 shadow-xs">
+    <CardContent className="grid divide-y rounded-xl border bg-card p-0 shadow-xs sm:grid-cols-3 sm:divide-x sm:divide-y-0">
       {weeks.map((week) => (
         <DraftWeek key={week.name} title={week.name} posts={week.data.length} />
       ))}
@@ -115,7 +115,9 @@ export const Drafts = () => (
         Drafts
       </CardTitle>
     </CardHeader>
-    <Suspense fallback={<Skeleton className="h-[46.5px] rounded-xl" />}>
+    <Suspense
+      fallback={<Skeleton className="h-[139.5px] rounded-xl sm:h-[46.5px]" />}
+    >
       <DraftsContent />
     </Suspense>
   </Card>
