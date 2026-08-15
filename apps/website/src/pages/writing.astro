@@ -1,13 +1,12 @@
 ---
 import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
 import { identity, person, personRef } from "@/lib/person";
 import { writing } from "@/lib/writing";
 
 export const prerender = true;
 
-const title = "Writing";
-const description =
-  "My articles and long-form writing on design, engineering and developer tools.";
+const { description, title } = getPage("/writing");
 
 const jsonLd = {
   "@context": "https://schema.org",

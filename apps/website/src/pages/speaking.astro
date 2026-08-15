@@ -2,13 +2,12 @@
 import { appearances } from '@/lib/appearances';
 import type { Appearance } from '@/lib/appearances';
 import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
 import { identity, person } from "@/lib/person";
 
 export const prerender = true;
 
-const title = "Speaking";
-const description =
-  "Conference talks, meetups, podcasts, interviews and judging I've done over the years.";
+const { description, title } = getPage("/speaking");
 
 const sections: { heading: string; items: Appearance[] }[] = [
   {

@@ -1,13 +1,12 @@
 ---
 import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
 import { identity, person, personRef } from "@/lib/person";
 import { press } from "@/lib/press";
 
 export const prerender = true;
 
-const title = "Press";
-const description =
-  "A factual index of independent press coverage of me and my work.";
+const { description, title } = getPage("/press");
 
 const jsonLd = {
   "@context": "https://schema.org",

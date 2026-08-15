@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/opengraph-image.png",
+      "destination": "/og/home.png",
+      "permanent": true
+    },
     { "source": "/blog/:path*", "destination": "/", "permanent": true },
     { "source": "/clients", "destination": "/", "permanent": true },
     { "source": "/work/:path*", "destination": "/about", "permanent": true },

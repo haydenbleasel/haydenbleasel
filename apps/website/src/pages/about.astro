@@ -2,14 +2,13 @@
 import CompanyIcon from "@/components/lifeline/company-icon.astro";
 import ProjectIcon from "@/components/project-icon.astro";
 import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
 import { identity, person } from "@/lib/person";
 import { categories, stack } from "@/lib/stack";
 
 export const prerender = true;
 
-const title = "About";
-const description =
-  "A bit about me — my background, work, projects and the tools I use daily.";
+const { description, title } = getPage("/about");
 
 const jsonLd = {
   "@context": "https://schema.org",

@@ -1,5 +1,6 @@
 ---
 import "@/styles/globals.css";
+import { homeDescription, homeTitle, pages } from "@/lib/pages";
 import { identity, person } from "@/lib/person";
 import { url } from "@/lib/url";
 
@@ -9,21 +10,21 @@ interface Props {
   title?: string;
 }
 
-const defaultTitle = "Software engineer and product designer | Hayden Bleasel";
-const defaultDescription =
-  "I design and build software on the internet. I’m originally from Sydney, Australia and currently living in San Francisco, California.";
-
 const {
-  description = defaultDescription,
+  description = homeDescription,
   jsonLd: jsonLdProp,
-  title = defaultTitle,
+  title = homeTitle,
 } = Astro.props;
 
 // Strip the trailing slash (prerendered pages render as `/about/`) so the
 // canonical matches the sitemap, navigation and JSON-LD URLs.
 const pathname = Astro.url.pathname.replace(/\/+$/u, "") || "/";
 const canonical = new URL(pathname, url).toString();
-const ogImage = new URL("/opengraph-image.png", url).toString();
+
+// Each durable page has its own generated OG image; anything else (which
+// today is nothing) falls back to the homepage card.
+const ogSlug = pages.find((page) => page.path === pathname)?.slug ?? "home";
+const ogImage = new URL(`/og/${ogSlug}.png`, url).toString();
 
 // The homepage is the canonical identity URL: a ProfilePage wrapping the
 // Person. Subpages pass their own page-level node via the jsonLd prop.
@@ -68,6 +69,28 @@ const jsonLd = jsonLdProp ?? {
     <link href="https://haydenbleasel.com" rel="author" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/icon.png" />
+    <link
+      href="/rss.xml"
+      rel="alternate"
+      title="Writing by Hayden Bleasel"
+      type="application/rss+xml"
+    />
+
+    {/* Fonts are otherwise discovered late, after the CSS parses. */}
+    <link
+      as="font"
+      crossorigin
+      href="/fonts/soehne-buch.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link
+      as="font"
+      crossorigin
+      href="/fonts/soehne-kraftig.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />

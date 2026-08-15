@@ -12,14 +12,21 @@ describe("sitemap", () => {
     await response.text();
   });
 
-  test("contains a url entry with required fields", async () => {
+  test("contains url entries", async () => {
     const body = await call().text();
 
     expect(body).toContain("<urlset");
     expect(body).toContain("<loc>");
-    expect(body).toContain("<changefreq>monthly</changefreq>");
-    expect(body).toContain("<priority>1.0</priority>");
-    expect(body).toContain("<lastmod>");
+  });
+
+  test("omits lastmod, changefreq and priority", async () => {
+    const body = await call().text();
+
+    // A build-time <lastmod> on every URL is noise crawlers learn to
+    // ignore, and Google skips <changefreq>/<priority> outright.
+    expect(body).not.toContain("<lastmod>");
+    expect(body).not.toContain("<changefreq>");
+    expect(body).not.toContain("<priority>");
   });
 
   test("contains the durable subpages", async () => {
@@ -28,7 +35,5 @@ describe("sitemap", () => {
     for (const route of ["/about", "/writing", "/speaking", "/press"]) {
       expect(body).toContain(`${route}</loc>`);
     }
-
-    expect(body).toContain("<priority>0.7</priority>");
   });
 });

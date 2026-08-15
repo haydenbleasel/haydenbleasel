@@ -1,21 +1,18 @@
 import type { APIRoute } from "astro";
 
+import { pages } from "@/lib/pages";
 import { url } from "@/lib/url";
 
 export const prerender = true;
 
-const routes = ["", "/about", "/writing", "/speaking", "/press"];
-
+// No <lastmod>: a build-time timestamp on every URL claims everything just
+// changed on every deploy, which teaches crawlers to ignore it. Google
+// ignores <changefreq> and <priority> outright, so they're omitted too.
 export const GET: APIRoute = () => {
-  const lastModified = new Date().toISOString();
-
-  const entries = routes
+  const entries = pages
     .map(
-      (route) => `  <url>
-    <loc>${url}${route}</loc>
-    <lastmod>${lastModified}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>${route === "" ? "1.0" : "0.7"}</priority>
+      (page) => `  <url>
+    <loc>${url}${page.path === "/" ? "" : page.path}</loc>
   </url>`
     )
     .join("\n");
