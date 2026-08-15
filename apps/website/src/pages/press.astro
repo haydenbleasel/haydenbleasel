@@ -24,9 +24,11 @@ const jsonLd = {
         ? {
             "@type": "ListItem",
             item: {
-              "@type": "Article",
+              // VideoObject uses `name`; Article uses `headline`.
+              ...(item.type === "video"
+                ? { "@type": "VideoObject", name: item.title }
+                : { "@type": "Article", headline: item.title }),
               about: personRef,
-              headline: item.title,
               publisher: { "@type": "Organization", name: item.outlet },
               url: item.url,
             },

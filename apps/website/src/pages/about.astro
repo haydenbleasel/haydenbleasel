@@ -64,6 +64,7 @@ const projects = [
   },
   {
     description: "Learn, improve and generate code with AI.",
+    footnote: 1,
     name: "Refraction",
     status: "Acquired",
     url: "https://x.com/haydenbleasel/status/1678770475647012864",
@@ -314,6 +315,37 @@ const projects = [
           <div
             class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
           >
+            <CompanyIcon class="scale-150" id="rga" label="R/GA" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">R/GA</h3>
+                <p class="text-zinc-500">Contract Senior UX Designer</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Aug 2020 – Jul 2021
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Collaborated with cross-functional R/GA teams globally for some
+            major clients, including Nike, Snap, Toyota,{" "}
+            <a
+              class={LINK}
+              href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/"
+              rel="noopener noreferrer"
+              target="_blank">Timberland</a
+            >, Australian Ethical and Google.
+          </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
             <CompanyIcon class="scale-150" id="jellypepper" label="Jellypepper" />
           </div>
           <div class="grid gap-3">
@@ -331,7 +363,9 @@ const projects = [
           >
             Started and ran an award-winning digital agency. Worked with early
             stage startups working on self-driving car technology, AI, biotech,
-            crypto, drone delivery, cybersecurity and orbital logistics.{" "}
+            crypto, drone delivery, cybersecurity and orbital logistics; as
+            well as some big companies like Canva, Clipchamp, National
+            Geographic and Westfield.{" "}
             <a
               class={LINK}
               href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/"
@@ -339,6 +373,39 @@ const projects = [
               target="_blank">Acquired</a
             >{" "}
             by Raw Studio.
+          </p>
+          </div>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-[48px_1fr]">
+          <div
+            class="flex aspect-square w-12 items-center justify-center rounded-lg border border-zinc-200 transition-colors duration-300 dark:border-zinc-800 sm:w-full"
+          >
+            <CompanyIcon class="scale-150" id="spaceship" label="Spaceship" />
+          </div>
+          <div class="grid gap-3">
+            <div class="flex items-start justify-between gap-4">
+              <div class="grid">
+                <h3 class="font-medium">Spaceship</h3>
+                <p class="text-zinc-500">Head of Product and Design</p>
+              </div>
+              <span class="shrink-0 text-zinc-500 tabular-nums">
+                Dec 2016 – Sep 2017
+              </span>
+            </div>
+          <p
+            class="text-pretty text-zinc-600 leading-relaxed transition-colors duration-300 dark:text-zinc-400"
+          >
+            Led product and design at Spaceship, a
+            Cannon-Brookes-backed superannuation fund helping young
+            Australians invest in their future. Later{" "}
+            <a
+              class={LINK}
+              href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9"
+              rel="noopener noreferrer"
+              target="_blank">acquired</a
+            >{" "}
+            by eToro.
           </p>
           </div>
         </div>
@@ -374,29 +441,14 @@ const projects = [
       <p
         class="border-zinc-200 border-t border-dotted pt-6 text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:border-zinc-800 dark:text-zinc-400"
       >
-        Earlier in my career, I was Head of Product and Design at Spaceship
-        (later{" "}
-        <a
-          class={LINK}
-          href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9"
-          rel="noopener noreferrer"
-          target="_blank">acquired</a
-        >{" "}
-        by eToro) and contracted for many clients through{" "}
-        <a
-          class={LINK}
-          href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/"
-          rel="noopener noreferrer"
-          target="_blank">R/GA</a
-        >, plus a handful of other roles you can read about on my{" "}
+        Earlier in my career, I held a handful of other roles you can read
+        about on my{" "}
         <a
           class={LINK}
           href="https://www.linkedin.com/in/haydenbleasel/"
           rel="noopener noreferrer"
           target="_blank">LinkedIn</a
-        >. I've been fortunate to work with many great companies including
-        Australian Ethical, Canva, Clipchamp, Google, National Geographic,
-        Nike, R/GA, Timberland, Toyota and Westfield. I{" "}
+        >. I also{" "}
         <a
           class={LINK}
           href="https://eslint.org/blog/2022/08/redesigning-eslint/"
@@ -430,6 +482,17 @@ const projects = [
                   >
                     {project.name}
                   </a>
+                  {project.footnote ? (
+                    <sup>
+                      <a
+                        class="text-xs text-zinc-500 transition-colors duration-300 hover:text-black dark:hover:text-white"
+                        href={`#footnote-${project.footnote}`}
+                        id={`footnote-ref-${project.footnote}`}
+                      >
+                        [{project.footnote}]
+                      </a>
+                    </sup>
+                  ) : null}
                   <span class="text-zinc-600 dark:text-zinc-400">
                     {project.description}
                   </span>
@@ -511,6 +574,17 @@ const projects = [
         ))
       }
     </section>
+
+    <p
+      class="border-zinc-200 border-t border-dotted pt-6 text-sm text-zinc-600 leading-relaxed transition-colors duration-300 dark:border-zinc-800 dark:text-zinc-400"
+      id="footnote-1"
+    >
+      <a class={LINK} href="#footnote-ref-1">[1]</a> Refraction was used by
+      Accenture, AKQA, Amazon, Bentley, Canva, CapGemini, Cisco, Experian,
+      ExpressVPN, Google, H&amp;M, Ikea, John Deere, Nespresso, PandaDoc,
+      Qantas, Rakuten, Red Bull, Repl.it, Roblox, Softbank, Sega, Tiktok,
+      Uber, Washington Post, Wix, Yahoo, Zoho and ZoomInfo.
+    </p>
   </div>
 </Page>
 

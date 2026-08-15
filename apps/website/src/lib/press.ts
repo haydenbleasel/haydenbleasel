@@ -5,6 +5,8 @@ export interface PressItem {
   note: string;
   outlet: string;
   title: string;
+  // JSON-LD item type; defaults to "article" when omitted.
+  type?: "article" | "video";
   url: string;
   year: number;
 }
@@ -34,6 +36,15 @@ export const press: PressItem[] = [
     title: "Announcing the Kibo UI acquisition",
     url: "https://www.shadcnblocks.com/blog/announcing-kibo-ui-acquisition/",
     year: 2025,
+  },
+  {
+    mentionsMe: true,
+    note: "Video on enterprise development and next-forge, the production-grade Next.js template I created.",
+    outlet: "Josh tried coding",
+    title: "What Large-Scale Software Looks Like",
+    type: "video",
+    url: "https://www.youtube.com/watch?v=aHZz_6NhQkQ",
+    year: 2024,
   },
   {
     mentionsMe: false,
