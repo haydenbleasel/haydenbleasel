@@ -16,8 +16,16 @@ export default defineConfig({
     prerenderEnvironment: "node",
   }),
 
-  // Flat HTML files let the asset host serve our extensionless, slashless URLs.
-  build: { format: "file" },
+  build: {
+    // Flat HTML files let the asset host serve our extensionless, slashless URLs.
+    format: "file",
+    // Ship the CSS inside each page so it can never paint unstyled. Field data
+    // showed desktop Chrome occasionally painting before the external
+    // stylesheet applied on internal navigations, then snapping into place
+    // (CLS ~0.55, 1.0 on About). Inlining also puts the @view-transition opt-in
+    // in the head, before Chrome decides whether to run the transition.
+    inlineStylesheets: "always",
+  },
 
   env: {
     schema: {

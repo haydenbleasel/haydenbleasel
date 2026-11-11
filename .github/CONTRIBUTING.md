@@ -85,6 +85,7 @@ The work history on the About page is written directly in `src/pages/about.astro
 - Code style is enforced by [Ultracite](https://github.com/haydenbleasel/ultracite) (Oxlint and Oxfmt) with its `core` and `astro` presets.
 - Pages build as flat HTML files (`build.format: "file"`) and URLs have no trailing slash. `public/_redirects` canonicalizes `.html` and trailing-slash URLs before requests reach the Worker.
 - Put client-side behavior in a `src/lib/` module that the component's `<script>` imports, like `nav-hover.ts` or `stack-tabs.ts`, so it's covered by tests. Logic inside an `.astro` file isn't.
+- CSS is inlined into every page (`build.inlineStylesheets: "always"`) rather than loaded as a separate stylesheet. With an external stylesheet, desktop Chrome occasionally painted pages unstyled on internal navigation before snapping into place, a layout shift of about 0.55 (1.0 on About). Keep it inline unless the CSS grows several times larger than its current ~6 KB gzipped.
 - Tests live in `__tests__/` and run on `bun:test`. `__tests__/support/preload.ts` stands in for Astro's virtual modules (`astro:content`, `astro:env/server` and `astro:middleware`), and browser scripts are tested against [happy-dom](https://github.com/capricorn86/happy-dom) with the helpers in `__tests__/support/dom.ts`.
 
 ## Deployment
