@@ -31,7 +31,7 @@
     "@types/node": "^25",
     "happy-dom": "^21.0.4",
     "husky": "^9.1.7",
-    "oxfmt": "^0.54.0",
+    "oxfmt": "^0.77.0",
     "oxlint": "^1.69.0",
     "tailwindcss": "^4",
     "typescript": "^6.0.3",
