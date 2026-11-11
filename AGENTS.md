@@ -20,6 +20,7 @@ Rendering decisions to keep (the config ones are explained in `astro.config.ts`)
 - Cross-document view transitions are on (`@view-transition` in `src/styles/globals.css`). The inline script in `src/layouts/layout.astro` skips them for keyboard navigation.
 - `session: false`: nothing uses Astro sessions, so the Worker has no KV namespace.
 - Redirects for old URLs go in `src/lib/redirects.ts`, which `src/middleware.ts` applies, not in `public/_redirects`.
+- Response headers for static assets (security headers, the long-lived font cache) live in `public/_headers`. HSTS and `X-Content-Type-Options` are Cloudflare zone settings instead, so they also cover responses the Worker generates; don't add them to `_headers` too.
 
 Posts are Markdown in `src/content/posts/`, with `title`, `description` and `date` frontmatter. Add `updated` only for a substantive editorial revision, and never derive it from the build time. Most other copy is typed data in `src/lib/` (`projects.ts`, `stack.ts`, `appearances.ts`, `press.ts`, `writing.ts`, `person.ts`, `pages.ts`). The writing is Hayden's own: don't rewrite posts or bio copy unless asked. Presumi is a product Hayden created, not a startup Hayden founded.
 
@@ -27,7 +28,7 @@ Every push to `main` runs `.github/workflows/deploy.yml` (check, types, the cove
 
 Dependencies use Bun (see `packageManager`), and Astro's CLI runs on Node.js 22.12+. Some packages only work at matching versions, which is why Dependabot groups them: astro, `@astrojs/*`, satteri and wrangler; tailwindcss and `@tailwindcss/vite`; ultracite, oxlint and oxfmt. `@astrojs/cloudflare`'s Vite plugin pins an exact wrangler, so keep the top-level `wrangler` pin equal to it or two copies of wrangler and workerd get installed. TypeScript stays below 7 because `astro check` needs its JavaScript API.
 
-Never add AI co-author trailers (such as `Co-Authored-By: Claude`) to commits or pull requests.
+Commit changes directly to `main`; don't open pull requests on this repo. Never add AI co-author trailers (such as `Co-Authored-By: Claude`) to commits.
 
 # Ultracite Code Standards
 

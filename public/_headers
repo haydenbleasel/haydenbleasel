@@ -1,0 +1,12 @@
+# Headers for responses served from static assets (every page, font and image).
+# HSTS and X-Content-Type-Options come from the Cloudflare zone instead, so they
+# also cover responses the Worker generates (redirects, the 404, the API).
+
+/*
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# The font files never change. Rename one if it does.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
