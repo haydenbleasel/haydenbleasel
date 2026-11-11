@@ -70,10 +70,11 @@ export const stubMatchMedia = <Query extends string>(
   return queries;
 };
 
-export interface FakeAnimation {
+export interface FakeAnimation extends EventTarget {
+  /** Records the call and fires `cancel`, like the real API. */
   cancel: ReturnType<typeof mock>;
   element: Element;
-  /** Resolves `finished`, as if the animation ran to the end. */
+  /** Resolves `finished` and fires `finish`, as if the animation ran to the end. */
   end: () => void;
   finish: ReturnType<typeof mock>;
   finished: Promise<FakeAnimation>;
@@ -91,15 +92,20 @@ export const stubAnimations = () => {
   ) {
     // Like the real API, `finished` resolves to the animation itself.
     const { promise, resolve } = Promise.withResolvers<FakeAnimation>();
-    const animation: FakeAnimation = {
-      cancel: mock(),
+    const animation: FakeAnimation = Object.assign(new EventTarget(), {
+      cancel: mock(() => {
+        animation.dispatchEvent(new Event("cancel"));
+      }),
       element: this,
-      end: () => resolve(animation),
+      end: () => {
+        resolve(animation);
+        animation.dispatchEvent(new Event("finish"));
+      },
       finish: mock(),
       finished: promise,
       keyframes,
       options,
-    };
+    });
     animations.push(animation);
     return animation as unknown as Animation;
   } as unknown as typeof Element.prototype.animate;
@@ -120,13 +126,16 @@ export const stubFonts = () => {
 
 /**
  * Captures ResizeObservers; call the returned function to report a resize to
- * every observer that's watching something.
+ * every observer that's watching something. With `{ queued: true }` it also
+ * reaches observers that have since stopped watching, like a resize that was
+ * already queued when they disconnected.
  */
 export const stubResizeObserver = () => {
   const observers: FakeResizeObserver[] = [];
   class FakeResizeObserver {
     readonly #onResize: () => void;
     readonly #targets = new Set<Element>();
+    #observed = false;
 
     constructor(onResize: () => void) {
       this.#onResize = onResize;
@@ -139,23 +148,24 @@ export const stubResizeObserver = () => {
 
     observe(target: Element) {
       this.#targets.add(target);
+      this.#observed = true;
     }
 
     unobserve(target: Element) {
       this.#targets.delete(target);
     }
 
-    resize() {
-      if (this.#targets.size > 0) {
+    resize(queued: boolean) {
+      if (this.#targets.size > 0 || (queued && this.#observed)) {
         this.#onResize();
       }
     }
   }
   globalThis.ResizeObserver =
     FakeResizeObserver as unknown as typeof ResizeObserver;
-  return () => {
+  return ({ queued = false } = {}) => {
     for (const observer of observers) {
-      observer.resize();
+      observer.resize(queued);
     }
   };
 };

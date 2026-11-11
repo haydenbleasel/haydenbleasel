@@ -85,7 +85,12 @@ export const subscribe = async (
   ) {
     return respond(request, "invalid");
   }
+  // Failures are logged (the Worker has observability on) because a native
+  // post's 303 hides them from status-code metrics.
   if (!environment.token || !environment.audienceId) {
+    console.error(
+      "Newsletter signup unavailable: RESEND_TOKEN or RESEND_AUDIENCE_ID is not set"
+    );
     return respond(request, "unavailable");
   }
   try {
@@ -103,10 +108,15 @@ export const subscribe = async (
       signal: AbortSignal.timeout(10_000),
     });
     if (!response.ok) {
+      console.error(
+        `Newsletter signup failed: Resend responded ${response.status}`,
+        await response.text()
+      );
       return respond(request, "failed");
     }
     return respond(request, "subscribed");
-  } catch {
+  } catch (error) {
+    console.error("Newsletter signup failed: Resend request errored", error);
     return respond(request, "failed");
   }
 };

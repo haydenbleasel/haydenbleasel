@@ -1,6 +1,23 @@
-import { describe, expect, mock, test } from "bun:test";
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  mock,
+  spyOn,
+  test,
+} from "bun:test";
 
 import { subscribe } from "../src/lib/subscribe";
+
+// Failures are logged for the Worker's logs; keep them out of the test output.
+let logged: ReturnType<typeof spyOn<Console, "error">>;
+beforeEach(() => {
+  logged = spyOn(console, "error").mockImplementation(() => {});
+});
+afterEach(() => {
+  logged.mockRestore();
+});
 
 const environment = { audienceId: "test-audience-id", token: "test-token" };
 const buildRequest = (email?: string, headers: HeadersInit = {}) => {
@@ -94,6 +111,9 @@ describe("subscribe", () => {
     );
     expect(response.status).toBe(503);
     expect(send).not.toHaveBeenCalled();
+    expect(logged).toHaveBeenCalledWith(
+      expect.stringContaining("RESEND_TOKEN or RESEND_AUDIENCE_ID")
+    );
   });
 
   test("returns a retryable error when Resend rejects the request", async () => {
@@ -112,10 +132,15 @@ describe("subscribe", () => {
       error: "Signup could not be completed. Please try again.",
       message: "",
     });
+    expect(logged).toHaveBeenCalledWith(
+      "Newsletter signup failed: Resend responded 429",
+      JSON.stringify({ message: "Rate limit exceeded" })
+    );
   });
 
   test("returns a retryable error when the network fails", async () => {
-    const send = mock(() => Promise.reject(new Error("Network unavailable")));
+    const offline = new Error("Network unavailable");
+    const send = mock(() => Promise.reject(offline));
     const response = await subscribe(
       buildRequest("test@example.com"),
       environment,
@@ -126,6 +151,10 @@ describe("subscribe", () => {
       error: "Signup could not be completed. Please try again.",
       message: "",
     });
+    expect(logged).toHaveBeenCalledWith(
+      "Newsletter signup failed: Resend request errored",
+      offline
+    );
   });
 
   test("answers scripts with JSON, whatever they accept", async () => {

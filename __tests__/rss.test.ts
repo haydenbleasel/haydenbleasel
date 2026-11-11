@@ -50,19 +50,29 @@ describe("rss", () => {
     expect(dates).toEqual(dates.toSorted((a, b) => b - a));
   });
 
-  test("dates external writing to the start of its year and names its publisher", async () => {
+  test("dates external writing to its publication date and names its publisher", async () => {
     const response = await call();
     const body = await response.text();
-    const [item] = writing;
-    const entry = body.slice(
-      body.indexOf(`<title>${item.title}</title>`),
-      body.indexOf("</item>", body.indexOf(`<title>${item.title}</title>`))
-    );
+    const entryFor = (title: string) => {
+      const start = body.indexOf(`<title>${title}</title>`);
+      return body.slice(start, body.indexOf("</item>", start));
+    };
+    const dated = writing.find((item) => item.date);
+    const undated = writing.find((item) => !item.date);
+    if (!(dated?.date && undated)) {
+      throw new Error("Expected dated and undated writing entries");
+    }
 
-    expect(entry).toContain(
-      `<pubDate>${new Date(Date.UTC(item.year, 0, 1)).toUTCString()}</pubDate>`
+    expect(entryFor(dated.title)).toContain(
+      `<pubDate>${new Date(`${dated.date}T00:00:00Z`).toUTCString()}</pubDate>`
     );
-    expect(entry).toContain(`<dc:publisher>${item.publisher}</dc:publisher>`);
+    expect(entryFor(dated.title)).toContain(
+      `<dc:publisher>${dated.publisher}</dc:publisher>`
+    );
+    // Without a date on the page, an entry falls back to the start of its year.
+    expect(entryFor(undated.title)).toContain(
+      `<pubDate>${new Date(Date.UTC(undated.year, 0, 1)).toUTCString()}</pubDate>`
+    );
     expect(body).toContain('xmlns:dc="http://purl.org/dc/elements/1.1/"');
     // <source> must link to the publisher's feed, which isn't known.
     expect(body).not.toContain("<source");

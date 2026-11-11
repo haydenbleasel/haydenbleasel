@@ -1,7 +1,14 @@
-import { describe, expect, mock, test } from "bun:test";
+import { describe, expect, test } from "bun:test";
 
 import { initExpandableProjects } from "../src/lib/expandable-projects";
-import { query, setRect, stubMatchMedia, useDom } from "./support/dom";
+import {
+  query,
+  setRect,
+  stubAnimations,
+  stubMatchMedia,
+  stubResizeObserver,
+  useDom,
+} from "./support/dom";
 
 useDom();
 
@@ -25,11 +32,6 @@ const markup = (names: string[]) => `
   </div>
 `;
 
-interface FakeAnimation extends EventTarget {
-  cancel: ReturnType<typeof mock>;
-  keyframes: Keyframe[];
-}
-
 // Rows are 40px tall from the container's top at 100px; the container is
 // 300px tall once nothing is collapsed.
 const setup = ({ reducedMotion = false } = {}) => {
@@ -46,54 +48,13 @@ const setup = ({ reducedMotion = false } = {}) => {
     setRect(row, { height: 40, left: 0, top: 100 + index * 40, width: 600 });
   }
 
-  const animations: FakeAnimation[] = [];
-  Element.prototype.animate = function animate(keyframes: Keyframe[]) {
-    const animation = Object.assign(new EventTarget(), {
-      cancel: mock(),
-      keyframes,
-    });
-    animations.push(animation);
-    return animation as unknown as Animation;
-  } as unknown as typeof Element.prototype.animate;
-
-  // Delivers resizes even after an observer disconnects, as a resize that was
-  // already queued would be.
-  const observers: QueuedResizeObserver[] = [];
-  class QueuedResizeObserver {
-    readonly #onResize: () => void;
-    observing = false;
-
-    constructor(onResize: () => void) {
-      this.#onResize = onResize;
-      observers.push(this);
-    }
-
-    disconnect() {
-      this.observing = false;
-    }
-
-    observe() {
-      this.observing = true;
-    }
-
-    deliver() {
-      this.#onResize();
-    }
-  }
-  globalThis.ResizeObserver =
-    QueuedResizeObserver as unknown as typeof ResizeObserver;
-
   return {
-    animations,
+    animations: stubAnimations(),
     button: query<HTMLButtonElement>("[data-project-expand]"),
     container,
     fade: query("[data-project-fade]"),
     media: stubMatchMedia({ [REDUCED_MOTION]: reducedMotion }),
-    resize: () => {
-      for (const observer of observers) {
-        observer.deliver();
-      }
-    },
+    resize: stubResizeObserver(),
     rows,
   };
 };
@@ -160,12 +121,12 @@ describe("expandable projects", () => {
       { height: "300px" },
     ]);
     expect(container.dataset.expanding).toBe("");
-    animations[0].dispatchEvent(new Event("finish"));
+    animations[0].end();
     expect(container.dataset.expanding).toBeUndefined();
 
     // A resize queued before expanding doesn't collapse the list again, and
     // neither does another click.
-    resize();
+    resize({ queued: true });
     click(button);
     expect(container.style.height).toBe("");
     expect(animations).toHaveLength(1);
@@ -194,7 +155,6 @@ describe("expandable projects", () => {
     expect(animations[0].cancel).not.toHaveBeenCalled();
     media[REDUCED_MOTION].change(true);
     expect(animations[0].cancel).toHaveBeenCalled();
-    animations[0].dispatchEvent(new Event("cancel"));
     expect(container.dataset.expanding).toBeUndefined();
   });
 });

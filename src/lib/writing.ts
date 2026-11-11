@@ -1,6 +1,10 @@
 export interface WritingItem {
   // Additional credited authors beyond me, for co-authored works.
   coAuthors?: { name: string; url: string }[];
+  // The publication date (YYYY-MM-DD) shown on the article. Give it for every
+  // new entry: the RSS feed dates an entry without one to January 1 of its
+  // year. It's only missing where the page shows no date.
+  date?: string;
   description: string;
   publisher: string;
   // Schema.org type for the JSON-LD item; defaults to Article.
@@ -12,6 +16,7 @@ export interface WritingItem {
 
 export const writing: WritingItem[] = [
   {
+    date: "2026-03-16",
     description: "Inline math, streaming animations and improved code blocks.",
     publisher: "Vercel",
     title: "Streamdown 2.5 is now available",
@@ -19,6 +24,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-13",
     description: "Bun by default, optional integrations and an agent skill.",
     publisher: "Vercel",
     title: "next-forge 6 is now available",
@@ -26,6 +32,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-12",
     description: "JSX previews, screenshots and downloadable conversations.",
     publisher: "Vercel",
     title: "AI Elements 1.9 is now available",
@@ -33,6 +40,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-11",
     description: "Manage feature flags from the CLI and with AI agents.",
     publisher: "Vercel",
     title: "Vercel Flags are now optimized for agents",
@@ -40,6 +48,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-11",
     description: "Messages, reactions and read receipts for WhatsApp bots.",
     publisher: "Vercel",
     title: "Chat SDK adds WhatsApp adapter support",
@@ -47,6 +56,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-10",
     description: "Store bot state in PostgreSQL without Redis.",
     publisher: "Vercel",
     title: "Chat SDK adds PostgreSQL state adapter",
@@ -54,6 +64,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-10",
     description: "Find official and community adapters in one place.",
     publisher: "Vercel",
     title: "Chat SDK now has an adapter directory",
@@ -61,6 +72,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-06",
     description: "Render tables and stream Markdown across chat platforms.",
     publisher: "Vercel",
     title: "Chat SDK adds table rendering and streaming markdown",
@@ -68,6 +80,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-03-05",
     description: "More control over rendering, languages and accessibility.",
     publisher: "Vercel",
     title:
@@ -76,6 +89,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-02-27",
     description: "Mentions, reactions and typing indicators for Telegram bots.",
     publisher: "Vercel",
     title: "Chat SDK adds Telegram adapter support",
@@ -83,6 +97,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-02-23",
     description: "Write bot logic once and deploy across chat platforms.",
     publisher: "Vercel",
     title: "Introducing npm i chat – One codebase, every chat platform",
@@ -90,6 +105,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-02-19",
     description: "A refreshed design, playground and custom rendering hooks.",
     publisher: "Vercel",
     title: "Streamdown 2.3 — Refreshed design and interactive playground",
@@ -97,6 +113,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-01-21",
     description: "Composable components for coding apps and AI agents.",
     publisher: "Vercel",
     title: "AI Code Elements",
@@ -104,6 +121,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-01-14",
     description: "Components for voice agents, transcription and speech apps.",
     publisher: "Vercel",
     title: "AI Voice Elements",
@@ -111,6 +129,7 @@ export const writing: WritingItem[] = [
     year: 2026,
   },
   {
+    date: "2026-01-12",
     description:
       "A smaller plugin-based core with configurable Markdown repair.",
     publisher: "Vercel",
@@ -133,6 +152,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-11-24",
     description: "Build visual workflows with drag-and-drop editing and AI.",
     publisher: "Vercel",
     title: "Workflow Builder: Build your own workflow automation platform",
@@ -140,6 +160,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-12-05",
     description: "Prebuilt components and actions for multi-tenant platforms.",
     publisher: "Vercel",
     title: "Introducing Platform Elements",
@@ -147,6 +168,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-12-05",
     description: "Deploy platforms with multi-tenant and multi-project modes.",
     publisher: "Vercel",
     title: "Introducing Vercel for Platforms",
@@ -154,6 +176,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-12-03",
     description: "Repair incomplete Markdown as AI responses stream.",
     publisher: "Vercel",
     title:
@@ -162,6 +185,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-11-24",
     description: "A leaner Markdown renderer with faster code highlighting.",
     publisher: "Vercel",
     title: "Streamdown 1.6 is now available to run faster and ship less code",
@@ -169,6 +193,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-09-08",
     description: "Animated text streaming and better custom HTML support.",
     publisher: "Vercel",
     title:
@@ -177,6 +202,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-08-21",
     description: "An open source Markdown renderer built for AI streaming.",
     publisher: "Vercel",
     title: "Introducing Streamdown: Open source Markdown for AI streaming",
@@ -184,6 +210,7 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
+    date: "2025-08-06",
     description: "Composable React components for AI interfaces.",
     publisher: "Vercel",
     title: "Introducing AI Elements: Prebuilt, composable AI SDK components",
@@ -209,6 +236,7 @@ export const writing: WritingItem[] = [
     year: 2023,
   },
   {
+    date: "2022-08-10",
     description: "The story behind ESLint’s brand and website redesign.",
     publisher: "ESLint",
     title: "Redesigning ESLint",

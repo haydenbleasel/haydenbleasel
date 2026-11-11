@@ -13,11 +13,11 @@ const escapeXml = (value: string) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 
-// External writing only carries a year, so it's dated to the start of that
-// year. Readers stamp an item without a pubDate with the time they fetch it,
-// which would list years-old articles as the newest. RSS's <source> must point
-// at the publisher's feed, which we don't have, so Dublin Core names the
-// publisher instead.
+// External writing is dated to its publication date, or to January 1 of its
+// year for the few entries whose pages show no date. Readers stamp an item
+// without a pubDate with the time they fetch it, which would list years-old
+// articles as the newest. RSS's <source> must point at the publisher's feed,
+// which we don't have, so Dublin Core names the publisher instead.
 export const GET: APIRoute = async () => {
   const posts = await getPosts();
   const postItems = posts.map((post) => {
@@ -34,7 +34,9 @@ export const GET: APIRoute = async () => {
     };
   });
   const externalItems = writing.map((item) => {
-    const date = new Date(Date.UTC(item.year, 0, 1));
+    const date = item.date
+      ? new Date(item.date)
+      : new Date(Date.UTC(item.year, 0, 1));
     return {
       date,
       xml: `    <item>

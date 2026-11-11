@@ -11,8 +11,10 @@ export const prerender = true;
 
 // Prerendered, so this is the build time and response headers set here never
 // reach the static file. The carousel script (src/lib/upcoming-carousel.ts)
-// re-checks every card's dates in the browser, so events expire without another
-// deployment.
+// re-checks every card's dates in the browser, so events expire on time. The
+// deploy workflow also rebuilds the site within an hour or so of an event
+// starting or ending (see hasScheduleChange), for visitors and crawlers that
+// don't run the script.
 const now = new Date();
 const upcoming = getUpcomingAppearances(appearances, now);
 

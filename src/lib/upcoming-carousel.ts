@@ -6,14 +6,21 @@ const playVideo = async (video: HTMLVideoElement) => {
   }
 };
 
+const HAVE_METADATA = 1;
+
 // Without JavaScript the video keeps its native controls. With it, a compact
-// play/pause toggle replaces them once the video can play.
+// play/pause toggle replaces them once the video's metadata loads, which
+// `preload="metadata"` asks for. A video that never loads keeps its native
+// controls, so it's never left without a way to play it.
 const enhanceVideo = (card: HTMLElement, video: HTMLVideoElement) => {
   const toggle = card.querySelector<HTMLButtonElement>("[data-video-toggle]");
   if (!toggle) {
     return;
   }
-  video.controls = false;
+  const showToggle = () => {
+    video.controls = false;
+    toggle.hidden = false;
+  };
   const updateToggle = () => {
     toggle.setAttribute(
       "aria-label",
@@ -28,11 +35,10 @@ const enhanceVideo = (card: HTMLElement, video: HTMLVideoElement) => {
   };
   video.addEventListener("play", updateToggle);
   video.addEventListener("pause", updateToggle);
-  video.addEventListener("loadeddata", () => {
-    toggle.hidden = false;
-  });
-  if (video.readyState >= 2) {
-    toggle.hidden = false;
+  if (video.readyState >= HAVE_METADATA) {
+    showToggle();
+  } else {
+    video.addEventListener("loadedmetadata", showToggle, { once: true });
   }
   toggle.addEventListener("click", () => {
     video.dataset.userPaused = String(!video.paused);

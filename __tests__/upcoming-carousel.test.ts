@@ -314,9 +314,11 @@ describe("upcoming appearances carousel", () => {
     const { next, previous, toggle, video } = setup();
     initUpcomingCarousel();
 
-    expect(video.controls).toBe(false);
+    // Native controls stay until the toggle can replace them.
+    expect(video.controls).toBe(true);
     expect(toggle.hidden).toBe(true);
-    video.dispatchEvent(new Event("loadeddata"));
+    video.dispatchEvent(new Event("loadedmetadata"));
+    expect(video.controls).toBe(false);
     expect(toggle.hidden).toBe(false);
     expect(video.paused).toBe(true);
 
@@ -344,12 +346,23 @@ describe("upcoming appearances carousel", () => {
     expect(video.dataset.userPaused).toBe("false");
   });
 
-  test("shows the toggle straight away when the video already loaded", () => {
-    const { toggle } = setup({ readyState: 2 });
+  test("shows the toggle straight away when the video's metadata already loaded", () => {
+    const { toggle, video } = setup({ readyState: 1 });
 
     initUpcomingCarousel();
 
     expect(toggle.hidden).toBe(false);
+    expect(video.controls).toBe(false);
+  });
+
+  test("keeps native controls on a video that fails to load", () => {
+    const { toggle, video } = setup({ reducedMotion: true });
+    initUpcomingCarousel();
+
+    video.dispatchEvent(new Event("error"));
+
+    expect(video.controls).toBe(true);
+    expect(toggle.hidden).toBe(true);
   });
 
   test("keeps native controls on a video without a toggle, but still plays it", async () => {

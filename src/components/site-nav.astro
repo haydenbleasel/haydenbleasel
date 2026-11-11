@@ -2,18 +2,24 @@
 import { pagePath } from "@/lib/page-path";
 import { isPostPath } from "@/lib/posts";
 
-const links = [
+interface NavLink {
+  href: string;
+  label: string;
+  // Whether a page belongs to the link's section, which marks the link as the
+  // current location. Defaults to pages under its path.
+  within?: (pathname: string) => boolean;
+}
+
+const links: NavLink[] = [
   { href: "/about", label: "About" },
-  { href: "/writing", label: "Writing" },
+  // Every post, including those postPath serves from the root.
+  { href: "/writing", label: "Writing", within: isPostPath },
   { href: "/speaking", label: "Speaking" },
   { href: "/press", label: "Press" },
 ];
 const pathname = pagePath(Astro.url.pathname);
-// Pages under a link's section mark it as the current location. Every post
-// belongs to Writing, including those postPath serves from the root.
-const isWithin = (href: string) =>
-  pathname.startsWith(`${href}/`) ||
-  (href === "/writing" && isPostPath(pathname));
+const isWithin = ({ href, within }: NavLink) =>
+  within ? within(pathname) : pathname.startsWith(`${href}/`);
 ---
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -22,7 +28,7 @@ const isWithin = (href: string) =>
   <nav aria-label="Main navigation" class="site-nav">
     <span aria-hidden="true" class="site-nav-hover" />
     {links.map((link) => (
-      <a href={link.href} aria-current={pathname === link.href ? "page" : isWithin(link.href) ? "location" : undefined}>
+      <a href={link.href} aria-current={pathname === link.href ? "page" : isWithin(link) ? "location" : undefined}>
         {link.label}
       </a>
     ))}

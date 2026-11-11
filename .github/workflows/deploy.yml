@@ -7,20 +7,59 @@ on:
   push:
     branches:
       - main
+  # /speaking is prerendered, so it only drops an ended event, or marks one
+  # "Happening now", when the site is rebuilt. The carousel script handles it
+  # in the browser; this rebuilds for visitors and crawlers without JavaScript.
+  schedule:
+    - cron: "7 * * * *"
   workflow_dispatch:
 
 permissions:
   contents: read
 
-concurrency:
-  group: deploy
-  cancel-in-progress: true
-
 jobs:
+  # Scheduled runs only deploy when an event started or ended in the past two
+  # hours. That's twice the schedule's interval, so a run GitHub starts late or
+  # skips is covered by the next one, at the cost of sometimes deploying twice.
+  schedule:
+    name: Check event schedule
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+
+      # Both modules are plain data and logic, so this needs no dependencies.
+      - name: Check for events that started or ended
+        id: check
+        run: |
+          bun --eval '
+            import { appearances } from "./src/lib/appearances.ts";
+            import { hasScheduleChange } from "./src/lib/upcoming-appearances.ts";
+
+            const since = new Date(Date.now() - 2 * 60 * 60 * 1000);
+            console.log(`changed=${hasScheduleChange(appearances, since)}`);
+          ' >> "$GITHUB_OUTPUT"
+
   deploy:
     name: Deploy
+    needs: schedule
+    # `schedule` is skipped on pushes and manual runs, which always deploy.
+    if: ${{ !cancelled() && (github.event_name != 'schedule' || needs.schedule.outputs.changed == 'true') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    # On the job, not the workflow, so an hourly check that doesn't deploy
+    # never cancels a deploy in progress.
+    concurrency:
+      group: deploy
+      cancel-in-progress: true
 
     steps:
       - name: Checkout

@@ -6,6 +6,7 @@ import { press } from "../src/lib/press";
 import { projects } from "../src/lib/projects";
 import { portraitImage } from "../src/lib/social-image";
 import { categories, stack } from "../src/lib/stack";
+import { writing } from "../src/lib/writing";
 
 const ROOT = path.join(import.meta.dir, "..");
 
@@ -69,6 +70,19 @@ describe("press", () => {
     expect(duplicates(press.map((item) => item.url))).toEqual([]);
     for (const item of press) {
       expect(item.url.startsWith("https://")).toBe(true);
+    }
+  });
+});
+
+describe("writing", () => {
+  // The RSS feed dates entries by `date`, and /writing shows `year`.
+  test("publication dates are real days in the entry's year", () => {
+    for (const item of writing.filter((entry) => entry.date)) {
+      expect(item.date).toMatch(/^\d{4}-\d{2}-\d{2}$/u);
+      expect(new Date(`${item.date}T00:00:00Z`).toISOString()).toStartWith(
+        `${item.date}T`
+      );
+      expect(item.date?.slice(0, 4)).toBe(String(item.year));
     }
   });
 });
