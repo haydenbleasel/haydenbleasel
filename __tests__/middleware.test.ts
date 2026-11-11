@@ -25,6 +25,7 @@ describe("middleware redirects", () => {
     ["/blog/presumi", "https://haydenbleasel.com/writing/presumi", 308],
     ["/games", "https://haydenbleasel.com/", 307],
     ["/posts", "https://x.com/haydenbleasel", 308],
+    ["/contact", "https://x.com/haydenbleasel", 307],
   ])("%s redirects to %s with a %d", async (path, location, status) => {
     const { next, redirect } = await request(path);
 

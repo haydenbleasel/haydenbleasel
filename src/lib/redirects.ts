@@ -63,6 +63,13 @@ export const redirects: Redirect[] = [
     permanent: true,
     source: "/code",
   },
+  // Linked from the codes of conduct in my other repos. There's no contact page,
+  // so send people to DMs on X; temporary so a real page can take over later.
+  {
+    destination: "https://x.com/haydenbleasel",
+    permanent: false,
+    source: "/contact",
+  },
   { destination: "/", permanent: false, source: "/games" },
   { destination: "/", permanent: false, source: "/books" },
   { destination: "/", permanent: false, source: "/music" },

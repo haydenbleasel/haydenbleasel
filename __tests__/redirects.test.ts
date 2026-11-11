@@ -39,6 +39,14 @@ describe("redirects", () => {
     }
   });
 
+  test("/contact, which other repos link to, temporarily goes to X", () => {
+    expect(bySource("/contact")).toEqual({
+      destination: "https://x.com/haydenbleasel",
+      permanent: false,
+      source: "/contact",
+    });
+  });
+
   test("no redirect points at the os1 domain", () => {
     for (const redirect of redirects) {
       expect(redirect.destination).not.toContain("os1.haydenbleasel.com");
