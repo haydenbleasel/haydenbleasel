@@ -21,7 +21,7 @@
     "@astrojs/markdown-satteri": "0.4.0",
     "astro": "^7.2.0",
     "satteri": "0.10.5",
-    "takumi-js": "^2.9.2"
+    "takumi-js": "^2.19.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
