@@ -109,9 +109,7 @@ export const initStackTabs = async () => {
         duration: 90,
         easing: "ease-out",
         fill: "forwards",
-      })
-    );
-    running.push(
+      }),
       next.animate(enterFrames, {
         duration: reducedMotion.matches ? 100 : 160,
         easing: ease,

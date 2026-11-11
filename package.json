@@ -17,10 +17,10 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "14.3.0",
-    "@astrojs/markdown-satteri": "0.4.0",
-    "astro": "^7.2.0",
-    "satteri": "0.10.5",
+    "@astrojs/cloudflare": "14.4.7",
+    "@astrojs/markdown-satteri": "0.4.8",
+    "astro": "^7.4.10",
+    "satteri": "0.11.7",
     "takumi-js": "^2.19.0"
   },
   "devDependencies": {
@@ -31,12 +31,12 @@
     "@types/node": "^25",
     "happy-dom": "^21.0.4",
     "husky": "^9.1.7",
-    "oxfmt": "^0.54.0",
-    "oxlint": "^1.69.0",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
     "tailwindcss": "^4",
     "typescript": "^6.0.3",
-    "ultracite": "^7.8.3",
-    "wrangler": "^4.125.0"
+    "ultracite": "^8.1.1",
+    "wrangler": "4.157.0"
   },
   "overrides": {
     "vscode-languageserver-protocol": "3.17.5"

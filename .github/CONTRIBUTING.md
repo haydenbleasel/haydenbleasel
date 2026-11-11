@@ -37,11 +37,11 @@ A pre-commit hook runs `check`, `test:coverage` and `types`. CI (`.github/workfl
 
 The newsletter signup needs Resend credentials. Locally, put them in `.dev.vars` or `.env` (both are gitignored). Without them, the signup endpoint returns a 503.
 
-| Variable             | Purpose                                                                                                                              |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `RESEND_TOKEN`       | Resend API key                                                                                                                       |
-| `RESEND_AUDIENCE_ID` | The Resend audience new subscribers join                                                                                             |
-| `SITE_ORIGIN`        | Optional. Overrides the canonical origin, which defaults to `https://haydenbleasel.com` in builds and `http://localhost:3010` in dev |
+| Variable | Purpose |
+| --- | --- |
+| `RESEND_TOKEN` | Resend API key |
+| `RESEND_AUDIENCE_ID` | The Resend audience new subscribers join |
+| `SITE_ORIGIN` | Optional. Overrides the canonical origin, which defaults to `https://haydenbleasel.com` in builds and `http://localhost:3010` in dev |
 
 ## Writing posts
 
@@ -67,16 +67,16 @@ For a substantive editorial revision, add `updated: YYYY-MM-DD`. This sets the a
 
 Most of the rest of the site comes from typed data in `src/lib/`:
 
-| File             | What it drives                                                                                            |
-| ---------------- | --------------------------------------------------------------------------------------------------------- |
-| `projects.ts`    | Projects on the homepage and the About page                                                               |
-| `stack.ts`       | The stack on the About page                                                                               |
+| File | What it drives |
+| --- | --- |
+| `projects.ts` | Projects on the homepage and the About page |
+| `stack.ts` | The stack on the About page |
 | `appearances.ts` | Talks, panels and judging on `/speaking`. Entries with an `event` are featured as upcoming until they end |
-| `press.ts`       | `/press`                                                                                                  |
-| `writing.ts`     | Articles and courses published elsewhere, on `/writing` and in the RSS feed                               |
-| `pages.ts`       | Titles and descriptions for each page's metadata and social card                                          |
-| `person.ts`      | The bio and schema.org `Person` data used in page metadata                                                |
-| `redirects.ts`   | Redirects for old URLs, applied in `src/middleware.ts`                                                    |
+| `press.ts` | `/press` |
+| `writing.ts` | Articles and courses published elsewhere, on `/writing` and in the RSS feed |
+| `pages.ts` | Titles and descriptions for each page's metadata and social card |
+| `person.ts` | The bio and schema.org `Person` data used in page metadata |
+| `redirects.ts` | Redirects for old URLs, applied in `src/middleware.ts` |
 
 The work history on the About page is written directly in `src/pages/about.astro`.
 

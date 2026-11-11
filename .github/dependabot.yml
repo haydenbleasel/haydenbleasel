@@ -15,6 +15,33 @@ updates:
     schedule:
       interval: "monthly"
     labels: ["dependencies", "javascript"]
+    # Packages that only work at matching versions. Bumped one at a time, each
+    # PR failed CI or left a peer dependency unmet.
+    groups:
+      # The Cloudflare adapter peers on astro, markdown-satteri pins Astro's
+      # internal helpers and satteri, and the adapter's Vite plugin pins
+      # wrangler.
+      astro:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+          - "satteri"
+          - "wrangler"
+      # The Vite plugin decides which Tailwind actually builds the CSS.
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      # Ultracite's presets enable rules from specific oxlint and oxfmt versions.
+      lint:
+        patterns:
+          - "ultracite"
+          - "oxlint"
+          - "oxfmt"
+      happy-dom:
+        patterns:
+          - "happy-dom"
+          - "@happy-dom/*"
     ignore:
       # TypeScript 7 has no JS API, which `astro check` (@astrojs/check)
       # depends on.
