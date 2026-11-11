@@ -20,7 +20,7 @@
     "@astrojs/cloudflare": "14.3.0",
     "@astrojs/markdown-satteri": "0.4.0",
     "astro": "^7.2.0",
-    "satteri": "0.10.5",
+    "satteri": "0.11.7",
     "takumi-js": "^2.19.0"
   },
   "devDependencies": {
