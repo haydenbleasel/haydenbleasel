@@ -1,0 +1,101 @@
+---
+import ProjectList from "@/components/project-list.astro";
+import NewsletterInline from "@/components/newsletter-inline.astro";
+import SiteNav from "@/components/site-nav.astro";
+import SiteFooter from "@/components/site-footer.astro";
+import Layout from "@/layouts/layout.astro";
+import { projects } from "@/lib/projects";
+import { getPosts, postPath } from "@/lib/posts";
+
+export const prerender = true;
+const activeProjects = projects.filter((project) => project.status === "Active");
+const posts = await getPosts();
+const latestPosts = posts.slice(0, 3);
+---
+
+<Layout>
+  <script is:inline>
+    (() => {
+      const [navigation] = performance.getEntriesByType("navigation");
+      const internalNavigation = document.referrer &&
+        new URL(document.referrer).origin === location.origin;
+
+      // Let internal navigation use the existing page crossfade, and keep
+      // restored history immediately readable. Reloads replay the entrance.
+      if (navigation?.type === "back_forward" ||
+        (navigation?.type !== "reload" && internalNavigation)) {return;}
+
+      const root = document.documentElement;
+      root.dataset.homeIntro = "";
+      const finishIntro = () => { delete root.dataset.homeIntro; };
+      addEventListener("keydown", finishIntro, { once: true });
+      addEventListener("pointerdown", finishIntro, { once: true });
+      addEventListener("pageshow", (event) => {
+        if (event.persisted) {finishIntro();}
+      });
+    })();
+  </script>
+  <div class="site-shell home-shell">
+    <SiteNav />
+    <main class="home-content page-content" id="main-content">
+      <div class="home-intro">
+        <p>
+          I’m an Australian software engineer and product designer, currently a
+          Member of Technical Staff at <a class="text-link" href="https://openai.com" target="_blank" rel="noopener noreferrer">OpenAI</a>.
+          Originally from Sydney, I now live in San Francisco on an O‑1A.
+        </p>
+        <p>
+          Previously at Vercel, I created <a class="text-link" href="https://streamdown.ai/" target="_blank" rel="noopener noreferrer">Streamdown</a>{" "}
+          and <a class="text-link" href="https://ui.shadcn.com/docs/ai-elements" target="_blank" rel="noopener noreferrer">AI Elements</a>,
+          and launched <a class="text-link" href="https://chat-sdk.dev/" target="_blank" rel="noopener noreferrer">Chat SDK</a>.
+          I’ve also led product at <a class="text-link" href="https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/" target="_blank" rel="noopener noreferrer">Corellium</a>, founded and sold the agency{" "}
+          <a class="text-link" href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem" target="_blank" rel="noopener noreferrer">Jellypepper</a>, and built <a class="text-link" href="/about#projects">next-forge, Kibo UI and Refraction</a>,
+          all of which were acquired.
+        </p>
+        <p>
+          After hours I maintain open source software. If these projects are useful to you, consider <a class="text-link" href="https://github.com/sponsors/haydenbleasel" target="_blank" rel="noopener noreferrer">sponsoring my work</a>.
+        </p>
+      </div>
+      <section class="home-section home-projects" id="projects" aria-labelledby="active-projects">
+        <h2 class="section-label" id="active-projects">Active projects</h2>
+        <ProjectList projects={activeProjects} showStatus={false} />
+      </section>
+      <section class="home-section latest-writing" aria-labelledby="latest-writing">
+        <h2 class="section-label" id="latest-writing">Latest writing</h2>
+        <div class="article-list">
+          {latestPosts.map((post) => (
+            <a class="article-entry" href={postPath(post.id)}>
+              <h3 class="article-title">{post.data.title}</h3>
+            </a>
+          ))}
+        </div>
+      </section>
+      <NewsletterInline />
+    </main>
+    <SiteFooter />
+  </div>
+</Layout>
+
+<style>
+  .home-projects :global(.project-list) {
+    display: grid;
+    gap: 1rem;
+    margin-top: 0;
+  }
+
+  .home-projects :global(.project-row) {
+    grid-template-columns: 1.25rem 7rem minmax(0, 1fr);
+    padding-block: 0;
+    border-bottom: 0;
+  }
+
+  @media (max-width: 640px) {
+    .home-projects :global(.project-row) {
+      grid-template-columns: 1.25rem minmax(0, 1fr);
+    }
+  }
+
+  .latest-writing .article-list {
+    gap: 1rem;
+  }
+</style>

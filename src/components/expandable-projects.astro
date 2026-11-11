@@ -1,0 +1,166 @@
+---
+import ProjectList from "@/components/project-list.astro";
+import type { Project } from "@/lib/projects";
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="expandable-projects" data-expandable-projects>
+  <div id="about-project-list" data-project-content>
+    <ProjectList projects={projects} />
+  </div>
+  <div aria-hidden="true" class="projects-fade" data-project-fade hidden></div>
+  <button
+    aria-controls="about-project-list"
+    aria-expanded="false"
+    class="projects-show-more"
+    data-project-expand
+    hidden
+    type="button"
+  >Show more</button>
+</div>
+
+<style>
+  .expandable-projects {
+    position: relative;
+    display: flow-root;
+  }
+
+  .expandable-projects[data-collapsed],
+  .expandable-projects[data-expanding] {
+    overflow: hidden;
+  }
+
+  .projects-fade {
+    position: absolute;
+    inset: var(--projects-fade-start) 0 0;
+    background: linear-gradient(to bottom, transparent, var(--background) 70%);
+    pointer-events: none;
+  }
+
+  .projects-show-more {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+    min-height: 44px;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 9999px;
+    background: var(--background);
+    color: var(--foreground);
+    font: inherit;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: nowrap;
+    transition: background-color 140ms ease, transform 140ms var(--motion-ease);
+  }
+
+  .projects-show-more:focus-visible {
+    outline-offset: -4px;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .projects-show-more:hover {
+      background: var(--nav-hover);
+    }
+  }
+
+  .projects-show-more:active {
+    transform: scale(0.97);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-show-more {
+      transition: none;
+    }
+
+    .projects-show-more:active {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  const container = document.querySelector<HTMLElement>("[data-expandable-projects]");
+  const content = container?.querySelector<HTMLElement>("[data-project-content]");
+  const fade = container?.querySelector<HTMLElement>("[data-project-fade]");
+  const button = container?.querySelector<HTMLButtonElement>("[data-project-expand]");
+  const rows = [...(content?.querySelectorAll<HTMLElement>("[data-project]") ?? [])];
+  const cutoff = rows.findIndex((row) => row.dataset.project === "Orate");
+
+  if (container && content && fade && button && cutoff !== -1 && cutoff < rows.length - 1) {
+    const concealed = rows.slice(cutoff);
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    let expanded = false;
+    let animation: Animation | undefined;
+
+    const measure = () => {
+      if (expanded) {
+        return;
+      }
+      const { top } = container.getBoundingClientRect();
+      const boundary = rows[cutoff].getBoundingClientRect();
+      container.style.height = `${boundary.bottom - top + 28}px`;
+      container.style.setProperty("--projects-fade-start", `${boundary.top - top - 8}px`);
+    };
+
+    // Keep the complete list available when JavaScript is disabled.
+    container.dataset.collapsed = "";
+    for (const row of concealed) {
+      row.inert = true;
+    }
+    measure();
+    fade.hidden = false;
+    button.hidden = false;
+
+    // Re-measure the Orate boundary after fonts load or the layout wraps.
+    const observer = new ResizeObserver(measure);
+    observer.observe(content);
+
+    button.addEventListener("click", (event) => {
+      if (expanded) {
+        return;
+      }
+      expanded = true;
+      observer.disconnect();
+      const fromHeight = container.getBoundingClientRect().height;
+      button.setAttribute("aria-expanded", "true");
+      button.hidden = true;
+      fade.hidden = true;
+      for (const row of concealed) {
+        row.inert = false;
+      }
+      delete container.dataset.collapsed;
+      container.style.removeProperty("height");
+      const toHeight = container.getBoundingClientRect().height;
+
+      if (event.detail === 0) {
+        concealed[0].querySelector<HTMLAnchorElement>("a")?.focus({ preventScroll: true });
+      }
+
+      if (!reducedMotion.matches && event.detail !== 0) {
+        container.dataset.expanding = "";
+        animation = container.animate(
+          [{ height: `${fromHeight}px` }, { height: `${toHeight}px` }],
+          { duration: 280, easing: "cubic-bezier(0.25, 1, 0.5, 1)" }
+        );
+        const finish = () => {
+          delete container.dataset.expanding;
+        };
+        animation.addEventListener("finish", finish, { once: true });
+        animation.addEventListener("cancel", finish, { once: true });
+      }
+    });
+
+    reducedMotion.addEventListener("change", () => {
+      if (reducedMotion.matches) {
+        animation?.cancel();
+      }
+    });
+  }
+</script>

@@ -1,0 +1,24 @@
+---
+import ProjectIcon from "@/components/project-icon.astro";
+import type { Project } from "@/lib/projects";
+
+interface Props {
+  projects: Project[];
+  showStatus?: boolean;
+}
+const { projects, showStatus = true } = Astro.props;
+---
+
+<ul class="project-list">
+          {projects.map((project) => (
+            <li class:list={["project-row", { "project-row-acquired": project.status === "Acquired", "opacity-50": project.status === "Merged" || project.status === "Archived" }]} data-project={project.name}>
+              <ProjectIcon class="project-icon" name={project.name} />
+              <div class="project-name">
+                <a class="text-link" href={project.url} target={project.url.startsWith("/") ? undefined : "_blank"} rel={project.url.startsWith("/") ? undefined : "noopener noreferrer"}>{project.name}</a>
+                {project.footnote ? <sup><a aria-label="Refraction customers" href={`#footnote-${project.footnote}`} id={`footnote-ref-${project.footnote}`}>[{project.footnote}]</a></sup> : null}
+              </div>
+              <p class="project-description">{project.description}</p>
+              {showStatus && <span class="project-status">{project.status}</span>}
+            </li>
+          ))}
+        </ul>

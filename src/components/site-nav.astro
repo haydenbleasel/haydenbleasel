@@ -1,0 +1,30 @@
+---
+import { pagePath } from "@/lib/page-path";
+
+const links = [
+  { href: "/about", label: "About" },
+  { href: "/writing", label: "Writing" },
+  { href: "/speaking", label: "Speaking" },
+  { href: "/press", label: "Press" },
+];
+const pathname = pagePath(Astro.url.pathname);
+---
+
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  {pathname === "/" ? <h1 class="site-name">Hayden Bleasel</h1> : <a class="site-name" href="/">Hayden Bleasel</a>}
+  <nav aria-label="Main navigation" class="site-nav">
+    <span aria-hidden="true" class="site-nav-hover" />
+    {links.map((link) => (
+      <a href={link.href} aria-current={pathname === link.href ? "page" : pathname.startsWith(`${link.href}/`) ? "location" : undefined}>
+        {link.label}
+      </a>
+    ))}
+  </nav>
+</header>
+
+<script>
+  import { initNavHover } from "@/lib/nav-hover";
+
+  initNavHover();
+</script>

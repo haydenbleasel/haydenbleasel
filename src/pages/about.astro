@@ -1,0 +1,477 @@
+---
+import CompanyIcon from "@/components/company-icon.astro";
+import ExpandableProjects from "@/components/expandable-projects.astro";
+import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
+import { identity, person, primaryPortrait } from "@/lib/person";
+import { projects } from "@/lib/projects";
+import { categories, stack } from "@/lib/stack";
+
+// Let Astro enforce permanent canonical redirects before serving this page.
+export const prerender = true;
+const { description, title } = getPage("/about");
+const LINK = "text-link";
+const stackSections = categories
+  .map((category) => ({ heading: category, items: stack.filter((item) => item.category === category) }))
+  .filter((section) => section.items.length > 0);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/about#webpage`,
+  "@type": "AboutPage",
+  description,
+  mainEntity: person,
+  name: "About Hayden Bleasel",
+  primaryImageOfPage: primaryPortrait,
+  url: `${identity}/about`,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="page-sections">
+
+      <div class="home-intro flow-root">
+        <img
+          alt="Hayden Bleasel"
+          class="float-right mb-4 ml-6 w-36 rounded-lg sm:w-44"
+          height="512"
+          loading="eager"
+          src="/photo-3x4.jpg"
+          width="384"
+        />
+        <p>
+          My work sits at the intersection of design and engineering. I build
+          tools for other builders — developer platforms, design systems and
+          open source infrastructure — and care about craft, speed and the
+          details that make software feel considered.
+        </p>
+        <p>
+          I started out in product design in Sydney, then went on to run a digital
+          agency and lead product, design and engineering teams. I moved to the
+          United States in 2022. Below is a fuller picture of my work, projects,
+          education and the tools I use.
+        </p>
+      </div>
+
+    <section class="home-section" id="work">
+      <h2 class="section-label">Work</h2>
+
+      <div class="grid gap-10">
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="openai" label="OpenAI" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">OpenAI</h3>
+                <p class="muted">Member of Technical Staff</p>
+              </div>
+              <span class="work-date">
+                Mar 2026 – Present
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Working on the new frontier of intelligence. Stay tuned.
+          </p>
+          </div>
+        </div>
+
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="vercel" label="Vercel" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">Vercel</h3>
+                <p class="muted">DX Engineer</p>
+              </div>
+              <span class="work-date">
+                Jun 2025 – Mar 2026
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Created{" "}
+            <a
+              class={LINK}
+              href="https://streamdown.ai/"
+              rel="noopener noreferrer"
+              target="_blank">Streamdown</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://ui.shadcn.com/docs/ai-elements"
+              rel="noopener noreferrer"
+              target="_blank">AI Elements</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://www.npmjs.com/package/remend"
+              rel="noopener noreferrer"
+              target="_blank">Remend</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/tersa"
+              rel="noopener noreferrer"
+              target="_blank">Tersa</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/openreview"
+              rel="noopener noreferrer"
+              target="_blank">OpenReview</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://github.com/vercel-labs/vectr"
+              rel="noopener noreferrer"
+              target="_blank">Vectr</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://www.npm.bet/"
+              rel="noopener noreferrer"
+              target="_blank">npm.bet</a
+            >. Helped ship{" "}
+            <a
+              class={LINK}
+              href="https://chat-sdk.dev/"
+              rel="noopener noreferrer"
+              target="_blank">Chat SDK</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/platforms"
+              rel="noopener noreferrer"
+              target="_blank">Platforms</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/blog/workflow-builder-build-your-own-workflow-automation-platform"
+              rel="noopener noreferrer"
+              target="_blank">Workflow Builder</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://vercel.com/academy"
+              rel="noopener noreferrer"
+              target="_blank">Academy</a
+            >; rebuilt the docs sites for{" "}
+            <a
+              class={LINK}
+              href="https://v0.app/docs"
+              rel="noopener noreferrer"
+              target="_blank">v0</a
+            >,{" "}
+            <a
+              class={LINK}
+              href="https://useworkflow.dev/docs/getting-started"
+              rel="noopener noreferrer"
+              target="_blank">Workflow</a
+            >{" "}
+            and{" "}
+            <a
+              class={LINK}
+              href="https://turborepo.dev/docs"
+              rel="noopener noreferrer"
+              target="_blank">Turborepo</a
+            >; and co-authored{" "}
+            <a
+              class={LINK}
+              href="https://www.components.build/"
+              rel="noopener noreferrer"
+              target="_blank">components.build</a
+            >.
+          </p>
+          </div>
+        </div>
+
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="corellium" label="Corellium" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">Corellium</h3>
+                <p class="muted">Chief Product Officer</p>
+              </div>
+              <span class="work-date">
+                Nov 2021 – Jan 2025
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Started the frontend engineering team, then led the Product, Design
+            and Support teams. Rebranded the company and helped it grow from
+            seed to Series A funding, then subsequent{" "}
+            <a
+              class={LINK}
+              href="https://techcrunch.com/2025/06/05/phone-unlocking-firm-cellebrite-to-acquire-mobile-testing-startup-corellium-for-170m/"
+              rel="noopener noreferrer"
+              target="_blank">acquisition</a
+            >{" "}
+            by Cellebrite.
+          </p>
+          </div>
+        </div>
+
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="rga" label="R/GA" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">R/GA</h3>
+                <p class="muted">Contract Senior UX Designer</p>
+              </div>
+              <span class="work-date">
+                Aug 2020 – Jul 2021
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Collaborated with cross-functional R/GA teams globally for some
+            major clients, including Nike, Snap, Toyota,{" "}
+            <a
+              class={LINK}
+              href="https://campaignbrief.com/timberland-launches-new-timbstrails-immersive-digital-storytelling-experience-via-r-ga-australia/"
+              rel="noopener noreferrer"
+              target="_blank">Timberland</a
+            >, Australian Ethical and Google.
+          </p>
+          </div>
+        </div>
+
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="jellypepper" label="Jellypepper" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">Jellypepper</h3>
+                <p class="muted">Director</p>
+              </div>
+              <span class="work-date">
+                Nov 2017 – Jul 2023
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Started and ran an award-winning digital agency. Worked with early
+            stage startups working on self-driving car technology, AI, biotech,
+            crypto, drone delivery, cybersecurity and orbital logistics; as
+            well as some big companies like Canva, Clipchamp, National
+            Geographic and Westfield.{" "}
+            <a
+              class={LINK}
+              href="https://raw.studio/blog/raw-studio-acquires-jellypepper-to-expand-its-reach-to-the-startup-ecosystem/"
+              rel="noopener noreferrer"
+              target="_blank">Acquired</a
+            >{" "}
+            by Raw Studio.
+          </p>
+          </div>
+        </div>
+
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="spaceship" label="Spaceship" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">Spaceship</h3>
+                <p class="muted">Head of Product and Design</p>
+              </div>
+              <span class="work-date">
+                Dec 2016 – Sep 2017
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Led product and design at Spaceship, a
+            Cannon-Brookes-backed superannuation fund helping young
+            Australians invest in their future. Later{" "}
+            <a
+              class={LINK}
+              href="https://www.afr.com/technology/cannon-brookes-backed-spaceship-acquired-in-80m-deal-20240926-p5kdo9"
+              rel="noopener noreferrer"
+              target="_blank">acquired</a
+            >{" "}
+            by eToro.
+          </p>
+          </div>
+        </div>
+
+        <div class="work-entry">
+          <div
+            class="work-icon"
+          >
+            <CompanyIcon class="scale-150" id="palantir" label="Palantir" />
+          </div>
+          <div class="grid gap-3">
+            <div class="work-heading">
+              <div class="grid">
+                <h3 class="font-medium">Palantir</h3>
+                <p class="muted">Product Design Intern</p>
+              </div>
+              <span class="work-date">
+                Oct 2015 – Dec 2015
+              </span>
+            </div>
+          <p
+            class="work-description"
+          >
+            Part of a small team tasked with designing an anti-fraud focused
+            pilot project. Designed a platform allowing for node-based
+            graphing, time-based visualization for object frequency analysis,
+            and a rich data exploration interface.
+          </p>
+          </div>
+        </div>
+      </div>
+
+      <p
+        class="work-note"
+      >
+        Earlier in my career, I held a handful of other roles you can read
+        about on my{" "}
+        <a
+          class={LINK}
+          href="https://www.linkedin.com/in/haydenbleasel/"
+          rel="noopener noreferrer"
+          target="_blank">LinkedIn</a
+        >. I also{" "}
+        <a
+          class={LINK}
+          href="https://eslint.org/blog/2022/08/redesigning-eslint/"
+          rel="noopener noreferrer"
+          target="_blank">rebranded ESLint</a
+        >{" "}
+        and redesigned the{" "}
+        <a
+          class={LINK}
+          href="https://nodejs.org/en/blog/announcements/diving-into-the-nodejs-website-redesign"
+          rel="noopener noreferrer"
+          target="_blank">Node.js website</a
+        >.
+      </p>
+    </section>
+
+
+      <section class="home-section" id="projects">
+        <h2 class="section-label">Projects</h2>
+        <ExpandableProjects projects={projects} />
+      </section>
+
+      <section class="home-section" id="education">
+        <h2 class="section-label">Education</h2>
+        <p>
+          I hold a double degree from the University of Technology Sydney
+          (2012–2016): a Bachelor of Business, majoring in Management, and a
+          Bachelor of Science in Information Technology, majoring in Enterprise
+          Systems Development.
+        </p>
+      </section>
+    <section class="home-section" id="stack">
+      <h2 class="section-label">Stack</h2>
+
+      <div
+        class="stack-tabs"
+        role="tablist"
+        aria-label="Tools by category"
+      >
+        {
+          stackSections.map((section, index) => (
+            <button
+              aria-controls={`stack-panel-${section.heading}`}
+              aria-selected={index === 0 ? "true" : "false"}
+              class="stack-tab"
+              tabindex={index === 0 ? 0 : -1}
+              data-stack-tab={section.heading}
+              id={`stack-tab-${section.heading}`}
+              role="tab"
+              type="button"
+            >
+              {section.heading}
+            </button>
+          ))
+        }
+        <span aria-hidden="true" class="stack-indicator" />
+      </div>
+
+      <div class="stack-panels">
+      {
+        stackSections.map((section, index) => (
+          <ul
+            aria-labelledby={`stack-tab-${section.heading}`}
+            class="stack-list"
+            data-stack-panel={section.heading}
+            hidden={index !== 0}
+            id={`stack-panel-${section.heading}`}
+            role="tabpanel"
+          >
+            {section.items.map((item) => (
+              <li class="stack-item">
+                <a
+                  class="text-link"
+                  href={item.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {item.name}
+                </a>
+                <span class="muted">
+                  {item.description}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+      </div>
+    </section>
+    <p
+      class="project-footnote"
+      id="footnote-1"
+    >
+      <a class={LINK} href="#footnote-ref-1">[1]</a> Refraction was used by
+      Accenture, AKQA, Amazon, Bentley, Canva, CapGemini, Cisco, Experian,
+      ExpressVPN, Google, H&amp;M, Ikea, John Deere, Nespresso, PandaDoc,
+      Qantas, Rakuten, Red Bull, Repl.it, Roblox, Softbank, Sega, Tiktok,
+      Uber, Washington Post, Wix, Yahoo, Zoho and ZoomInfo.
+    </p>
+  </div>
+</Page>
+
+<script>
+  import { initStackTabs } from "@/lib/stack-tabs";
+
+  initStackTabs();
+</script>

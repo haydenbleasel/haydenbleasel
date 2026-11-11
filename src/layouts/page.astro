@@ -1,0 +1,23 @@
+---
+import SiteFooter from "@/components/site-footer.astro";
+import SiteNav from "@/components/site-nav.astro";
+import Layout from "@/layouts/layout.astro";
+
+interface Props {
+  description: string;
+  jsonLd: Record<string, unknown>;
+  title: string;
+}
+const { description, jsonLd, title } = Astro.props;
+---
+
+<Layout description={description} jsonLd={jsonLd} title={`${title} | Hayden Bleasel`}>
+  <div class="site-shell">
+    <SiteNav />
+    <main class="page-content" id="main-content">
+      <h1 class="sr-only">{title}</h1>
+      <slot />
+    </main>
+    <SiteFooter />
+  </div>
+</Layout>

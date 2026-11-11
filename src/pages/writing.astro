@@ -1,0 +1,124 @@
+---
+import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
+import { identity, person, personRef } from "@/lib/person";
+import { getPosts, postPath } from "@/lib/posts";
+import { writing } from "@/lib/writing";
+
+export const prerender = true;
+
+const { description, title } = getPage("/writing");
+const posts = await getPosts();
+
+const sections = [
+  {
+    heading: "Elsewhere",
+    items: writing.filter((item) => item.publisher !== "Vercel Academy"),
+  },
+  {
+    heading: "Courses",
+    items: writing.filter((item) => item.publisher === "Vercel Academy"),
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/writing#webpage`,
+  "@type": "CollectionPage",
+  about: person,
+  description,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: [
+      ...posts.map((post, index) => ({
+        "@type": "ListItem",
+        item: {
+          "@type": "BlogPosting",
+          author: personRef,
+          datePublished: post.data.date.toISOString(),
+          ...(post.data.updated && { dateModified: post.data.updated.toISOString() }),
+          headline: post.data.title,
+          url: `${identity}${postPath(post.id)}`,
+        },
+        position: index + 1,
+      })),
+      ...writing.map((item, index) => ({
+        "@type": "ListItem",
+        item: {
+          "@type": item.schemaType ?? "Article",
+          author: item.coAuthors
+            ? [
+                personRef,
+                ...item.coAuthors.map((coAuthor) => ({
+                  "@type": "Person",
+                  name: coAuthor.name,
+                  url: coAuthor.url,
+                })),
+              ]
+            : personRef,
+          headline: item.title,
+          url: item.url,
+        },
+        position: posts.length + index + 1,
+      })),
+    ],
+  },
+  name: "Writing by Hayden Bleasel",
+  url: `${identity}/writing`,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="page-sections">
+    <section class="page-section">
+      <h2 class="section-label">Posts</h2>
+      <div class="article-list">
+        {posts.map((post) => (
+          <a class="article-entry" href={postPath(post.id)}>
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="article-title">{post.data.title}</h3>
+              <time
+                class="shrink-0 text-sm text-zinc-500 tabular-nums"
+                datetime={post.data.date.toISOString().slice(0, 10)}
+              >
+                {post.data.date.getUTCFullYear()}
+              </time>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+    {
+      sections.map((section) => (
+        <section class="page-section">
+          <h2 class="section-label">{section.heading}</h2>
+          <div class="article-list">
+            {section.items.map((item) => (
+              <a
+                class="article-entry group"
+                href={item.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div class="flex items-baseline justify-between gap-4 max-sm:flex-col max-sm:gap-0">
+                  <h3 class="article-title">
+                    {item.title}
+                  </h3>
+                  <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+                    {item.publisher}, {item.year}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Page>
+
+<style>
+  .article-list {
+    gap: 1rem;
+  }
+</style>

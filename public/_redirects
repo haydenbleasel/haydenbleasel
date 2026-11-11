@@ -1,0 +1,5 @@
+# Canonicalize static HTML URLs at the asset layer, before the Worker runs.
+/index.html / 301
+/*.html /:splat 301
+/:page/ /:page 301
+/writing/:slug/ /writing/:slug 301

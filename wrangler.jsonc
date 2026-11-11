@@ -1,0 +1,20 @@
+// Base Worker config. @astrojs/cloudflare merges it into the config it writes
+// to dist/server/wrangler.json at build time (adding `main` and the assets
+// directory), and `wrangler deploy` follows the redirect the build leaves in
+// .wrangler/deploy/config.json. Deployed from CI (.github/workflows/deploy.yml).
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "haydenbleasel-web",
+  "compatibility_date": "2026-09-03",
+  // A Workers Custom Domain: Cloudflare manages its DNS record and certificate.
+  // www redirects here via a zone Redirect Rule.
+  "routes": [{ "pattern": "haydenbleasel.com", "custom_domain": true }],
+  // Set with `wrangler secret put`. The newsletter endpoint returns a 503
+  // while either is missing.
+  "secrets": {
+    "required": ["RESEND_AUDIENCE_ID", "RESEND_TOKEN"],
+  },
+  "observability": {
+    "enabled": true,
+  },
+}

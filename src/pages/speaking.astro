@@ -1,0 +1,95 @@
+---
+import { appearances } from '@/lib/appearances';
+import type { Appearance } from '@/lib/appearances';
+import UpcomingAppearances from '@/components/upcoming-appearances.astro';
+import { getUpcomingAppearances } from '@/lib/upcoming-appearances';
+import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
+import { identity, person } from "@/lib/person";
+
+export const prerender = true;
+
+// Date-driven highlights must be fresh without needing another deployment.
+Astro.response.headers.set("Cache-Control", "no-store");
+const now = new Date();
+const upcoming = getUpcomingAppearances(appearances, now);
+
+const { description, title } = getPage("/speaking");
+
+const sections: { heading: string; items: Appearance[] }[] = [
+  {
+    heading: "Talks",
+    items: appearances.filter((appearance) => appearance.type === "Talk"),
+  },
+  {
+    heading: "Panels",
+    items: appearances.filter((appearance) => appearance.type === "Panel"),
+  },
+  {
+    heading: "Interviews",
+    items: appearances.filter(
+      (appearance) =>
+        appearance.type === "Interview" || appearance.type === "Podcast"
+    ),
+  },
+  {
+    heading: "Judging",
+    items: appearances.filter((appearance) => appearance.type === "Judging"),
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/speaking#webpage`,
+  "@type": "CollectionPage",
+  about: person,
+  description,
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: appearances.map((appearance, index) => ({
+      "@type": "ListItem",
+      name: appearance.title,
+      position: index + 1,
+      ...(appearance.url ? { url: appearance.url } : {}),
+    })),
+  },
+  name: "Speaking by Hayden Bleasel",
+  url: `${identity}/speaking`,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="page-sections">
+    <UpcomingAppearances items={upcoming} now={now} />
+    {
+      sections.map((section) => (
+        <section class="page-section">
+          <h2 class="section-label">{section.heading}</h2>
+          <ul class="appearance-list">
+            {section.items.map((item) => (
+              <li class="flex items-baseline justify-between gap-4">
+                {item.url ? (
+                  <a
+                    class="appearance-title text-link"
+                    href={item.url}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {item.title}
+                  </a>
+                ) : (
+                  <span class="appearance-title">
+                    {item.title}
+                  </span>
+                )}
+                <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+                  {item.year}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</Page>

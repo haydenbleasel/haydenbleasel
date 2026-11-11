@@ -1,0 +1,65 @@
+---
+// In-content newsletter form. Progressively
+// enhanced: posts to /api/subscribe natively; the script intercepts
+// the submit for a no-reload experience and swaps in the result.
+---
+
+<section aria-label="Mailing list" class="newsletter">
+  <p>To stay up to date with what I’m building, join my mailing list.</p>
+
+<div class="newsletter-control" data-newsletter-state="idle">
+<form
+  action="/api/subscribe"
+  class="newsletter-form"
+  data-newsletter
+  method="POST"
+>
+  <label class="sr-only" for="newsletter-email">Email address</label>
+  <input
+    autocapitalize="none"
+    autocomplete="email"
+    class="newsletter-input"
+    id="newsletter-email"
+    name="email"
+    placeholder="Your email address"
+    required
+    type="email"
+  />
+  <button
+    class="newsletter-button"
+    title="Subscribe"
+    type="submit"
+  >
+    <span class="sr-only" data-newsletter-button-label>Subscribe</span>
+    <svg
+      aria-hidden="true"
+      class="newsletter-arrow"
+      fill="none"
+      height="20"
+      viewBox="0 0 16 16"
+      width="20"
+    >
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    </svg>
+    <span aria-hidden="true" class="newsletter-spinner"></span>
+    <svg aria-hidden="true" class="newsletter-check" fill="none" height="20" viewBox="0 0 16 16" width="20">
+      <path d="m3 8 3.5 3.5L13 4.5" pathLength="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" />
+    </svg>
+  </button>
+</form>
+
+<p
+  aria-live="polite"
+  class="newsletter-status hidden"
+  data-newsletter-status
+  role="status"
+>
+</p>
+</div>
+</section>
+
+<script>
+  import { initNewsletter } from "@/lib/newsletter";
+
+  initNewsletter();
+</script>

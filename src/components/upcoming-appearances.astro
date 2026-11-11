@@ -1,0 +1,233 @@
+---
+import { formatEventDate } from '@/lib/upcoming-appearances';
+import type { ScheduledAppearance } from '@/lib/upcoming-appearances';
+
+interface Props { items: ScheduledAppearance[]; now: Date; }
+const { items, now } = Astro.props;
+const getEventStatus = (item: ScheduledAppearance) =>
+  Date.parse(item.event.startDate) <= now.getTime()
+    ? "Happening now"
+    : item.type;
+---
+
+{items.length > 0 && (
+  <section class="upcoming-events" aria-label="Upcoming appearances" data-upcoming-events>
+    <div class="upcoming-toolbar">
+      <h2 class="section-label">Coming up</h2>
+      <div class="upcoming-controls" data-event-controls hidden>
+        <button type="button" aria-label="Previous event" aria-controls="upcoming-event-cards" data-event-previous>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m14 6-6 6 6 6" /></svg>
+        </button>
+        <span class="upcoming-count" aria-live="polite" aria-atomic="true" data-event-count />
+        <button type="button" aria-label="Next event" aria-controls="upcoming-event-cards" data-event-next>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m10 6 6 6-6 6" /></svg>
+        </button>
+      </div>
+    </div>
+    <div class="upcoming-cards" id="upcoming-event-cards" data-event-track>
+      {items.map((item, index) => (
+        <article class:list={["upcoming-card", { "has-image": item.event.image || item.event.video }]} data-event-card data-start={item.event.startDate} data-end={item.event.endDate} aria-labelledby={`upcoming-title-${index}`}>
+          <div class="upcoming-copy">
+            <p class="upcoming-meta"><span data-event-status>{getEventStatus(item)}</span> · <time datetime={item.event.startDate}>{formatEventDate(item.event)}</time></p>
+            <h3 id={`upcoming-title-${index}`}>{item.title.replace(/\s+#SFTechWeek$/, "")}</h3>
+            <p class="upcoming-location">{item.event.location}</p>
+            <a class="upcoming-cta" href={item.url} target="_blank" rel="noopener noreferrer">View event</a>
+          </div>
+          {item.event.video ? (
+            <div class="upcoming-media">
+              <video class="upcoming-image" src={item.event.video} poster={item.event.image} width="500" height="500" muted loop playsinline controls preload="metadata" aria-label={`${item.title} event graphic`} data-event-video />
+              <button class="upcoming-video-toggle" type="button" aria-label="Play event animation" data-video-toggle hidden>
+                <span data-video-play><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m8 5 11 7-11 7z" /></svg></span>
+                <span data-video-pause hidden><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 5h4v14H6zm8 0h4v14h-4z" /></svg></span>
+              </button>
+            </div>
+          ) : item.event.image && <img class="upcoming-image" src={item.event.image} alt="" width="500" height="500" />}
+        </article>
+      ))}
+    </div>
+  </section>
+)}
+
+<script>
+  const playVideo = async (video: HTMLVideoElement) => {
+    try {
+      await video.play();
+    } catch {
+      // If autoplay is blocked or interrupted, the play control stays usable.
+    }
+  };
+
+  const initializeUpcoming = () => {
+    const region = document.querySelector<HTMLElement>("[data-upcoming-events]");
+    if (!region) { return; }
+    const cards = [...region.querySelectorAll<HTMLElement>('[data-event-card]')];
+    const controls = region.querySelector<HTMLElement>("[data-event-controls]");
+    const count = region.querySelector<HTMLElement>("[data-event-count]");
+    const previous = region.querySelector<HTMLButtonElement>("[data-event-previous]");
+    const next = region.querySelector<HTMLButtonElement>("[data-event-next]");
+    const track = region.querySelector<HTMLElement>("[data-event-track]");
+    if (!controls || !count || !previous || !next || !track) { return; }
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const compactLayout = window.matchMedia("(max-width: 540px)");
+    let available: HTMLElement[] = [];
+    let current: HTMLElement | undefined;
+    let scrollTimer: ReturnType<typeof setTimeout>;
+
+    const syncVideos = () => {
+      for (const card of cards) {
+        const video = card.querySelector<HTMLVideoElement>("[data-event-video]");
+        if (!video) { continue; }
+        const shouldPlay = card === current && !document.hidden && !compactLayout.matches && (!reducedMotion.matches || video.dataset.userPaused === "false") && video.dataset.userPaused !== "true";
+        if (shouldPlay) { playVideo(video); }
+        else { video.pause(); }
+      }
+    };
+
+    for (const card of cards) {
+      const video = card.querySelector<HTMLVideoElement>("[data-event-video]");
+      const toggle = card.querySelector<HTMLButtonElement>("[data-video-toggle]");
+      if (!video || !toggle) { continue; }
+      video.controls = false;
+      const updateToggle = () => {
+        toggle.setAttribute("aria-label", video.paused ? "Play event animation" : "Pause event animation");
+        toggle.querySelector<HTMLElement>("[data-video-play]")?.toggleAttribute("hidden", !video.paused);
+        toggle.querySelector<HTMLElement>("[data-video-pause]")?.toggleAttribute("hidden", video.paused);
+      };
+      video.addEventListener("play", updateToggle);
+      video.addEventListener("pause", updateToggle);
+      video.addEventListener("loadeddata", () => { toggle.hidden = false; });
+      if (video.readyState >= 2) { toggle.hidden = false; }
+      toggle.addEventListener("click", () => {
+        video.dataset.userPaused = String(!video.paused);
+        if (video.paused) { playVideo(video); }
+        else { video.pause(); }
+      });
+    }
+
+    const updateControls = () => {
+      const index = current ? available.indexOf(current) : -1;
+      region.hidden = available.length === 0;
+      controls.hidden = available.length < 2;
+      const label = `${index + 1} of ${available.length}`;
+      if (count.textContent !== label) { count.textContent = label; }
+      previous.disabled = index <= 0;
+      next.disabled = index >= available.length - 1;
+      for (const card of cards) {
+        card.inert = card !== current;
+        card.setAttribute("aria-hidden", String(card !== current));
+      }
+      syncVideos();
+    };
+
+    const alignCurrent = (animate = false) => {
+      if (!current) { return; }
+      track.scrollTo({
+        behavior: animate && !reducedMotion.matches ? "smooth" : "instant",
+        left: current.offsetLeft,
+      });
+    };
+
+    const refresh = () => {
+      const now = Date.now();
+      const remaining = cards.filter((card) => Date.parse(card.dataset.end ?? "") > now);
+      const changed = remaining.length !== available.length;
+      available = remaining;
+      if (!current || !available.includes(current)) { [current] = available; }
+      for (const card of cards) {
+        card.hidden = !available.includes(card);
+        const status = card.querySelector<HTMLElement>("[data-event-status]");
+        if (status && Date.parse(card.dataset.start ?? "") <= now) { status.textContent = "Happening now"; }
+      }
+      updateControls();
+      if (changed) { alignCurrent(); }
+    };
+
+    const move = (offset: number, animate: boolean) => {
+      refresh();
+      const index = current ? available.indexOf(current) : 0;
+      current = available[Math.max(0, Math.min(available.length - 1, index + offset))];
+      updateControls();
+      alignCurrent(animate);
+    };
+
+    // Native scrolling supports touch swipes and trackpads as well as buttons.
+    // Wait until scrolling settles before announcing a swipe's selected card.
+    const finishScroll = () => {
+      clearTimeout(scrollTimer);
+      let nearest: HTMLElement | undefined;
+      for (const card of available) {
+        if (!nearest || Math.abs(card.offsetLeft - track.scrollLeft) < Math.abs(nearest.offsetLeft - track.scrollLeft)) {
+          nearest = card;
+        }
+      }
+      current = nearest;
+      updateControls();
+    };
+    track.addEventListener("scroll", () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(finishScroll, 150);
+    }, { passive: true });
+    track.addEventListener("scrollend", finishScroll);
+    previous.addEventListener("click", (event) => move(-1, event.detail > 0));
+    next.addEventListener("click", (event) => move(1, event.detail > 0));
+    region.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) { return; }
+      const offsets: Record<string, number> = {
+        ArrowLeft: -1, ArrowRight: 1, End: available.length, Home: -available.length,
+      };
+      const offset = offsets[event.key];
+      if (offset === undefined || available.length < 2) { return; }
+      event.preventDefault();
+      const focusWasInCard = current?.contains(document.activeElement);
+      move(offset, false);
+      if (focusWasInCard) { current?.querySelector<HTMLAnchorElement>("a")?.focus({ preventScroll: true }); }
+    });
+
+    region.dataset.carouselReady = "";
+    region.setAttribute("aria-roledescription", "carousel");
+    refresh();
+    new ResizeObserver(() => alignCurrent()).observe(track);
+    reducedMotion.addEventListener("change", () => { alignCurrent(); syncVideos(); });
+    compactLayout.addEventListener("change", syncVideos);
+    // Expire cards even when a tab stays open across an event's end, or is
+    // restored from the browser's back/forward cache.
+    setInterval(refresh, 30_000);
+    document.addEventListener("visibilitychange", refresh);
+    window.addEventListener("pageshow", refresh);
+  };
+  initializeUpcoming();
+</script>
+
+<style>
+  .upcoming-events, .upcoming-cards { display: grid; gap: 1rem; }
+  .upcoming-cards { position: relative; }
+  [data-carousel-ready] .upcoming-cards { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  [data-carousel-ready] .upcoming-cards::-webkit-scrollbar { display: none; }
+  [data-carousel-ready] .upcoming-card { flex: 0 0 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+  .upcoming-toolbar, .upcoming-controls { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+  .upcoming-count { min-width: 2.75rem; font-size: .875rem; color: var(--muted); text-align: center; font-variant-numeric: tabular-nums; }
+  .upcoming-controls button { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 9999px; }
+  @media (hover: hover) and (pointer: fine) {
+    .upcoming-controls button:hover:not(:disabled) { background: color-mix(in srgb, var(--foreground) 8%, transparent); }
+  }
+  .upcoming-controls button:disabled { opacity: .3; }
+  .upcoming-card { display: grid; gap: 1.25rem 1.75rem; padding: 1.75rem; border-radius: 1rem; overflow: hidden; background: #17151f; color: #fff; }
+  .upcoming-card::selection, .upcoming-card ::selection { background: #c9ddff; color: #17151f; }
+  .upcoming-card.has-image { grid-template-columns: minmax(0, 1fr) 10rem; }
+  .upcoming-copy { align-self: center; }
+  .upcoming-meta { font-size: .875rem; line-height: 1.6; color: #c5c0d3; }
+  .upcoming-card h3 { font-size: 1.375rem; font-weight: 500; line-height: 1.3; margin-top: .875rem; text-wrap: balance; }
+  .upcoming-location { font-size: .875rem; color: #c5c0d3; margin-top: .5rem; }
+  .upcoming-cta { display: inline-flex; align-items: center; min-height: 2.5rem; margin-top: 1.25rem; padding: .375rem .875rem; border-radius: .5rem; background: #fff; color: #17151f; font-size: .875rem; font-weight: 500; }
+  .upcoming-cta:hover { background: #eae7f0; }
+  .upcoming-image { align-self: center; width: 10rem; height: 10rem; object-fit: cover; border-radius: .5rem; }
+  .upcoming-media { position: relative; align-self: center; }
+  .upcoming-video-toggle { position: absolute; right: .5rem; bottom: .5rem; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 9999px; background: rgb(0 0 0 / 65%); color: #fff; }
+  button:focus-visible, a:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 540px) {
+    .upcoming-card.has-image { grid-template-columns: minmax(0, 1fr); }
+    .upcoming-card { padding: 1.5rem; }
+    .upcoming-image, .upcoming-media { display: none; }
+  }
+</style>

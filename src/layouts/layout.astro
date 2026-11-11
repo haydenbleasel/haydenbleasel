@@ -1,0 +1,172 @@
+---
+import "@/styles/globals.css";
+import { pagePath } from "@/lib/page-path";
+import { homeDescription, homeTitle } from "@/lib/pages";
+import { identity, person, primaryPortrait } from "@/lib/person";
+import { socialImage } from "@/lib/social-image";
+import { url } from "@/lib/url";
+
+interface Props {
+  description?: string;
+  jsonLd?: Record<string, unknown>;
+  publishedTime?: string;
+  modifiedTime?: string;
+  title?: string;
+  type?: "website" | "article";
+}
+
+const {
+  description = homeDescription,
+  jsonLd: jsonLdProp,
+  publishedTime,
+  modifiedTime,
+  title = homeTitle,
+  type = "website",
+} = Astro.props;
+
+const pathname = pagePath(Astro.url.pathname);
+const canonical = new URL(pathname, url).toString();
+
+const image = socialImage(pathname);
+const ogImage = new URL(image.path, identity).toString();
+const ogImageAlt = image.alt ?? `${title.replace(/ \| Hayden Bleasel$/u, "")} — ${description}`;
+
+// The homepage is the canonical identity URL: a ProfilePage wrapping the
+// Person. Subpages pass their own page-level node via the jsonLd prop.
+const jsonLd = jsonLdProp ?? {
+  "@context": "https://schema.org",
+  "@id": `${identity}/#profilepage`,
+  "@type": "ProfilePage",
+  description,
+  mainEntity: person,
+  name: title,
+  primaryImageOfPage: primaryPortrait,
+  url: identity,
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script is:inline>
+      // Apply the stored (or system) theme before first paint.
+      (() => {
+        try {
+          const stored = localStorage.getItem("theme");
+          const dark =
+            stored === "dark" ||
+            (!stored &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+          document.documentElement.classList.toggle("dark", dark);
+        } catch {
+          /* no storage — stay light */
+        }
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Keep normal document navigation, including native history and focus.
+      // Keyboard navigation skips the optional visual transition altogether.
+      (() => {
+        let keyboardInput = false;
+        addEventListener("keydown", () => { keyboardInput = true; }, true);
+        addEventListener("pointerdown", () => { keyboardInput = false; }, true);
+
+        const handleTransition = async (event) => {
+          const transition = event.viewTransition;
+          if (!transition) {return;}
+
+          if (event.type === "pageswap" && keyboardInput) {
+            transition.skipTransition();
+          }
+
+          try {
+            await transition.ready;
+          } catch {
+            // Resizes and skipped animations reject ready; navigation still succeeds.
+          }
+        };
+
+        addEventListener("pageswap", handleTransition);
+        addEventListener("pagereveal", handleTransition);
+      })();
+    </script>
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Hayden Bleasel" />
+    <meta name="creator" content="Hayden Bleasel" />
+    <link href="https://haydenbleasel.com" rel="author" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/icon.png" />
+    <link
+      href="/rss.xml"
+      rel="alternate"
+      title="Writing by Hayden Bleasel"
+      type="application/rss+xml"
+    />
+
+    {/* Fonts are otherwise discovered late, after the CSS parses. */}
+    <link
+      as="font"
+      crossorigin
+      href="/fonts/soehne-buch.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+    <link
+      as="font"
+      crossorigin
+      href="/fonts/soehne-kraftig.woff2"
+      rel="preload"
+      type="font/woff2"
+    />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content={title} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={type} />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    <meta property="og:site_name" content="Hayden Bleasel" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:image:type" content={image.type} />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content={image.width === image.height ? "summary" : "summary_large_image"} />
+    <meta name="twitter:creator" content="@haydenbleasel" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline
+    ></script>
+  </head>
+  <body
+    class="font-sans antialiased min-h-dvh bg-background text-foreground transition-colors duration-300"
+  >
+    <slot />
+    {import.meta.env.PROD && (
+      <script
+        is:inline
+        type="module"
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token":"994845a0555a460387421c19ee15c2f6"}'
+      ></script>
+    )}
+  </body>
+</html>

@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from "astro:content";
+import SiteFooter from "@/components/site-footer.astro";
+import SiteNav from "@/components/site-nav.astro";
+import Layout from "@/layouts/layout.astro";
+import { identity, person } from "@/lib/person";
+import { formatPostDate, postPath } from "@/lib/posts";
+import { socialImagePath } from "@/lib/social-image";
+import "@/styles/post.css";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const { title, description, date, updated } = post.data;
+const content = await Astro.slots.render("default");
+// Estimate at 200 words per minute, counting article text without HTML markup.
+const wordCount = content
+  .replaceAll(/<!--[\s\S]*?-->/gu, " ")
+  .replaceAll(/<[^>]*>/gu, " ")
+  .replaceAll(/&nbsp;|&#160;|&#xA0;/giu, " ")
+  .match(/\S+/gu)?.length ?? 0;
+const readingMinutes = Math.max(1, Math.ceil(wordCount / 200));
+const canonical = `${identity}${postPath(post.id)}`;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${canonical}#article`,
+  "@type": "BlogPosting",
+  author: person,
+  datePublished: date.toISOString(),
+  ...(updated && { dateModified: updated.toISOString() }),
+  description,
+  headline: title,
+  image: `${identity}${socialImagePath(postPath(post.id))}`,
+  inLanguage: "en",
+  mainEntityOfPage: canonical,
+  url: canonical,
+};
+---
+
+<Layout
+  description={description}
+  jsonLd={jsonLd}
+  publishedTime={date.toISOString()}
+  modifiedTime={updated?.toISOString()}
+  title={`${title} | Hayden Bleasel`}
+  type="article"
+>
+  <div class="site-shell">
+    <SiteNav />
+    <main class="page-content" id="main-content">
+      <article class="post">
+        <header class="post-header">
+          <h1 class="post-title">{title}</h1>
+          <p class="post-meta">
+            <time datetime={date.toISOString().slice(0, 10)}>
+              {formatPostDate(date)}
+            </time>
+            <span aria-hidden="true"> · </span>
+            <span class="whitespace-nowrap">{readingMinutes} min read</span>
+          </p>
+        </header>
+        <div class="post-body">
+          <Fragment set:html={content} />
+        </div>
+        <footer class="post-footer">
+          <a class="text-link" href="/writing">All writing</a>
+        </footer>
+      </article>
+    </main>
+    <SiteFooter />
+  </div>
+</Layout>

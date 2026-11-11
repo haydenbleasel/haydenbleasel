@@ -1,0 +1,106 @@
+---
+import Page from "@/layouts/page.astro";
+import { getPage } from "@/lib/pages";
+import { identity, person, personRef } from "@/lib/person";
+import { press } from "@/lib/press";
+
+export const prerender = true;
+
+const { description, title } = getPage("/press");
+
+const sortedPress = press.toSorted((a, b) => b.year - a.year);
+const sections = [
+  {
+    heading: "Mentions",
+    id: "mentions",
+    items: sortedPress.filter((item) => item.mentionsMe),
+  },
+  {
+    heading: "Related coverage",
+    id: "related-coverage",
+    items: sortedPress.filter((item) => !item.mentionsMe),
+  },
+];
+const orderedPress = sections.flatMap((section) => section.items);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@id": `${identity}/press#webpage`,
+  "@type": "CollectionPage",
+  about: person,
+  description,
+  mainEntity: {
+    "@type": "ItemList",
+    // Only articles that name me assert Article.about. External videos and
+    // company milestone coverage stay plain links, not video rich results.
+    itemListElement: orderedPress.map((item, index) =>
+      item.mentionsMe && item.type !== "video"
+        ? {
+            "@type": "ListItem",
+            item: {
+              "@type": "Article",
+              about: personRef,
+              headline: item.title,
+              publisher: { "@type": "Organization", name: item.outlet },
+              url: item.url,
+            },
+            position: index + 1,
+          }
+        : {
+            "@type": "ListItem",
+            name: item.title,
+            position: index + 1,
+            url: item.url,
+          }
+    ),
+  },
+  name: "Press coverage of Hayden Bleasel",
+  url: `${identity}/press`,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} title={title}>
+  <div class="page-sections">
+    {
+      sections.map((section) => (
+        <section class="page-section" id={section.id}>
+          <h2 class="section-label">{section.heading}</h2>
+          <div class="article-list">
+            {section.items.map((item) => (
+              <a
+                class="article-entry group"
+                href={item.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <div class="flex items-baseline justify-between gap-4 max-sm:flex-col max-sm:gap-0">
+                  <h3 class="article-title" title={item.title}>
+                    {item.title}
+                  </h3>
+                  <span class="shrink-0 text-sm text-zinc-500 tabular-nums">
+                    {item.outlet}, {item.year}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+</Page>
+
+<style>
+  .article-list {
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .article-title {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+</style>
