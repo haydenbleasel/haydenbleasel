@@ -24,7 +24,7 @@
     "takumi-js": "^2.9.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.5",
+    "@astrojs/check": "^0.9.12",
     "@happy-dom/global-registrator": "^21.0.4",
     "@tailwindcss/vite": "^4.3.3",
     "@types/bun": "^1.4.4",
