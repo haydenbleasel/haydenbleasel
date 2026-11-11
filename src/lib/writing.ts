@@ -229,13 +229,6 @@ export const writing: WritingItem[] = [
     year: 2025,
   },
   {
-    description: "A tour of the redesigned Corellium platform.",
-    publisher: "Corellium",
-    title: "A Brief Look at the New Corellium",
-    url: "https://www.corellium.com/blog/a-brief-look-at-the-new-corellium",
-    year: 2023,
-  },
-  {
     date: "2022-08-10",
     description: "The story behind ESLint’s brand and website redesign.",
     publisher: "ESLint",
