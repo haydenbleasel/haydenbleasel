@@ -1,6 +1,11 @@
 import { describe, expect, test } from "bun:test";
 
-import { formatPostDate, getPosts, postPath } from "../src/lib/posts";
+import {
+  formatPostDate,
+  getPosts,
+  isPostPath,
+  postPath,
+} from "../src/lib/posts";
 
 describe("posts", () => {
   test("lists posts newest first", async () => {
@@ -12,6 +17,13 @@ describe("posts", () => {
   test("posts live under /writing, except taking-away", () => {
     expect(postPath("streamdown")).toBe("/writing/streamdown");
     expect(postPath("taking-away")).toBe("/taking-away");
+  });
+
+  test("recognizes every post's path, including those at the root", () => {
+    expect(isPostPath(postPath("streamdown"))).toBe(true);
+    expect(isPostPath(postPath("taking-away"))).toBe(true);
+    expect(isPostPath("/writing")).toBe(false);
+    expect(isPostPath("/about")).toBe(false);
   });
 
   test("formats dates in UTC so frontmatter dates don't shift a day", () => {

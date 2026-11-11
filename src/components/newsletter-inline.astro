@@ -2,12 +2,26 @@
 // In-content newsletter form. Progressively
 // enhanced: posts to /api/subscribe natively; the script intercepts
 // the submit for a no-reload experience and swaps in the result.
+// A native post redirects back here to #newsletter-<outcome>, which shows the
+// matching notice below (and replaces the form after a signup). The notices
+// come before the form so CSS can hide it.
+import { outcomes } from "@/lib/subscribe";
 ---
 
 <section aria-label="Mailing list" class="newsletter">
   <p>To stay up to date with what I’m building, join my mailing list.</p>
 
 <div class="newsletter-control" data-newsletter-state="idle">
+{Object.entries(outcomes).map(([outcome, { error, message }]) => (
+  <p
+    class="newsletter-notice"
+    data-kind={error ? "error" : "success"}
+    data-newsletter-notice
+    id={`newsletter-${outcome}`}
+    role="status"
+    tabindex="-1"
+  >{error || message}</p>
+))}
 <form
   action="/api/subscribe"
   class="newsletter-form"

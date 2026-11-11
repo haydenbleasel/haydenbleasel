@@ -7,8 +7,15 @@ export const getPosts = async () => {
   );
 };
 
+// Posts served from the site root instead of under /writing.
+const rootPosts = new Set(["taking-away"]);
+
 export const postPath = (id: string) =>
-  id === "taking-away" ? "/taking-away" : `/writing/${id}`;
+  rootPosts.has(id) ? `/${id}` : `/writing/${id}`;
+
+// Whether a page path is a post, wherever postPath serves it.
+export const isPostPath = (pathname: string) =>
+  pathname.startsWith("/writing/") || rootPosts.has(pathname.slice(1));
 
 export const formatPostDate = (date: Date) =>
   new Intl.DateTimeFormat("en-US", {

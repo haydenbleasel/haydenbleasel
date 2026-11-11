@@ -15,6 +15,7 @@ const markup = `
       </button>
     </form>
     <p class="hidden" data-newsletter-status role="status"></p>
+    <p data-newsletter-notice id="newsletter-invalid">Invalid email address</p>
   </div>
 `;
 
@@ -101,6 +102,32 @@ describe("newsletter form", () => {
     expect(button.disabled).toBe(false);
     expect(button.hasAttribute("aria-busy")).toBe(false);
     expect(label.textContent).toBe("Subscribe");
+  });
+
+  test("hides the notice from an earlier native submit", async () => {
+    const { submit } = setup(() => reply(true, { message: "Subscribed!" }));
+    const notice = query("[data-newsletter-notice]");
+
+    expect(notice.hidden).toBe(false);
+    submit();
+    expect(notice.hidden).toBe(true);
+    await flush();
+  });
+
+  test("drops a native submit's fragment so reloading doesn't repeat it", () => {
+    history.replaceState(null, "", "/?ref=x#newsletter-invalid");
+
+    setup(() => reply(true, { message: "Subscribed!" }));
+
+    expect(location.href).toBe("https://haydenbleasel.com/?ref=x");
+  });
+
+  test("leaves other fragments alone", () => {
+    history.replaceState(null, "", "/#newsletter-email");
+
+    setup(() => reply(true, { message: "Subscribed!" }));
+
+    expect(location.hash).toBe("#newsletter-email");
   });
 
   test.each([

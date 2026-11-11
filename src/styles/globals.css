@@ -805,6 +805,38 @@
   color: #f87171;
 }
 
+/* The result of a native form post, which the API sends back to
+   #newsletter-<outcome>. Only the targeted notice shows, and a successful
+   signup replaces the form, as the script's success state does. */
+.newsletter-notice {
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
+.newsletter-notice:not(:target) {
+  display: none;
+}
+
+.newsletter-notice[data-kind="success"] {
+  grid-area: 1 / 1;
+  align-self: center;
+}
+
+.newsletter-notice[data-kind="success"]:target:not([hidden])
+  ~ .newsletter-form {
+  display: none;
+}
+
+.newsletter-notice[data-kind="error"] {
+  grid-area: 2 / 1;
+  padding-top: 0.75rem;
+  color: #dc2626;
+}
+
+.dark .newsletter-notice[data-kind="error"] {
+  color: #f87171;
+}
+
 @starting-style {
   .newsletter-status {
     opacity: 0;

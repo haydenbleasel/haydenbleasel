@@ -1,5 +1,6 @@
 ---
 import { pagePath } from "@/lib/page-path";
+import { isPostPath } from "@/lib/posts";
 
 const links = [
   { href: "/about", label: "About" },
@@ -8,6 +9,11 @@ const links = [
   { href: "/press", label: "Press" },
 ];
 const pathname = pagePath(Astro.url.pathname);
+// Pages under a link's section mark it as the current location. Every post
+// belongs to Writing, including those postPath serves from the root.
+const isWithin = (href: string) =>
+  pathname.startsWith(`${href}/`) ||
+  (href === "/writing" && isPostPath(pathname));
 ---
 
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -16,7 +22,7 @@ const pathname = pagePath(Astro.url.pathname);
   <nav aria-label="Main navigation" class="site-nav">
     <span aria-hidden="true" class="site-nav-hover" />
     {links.map((link) => (
-      <a href={link.href} aria-current={pathname === link.href ? "page" : pathname.startsWith(`${link.href}/`) ? "location" : undefined}>
+      <a href={link.href} aria-current={pathname === link.href ? "page" : isWithin(link.href) ? "location" : undefined}>
         {link.label}
       </a>
     ))}

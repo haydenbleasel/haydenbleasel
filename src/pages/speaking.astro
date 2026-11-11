@@ -9,8 +9,10 @@ import { identity, person } from "@/lib/person";
 
 export const prerender = true;
 
-// Date-driven highlights must be fresh without needing another deployment.
-Astro.response.headers.set("Cache-Control", "no-store");
+// Prerendered, so this is the build time and response headers set here never
+// reach the static file. The carousel script (src/lib/upcoming-carousel.ts)
+// re-checks every card's dates in the browser, so events expire without another
+// deployment.
 const now = new Date();
 const upcoming = getUpcomingAppearances(appearances, now);
 

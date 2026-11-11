@@ -13,9 +13,7 @@ test("every source module loads", async () => {
     new Glob("**/*.ts").scan({ cwd: SOURCE_ROOT })
   );
   const modules = await Promise.all(
-    files
-      .filter((file) => !file.endsWith(".test.ts"))
-      .map(async (file) => await import(path.join(SOURCE_ROOT, file)))
+    files.map(async (file) => await import(path.join(SOURCE_ROOT, file)))
   );
 
   expect(modules.length).toBeGreaterThan(20);

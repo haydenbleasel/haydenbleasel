@@ -32,7 +32,7 @@ describe("rss", () => {
     expect(body.split("<item>").length - 1).toBe(posts.length + writing.length);
   });
 
-  test("lists posts newest first and only dates posts", async () => {
+  test("dates every item and lists them newest first", async () => {
     const response = await call();
     const body = await response.text();
 
@@ -41,7 +41,31 @@ describe("rss", () => {
     );
     expect(body).toContain("/writing/second-post</link>");
     expect(body).toContain("<pubDate>Fri, 03 Jan 2025 00:00:00 GMT</pubDate>");
-    expect(body.split("<pubDate>").length - 1).toBe(posts.length);
+    expect(body.split("<pubDate>").length - 1).toBe(
+      posts.length + writing.length
+    );
+    const dates = [...body.matchAll(/<pubDate>(?<date>.+?)<\/pubDate>/gu)].map(
+      (match) => Date.parse(match.groups?.date ?? "")
+    );
+    expect(dates).toEqual(dates.toSorted((a, b) => b - a));
+  });
+
+  test("dates external writing to the start of its year and names its publisher", async () => {
+    const response = await call();
+    const body = await response.text();
+    const [item] = writing;
+    const entry = body.slice(
+      body.indexOf(`<title>${item.title}</title>`),
+      body.indexOf("</item>", body.indexOf(`<title>${item.title}</title>`))
+    );
+
+    expect(entry).toContain(
+      `<pubDate>${new Date(Date.UTC(item.year, 0, 1)).toUTCString()}</pubDate>`
+    );
+    expect(entry).toContain(`<dc:publisher>${item.publisher}</dc:publisher>`);
+    expect(body).toContain('xmlns:dc="http://purl.org/dc/elements/1.1/"');
+    // <source> must link to the publisher's feed, which isn't known.
+    expect(body).not.toContain("<source");
   });
 
   test("escapes xml entities", async () => {

@@ -1,11 +1,11 @@
 import { describe, expect, test } from "bun:test";
 
-import type { Appearance } from "./appearances";
-import { appearances } from "./appearances";
+import type { Appearance } from "../src/lib/appearances";
+import { appearances } from "../src/lib/appearances";
 import {
   formatEventDate,
   getUpcomingAppearances,
-} from "./upcoming-appearances";
+} from "../src/lib/upcoming-appearances";
 
 const source = appearances.find(
   (item) => item.title === "The Tech Week Flyover #SFTechWeek"
@@ -70,6 +70,49 @@ describe("upcoming appearances", () => {
     });
     expect(winter).toContain("12:00");
     expect(winter).toContain("4:00 PM PST");
+  });
+
+  test("gives a multi-day event each end's date and time once", () => {
+    const label = formatEventDate({
+      ...flyover.event,
+      endDate: "2026-10-11T16:00:00-07:00",
+      startDate: "2026-10-09T12:00:00-07:00",
+    });
+    expect(label).not.toContain("/");
+    expect(label).not.toContain(" · ");
+    expect(label.match(/Oct 9, 2026/gu)).toHaveLength(1);
+    expect(label).toMatch(/Oct 9, 2026, 12:00\sPM PDT/u);
+    expect(label).toMatch(/Oct 11, 2026, 4:00\sPM PDT$/u);
+    // Days are counted in the organizer's timezone: this evening event ends
+    // after midnight UTC but on the same local day, so it keeps the short form.
+    const evening = formatEventDate({
+      ...flyover.event,
+      endDate: "2026-10-09T21:00:00-07:00",
+      startDate: "2026-10-09T18:00:00-07:00",
+    });
+    expect(evening).toMatch(/^Oct 9, 2026 · 6:00\s–\s9:00\sPM PDT$/u);
+  });
+
+  test("keeps an evening that runs past midnight on its start date", () => {
+    const midnight = formatEventDate({
+      ...flyover.event,
+      endDate: "2026-10-10T00:00:00-07:00",
+      startDate: "2026-10-09T19:00:00-07:00",
+    });
+    expect(midnight).toMatch(/^Oct 9, 2026 · 7:00\sPM – 12:00\sAM PDT$/u);
+    const late = formatEventDate({
+      ...flyover.event,
+      endDate: "2026-10-10T01:30:00-07:00",
+      startDate: "2026-10-09T22:00:00-07:00",
+    });
+    expect(late).toMatch(/^Oct 9, 2026 · 10:00\sPM – 1:30\sAM PDT$/u);
+    // Daylight saving ends overnight, so each time names its own zone.
+    const fallBack = formatEventDate({
+      ...flyover.event,
+      endDate: "2026-11-01T01:30:00-08:00",
+      startDate: "2026-10-31T22:00:00-07:00",
+    });
+    expect(fallBack).toMatch(/^Oct 31, 2026 · 10:00\sPM PDT – 1:30\sAM PST$/u);
   });
 
   test("renders no highlights when all events have passed", () => {
