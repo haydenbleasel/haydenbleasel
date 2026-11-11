@@ -1,0 +1,13 @@
+[test]
+# Stand-ins for Astro's virtual modules (astro:content, astro:env/server,
+# astro:middleware), which only exist inside Astro's build and dev server.
+preload = ["./__tests__/support/preload.ts"]
+# `bun test --coverage` (`bun run test:coverage`) fails unless every line and
+# function of each file the tests load is covered. `__tests__/modules.test.ts`
+# loads every source module, so one without tests fails the run instead of going
+# unreported. Plain `bun test` doesn't check it. `.astro` files can't be loaded
+# by Bun, so they're outside what's measured.
+coverageSkipTestFiles = true
+coverageThreshold = { lines = 1, functions = 1 }
+# Fixtures and test helpers aren't what's measured.
+coveragePathIgnorePatterns = ["__tests__/**"]

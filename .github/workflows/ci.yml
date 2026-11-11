@@ -40,8 +40,9 @@ jobs:
       - name: Types
         run: bun types
 
-      - name: Test
-        run: bun test
+      # Fails unless every line and function is covered (see bunfig.toml).
+      - name: Test with coverage gate
+        run: bun run test:coverage
 
       - name: Build
         run: bun run build

@@ -34,6 +34,21 @@ describe("subscribe", () => {
     expect(send).not.toHaveBeenCalled();
   });
 
+  test("rejects a body that isn't form data", async () => {
+    const send = mock(() => Promise.resolve(Response.json({ id: "123" })));
+    const response = await subscribe(
+      new Request("http://localhost/api/subscribe", {
+        body: "email=test@example.com",
+        headers: { "Content-Type": "text/plain" },
+        method: "POST",
+      }),
+      environment,
+      send as unknown as typeof fetch
+    );
+    expect(response.status).toBe(400);
+    expect(send).not.toHaveBeenCalled();
+  });
+
   test("subscribes a trimmed email to the configured segment", async () => {
     const send = mock(() => Promise.resolve(Response.json({ id: "456" })));
     const response = await subscribe(

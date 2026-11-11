@@ -1,7 +1,5 @@
-import { mock } from "bun:test";
-
-// Astro supplies this virtual module during builds and development. Keep the
-// fixtures unsorted so route tests exercise the collection's date ordering.
+// What `getCollection("posts")` returns in tests (see support/preload.ts). Keep
+// the fixtures unsorted so route tests exercise the collection's date ordering.
 export const posts = [
   {
     data: {
@@ -21,7 +19,3 @@ export const posts = [
     id: "second-post",
   },
 ];
-
-mock.module("astro:content", () => ({
-  getCollection: () => Promise.resolve(posts),
-}));

@@ -42,19 +42,21 @@ The dev server runs at [localhost:3010](http://localhost:3010).
 | `bun run fix`           | Fix lint and formatting issues                              |
 | `bun run types`         | Type-check with `astro check`                               |
 | `bun run test`          | Run the tests                                               |
-| `bun run test:coverage` | Run the tests with a coverage report                        |
+| `bun run test:coverage` | Run the tests and fail below 100% coverage                  |
 
-A pre-commit hook runs `check`, `test` and `types`.
+A pre-commit hook runs `check`, `test:coverage` and `types`.
+
+Tests live in `__tests__/` and cover every line and function of the TypeScript in `src/`, which CI enforces. `__tests__/modules.test.ts` loads every module, so a new one without tests fails the gate rather than going unreported. Browser scripts are tested against [happy-dom](https://github.com/capricorn86/happy-dom).
 
 ### Environment variables
 
 The newsletter signup needs Resend credentials. Locally, put them in `.dev.vars` or `.env` (both are gitignored). Without them, the signup endpoint returns a 503.
 
-| Variable             | Purpose                                                                         |
-| -------------------- | ------------------------------------------------------------------------------- |
-| `RESEND_TOKEN`       | Resend API key                                                                  |
-| `RESEND_AUDIENCE_ID` | The Resend audience new subscribers join                                        |
-| `SITE_ORIGIN`        | Optional. Overrides the canonical origin, which defaults to `haydenbleasel.com` |
+| Variable             | Purpose                                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `RESEND_TOKEN`       | Resend API key                                                                                                                       |
+| `RESEND_AUDIENCE_ID` | The Resend audience new subscribers join                                                                                             |
+| `SITE_ORIGIN`        | Optional. Overrides the canonical origin, which defaults to `https://haydenbleasel.com` in builds and `http://localhost:3010` in dev |
 
 ### Writing posts
 
