@@ -17,6 +17,20 @@ export const initNewsletter = () => {
     return;
   }
 
+  // A native submit (see subscribe.ts) lands back here at #newsletter-<outcome>.
+  // Its notice stays up for this visit (replaceState doesn't change :target),
+  // but drop the fragment so a reload, bookmark or shared link doesn't repeat it.
+  const notices = [
+    ...control.querySelectorAll<HTMLElement>("[data-newsletter-notice]"),
+  ];
+  if (notices.some((notice) => `#${notice.id}` === location.hash)) {
+    history.replaceState(
+      history.state,
+      "",
+      `${location.pathname}${location.search}`
+    );
+  }
+
   let keyboardInput = false;
   form.addEventListener("keydown", () => {
     keyboardInput = true;
@@ -43,6 +57,10 @@ export const initNewsletter = () => {
     button.setAttribute("aria-busy", "true");
     label.textContent = "Joining…";
     status.classList.add("hidden");
+    // The notice from an earlier native submit (see subscribe.ts) is stale now.
+    for (const notice of notices) {
+      notice.hidden = true;
+    }
 
     try {
       const response = await fetch(form.action, {

@@ -781,28 +781,52 @@
   display: none;
 }
 
-.newsletter-status {
+/* The script's status line, and the notices for a native form post (below)
+   that show the same messages in the same place. */
+.newsletter-status,
+.newsletter-notice {
   font-size: 0.875rem;
   line-height: 1.75;
-  opacity: 1;
-  transition: opacity 160ms ease;
 }
 
-.newsletter-status[data-kind="success"] {
+.newsletter-status[data-kind="success"],
+.newsletter-notice[data-kind="success"] {
   grid-area: 1 / 1;
   align-self: center;
-  padding-right: 3.5rem;
-  pointer-events: none;
 }
 
-.newsletter-status[data-kind="error"] {
+.newsletter-status[data-kind="error"],
+.newsletter-notice[data-kind="error"] {
   grid-area: 2 / 1;
   padding-top: 0.75rem;
   color: #dc2626;
 }
 
-.dark .newsletter-status[data-kind="error"] {
+.dark .newsletter-status[data-kind="error"],
+.dark .newsletter-notice[data-kind="error"] {
   color: #f87171;
+}
+
+.newsletter-status {
+  opacity: 1;
+  transition: opacity 160ms ease;
+}
+
+.newsletter-status[data-kind="success"] {
+  padding-right: 3.5rem;
+  pointer-events: none;
+}
+
+/* The result of a native form post, which the API sends back to
+   #newsletter-<outcome>. Only the targeted notice shows, and a successful
+   signup replaces the form, as the script's success state does. */
+.newsletter-notice:not(:target) {
+  display: none;
+}
+
+.newsletter-notice[data-kind="success"]:target:not([hidden])
+  ~ .newsletter-form {
+  display: none;
 }
 
 @starting-style {

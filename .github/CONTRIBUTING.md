@@ -35,7 +35,7 @@ A pre-commit hook runs `check`, `test:coverage` and `types`. CI (`.github/workfl
 
 ## Environment variables
 
-The newsletter signup needs Resend credentials. Locally, put them in `.dev.vars` or `.env` (both are gitignored). Without them, the signup endpoint returns a 503.
+The newsletter signup needs Resend credentials. Locally, put them in `.dev.vars` or `.env` (both are gitignored). Without them, the signup endpoint returns a 503, or redirects a form posted without JavaScript back to the form with an error.
 
 | Variable | Purpose |
 | --- | --- |
@@ -55,7 +55,7 @@ date: 2026-10-07
 ---
 ```
 
-The filename becomes the URL: `streamdown.md` is `/writing/streamdown`. Exceptions are defined in `postPath` in `src/lib/posts.ts`: `taking-away.md` is `/taking-away`.
+The filename becomes the URL: `streamdown.md` is `/writing/streamdown`. Posts served from the site root instead are listed in `rootPosts` in `src/lib/posts.ts`: `taking-away.md` is `/taking-away`. Every post marks Writing as the current section in the nav, wherever it's served.
 
 The title comes from the frontmatter, so start the body with prose and use `##` for section headings. Images go in `public/images/writing/<post>/`.
 
@@ -73,7 +73,7 @@ Most of the rest of the site comes from typed data in `src/lib/`:
 | `stack.ts` | The stack on the About page |
 | `appearances.ts` | Talks, panels and judging on `/speaking`. Entries with an `event` are featured as upcoming until they end |
 | `press.ts` | `/press` |
-| `writing.ts` | Articles and courses published elsewhere, on `/writing` and in the RSS feed |
+| `writing.ts` | Articles and courses published elsewhere, on `/writing` and in the RSS feed. Give each new entry the publication `date` shown on the article: the feed dates an entry without one to January 1 of its `year` |
 | `pages.ts` | Titles and descriptions for each page's metadata and social card |
 | `person.ts` | The bio and schema.org `Person` data used in page metadata |
 | `redirects.ts` | Redirects for old URLs, applied in `src/middleware.ts` |
@@ -92,6 +92,8 @@ The work history on the About page is written directly in `src/pages/about.astro
 ## Deployment
 
 The site deploys to Cloudflare Workers as `haydenbleasel-web` and is served on haydenbleasel.com as a Workers Custom Domain (see `wrangler.jsonc`). Pushing to `main` runs the deploy workflow (`.github/workflows/deploy.yml`), which runs the checks, types and tests, then deploys.
+
+The deploy workflow also runs every hour and deploys when an event in `appearances.ts` started or ended in the past two hours. `/speaking` is prerendered, so this is what drops an ended event, or marks one as happening now, for visitors without JavaScript. The page's script does the same in the browser.
 
 The deploy workflow needs `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` repository secrets. The Resend credentials are set on the Worker itself:
 

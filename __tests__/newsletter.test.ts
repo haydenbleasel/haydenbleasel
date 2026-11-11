@@ -1,13 +1,27 @@
 import { describe, expect, mock, test } from "bun:test";
+import path from "node:path";
 
 import { initNewsletter } from "../src/lib/newsletter";
+import { outcomes } from "../src/lib/subscribe";
 import { flush, query, useDom } from "./support/dom";
 
 useDom();
 
-// The parts of newsletter-inline.astro the script reads.
+const COMPONENT = path.join(
+  import.meta.dir,
+  "../src/components/newsletter-inline.astro"
+);
+
+// The parts of newsletter-inline.astro the script reads, in the same order: a
+// notice for each outcome of a native post, then the form and the status line.
 const markup = `
   <div data-newsletter-state="idle">
+    ${Object.entries(outcomes)
+      .map(
+        ([outcome, { error, message }]) =>
+          `<p data-kind="${error ? "error" : "success"}" data-newsletter-notice id="newsletter-${outcome}">${error || message}</p>`
+      )
+      .join("")}
     <form action="/api/subscribe" data-newsletter method="POST">
       <input name="email" type="email" />
       <button title="Subscribe" type="submit">
@@ -101,6 +115,53 @@ describe("newsletter form", () => {
     expect(button.disabled).toBe(false);
     expect(button.hasAttribute("aria-busy")).toBe(false);
     expect(label.textContent).toBe("Subscribe");
+  });
+
+  test("hides the notices from an earlier native submit", async () => {
+    const { submit } = setup(() => reply(true, { message: "Subscribed!" }));
+    const notices = [
+      ...document.querySelectorAll<HTMLElement>("[data-newsletter-notice]"),
+    ];
+
+    expect(notices.map((notice) => notice.hidden)).toEqual(
+      notices.map(() => false)
+    );
+    submit();
+    expect(notices.map((notice) => notice.hidden)).toEqual(
+      notices.map(() => true)
+    );
+    await flush();
+  });
+
+  test.each(Object.keys(outcomes))(
+    "drops the #newsletter-%s fragment so reloading doesn't repeat it",
+    (outcome) => {
+      history.replaceState(null, "", `/?ref=x#newsletter-${outcome}`);
+
+      setup(() => reply(true, { message: "Subscribed!" }));
+
+      expect(location.href).toBe("https://haydenbleasel.com/?ref=x");
+    }
+  );
+
+  // The CSS that hides the form after a native signup selects
+  // `.newsletter-notice:target ~ .newsletter-form`, which only matches a
+  // notice that comes before the form.
+  test("the component renders its notices before the form", async () => {
+    const component = await Bun.file(COMPONENT).text();
+
+    expect(component.indexOf("data-newsletter-notice")).toBeGreaterThan(-1);
+    expect(component.indexOf("data-newsletter-notice")).toBeLessThan(
+      component.indexOf("<form")
+    );
+  });
+
+  test("leaves other fragments alone", () => {
+    history.replaceState(null, "", "/#newsletter-email");
+
+    setup(() => reply(true, { message: "Subscribed!" }));
+
+    expect(location.hash).toBe("#newsletter-email");
   });
 
   test.each([
