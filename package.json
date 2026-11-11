@@ -26,7 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@happy-dom/global-registrator": "^21.0.4",
-    "@tailwindcss/vite": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.5",
     "@types/bun": "^1.4.4",
     "@types/node": "^25",
     "happy-dom": "^21.0.4",
