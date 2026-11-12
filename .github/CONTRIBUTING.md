@@ -7,7 +7,7 @@ The root `README.md` is the GitHub profile README for [@haydenbleasel](https://g
 ## Prerequisites
 
 - Node.js 22.12+ (Astro's CLI runs on Node)
-- Bun 1.3.13+
+- Bun 1.4.4+
 
 ```bash
 bun install

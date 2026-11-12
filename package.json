@@ -47,7 +47,7 @@
     "firefox >= 111",
     "safari >= 16.4"
   ],
-  "packageManager": "bun@1.3.13",
+  "packageManager": "bun@1.4.4",
   "trustedDependencies": [
     "sharp"
   ]
