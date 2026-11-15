@@ -13,6 +13,14 @@ const escapeXml = (value: string) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 
+// Feed readers resolve nothing against the site, so root-relative links and
+// images in a post's HTML get the origin. CDATA can't contain its own closing
+// marker, so one in the text is split across two sections.
+const feedHtml = (html: string) =>
+  html
+    .replaceAll(/\b(?<attribute>href|src)="\/(?!\/)/gu, `$<attribute>="${url}/`)
+    .replaceAll("]]>", "]]]]><![CDATA[>");
+
 // External writing is dated to its publication date, or to January 1 of its
 // year for the few entries whose pages show no date. Readers stamp an item
 // without a pubDate with the time they fetch it, which would list years-old
@@ -29,7 +37,11 @@ export const GET: APIRoute = async () => {
       <link>${permalink}</link>
       <guid isPermaLink="true">${permalink}</guid>
       <description>${escapeXml(post.data.description)}</description>
-      <pubDate>${post.data.date.toUTCString()}</pubDate>
+      <pubDate>${post.data.date.toUTCString()}</pubDate>${
+        post.rendered?.html
+          ? `\n      <content:encoded><![CDATA[${feedHtml(post.rendered.html)}]]></content:encoded>`
+          : ""
+      }
     </item>`,
     };
   });
@@ -55,7 +67,7 @@ export const GET: APIRoute = async () => {
     .join("\n");
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Writing by Hayden Bleasel</title>
     <link>${url}/writing</link>

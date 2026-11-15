@@ -78,12 +78,34 @@ describe("rss", () => {
     expect(body).not.toContain("<source");
   });
 
+  test("carries each post's full text with absolute links and images", async () => {
+    const response = await call();
+    const body = await response.text();
+    const { origin } = new URL(
+      /<atom:link href="(?<href>[^"]+)"/u.exec(body)?.groups?.href ?? ""
+    );
+
+    expect(body).toContain(
+      'xmlns:content="http://purl.org/rss/1.0/modules/content/"'
+    );
+    expect(body).toContain(
+      `<content:encoded><![CDATA[<p>See <a href="${origin}/writing">more</a>.</p><img src="${origin}/images/a.webp" alt="">`
+    );
+    // Links to other sites are left as they are.
+    expect(body).toContain('<a href="https://example.com">a link</a>');
+    // A CDATA closing marker in the text can't end the section early.
+    expect(body).toContain("A stray ]]]]><![CDATA[> marker");
+    // A post with no rendered body is still listed, without the element.
+    expect(body.split("<content:encoded>").length - 1).toBe(1);
+  });
+
   test("escapes xml entities", async () => {
     const response = await call();
     const body = await response.text();
 
     // Raw ampersands (outside entities) would make the feed invalid.
-    expect(body).not.toMatch(/&(?!amp;|lt;|gt;|quot;|apos;)/u);
+    const outsideCdata = body.replaceAll(/<!\[CDATA\[[\s\S]*?\]\]>/gu, "");
+    expect(outsideCdata).not.toMatch(/&(?!amp;|lt;|gt;|quot;|apos;)/u);
     expect(body).toContain(
       "A description with &lt;markup&gt; &amp; punctuation"
     );
