@@ -1,12 +1,36 @@
 # Headers for responses served from static assets (every page, font and image).
 # HSTS and X-Content-Type-Options come from the Cloudflare zone instead, so they
-# also cover responses the Worker generates (redirects, the 404, the API).
+# also cover responses the Worker generates (redirects and the API).
 
+# The policy allows inline scripts and styles because every page ships its own
+# (build.inlineStylesheets, the theme and transition scripts, Shiki's style
+# attributes). It still limits where scripts, requests, forms and frames can
+# go. The Cloudflare Web Analytics beacon is the only third-party script, and
+# event videos on /speaking are the only third-party media.
 /*
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https:; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
 
 # The font files never change. Rename one if it does.
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Pages link to their social card with a version (see src/lib/social-image.ts),
+# so a redesigned card gets a new URL.
+/og/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Article images, event artwork, portraits and icons keep their URLs, so they
+# are cached for a month. Rename a file to replace it sooner.
+/images/*
+  Cache-Control: public, max-age=2592000
+/events/*
+  Cache-Control: public, max-age=2592000
+/photo-*
+  Cache-Control: public, max-age=2592000
+/icon.png
+  Cache-Control: public, max-age=2592000
+/apple-touch-icon.png
+  Cache-Control: public, max-age=2592000

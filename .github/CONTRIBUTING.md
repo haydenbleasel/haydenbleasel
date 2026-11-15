@@ -57,7 +57,7 @@ date: 2026-10-07
 
 The filename becomes the URL: `streamdown.md` is `/writing/streamdown`. Posts served from the site root instead are listed in `rootPosts` in `src/lib/posts.ts`: `taking-away.md` is `/taking-away`. Every post marks Writing as the current section in the nav, wherever it's served.
 
-The title comes from the frontmatter, so start the body with prose and use `##` for section headings. Images go in `public/images/writing/<post>/`.
+The title comes from the frontmatter, so start the body with prose and use `##` for section headings. Images go in `public/images/writing/<post>/`. Use WebP for screenshots. The build reads each image's size to set `width` and `height`, and fails if the file is missing (`src/lib/markdown-images.ts`).
 
 Posts are listed newest first on `/writing`, the latest three appear on the homepage, and every post is added to the RSS feed and sitemap automatically. Each post also gets a social card built with Takumi from its title, description and date. It's served at `/og/<post-path>.png` (so `/og/writing/streamdown.png`) and linked in the page's Open Graph, Twitter and article metadata.
 
@@ -85,6 +85,8 @@ The work history on the About page is written directly in `src/pages/about.astro
 - Code style is enforced by [Ultracite](https://github.com/haydenbleasel/ultracite) (Oxlint and Oxfmt) with its `core` and `astro` presets.
 - Pages build as flat HTML files (`build.format: "file"`) and URLs have no trailing slash. `public/_redirects` canonicalizes `.html` and trailing-slash URLs before requests reach the Worker.
 - `public/_headers` sets the security headers and the long-lived font cache for static assets. HSTS and `X-Content-Type-Options` are set on the Cloudflare zone, so they also cover responses the Worker generates.
+- `public/_headers` also sets the Content-Security-Policy. A new third-party script, image host or request target has to be added to it, or browsers block it.
+- `/api/subscribe` is limited to 5 signups a minute per visitor address by the `SUBSCRIBE_LIMITER` rate limiting binding in `wrangler.jsonc`, and ignores submissions that fill the form's hidden `website` field.
 - Put client-side behavior in a `src/lib/` module that the component's `<script>` imports, like `nav-hover.ts` or `stack-tabs.ts`, so it's covered by tests. Logic inside an `.astro` file isn't.
 - CSS is inlined into every page (`build.inlineStylesheets: "always"`) rather than loaded as a separate stylesheet. With an external stylesheet, desktop Chrome occasionally painted pages unstyled on internal navigation before snapping into place, a layout shift of about 0.55 (1.0 on About). Keep it inline unless the CSS grows several times larger than its current ~6 KB gzipped.
 - Tests live in `__tests__/` and run on `bun:test`. `__tests__/support/preload.ts` stands in for Astro's virtual modules (`astro:content`, `astro:env/server` and `astro:middleware`), and browser scripts are tested against [happy-dom](https://github.com/capricorn86/happy-dom) with the helpers in `__tests__/support/dom.ts`.
