@@ -5,7 +5,7 @@
 // A native post redirects back here to #newsletter-<outcome>, which shows the
 // matching notice below (and replaces the form after a signup). The notices
 // come before the form so CSS can hide it.
-import { outcomes } from "@/lib/subscribe";
+import { HONEYPOT_FIELD, outcomes } from "@/lib/subscribe";
 ---
 
 <section aria-label="Mailing list" class="newsletter">
@@ -28,6 +28,11 @@ import { outcomes } from "@/lib/subscribe";
   data-newsletter
   method="POST"
 >
+  {/* A trap for scripts that fill in every field (see subscribe.ts). */}
+  <div aria-hidden="true" class="sr-only">
+    <label for="newsletter-website">Leave this empty</label>
+    <input autocomplete="off" id="newsletter-website" name={HONEYPOT_FIELD} tabindex="-1" type="text" />
+  </div>
   <label class="sr-only" for="newsletter-email">Email address</label>
   <input
     autocapitalize="none"

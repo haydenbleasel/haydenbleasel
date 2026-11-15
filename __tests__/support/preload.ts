@@ -17,6 +17,13 @@ mock.module("astro:content", () => ({
 
 mock.module("astro:env/server", () => environment);
 
+// The Worker's bindings. Tests swap `limit` to exercise the rate limiter.
+export const bindings = {
+  SUBSCRIBE_LIMITER: { limit: mock(() => Promise.resolve({ success: true })) },
+};
+
+mock.module("cloudflare:workers", () => ({ env: bindings }));
+
 mock.module("astro:middleware", () => ({
   defineMiddleware: <T>(handler: T) => handler,
 }));

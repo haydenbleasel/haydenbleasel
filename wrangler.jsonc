@@ -14,6 +14,16 @@
   "secrets": {
     "required": ["RESEND_AUDIENCE_ID", "RESEND_TOKEN"],
   },
+  // Caps newsletter signups at 5 a minute per visitor address (see
+  // src/lib/subscribe.ts). The namespace ID is any number unique to this
+  // account's rate limiters.
+  "ratelimits": [
+    {
+      "name": "SUBSCRIBE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 5, "period": 60 },
+    },
+  ],
   "observability": {
     "enabled": true,
   },

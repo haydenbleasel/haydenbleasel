@@ -8,7 +8,7 @@ import {
   test,
 } from "bun:test";
 
-import { subscribe } from "../src/lib/subscribe";
+import { HONEYPOT_FIELD, subscribe } from "../src/lib/subscribe";
 
 // Failures are logged for the Worker's logs; keep them out of the test output.
 let logged: ReturnType<typeof spyOn<Console, "error">>;
@@ -71,6 +71,59 @@ describe("subscribe", () => {
     );
     expect(response.status).toBe(400);
     expect(send).not.toHaveBeenCalled();
+  });
+
+  test("tells a bot that filled the hidden field it worked, and adds nobody", async () => {
+    const send = mock(() => Promise.resolve(Response.json({ id: "123" })));
+    const formData = new FormData();
+    formData.set("email", "bot@example.com");
+    formData.set(HONEYPOT_FIELD, "https://spam.example");
+    const response = await subscribe(
+      new Request("http://localhost/api/subscribe", {
+        body: formData,
+        method: "POST",
+      }),
+      environment,
+      send as unknown as typeof fetch
+    );
+
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({
+      error: "",
+      message: "Subscribed!",
+    });
+    expect(send).not.toHaveBeenCalled();
+  });
+
+  test("limits signups per visitor address before contacting Resend", async () => {
+    const send = mock(() => Promise.resolve(Response.json({ id: "123" })));
+    const limit = mock(({ key }: { key: string }) =>
+      Promise.resolve({ success: key !== "203.0.113.7" })
+    );
+    const attempt = (headers: HeadersInit) =>
+      subscribe(
+        buildRequest("test@example.com", headers),
+        { ...environment, limiter: { limit } },
+        send as unknown as typeof fetch
+      );
+
+    const limited = await attempt({ "CF-Connecting-IP": "203.0.113.7" });
+    expect(limited.status).toBe(429);
+    expect(await limited.json()).toEqual({
+      error: "Too many attempts. Please try again in a minute.",
+      message: "",
+    });
+    expect(send).not.toHaveBeenCalled();
+
+    const allowed = await attempt({ "CF-Connecting-IP": "203.0.113.8" });
+    expect(allowed.status).toBe(200);
+    // Requests without the header (local development) share one bucket.
+    await attempt({});
+    expect(limit.mock.calls.map(([options]) => options.key)).toEqual([
+      "203.0.113.7",
+      "203.0.113.8",
+      "unknown",
+    ]);
   });
 
   test("subscribes a trimmed email to the configured segment", async () => {

@@ -1,6 +1,6 @@
 [test]
 # Stand-ins for Astro's virtual modules (astro:content, astro:env/server,
-# astro:middleware), which only exist inside Astro's build and dev server.
+# astro:middleware, cloudflare:workers), which only exist inside Astro's build and dev server.
 preload = ["./__tests__/support/preload.ts"]
 # `bun test --coverage` (`bun run test:coverage`) fails unless every line and
 # function of each file the tests load is covered. `__tests__/modules.test.ts`

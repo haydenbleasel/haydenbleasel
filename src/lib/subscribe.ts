@@ -1,7 +1,18 @@
+// The Worker's rate limiting binding (SUBSCRIBE_LIMITER in wrangler.jsonc).
+export interface RateLimiter {
+  limit: (options: { key: string }) => Promise<{ success: boolean }>;
+}
+
 interface NewsletterEnvironment {
   audienceId?: string;
+  /** Absent in development and tests, where signups aren't limited. */
+  limiter?: RateLimiter;
   token?: string;
 }
+
+// A field people never see (newsletter-inline.astro hides it). Scripts that
+// fill in every input give themselves away by completing it.
+export const HONEYPOT_FIELD = "website";
 
 // The page script reads these as JSON. A native form post (without
 // JavaScript, or before the script loads) is sent back to the form at
@@ -14,6 +25,11 @@ export const outcomes = {
     status: 502,
   },
   invalid: { error: "Invalid email address", message: "", status: 400 },
+  limited: {
+    error: "Too many attempts. Please try again in a minute.",
+    message: "",
+    status: 429,
+  },
   subscribed: { error: "", message: "Subscribed!", status: 200 },
   unavailable: {
     error: "Signup is temporarily unavailable. Please try again later.",
@@ -72,11 +88,23 @@ export const subscribe = async (
   send: typeof fetch = fetch
 ) => {
   let email: FormDataEntryValue | null;
+  let honeypot: FormDataEntryValue | null;
   try {
     const data = await request.formData();
     email = data.get("email");
+    honeypot = data.get(HONEYPOT_FIELD);
   } catch {
     return respond(request, "invalid");
+  }
+  // Tell a bot it worked, so it has no reason to adapt, and add nobody.
+  if (honeypot) {
+    return respond(request, "subscribed");
+  }
+  // Counted per visitor address, before validation, so guessing is limited too.
+  const address = request.headers.get("CF-Connecting-IP") ?? "unknown";
+  const allowed = await environment.limiter?.limit({ key: address });
+  if (allowed?.success === false) {
+    return respond(request, "limited");
   }
   if (
     typeof email !== "string" ||

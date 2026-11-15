@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, spyOn, test } from "bun:test";
 
 import { POST, prerender } from "../src/pages/api/subscribe";
-import { environment } from "./support/preload";
+import { bindings, environment } from "./support/preload";
 
 type Context = Parameters<typeof POST>[0];
 
@@ -42,6 +42,17 @@ describe("POST /api/subscribe", () => {
       email: "reader@example.com",
       segments: [{ id: environment.RESEND_AUDIENCE_ID }],
     });
+  });
+
+  test("limits signups with the Worker's rate limiter", async () => {
+    bindings.SUBSCRIBE_LIMITER.limit.mockResolvedValueOnce({ success: false });
+    const body = new FormData();
+    body.set("email", "reader@example.com");
+
+    const response = await post(body);
+
+    expect(response.status).toBe(429);
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 
   test("rejects an invalid email without calling Resend", async () => {
