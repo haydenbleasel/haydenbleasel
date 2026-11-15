@@ -12,7 +12,6 @@ interface NavLink {
 
 const links: NavLink[] = [
   { href: "/about", label: "About" },
-  // Every post, including those postPath serves from the root.
   { href: "/writing", label: "Writing", within: isPostPath },
   { href: "/speaking", label: "Speaking" },
   { href: "/press", label: "Press" },

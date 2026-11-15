@@ -21,6 +21,16 @@ describe("redirects", () => {
     expect(bySource("/clients")?.permanent).toBe(true);
   });
 
+  test("the post first published at the root leads to its /writing URL", () => {
+    expect(bySource("/taking-away")?.destination).toBe("/writing/taking-away");
+    expect(bySource("/taking-away.md")?.destination).toBe(
+      "/writing/taking-away.md"
+    );
+    expect(bySource("/og/taking-away.png")?.destination).toBe(
+      "/og/writing/taking-away.png"
+    );
+  });
+
   test("os1 routes map to their new homes", () => {
     expect(bySource("/appearances")?.destination).toBe("/speaking");
     expect(bySource("/projects")?.destination).toBe("/about#projects");

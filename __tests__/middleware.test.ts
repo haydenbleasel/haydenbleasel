@@ -23,6 +23,18 @@ describe("middleware redirects", () => {
     ["/blog", "https://haydenbleasel.com/writing", 308],
     ["/blog/", "https://haydenbleasel.com/writing", 308],
     ["/blog/presumi", "https://haydenbleasel.com/writing/presumi", 308],
+    ["/taking-away", "https://haydenbleasel.com/writing/taking-away", 308],
+    ["/taking-away/", "https://haydenbleasel.com/writing/taking-away", 308],
+    [
+      "/taking-away.md",
+      "https://haydenbleasel.com/writing/taking-away.md",
+      308,
+    ],
+    [
+      "/og/taking-away.png",
+      "https://haydenbleasel.com/og/writing/taking-away.png",
+      308,
+    ],
     ["/games", "https://haydenbleasel.com/", 307],
     ["/posts", "https://x.com/haydenbleasel", 308],
     ["/contact", "https://x.com/haydenbleasel", 307],

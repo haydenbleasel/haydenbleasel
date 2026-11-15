@@ -48,6 +48,23 @@ export const redirects: Redirect[] = [
     permanent: true,
     source: "/blog/refraction-has-been-acquired-by-twistag",
   },
+  // This post was first published at the site root, along with its Markdown
+  // copy and social card.
+  {
+    destination: "/writing/taking-away",
+    permanent: true,
+    source: "/taking-away",
+  },
+  {
+    destination: "/writing/taking-away.md",
+    permanent: true,
+    source: "/taking-away.md",
+  },
+  {
+    destination: "/og/writing/taking-away.png",
+    permanent: true,
+    source: "/og/taking-away.png",
+  },
   { destination: "/", permanent: true, source: "/clients" },
   { destination: "/about#work", permanent: true, source: "/work/:path*" },
   { destination: "/speaking", permanent: true, source: "/appearances" },

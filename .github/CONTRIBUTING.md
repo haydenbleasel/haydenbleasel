@@ -55,7 +55,7 @@ date: 2026-10-07
 ---
 ```
 
-The filename becomes the URL: `streamdown.md` is `/writing/streamdown`. Posts served from the site root instead are listed in `rootPosts` in `src/lib/posts.ts`: `taking-away.md` is `/taking-away`. Every post marks Writing as the current section in the nav, wherever it's served.
+The filename becomes the URL: `streamdown.md` is `/writing/streamdown`. Every post marks Writing as the current section in the nav. If you rename a post, add a redirect from its old URL in `src/lib/redirects.ts`.
 
 The title comes from the frontmatter, so start the body with prose and use `##` for section headings. Images go in `public/images/writing/<post>/`. Use WebP for screenshots. The build reads each image's size to set `width` and `height`, and fails if the file is missing (`src/lib/markdown-images.ts`).
 

@@ -16,21 +16,21 @@ describe("posts", () => {
     expect(posts.map((post) => post.id)).toEqual(["second-post", "first-post"]);
   });
 
-  test("posts live under /writing, except taking-away", () => {
+  test("every post lives under /writing", () => {
     expect(postPath("streamdown")).toBe("/writing/streamdown");
-    expect(postPath("taking-away")).toBe("/taking-away");
+    expect(postPath("taking-away")).toBe("/writing/taking-away");
   });
 
-  test("recognizes every post's path, including those at the root", () => {
+  test("recognizes a post's path, but not the writing index or other pages", () => {
     expect(isPostPath(postPath("streamdown"))).toBe(true);
-    expect(isPostPath(postPath("taking-away"))).toBe(true);
+    expect(isPostPath("/taking-away")).toBe(false);
     expect(isPostPath("/writing")).toBe(false);
     expect(isPostPath("/about")).toBe(false);
   });
 
   test("each post has a Markdown copy beside it", () => {
     expect(postMarkdownPath("streamdown")).toBe("/writing/streamdown.md");
-    expect(postMarkdownPath("taking-away")).toBe("/taking-away.md");
+    expect(postMarkdownPath("taking-away")).toBe("/writing/taking-away.md");
   });
 
   test("finds the posts published either side of one", () => {

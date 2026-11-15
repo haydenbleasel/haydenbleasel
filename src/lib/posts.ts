@@ -7,15 +7,11 @@ export const getPosts = async () => {
   );
 };
 
-// Posts served from the site root instead of under /writing.
-const rootPosts = new Set(["taking-away"]);
+export const postPath = (id: string) => `/writing/${id}`;
 
-export const postPath = (id: string) =>
-  rootPosts.has(id) ? `/${id}` : `/writing/${id}`;
-
-// Whether a page path is a post, wherever postPath serves it.
+// Whether a page path is a post, rather than the /writing index.
 export const isPostPath = (pathname: string) =>
-  pathname.startsWith("/writing/") || rootPosts.has(pathname.slice(1));
+  pathname.startsWith("/writing/");
 
 // The Markdown copy of a post, for agents (src/pages/[...slug].md.ts).
 export const postMarkdownPath = (id: string) => `${postPath(id)}.md`;
