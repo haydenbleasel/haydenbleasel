@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 
 import { externalArticleLinks } from "./src/lib/markdown-external-links";
+import { articleImages } from "./src/lib/markdown-images";
 import { url } from "./src/lib/url";
 
 // https://astro.build/config
@@ -61,7 +62,7 @@ export default defineConfig({
   ],
 
   markdown: {
-    processor: satteri({ hastPlugins: [externalArticleLinks] }),
+    processor: satteri({ hastPlugins: [externalArticleLinks, articleImages] }),
     shikiConfig: {
       defaultColor: false,
       themes: {

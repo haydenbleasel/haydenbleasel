@@ -9,7 +9,7 @@ updated: 2026-10-30
 
 Their first editor looked great. It was dark and iMovie-like, but the team's behavioral data showed that people who'd never edited a video couldn't make sense of it. Only 30% of users finished a video.
 
-![Clipchamp's original editor, with a media grid on the left, a large preview on the right and the timeline below.](/images/writing/clipchamp/editor-before.png)
+![Clipchamp's original editor, with a media grid on the left, a large preview on the right and the timeline below.](/images/writing/clipchamp/editor-before.webp)
 
 Anna Ji, who ran growth at Clipchamp, asked my agency [Jellypepper](/writing/jellypepper) to help. In 2019, I was the product designer on their growth team, often working from their office. Anna set the strategy and roadmap. I did the design, and five of their developers built it.
 
@@ -29,15 +29,15 @@ The obvious place to start was the editor. We started at the other end of the fu
 
 Export was short but confusing. Most of Clipchamp's users weren't technical and didn't know which resolution suited what they were making. Different resolutions came with different plans or as one-off purchases, which is a lot to fit in a dropdown. And because you picked a resolution after checkout, choosing a higher one could mean going back, upgrading and starting the export again.
 
-![The old export screen, where video quality was a dropdown mixing free, paid and coming-soon options.](/images/writing/clipchamp/resolution-before.png)
+![The old export screen, where video quality was a dropdown mixing free, paid and coming-soon options.](/images/writing/clipchamp/resolution-before.webp)
 
 We turned it into a multi-screen flow. The first screen showed each resolution as a different-sized thumbnail, with a line about where it works best. If you picked one that needed a higher plan, the plans appeared in the same flow, and if you weren't ready to pay, you could still download a watermarked 480p version. We also considered letting people choose a compression level, but decided to handle that automatically instead.
 
-![The new export screen, showing 480p, 720p and 1080p as different-sized thumbnails, with an option to download a watermarked 480p demo.](/images/writing/clipchamp/resolution-after.png)
+![The new export screen, showing 480p, 720p and 1080p as different-sized thumbnails, with an option to download a watermarked 480p demo.](/images/writing/clipchamp/resolution-after.webp)
 
 The download screen at the end used to be a single save button. We added a preview link, an embed code and sharing to Facebook and Twitter, so people could do more with a finished video than save it.
 
-![The new download screen, with options to download, copy a preview link, embed the video or share it.](/images/writing/clipchamp/export-after.png)
+![The new download screen, with options to download, copy a preview link, embed the video or share it.](/images/writing/clipchamp/export-after.webp)
 
 ## Every path through pricing
 
@@ -45,21 +45,21 @@ Pricing was harder. Between plans, add-on stock packs and micropayments for indi
 
 So before designing anything, I mapped every possible path through pricing for free, premium and business users, and wrote up every outcome.
 
-![Flow diagrams mapping every path through upgrades, exports, stock and billing for free, premium and business users.](/images/writing/clipchamp/pricing-flows.png)
+![Flow diagrams mapping every path through upgrades, exports, stock and billing for free, premium and business users.](/images/writing/clipchamp/pricing-flows.webp)
 
 That turned up flows the team hadn't considered. Exporting at 480p, for example, never prompted an upgrade at all. Anna left a comment saying she couldn't believe she hadn't thought of it.
 
-![Notes from the pricing flows doc, with Anna's comment that a 480p export never triggered an upgrade.](/images/writing/clipchamp/flows-2.jpeg)
+![Notes from the pricing flows doc, with Anna's comment that a 480p export never triggered an upgrade.](/images/writing/clipchamp/flows-2.webp)
 
 The new plans page asked for one decision at a time: billing period first, then a plan or a one-off purchase. Each plan showed a price that updated with the billing period and a short list of features you could compare across, with tooltips for detail. One-off purchases moved below the plans as a secondary option. We went through several rounds of testing with real users before settling on it.
 
-![The old purchase screen, with a single Premium plan beside a one-time export.](/images/writing/clipchamp/plans-before.png)
+![The old purchase screen, with a single Premium plan beside a one-time export.](/images/writing/clipchamp/plans-before.webp)
 
-![The new plans screen, with Basic, Creator, Business and Agency plans, a monthly or yearly toggle and a one-off export below.](/images/writing/clipchamp/plans-after.png)
+![The new plans screen, with Basic, Creator, Business and Agency plans, a monthly or yearly toggle and a one-off export below.](/images/writing/clipchamp/plans-after.webp)
 
 Checkout had more basic problems. The PayPal button was wrong, which mattered because about 60% of customers paid with PayPal. Card details weren't saved, and the sales team wanted a coupon field. We fixed those, then put the payment details beside an itemized bill and added a quote from a customer.
 
-![The new checkout, with a saved card beside an itemized order, a coupon link and a customer quote.](/images/writing/clipchamp/checkout-after.png)
+![The new checkout, with a saved card beside an itemized order, a coupon link and a customer quote.](/images/writing/clipchamp/checkout-after.webp)
 
 Together, the pricing and checkout changes increased checkout conversion by 30%.
 
@@ -71,9 +71,9 @@ We tried two things. The first was templates: ready-made projects with titles, s
 
 The second was how a video got started. It used to be a modal that asked for an aspect ratio, which is jargon to most people. The new flow asked what you were making and where you'd post it, described each format in plain terms and offered templates to match.
 
-![The old new-project modal, asking for a title, aspect ratio and duration.](/images/writing/clipchamp/create-before.png)
+![The old new-project modal, asking for a title, aspect ratio and duration.](/images/writing/clipchamp/create-before.webp)
 
-![The new flow, with formats like Portrait and Widescreen described by where they'd be posted, above rows of templates.](/images/writing/clipchamp/create-after.png)
+![The new flow, with formats like Portrait and Widescreen described by where they'd be posted, above rows of templates.](/images/writing/clipchamp/create-after.webp)
 
 ## The editor, last
 
@@ -83,7 +83,7 @@ The properties panel only appeared when you selected a clip. Keyboard shortcuts 
 
 We also replaced [Appcues](https://www.appcues.com) with built-in cues, so product tours could show you how to drag media onto the timeline, and added a star to anything that needed a paid plan.
 
-![The redesigned editor, with a media sidebar and search on the left and editing controls above the timeline.](/images/writing/clipchamp/editor-after.png)
+![The redesigned editor, with a media sidebar and search on the left and editing controls above the timeline.](/images/writing/clipchamp/editor-after.webp)
 
 The new sidebar increased content adoption by 20%, and pro users told us the shortcuts made them much faster.
 
@@ -95,9 +95,9 @@ It took five sprints. We put interactive prototypes in front of a few key custom
 
 We wrote the releases as user stories, and most of them were about saving time: "When branding beyond the first video, I want to access my logo without having to upload it again." That led to logo tracks, uploaded brand fonts, a color palette, intro and outro slates and brandmarks (reusable blocks for titles, calls to action and social handles).
 
-![A map of how Brand Centre's logos, colors and typography connect to the editor.](/images/writing/clipchamp/brand-centre-1.png)
+![A map of how Brand Centre's logos, colors and typography connect to the editor.](/images/writing/clipchamp/brand-centre-1.webp)
 
-![A Brand Centre concept in the editor, with brand colors, a font and a logo applied to brandmarks on the timeline.](/images/writing/clipchamp/brand-centre.png)
+![A Brand Centre concept in the editor, with brand colors, a font and a logo applied to brandmarks on the timeline.](/images/writing/clipchamp/brand-centre.webp)
 
 Brand Centre shipped as a place to organize and store brand assets together.
 
