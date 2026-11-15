@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { identity, person, primaryPortrait } from "../src/lib/person";
 import { press } from "../src/lib/press";
-import { projects } from "../src/lib/projects";
+import { projectSchema, projects, vercelProjects } from "../src/lib/projects";
 import { portraitImage } from "../src/lib/social-image";
 import { categories, stack } from "../src/lib/stack";
 import { writing } from "../src/lib/writing";
@@ -101,6 +101,65 @@ describe("stack", () => {
     expect(duplicates(stack.map((item) => item.name))).toEqual([]);
     for (const item of stack) {
       expect(item.url.startsWith("https://")).toBe(true);
+    }
+  });
+});
+
+describe("project structured data", () => {
+  const personRef = { "@id": "https://haydenbleasel.com/#person" };
+
+  test("names me as the creator and links an active project's own site", () => {
+    expect(
+      projectSchema({
+        description: "A linter.",
+        name: "Ultracite",
+        status: "Active",
+        url: "https://www.ultracite.ai",
+      })
+    ).toEqual({
+      "@type": "SoftwareSourceCode",
+      creator: personRef,
+      description: "A linter.",
+      name: "Ultracite",
+      url: "https://www.ultracite.ai/",
+    });
+  });
+
+  test("links a repository as the code, whatever the project's status", () => {
+    expect(
+      projectSchema({
+        name: "Ghost",
+        status: "Archived",
+        url: "https://github.com/haydenbleasel/ghost",
+      })
+    ).toMatchObject({
+      codeRepository: "https://github.com/haydenbleasel/ghost",
+    });
+  });
+
+  test("treats a retired project's link as a page about it", () => {
+    expect(
+      projectSchema({
+        name: "Neutral",
+        status: "Archived",
+        url: "/writing/neutral",
+      })
+    ).toMatchObject({
+      subjectOf: {
+        "@type": "WebPage",
+        url: "https://haydenbleasel.com/writing/neutral",
+      },
+    });
+  });
+
+  test("covers the projects made at Vercel, which carry no status", () => {
+    expect(duplicates(vercelProjects.map((project) => project.name))).toEqual(
+      []
+    );
+    for (const project of vercelProjects) {
+      const node = projectSchema(project);
+      expect("url" in node || "codeRepository" in node).toBe(true);
+      expect(node).not.toHaveProperty("description");
     }
   });
 });

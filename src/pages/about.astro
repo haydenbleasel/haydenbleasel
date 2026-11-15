@@ -4,7 +4,7 @@ import ExpandableProjects from "@/components/expandable-projects.astro";
 import Page from "@/layouts/page.astro";
 import { getPage } from "@/lib/pages";
 import { identity, person, primaryPortrait } from "@/lib/person";
-import { projects } from "@/lib/projects";
+import { projects, projectSchema, vercelProjects } from "@/lib/projects";
 import { categories, stack } from "@/lib/stack";
 
 // Let Astro enforce permanent canonical redirects before serving this page.
@@ -20,6 +20,7 @@ const jsonLd = {
   "@type": "AboutPage",
   description,
   mainEntity: person,
+  mentions: [...projects, ...vercelProjects].map((project) => projectSchema(project)),
   name: "About Hayden Bleasel",
   primaryImageOfPage: primaryPortrait,
   url: `${identity}/about`,

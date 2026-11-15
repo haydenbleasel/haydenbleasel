@@ -1,3 +1,5 @@
+import { identity, personRef } from "./person";
+
 export interface Project {
   description: string;
   footnote?: number;
@@ -75,3 +77,43 @@ export const projects: Project[] = [
     url: "/writing/neutral",
   },
 ];
+
+// Open source I created while at Vercel, as listed under Work on the About
+// page. Keep the two in step.
+export const vercelProjects = [
+  { name: "Streamdown", url: "https://streamdown.ai/" },
+  { name: "AI Elements", url: "https://ui.shadcn.com/docs/ai-elements" },
+  { name: "Remend", url: "https://www.npmjs.com/package/remend" },
+  { name: "Tersa", url: "https://github.com/vercel-labs/tersa" },
+  { name: "OpenReview", url: "https://github.com/vercel-labs/openreview" },
+  { name: "Vectr", url: "https://github.com/vercel-labs/vectr" },
+  { name: "npm.bet", url: "https://www.npm.bet/" },
+];
+
+// Where a project's link leads decides which property carries it: a
+// repository, the project's own site (only active projects still have one),
+// or a page about it, such as an acquisition announcement.
+const projectLink = (project: Pick<Project, "url"> & { status?: string }) => {
+  const url = new URL(project.url, identity).href;
+  if (url.startsWith("https://github.com/")) {
+    return { codeRepository: url };
+  }
+  if (!project.status || project.status === "Active") {
+    return { url };
+  }
+  return { subjectOf: { "@type": "WebPage", url } };
+};
+
+/**
+ * A structured-data node naming me as the creator of a project, so "who made
+ * Ultracite" has a machine-readable answer.
+ */
+export const projectSchema = (
+  project: Pick<Project, "name" | "url"> & Partial<Project>
+) => ({
+  "@type": "SoftwareSourceCode",
+  creator: personRef,
+  ...(project.description && { description: project.description }),
+  name: project.name,
+  ...projectLink(project),
+});

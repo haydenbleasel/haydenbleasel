@@ -3,12 +3,15 @@ import "@/styles/globals.css";
 import { pagePath } from "@/lib/page-path";
 import { homeDescription, homeTitle } from "@/lib/pages";
 import { identity, person, primaryPortrait } from "@/lib/person";
+import { projects, projectSchema } from "@/lib/projects";
 import { socialImage } from "@/lib/social-image";
 import { url } from "@/lib/url";
 
 interface Props {
   description?: string;
   jsonLd?: Record<string, unknown>;
+  /** Path to a Markdown copy of the page, for agents. */
+  markdown?: string;
   publishedTime?: string;
   modifiedTime?: string;
   /** Keep the page out of search results (the 404). */
@@ -20,6 +23,7 @@ interface Props {
 const {
   description = homeDescription,
   jsonLd: jsonLdProp,
+  markdown,
   publishedTime,
   modifiedTime,
   noindex = false,
@@ -42,6 +46,10 @@ const jsonLd = jsonLdProp ?? {
   "@id": `${identity}/#profilepage`,
   "@type": "ProfilePage",
   description,
+  // The projects listed on the homepage.
+  hasPart: projects
+    .filter((project) => project.status === "Active")
+    .map((project) => projectSchema(project)),
   mainEntity: person,
   name: title,
   primaryImageOfPage: primaryPortrait,
@@ -112,6 +120,7 @@ const jsonLd = jsonLdProp ?? {
     <meta name="creator" content="Hayden Bleasel" />
     <link href="https://haydenbleasel.com" rel="author" />
     {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
     <link rel="icon" href="/icon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link
