@@ -69,7 +69,7 @@ export const appearances: Appearance[] = [
   {
     title: "Shipping Products at Lightspeed at WDX '23, Sydney",
     type: "Talk",
-    url: "https://www.wdx.design/wdx23-conference",
+    url: "https://www.linkedin.com/posts/haydenbleasel_wdx23-conference-271023-get-your-ticket-share-7113282615469649921-xCSJ/",
     year: 2023,
   },
   {
