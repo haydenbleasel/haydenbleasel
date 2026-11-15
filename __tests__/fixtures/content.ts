@@ -2,6 +2,7 @@
 // the fixtures unsorted so route tests exercise the collection's date ordering.
 export const posts = [
   {
+    body: "See [more](/writing) and ![a chart](/images/a.webp).\n\n[Elsewhere](https://example.com)\n",
     data: {
       date: new Date("2025-01-01"),
       description: "Older post",

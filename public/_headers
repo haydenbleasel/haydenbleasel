@@ -13,6 +13,11 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https:; connect-src 'self' https://cloudflareinsights.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
 
+# Markdown copies of posts are for agents that fetch them directly. Search
+# engines should index the HTML page instead.
+/*.md
+  X-Robots-Tag: noindex
+
 # The font files never change. Rename one if it does.
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable

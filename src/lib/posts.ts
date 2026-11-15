@@ -17,6 +17,18 @@ export const postPath = (id: string) =>
 export const isPostPath = (pathname: string) =>
   pathname.startsWith("/writing/") || rootPosts.has(pathname.slice(1));
 
+// The Markdown copy of a post, for agents (src/pages/[...slug].md.ts).
+export const postMarkdownPath = (id: string) => `${postPath(id)}.md`;
+
+// The posts published either side of one, in a list sorted newest first.
+export const adjacentPosts = <Post extends { id: string }>(
+  posts: Post[],
+  id: string
+): { newer?: Post; older?: Post } => {
+  const index = posts.findIndex((post) => post.id === id);
+  return { newer: posts[index - 1], older: posts[index + 1] };
+};
+
 export const formatPostDate = (date: Date) =>
   new Intl.DateTimeFormat("en-US", {
     day: "numeric",

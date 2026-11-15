@@ -4,15 +4,21 @@ import SiteFooter from "@/components/site-footer.astro";
 import SiteNav from "@/components/site-nav.astro";
 import Layout from "@/layouts/layout.astro";
 import { identity, person } from "@/lib/person";
-import { formatPostDate, postPath } from "@/lib/posts";
+import { formatPostDate, postMarkdownPath, postPath } from "@/lib/posts";
 import { socialImagePath } from "@/lib/social-image";
 import "@/styles/post.css";
 
 interface Props {
+  newer?: CollectionEntry<"posts">;
+  older?: CollectionEntry<"posts">;
   post: CollectionEntry<"posts">;
 }
 
-const { post } = Astro.props;
+const { newer, older, post } = Astro.props;
+const more = [
+  { label: "Newer", post: newer },
+  { label: "Older", post: older },
+].flatMap((entry) => (entry.post ? [{ label: entry.label, post: entry.post }] : []));
 const { title, description, date, updated } = post.data;
 const content = await Astro.slots.render("default");
 // Estimate at 200 words per minute, counting article text without HTML markup.
@@ -42,6 +48,7 @@ const jsonLd = {
 <Layout
   description={description}
   jsonLd={jsonLd}
+  markdown={postMarkdownPath(post.id)}
   publishedTime={date.toISOString()}
   modifiedTime={updated?.toISOString()}
   title={`${title} | Hayden Bleasel`}
@@ -65,6 +72,16 @@ const jsonLd = {
           <Fragment set:html={content} />
         </div>
         <footer class="post-footer">
+          {more.length > 0 && (
+            <nav aria-label="More writing" class="post-more">
+              {more.map((entry) => (
+                <a class="post-more-link" href={postPath(entry.post.id)}>
+                  <span class="post-more-label">{entry.label}</span>
+                  <span class="post-more-title">{entry.post.data.title}</span>
+                </a>
+              ))}
+            </nav>
+          )}
           <a class="text-link" href="/writing">All writing</a>
         </footer>
       </article>

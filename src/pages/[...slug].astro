@@ -3,24 +3,26 @@ import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import Post from "@/layouts/post.astro";
-import { getPosts, postPath } from "@/lib/posts";
+import { adjacentPosts, getPosts, postPath } from "@/lib/posts";
 
 export const getStaticPaths = (async () => {
   const posts = await getPosts();
   return posts.map((post) => ({
     params: { slug: postPath(post.id).slice(1) },
-    props: { post },
+    props: { post, ...adjacentPosts(posts, post.id) },
   }));
 }) satisfies GetStaticPaths;
 
 interface Props {
+  newer?: CollectionEntry<"posts">;
+  older?: CollectionEntry<"posts">;
   post: CollectionEntry<"posts">;
 }
 
-const { post } = Astro.props;
+const { newer, older, post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Post post={post}>
+<Post newer={newer} older={older} post={post}>
   <Content />
 </Post>

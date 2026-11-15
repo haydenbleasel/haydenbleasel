@@ -1,9 +1,11 @@
 import { describe, expect, test } from "bun:test";
 
 import {
+  adjacentPosts,
   formatPostDate,
   getPosts,
   isPostPath,
+  postMarkdownPath,
   postPath,
 } from "../src/lib/posts";
 
@@ -24,6 +26,28 @@ describe("posts", () => {
     expect(isPostPath(postPath("taking-away"))).toBe(true);
     expect(isPostPath("/writing")).toBe(false);
     expect(isPostPath("/about")).toBe(false);
+  });
+
+  test("each post has a Markdown copy beside it", () => {
+    expect(postMarkdownPath("streamdown")).toBe("/writing/streamdown.md");
+    expect(postMarkdownPath("taking-away")).toBe("/taking-away.md");
+  });
+
+  test("finds the posts published either side of one", () => {
+    const posts = [{ id: "newest" }, { id: "middle" }, { id: "oldest" }];
+
+    expect(adjacentPosts(posts, "middle")).toEqual({
+      newer: { id: "newest" },
+      older: { id: "oldest" },
+    });
+    expect(adjacentPosts(posts, "newest")).toEqual({
+      newer: undefined,
+      older: { id: "middle" },
+    });
+    expect(adjacentPosts(posts, "oldest")).toEqual({
+      newer: { id: "middle" },
+      older: undefined,
+    });
   });
 
   test("formats dates in UTC so frontmatter dates don't shift a day", () => {

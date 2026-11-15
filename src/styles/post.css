@@ -160,3 +160,34 @@
   color: var(--muted);
   font-size: 0.875rem;
 }
+
+.post-more {
+  display: grid;
+  gap: 1rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .post-more {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.post-more-link {
+  display: grid;
+  gap: 0.125rem;
+}
+
+.post-more-title {
+  color: var(--heading);
+  font-size: 1rem;
+  font-weight: 500;
+  text-wrap: balance;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .post-more-link:hover .post-more-title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+}
