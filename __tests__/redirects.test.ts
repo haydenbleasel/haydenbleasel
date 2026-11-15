@@ -31,6 +31,12 @@ describe("redirects", () => {
     );
   });
 
+  test("no source is listed twice, since only the first would apply", () => {
+    const sources = redirects.map((r) => r.source);
+
+    expect(new Set(sources).size).toBe(sources.length);
+  });
+
   test("os1 routes map to their new homes", () => {
     expect(bySource("/appearances")?.destination).toBe("/speaking");
     expect(bySource("/projects")?.destination).toBe("/about#projects");
