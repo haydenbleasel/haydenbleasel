@@ -19,6 +19,15 @@ mock.module("astro:env/server", () => environment);
 
 // The Worker's bindings. Tests swap `limit` to exercise the rate limiter.
 export const bindings = {
+  ASSETS: {
+    fetch: mock((_input: URL | string) =>
+      Promise.resolve(
+        new Response("<h1>Page not found</h1>", {
+          headers: { "content-type": "text/html; charset=utf-8" },
+        })
+      )
+    ),
+  },
   SUBSCRIBE_LIMITER: { limit: mock(() => Promise.resolve({ success: true })) },
 };
 

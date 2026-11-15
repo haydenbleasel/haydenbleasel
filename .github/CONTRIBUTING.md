@@ -76,7 +76,7 @@ Most of the rest of the site comes from typed data in `src/lib/`:
 | `writing.ts` | Articles and courses published elsewhere, on `/writing` and in the RSS feed. Give each new entry the publication `date` shown on the article: the feed dates an entry without one to January 1 of its `year` |
 | `pages.ts` | Titles and descriptions for each page's metadata and social card |
 | `person.ts` | The bio and schema.org `Person` data used in page metadata |
-| `redirects.ts` | Redirects for old URLs, applied in `src/middleware.ts` |
+| `redirects.ts` | Redirects for old URLs, applied in `src/middleware.ts`. Middleware only runs for paths that match a route, so `src/pages/[...path].ts` catches the rest and serves the 404 page when nothing redirects |
 
 The work history on the About page is written directly in `src/pages/about.astro`.
 
