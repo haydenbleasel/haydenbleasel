@@ -1,0 +1,28 @@
+---
+import Page from "@/layouts/page.astro";
+import { identity } from "@/lib/person";
+
+export const prerender = true;
+
+const title = "Page not found";
+const description = "This page doesn’t exist, or it has moved.";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  description,
+  isPartOf: { "@id": `${identity}/#profilepage` },
+  name: title,
+};
+---
+
+<Page description={description} jsonLd={jsonLd} noindex title={title}>
+  <div class="page-sections">
+    <section class="page-section">
+      <h2 class="section-label" aria-hidden="true">404</h2>
+      <p>
+        This page doesn’t exist, or it has moved. Head back <a class="text-link" href="/">home</a>,
+        or have a look through my <a class="text-link" href="/writing">writing</a>.
+      </p>
+    </section>
+  </div>
+</Page>

@@ -31,6 +31,8 @@
 }
 
 :root {
+  /* Native scrollbars and form controls follow the theme. */
+  color-scheme: light;
   --motion-ease: cubic-bezier(0.25, 1, 0.5, 1);
   --background: #fff;
   --foreground: #3a3a3a;
@@ -42,6 +44,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: #111;
   --foreground: #d6d6d6;
   --heading: #f5f5f5;

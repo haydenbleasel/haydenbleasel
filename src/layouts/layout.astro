@@ -11,6 +11,8 @@ interface Props {
   jsonLd?: Record<string, unknown>;
   publishedTime?: string;
   modifiedTime?: string;
+  /** Keep the page out of search results (the 404). */
+  noindex?: boolean;
   title?: string;
   type?: "website" | "article";
 }
@@ -20,6 +22,7 @@ const {
   jsonLd: jsonLdProp,
   publishedTime,
   modifiedTime,
+  noindex = false,
   title = homeTitle,
   type = "website",
 } = Astro.props;
@@ -27,7 +30,8 @@ const {
 const pathname = pagePath(Astro.url.pathname);
 const canonical = new URL(pathname, url).toString();
 
-const image = socialImage(pathname);
+// Pages outside the sitemap have no generated card, so they share the portrait.
+const image = socialImage(noindex ? "/" : pathname);
 const ogImage = new URL(image.path, identity).toString();
 const ogImageAlt = image.alt ?? `${title.replace(/ \| Hayden Bleasel$/u, "")} — ${description}`;
 
@@ -49,6 +53,8 @@ const jsonLd = jsonLdProp ?? {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    {/* Matches --background. The script below and the theme switcher keep it in step. */}
+    <meta name="theme-color" content="#fff" />
     <script is:inline>
       // Apply the stored (or system) theme before first paint.
       (() => {
@@ -60,6 +66,11 @@ const jsonLd = jsonLdProp ?? {
               window.matchMedia("(prefers-color-scheme: dark)").matches);
 
           document.documentElement.classList.toggle("dark", dark);
+          if (dark) {
+            document
+              .querySelector('meta[name="theme-color"]')
+              .setAttribute("content", "#111");
+          }
         } catch {
           /* no storage — stay light */
         }
@@ -100,8 +111,9 @@ const jsonLd = jsonLdProp ?? {
     <meta name="author" content="Hayden Bleasel" />
     <meta name="creator" content="Hayden Bleasel" />
     <link href="https://haydenbleasel.com" rel="author" />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/icon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link
       href="/rss.xml"
       rel="alternate"
@@ -128,7 +140,7 @@ const jsonLd = jsonLdProp ?? {
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content={title} />
+    <meta name="apple-mobile-web-app-title" content="Hayden Bleasel" />
 
     <!-- Open Graph -->
     <meta property="og:type" content={type} />

@@ -6,6 +6,7 @@ import { query, useDom } from "./support/dom";
 useDom();
 
 const setup = () => {
+  document.head.innerHTML = '<meta name="theme-color" content="#fff">';
   document.body.innerHTML =
     '<button data-theme-switcher type="button">Switch theme</button>';
   initThemeSwitcher();
@@ -23,7 +24,15 @@ describe("theme switcher", () => {
     button.click();
     expect(document.documentElement.classList.contains("dark")).toBe(true);
     expect(localStorage.getItem("theme")).toBe("dark");
+    expect(query('meta[name="theme-color"]').getAttribute("content")).toBe(
+      "#111"
+    );
 
+    button.click();
+    expect(query('meta[name="theme-color"]').getAttribute("content")).toBe(
+      "#fff"
+    );
+    button.click();
     button.click();
     expect(document.documentElement.classList.contains("dark")).toBe(false);
     expect(localStorage.getItem("theme")).toBe("light");

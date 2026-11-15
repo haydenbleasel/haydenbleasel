@@ -6,12 +6,13 @@ import Layout from "@/layouts/layout.astro";
 interface Props {
   description: string;
   jsonLd: Record<string, unknown>;
+  noindex?: boolean;
   title: string;
 }
-const { description, jsonLd, title } = Astro.props;
+const { description, jsonLd, noindex, title } = Astro.props;
 ---
 
-<Layout description={description} jsonLd={jsonLd} title={`${title} | Hayden Bleasel`}>
+<Layout description={description} jsonLd={jsonLd} noindex={noindex} title={`${title} | Hayden Bleasel`}>
   <div class="site-shell">
     <SiteNav />
     <main class="page-content" id="main-content">
