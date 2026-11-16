@@ -25,6 +25,7 @@ describe("middleware redirects", () => {
     ["/blog/presumi", "https://haydenbleasel.com/writing/presumi", 308],
     ["/taking-away", "https://haydenbleasel.com/writing/taking-away", 308],
     ["/taking-away/", "https://haydenbleasel.com/writing/taking-away", 308],
+    ["/by-taking-away", "https://haydenbleasel.com/writing/taking-away", 308],
     [
       "/taking-away.md",
       "https://haydenbleasel.com/writing/taking-away.md",

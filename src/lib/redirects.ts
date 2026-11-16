@@ -67,6 +67,11 @@ export const redirects: Redirect[] = [
   },
   // Posts and projects under the names earlier versions of the site gave them.
   {
+    destination: "/writing/taking-away",
+    permanent: true,
+    source: "/by-taking-away",
+  },
+  {
     destination: "/writing/clipchamp",
     permanent: true,
     source: "/blog/clipchamp",
