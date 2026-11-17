@@ -28,6 +28,12 @@ export const projects: Project[] = [
     url: "https://useblume.dev/",
   },
   {
+    description: "Email your mailing list from your agent.",
+    name: "Sendoff",
+    status: "Active",
+    url: "https://sendoff.dev",
+  },
+  {
     description: "A UI library for building web applications.",
     name: "Kibo UI",
     status: "Acquired",

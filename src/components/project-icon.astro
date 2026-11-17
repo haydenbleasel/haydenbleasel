@@ -1,7 +1,12 @@
 ---
 /**
- * Project marks. Fill and stroke follow currentColor;
- * the Ghost mark's shading paths use a translucent currentColor in
+ * Project marks. Each viewBox is cropped to the mark itself (strokes
+ * included), so they all render at the same size and `.project-icon` alone
+ * sets it. Fill and stroke follow currentColor, with a translucent
+ * currentColor for the lighter shapes behind a mark (Files SDK's back page,
+ * Sendoff's panels). Sendoff's panels are split by 4 units rather than the
+ * logo's 2, and its arrow is left whole, so both read at this size.
+ * The Ghost mark's shading paths use a translucent currentColor in
  * place of OS1's `var(--border)` token, which this site doesn't define.
  */
 interface Props {
@@ -64,7 +69,7 @@ const { class: className, name } = Astro.props;
       aria-hidden="true"
       class={className}
       fill="currentColor"
-      viewBox="0 0 256 256"
+      viewBox="24 24 208 208"
     >
       <path
         d="M208,72V184a8,8,0,0,1-8,8H176V104L136,64H80V40a8,8,0,0,1,8-8h80Z"
@@ -120,6 +125,23 @@ const { class: className, name } = Astro.props;
         stroke="currentColor"
         stroke-width="0.0759495"
       />
+    </svg>
+  )
+}
+
+{
+  name === "Sendoff" && (
+    <svg
+      aria-hidden="true"
+      class={className}
+      fill="currentColor"
+      viewBox="0 0 64 64"
+    >
+      <path
+        d="M15 0H49A15 15 0 0 1 64 15V30H0V15A15 15 0 0 1 15 0ZM0 34H64V49A15 15 0 0 1 49 64H15A15 15 0 0 1 0 49Z"
+        opacity="0.12"
+      />
+      <path d="M21 16L48 16L48 43L40 43L40 29.66L19 50.66L13.34 45L34.34 24L21 24Z" />
     </svg>
   )
 }
@@ -244,7 +266,7 @@ const { class: className, name } = Astro.props;
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
-      viewBox="0 0 24 24"
+      viewBox="1 1 22 22"
     >
       <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
       <path d="m3.3 7 8.7 5 8.7-5" />
@@ -263,7 +285,7 @@ const { class: className, name } = Astro.props;
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
-      viewBox="0 0 24 24"
+      viewBox="1 1 22 22"
     >
       <path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" />
       <rect height="8" rx="1" width="8" x="14" y="2" />
@@ -281,7 +303,7 @@ const { class: className, name } = Astro.props;
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="2"
-      viewBox="0 0 24 24"
+      viewBox="1 1 22 22"
     >
       <path d="m10 9-3 3 3 3" />
       <path d="m14 15 3-3-3-3" />
